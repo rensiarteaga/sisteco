@@ -1,7 +1,0 @@
-JCFUERTES - NFLVFL
-
-list-items
-list-proce.bmp
-
-Ext.MessageBox.alert('...', '.');
-
