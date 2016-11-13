@@ -14,18 +14,18 @@ DECLARE
 BEGIN
 	if TG_OP = 'INSERT' OR TG_OP = 'UPDATE' THEN
       BEGIN
-       	select det.id_item into v_item from alma.tal_detalle_movimiento det where det.id_detalle_movimiento = NEW.id_detalle_movimiento;
-        select mov.id_almacen into v_almacen from alma.tal_movimiento mov where mov.id_movimiento=NEW.id_movimiento;
+       	select det.id_item into v_item from alma.tai_detalle_movimiento det where det.id_detalle_movimiento = NEW.id_detalle_movimiento;
+        select mov.id_almacen into v_almacen from alma.tai_movimiento mov where mov.id_movimiento=NEW.id_movimiento;
       	
         --stock min y max del item que se registra o se modifica en el almacen
         select stock.minimo,stock.maximo INTO minimo,maximo
-        from alma.tal_stock_item stock 
+        from alma.tai_stock_item stock 
         where stock.id_item = v_item AND stock.id_almacen = v_almacen; 
         
-        if (minimo > 0 AND maximo > 0) 
+        if (minimo > 0 AND maximo > 0)
         then
         	--llamada a la funcion que calcula el saldo del item de un almacen
-            cantidad_item := alma.f_al_detalle_saldos(v_almacen,NEW.id_item,'MOVIMIENTO',NULL);
+            cantidad_item := alma.f_ai_detalle_saldos(v_almacen,NEW.id_item,'MOVIMIENTO',NULL);
             
             raise exception '%',cantidad_item;
         else

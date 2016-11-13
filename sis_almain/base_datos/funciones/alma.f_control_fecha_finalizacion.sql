@@ -15,8 +15,8 @@ BEGIN
 res:=true;
 --datos del  movimiento
 select mov.*,tip.tipo,tip.requiere_aprobacion into v_mov
-from alma.tal_movimiento mov
-inner join alma.tal_tipo_movimiento tip on tip.id_tipo_movimiento=mov.id_tipo_movimiento
+from alma.tai_movimiento mov
+inner join alma.tai_tipo_movimiento tip on tip.id_tipo_movimiento=mov.id_tipo_movimiento
 where mov.id_movimiento=al_id_movimiento;
 
 --control de fecha de una salida normal(sin solicitud)
@@ -27,16 +27,16 @@ if v_mov.id_solicitud_salida is NULL 	THEN
         	if v_mov.requiere_aprobacion='si' 
             then
               	select max(mov.fecha_movimiento)::date into v_max_fecha
-                from alma.tal_movimiento mov
-                inner join alma.tal_tipo_movimiento tip on tip.id_tipo_movimiento=mov.id_tipo_movimiento
+                from alma.tai_movimiento mov
+                inner join alma.tai_tipo_movimiento tip on tip.id_tipo_movimiento=mov.id_tipo_movimiento
                 where mov.estado in ('pendiente_aprobacion') AND tip.tipo='ingreso' AND mov.id_almacen=v_mov.id_almacen;
                 
                 if (v_max_fecha IS NOT NULL) AND (v_max_fecha > v_mov.fecha_movimiento)
                 then
                 	--error fecha movimiento < fecha del ultimo movimiento pendiente de aprobacion
                     select count(mov.id_movimiento) into v_cant
-                    from alma.tal_movimiento mov
-                    inner join alma.tal_tipo_movimiento tip on tip.id_tipo_movimiento=mov.id_tipo_movimiento
+                    from alma.tai_movimiento mov
+                    inner join alma.tai_tipo_movimiento tip on tip.id_tipo_movimiento=mov.id_tipo_movimiento
                     where mov.estado in ('pendiente_aprobacion') AND v_max_fecha <= mov.fecha_movimiento AND (tip.tipo='ingreso' OR tip.tipo='transpaso_ingreso' ) AND mov.id_almacen=v_mov.id_almacen ;
                     raise exception '%','Se tiene '||v_cant||' movimientos, pendientes de aprobacion. Verifique las fechas de los movimientos.';
                 	--raise notice 'AAAA';
@@ -45,8 +45,8 @@ if v_mov.id_solicitud_salida is NULL 	THEN
                 
             else
             	select max(mov.fecha_finalizacion)::date into v_max_fecha
-                from alma.tal_movimiento mov
-                inner join alma.tal_tipo_movimiento tip on tip.id_tipo_movimiento=mov.id_tipo_movimiento
+                from alma.tai_movimiento mov
+                inner join alma.tai_tipo_movimiento tip on tip.id_tipo_movimiento=mov.id_tipo_movimiento
                 where mov.estado in ('finalizado') AND tip.tipo='ingreso' AND mov.id_almacen=v_mov.id_almacen;
                 if (v_max_fecha IS NOT NULL) AND (v_max_fecha >  v_mov.fecha_movimiento)
                 then
@@ -63,16 +63,16 @@ if v_mov.id_solicitud_salida is NULL 	THEN
       	if v_mov.requiere_aprobacion='si' 
         then
               	select max(mov.fecha_movimiento)::date into v_max_fecha
-                from alma.tal_movimiento mov
-                inner join alma.tal_tipo_movimiento tip on tip.id_tipo_movimiento=mov.id_tipo_movimiento
+                from alma.tai_movimiento mov
+                inner join alma.tai_tipo_movimiento tip on tip.id_tipo_movimiento=mov.id_tipo_movimiento
                 where mov.estado in ('pendiente_aprobacion') AND tip.tipo='transpaso_ingreso' AND mov.id_almacen=v_mov.id_almacen;
                 
                 if (v_max_fecha IS NOT NULL) AND (v_max_fecha > v_mov.fecha_movimiento)
                 then
                 	--error fecha movimiento < fecha del ultimo movimiento pendiente de aprobacion
                     select count(mov.id_movimiento) into v_cant
-                    from alma.tal_movimiento mov
-                    inner join alma.tal_tipo_movimiento tip on tip.id_tipo_movimiento=mov.id_tipo_movimiento
+                    from alma.tai_movimiento mov
+                    inner join alma.tai_tipo_movimiento tip on tip.id_tipo_movimiento=mov.id_tipo_movimiento
                     where mov.estado in ('pendiente_aprobacion') AND v_max_fecha <= mov.fecha_movimiento AND tip.tipo='transpaso_ingreso' AND mov.id_almacen=v_mov.id_almacen ;
                     raise exception '%','Se tiene '||v_cant||' movimientos, pendientes de aprobacion. Verifique las fechas de los movimientos.';
                 	--raise notice 'AAAA';
@@ -81,8 +81,8 @@ if v_mov.id_solicitud_salida is NULL 	THEN
                 
         else
             	select max(mov.fecha_finalizacion)::date into v_max_fecha
-                from alma.tal_movimiento mov
-                inner join alma.tal_tipo_movimiento tip on tip.id_tipo_movimiento=mov.id_tipo_movimiento
+                from alma.tai_movimiento mov
+                inner join alma.tai_tipo_movimiento tip on tip.id_tipo_movimiento=mov.id_tipo_movimiento
                 where mov.estado in ('finalizado') AND tip.tipo='transpaso_ingreso' AND mov.id_almacen=v_mov.id_almacen;
                 if (v_max_fecha IS NOT NULL) AND (v_max_fecha >  v_mov.fecha_movimiento)
                 then
@@ -99,16 +99,16 @@ if v_mov.id_solicitud_salida is NULL 	THEN
         if v_mov.requiere_aprobacion='si'
               then
                   select max(mov.fecha_movimiento)::date into v_max_fecha
-                  from alma.tal_movimiento mov
-                  inner join alma.tal_tipo_movimiento tip on tip.id_tipo_movimiento=mov.id_tipo_movimiento
+                  from alma.tai_movimiento mov
+                  inner join alma.tai_tipo_movimiento tip on tip.id_tipo_movimiento=mov.id_tipo_movimiento
                   where mov.estado in ('pendiente_aprobacion') AND tip.tipo='transpaso_salida' AND mov.id_almacen=v_mov.id_almacen ;
                   
                   if (v_max_fecha IS NOT NULL) AND (v_max_fecha > v_mov.fecha_movimiento)
                   then
                       --error la fecha de salida del movimiento es mayor a las fecha de salida pendientes de aprobacion del sistema
                       select count(mov.id_movimiento) into v_cant
-                      from alma.tal_movimiento mov
-                      inner join alma.tal_tipo_movimiento tip on tip.id_tipo_movimiento=mov.id_tipo_movimiento
+                      from alma.tai_movimiento mov
+                      inner join alma.tai_tipo_movimiento tip on tip.id_tipo_movimiento=mov.id_tipo_movimiento
                       where mov.estado in ('pendiente_aprobacion') AND v_max_fecha <= mov.fecha_movimiento  AND tip.tipo='transpaso_salida' AND mov.id_almacen=v_mov.id_almacen;
                       raise exception '%','Se tiene '||v_cant||' movimientos (salidas) ,pendientes de aprobacion. Verifique las fechas de los movimientos.';
                   end if;
@@ -116,8 +116,8 @@ if v_mov.id_solicitud_salida is NULL 	THEN
               else
                   --mov salida sin aprobacion
                   select max(mov.fecha_finalizacion)::date into v_max_fecha
-                  from alma.tal_movimiento mov
-                  inner join alma.tal_tipo_movimiento tip on tip.id_tipo_movimiento=mov.id_tipo_movimiento
+                  from alma.tai_movimiento mov
+                  inner join alma.tai_tipo_movimiento tip on tip.id_tipo_movimiento=mov.id_tipo_movimiento
                   where mov.estado in ('finalizado') AND tip.tipo='transpaso_salida' AND mov.id_almacen=v_mov.id_almacen;
                   
                   if (v_max_fecha IS NOT NULL) AND (v_max_fecha > v_mov.fecha_movimiento)
@@ -137,16 +137,16 @@ if v_mov.id_solicitud_salida is NULL 	THEN
         	if v_mov.requiere_aprobacion='si'
             then
             	select max(mov.fecha_movimiento)::date into v_max_fecha
-                from alma.tal_movimiento mov
-                inner join alma.tal_tipo_movimiento tip on tip.id_tipo_movimiento=mov.id_tipo_movimiento
+                from alma.tai_movimiento mov
+                inner join alma.tai_tipo_movimiento tip on tip.id_tipo_movimiento=mov.id_tipo_movimiento
                 where mov.estado in ('pendiente_aprobacion') AND tip.tipo='salida' AND mov.id_almacen=v_mov.id_almacen ;
                 
                 if (v_max_fecha IS NOT NULL) AND (v_max_fecha > v_mov.fecha_movimiento)
                 then
                 	--error la fecha de salida del movimiento es mayor a las fecha de salida pendientes de aprobacion del sistema
                     select count(mov.id_movimiento) into v_cant
-                    from alma.tal_movimiento mov
-                    inner join alma.tal_tipo_movimiento tip on tip.id_tipo_movimiento=mov.id_tipo_movimiento
+                    from alma.tai_movimiento mov
+                    inner join alma.tai_tipo_movimiento tip on tip.id_tipo_movimiento=mov.id_tipo_movimiento
                     where mov.estado in ('pendiente_aprobacion') AND v_max_fecha <= mov.fecha_movimiento  AND tip.tipo='salida' AND mov.id_almacen=v_mov.id_almacen;
                     raise exception '%','Se tiene '||v_cant||' movimientos (salidas) ,pendientes de aprobacion. Verifique las fechas de los movimientos.';
                 end if;
@@ -154,8 +154,8 @@ if v_mov.id_solicitud_salida is NULL 	THEN
             else
             	--mov salida sin aprobacion
                 select max(mov.fecha_finalizacion)::date into v_max_fecha
-                from alma.tal_movimiento mov
-                inner join alma.tal_tipo_movimiento tip on tip.id_tipo_movimiento=mov.id_tipo_movimiento
+                from alma.tai_movimiento mov
+                inner join alma.tai_tipo_movimiento tip on tip.id_tipo_movimiento=mov.id_tipo_movimiento
                 where mov.estado in ('finalizado') AND tip.tipo='salida' AND mov.id_almacen=v_mov.id_almacen;
                 
                 if (v_max_fecha IS NOT NULL) AND (v_max_fecha > v_mov.fecha_movimiento)
@@ -175,8 +175,8 @@ else
     BEGIN
     	--movimentos generados a partir de solicitudes de salida
         select max(mov.fecha_movimiento)::date into v_max_fecha
-        from alma.tal_movimiento mov
-        inner join alma.tal_tipo_movimiento tip on tip.id_tipo_movimiento=mov.id_tipo_movimiento
+        from alma.tai_movimiento mov
+        inner join alma.tai_tipo_movimiento tip on tip.id_tipo_movimiento=mov.id_tipo_movimiento
         where mov.estado in ('finalizado') AND /*tip.tipo='salida' AND*/ mov.id_almacen=v_mov.id_almacen AND mov.id_solicitud_salida IS NOT NULL ;
         
         if (v_max_fecha IS NOT NULL) AND (v_max_fecha > v_mov.fecha_movimiento)
