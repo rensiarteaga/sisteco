@@ -1,0 +1,338 @@
+<?xml version="1.0"?>
+<Report>
+    <Version>7.5</Version>
+    <Properties>
+        <Description></Description>
+        <Title></Title>
+        <Author></Author>
+        <Keywords></Keywords>
+        <Date></Date>
+        <FrameSize></FrameSize>
+    </Properties>
+
+    <Header>
+        <Body></Body>
+        <Align>center</Align>
+    </Header>
+
+    <Footer>
+        <Body></Body>
+        <Align>center</Align>
+    </Footer>
+
+    <Parameters>
+        <id_salida>
+            <value>49</value>
+        </id_salida>
+
+        <login_usuario>
+            <value>Rodrigo Martin Chumacero Moscoso</value>
+        </login_usuario>
+
+    </Parameters>
+
+    <DataSet>
+        <DataSource>
+            <Name>yucumo</Name>
+        </DataSource>
+
+        <Query>
+            <Select>DISTINCT ALMACE.nombre,SALIDA.fecha_reg,SALIDA.descripcion as desc_salida, CASE COALESCE(SALIDA.id_institucion,0)     WHEN 0 THEN CASE COALESCE(SALIDA.id_contratista,0)                     WHEN 0 THEN (SELECT COALESCE(apellido_paterno,'')||' '||COALESCE(apellido_materno,'')||COALESCE(nombre,'') FROM sss.tsg_persona WHERE id_persona = EMPLEA.id_persona)                     ELSE (SELECT COALESCE(nombre,'') FROM param.tpm_institucion WHERE id_institucion = CONTRA.id_institucion)                 END     ELSE INSTIT.nombre END as solicitante</Select>
+            <From>almin.tal_pedido_tuc_int PEDINT INNER JOIN almin.tal_tipo_unidad_constructiva TIPOUC ON TIPOUC.id_tipo_unidad_constructiva = PEDINT.id_tipo_unidad_constructiva INNER JOIN almin.tal_salida SALIDA ON SALIDA.id_salida = PEDINT.id_salida INNER JOIN almin.tal_item ITEM ON ITEM.id_item = PEDINT.id_item INNER JOIN almin.tal_almacen_logico ALMLOG ON ALMLOG.id_almacen_logico = SALIDA.id_almacen_logico INNER JOIN almin.tal_almacen_ep ALMAEP ON ALMAEP.id_almacen_ep = ALMLOG.id_almacen_ep INNER JOIN almin.tal_almacen ALMACE ON ALMACE.id_almacen = ALMAEP.id_almacen LEFT JOIN almin.tal_composicion_tuc COMTUC ON COMTUC.id_tuc_hijo = TIPOUC.id_tipo_unidad_constructiva LEFT JOIN almin.tal_tipo_unidad_constructiva TIPOUC1 ON TIPOUC1.id_tipo_unidad_constructiva = COMTUC.id_tipo_unidad_constructiva LEFT JOIN param.tpm_contratista CONTRA ON CONTRA.id_contratista = SALIDA.id_contratista LEFT JOIN param.tpm_institucion INSTIT ON INSTIT.id_institucion = SALIDA.id_institucion LEFT JOIN kard.tkp_empleado EMPLEA ON EMPLEA.id_empleado = SALIDA.id_empleado</From>
+            <Where>PEDINT.id_salida = $id_salida and PEDINT.nuevo + PEDINT.usado &lt; PEDINT.cantidad_solicitada</Where>
+            <GroupBy></GroupBy>
+            <OrderBy></OrderBy>
+            <Config>
+                <Distinct></Distinct>
+                <OffSet>0</OffSet>
+                <Limit>0</Limit>
+            </Config>
+
+        </Query>
+
+        <Groups>
+            <Config>
+                <ShowGroup></ShowGroup>
+                <ShowDetail>1</ShowDetail>
+                <ShowLabel></ShowLabel>
+                <ShowNumber>1</ShowNumber>
+                <ShowIndent>1</ShowIndent>
+            </Config>
+
+        </Groups>
+
+        <Fields>
+            <Column1>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column1>
+
+            <Column2>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column2>
+
+            <Column3>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column3>
+
+            <Column4>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column4>
+
+        </Fields>
+
+    </DataSet>
+
+    <PageSetup>
+        <Format>Letter</Format>
+        <Orientation>landscape</Orientation>
+        <LeftMargin>0</LeftMargin>
+        <RightMargin>0</RightMargin>
+        <TopMargin>0</TopMargin>
+        <BottomMargin>0</BottomMargin>
+        <LineSpace>14</LineSpace>
+    </PageSetup>
+
+    <Graph>
+        <Title></Title>
+        <TitleX></TitleX>
+        <TitleY></TitleY>
+        <Width>480</Width>
+        <Height>268</Height>
+        <Description></Description>
+        <ShowData>1</ShowData>
+        <ShowValues>1</ShowValues>
+        <Orientation>columns</Orientation>
+    </Graph>
+
+    <Merge>
+        <ReportHeader>#setcffdfdfd  Reporte ENDESIS  Copyright Â©2007, ENDE S.A... Todos los derechos reservados. 
+#tab630
+#setftb18
+#setcf010101
+#sety045 #tab330 #setfab14 MATERIALES FALTANTES
+
+</ReportHeader>
+
+        <Details>
+            <Detail1>
+                <GroupHeader>#sety000#tab530  #image ../../../../lib/images/logo_reporte.jpg
+#sety75 #tab020 #setfab12 Almacén: #tab85 #setfan12    $var1 
+#sety90 #tab020 #setfab12  Solicitante:   #tab095#setfan12    $var4 
+#sety105 #tab020 #setfab12  Fecha Solicitud:   #tab118#setfan12     $var2 
+
+#sety140 #rect*020*010*530*025*1*#22105e*#22105e
+#rect*020*000*750*033*1*#ffd200*#ffd200
+#tab020#setfan10 #setcf000000 Unidad Constructiva #tab145 Componente  #tab330 Material   #tab455 Descripción #tab667 Cantidades
+#tab610 Solicitada #tab670 Disponible #tab730 Faltante
+#sety173  #setcf000000      </GroupHeader>
+
+                <DataSet1>
+                    <Body> #tab025  $subfield1  #tab130 $subfield2 #tab260 $subfield3  #tab430 $subfield4  #tab615  $subfield5  #tab678 $subfield6  #tab730 $subfield7 
+ #tab020#lineH750</Body>
+
+                    <Query>
+                        <Select>TIPOUC1.descripcion as desc_padre,TIPOUC.descripcion as desc_uc, ITEM.nombre as item, ITEM.descripcion as desc_item,PEDINT.cantidad_solicitada, PEDINT.nuevo + PEDINT.usado as cant_disp, PEDINT.cantidad_solicitada - PEDINT.nuevo - PEDINT.usado as cant_faltante, ALMACE.nombre,SALIDA.fecha_reg,SALIDA.descripcion as desc_salida, CASE COALESCE(SALIDA.id_institucion,0)     WHEN 0 THEN CASE COALESCE(SALIDA.id_contratista,0)                     WHEN 0 THEN (SELECT COALESCE(apellido_paterno,'')||' '||COALESCE(apellido_materno,'')||COALESCE(nombre,'') FROM sss.tsg_persona WHERE id_persona = EMPLEA.id_persona)                     ELSE (SELECT COALESCE(nombre,'') FROM param.tpm_institucion WHERE id_institucion = CONTRA.id_institucion)                 END     ELSE INSTIT.nombre END as solicitante</Select>
+                        <From>almin.tal_pedido_tuc_int PEDINT INNER JOIN almin.tal_tipo_unidad_constructiva TIPOUC ON TIPOUC.id_tipo_unidad_constructiva = PEDINT.id_tipo_unidad_constructiva INNER JOIN almin.tal_salida SALIDA ON SALIDA.id_salida = PEDINT.id_salida INNER JOIN almin.tal_item ITEM ON ITEM.id_item = PEDINT.id_item INNER JOIN almin.tal_almacen_logico ALMLOG ON ALMLOG.id_almacen_logico = SALIDA.id_almacen_logico INNER JOIN almin.tal_almacen_ep ALMAEP ON ALMAEP.id_almacen_ep = ALMLOG.id_almacen_ep INNER JOIN almin.tal_almacen ALMACE ON ALMACE.id_almacen = ALMAEP.id_almacen LEFT JOIN almin.tal_composicion_tuc COMTUC ON COMTUC.id_tuc_hijo = TIPOUC.id_tipo_unidad_constructiva LEFT JOIN almin.tal_tipo_unidad_constructiva TIPOUC1 ON TIPOUC1.id_tipo_unidad_constructiva = COMTUC.id_tipo_unidad_constructiva LEFT JOIN param.tpm_contratista CONTRA ON CONTRA.id_contratista = SALIDA.id_contratista LEFT JOIN param.tpm_institucion INSTIT ON INSTIT.id_institucion = SALIDA.id_institucion LEFT JOIN kard.tkp_empleado EMPLEA ON EMPLEA.id_empleado = SALIDA.id_empleado</From>
+                        <Where>PEDINT.id_salida = $id_salida and PEDINT.nuevo + PEDINT.usado &lt; PEDINT.cantidad_solicitada</Where>
+                        <GroupBy></GroupBy>
+                        <OrderBy></OrderBy>
+                        <Config>
+                            <Distinct></Distinct>
+                            <OffSet>0</OffSet>
+                            <Limit>0</Limit>
+                        </Config>
+
+                    </Query>
+
+                    <Fields>
+                        <Column1>
+                            <Chars>30</Chars>
+                            <Points>100</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column1>
+
+                        <Column2>
+                            <Chars>30</Chars>
+                            <Points>100</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column2>
+
+                        <Column3>
+                            <Chars>30</Chars>
+                            <Points>150</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column3>
+
+                        <Column4>
+                            <Chars>30</Chars>
+                            <Points>180</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column4>
+
+                        <Column5>
+                            <Chars>30</Chars>
+                            <Points>45</Points>
+                            <Align>right</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column5>
+
+                        <Column6>
+                            <Chars>30</Chars>
+                            <Points>45</Points>
+                            <Align>right</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column6>
+
+                        <Column7>
+                            <Chars>30</Chars>
+                            <Points>45</Points>
+                            <Align>right</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column7>
+
+                        <Column8>
+                            <Chars>30</Chars>
+                            <Points>60</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column8>
+
+                        <Column9>
+                            <Chars>30</Chars>
+                            <Points>60</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column9>
+
+                        <Column10>
+                            <Chars>30</Chars>
+                            <Points>60</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column10>
+
+                        <Column11>
+                            <Chars>30</Chars>
+                            <Points>60</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column11>
+
+                    </Fields>
+
+                </DataSet1>
+
+                <NumberSubSql>0</NumberSubSql>
+                <GroupFooter>#sety570 #tab010 #setfan8 Usuario:$login_usuario  #tab360#setftn8 Página $page de  $pagecounting #tab660#setfan8 Fecha: $day-$month-$year   $time
+</GroupFooter>
+
+            </Detail1>
+
+        </Details>
+
+        <ReportFooter></ReportFooter>
+        <FinalSummary></FinalSummary>
+        <PageSetup>
+            <Format>Letter</Format>
+            <Orientation>landscape</Orientation>
+            <LeftMargin>0</LeftMargin>
+            <RightMargin>0</RightMargin>
+            <TopMargin>0</TopMargin>
+            <BottomMargin>25</BottomMargin>
+            <LineSpace>14</LineSpace>
+        </PageSetup>
+
+    </Merge>
+
+    <Label>
+        <Body></Body>
+        <Config>
+            <HorizontalSpacing>15</HorizontalSpacing>
+            <VerticalSpacing>0</VerticalSpacing>
+            <LabelWidth>288</LabelWidth>
+            <LabelHeight>72</LabelHeight>
+            <LeftMargin>11</LeftMargin>
+            <TopMargin>36</TopMargin>
+            <Columns>2</Columns>
+            <Rows>10</Rows>
+            <PageFormat>A3</PageFormat>
+            <LineSpacing>14</LineSpacing>
+        </Config>
+
+    </Label>
+
+    <OpenOffice>
+        <Source></Source>
+        <Config>
+            <FixedDetails>1</FixedDetails>
+            <ExpandDetails></ExpandDetails>
+            <printEmptyDetail>1</printEmptyDetail>
+            <SumByTotal>1</SumByTotal>
+            <RepeatHeader>1</RepeatHeader>
+            <RepeatFooter>1</RepeatFooter>
+        </Config>
+
+    </OpenOffice>
+
+</Report>

@@ -1,0 +1,265 @@
+<?xml version="1.0"?>
+<Report>
+    <Version>7.5</Version>
+    <Properties>
+        <Description></Description>
+        <Title></Title>
+        <Author></Author>
+        <Keywords></Keywords>
+        <Date></Date>
+        <FrameSize></FrameSize>
+    </Properties>
+
+    <Header>
+        <Body></Body>
+        <Align>center</Align>
+    </Header>
+
+    <Footer>
+        <Body></Body>
+        <Align>center</Align>
+    </Footer>
+
+    <Parameters>
+        <fecha_inicio>
+            <value>1/16/2008</value>
+        </fecha_inicio>
+
+        <fecha_fin>
+            <value>1/23/2008</value>
+        </fecha_fin>
+
+        <login_usuario>
+            <value>Ana Maria Villegas Quispe</value>
+        </login_usuario>
+
+        <gerencia>
+            <value>6</value>
+        </gerencia>
+
+    </Parameters>
+
+    <DataSet>
+        <DataSource>
+            <Name>fercho</Name>
+        </DataSource>
+
+        <Query>
+            <Select>geren.nombre_gerencia</Select>
+            <From>gestel.tst_gerencia geren</From>
+            <Where>geren.id_gerencia=$gerencia</Where>
+            <GroupBy>geren.nombre_gerencia</GroupBy>
+            <OrderBy></OrderBy>
+            <Config>
+                <Distinct></Distinct>
+                <OffSet>0</OffSet>
+                <Limit>0</Limit>
+            </Config>
+
+        </Query>
+
+        <Groups>
+            <Config>
+                <ShowGroup></ShowGroup>
+                <ShowDetail>1</ShowDetail>
+                <ShowLabel></ShowLabel>
+                <ShowNumber>1</ShowNumber>
+                <ShowIndent>1</ShowIndent>
+            </Config>
+
+        </Groups>
+
+        <Fields>
+            <Column1>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column1>
+
+        </Fields>
+
+    </DataSet>
+
+    <PageSetup></PageSetup>
+    <Graph>
+        <Title></Title>
+        <TitleX></TitleX>
+        <TitleY></TitleY>
+        <Width>480</Width>
+        <Height>268</Height>
+        <Description></Description>
+        <ShowData>1</ShowData>
+        <ShowValues>1</ShowValues>
+        <Orientation>columns</Orientation>
+    </Graph>
+
+    <Merge>
+        <ReportHeader>#setcffdfdfd  Reporte ENDESIS  Copyright Â©2007, ENDE S.A... Todos los derechos reservados. 
+#tab630
+#setftb18
+#setcf010101
+#sety045 #tab20 #setfab14 REPORTE DE TIEMPO DE LLAMADAS POR GERENCIA
+</ReportHeader>
+
+        <Details>
+            <Detail1>
+                <GroupHeader> #sety000#tab400  #image ../../../../lib/images/logo_reporte.jpg
+ #sety75 #tab020 #setfab12  Gerencia: #tab80 #setfan12    $var1  
+ #sety90 #tab020 #setfab12  Desde:   #tab070#setfan12 $fecha_inicio #tab150#setfab12 Hasta: #tab200 #setfan12 $fecha_fin     
+
+#sety120 #rect*020*010*530*025*1*#22105e*#22105e
+#rect*020*000*530*025*1*#ffd200*#ffd200
+#tab025#setfan10 #setcf000000Funcionario  #tab155 Tiempo Local #tab225 Tiempo Celular  #tab300 Tiempo Nacional   #tab385 Tiempo Internacional  #tab485 Tiempo Total
+#sety145  #setcf000000      </GroupHeader>
+
+                <DataSet1>
+                    <Body> #tab025    $subfield2    $subfield3   $subfield4    $subfield5   $subfield6   $subfield7
+ #tab020#lineH530</Body>
+
+                    <Query>
+                        <Select>distinct empext.id_empleado,(COALESCE(PERSON.apellido_paterno,' ')||'  '||COALESCE(PERSON.apellido_materno,' ')||'  '||COALESCE(PERSON.nombre,' ')) AS desc_empleado,        (select sum(llamad1.duracion_llamada) from gestel.tst_llamada llamad1 left join gestel.tst_tipo_llamada tiplla1 on llamad1.id_tipo_llamada=tiplla1.id_tipo_llamada where tiplla1.nombre_tipo_llamada='Local' and llamad1.saliente='si' and llamad1.fecha_llamada&gt;=$fecha_inicio and llamad1.fecha_llamada&lt;=$fecha_fin and llamad1.id_empleado=empext.id_empleado) as suma_local,         (select sum(llamad2.duracion_llamada) from gestel.tst_llamada llamad2 left join gestel.tst_tipo_llamada tiplla2 on llamad2.id_tipo_llamada=tiplla2.id_tipo_llamada where tiplla2.nombre_tipo_llamada='Celular' and llamad2.saliente='si' and llamad2.fecha_llamada&gt;=$fecha_inicio and llamad2.fecha_llamada&lt;=$fecha_fin and llamad2.id_empleado=empext.id_empleado) as suma_celular,        (select sum(llamad3.duracion_llamada) from gestel.tst_llamada llamad3 left join gestel.tst_tipo_llamada tiplla3 on llamad3.id_tipo_llamada=tiplla3.id_tipo_llamada where tiplla3.nombre_tipo_llamada='Nacional' and llamad3.saliente='si' and llamad3.fecha_llamada&gt;=$fecha_inicio and llamad3.fecha_llamada&lt;=$fecha_fin and llamad3.id_empleado=empext.id_empleado) as suma_nacional,          (select sum(llamad4.duracion_llamada) from gestel.tst_llamada llamad4 left join gestel.tst_tipo_llamada tiplla4 on llamad4.id_tipo_llamada=tiplla4.id_tipo_llamada where tiplla4.nombre_tipo_llamada='Internacional' and llamad4.saliente='si' and llamad4.fecha_llamada&gt;=$fecha_inicio and llamad4.fecha_llamada&lt;=$fecha_fin and llamad4.id_empleado=empext.id_empleado) as suma_internacional,        (select sum(llamad5.duracion_llamada) from gestel.tst_llamada llamad5 where llamad5.saliente='si' and llamad5.fecha_llamada&gt;=$fecha_inicio and llamad5.fecha_llamada&lt;=$fecha_fin and llamad5.id_empleado=empext.id_empleado) as suma_total</Select>
+                        <From>gestel.tst_llamada llamad        inner join gestel.tst_tipo_llamada tiplla        on llamad.id_tipo_llamada=tiplla.id_tipo_llamada        inner join kard.tkp_empleado emplea        on llamad.id_empleado=emplea.id_empleado        inner join sss.tsg_persona PERSON        on emplea.id_persona=PERSON.id_persona        inner join kard.tkp_empleado_extension empext        on emplea.id_empleado=empext.id_empleado        inner join gestel.tst_gerencia geren        on empext.id_gerencia=geren.id_gerencia</From>
+                        <Where>geren.id_gerencia=$gerencia and llamad.fecha_llamada&gt;=$fecha_inicio and llamad.fecha_llamada&lt;=$fecha_fin</Where>
+                        <GroupBy></GroupBy>
+                        <OrderBy></OrderBy>
+                        <Config>
+                            <Distinct></Distinct>
+                            <OffSet>0</OffSet>
+                            <Limit>0</Limit>
+                        </Config>
+
+                    </Query>
+
+                    <Fields>
+                        <Column1>
+                            <Chars>30</Chars>
+                            <Points>100</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column1>
+
+                        <Column2>
+                            <Chars>30</Chars>
+                            <Points>135</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column2>
+
+                        <Column3>
+                            <Chars>30</Chars>
+                            <Points>70</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column3>
+
+                        <Column4>
+                            <Chars>30</Chars>
+                            <Points>80</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column4>
+
+                        <Column5>
+                            <Chars>30</Chars>
+                            <Points>95</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column5>
+
+                        <Column6>
+                            <Chars>30</Chars>
+                            <Points>90</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column6>
+
+                        <Column7>
+                            <Chars>30</Chars>
+                            <Points>60</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column7>
+
+                    </Fields>
+
+                </DataSet1>
+
+                <NumberSubSql>0</NumberSubSql>
+                <GroupFooter> #tab020#lineH530
+#sety730 #tab010 #setfan8 Usuario:$login_usuario  #tab230#setftn8 Página $page de  $pagecounting        #tab460#setfan8 Fecha: $day - $month - $year 
+#sety740 #tab010 #setfan8 GESTEL #tab460#setfan8 Hora: $time </GroupFooter>
+
+            </Detail1>
+
+        </Details>
+
+        <ReportFooter></ReportFooter>
+        <FinalSummary></FinalSummary>
+        <PageSetup>
+            <Format>Letter</Format>
+            <Orientation>portrait</Orientation>
+            <LeftMargin>25</LeftMargin>
+            <RightMargin>25</RightMargin>
+            <TopMargin>25</TopMargin>
+            <BottomMargin>25</BottomMargin>
+            <LineSpace>14</LineSpace>
+        </PageSetup>
+
+    </Merge>
+
+    <Label>
+        <Body></Body>
+        <Config>
+            <HorizontalSpacing>15</HorizontalSpacing>
+            <VerticalSpacing>0</VerticalSpacing>
+            <LabelWidth>288</LabelWidth>
+            <LabelHeight>72</LabelHeight>
+            <LeftMargin>11</LeftMargin>
+            <TopMargin>36</TopMargin>
+            <Columns>2</Columns>
+            <Rows>10</Rows>
+            <PageFormat>A3</PageFormat>
+            <LineSpacing>14</LineSpacing>
+        </Config>
+
+    </Label>
+
+    <OpenOffice>
+        <Source></Source>
+        <Config>
+            <FixedDetails>1</FixedDetails>
+            <ExpandDetails></ExpandDetails>
+            <printEmptyDetail>1</printEmptyDetail>
+            <SumByTotal>1</SumByTotal>
+            <RepeatHeader>1</RepeatHeader>
+            <RepeatFooter>1</RepeatFooter>
+        </Config>
+
+    </OpenOffice>
+
+</Report>

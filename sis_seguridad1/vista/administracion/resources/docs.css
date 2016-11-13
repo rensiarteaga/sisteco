@@ -1,0 +1,108 @@
+.pkg h3 {
+    padding-left:34px;
+    font:normal 11px verdana,helvetica,tahoma,sans-serif;
+    
+    display:block;
+    -moz-outline:none;
+    outline:none;
+	white-space: nowrap;
+    
+	height:18px;
+    cursor:pointer;
+}
+h3.collapser-expanded{
+    background: #fff url(pkg-open.gif) no-repeat 0px -1px;
+}
+h3.collapser-collapsed {
+    background: #fff url(pkg-closed.gif) no-repeat 0px -1px;
+}
+.pkg-body{
+    margin-left:16px;
+    font:normal 11px verdana,helvetica,tahoma,sans-serif;
+}
+#classes a{
+    font:normal 11px verdana,helvetica,tahoma,sans-serif;
+    display:block;
+    text-decoration:none;
+    height:18px;
+    color:black;
+    background: #fff url(class.gif) no-repeat 16px -1px;
+    padding-left:34px;
+    -moz-outline:none;
+    outline:none;
+	 white-space: nowrap;
+}
+#classes a:hover{
+	text-decoration: underline;
+}
+#classes a.ex{
+    background: #fff url(example.gif) no-repeat 16px -1px;
+}
+#classes{
+    overflow:auto;
+    padding:5px;
+}
+#class .loading-indicator{
+	font-size:12px;
+	height:18px;
+}
+#docs .x-layout-panel-north{
+   border:0px none;
+   background:#02265B url('../../../../lib/ext-yui/resources/images/default/basic-dialog/hd-sprite.gif') repeat-x 0px -83px;
+   padding-top:0px;
+   padding-left:0px;
+}
+#docs .x-layout-collapsed-west{
+   background-image: url(menu.gif);
+   background-repeat:no-repeat;
+   background-position:center;
+}
+
+#docs .x-layout-collapsed-east{
+   background-image: url(collapse-bg.gif);
+   background-repeat:no-repeat;
+   background-position:center;
+}
+#header {
+    font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+    color:white;
+}
+.loading-indicator {
+    font-size:8pt;
+    background-image:url('../../../lib/ext-yui/resources/images/grid/loading.gif');
+    background-repeat: no-repeat;
+    background-position:top left;
+    padding-left:20px;
+	height:18px;
+	text-align:left;
+} 
+a#welcome-link{
+	background:#fff url(docs.gif) no-repeat 0px 0px;
+	padding-left:18px;
+}
+a#help-forums{
+	background:#fff url(forum.gif) no-repeat 16px 0px;
+	padding-left:34px;
+	display:block
+}
+a#log-out{
+	background:#fff url(logout.jpg) no-repeat 16px 0px;
+	padding-left:34px;
+	display:block
+}
+#loading{
+	position:absolute;
+	left:45%;
+	top:40%;
+	border:3px solid #B2D0F7;
+	background:white url(block-bg.gif) repeat-x;
+	padding:10px;
+	font:bold 14px verdana,tahoma,helvetica;
+	color:#003366;
+	width:150px;
+	text-align:center;
+}
+
+   .ylayout-panel-south  {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px; BACKGROUND-COLOR: #c3daf9
+}

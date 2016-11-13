@@ -1,0 +1,192 @@
+<?xml version="1.0"?>
+<Report>
+    <Version>7.5</Version>
+    <Properties>
+        <Description></Description>
+        <Title></Title>
+        <Author></Author>
+        <Keywords></Keywords>
+        <Date></Date>
+        <FrameSize></FrameSize>
+    </Properties>
+
+    <Header>
+        <Body></Body>
+        <Align>center</Align>
+    </Header>
+
+    <Footer>
+        <Body></Body>
+        <Align>center</Align>
+    </Footer>
+
+    <Parameters>
+        <fecha_inicio>
+            <value>7/02/2007</value>
+        </fecha_inicio>
+
+        <fecha_fin>
+            <value>7/07/2007</value>
+        </fecha_fin>
+
+        <login_usuario>
+            <value>Ana Maria Villegas Quispe</value>
+        </login_usuario>
+
+        <codigo_empleado>
+            <value>Arze Castro, Jose</value>
+        </codigo_empleado>
+
+    </Parameters>
+
+    <DataSet>
+        <DataSource>
+            <Name>dbendesis</Name>
+        </DataSource>
+
+        <Query>
+            <Select>sum (total.TotalNoTrabajado)</Select>
+            <From>(select fechas_hora.empleado,fechas_hora.fecha,        fechas_hora.m_atrasados as min_atrasados,        fechas_hora.m_faltantes as min_faltantes,        (fechas_hora.m_atrasados + fechas_hora.m_faltantes)AS TotalNoTrabajado,        fechas_hora.m_adelantados as min_adelantados,        fechas_hora.m_post_trabajo as min_post_trabajo,        (fechas_hora.m_adelantados+fechas_hora.m_post_trabajo)AS TotalExtra from  (Select distinct lr.codigo_empleado as empleado, lr.fecha as fecha,   ((COALESCE((select min(lr1.hora) - '8:30:00'               from casis.tca_lectura_depurada lr1               where lr1.tipo_movimiento='Entrada' and lr.fecha=lr1.fecha               and lr.codigo_empleado=lr1.codigo_empleado               having ('8:30:00'-min(lr1.hora))&lt;'00:00:00'),'00:00:00'))+   (COALESCE((select max(lr1.hora) - '14:30:00'   from casis.tca_lectura_depurada lr1    where lr1.tipo_movimiento='Entrada' and lr.fecha=lr1.fecha    and lr.codigo_empleado=lr1.codigo_empleado   having ('14:30:00'-max(lr1.hora))&lt;'00:00:00'),'00:00:00')))as m_atrasados,   ((COALESCE((select '12:30:00'-min(lr1.hora)       from casis.tca_lectura_depurada lr1          where lr1.tipo_movimiento='Salida'        and lr.fecha=lr1.fecha and lr.codigo_empleado=lr1.codigo_empleado     having (min(lr1.hora)-'12:30:00')&lt;'00:00:00'),'00:00:00')) +     (COALESCE((select '18:30:00'-max(lr1.hora)     from casis.tca_lectura_depurada lr1        where lr1.tipo_movimiento='Salida'      and lr.fecha=lr1.fecha and lr.codigo_empleado=lr1.codigo_empleado     having (max(lr1.hora)-'18:30:00')&lt;'00:00:00'),'00:00:00')))   as m_faltantes,  ((COALESCE((select '8:30:00'- min(lr1.hora)   from casis.tca_lectura_depurada lr1     where lr1.tipo_movimiento = 'Entrada'    and lr.fecha=lr1.fecha and lr.codigo_empleado=lr1.codigo_empleado   having (min(lr1.hora)-'8:30:00')&lt;'00:00:00'),'00:00:00'))+  (COALESCE((select '14:30:00'- max(lr1.hora)   from casis.tca_lectura_depurada lr1     where lr1.tipo_movimiento = 'Entrada'    and lr.fecha=lr1.fecha and lr.codigo_empleado=lr1.codigo_empleado   having (max(lr1.hora)-'14:30:00')&lt;'00:00:00'),'00:00:00'))) as m_adelantados,   ((COALESCE((select min(lr1.hora)-'12:30:00'    from casis.tca_lectura_depurada lr1       where lr1.tipo_movimiento='Salida'    and lr.fecha=lr1.fecha and lr.codigo_empleado=lr1.codigo_empleado    having ('12:30:00'-min(lr1.hora))&lt;'00:00:00'),'00:00:00')) +    (COALESCE((select max(lr1.hora)-'18:30:00'    from casis.tca_lectura_depurada lr1       where lr1.tipo_movimiento='Salida'     and lr.fecha=lr1.fecha and lr.codigo_empleado=lr1.codigo_empleado    having ('18:30:00'-max(lr1.hora))&lt;'00:00:00'),'00:00:00')))   as m_post_trabajo    From casis.tca_lectura_depurada lr    Where lr.fecha &gt;=$fecha_inicio and lr.fecha&lt;=$fecha_fin and lr.codigo_empleado=$codigo_empleado and lr.aprobado='si')as fechas_hora)as total</From>
+            <Where></Where>
+            <GroupBy></GroupBy>
+            <OrderBy></OrderBy>
+            <Config>
+                <Distinct></Distinct>
+                <OffSet>0</OffSet>
+                <Limit>0</Limit>
+            </Config>
+
+        </Query>
+
+        <Groups>
+            <Config>
+                <ShowGroup></ShowGroup>
+                <ShowDetail>1</ShowDetail>
+                <ShowLabel></ShowLabel>
+                <ShowNumber>1</ShowNumber>
+                <ShowIndent>1</ShowIndent>
+            </Config>
+
+        </Groups>
+
+        <Fields>
+            <Column1>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column1>
+
+        </Fields>
+
+    </DataSet>
+
+    <PageSetup></PageSetup>
+    <Graph>
+        <Title></Title>
+        <TitleX></TitleX>
+        <TitleY></TitleY>
+        <Width>480</Width>
+        <Height>268</Height>
+        <Description></Description>
+        <ShowData>1</ShowData>
+        <ShowValues>1</ShowValues>
+        <Orientation>columns</Orientation>
+    </Graph>
+
+    <Merge>
+        <ReportHeader>#setcffdfdfd  Reporte ENDESIS  Copyright ©2007, ENDE S.A... Todos los derechos reservados. 
+#tab630
+#setftb18
+#setcf010101
+#sety050 #tab120 DESCUENTO SEMANAL 
+</ReportHeader>
+
+        <Details>
+            <Detail1>
+                <GroupHeader>#sety000#tab400  #image ../../../../lib/images/logo_reporte.jpg
+ #sety75 #tab020 #setfab12  Funcionario: #tab100#setfan12   $codigo_empleado   
+ #sety90 #tab020 #setfab12  Semana del Lunes:  #tab135 #setfan12 $fecha_inicio  #tab200#setfab12 al Viernes: #tab265#setfan12 $fecha_fin
+
+#sety120 #rect*020*010*400*040*1*#22105e*#22105e
+#rect*020*000*400*040*1*#ffd200*#ffd200
+#tab035#setfan10 #setcfffffff#setcfffc364 #setcf000000 Total de Tiempo No Trabajado:  #tab200  $var1
+#tab035#setfan10 #setcfffffff#setcfffc364 #setcf000000 El funcionario $codigo_empleado no tiene descuentos.   
+#sety145  #setcf000000     </GroupHeader>
+
+                <DataSet1>
+                    <Body></Body>
+                    <Query>
+                        <Select></Select>
+                        <From></From>
+                        <Where></Where>
+                        <GroupBy></GroupBy>
+                        <OrderBy></OrderBy>
+                        <Config>
+                            <Distinct></Distinct>
+                            <OffSet>0</OffSet>
+                            <Limit>0</Limit>
+                        </Config>
+
+                    </Query>
+
+                    <Fields></Fields>
+                </DataSet1>
+
+                <NumberSubSql>0</NumberSubSql>
+                <GroupFooter> #tab020
+#sety705 #tab010 #setfan8 CASIS  #tab230#setftn8 PAGINA $page DE  $pagecounting        #tab460#setfan8 fecha: $day - $month - $year 
+#sety715  #tab010 #setfan8 Usuario:$login_usuario#tab460#setfan8 hora: $time </GroupFooter>
+
+            </Detail1>
+
+        </Details>
+
+        <ReportFooter></ReportFooter>
+        <FinalSummary></FinalSummary>
+        <PageSetup>
+            <Format>Letter</Format>
+            <Orientation>portrait</Orientation>
+            <LeftMargin>25</LeftMargin>
+            <RightMargin>25</RightMargin>
+            <TopMargin>25</TopMargin>
+            <BottomMargin>25</BottomMargin>
+            <LineSpace>14</LineSpace>
+        </PageSetup>
+
+    </Merge>
+
+    <Label>
+        <Body></Body>
+        <Config>
+            <HorizontalSpacing>15</HorizontalSpacing>
+            <VerticalSpacing>0</VerticalSpacing>
+            <LabelWidth>288</LabelWidth>
+            <LabelHeight>72</LabelHeight>
+            <LeftMargin>11</LeftMargin>
+            <TopMargin>36</TopMargin>
+            <Columns>2</Columns>
+            <Rows>10</Rows>
+            <PageFormat>A3</PageFormat>
+            <LineSpacing>14</LineSpacing>
+        </Config>
+
+    </Label>
+
+    <OpenOffice>
+        <Source></Source>
+        <Config>
+            <FixedDetails>1</FixedDetails>
+            <ExpandDetails></ExpandDetails>
+            <printEmptyDetail>1</printEmptyDetail>
+            <SumByTotal>1</SumByTotal>
+            <RepeatHeader>1</RepeatHeader>
+            <RepeatFooter>1</RepeatFooter>
+        </Config>
+
+    </OpenOffice>
+
+</Report>

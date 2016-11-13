@@ -1,0 +1,280 @@
+<?xml version="1.0"?>
+<Report>
+    <Version>7.5</Version>
+    <Properties>
+        <Description></Description>
+        <Title></Title>
+        <Author></Author>
+        <Keywords></Keywords>
+        <Date></Date>
+
+        <FrameSize></FrameSize>
+    </Properties>
+
+    <Header>
+        <Body></Body>
+        <Align>center</Align>
+    </Header>
+
+    <Footer>
+
+        <Body></Body>
+        <Align>center</Align>
+    </Footer>
+
+    <DataSet>
+        <DataSource>
+            <Name>almacenes</Name>
+        </DataSource>
+
+        <Query>
+            <Select>current_date</Select>
+            <From></From>
+            <Where></Where>
+            <GroupBy></GroupBy>
+            <OrderBy></OrderBy>
+            <Config>
+                <Distinct></Distinct>
+
+                <OffSet>0</OffSet>
+                <Limit>0</Limit>
+            </Config>
+
+        </Query>
+
+        <Groups>
+            <Config>
+                <ShowGroup></ShowGroup>
+
+                <ShowDetail>1</ShowDetail>
+                <ShowLabel></ShowLabel>
+                <ShowNumber>1</ShowNumber>
+                <ShowIndent>1</ShowIndent>
+            </Config>
+
+        </Groups>
+
+        <Fields>
+            <Column1>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column1>
+
+        </Fields>
+
+    </DataSet>
+
+    <PageSetup>
+        <Format>Letter</Format>
+
+        <Orientation>portrait</Orientation>
+        <LeftMargin>0</LeftMargin>
+        <RightMargin>0</RightMargin>
+        <TopMargin>0</TopMargin>
+        <BottomMargin>0</BottomMargin>
+        <LineSpace>14</LineSpace>
+
+    </PageSetup>
+
+    <Graph>
+        <Title></Title>
+        <TitleX></TitleX>
+        <TitleY></TitleY>
+        <Width>480</Width>
+        <Height>268</Height>
+
+        <Description></Description>
+        <ShowData>1</ShowData>
+        <ShowValues>1</ShowValues>
+        <Orientation>columns</Orientation>
+    </Graph>
+
+    <Merge>
+        <ReportHeader>
+
+
+#setfab10
+#tab250 LISTADO DE ALMACENES
+
+
+#rect*015*010*570*030*1*#22105e*#22105e
+#rect*015*000*570*030*1*#22105e*#22105e
+#tab015 #setcfffffff</ReportHeader>
+
+        <Details>
+            <Detail1>
+                <GroupHeader>#tab025CÓDIGO #tab085NOMBRE #tab150DESCRIPCIÓN #tab260DIRECCIÓN #tab350FECHA ÚLTIMO  #tab440BLOQUEADO #tab515CERRADO
+#tab350INVENTARIO
+#setcf111111#setfan10
+</GroupHeader>
+
+                <DataSet1>
+                    <Body>#tab025  $subfield1  #tab085  $subfield2  #tab155  $subfield3  #tab260  $subfield3  #tab355  $subfield5  #tab465  $subfield6  #tab515  $subfield7 
+#tab025 #lineH540
+
+</Body>
+
+                    <Query>
+                        <Select>codigo, nombre, descripcion, direccion, fecha_ultimo_inventario, bloqueado, cerrado</Select>
+                        <From>almin.tal_almacen</From>
+                        <Where></Where>
+                        <GroupBy></GroupBy>
+                        <OrderBy></OrderBy>
+                        <Config>
+
+                            <Distinct></Distinct>
+                            <OffSet>0</OffSet>
+                            <Limit>0</Limit>
+                        </Config>
+
+                    </Query>
+
+                    <Fields>
+                        <Column1>
+
+                            <Chars>30</Chars>
+                            <Points>60</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+
+                        </Column1>
+
+                        <Column2>
+                            <Chars>30</Chars>
+                            <Points>75</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column2>
+
+                        <Column3>
+                            <Chars>30</Chars>
+                            <Points>100</Points>
+                            <Align>left</Align>
+
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column3>
+
+                        <Column4>
+                            <Chars>30</Chars>
+                            <Points>85</Points>
+
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column4>
+
+                        <Column5>
+                            <Chars>30</Chars>
+
+                            <Points>60</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column5>
+
+                        <Column6>
+                            <Chars>30</Chars>
+                            <Points>60</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+
+                            <Conditional></Conditional>
+                        </Column6>
+
+                        <Column7>
+                            <Chars>30</Chars>
+                            <Points>60</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column7>
+
+                    </Fields>
+
+                </DataSet1>
+
+                <NumberSubSql>0</NumberSubSql>
+
+                <GroupFooter>#setcf030303#sety750 #tab010 #setfan8 Usuario:$login_usuario  #tab260#setftn8 Página $page de  $pagecounting         #tab490#setfan8 fecha: $day - $month - $year 
+#sety760#tab490#setfan8 hora: $time</GroupFooter>
+
+            </Detail1>
+
+        </Details>
+
+        <ReportFooter></ReportFooter>
+        <FinalSummary></FinalSummary>
+        <PageSetup>
+            <Format>Letter</Format>
+
+            <Orientation>portrait</Orientation>
+            <LeftMargin>0</LeftMargin>
+            <RightMargin>0</RightMargin>
+            <TopMargin>0</TopMargin>
+            <BottomMargin>0</BottomMargin>
+            <LineSpace>14</LineSpace>
+
+        </PageSetup>
+
+    </Merge>
+
+    <Label>
+        <Body></Body>
+        <Config>
+            <HorizontalSpacing>15</HorizontalSpacing>
+            <VerticalSpacing>0</VerticalSpacing>
+
+            <LabelWidth>288</LabelWidth>
+            <LabelHeight>72</LabelHeight>
+            <LeftMargin>11</LeftMargin>
+            <TopMargin>36</TopMargin>
+            <Columns>2</Columns>
+            <Rows>10</Rows>
+
+            <PageFormat>A3</PageFormat>
+            <LineSpacing>14</LineSpacing>
+        </Config>
+
+    </Label>
+
+    <OpenOffice>
+        <Source></Source>
+        <Config>
+
+            <FixedDetails>1</FixedDetails>
+            <ExpandDetails></ExpandDetails>
+            <printEmptyDetail>1</printEmptyDetail>
+            <SumByTotal>1</SumByTotal>
+            <RepeatHeader>1</RepeatHeader>
+            <RepeatFooter>1</RepeatFooter>
+
+        </Config>
+
+    </OpenOffice>
+
+</Report>

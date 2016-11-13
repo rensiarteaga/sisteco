@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rep_cbte_partida" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<parameter name="id_cbte" class="java.lang.String"/>
+	<parameter name="id_siet_declara" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[select distinct com.concepto_cbte,
+       cbte.id_cbte,
+       cue.nombre_cuenta,
+       tra.id_auxiliar,
+       aux.codigo_auxiliar,
+       aux.nombre_auxiliar,
+       che.nro_cheque,
+       che.fecha_cobro,
+       cb.nro_cuenta_banco,
+       sum(cp.importe)as importe,
+       p.codigo_partida,
+       p.nombre_partida,o.sigla_oec
+ FROM
+ sigma.tsi_siet_cbte cbte
+ inner join sci.tct_comprobante com on com.id_comprobante=cbte.id_cbte
+ INNER JOIN sci.tct_transaccion tra on tra.id_comprobante=cbte.id_cbte
+ INNER JOIN sci.tct_cuenta CUE ON CUE.id_cuenta=tra.id_cuenta
+ INNER JOIN sci.tct_auxiliar AUX on aux.id_auxiliar=tra.id_auxiliar
+ inner join sigma.tsi_siet_cbte_partida cp on cp.id_siet_cbte=cbte.id_siet_cbte
+ INNER JOIN presto.tpr_partida p on p.id_partida=cp.id_partida
+ INNER JOIN sci.tct_cheque che on che.id_transaccion=tra.id_transaccion
+ INNER JOIN tesoro.tts_cuenta_bancaria cb on cb.id_cuenta=tra.id_cuenta and cb.id_auxiliar=tra.id_auxiliar
+ INNER JOIN sigma.tsi_oec o on o.id_oec=p.id_oec_sigma
+
+   where
+    cbte.id_siet_declara=$P{id_siet_declara} and cbte.id_cbte ilike ('%%%')
+ group by cbte.id_cbte,tra.id_partida,com.concepto_cbte,
+       cbte.id_cbte,
+       cue.nombre_cuenta,
+       tra.id_auxiliar,
+       aux.codigo_auxiliar,
+       aux.nombre_auxiliar,
+       che.nro_cheque,
+       che.fecha_cobro,
+       cb.nro_cuenta_banco,
+       p.codigo_partida,
+       p.nombre_partida,o.sigla_oec]]>
+	</queryString>
+	<field name="concepto_cbte" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_cbte" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre_cuenta" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_auxiliar" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="codigo_auxiliar" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre_auxiliar" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nro_cheque" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha_cobro" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nro_cuenta_banco" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="importe" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="codigo_partida" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre_partida" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sigla_oec" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="importe_1" class="java.math.BigDecimal" resetType="Group" resetGroup="comprobante" calculation="Sum">
+		<variableExpression><![CDATA[$F{importe}]]></variableExpression>
+	</variable>
+	<group name="comprobante">
+		<groupExpression><![CDATA[$F{id_cbte}]]></groupExpression>
+		<groupHeader>
+			<band height="21">
+				<textField>
+					<reportElement x="0" y="0" width="100" height="10"/>
+					<textElement>
+						<font size="6" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{concepto_cbte}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="10" width="100" height="10"/>
+					<textElement>
+						<font size="6" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{nombre_cuenta}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="100" y="10" width="100" height="10"/>
+					<textElement>
+						<font size="6" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{codigo_auxiliar}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="200" y="10" width="100" height="10"/>
+					<textElement>
+						<font size="6" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{nombre_auxiliar}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="300" y="10" width="100" height="10"/>
+					<textElement>
+						<font size="6" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{nro_cheque}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="400" y="10" width="100" height="10"/>
+					<textElement>
+						<font size="6" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{nro_cuenta_banco}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="10">
+				<textField>
+					<reportElement x="230" y="0" width="100" height="10"/>
+					<textElement textAlignment="Right">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{importe_1}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<detail>
+		<band height="10" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="43" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{codigo_partida}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="230" y="0" width="100" height="10"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{importe}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="43" y="0" width="171" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombre_partida}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="214" y="0" width="39" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{sigla_oec}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

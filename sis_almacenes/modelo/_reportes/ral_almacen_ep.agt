@@ -1,0 +1,349 @@
+<?xml version="1.0"?>
+<Report>
+    <Version>7.5</Version>
+    <Properties>
+        <Description></Description>
+        <Title></Title>
+        <Author></Author>
+        <Keywords></Keywords>
+        <Date></Date>
+
+        <FrameSize></FrameSize>
+    </Properties>
+
+    <Header>
+        <Body></Body>
+        <Align>center</Align>
+    </Header>
+
+    <Footer>
+
+        <Body></Body>
+        <Align>center</Align>
+    </Footer>
+
+    <Parameters>
+        <id_almacen>
+            <mask></mask>
+            <value>%</value>
+
+        </id_almacen>
+
+        <id_financiador>
+            <mask></mask>
+            <value>%</value>
+        </id_financiador>
+
+        <id_regional>
+            <mask></mask>
+
+            <value>%</value>
+        </id_regional>
+
+        <id_programa>
+            <mask></mask>
+            <value>%</value>
+        </id_programa>
+
+        <id_proyecto>
+
+            <mask></mask>
+            <value>%</value>
+        </id_proyecto>
+
+        <id_actividad>
+            <mask></mask>
+            <value>%</value>
+        </id_actividad>
+
+    </Parameters>
+
+    <DataSet>
+        <DataSource>
+            <Name>almacenes</Name>
+        </DataSource>
+
+        <Query>
+            <Select>distinct alm.id_almacen, ep.id_almacen_ep, alm.nombre as almacen, alm.codigo</Select>
+
+            <From>almin.tal_almacen alm      INNER JOIN almin.tal_almacen_ep ep ON alm.id_almacen = ep.id_almacen</From>
+            <Where>ep.id_almacen like $id_almacen</Where>
+            <GroupBy>alm.id_almacen,          ep.id_almacen_ep,          alm.nombre,          alm.codigo</GroupBy>
+            <OrderBy>alm.id_almacen</OrderBy>
+            <Config>
+                <Distinct></Distinct>
+                <OffSet>0</OffSet>
+
+                <Limit>0</Limit>
+            </Config>
+
+        </Query>
+
+        <Groups>
+            <Config>
+                <ShowGroup></ShowGroup>
+                <ShowDetail>1</ShowDetail>
+
+                <ShowLabel></ShowLabel>
+                <ShowNumber>1</ShowNumber>
+                <ShowIndent>1</ShowIndent>
+            </Config>
+
+        </Groups>
+
+        <Fields>
+            <Column1>
+
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+
+            </Column1>
+
+            <Column2>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column2>
+
+            <Column3>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column3>
+
+            <Column4>
+                <Chars>30</Chars>
+                <Points>60</Points>
+
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column4>
+
+        </Fields>
+
+    </DataSet>
+
+    <PageSetup>
+        <Format>Letter</Format>
+        <Orientation>portrait</Orientation>
+        <LeftMargin>0</LeftMargin>
+        <RightMargin>0</RightMargin>
+
+        <TopMargin>0</TopMargin>
+        <BottomMargin>0</BottomMargin>
+        <LineSpace>14</LineSpace>
+    </PageSetup>
+
+    <Graph>
+        <Title></Title>
+
+        <TitleX></TitleX>
+        <TitleY></TitleY>
+        <Width>480</Width>
+        <Height>268</Height>
+        <Description></Description>
+        <ShowData>1</ShowData>
+        <ShowValues>1</ShowValues>
+
+        <Orientation>columns</Orientation>
+    </Graph>
+
+    <Merge>
+        <ReportHeader>#tab400 #bgimage ../../../../lib/images/logo_reporte_factur.jpg
+
+
+#setfan10</ReportHeader>
+
+        <Details>
+            <Detail1>
+                <GroupHeader>
+
+#tab200 ALMACENES - ESTRUCTURA PROGRAMÁTICA  
+#tab025ALMACEN:  $var3
+#tab025CÓDIGO:   $var4
+#rect*015*010*515*030*1*#22105e*#22105e
+#tab015#setfan10 #setcfffffff
+
+#tab025FINANCIADOR #tab110REGIONAL #tab180PROGRAMA #tab260PROYECTO #tab340ACTIVIDAD #tab420OBSERVACIONES
+#setcf171717
+
+</GroupHeader>
+                <DataSet1>
+                    <Body>#tab035 $subfield1  #tab120 $subfield2  #tab190 $subfield3  #tab270 $subfield4 #tab350 $subfield5 #tab430 $subfield6</Body>
+                    <Query>
+                        <Select>financ.codigo_financiador, region.codigo_regional, progra.codigo_programa, proyec.codigo_proyecto, activi.codigo_actividad, ep.observaciones</Select>
+                        <From>almin.tal_almacen alm      INNER JOIN almin.tal_almacen_ep ep ON alm.id_almacen = ep.id_almacen      INNER JOIN param.tpm_fina_regi_prog_proy_acti frppa ON      frppa.id_fina_regi_prog_proy_acti = ep.id_fina_regi_prog_proy_acti      INNER JOIN param.tpm_programa_proyecto_actividad ppa on ppa.id_prog_proy_acti =      frppa.id_prog_proy_acti      inner join param.tpm_financiador financ on financ.id_financiador =      frppa.id_financiador      inner join param.tpm_regional region on region.id_regional = frppa.id_regional      inner join param.tpm_programa progra on progra.id_programa = ppa.id_programa      inner join param.tpm_proyecto proyec on proyec.id_proyecto = ppa.id_proyecto      inner join param.tpm_actividad activi on activi.id_actividad = ppa.id_actividad</From>
+                        <Where>ep.id_almacen = $var2 and       financ.id_financiador like $id_financiador and       region.id_regional like $id_regional and       progra.id_programa like $id_programa and       proyec.id_proyecto like $id_proyecto and       activi.id_actividad like $id_actividad</Where>
+
+                        <GroupBy>financ.codigo_financiador, region.codigo_regional, progra.codigo_programa, proyec.codigo_proyecto, activi.codigo_actividad, ep.observaciones</GroupBy>
+                        <OrderBy>financ.codigo_financiador,          region.codigo_regional,          progra.codigo_programa,          proyec.codigo_proyecto,          activi.codigo_actividad,  ep.observaciones</OrderBy>
+                        <Config>
+                            <Distinct></Distinct>
+                            <OffSet>0</OffSet>
+                            <Limit>0</Limit>
+                        </Config>
+
+                    </Query>
+
+                    <Fields>
+                        <Column1>
+                            <Chars>30</Chars>
+                            <Points>60</Points>
+                            <Align>left</Align>
+
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column1>
+
+                        <Column2>
+                            <Chars>30</Chars>
+                            <Points>60</Points>
+
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column2>
+
+                        <Column3>
+                            <Chars>30</Chars>
+
+                            <Points>60</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column3>
+
+                        <Column4>
+                            <Chars>30</Chars>
+                            <Points>60</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+
+                            <Conditional></Conditional>
+                        </Column4>
+
+                        <Column5>
+                            <Chars>30</Chars>
+                            <Points>60</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column5>
+
+                        <Column6>
+                            <Chars>30</Chars>
+                            <Points>60</Points>
+
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column6>
+
+                        <Column7>
+                            <Chars>30</Chars>
+
+                            <Points>60</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column7>
+
+                    </Fields>
+
+                </DataSet1>
+
+                <NumberSubSql>0</NumberSubSql>
+                <GroupFooter>
+#tab025#lineH490
+
+#sety740
+#setfan07
+#tab025USUARIO:  #tab250PAGINAS:  $page  DE  $pagecounting #tab450 FECHA:  $day -  $month -  $year 
+																	  #tab450 HORA: $time 
+#setfan10</GroupFooter>
+            </Detail1>
+
+        </Details>
+
+        <ReportFooter></ReportFooter>
+        <FinalSummary></FinalSummary>
+        <PageSetup>
+            <Format>Letter</Format>
+            <Orientation>portrait</Orientation>
+            <LeftMargin>0</LeftMargin>
+            <RightMargin>0</RightMargin>
+
+            <TopMargin>0</TopMargin>
+            <BottomMargin>0</BottomMargin>
+            <LineSpace>14</LineSpace>
+        </PageSetup>
+
+    </Merge>
+
+    <Label>
+
+        <Body></Body>
+        <Config>
+            <HorizontalSpacing>15</HorizontalSpacing>
+            <VerticalSpacing>0</VerticalSpacing>
+            <LabelWidth>288</LabelWidth>
+            <LabelHeight>72</LabelHeight>
+            <LeftMargin>11</LeftMargin>
+
+            <TopMargin>36</TopMargin>
+            <Columns>2</Columns>
+            <Rows>10</Rows>
+            <PageFormat>A3</PageFormat>
+            <LineSpacing>14</LineSpacing>
+        </Config>
+
+    </Label>
+
+    <OpenOffice>
+        <Source></Source>
+        <Config>
+            <FixedDetails>1</FixedDetails>
+            <ExpandDetails></ExpandDetails>
+            <printEmptyDetail>1</printEmptyDetail>
+
+            <SumByTotal>1</SumByTotal>
+            <RepeatHeader>1</RepeatHeader>
+            <RepeatFooter>1</RepeatFooter>
+        </Config>
+
+    </OpenOffice>
+
+</Report>

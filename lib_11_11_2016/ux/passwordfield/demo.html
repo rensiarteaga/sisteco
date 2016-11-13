@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Ext.ux.PasswordField demo</title>
+
+<script type="text/javascript" src="js/ext-base.js"></script>
+<script type="text/javascript" src="js/ext-all.js"></script>
+<link type="text/css" rel="stylesheet" href="css/ext-all.css" />
+
+<script type="text/javascript" src="js/Ext.ux.PasswordField.js"></script>
+<link type="text/css" rel="stylesheet" href="css/Ext.ux.PasswordField.css" />
+</head>
+
+<body>
+
+<div style="width:600px;">
+    <div class="x-box-tl"><div class="x-box-tr"><div class="x-box-tc"></div></div></div>
+    <div class="x-box-ml"><div class="x-box-mr"><div class="x-box-mc">
+	    <h3>Ext.ux.PasswordField demo (version 0.21)</h3>
+        <div id="pass1"></div>        
+        Thanks to James Asher (<a href="http://extjs.com/forum/showthread.php?t=20210">TheJoker101</a>) and Eelco Wiersma (<a href="http://extjs.com/forum/showthread.php?t=12155">Pagebaker</a>) for their original code implementations.
+    </div></div></div>
+    <div class="x-box-bl"><div class="x-box-br"><div class="x-box-bc"></div></div></div>
+</div>
+
+</body>
+<script language="javascript" type="text/javascript">
+	Ext.onReady(function(){
+		var password = new Ext.ux.PasswordField({
+			width: 200,
+			showCapsWarning: true,
+			showStrengthMeter: true,
+			pwStrengthTest: function(pw) {
+				return (pw.length * 10);
+			}									
+		});
+		password.render('pass1');
+	});
+</script>
+</html>

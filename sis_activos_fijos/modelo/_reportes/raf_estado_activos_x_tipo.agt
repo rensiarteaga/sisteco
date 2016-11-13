@@ -1,0 +1,352 @@
+<?xml version="1.0"?>
+<Report>
+    <Version>7.5</Version>
+    <Properties>
+        <Description></Description>
+        <Title></Title>
+        <Author></Author>
+        <Keywords></Keywords>
+        <Date></Date>
+        <FrameSize></FrameSize>
+    </Properties>
+
+    <Header>
+        <Body></Body>
+        <Align>center</Align>
+    </Header>
+
+    <Footer>
+        <Body></Body>
+        <Align>center</Align>
+    </Footer>
+
+    <Parameters>
+        <login_usuario>
+            <value>Ana Maria V. Q.</value>
+        </login_usuario>
+
+        <id_usuario>
+            <value>10</value>
+        </id_usuario>
+
+        <id_financiador>
+            <value>%</value>
+        </id_financiador>
+
+        <id_regional>
+            <value>%</value>
+        </id_regional>
+
+        <id_programa>
+            <value>%</value>
+        </id_programa>
+
+        <id_proyecto>
+            <value>%</value>
+        </id_proyecto>
+
+        <id_actividad>
+            <value>%</value>
+        </id_actividad>
+
+        <tipo>
+            <value>%</value>
+        </tipo>
+
+    </Parameters>
+
+    <DataSet>
+        <DataSource>
+            <Name>rendesis</Name>
+        </DataSource>
+
+        <Query>
+            <Select>distinct TIPO.id_tipo_activo, TIPO.codigo, TIPO.descripcion</Select>
+            <From>tsg_usuario USU  INNER JOIN tsg_usuario_asignacion USUASIG ON (USU.id_usuario = USUASIG.id_usuario)  INNER JOIN tsg_asignacion_estructura ASIGESTR ON (USUASIG.id_asignacion_estructura = ASIGESTR.id_asignacion_estructura) INNER JOIN tsg_asignacion_estructura_tpm_frppa  ASIGFRPPA ON (ASIGESTR.id_asignacion_estructura = ASIGFRPPA.id_asignacion_estructura)  INNER JOIN tpm_fina_regi_prog_proy_acti FRPPA  ON (ASIGFRPPA.id_fina_regi_prog_proy_acti = FRPPA.id_fina_regi_prog_proy_acti) INNER JOIN tpm_programa_proyecto_actividad PPA ON (PPA.id_prog_proy_acti = FRPPA.id_prog_proy_acti)  INNER JOIN taf_activo_fijo_tpm_frppa AFEP ON (FRPPA.id_fina_regi_prog_proy_acti= AFEP.id_fina_regi_prog_proy_acti) INNER JOIN taf_activo_fijo AF ON (AF.id_activo_fijo = AFEP.id_activo_fijo) INNER JOIN taf_sub_tipo_activo STIPO ON (AF.id_sub_tipo_activo = STIPO.id_sub_tipo_activo) INNER JOIN taf_tipo_activo TIPO ON  (TIPO.id_tipo_activo = STIPO.id_tipo_activo )</From>
+            <Where>TIPO.id_tipo_activo  like $tipo and FRPPA.id_financiador LIKE $id_financiador and FRPPA.id_regional LIKE $id_regional and PPA.id_programa LIKE $id_programa and PPA.id_proyecto LIKE $id_proyecto and PPA.id_actividad LIKE $id_actividad and USU.id_usuario = $id_usuario</Where>
+            <GroupBy></GroupBy>
+            <OrderBy></OrderBy>
+            <Config>
+                <Distinct></Distinct>
+                <OffSet>0</OffSet>
+                <Limit>0</Limit>
+            </Config>
+
+        </Query>
+
+        <Groups>
+            <Config>
+                <ShowGroup></ShowGroup>
+                <ShowDetail>1</ShowDetail>
+                <ShowLabel></ShowLabel>
+                <ShowNumber>1</ShowNumber>
+                <ShowIndent>1</ShowIndent>
+            </Config>
+
+        </Groups>
+
+        <Fields>
+            <Column1>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column1>
+
+            <Column2>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column2>
+
+            <Column3>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column3>
+
+        </Fields>
+
+    </DataSet>
+
+    <PageSetup></PageSetup>
+    <Graph>
+        <Title></Title>
+        <TitleX></TitleX>
+        <TitleY></TitleY>
+        <Width>480</Width>
+        <Height>268</Height>
+        <Description></Description>
+        <ShowData>1</ShowData>
+        <ShowValues>1</ShowValues>
+        <Orientation>columns</Orientation>
+    </Graph>
+
+    <Merge>
+        <ReportHeader>#setcffdfdfd  Reporte ENDESIS  Copyright Â©2007, ENDE S.A... Todos los derechos reservados. 
+#setftb18
+#setcf010101
+ #sety020 #tab240 ESTADO DE ACTIVOS FIJOS
+ #sety40 #tab260 #setfab12 Tipo:   $var3   #tab110   #setfan12   
+#sety55 #tab260 AL:   $day - $month - $year 
+ #sety70 #tab260 #setfab12Regional:</ReportHeader>
+
+        <Details>
+            <Detail1>
+                <GroupHeader>#sety005#tab610   #image ../../../../lib/images/logo_reporte.jpg
+
+
+#sety90 #rect*020*010*720*025*1*#22105e*#22105e
+#rect*020*000*720*025*1*#22105e*#22105e
+#tab025#setfan10 #setcfffffff Codigo #tab70 Descripcion #tab250 Fecha   #tab310Factura   #tab400 Valor      #tab460 Depreciacion      #tab535 Depreciacion  #tab605 Valor Actual      #tab680 Vida Util 
+#tab250  Compra #tab400 Original  #tab470 del periodo   #tab535 Acumulada  #tab680   Restante
+#sety125  #setcf000000                                                                                                                                                      </GroupHeader>
+
+                <DataSet1>
+                    <Body>
+
+#tab020  #lineH720      $subfield4        $subfield5       $subfield6        $subfield7       $subfield8      $subfield9        $subfield10  $subfield11    $subfield12 </Body>
+                    <Query>
+                        <Select>tipo.id_tipo_activo, stipo.id_sub_tipo_activo, af.id_activo_fijo, af.codigo as "Codigo", af.descripcion as "Descripcion", to_char(af.fecha_compra,'dd/mm/YYYY') as "Fecha Compra", af.num_factura as "Factura", af.monto_compra as "Valor Original", af.depreciacion_periodo as "Depreciacion Periodo", af.depreciacion_acum as "Depreciacion Acumulada", af.monto_actual as "Valor Actual", af.vida_util_restante as "Vida Util Restante"</Select>
+                        <From>taf_tipo_activo tipo inner join taf_sub_tipo_activo stipo on tipo.id_tipo_activo = stipo.id_tipo_activo inner join taf_activo_fijo af on af.id_sub_tipo_activo = stipo.id_sub_tipo_activo</From>
+                        <Where>tipo.id_tipo_activo  like $var1</Where>
+                        <GroupBy></GroupBy>
+                        <OrderBy></OrderBy>
+                        <Config>
+                            <Distinct></Distinct>
+                            <OffSet>0</OffSet>
+                            <Limit>0</Limit>
+                        </Config>
+
+                    </Query>
+
+                    <Fields>
+                        <Column1>
+                            <Chars>30</Chars>
+                            <Points>60</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column1>
+
+                        <Column2>
+                            <Chars>30</Chars>
+                            <Points>60</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column2>
+
+                        <Column3>
+                            <Chars>30</Chars>
+                            <Points>60</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column3>
+
+                        <Column4>
+                            <Chars>30</Chars>
+                            <Points>70</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column4>
+
+                        <Column5>
+                            <Chars>30</Chars>
+                            <Points>150</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column5>
+
+                        <Column6>
+                            <Chars>30</Chars>
+                            <Points>70</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column6>
+
+                        <Column7>
+                            <Chars>30</Chars>
+                            <Points>70</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column7>
+
+                        <Column8>
+                            <Chars>30</Chars>
+                            <Points>70</Points>
+                            <Align>right</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column8>
+
+                        <Column9>
+                            <Chars>30</Chars>
+                            <Points>75</Points>
+                            <Align>right</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column9>
+
+                        <Column10>
+                            <Chars>30</Chars>
+                            <Points>75</Points>
+                            <Align>right</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column10>
+
+                        <Column11>
+                            <Chars>30</Chars>
+                            <Points>75</Points>
+                            <Align>right</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column11>
+
+                        <Column12>
+                            <Chars>30</Chars>
+                            <Points>50</Points>
+                            <Align>right</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column12>
+
+                    </Fields>
+
+                </DataSet1>
+
+                <NumberSubSql>0</NumberSubSql>
+                <GroupFooter> #tab020#rect*000*000*720*002*1*#081392*#000000
+#sety540 #tab010 #setfan8 Usuario:$login_usuario  #tab330#setftn8 Página $page de  $pagecounting         #tab660#setfan8 fecha: $day - $month - $year 
+#sety550#tab660#setfan8 hora: $time </GroupFooter>
+
+            </Detail1>
+
+        </Details>
+
+        <ReportFooter></ReportFooter>
+        <FinalSummary></FinalSummary>
+        <PageSetup>
+            <Format>Letter</Format>
+            <Orientation>landscape</Orientation>
+            <LeftMargin>25</LeftMargin>
+            <RightMargin>25</RightMargin>
+            <TopMargin>25</TopMargin>
+            <BottomMargin>25</BottomMargin>
+            <LineSpace>14</LineSpace>
+        </PageSetup>
+
+    </Merge>
+
+    <Label>
+        <Body></Body>
+        <Config>
+            <HorizontalSpacing>15</HorizontalSpacing>
+            <VerticalSpacing>0</VerticalSpacing>
+            <LabelWidth>288</LabelWidth>
+            <LabelHeight>72</LabelHeight>
+            <LeftMargin>11</LeftMargin>
+            <TopMargin>36</TopMargin>
+            <Columns>2</Columns>
+            <Rows>10</Rows>
+            <PageFormat></PageFormat>
+            <LineSpacing>14</LineSpacing>
+        </Config>
+
+    </Label>
+
+    <OpenOffice>
+        <Source></Source>
+        <Config>
+            <FixedDetails>1</FixedDetails>
+            <ExpandDetails></ExpandDetails>
+            <printEmptyDetail>1</printEmptyDetail>
+            <SumByTotal>1</SumByTotal>
+            <RepeatHeader>1</RepeatHeader>
+            <RepeatFooter>1</RepeatFooter>
+        </Config>
+
+    </OpenOffice>
+
+</Report>

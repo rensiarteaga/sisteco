@@ -1,0 +1,294 @@
+<?php
+/**
+ * Nombre de la clase:	cls_DBProceso.php
+ * Propósito:			Permite ejecutar toda la funcionalidad de la tabla taf_taf_proceso
+ * Autor:				(autogenerado)
+ * Fecha creación:		2010-10-13 17:05:17
+ */
+
+ 
+class cls_DBProceso
+{
+	var $salida;
+	var $query;
+	var $var;
+	var $nombre_funcion;
+	var $codigo_procedimiento;
+	var $decodificar;
+	
+	function __construct()
+	{
+		$this->decodificar=$decodificar;
+	}
+	
+	/**
+	 * Nombre de la función:	ListarProceso
+	 * Propósito:				Desplegar los registros de taf_proceso
+	 * Autor:				    (autogenerado)
+	 * Fecha de creación:		2010-10-13 17:05:17
+	 */
+	function ListarProceso($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad)
+	{
+		$this->salida = "";
+		$this->nombre_funcion = 'f_taf_proceso_sel';
+		$this->codigo_procedimiento = "'AF_PROC_SEL'";
+
+		$func = new cls_funciones();//Instancia de las funciones generales
+		
+		//Instancia la clase middle para la ejecución de la función de la BD
+		$this->var = new cls_middle($this->nombre_funcion,$this->codigo_procedimiento);
+
+		//Carga los parámetros del filtro
+		$this->var->cant = $cant;
+		$this->var->puntero = $puntero;
+		$this->var->sortcol = "'$sortcol'";
+		$this->var->sortdir = "'$sortdir'";
+		$this->var->criterio_filtro = "'$criterio_filtro'";
+
+		//Carga los parámetros específicos de la estructura programática
+		$this->var->add_param($func->iif($id_financiador == '',"'%'","'$id_financiador'"));//id_financiador
+		$this->var->add_param($func->iif($id_regional == '',"'%'","'$id_regional'"));//id_regional
+		$this->var->add_param($func->iif($id_programa == '',"'%'","'$id_programa'"));//id_programa
+		$this->var->add_param($func->iif($id_proyecto == '',"'%'","'$id_proyecto'"));//id_proyecto
+		$this->var->add_param($func->iif($id_actividad == '',"'%'","'$id_actividad'"));//id_actividad
+
+		//Carga la definición de columnas con sus tipos de datos
+		$this->var->add_def_cols('id_proceso','integer');
+		$this->var->add_def_cols('descripcion','varchar');
+		$this->var->add_def_cols('codigo','varchar');
+		$this->var->add_def_cols('sw_aprobar','varchar');
+		$this->var->add_def_cols('sw_contabilizar','varchar');
+		$this->var->add_def_cols('sw_registrar','varchar');
+		$this->var->add_def_cols('sw_bien_responsabilidad','varchar');
+
+		//Ejecuta la función de consulta
+		$res = $this->var->exec_query();
+
+		//Obtiene el array de salida de la función y retorna el resultado de la ejecución
+		$this->salida = $this->var->salida;
+
+		//Obtiene la cadena con que se llamó a la función de postgres
+		$this->query = $this->var->query;
+		return $res;
+	}
+	
+	/**
+	 * Nombre de la función:	ContarProceso
+	 * Propósito:				Contar los registros de taf_proceso
+	 * Autor:				    (autogenerado)
+	 * Fecha de creación:		2010-10-13 17:05:17
+	 */
+	function ContarProceso($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad)
+	{
+		$this->salida = "";
+		$this->nombre_funcion = 'f_taf_proceso_sel';
+		$this->codigo_procedimiento = "'AF_PROC_COUNT'";
+
+		$func = new cls_funciones();//Instancia de las funciones generales
+		
+		//Instancia la clase middle para la ejecución de la función de la BD
+		$this->var = new cls_middle($this->nombre_funcion,$this->codigo_procedimiento);
+
+		//Carga los parámetros del filtro
+		$this->var->cant = $cant;
+		$this->var->puntero = $puntero;
+		$this->var->sortcol = "'$sortcol'";
+		$this->var->sortdir = "'$sortdir'";
+		$this->var->criterio_filtro = "'$criterio_filtro'";
+
+		//Carga los parámetros específicos de la estructura programática
+		$this->var->add_param($func->iif($id_financiador == '',"'%'","'$id_financiador'"));//id_financiador
+		$this->var->add_param($func->iif($id_regional == '',"'%'","'$id_regional'"));//id_regional
+		$this->var->add_param($func->iif($id_programa == '',"'%'","'$id_programa'"));//id_programa
+		$this->var->add_param($func->iif($id_proyecto == '',"'%'","'$id_proyecto'"));//id_proyecto
+		$this->var->add_param($func->iif($id_actividad == '',"'%'","'$id_actividad'"));//id_actividad
+		
+		//Carga la definición de columnas con sus tipos de datos
+		$this->var->add_def_cols('total','bigint');
+
+		//Ejecuta la función de consulta
+		$res = $this->var->exec_query();
+
+		//Obtiene el array de salida de la función
+		$this->salida = $this->var->salida;
+
+		//Si la ejecución fue satisfactoria modifica la salida para que solo devuelva el total de la consulta
+		if($res)
+		{
+			$this->salida = $this->var->salida[0][0];
+		}
+
+		//Obtiene la cadena con que se llamó a la función de postgres
+		$this->query = $this->var->query;
+
+		//Retorna el resultado de la ejecución
+		return $res;
+	}
+	
+	/**
+	 * Nombre de la función:	InsertarProceso
+	 * Propósito:				Permite ejecutar la función de inserción de la tabla taf_proceso
+	 * Autor:				    (autogenerado)
+	 * Fecha de creación:		2010-10-13 17:05:17
+	 */
+	function InsertarProceso($descripcion,$codigo,$sw_aprobar,$sw_contabilizar,$sw_registrar,$sw_bien_responsabilidad)
+	{
+		$this->salida = "";
+		$this->nombre_funcion = 'f_taf_proceso_iud';
+		$this->codigo_procedimiento = "'AF_PROC_INS'";
+
+		//Instancia la clase midlle para la ejecución de la función de la BD
+		$this->var = new cls_middle($this->nombre_funcion,$this->codigo_procedimiento,$this->decodificar);
+		$this->var->add_param("NULL");
+		$this->var->add_param("'$descripcion'");
+		$this->var->add_param("'$codigo'");
+		$this->var->add_param("'$sw_aprobar'");
+		$this->var->add_param("'$sw_contabilizar'");
+		$this->var->add_param("'$sw_registrar'");
+		$this->var->add_param("'$sw_bien_responsabilidad'");
+
+		//Ejecuta la función
+		$res = $this->var->exec_non_query();
+
+		//Obtiene el array de salida de la función y retorna el resultado de la ejecución
+		$this->salida = $this->var->salida;
+
+		//Obtiene la cadena con que se llamó a la función de postgres
+		$this->query = $this->var->query;
+
+		return $res;
+	}
+	
+	/**
+	 * Nombre de la función:	ModificarProceso
+	 * Propósito:				Permite ejecutar la función de modificación de la tabla taf_proceso
+	 * Autor:				    (autogenerado)
+	 * Fecha de creación:		2010-10-13 17:05:17
+	 */
+	function ModificarProceso($id_proceso,$descripcion,$codigo,$sw_aprobar,$sw_contabilizar,$sw_registrar,$sw_bien_responsabilidad)
+	{
+		$this->salida = "";
+		$this->nombre_funcion = 'f_taf_proceso_iud';
+		$this->codigo_procedimiento = "'AF_PROC_UPD'";
+
+		//Instancia la clase midlle para la ejecución de la función de la BD
+		$this->var = new cls_middle($this->nombre_funcion,$this->codigo_procedimiento,$this->decodificar);
+		$this->var->add_param($id_proceso);
+		$this->var->add_param("'$descripcion'");
+		$this->var->add_param("'$codigo'");
+		$this->var->add_param("'$sw_aprobar'");
+		$this->var->add_param("'$sw_contabilizar'");
+		$this->var->add_param("'$sw_registrar'");
+		$this->var->add_param("'$sw_bien_responsabilidad'");
+
+		//Ejecuta la función
+		$res = $this->var->exec_non_query();
+
+		//Obtiene el array de salida de la función y retorna el resultado de la ejecución
+		$this->salida = $this->var->salida;
+
+		//Obtiene la cadena con que se llamó a la función de postgres
+		$this->query = $this->var->query;
+
+		return $res;
+	}
+	
+	/**
+	 * Nombre de la función:	EliminarProceso
+	 * Propósito:				Permite ejecutar la función de eliminación de la tabla taf_proceso
+	 * Autor:				    (autogenerado)
+	 * Fecha de creación:		2010-10-13 17:05:17
+	 */
+	function EliminarProceso($id_proceso)
+	{
+		$this->salida = "";
+		$this->nombre_funcion = 'f_taf_proceso_iud';
+		$this->codigo_procedimiento = "'AF_PROC_DEL'";
+
+		//Instancia la clase midlle para la ejecución de la función de la BD
+		$this->var = new cls_middle($this->nombre_funcion,$this->codigo_procedimiento,$this->decodificar);
+		$this->var->add_param($id_proceso);
+		$this->var->add_param("NULL");
+		$this->var->add_param("NULL");
+		$this->var->add_param("NULL");
+		$this->var->add_param("NULL");
+		$this->var->add_param("NULL");
+		$this->var->add_param("NULL");
+
+		//Ejecuta la función
+		$res = $this->var->exec_non_query();
+
+		//Obtiene el array de salida de la función y retorna el resultado de la ejecución
+		$this->salida = $this->var->salida;
+
+		//Obtiene la cadena con que se llamó a la función de postgres
+		$this->query = $this->var->query;
+
+		return $res;
+	}
+	
+	/**
+	 * Nombre de la función:	ValidarProceso
+	 * Propósito:				Permite ejecutar la validación del lado del servidor de la tabla taf_proceso
+	 * Autor:				    (autogenerado)
+	 * Fecha de creación:		2010-10-13 17:05:17
+	 */
+	function ValidarProceso($operacion_sql,$id_proceso,$descripcion,$codigo)
+	{
+		$this->salida = "";
+		$valid = new cls_validacion_serv();
+
+		//Clase para validar el tipo de dato
+		$tipo_dato = new cls_define_tipo_dato();
+	
+		//Ejecuta la validación por el tipo de operación
+		if($operacion_sql=='insert' || $operacion_sql=='update')
+		{
+			if($operacion_sql == 'update')
+			{
+				//Validar descripcion - tipo int4
+				$tipo_dato->_reiniciar_valor();
+				$tipo_dato->set_MaxLength(10);
+				$tipo_dato->set_Columna("id_proceso");
+
+				if(!$valid->verifica_dato($tipo_dato->TipoDatoInteger(), "id_proceso", $id_proceso))
+				{
+					$this->salida = $valid->salida;
+					return false;
+				}
+			}
+
+			//Validar codigo - tipo varchar
+			$tipo_dato->_reiniciar_valor();
+			$tipo_dato->set_Columna("codigo");
+			$tipo_dato->set_MaxLength(30);
+			$tipo_dato->set_AllowBlank(true);
+			if(!$valid->verifica_dato($tipo_dato->TipoDatoText(), "codigo", $codigo))
+			{
+				$this->salida = $valid->salida;
+				return false;
+			}
+			//Validación exitosa
+			return true;
+		}
+		elseif ($operacion_sql=='delete')
+		{
+			//Validar descripcion - tipo int4
+			$tipo_dato->_reiniciar_valor();
+			$tipo_dato->set_Columna("id_proceso");
+
+			if(!$valid->verifica_dato($tipo_dato->TipoDatoInteger(), "id_proceso", $id_proceso))
+			{
+				$this->salida = $valid->salida;
+				return false;
+			}
+		
+			//Validación exitosa
+			return true;	
+		}
+		else
+		{
+			return false;
+		}
+	}
+}?>

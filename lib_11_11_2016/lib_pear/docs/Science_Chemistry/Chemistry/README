@@ -1,0 +1,18 @@
+Science_Chemistry
+
+Author: Jesus M. Castagnetto
+Version: 1.0
+
+A package of classes to deal with chemical opbjects (atoms, molecules,
+macromolecules, etc)
+
+To install the Science_Chemistry package you currently have to make a distribution
+tarball first:
+ 
+$ pear package package.xml
+ 
+This will result in a file called Science_Chemistry-1.0.tgz that you have to install:
+ 
+$ pear install Science_Chemistry-1.0.tgz
+ 
+Now you are all set

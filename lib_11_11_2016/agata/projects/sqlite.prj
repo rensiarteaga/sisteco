@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<project>
+    <host></host>
+    <name>samples.db</name>
+    <user></user>
+    <pass></pass>
+    <type>native-sqlite</type>
+    <dict>Samples</dict>
+</project>
+

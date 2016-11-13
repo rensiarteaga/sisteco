@@ -1,0 +1,374 @@
+<?xml version="1.0"?>
+<Report>
+    <Version>7.5</Version>
+    <Properties>
+        <Description></Description>
+        <Title></Title>
+        <Author></Author>
+        <Keywords></Keywords>
+        <Date></Date>
+        <FrameSize></FrameSize>
+    </Properties>
+
+    <Header>
+        <Body></Body>
+        <Align>center</Align>
+    </Header>
+
+    <Footer>
+        <Body></Body>
+        <Align>center</Align>
+    </Footer>
+
+    <Parameters>
+        <id_supergrupo>
+            <value>%</value>
+        </id_supergrupo>
+
+        <id_grupo>
+            <value>%</value>
+        </id_grupo>
+
+        <id_subgrupo>
+            <value>%</value>
+        </id_subgrupo>
+
+        <id_id1>
+            <value>%</value>
+        </id_id1>
+
+    </Parameters>
+
+    <DataSet>
+        <DataSource>
+            <Name>polea</Name>
+        </DataSource>
+
+        <Query>
+            <Select>distinct SUPGRU.id_supergrupo,GRUPP.id_grupo,SUBGRU.id_subgrupo,IID1.id_id1,SUPGRU.codigo,SUPGRU.nombre,SUPGRU.descripcion,GRUPP.codigo,GRUPP.nombre,GRUPP.descripcion,SUBGRU.codigo,SUBGRU.nombre,SUBGRU.descripcion,IID1.codigo,IID1.nombre,IID1.descripcion</Select>
+            <From>almin.tal_id1 IID1  INNER JOIN almin.tal_subgrupo SUBGRU ON (SUBGRU.id_subgrupo=IID1.id_subgrupo) INNER JOIN almin.tal_grupo GRUPP ON (GRUPP.id_grupo=SUBGRU.id_grupo) INNER JOIN almin.tal_supergrupo SUPGRU ON (SUPGRU.id_supergrupo=GRUPP.id_supergrupo) INNER JOIN almin.tal_id2 IID2 ON (IID2.id_id1=IID1.id_id1)</From>
+            <Where>SUPGRU.id_supergrupo like $id_supergrupo and GRUPP.id_grupo like $id_grupo and SUBGRU.id_subgrupo like $id_subgrupo and IID1.id_id1 like $id_id1</Where>
+            <GroupBy></GroupBy>
+            <OrderBy></OrderBy>
+            <Config>
+                <Distinct></Distinct>
+                <OffSet>0</OffSet>
+                <Limit>0</Limit>
+            </Config>
+
+        </Query>
+
+        <Groups>
+            <Config>
+                <ShowGroup></ShowGroup>
+                <ShowDetail>1</ShowDetail>
+                <ShowLabel></ShowLabel>
+                <ShowNumber>1</ShowNumber>
+                <ShowIndent>1</ShowIndent>
+            </Config>
+
+        </Groups>
+
+        <Fields>
+            <Column1>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column1>
+
+            <Column2>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column2>
+
+            <Column3>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column3>
+
+            <Column4>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column4>
+
+            <Column5>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column5>
+
+            <Column6>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column6>
+
+            <Column7>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column7>
+
+            <Column8>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column8>
+
+            <Column9>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column9>
+
+            <Column10>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column10>
+
+            <Column11>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column11>
+
+            <Column12>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column12>
+
+            <Column13>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column13>
+
+            <Column14>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column14>
+
+            <Column15>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column15>
+
+            <Column16>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column16>
+
+        </Fields>
+
+    </DataSet>
+
+    <PageSetup></PageSetup>
+    <Graph>
+        <Title></Title>
+        <TitleX></TitleX>
+        <TitleY></TitleY>
+        <Width>480</Width>
+        <Height>268</Height>
+        <Description></Description>
+        <ShowData>1</ShowData>
+        <ShowValues>1</ShowValues>
+        <Orientation>columns</Orientation>
+    </Graph>
+
+    <Merge>
+        <ReportHeader>#setspace014#setfab12#tab260CLASIFICACIÓN ID2
+
+#setfab10#tab015Super Grupo : #tab090 #setfan10 $var6 
+#tab015#setfab10Grupo: #setfan10  #tab090$var9 
+#tab015#setfab10Subgrupo:#setfan10 #tab090 $var12  
+#tab015#setfab10ID1: #setfan10   #tab090$var15 
+</ReportHeader>
+
+        <Details>
+            <Detail1>
+                <GroupHeader>#sety001#tab570#bgimage ../../../../lib/images/logo_reporte_factur.jpg
+#sety090#tab010#rectr*000*000*730*020*1*#FFFFFF*#000000 
+#tab015#setfab10 Codigo#tab095Nombre             #tab300 Descripción          
+#setcf030303 #setspace010#setfan08
+</GroupHeader>
+
+                <DataSet1>
+                    <Body>#tab015 $subfield1  $subfield2 $subfield3 
+
+</Body>
+
+                    <Query>
+                        <Select>IID2.codigo,IID2.nombre,IID2.descripcion</Select>
+                        <From>almin.tal_id2 IID2  INNER JOIN almin.tal_id1 IID1 ON (IID2.id_id1=IID1.id_id1)   INNER JOIN almin.tal_subgrupo SUBGRU ON (SUBGRU.id_subgrupo=IID1.id_subgrupo) INNER JOIN almin.tal_grupo GRUPP ON (GRUPP.id_grupo=SUBGRU.id_grupo) INNER JOIN almin.tal_supergrupo SUPGRU ON (SUPGRU.id_supergrupo=GRUPP.id_supergrupo)</From>
+                        <Where>SUPGRU.id_supergrupo= $var1 and GRUPP.id_grupo = $var2 and SUBGRU.id_subgrupo = $var3 and IID1.id_id1 = $var4</Where>
+                        <GroupBy></GroupBy>
+                        <OrderBy></OrderBy>
+                        <Config>
+                            <Distinct></Distinct>
+                            <OffSet>0</OffSet>
+                            <Limit>0</Limit>
+                        </Config>
+
+                    </Query>
+
+                    <Fields>
+                        <Column1>
+                            <Chars>30</Chars>
+                            <Points>80</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column1>
+
+                        <Column2>
+                            <Chars>30</Chars>
+                            <Points>200</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column2>
+
+                        <Column3>
+                            <Chars>30</Chars>
+                            <Points>450</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column3>
+
+                    </Fields>
+
+                </DataSet1>
+
+                <NumberSubSql>0</NumberSubSql>
+                <GroupFooter>#tab015#lineH720
+#setcf030303#sety560 #tab010 #setfan07 Usuario:$login_usuario  #tab330 Página $page de  $pagecounting         #tab650 Fecha: $day - $month - $year 
+#sety570#tab650 Hora: $time </GroupFooter>
+
+            </Detail1>
+
+        </Details>
+
+        <ReportFooter></ReportFooter>
+        <FinalSummary></FinalSummary>
+        <PageSetup>
+            <Format>Letter</Format>
+            <Orientation>landscape</Orientation>
+            <LeftMargin>25</LeftMargin>
+            <RightMargin>5</RightMargin>
+            <TopMargin>15</TopMargin>
+            <BottomMargin>15</BottomMargin>
+            <LineSpace>14</LineSpace>
+        </PageSetup>
+
+    </Merge>
+
+    <Label>
+        <Body></Body>
+        <Config>
+            <HorizontalSpacing>15</HorizontalSpacing>
+            <VerticalSpacing>0</VerticalSpacing>
+            <LabelWidth>288</LabelWidth>
+            <LabelHeight>72</LabelHeight>
+            <LeftMargin>11</LeftMargin>
+            <TopMargin>36</TopMargin>
+            <Columns>2</Columns>
+            <Rows>10</Rows>
+            <PageFormat>A3</PageFormat>
+            <LineSpacing>14</LineSpacing>
+        </Config>
+
+    </Label>
+
+    <OpenOffice>
+        <Source></Source>
+        <Config>
+            <FixedDetails>1</FixedDetails>
+            <ExpandDetails></ExpandDetails>
+            <printEmptyDetail>1</printEmptyDetail>
+            <SumByTotal>1</SumByTotal>
+            <RepeatHeader>1</RepeatHeader>
+            <RepeatFooter>1</RepeatFooter>
+        </Config>
+
+    </OpenOffice>
+
+</Report>

@@ -1,0 +1,90 @@
+
+
+                                TCLink v3.4
+                             PHP Implementation
+                       copyright (C) TrustCommerce 2003
+                         http://www.trustcommerce.com
+                         developer@trustcommerce.com
+
+                              September 5, 2003
+
+I. DESCRIPTION
+
+  TCLink is a thin client library to allow your e-commerce servers to
+connect to the TrustCommerce payment gateway easily and consistently.
+The protocol (which is the same across all platforms and languages) is
+well-documented in the Web Developer's Guide, so please consult it for
+any questions you may have about the protocol syntax itself.
+
+  If you are using Python on Win32, do not use this client.  Please
+download the COM object from the Vault website instead.
+
+  TCLink was originally ported to PHP by Andrew Barnett of Data Clarity.
+Thanks go to both him (for the code) and his business (for their support
+of open source).
+
+
+II. LICENSE
+
+  TCLink for PHP is released under the GNU LGPL.  Please read LICENSE
+for details.
+
+
+III. REQUIREMENTS
+
+  You must be running PHP 4.0.4pl1 or higher.
+
+  You need to have the OpenSSL development libraries installed.  Versions
+prior to 0.9.6 may work, but are not supported; it is recommended you use
+the most recent version.
+
+  Besides the normal PHP install, you'll need the php-devel package,
+which contains files needed for building PHP modules.  You can tell
+if this package is installed if the binary "phpize" is in your path.
+
+ 
+IV. BUILDING
+
+  At the root directory of this archive, execute the following:
+
+    ./build.sh
+
+  If the module builds without errors, test it with this command:
+
+    php tctest.php
+
+  This script will run a test transaction and print the results.
+
+
+V. INSTALLATION
+
+  If you have root access to the machine, you will probably want to
+install TCLink as a global extension.  You can do this by copying the
+module library (modules/tclink.so) to your PHP extensions directory
+(typically /usr/lib/php4).  Your extensions directory is defined by the
+"extension_dir" directive in php.ini.
+
+  Edit php.ini (typically found in /etc) and add the following line:
+
+    extension=tclink.so
+
+  Restart your webserver, and all PHP scripts will have access to TCLink.
+
+  If you can't or don't want to install the module system wide, you can
+still load it manually in each script that needs to access it through
+the dl() call.  See the top of tctest.php for an example.
+
+
+VI. USAGE
+
+  The tctest.php script shows a simple example of running transactions
+through the TCLink API.  A more complex example is contained in
+tcexample.php.  For further information, please consult the TC
+Developer's Guide, located in the doc subdirectory.
+
+  A note to users of TCLink PHP prior to 3.3: the API has changed from
+the C-style interface, to a single tclink_send() function which accepts
+a hash (associative array) of input parameters, and returns a hash with
+the output parameters.  Please see the examples to update your code.
+
+

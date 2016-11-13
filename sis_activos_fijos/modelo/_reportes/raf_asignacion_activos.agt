@@ -1,0 +1,310 @@
+<?xml version="1.0"?>
+<Report>
+    <Version>7.5</Version>
+    <Properties>
+        <Description></Description>
+        <Title></Title>
+        <Author></Author>
+        <Keywords></Keywords>
+        <Date></Date>
+        <FrameSize></FrameSize>
+    </Properties>
+
+    <Header>
+        <Body></Body>
+        <Align>center</Align>
+    </Header>
+
+    <Footer>
+        <Body></Body>
+        <Align>center</Align>
+    </Footer>
+
+    <Parameters>
+        <login_usuario>
+            <value>su</value>
+        </login_usuario>
+
+        <id_empleado>
+            <value>201</value>
+        </id_empleado>
+
+    </Parameters>
+
+    <DataSet>
+        <DataSource>
+            <Name>actif_desarrollo</Name>
+        </DataSource>
+
+        <Query>
+            <Select>distinct EMP.id_empleado, PER.nombre, PER.apellido_paterno, PER.apellido_materno, upper(CARGO.descripcion) as cargo, upper(UNIORG.descripcion) as uni_org, (SELECT COALESCE(PERSON.nombre,'') || ' ' || COALESCE(PERSON.apellido_paterno,'') || ' ' ||COALESCE(PERSON.apellido_materno,'') FROM taf_responsable_af RESPAF INNER JOIN tkp_empleado EMPLEA ON EMPLEA.id_empleado = RESPAF.id_empleado INNER JOIN tsg_persona PERSON ON PERSON.id_persona = EMPLEA.id_persona WHERE RESPAF.estado = 'activo')  as resp_af</Select>
+            <From>tkp_empleado EMP INNER JOIN tsg_persona PER ON EMP.id_persona=PER.id_persona LEFT JOIN taf_empleado_cargo_unidad_organizacional EMPLUO
+ON EMPLUO.id_empleado = EMP.id_empleado
+LEFT JOIN taf_cargo CARGO
+ON CARGO.id_cargo = EMPLUO.id_cargo
+LEFT JOIN taf_unidad_organizacional UNIORG
+ON UNIORG.id_unidad_organizacional = EMPLUO.id_unidad_organizacional</From>
+
+            <Where>EMP.id_empleado LIKE $id_empleado</Where>
+            <GroupBy></GroupBy>
+            <OrderBy></OrderBy>
+            <Config>
+                <Distinct></Distinct>
+                <OffSet>0</OffSet>
+                <Limit>0</Limit>
+            </Config>
+
+        </Query>
+
+        <Groups>
+            <Config>
+                <ShowGroup></ShowGroup>
+                <ShowDetail>1</ShowDetail>
+                <ShowLabel></ShowLabel>
+                <ShowNumber>1</ShowNumber>
+                <ShowIndent>1</ShowIndent>
+            </Config>
+
+        </Groups>
+
+        <Fields>
+            <Column1>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column1>
+
+            <Column2>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column2>
+
+            <Column3>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column3>
+
+            <Column4>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column4>
+
+            <Column5>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column5>
+
+            <Column6>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column6>
+
+            <Column7>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column7>
+
+        </Fields>
+
+    </DataSet>
+
+    <PageSetup></PageSetup>
+    <Graph>
+        <Title></Title>
+        <TitleX></TitleX>
+        <TitleY></TitleY>
+        <Width>480</Width>
+        <Height>268</Height>
+        <Description></Description>
+        <ShowData>1</ShowData>
+        <ShowValues>1</ShowValues>
+        <Orientation>columns</Orientation>
+    </Graph>
+
+    <Merge>
+        <ReportHeader>#setcffdfdfd  Reporte ENDESIS  Copyright Â©2007, ENDE S.A... Todos los derechos reservados. 
+#tab630
+#setftb18
+#setcf010101
+#sety020#tab240 Activos Fijos Bajo Responsabilidad
+
+
+
+
+</ReportHeader>
+
+        <Details>
+            <Detail1>
+                <GroupHeader>#sety000 #tab570  #image ../../../../lib/images/logo_reporte.jpg  
+#sety50 #tab020 #setfab11Responsable:  #tab100   #setfan11   $var2  $var3  $var4
+#sety65 #tab020 #setfab11Cargo:  #tab60   #setfan11    $var5 
+#sety80 #tab020 #setfab11Unidad Organizacional:  #tab150   #setfan11    $var6 
+#sety100 #rect*020*010*720*030*1*#ffd200*#ffd200
+#rect*020*000*720*030*1*#ffd200*#ffd200
+#tab025#setfan10 #setcf000000 Código #tab200 Descripción #tab495 Ubicación Física #tab605  #tab685 Fecha de 
+#tab605 #tab685 Asignación
+#sety130 #setcf000000                                                                                                          </GroupHeader>
+
+                <DataSet1>
+                    <Body> #tab020  #lineH720 #setfan7 $subfield1 #tab80 $subfield2 #tab460  $subfield3  #tab689  $subfield5 #tab685 $subfield6  
+</Body>
+
+                    <Query>
+                        <Select>actif.codigo, actif.descripcion_larga, actif.ubicacion_fisica, actif.orden_compra, to_char(afemp.fecha_asig,'dd/mm/YYYY')</Select>
+                        <From>taf_activo_fijo actif INNER JOIN taf_activo_fijo_empleado afemp ON actif.id_activo_fijo=afemp.id_activo_fijo INNER JOIN tkp_empleado emp ON emp.id_empleado=afemp.id_empleado INNER JOIN tsg_persona per ON per.id_persona=emp.id_persona</From>
+                        <Where>afemp.estado='activo' and emp.id_empleado LIKE $var1</Where>
+                        <GroupBy></GroupBy>
+                        <OrderBy>actif.codigo</OrderBy>
+                        <Config>
+                            <Distinct></Distinct>
+                            <OffSet>0</OffSet>
+                            <Limit>0</Limit>
+                        </Config>
+
+                    </Query>
+
+                    <Fields>
+                        <Column1>
+                            <Chars>30</Chars>
+                            <Points>90</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column1>
+
+                        <Column2>
+                            <Chars>30</Chars>
+                            <Points>385</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column2>
+
+                        <Column3>
+                            <Chars>210</Chars>
+                            <Points>240</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column3>
+
+                        <Column4>
+                            <Chars>30</Chars>
+                            <Points>150</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column4>
+
+                        <Column5>
+                            <Chars>30</Chars>
+                            <Points>75</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column5>
+
+                    </Fields>
+
+                </DataSet1>
+
+                <NumberSubSql>0</NumberSubSql>
+                <GroupFooter> #tab020#lineH720
+#sety567 #tab010 #setfan6 Usuario:$login_usuario  #tab330#setftn7 Página $page de  $pagecounting        #tab665#setfan6 Fecha: $day - $month - $year 
+#sety560#tab665#setfan6 Hora: $time </GroupFooter>
+
+            </Detail1>
+
+        </Details>
+
+        <ReportFooter>#setfan10 #sety510 #tab120  $var7   #tab430 $var2  $var3  $var4   
+#tab120 Encargado Unidad de Activos Fijos   #tab430   Responsable</ReportFooter>
+
+        <FinalSummary></FinalSummary>
+        <PageSetup>
+            <Format>Letter</Format>
+            <Orientation>landscape</Orientation>
+            <LeftMargin>25</LeftMargin>
+            <RightMargin>25</RightMargin>
+            <TopMargin>25</TopMargin>
+            <BottomMargin>100</BottomMargin>
+            <LineSpace>12</LineSpace>
+        </PageSetup>
+
+    </Merge>
+
+    <Label>
+        <Body></Body>
+        <Config>
+            <HorizontalSpacing>15</HorizontalSpacing>
+            <VerticalSpacing>0</VerticalSpacing>
+            <LabelWidth>288</LabelWidth>
+            <LabelHeight>72</LabelHeight>
+            <LeftMargin>11</LeftMargin>
+            <TopMargin>36</TopMargin>
+            <Columns>2</Columns>
+            <Rows>10</Rows>
+            <PageFormat></PageFormat>
+            <LineSpacing>14</LineSpacing>
+        </Config>
+
+    </Label>
+
+    <OpenOffice>
+        <Source></Source>
+        <Config>
+            <FixedDetails>1</FixedDetails>
+            <ExpandDetails></ExpandDetails>
+            <printEmptyDetail>1</printEmptyDetail>
+            <SumByTotal>1</SumByTotal>
+            <RepeatHeader>1</RepeatHeader>
+            <RepeatFooter>1</RepeatFooter>
+        </Config>
+
+    </OpenOffice>
+
+</Report>

@@ -1,0 +1,337 @@
+<?xml version="1.0"?>
+<Report>
+    <Version>7.5</Version>
+    <Properties>
+        <Description></Description>
+        <Title></Title>
+        <Author></Author>
+        <Keywords></Keywords>
+        <Date></Date>
+
+        <FrameSize></FrameSize>
+    </Properties>
+
+    <Header>
+        <Body></Body>
+        <Align>center</Align>
+    </Header>
+
+    <Footer>
+
+        <Body></Body>
+        <Align>center</Align>
+    </Footer>
+
+    <Parameters>
+        <id_almacen>
+            <value>1</value>
+        </id_almacen>
+
+        <fecha_cierre>
+            <value>12/22/2007</value>
+        </fecha_cierre>
+
+        <fecha_apertura>
+            <value>12/22/2007</value>
+        </fecha_apertura>
+
+    </Parameters>
+
+    <DataSet>
+        <DataSource>
+            <Name>endesis_factur23</Name>
+        </DataSource>
+
+        <Query>
+            <Select>distinct ALMACE.id_almacen, ALMACE.fecha_cierre, ALMACE.fecha_apertura, ALMACE.nombre</Select>
+
+            <From>almin.tal_salida SALIDA INNER JOIN almin.tal_almacen_logico ALMLOG ON (ALMLOG.id_almacen_logico=SALIDA.id_almacen_logico) INNER JOIN almin.tal_almacen_ep ALMAEP ON (ALMAEP.id_almacen_ep=ALMLOG.id_almacen_ep) INNER JOIN almin.tal_almacen ALMACE ON (ALMACE.id_almacen=ALMAEP.id_almacen) INNER JOIN almin.tal_motivo_salida_cuenta MSALCU ON (MSALCU.id_motivo_salida_cuenta=SALIDA.id_motivo_salida_cuenta)  INNER JOIN almin.tal_motivo_salida MSALIDA ON (MSALCU.id_motivo_salida= MSALIDA.id_motivo_salida)  INNER JOIN sci.tct_cuenta c ON (c.id_cuenta=MSALCU.id_cuenta) INNER JOIN almin.tal_salida_detalle SALDET ON (SALDET.id_salida=SALIDA.id_salida)</From>
+            <Where>ALMACE.fecha_cierre &gt;= $fecha_cierre and ALMACE.fecha_apertura &lt;= $fecha_apertura and SALIDA.estado_salida='Finalizado' and ALMACE.id_almacen like $id_almacen</Where>
+            <GroupBy></GroupBy>
+            <OrderBy></OrderBy>
+            <Config>
+                <Distinct></Distinct>
+                <OffSet>0</OffSet>
+
+                <Limit>0</Limit>
+            </Config>
+
+        </Query>
+
+        <Groups>
+            <Config>
+                <ShowGroup></ShowGroup>
+                <ShowDetail>1</ShowDetail>
+
+                <ShowLabel></ShowLabel>
+                <ShowNumber>1</ShowNumber>
+                <ShowIndent>1</ShowIndent>
+            </Config>
+
+        </Groups>
+
+        <Fields>
+            <Column1>
+
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+
+            </Column1>
+
+            <Column2>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column2>
+
+            <Column3>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column3>
+
+            <Column4>
+                <Chars>30</Chars>
+                <Points>60</Points>
+
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column4>
+
+        </Fields>
+
+    </DataSet>
+
+    <PageSetup></PageSetup>
+    <Graph>
+        <Title></Title>
+        <TitleX></TitleX>
+        <TitleY></TitleY>
+        <Width>480</Width>
+
+        <Height>268</Height>
+        <Description></Description>
+        <ShowData>1</ShowData>
+        <ShowValues>1</ShowValues>
+        <Orientation>columns</Orientation>
+    </Graph>
+
+    <Merge>
+        <ReportHeader>
+#setfab12#tab250SALIDAS DE MATERIALES  POR ALMACEN
+                         
+#tab015#setfab10Almacen#setfan10....................................................................#tab100  $var4 #tab250 Fecha de Apertura ..................................................... #tab350$var3 #tab490 Fecha de Cierre ..........................................................#tab590 $var2 
+</ReportHeader>
+        <Details>
+            <Detail1>
+                <GroupHeader> #rect*015*010*730*030*1*#22105e*#22105e
+#rect*015*000*730*030*1*#22105e*#22105e
+#tab015#setfan10 #setcfffffff Motivo de Salida #tab215 Cuenta            #tab325Costo     #tab395 Fecha de       #tab480Almacen #tab665Almacen
+#tab325Total #tab395Salida #tab480EP #tab665Logico
+#setcf030303
+</GroupHeader>
+
+                <DataSet1>
+
+                    <Body>#tab015  $subfield5   $subfield6   $subfield4  #tab395$subfield9  #tab480 $subfield7  #tab650$subfield8 
+#tab015#lineH730
+</Body>
+
+                    <Query>
+                        <Select>SALIDA.id_salida, SALDET.id_salida, SALIDA.descripcion, (select SUM(SALDET.costo)                                                 from almin.tal_salida_detalle SALDET                                                 WHERE SALDET.id_salida=SALIDA.id_salida)AS costo, MSALIDA.nombre, c.nro_cuenta, ALMAEP.descripcion, ALMLOG.nombre, SALIDA.fecha_finalizado_cancelado</Select>
+                        <From>almin.tal_salida SALIDA INNER JOIN almin.tal_almacen_logico ALMLOG ON (ALMLOG.id_almacen_logico=SALIDA.id_almacen_logico) INNER JOIN almin.tal_almacen_ep ALMAEP ON (ALMAEP.id_almacen_ep=ALMLOG.id_almacen_ep) INNER JOIN almin.tal_almacen ALMACE ON (ALMACE.id_almacen=ALMAEP.id_almacen) INNER JOIN almin.tal_motivo_salida_cuenta MSALCU ON (MSALCU.id_motivo_salida_cuenta=SALIDA.id_motivo_salida_cuenta)  INNER JOIN almin.tal_motivo_salida MSALIDA ON (MSALCU.id_motivo_salida= MSALIDA.id_motivo_salida)  INNER JOIN sci.tct_cuenta c ON (c.id_cuenta=MSALCU.id_cuenta) INNER JOIN almin.tal_salida_detalle SALDET ON (SALDET.id_salida=SALIDA.id_salida)</From>
+                        <Where>ALMACE.fecha_cierre &gt;= $fecha_cierre and ALMACE.fecha_apertura &lt;= $fecha_apertura and SALIDA.estado_salida='Finalizado' and ALMACE.id_almacen like $var1</Where>
+
+                        <GroupBy>SALIDA.id_salida, SALDET.id_salida, SALIDA.descripcion, MSALIDA.nombre, c.nro_cuenta, ALMAEP.descripcion, ALMLOG.nombre, SALIDA.fecha_finalizado_cancelado</GroupBy>
+                        <OrderBy></OrderBy>
+                        <Config>
+                            <Distinct></Distinct>
+                            <OffSet>0</OffSet>
+                            <Limit>0</Limit>
+                        </Config>
+
+                    </Query>
+
+                    <Fields>
+                        <Column1>
+                            <Chars>30</Chars>
+                            <Points>100</Points>
+                            <Align>left</Align>
+
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column1>
+
+                        <Column2>
+                            <Chars>30</Chars>
+                            <Points>200</Points>
+
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column2>
+
+                        <Column3>
+                            <Chars>30</Chars>
+
+                            <Points>60</Points>
+                            <Align>right</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column3>
+
+                        <Column4>
+                            <Chars>30</Chars>
+                            <Points>70</Points>
+                            <Align>right</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+
+                            <Conditional></Conditional>
+                        </Column4>
+
+                        <Column5>
+                            <Chars>30</Chars>
+                            <Points>190</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column5>
+
+                        <Column6>
+                            <Chars>30</Chars>
+                            <Points>85</Points>
+
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column6>
+
+                        <Column7>
+                            <Chars>30</Chars>
+
+                            <Points>180</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column7>
+
+                        <Column8>
+                            <Chars>30</Chars>
+                            <Points>100</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+
+                            <Conditional></Conditional>
+                        </Column8>
+
+                        <Column9>
+                            <Chars>30</Chars>
+                            <Points>70</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column9>
+
+                    </Fields>
+
+                </DataSet1>
+
+                <NumberSubSql>0</NumberSubSql>
+
+                <GroupFooter> #tab015#rect*000*000*730*002*1*#081392*#000000
+</GroupFooter>
+
+            </Detail1>
+
+        </Details>
+
+        <ReportFooter>#setcf030303#sety540 #tab010 #setfan8 Usuario:$login_usuario  #tab350#setftn8 Página $page de  $pagecounting         #tab655#setfan8 Fecha: $day - $month - $year 
+#sety550#tab655#setfan8 Hora: $time </ReportFooter>
+
+        <FinalSummary></FinalSummary>
+
+        <PageSetup>
+            <Format>Letter</Format>
+            <Orientation>landscape</Orientation>
+            <LeftMargin>25</LeftMargin>
+            <RightMargin>25</RightMargin>
+            <TopMargin>25</TopMargin>
+
+            <BottomMargin>25</BottomMargin>
+            <LineSpace>14</LineSpace>
+        </PageSetup>
+
+    </Merge>
+
+    <Label>
+        <Body></Body>
+        <Config>
+
+            <HorizontalSpacing>15</HorizontalSpacing>
+            <VerticalSpacing>0</VerticalSpacing>
+            <LabelWidth>288</LabelWidth>
+            <LabelHeight>72</LabelHeight>
+            <LeftMargin>11</LeftMargin>
+            <TopMargin>36</TopMargin>
+
+            <Columns>2</Columns>
+            <Rows>10</Rows>
+            <PageFormat>A3</PageFormat>
+            <LineSpacing>14</LineSpacing>
+        </Config>
+
+    </Label>
+
+    <OpenOffice>
+        <Source></Source>
+        <Config>
+            <FixedDetails>1</FixedDetails>
+            <ExpandDetails></ExpandDetails>
+            <printEmptyDetail>1</printEmptyDetail>
+            <SumByTotal>1</SumByTotal>
+
+            <RepeatHeader>1</RepeatHeader>
+            <RepeatFooter>1</RepeatFooter>
+        </Config>
+
+    </OpenOffice>
+
+</Report>

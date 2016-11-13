@@ -1,0 +1,402 @@
+<?xml version="1.0"?>
+<Report>
+    <Version>7.5</Version>
+    <Properties>
+        <Description></Description>
+        <Title></Title>
+        <Author></Author>
+        <Keywords></Keywords>
+        <Date></Date>
+        <FrameSize></FrameSize>
+    </Properties>
+
+    <Header>
+        <Body></Body>
+        <Align>center</Align>
+    </Header>
+
+    <Footer>
+        <Body></Body>
+        <Align>center</Align>
+    </Footer>
+
+    <Parameters>
+        <login_usuario>
+            <value>Ana Maria V. Q.</value>
+        </login_usuario>
+
+        <id_activo_fijo>
+            <value>%</value>
+        </id_activo_fijo>
+
+        <id_tipo_activo>
+            <value>%</value>
+        </id_tipo_activo>
+
+        <id_sub_tipo_activo>
+            <value>%</value>
+        </id_sub_tipo_activo>
+
+        <id_financiador>
+            <value>%</value>
+        </id_financiador>
+
+        <id_regional>
+            <value>%</value>
+        </id_regional>
+
+        <id_programa>
+            <value>%</value>
+        </id_programa>
+
+        <id_proyecto>
+            <value>%</value>
+        </id_proyecto>
+
+        <id_actividad>
+            <value>%</value>
+        </id_actividad>
+
+        <id_usuario>
+            <value>1</value>
+        </id_usuario>
+
+        <fecha_ini>
+            <value>1990-01-01</value>
+        </fecha_ini>
+
+        <fecha_fin>
+            <value>2090-01-01</value>
+        </fecha_fin>
+
+    </Parameters>
+
+    <DataSet>
+        <DataSource>
+            <Name>endesis</Name>
+        </DataSource>
+
+        <Query>
+            <Select>distinct af.id_activo_fijo,        af.codigo,        af.descripcion,        af.fecha_compra,        af.monto_compra,        af.tasa_depreciacion,        af.vida_util_original,        af.vida_util_restante,        tipo.descripcion,        stipo.descripcion,        uc.descripcion,        md.descripcion</Select>
+            <From>taf_activo_fijo af      inner join taf_sub_tipo_activo stipo on af.id_sub_tipo_activo=stipo.id_sub_tipo_activo      inner join taf_tipo_activo tipo on tipo.id_tipo_activo=stipo.id_tipo_activo      left join taf_unidad_constructiva uc on af.id_unidad_constructiva = uc.id_unidad_constructiva      inner join taf_metodo_depreciacion md on  tipo.id_metodo_depreciacion = md.id_metodo_depreciacion      inner join taf_depreciacion d on af.id_activo_fijo = d.id_activo_fijo      inner join taf_activo_fijo_tpm_frppa AFFRPPA on af.id_activo_fijo = d.id_activo_fijo</From>
+            <Where>af.id_activo_fijo LIKE $id_activo_fijo and tipo.id_tipo_activo LIKE $id_tipo_activo and stipo.id_sub_tipo_activo LIKE $id_sub_tipo_activo and d.fecha_hasta BETWEEN $fecha_ini AND $fecha_fin and (af.id_activo_fijo IN                       (SELECT                       AFFRPPA.id_activo_fijo                       FROM taf_activo_fijo_tpm_frppa AFFRPPA                       WHERE AFFRPPA.id_fina_regi_prog_proy_acti IN                                        (SELECT DISTINCT                                         ASIGFRPPA.id_fina_regi_prog_proy_acti                                         FROM tsg_usuario_asignacion USRAS                                         INNER JOIN tsg_asignacion_estructura_tpm_frppa ASIGFRPPA                                         ON ASIGFRPPA.id_asignacion_estructura = USRAS.id_asignacion_estructura                                         INNER JOIN tpm_fina_regi_prog_proy_acti FRPPA                                         ON FRPPA.id_fina_regi_prog_proy_acti = ASIGFRPPA.id_fina_regi_prog_proy_acti                                         AND FRPPA.id_financiador LIKE $id_financiador                                         AND FRPPA.id_regional LIKE $id_regional                                         INNER JOIN tpm_programa_proyecto_actividad PPA                                         ON PPA.id_prog_proy_acti = FRPPA.id_prog_proy_acti                                         AND PPA.id_programa LIKE  $id_programa                                         AND PPA.id_proyecto LIKE  $id_proyecto                                         AND PPA.id_actividad LIKE $id_actividad                                         WHERE USRAS.id_usuario = $id_usuario)                     )     OR (0 = (SELECT COUNT(AFFRPPA.id_activo_fijo)           FROM taf_activo_fijo_tpm_frppa AFFRPPA           WHERE AFFRPPA.id_activo_fijo = AF.id_activo_fijo)))</Where>
+            <GroupBy></GroupBy>
+            <OrderBy>af.fecha_compra ASC</OrderBy>
+            <Config>
+                <Distinct></Distinct>
+                <OffSet>0</OffSet>
+                <Limit>0</Limit>
+            </Config>
+
+        </Query>
+
+        <Groups>
+            <Config>
+                <ShowGroup></ShowGroup>
+                <ShowDetail>1</ShowDetail>
+                <ShowLabel></ShowLabel>
+                <ShowNumber>1</ShowNumber>
+                <ShowIndent>1</ShowIndent>
+            </Config>
+
+        </Groups>
+
+        <Fields>
+            <Column1>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column1>
+
+            <Column2>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column2>
+
+            <Column3>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column3>
+
+            <Column4>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function>/time/yyyymmdd2ddmmaaaa.fun</Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column4>
+
+            <Column5>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column5>
+
+            <Column6>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column6>
+
+            <Column7>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column7>
+
+            <Column8>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column8>
+
+            <Column9>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column9>
+
+            <Column10>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column10>
+
+            <Column11>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column11>
+
+            <Column12>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column12>
+
+        </Fields>
+
+    </DataSet>
+
+    <PageSetup></PageSetup>
+    <Graph>
+        <Title></Title>
+        <TitleX></TitleX>
+        <TitleY></TitleY>
+        <Width>480</Width>
+        <Height>268</Height>
+        <Description></Description>
+        <ShowData>1</ShowData>
+        <ShowValues>1</ShowValues>
+        <Orientation>columns</Orientation>
+    </Graph>
+
+    <Merge>
+        <ReportHeader>#setcffdfdfd  Reporte ENDESIS  Copyright Â©2007, ENDE S.A... Todos los derechos reservados. 
+#setftb18
+#setcf010101
+ #sety020 #tab240 DETALLE DEPRECIACION
+ #sety40 #tab260 #setfab12  AL:   $day - $month - $year   
+#sety60 #tab20 Codigo Activo Fijo: #tab150 #setfan10$var2   #tab370#setfab12 Fecha de Compra:    #tab500  #setfan10  $var4  
+ #sety72 #tab20 #setfab12 Descripcion: #tab150  #setfan10$var3  #tab370#setfab12Valor Compra:  #tab500  #setfan10 $var5 
+ #sety84 #tab20 #setfab12 Tipo:   #tab150 #setfan10$var9  #tab370#setfab12Tasa Depreciacion:  #tab500  #setfan10  $var6 
+ #sety96 #tab20 #setfab12 Sub Tipo:#tab150  #setfan10$var10   #tab370 #setfab12 Vida Util  Original:  #tab500  #setfan10  $var7 
+ #sety108 #tab20  #setfab12 Unidad Constructiva: #tab150#setfan10$var11    #tab370 #setfab12Vida Util Restante: #setfan10 #tab500  $var8 
+ #sety120 #tab20 #setfab12  Metodo Depreciacion: #tab150  #setfan10$var12 </ReportHeader>
+
+        <Details>
+            <Detail1>
+                <GroupHeader>#sety000#tab570  #image ../../../../lib/images/logo_reporte.jpg
+
+
+#sety140 #rect*020*010*720*025*1*#22105e*#22105e
+#rect*020*000*720*025*1*#22105e*#22105e
+#tab025#setfan10 #setcfffffff Periodo #tab100 Tipo Cambio Inicial #tab230 Tipo Cambio Final   #tab360 Depreciacion   #tab460 Depreciacion Acumulada      #tab650 Valor Actual     
+
+#sety165  #setcf000000                                                                                                                                                      </GroupHeader>
+
+                <DataSet1>
+                    <Body>
+
+#tab020  #lineH720    $subfield1     $subfield2  $subfield3   $subfield4    $subfield5       $subfield6     </Body>
+                    <Query>
+                        <Select>d.fecha_hasta ,         d.tipo_cambio_ini,         d.tipo_cambio_fin,         d.depreciacion,         d.depreciacion_acum,         d.monto_vigente</Select>
+                        <From>taf_activo_fijo af INNER JOIN taf_depreciacion d ON af.id_activo_fijo = d.id_activo_fijo</From>
+                        <Where>af.id_activo_fijo  like $var1       AND d.fecha_hasta BETWEEN $fecha_ini AND $fecha_fin</Where>
+                        <GroupBy></GroupBy>
+                        <OrderBy>d.fecha_hasta ASC</OrderBy>
+                        <Config>
+                            <Distinct></Distinct>
+                            <OffSet>0</OffSet>
+                            <Limit>0</Limit>
+                        </Config>
+
+                    </Query>
+
+                    <Fields>
+                        <Column1>
+                            <Chars>30</Chars>
+                            <Points>100</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function>/time/yyyymmdd2ddmmaaaa.fun</Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column1>
+
+                        <Column2>
+                            <Chars>30</Chars>
+                            <Points>80</Points>
+                            <Align>right</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column2>
+
+                        <Column3>
+                            <Chars>30</Chars>
+                            <Points>120</Points>
+                            <Align>right</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column3>
+
+                        <Column4>
+                            <Chars>30</Chars>
+                            <Points>110</Points>
+                            <Align>right</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column4>
+
+                        <Column5>
+                            <Chars>30</Chars>
+                            <Points>160</Points>
+                            <Align>right</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column5>
+
+                        <Column6>
+                            <Chars>30</Chars>
+                            <Points>140</Points>
+                            <Align>right</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column6>
+
+                    </Fields>
+
+                </DataSet1>
+
+                <NumberSubSql>0</NumberSubSql>
+                <GroupFooter> #tab020#rect*000*000*720*002*1*#081392*#000000
+#sety540 #tab010 #setfan8 Usuario:$login_usuario  #tab330#setftn8 Página $page de  $pagecounting         #tab660#setfan8 fecha: $day - $month - $year 
+#sety550#tab660#setfan8 hora: $time </GroupFooter>
+
+            </Detail1>
+
+        </Details>
+
+        <ReportFooter></ReportFooter>
+        <FinalSummary></FinalSummary>
+        <PageSetup>
+            <Format>Letter</Format>
+            <Orientation>landscape</Orientation>
+            <LeftMargin>25</LeftMargin>
+            <RightMargin>25</RightMargin>
+            <TopMargin>25</TopMargin>
+            <BottomMargin>25</BottomMargin>
+            <LineSpace>14</LineSpace>
+        </PageSetup>
+
+    </Merge>
+
+    <Label>
+        <Body></Body>
+        <Config>
+            <HorizontalSpacing>15</HorizontalSpacing>
+            <VerticalSpacing>0</VerticalSpacing>
+            <LabelWidth>288</LabelWidth>
+            <LabelHeight>72</LabelHeight>
+            <LeftMargin>11</LeftMargin>
+            <TopMargin>36</TopMargin>
+            <Columns>2</Columns>
+            <Rows>10</Rows>
+            <PageFormat></PageFormat>
+            <LineSpacing>14</LineSpacing>
+        </Config>
+
+    </Label>
+
+    <OpenOffice>
+        <Source></Source>
+        <Config>
+            <FixedDetails>1</FixedDetails>
+            <ExpandDetails></ExpandDetails>
+            <printEmptyDetail>1</printEmptyDetail>
+            <SumByTotal>1</SumByTotal>
+            <RepeatHeader>1</RepeatHeader>
+            <RepeatFooter>1</RepeatFooter>
+        </Config>
+
+    </OpenOffice>
+
+</Report>

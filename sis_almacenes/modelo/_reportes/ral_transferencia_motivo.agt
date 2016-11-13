@@ -1,0 +1,352 @@
+<?xml version="1.0"?>
+<Report>
+    <Version>7.5</Version>
+    <Properties>
+        <Description></Description>
+        <Title></Title>
+        <Author></Author>
+        <Keywords></Keywords>
+        <Date></Date>
+
+        <FrameSize></FrameSize>
+    </Properties>
+
+    <Header>
+        <Body></Body>
+        <Align>center</Align>
+    </Header>
+
+    <Footer>
+
+        <Body></Body>
+        <Align>center</Align>
+    </Footer>
+
+    <Parameters>
+        <id_motivo_ingreso>
+            <value>6</value>
+        </id_motivo_ingreso>
+
+        <id_motivo_salida>
+            <value>2</value>
+        </id_motivo_salida>
+
+    </Parameters>
+
+    <DataSet>
+        <DataSource>
+            <Name>almacenes</Name>
+
+        </DataSource>
+
+        <Query>
+            <Select>mig.nombre as ingreso,        msl.nombre as salida,        cuen.nro_cuenta as cuenta_ingreso,        cuen2.nro_cuenta as cuenta_salida</Select>
+            <From>almin.tal_firma_autorizada_transf fat      INNER join kard.tkp_empleado em ON fat.id_empleado=em.id_empleado      inner join sss.tsg_persona per on em.id_persona=per.id_persona      inner join almin.tal_motivo_ingreso_cuenta mic on fat.id_motivo_ingreso_cuenta=mic.id_motivo_ingreso_cuenta      inner join almin.tal_motivo_salida_cuenta msc on fat.id_motivo_salida_cuenta=msc.id_motivo_salida_cuenta      inner join sci.tct_cuenta cuen on mic.id_cuenta=cuen.id_cuenta      inner join sci.tct_cuenta cuen2 on msc.id_cuenta=cuen2.id_cuenta      inner join almin.tal_motivo_ingreso mig on mic.id_motivo_ingreso=mig.id_motivo_ingreso      inner join almin.tal_motivo_salida msl on msc.id_motivo_salida=msl.id_motivo_salida</From>
+            <Where>cuen.nro_cuenta='Transferencia' and cuen2.nro_cuenta='Transferencia' and mig.id_motivo_ingreso like $id_motivo_ingreso and msl.id_motivo_salida like $id_motivo_salida</Where>
+            <GroupBy>mig.nombre ,        msl.nombre ,        cuen.nro_cuenta ,        cuen2.nro_cuenta</GroupBy>
+
+            <OrderBy></OrderBy>
+            <Config>
+                <Distinct></Distinct>
+                <OffSet>0</OffSet>
+                <Limit>0</Limit>
+            </Config>
+
+        </Query>
+
+        <Groups>
+            <Config>
+                <ShowGroup></ShowGroup>
+                <ShowDetail>1</ShowDetail>
+                <ShowLabel></ShowLabel>
+                <ShowNumber>1</ShowNumber>
+                <ShowIndent>1</ShowIndent>
+
+            </Config>
+
+        </Groups>
+
+        <Fields>
+            <Column1>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column1>
+
+            <Column2>
+                <Chars>30</Chars>
+                <Points>60</Points>
+
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column2>
+
+            <Column3>
+                <Chars>30</Chars>
+
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column3>
+
+            <Column4>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+
+                <Conditional></Conditional>
+            </Column4>
+
+        </Fields>
+
+    </DataSet>
+
+    <PageSetup></PageSetup>
+    <Graph>
+        <Title></Title>
+
+        <TitleX></TitleX>
+        <TitleY></TitleY>
+        <Width>480</Width>
+        <Height>268</Height>
+        <Description></Description>
+        <ShowData>1</ShowData>
+        <ShowValues>1</ShowValues>
+
+        <Orientation>columns</Orientation>
+    </Graph>
+
+    <Merge>
+        <ReportHeader>
+        #setfab10#tab250TRANSFERENCIAS#setfan10
+</ReportHeader>
+
+        <Details>
+            <Detail1>
+
+                <GroupHeader>#tab025Motivo Ingreso: $var1 
+#tab025Motivo Salida: $var2 
+#rect*025*013*540*020*1*#22105e*#22105e
+
+#setfab10 #setcfffffff 
+#tab025COD. EMPLEADO #tab200EMPLEADO #tab450EP
+
+#setcf0b0b0b#setfan10  </GroupHeader>
+
+                <DataSet1>
+                    <Body>#tab025 $subfield11 #tab130 $subfield1 #tab215 $subfield2 #tab290 $subfield3 #tab360 $subfield6 #tab400$subfield7 #tab440 $subfield8 #tab480 $subfield9 #tab520 $subfield10 
+#tab025#lineH540</Body>
+
+                    <Query>
+                        <Select>per.nombre as empleado, per.apellido_paterno, per.apellido_materno, cuen.nro_cuenta as cuenta_ingreso, cuen2.nro_cuenta as cuenta_salida, finan.codigo_financiador, reg.codigo_regional, prog.codigo_programa, proy.codigo_proyecto, act.codigo_actividad, em.codigo_empleado</Select>
+                        <From>almin.tal_firma_autorizada_transf fat      INNER join kard.tkp_empleado em ON fat.id_empleado=em.id_empleado      inner join sss.tsg_persona per on em.id_persona=per.id_persona      inner join almin.tal_motivo_ingreso_cuenta mic on fat.id_motivo_ingreso_cuenta=mic.id_motivo_ingreso_cuenta      inner join almin.tal_motivo_salida_cuenta msc on fat.id_motivo_salida_cuenta=msc.id_motivo_salida_cuenta      inner join sci.tct_cuenta cuen on mic.id_cuenta=cuen.id_cuenta      inner join sci.tct_cuenta cuen2 on msc.id_cuenta=cuen2.id_cuenta      inner join almin.tal_motivo_ingreso mig on mic.id_motivo_ingreso=mig.id_motivo_ingreso      inner join almin.tal_motivo_salida msl on msc.id_motivo_salida=msl.id_motivo_salida      INNER JOIN param.tpm_fina_regi_prog_proy_acti fin ON mic.id_fina_regi_prog_proy_acti = fin.id_fina_regi_prog_proy_acti      INNER JOIN param.tpm_programa_proyecto_actividad pro ON fin.id_prog_proy_acti = pro.id_prog_proy_acti      INNER JOIN param.tpm_financiador finan  ON fin.id_financiador = finan.id_financiador      INNER JOIN param.tpm_regional reg ON fin.id_regional = reg.id_regional      INNER JOIN param.tpm_programa prog ON pro.id_programa = prog.id_programa      INNER JOIN param.tpm_proyecto proy ON pro.id_proyecto = proy.id_proyecto      INNER JOIN param.tpm_actividad act ON pro.id_actividad = act.id_actividad</From>
+
+                        <Where>cuen.nro_cuenta='Transferencia' and cuen2.nro_cuenta='Transferencia' and mig.id_motivo_ingreso=$id_motivo_ingreso and msl.id_motivo_salida=$id_motivo_salida</Where>
+                        <GroupBy>em.codigo_empleado , per.nombre , per.apellido_paterno, per.apellido_materno, cuen.nro_cuenta , cuen2.nro_cuenta , finan.codigo_financiador, reg.codigo_regional, prog.codigo_programa, proy.codigo_proyecto, act.codigo_actividad</GroupBy>
+                        <OrderBy>em.codigo_empleado, per.nombre, per.apellido_paterno, per.apellido_materno</OrderBy>
+                        <Config>
+                            <Distinct></Distinct>
+                            <OffSet>0</OffSet>
+
+                            <Limit>0</Limit>
+                        </Config>
+
+                    </Query>
+
+                    <Fields>
+                        <Column1>
+                            <Chars>30</Chars>
+                            <Points>90</Points>
+
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column1>
+
+                        <Column2>
+                            <Chars>30</Chars>
+
+                            <Points>85</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column2>
+
+                        <Column3>
+                            <Chars>30</Chars>
+                            <Points>85</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+
+                            <Conditional></Conditional>
+                        </Column3>
+
+                        <Column4>
+                            <Chars>30</Chars>
+                            <Points>60</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column4>
+
+                        <Column5>
+                            <Chars>30</Chars>
+                            <Points>60</Points>
+
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column5>
+
+                        <Column6>
+                            <Chars>30</Chars>
+
+                            <Points>40</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column6>
+
+                        <Column7>
+                            <Chars>30</Chars>
+                            <Points>40</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+
+                            <Conditional></Conditional>
+                        </Column7>
+
+                        <Column8>
+                            <Chars>30</Chars>
+                            <Points>40</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column8>
+
+                        <Column9>
+                            <Chars>30</Chars>
+                            <Points>40</Points>
+
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column9>
+
+                        <Column10>
+                            <Chars>30</Chars>
+
+                            <Points>40</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column10>
+
+                        <Column11>
+                            <Chars>30</Chars>
+                            <Points>50</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+
+                            <Conditional></Conditional>
+                        </Column11>
+
+                    </Fields>
+
+                </DataSet1>
+
+                <NumberSubSql>0</NumberSubSql>
+                <GroupFooter>#setcf030303#sety760 #tab010 #setfan8 Usuario:$login_usuario  #tab270#setftn8 Página $page de  $pagecounting         #tab490#setfan8 fecha: $day - $month - $year 
+#sety770#tab490#setfan8 hora: $time</GroupFooter>
+
+            </Detail1>
+
+        </Details>
+
+        <ReportFooter></ReportFooter>
+        <FinalSummary></FinalSummary>
+        <PageSetup>
+            <Format>Letter</Format>
+            <Orientation>portrait</Orientation>
+
+            <LeftMargin>0</LeftMargin>
+            <RightMargin>0</RightMargin>
+            <TopMargin>0</TopMargin>
+            <BottomMargin>0</BottomMargin>
+            <LineSpace>14</LineSpace>
+        </PageSetup>
+
+    </Merge>
+
+    <Label>
+        <Body></Body>
+        <Config>
+            <HorizontalSpacing>15</HorizontalSpacing>
+            <VerticalSpacing>0</VerticalSpacing>
+            <LabelWidth>288</LabelWidth>
+
+            <LabelHeight>72</LabelHeight>
+            <LeftMargin>11</LeftMargin>
+            <TopMargin>36</TopMargin>
+            <Columns>2</Columns>
+            <Rows>10</Rows>
+            <PageFormat>A3</PageFormat>
+
+            <LineSpacing>14</LineSpacing>
+        </Config>
+
+    </Label>
+
+    <OpenOffice>
+        <Source></Source>
+        <Config>
+            <FixedDetails>1</FixedDetails>
+
+            <ExpandDetails></ExpandDetails>
+            <printEmptyDetail>1</printEmptyDetail>
+            <SumByTotal>1</SumByTotal>
+            <RepeatHeader>1</RepeatHeader>
+            <RepeatFooter>1</RepeatFooter>
+        </Config>
+
+    </OpenOffice>
+
+</Report>

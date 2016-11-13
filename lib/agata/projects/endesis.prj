@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<project>
+    <desc></desc>
+    <author></author>
+    <date></date>
+    <host>10.10.10.11</host>
+    <name>dbendesis</name>
+    <user>postgres</user>
+    <pass>bXVuZG9saWJyZQ==</pass>
+    <type>native-pgsql</type>
+    <dict></dict>
+</project>
+

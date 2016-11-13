@@ -1,0 +1,64 @@
+Error al seleccionar el tipo de archivo: 
+Error al seleccionar el tipo de archivo: 
+Error al seleccionar el tipo de archivo: 
+Error al seleccionar el tipo de archivo: 
+Error al seleccionar el tipo de archivo: 
+No se pudo conectar ala base de datos: Connection refused. Check that the hostname and port are correct and that the postmaster is accepting TCP/IP connections. Connection refused. Check that the hostname and port are correct and that the postmaster is accepting TCP/IP connections.
+Error en la conexion
+No se pudo conectar ala base de datos: Connection refused. Check that the hostname and port are correct and that the postmaster is accepting TCP/IP connections. Connection refused. Check that the hostname and port are correct and that the postmaster is accepting TCP/IP connections.
+Error en la conexion
+Error al seleccionar el tipo de archivo: 
+Error al seleccionar el tipo de archivo: 
+Error al seleccionar el tipo de archivo: 
+Error al seleccionar el tipo de archivo: 
+Error al seleccionar el tipo de archivo: 
+Error al seleccionar el tipo de archivo: 
+Error al seleccionar el tipo de archivo: 
+Error al seleccionar el tipo de archivo: 
+Feb 11, 2014 9:25:39 AM net.sf.jasperreports.engine.fill.JRFillSubreport prepare
+SEVERE: Fill 26274085: exception
+net.sf.jasperreports.engine.JRException: Error executing SQL statement for : report8
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:141)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.createQueryDatasource(JRFillDataset.java:681)
+	at net.sf.jasperreports.engine.fill.JRFillDataset.initDatasource(JRFillDataset.java:601)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.setParameters(JRBaseFiller.java:1247)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:877)
+	at net.sf.jasperreports.engine.fill.JRBaseFiller.fill(JRBaseFiller.java:826)
+	at net.sf.jasperreports.engine.fill.JRFillSubreport.fillSubreport(JRFillSubreport.java:557)
+	at net.sf.jasperreports.engine.fill.JRSubreportRunnable.run(JRSubreportRunnable.java:59)
+	at net.sf.jasperreports.engine.fill.JRThreadSubreportRunner.run(JRThreadSubreportRunner.java:205)
+	at java.lang.Thread.run(Thread.java:619)
+Caused by: org.postgresql.util.PSQLException: An I/O error occured while sending to the backend.
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:283)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.execute(AbstractJdbc2Statement.java:479)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeWithFlags(AbstractJdbc2Statement.java:367)
+	at org.postgresql.jdbc2.AbstractJdbc2Statement.executeQuery(AbstractJdbc2Statement.java:271)
+	at net.sf.jasperreports.engine.query.JRJdbcQueryExecuter.createDatasource(JRJdbcQueryExecuter.java:135)
+	... 9 more
+Caused by: java.net.SocketException: Socket closed
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.read(SocketInputStream.java:129)
+	at org.postgresql.core.VisibleBufferedInputStream.readMore(VisibleBufferedInputStream.java:135)
+	at org.postgresql.core.VisibleBufferedInputStream.ensureBytes(VisibleBufferedInputStream.java:104)
+	at org.postgresql.core.VisibleBufferedInputStream.read(VisibleBufferedInputStream.java:73)
+	at org.postgresql.core.PGStream.ReceiveChar(PGStream.java:259)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:1620)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:257)
+	... 13 more
+Error al seleccionar el tipo de archivo: 
+Error al seleccionar el tipo de archivo: 
+Error al seleccionar el tipo de archivo: 
+Error al seleccionar el tipo de archivo: 
+Error al seleccionar el tipo de archivo: 
+Error al seleccionar el tipo de archivo: 
+Error al seleccionar el tipo de archivo: 
+Error al seleccionar el tipo de archivo: 
+Error al seleccionar el tipo de archivo: 
+Error en la conexion
+Error al seleccionar el tipo de archivo: 
+Error al seleccionar el tipo de archivo: 
+Error al seleccionar el tipo de archivo: 
+Error al seleccionar el tipo de archivo: 
+No se pudo cambiar el formato de fecha a 01/01/2014   Illegal pattern character 'Y' Illegal pattern character 'Y'
+Exception in thread "main" java.lang.NullPointerException
+	at ReportDriver.main(ReportDriver.java:384)

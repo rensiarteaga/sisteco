@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<report>
+  <title> sales </title>
+ <group label="1. Customer Name : Alexandre Schmidt">
+    <header>
+      <line type="header">
+        <column type="header" numero="2"> Product Description </column>
+        <column type="header" numero="3"> Amount </column>
+        <column type="header" numero="4"> Date </column>
+        <column type="header" numero="5"> Price </column>
+      </line>
+    </header>
+    <fields>
+      <line type="data">
+        <column type="data" align="left" colnum="2"> chocolate </column>
+        <column type="data" align="right" colnum="3"> 3.00 </column>
+        <column type="data" align="center" colnum="4"> 2003-10-31 </column>
+        <column type="data" align="right" colnum="5"> 23.00 </column>
+      </line>
+      <line type="data">
+        <column type="data" align="left" colnum="2"> notepad </column>
+        <column type="data" align="right" colnum="3"> 6.00 </column>
+        <column type="data" align="center" colnum="4"> 2003-10-31 </column>
+        <column type="data" align="right" colnum="5"> 11.99 </column>
+      </line>
+      <line type="data">
+        <column type="data" align="left" colnum="2"> pencil </column>
+        <column type="data" align="right" colnum="3"> 9.00 </column>
+        <column type="data" align="center" colnum="4"> 2003-10-31 </column>
+        <column type="data" align="right" colnum="5"> 10.00 </column>
+      </line>
+      <line type="data">
+        <column type="data" align="left" colnum="2"> refrigerant </column>
+        <column type="data" align="right" colnum="3"> 4.00 </column>
+        <column type="data" align="center" colnum="4"> 2003-10-31 </column>
+        <column type="data" align="right" colnum="5"> 15.00 </column>
+      </line>
+    </fields>
+   <footer>
+     <line type="total">
+       <column type="total" formula="Count" colnum="2"> 4 </column>
+       <column type="total" formula="Sum" colnum="3"> 22 </column>
+     </line>
+   </footer>
+  </group>
+ <group label="2. Customer Name : Cesar Brod">
+    <header>
+      <line type="header">
+        <column type="header" numero="2"> Product Description </column>
+        <column type="header" numero="3"> Amount </column>
+        <column type="header" numero="4"> Date </column>
+        <column type="header" numero="5"> Price </column>
+      </line>
+    </header>
+    <fields>
+      <line type="data">
+        <column type="data" align="left" colnum="2"> soap </column>
+        <column type="data" align="right" colnum="3"> 9.00 </column>
+        <column type="data" align="center" colnum="4"> 2003-10-31 </column>
+        <column type="data" align="right" colnum="5"> 0.20 </column>
+      </line>
+      <line type="data">
+        <column type="data" align="left" colnum="2"> wine bottle </column>
+        <column type="data" align="right" colnum="3"> 3.00 </column>
+        <column type="data" align="center" colnum="4"> 2003-10-31 </column>
+        <column type="data" align="right" colnum="5"> 20.00 </column>
+      </line>
+      <line type="data">
+        <column type="data" align="left" colnum="2"> wine bottle </column>
+        <column type="data" align="right" colnum="3"> 7.00 </column>
+        <column type="data" align="center" colnum="4"> 2003-10-31 </column>
+        <column type="data" align="right" colnum="5"> 21.00 </column>
+      </line>
+      <line type="data">
+        <column type="data" align="left" colnum="2"> shoe </column>
+        <column type="data" align="right" colnum="3"> 2.00 </column>
+        <column type="data" align="center" colnum="4"> 2003-10-31 </column>
+        <column type="data" align="right" colnum="5"> 11.99 </column>
+      </line>
+    </fields>
+   <footer>
+     <line type="total">
+       <column type="total" formula="Count" colnum="2"> 4 </column>
+       <column type="total" formula="Sum" colnum="3"> 21 </column>
+     </line>
+   </footer>
+  </group>
+ <group label="3. Customer Name : Daniel Afonso Heisler">
+    <header>
+      <line type="header">
+        <column type="header" numero="2"> Product Description </column>
+        <column type="header" numero="3"> Amount </column>
+        <column type="header" numero="4"> Date </column>
+        <column type="header" numero="5"> Price </column>
+      </line>
+    </header>
+    <fields>
+      <line type="data">
+        <column type="data" align="left" colnum="2"> chocolate </column>
+        <column type="data" align="right" colnum="3"> 7.00 </column>
+        <column type="data" align="center" colnum="4"> 2003-10-31 </column>
+        <column type="data" align="right" colnum="5"> 23.99 </column>
+      </line>
+      <line type="data">
+        <column type="data" align="left" colnum="2"> notepad </column>
+        <column type="data" align="right" colnum="3"> 7.00 </column>
+        <column type="data" align="center" colnum="4"> 2003-10-31 </column>
+        <column type="data" align="right" colnum="5"> 13.00 </column>
+      </line>
+      <line type="data">
+        <column type="data" align="left" colnum="2"> pencil </column>
+        <column type="data" align="right" colnum="3"> 3.00 </column>
+        <column type="data" align="center" colnum="4"> 2003-10-31 </column>
+        <column type="data" align="right" colnum="5"> 10.00 </column>
+      </line>
+      <line type="data">
+        <column type="data" align="left" colnum="2"> refrigerant </column>
+        <column type="data" align="right" colnum="3"> 7.00 </column>
+        <column type="data" align="center" colnum="4"> 2003-10-31 </column>
+        <column type="data" align="right" colnum="5"> 15.00 </column>
+      </line>
+    </fields>
+   <footer>
+     <line type="total">
+       <column type="total" formula="Count" colnum="2"> 4 </column>
+       <column type="total" formula="Sum" colnum="3"> 24 </column>
+     </line>
+   </footer>
+  </group>
+ <group label="4. Customer Name : João Alex Fritsch">
+    <header>
+      <line type="header">
+        <column type="header" numero="2"> Product Description </column>
+        <column type="header" numero="3"> Amount </column>
+        <column type="header" numero="4"> Date </column>
+        <column type="header" numero="5"> Price </column>
+      </line>
+    </header>
+    <fields>
+      <line type="data">
+        <column type="data" align="left" colnum="2"> soap </column>
+        <column type="data" align="right" colnum="3"> 2.00 </column>
+        <column type="data" align="center" colnum="4"> 2003-10-31 </column>
+        <column type="data" align="right" colnum="5"> 0.20 </column>
+      </line>
+      <line type="data">
+        <column type="data" align="left" colnum="2"> wine bottle </column>
+        <column type="data" align="right" colnum="3"> 3.00 </column>
+        <column type="data" align="center" colnum="4"> 2003-10-31 </column>
+        <column type="data" align="right" colnum="5"> 21.00 </column>
+      </line>
+      <line type="data">
+        <column type="data" align="left" colnum="2"> access point </column>
+        <column type="data" align="right" colnum="3"> 3.00 </column>
+        <column type="data" align="center" colnum="4"> 2003-10-31 </column>
+        <column type="data" align="right" colnum="5"> 16.00 </column>
+      </line>
+    </fields>
+   <footer>
+     <line type="total">
+       <column type="total" formula="Count" colnum="2"> 3 </column>
+       <column type="total" formula="Sum" colnum="3"> 8 </column>
+     </line>
+   </footer>
+  </group>
+ <group label="5. Customer Name : Maurício de Castro">
+    <header>
+      <line type="header">
+        <column type="header" numero="2"> Product Description </column>
+        <column type="header" numero="3"> Amount </column>
+        <column type="header" numero="4"> Date </column>
+        <column type="header" numero="5"> Price </column>
+      </line>
+    </header>
+    <fields>
+      <line type="data">
+        <column type="data" align="left" colnum="2"> chocolate </column>
+        <column type="data" align="right" colnum="3"> 2.00 </column>
+        <column type="data" align="center" colnum="4"> 2003-10-31 </column>
+        <column type="data" align="right" colnum="5"> 23.99 </column>
+      </line>
+      <line type="data">
+        <column type="data" align="left" colnum="2"> notepad </column>
+        <column type="data" align="right" colnum="3"> 9.00 </column>
+        <column type="data" align="center" colnum="4"> 2003-10-31 </column>
+        <column type="data" align="right" colnum="5"> 11.99 </column>
+      </line>
+      <line type="data">
+        <column type="data" align="left" colnum="2"> pencil </column>
+        <column type="data" align="right" colnum="3"> 4.00 </column>
+        <column type="data" align="center" colnum="4"> 2003-10-31 </column>
+        <column type="data" align="right" colnum="5"> 10.00 </column>
+      </line>
+      <line type="data">
+        <column type="data" align="left" colnum="2"> refrigerant </column>
+        <column type="data" align="right" colnum="3"> 3.00 </column>
+        <column type="data" align="center" colnum="4"> 2003-10-31 </column>
+        <column type="data" align="right" colnum="5"> 15.00 </column>
+      </line>
+      <line type="data">
+        <column type="data" align="left" colnum="2"> pants </column>
+        <column type="data" align="right" colnum="3"> 4.00 </column>
+        <column type="data" align="center" colnum="4"> 2003-10-31 </column>
+        <column type="data" align="right" colnum="5"> 21.00 </column>
+      </line>
+      <line type="data">
+        <column type="data" align="left" colnum="2"> tshirt </column>
+        <column type="data" align="right" colnum="3"> 4.00 </column>
+        <column type="data" align="center" colnum="4"> 2003-10-31 </column>
+        <column type="data" align="right" colnum="5"> 13.99 </column>
+      </line>
+    </fields>
+   <footer>
+     <line type="total">
+       <column type="total" formula="Count" colnum="2"> 6 </column>
+       <column type="total" formula="Sum" colnum="3"> 26 </column>
+     </line>
+   </footer>
+  </group>
+ <group label="6. Customer Name : Nasair da Silva">
+    <header>
+      <line type="header">
+        <column type="header" numero="2"> Product Description </column>
+        <column type="header" numero="3"> Amount </column>
+        <column type="header" numero="4"> Date </column>
+        <column type="header" numero="5"> Price </column>
+      </line>
+    </header>
+    <fields>
+      <line type="data">
+        <column type="data" align="left" colnum="2"> soap </column>
+        <column type="data" align="right" colnum="3"> 9.00 </column>
+        <column type="data" align="center" colnum="4"> 2003-10-31 </column>
+        <column type="data" align="right" colnum="5"> 0.29 </column>
+      </line>
+      <line type="data">
+        <column type="data" align="left" colnum="2"> wine bottle </column>
+        <column type="data" align="right" colnum="3"> 8.00 </column>
+        <column type="data" align="center" colnum="4"> 2003-10-31 </column>
+        <column type="data" align="right" colnum="5"> 21.00 </column>
+      </line>
+    </fields>
+   <footer>
+     <line type="total">
+       <column type="total" formula="Count" colnum="2"> 2 </column>
+       <column type="total" formula="Sum" colnum="3"> 17 </column>
+     </line>
+   </footer>
+  </group>
+ <group label="7. Customer Name : Pablo DallOglio">
+    <header>
+      <line type="header">
+        <column type="header" numero="2"> Product Description </column>
+        <column type="header" numero="3"> Amount </column>
+        <column type="header" numero="4"> Date </column>
+        <column type="header" numero="5"> Price </column>
+      </line>
+    </header>
+    <fields>
+      <line type="data">
+        <column type="data" align="left" colnum="2"> chocolate </column>
+        <column type="data" align="right" colnum="3"> 42.00 </column>
+        <column type="data" align="center" colnum="4"> 2003-10-31 </column>
+        <column type="data" align="right" colnum="5"> 23.99 </column>
+      </line>
+      <line type="data">
+        <column type="data" align="left" colnum="2"> notepad </column>
+        <column type="data" align="right" colnum="3"> 4.00 </column>
+        <column type="data" align="center" colnum="4"> 2003-10-31 </column>
+        <column type="data" align="right" colnum="5"> 11.99 </column>
+      </line>
+      <line type="data">
+        <column type="data" align="left" colnum="2"> pencil </column>
+        <column type="data" align="right" colnum="3"> 4.00 </column>
+        <column type="data" align="center" colnum="4"> 2003-10-31 </column>
+        <column type="data" align="right" colnum="5"> 10.00 </column>
+      </line>
+      <line type="data">
+        <column type="data" align="left" colnum="2"> refrigerant </column>
+        <column type="data" align="right" colnum="3"> 7.00 </column>
+        <column type="data" align="center" colnum="4"> 2003-10-31 </column>
+        <column type="data" align="right" colnum="5"> 15.00 </column>
+      </line>
+      <line type="data">
+        <column type="data" align="left" colnum="2"> mouse </column>
+        <column type="data" align="right" colnum="3"> 6.00 </column>
+        <column type="data" align="center" colnum="4"> 2003-10-31 </column>
+        <column type="data" align="right" colnum="5"> 5.00 </column>
+      </line>
+    </fields>
+   <footer>
+     <line type="total">
+       <column type="total" formula="Count" colnum="2"> 5 </column>
+       <column type="total" formula="Sum" colnum="3"> 63 </column>
+     </line>
+   </footer>
+  </group>
+ <group label="8. Customer Name : Tiago Giovanaz">
+    <header>
+      <line type="header">
+        <column type="header" numero="2"> Product Description </column>
+        <column type="header" numero="3"> Amount </column>
+        <column type="header" numero="4"> Date </column>
+        <column type="header" numero="5"> Price </column>
+      </line>
+    </header>
+    <fields>
+      <line type="data">
+        <column type="data" align="left" colnum="2"> wine bottle </column>
+        <column type="data" align="right" colnum="3"> 2.00 </column>
+        <column type="data" align="center" colnum="4"> 2003-10-31 </column>
+        <column type="data" align="right" colnum="5"> 21.00 </column>
+      </line>
+    </fields>
+   <footer>
+     <line type="total">
+       <column type="total" formula="Count" colnum="2"> 1 </column>
+       <column type="total" formula="Sum" colnum="3"> 2 </column>
+     </line>
+   </footer>
+  </group>
+ <group label="9. Customer Name : Vilson Cristiano Gärtner">
+    <header>
+      <line type="header">
+        <column type="header" numero="2"> Product Description </column>
+        <column type="header" numero="3"> Amount </column>
+        <column type="header" numero="4"> Date </column>
+        <column type="header" numero="5"> Price </column>
+      </line>
+    </header>
+    <fields>
+      <line type="data">
+        <column type="data" align="left" colnum="2"> chocolate </column>
+        <column type="data" align="right" colnum="3"> 7.00 </column>
+        <column type="data" align="center" colnum="4"> 2003-10-31 </column>
+        <column type="data" align="right" colnum="5"> 23.00 </column>
+      </line>
+      <line type="data">
+        <column type="data" align="left" colnum="2"> notepad </column>
+        <column type="data" align="right" colnum="3"> 4.00 </column>
+        <column type="data" align="center" colnum="4"> 2003-10-31 </column>
+        <column type="data" align="right" colnum="5"> 13.00 </column>
+      </line>
+      <line type="data">
+        <column type="data" align="left" colnum="2"> pencil </column>
+        <column type="data" align="right" colnum="3"> 7.00 </column>
+        <column type="data" align="center" colnum="4"> 2003-10-31 </column>
+        <column type="data" align="right" colnum="5"> 10.00 </column>
+      </line>
+      <line type="data">
+        <column type="data" align="left" colnum="2"> refrigerant </column>
+        <column type="data" align="right" colnum="3"> 4.00 </column>
+        <column type="data" align="center" colnum="4"> 2003-10-31 </column>
+        <column type="data" align="right" colnum="5"> 15.00 </column>
+      </line>
+    </fields>
+   <footer>
+     <line type="total">
+       <column type="total" formula="Count" colnum="2"> 4 </column>
+       <column type="total" formula="Sum" colnum="3"> 22 </column>
+     </line>
+   </footer>
+  </group>
+</report>

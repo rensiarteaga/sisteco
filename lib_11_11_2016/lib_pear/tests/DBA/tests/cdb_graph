@@ -1,0 +1,11 @@
+set size 1.0, 1.0
+set terminal postscript portrait "Helvetica" 12
+set title "driver: cdb"
+set xlabel "# of transactions"
+set ylabel "time in seconds"
+set out "cdb.ps"
+plot "cdb_1600.dat" using 1:2 title 'cdb, 1600 keys' with lines,\
+ "cdb_3200.dat" using 1:2 title 'cdb, 3200 keys' with lines,\
+ "cdb_6400.dat" using 1:2 title 'cdb, 6400 keys' with lines,\
+ "cdb_12800.dat" using 1:2 title 'cdb, 12800 keys' with lines,\
+ "cdb_25600.dat" using 1:2 title 'cdb, 25600 keys' with lines

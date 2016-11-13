@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<report>
+  <title> cities </title>
+  <header>
+    <line type="header">
+      <column type="header" numero="1"> City Code </column>
+      <column type="header" numero="2"> City Description </column>
+      <column type="header" numero="3"> State Code </column>
+      <column type="header" numero="4"> State Description </column>
+    </line>
+  </header>
+  <fields>
+    <line type="data">
+      <column type="data" align="left" colnum="1"> 9 </column>
+      <column type="data" align="left" colnum="2"> Del Rey </column>
+      <column type="data" align="left" colnum="3"> CA </column>
+      <column type="data" align="left" colnum="4"> California </column>
+    </line>
+    <line type="data">
+      <column type="data" align="left" colnum="1"> 10 </column>
+      <column type="data" align="left" colnum="2"> Kingsburg </column>
+      <column type="data" align="left" colnum="3"> CA </column>
+      <column type="data" align="left" colnum="4"> California </column>
+    </line>
+    <line type="data">
+      <column type="data" align="left" colnum="1"> 11 </column>
+      <column type="data" align="left" colnum="2"> Lakeport </column>
+      <column type="data" align="left" colnum="3"> CA </column>
+      <column type="data" align="left" colnum="4"> California </column>
+    </line>
+    <line type="data">
+      <column type="data" align="left" colnum="1"> 12 </column>
+      <column type="data" align="left" colnum="2"> Palo Alto </column>
+      <column type="data" align="left" colnum="3"> CA </column>
+      <column type="data" align="left" colnum="4"> California </column>
+    </line>
+    <line type="data">
+      <column type="data" align="left" colnum="1"> 13 </column>
+      <column type="data" align="left" colnum="2"> Colorado Springs </column>
+      <column type="data" align="left" colnum="3"> CO </column>
+      <column type="data" align="left" colnum="4"> Colorado </column>
+    </line>
+    <line type="data">
+      <column type="data" align="left" colnum="1"> 14 </column>
+      <column type="data" align="left" colnum="2"> New Castle </column>
+      <column type="data" align="left" colnum="3"> CO </column>
+      <column type="data" align="left" colnum="4"> Colorado </column>
+    </line>
+    <line type="data">
+      <column type="data" align="left" colnum="1"> 15 </column>
+      <column type="data" align="left" colnum="2"> Springfield </column>
+      <column type="data" align="left" colnum="3"> CO </column>
+      <column type="data" align="left" colnum="4"> Colorado </column>
+    </line>
+    <line type="data">
+      <column type="data" align="left" colnum="1"> 16 </column>
+      <column type="data" align="left" colnum="2"> Westminster </column>
+      <column type="data" align="left" colnum="3"> CO </column>
+      <column type="data" align="left" colnum="4"> Colorado </column>
+    </line>
+    <line type="data">
+      <column type="data" align="left" colnum="1"> 2 </column>
+      <column type="data" align="left" colnum="2"> Cambridge </column>
+      <column type="data" align="left" colnum="3"> MA </column>
+      <column type="data" align="left" colnum="4"> Massachusetts </column>
+    </line>
+    <line type="data">
+      <column type="data" align="left" colnum="1"> 3 </column>
+      <column type="data" align="left" colnum="2"> Lawrence </column>
+      <column type="data" align="left" colnum="3"> MA </column>
+      <column type="data" align="left" colnum="4"> Massachusetts </column>
+    </line>
+    <line type="data">
+      <column type="data" align="left" colnum="1"> 4 </column>
+      <column type="data" align="left" colnum="2"> Somerville </column>
+      <column type="data" align="left" colnum="3"> MA </column>
+      <column type="data" align="left" colnum="4"> Massachusetts </column>
+    </line>
+    <line type="data">
+      <column type="data" align="left" colnum="1"> 1 </column>
+      <column type="data" align="left" colnum="2"> Arlington </column>
+      <column type="data" align="left" colnum="3"> MA </column>
+      <column type="data" align="left" colnum="4"> Massachusetts </column>
+    </line>
+    <line type="data">
+      <column type="data" align="left" colnum="1"> 5 </column>
+      <column type="data" align="left" colnum="2"> Albany </column>
+      <column type="data" align="left" colnum="3"> NY </column>
+      <column type="data" align="left" colnum="4"> New York </column>
+    </line>
+    <line type="data">
+      <column type="data" align="left" colnum="1"> 6 </column>
+      <column type="data" align="left" colnum="2"> Cortland </column>
+      <column type="data" align="left" colnum="3"> NY </column>
+      <column type="data" align="left" colnum="4"> New York </column>
+    </line>
+    <line type="data">
+      <column type="data" align="left" colnum="1"> 7 </column>
+      <column type="data" align="left" colnum="2"> Hamilton </column>
+      <column type="data" align="left" colnum="3"> NY </column>
+      <column type="data" align="left" colnum="4"> New York </column>
+    </line>
+    <line type="data">
+      <column type="data" align="left" colnum="1"> 8 </column>
+      <column type="data" align="left" colnum="2"> Waterville </column>
+      <column type="data" align="left" colnum="3"> NY </column>
+      <column type="data" align="left" colnum="4"> New York </column>
+    </line>
+  </fields>
+</report>

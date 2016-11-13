@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rep_conc_fallida" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<parameter name="pm_id_usuario" class="java.lang.Integer"/>
+	<parameter name="pm_ip" class="java.lang.String"/>
+	<parameter name="pm_mac" class="java.lang.String"/>
+	<parameter name="pr_id_siet_declara" class="java.lang.Integer"/>
+	<parameter name="pr_id_siet_cbte" class="java.lang.String"/>
+	<parameter name="desc_usuario" class="java.lang.String"/>
+	<parameter name="pr_periodo" class="java.lang.String"/>
+	<parameter name="pr_gestion" class="java.lang.String"/>
+	<parameter name="pr_tipo_declara" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT * FROM presto.f_tpr_siet_declara_rep($P{pm_id_usuario},$P{pm_ip},$P{pm_mac},'PR_CONCFALL_REP'
+,NULL, 1000,0,'id_siet_cbte asc','asc','0=0','%','%','%','%','%',$P{pr_id_siet_declara},'%') AS ( id_siet_cbte integer,periodo_lite varchar,gestion numeric,
+                                 id_cbte integer,
+                                 nro_cbte integer,
+                                 id_extracto_bancario integer,
+                                 importe numeric,
+                                 obs   text,
+                                 nro_cuenta_banco varchar,
+                                 nro_deposito_eb varchar,
+                                 nro_deposito_cbte varchar,
+                                 importe_eb numeric
+
+)
+ ORDER BY id_extracto_bancario]]>
+	</queryString>
+	<field name="id_siet_cbte" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_cbte" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nro_cbte" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_extracto_bancario" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="periodo_lite" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nro_cuenta_banco" class="java.lang.String"/>
+	<field name="obs" class="java.lang.String"/>
+	<field name="gestion" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="importe" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nro_deposito_eb" class="java.lang.String"/>
+	<field name="nro_deposito_cbte" class="java.lang.String"/>
+	<field name="importe_eb" class="java.math.BigDecimal"/>
+	<variable name="importe_eb_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{importe_eb}]]></variableExpression>
+	</variable>
+	<variable name="importe_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{importe}]]></variableExpression>
+	</variable>
+	<variable name="importe_eb_2" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{importe_eb}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="37" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="572" height="17"/>
+				<textElement textAlignment="Center" markup="none">
+					<font size="13" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["CONCILIACION FALLIDA DE COMPROBANTES"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="14" width="572" height="13"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Periodo: "+$P{pr_periodo} +" Gestion: "+$P{pr_gestion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="27" width="572" height="10"/>
+				<textElement textAlignment="Center">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["TIPO: "+$P{pr_tipo_declara}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="21">
+			<staticText>
+				<reportElement x="0" y="0" width="40" height="20"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="6" isBold="false" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[ID.SIETCBTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="40" y="0" width="83" height="20"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="7" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[PERIODO-GESTION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="123" y="0" width="35" height="20"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="7" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[ID.   CBTE.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="158" y="0" width="46" height="21"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="7" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[NRO. CBTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="274" y="0" width="29" height="20"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="7" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[ID. E.B.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="418" y="0" width="48" height="20"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="7" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[IMPORTE CBTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="204" y="1" width="70" height="20"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="7" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[CUENTA BANCARIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="512" y="0" width="60" height="20"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="7" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[OBSERVACION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="303" y="0" width="50" height="20"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="7" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[NRO. CHE/DEP E.B.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="466" y="0" width="46" height="20"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="7" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[IMPORTE       E.B.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="353" y="0" width="65" height="20"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="7" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[NRO.                      CHE/DEP. CBTE]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="10" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="40" height="10"/>
+				<textElement>
+					<font size="6" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{id_siet_cbte}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00">
+				<reportElement x="204" y="0" width="58" height="10"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{importe}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="572" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.2" lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="88" y="0" width="35" height="10"/>
+				<textElement>
+					<font size="6" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{gestion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="158" y="0" width="46" height="10"/>
+				<textElement>
+					<font size="6" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nro_cbte}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="45" y="0" width="43" height="10"/>
+				<textElement>
+					<font size="6" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{periodo_lite}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="123" y="0" width="35" height="10"/>
+				<textElement>
+					<font size="6" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{id_cbte}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="337" y="0" width="29" height="10"/>
+				<textElement>
+					<font size="6" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{id_extracto_bancario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="267" y="0" width="70" height="10"/>
+				<textElement>
+					<font size="6" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nro_cuenta_banco}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="516" y="0" width="56" height="10"/>
+				<textElement>
+					<font size="6" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{obs}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="366" y="0" width="50" height="10"/>
+				<textElement textAlignment="Center">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nro_deposito_eb}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="418" y="0" width="48" height="10"/>
+				<textElement textAlignment="Center">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nro_deposito_cbte}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;-#,##0.00">
+				<reportElement x="466" y="0" width="46" height="10"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{importe_eb}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20">
+			<textField evaluationTime="Report">
+				<reportElement x="0" y="0" width="204" height="10" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Usuario: " + $P{desc_usuario}]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH:mm:ss">
+				<reportElement x="472" y="10" width="100" height="10" forecolor="#000000"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="204" y="0" width="90" height="10" forecolor="#000000"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="6" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="294" y="0" width="72" height="10" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="572" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.25" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<textField evaluationTime="Report" isBlankWhenNull="true">
+				<reportElement x="0" y="10" width="88" height="10" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Sistema: ENDESIS - PRESTO"]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="472" y="0" width="100" height="10" forecolor="#000000"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="168">
+			<textField pattern="#,##0.00;-#,##0.00">
+				<reportElement x="418" y="0" width="48" height="10"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="7" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{importe_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;-#,##0.00">
+				<reportElement x="466" y="0" width="46" height="10"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="7" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{importe_eb_2}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="366" y="0" width="146" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="366" y="0" width="50" height="10"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="7" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[TOTALES:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="265" y="1" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{importe_eb_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

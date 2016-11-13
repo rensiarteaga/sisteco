@@ -1,0 +1,463 @@
+/*************alma.tal_almacen**********/
+
+CREATE TABLE alma.tal_almacen (
+  id_almacen SERIAL, 
+  codigo VARCHAR(20) NOT NULL, 
+  nombre VARCHAR(100) NOT NULL, 
+  direccion VARCHAR(200) NOT NULL, 
+  estado VARCHAR(15) NOT NULL, 
+  tipo_control VARCHAR(20) NOT NULL, 
+  id_lugar INTEGER NOT NULL, 
+  id_depto INTEGER NOT NULL, 
+  usuario_reg VARCHAR(50) DEFAULT "current_user"() NOT NULL, 
+  fecha_reg TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT now() NOT NULL, 
+  CONSTRAINT "alma.tal_almacen_pkey" PRIMARY KEY(id_almacen), 
+  CONSTRAINT tal_almacen_codigo_key UNIQUE(codigo), 
+  CONSTRAINT chk_tal_almacen__estado CHECK (((estado)::text = 'activo'::text) OR ((estado)::text = 'inactivo'::text)), 
+  CONSTRAINT fk_tal_almacen__id_depto FOREIGN KEY (id_depto)
+    REFERENCES param.tpm_depto(id_depto)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+    NOT DEFERRABLE, 
+  CONSTRAINT fk_tal_almacen__id_lugar FOREIGN KEY (id_lugar)
+    REFERENCES sss.tsg_lugar(id_lugar)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+    NOT DEFERRABLE
+) WITHOUT OIDS;
+
+/*****************alma.tal_clasificacion******************/
+
+CREATE TABLE alma.tal_clasificacion (
+  id_clasificacion SERIAL, 
+  codigo VARCHAR(5) NOT NULL, 
+  codigo_largo VARCHAR(100) NOT NULL, 
+  nombre VARCHAR(100) NOT NULL, 
+  estado VARCHAR(15) NOT NULL, 
+  id_clasificacion_fk INTEGER, 
+  usuario_reg VARCHAR(50) DEFAULT "current_user"() NOT NULL, 
+  fecha_reg TIMESTAMP WITHOUT TIME ZONE DEFAULT now() NOT NULL, 
+  CONSTRAINT tal_clasificacion_pkey PRIMARY KEY(id_clasificacion), 
+  CONSTRAINT chk_tal_clasificacion__estado CHECK (((estado)::text = 'activo'::text) OR ((estado)::text = 'inactivo'::text)), 
+  CONSTRAINT fk_tal_clasificacion__id_clasificacion_fk FOREIGN KEY (id_clasificacion_fk)
+    REFERENCES alma.tal_clasificacion(id_clasificacion)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+    NOT DEFERRABLE
+) WITHOUT OIDS;
+
+
+/*************alma.tal_detalle_movimiento***********/
+
+CREATE TABLE alma.tal_detalle_movimiento (
+  id_detalle_movimiento SERIAL, 
+  id_movimiento INTEGER NOT NULL, 
+  id_item INTEGER NOT NULL, 
+  cantidad NUMERIC(18,2), 
+  cantidad_solicitada NUMERIC(18,2), 
+  tipo_saldo VARCHAR(20), 
+  usuario_reg VARCHAR(50) DEFAULT "current_user"() NOT NULL, 
+  fecha_reg TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT now() NOT NULL, 
+  costo_unitario NUMERIC(18,6) DEFAULT 0 NOT NULL, 
+  costo_valorado NUMERIC(18,6) DEFAULT 0 NOT NULL, 
+  costo_total NUMERIC(18,2) DEFAULT 0 NOT NULL, 
+  CONSTRAINT tal_detalle_movimiento_pkey PRIMARY KEY(id_detalle_movimiento), 
+  CONSTRAINT chk_tal_detalle_movimiento__tipo_saldo CHECK ((((tipo_saldo)::text = 'por_entregar'::text) OR ((tipo_saldo)::text = 'rechazado'::text)) OR ((tipo_saldo)::text = 'entregado'::text)), 
+  CONSTRAINT fk_detalle_movimiento__id_item FOREIGN KEY (id_item)
+    REFERENCES alma.tal_item(id_item)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+    NOT DEFERRABLE, 
+  CONSTRAINT fk_detalle_movimiento__id_movimiento FOREIGN KEY (id_movimiento)
+    REFERENCES alma.tal_movimiento(id_movimiento)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+    NOT DEFERRABLE
+) WITHOUT OIDS;
+
+CREATE TRIGGER control_minmax_item_stock BEFORE INSERT OR UPDATE 
+ON alma.tal_detalle_movimiento FOR EACH ROW 
+EXECUTE PROCEDURE alma.trig_control_stock_item();
+
+ALTER TABLE alma.tal_detalle_movimiento
+  DISABLE TRIGGER control_minmax_item_stock;
+
+/************alma.tal_detalle_solicitud*****************/
+
+CREATE TABLE alma.tal_detalle_solicitud (
+  id_detalle_solicitud SERIAL, 
+  id_solicitud_salida INTEGER NOT NULL, 
+  id_item INTEGER NOT NULL, 
+  cantidad NUMERIC(18,2), 
+  usuario_reg VARCHAR(50) DEFAULT "current_user"() NOT NULL, 
+  fecha_reg TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT now() NOT NULL, 
+  CONSTRAINT tal_detalle_solicitud_pkey PRIMARY KEY(id_detalle_solicitud), 
+  CONSTRAINT fk_tal_detalle_solicitud__id_item FOREIGN KEY (id_item)
+    REFERENCES alma.tal_item(id_item)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+    NOT DEFERRABLE, 
+  CONSTRAINT fk_tal_detalle_solicitud__id_solicitud_salida FOREIGN KEY (id_solicitud_salida)
+    REFERENCES alma.tal_solicitud_salida(id_solicitud_salida)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+    NOT DEFERRABLE
+) WITHOUT OIDS;
+
+ALTER TABLE alma.tal_detalle_solicitud
+  ALTER COLUMN cantidad SET STATISTICS 100;
+
+/*****************alma.tal_detalle_unidad_constructiva******************/
+
+CREATE TABLE alma.tal_detalle_unidad_constructiva (
+  id_detalle_unidad_constructiva INTEGER DEFAULT nextval('alma.tal_detalle_unidad_constructi_id_detalle_unidad_constructiv_seq'::regclass) NOT NULL, 
+  id_unidad_constructiva INTEGER NOT NULL, 
+  id_item INTEGER NOT NULL, 
+  cantidad NUMERIC(18,2) NOT NULL, 
+  descripcion VARCHAR(200), 
+  estado_registro VARCHAR(10) NOT NULL, 
+  orden INTEGER, 
+  usuario_reg VARCHAR(50) DEFAULT "current_user"() NOT NULL, 
+  fecha_reg TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT now() NOT NULL, 
+  CONSTRAINT tal_detalle_unidad_constructiva_pkey PRIMARY KEY(id_detalle_unidad_constructiva)
+) WITHOUT OIDS;
+
+
+/**********alma.tal_item********/
+
+CREATE TABLE alma.tal_item (
+  id_item SERIAL, 
+  id_clasificacion INTEGER NOT NULL, 
+  codigo VARCHAR(30) NOT NULL, 
+  nombre VARCHAR(100) NOT NULL, 
+  descripcion VARCHAR(1000), 
+  codigo_fabrica VARCHAR(30), 
+  id_unidad_medida INTEGER NOT NULL, 
+  num_por_clasificacion INTEGER NOT NULL, 
+  bajo_responsabilidad VARCHAR(11) NOT NULL, 
+  estado VARCHAR(10) NOT NULL, 
+  metodo_valoracion VARCHAR(4) NOT NULL, 
+  usuario_reg VARCHAR(50) DEFAULT "current_user"() NOT NULL, 
+  fecha_reg TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT now() NOT NULL, 
+  CONSTRAINT tal_item_pkey PRIMARY KEY(id_item), 
+  CONSTRAINT chk_tal_item__estado CHECK (((estado)::text = 'activo'::text) OR ((estado)::text = 'inactivo'::text)), 
+  CONSTRAINT fk_tal_item__id_clasificacion FOREIGN KEY (id_clasificacion)
+    REFERENCES alma.tal_clasificacion(id_clasificacion)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+    NOT DEFERRABLE, 
+  CONSTRAINT fk_tal_item__id_unidad_medida FOREIGN KEY (id_unidad_medida)
+    REFERENCES param.tpm_unidad_medida_base(id_unidad_medida_base)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+    NOT DEFERRABLE
+) WITHOUT OIDS;
+
+
+/**********alma.tal_item_valoracion_pp*************/
+
+CREATE TABLE alma.tal_item_valoracion_pp (
+  id_item_valoracion SERIAL, 
+  id_almacen INTEGER NOT NULL, 
+  id_item INTEGER NOT NULL, 
+  cantidad NUMERIC(18,2) NOT NULL, 
+  costo_unitario NUMERIC(18,6) NOT NULL, 
+  costo_valorado NUMERIC(18,6) NOT NULL, 
+  id_detalle_movimiento INTEGER DEFAULT 0 NOT NULL, 
+  fecha_reg TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT now() NOT NULL, 
+  usuario_reg VARCHAR(50) DEFAULT "current_user"() NOT NULL, 
+  CONSTRAINT tal_item_valoracion_pp_pkey PRIMARY KEY(id_item_valoracion), 
+  CONSTRAINT fk_tal_item_valoracion_pp__id_almacen FOREIGN KEY (id_almacen)
+    REFERENCES alma.tal_almacen(id_almacen)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+    NOT DEFERRABLE, 
+  CONSTRAINT fk_tal_item_valoracion_pp__id_item FOREIGN KEY (id_item)
+    REFERENCES alma.tal_item(id_item)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+    NOT DEFERRABLE
+) WITHOUT OIDS;
+
+COMMENT ON COLUMN alma.tal_item_valoracion_pp.id_almacen
+IS 'id_almacen  donde el item se valorizo';
+
+
+
+/***********alma.tal_movimiento***********/
+
+
+CREATE TABLE alma.tal_movimiento (
+  id_movimiento SERIAL, 
+  id_tipo_movimiento INTEGER NOT NULL, 
+  id_almacen INTEGER NOT NULL, 
+  id_solicitud_salida INTEGER, 
+  codigo VARCHAR(50), 
+  fecha_movimiento TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, 
+  fecha_finalizacion TIMESTAMP(0) WITHOUT TIME ZONE, 
+  descripcion VARCHAR(200), 
+  observaciones VARCHAR(200), 
+  estado VARCHAR(20) NOT NULL, 
+  usuario_reg VARCHAR(50) DEFAULT "current_user"() NOT NULL, 
+  fecha_reg TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT now() NOT NULL, 
+  id_almacen_trans INTEGER, 
+  id_movimiento_fk INTEGER, 
+  CONSTRAINT tal_movimiento_pkey PRIMARY KEY(id_movimiento), 
+  CONSTRAINT chk_tal_movimiento__estado CHECK (((((estado)::text = 'borrador'::text) OR ((estado)::text = 'finalizado'::text)) OR ((estado)::text = 'pendiente_aprobacion'::text)) OR ((estado)::text = 'valorado'::text)), 
+  CONSTRAINT fk_tal_movimiento__id_almacen FOREIGN KEY (id_almacen)
+    REFERENCES alma.tal_almacen(id_almacen)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+    NOT DEFERRABLE, 
+  CONSTRAINT fk_tal_movimiento__id_almacen_trans FOREIGN KEY (id_almacen_trans)
+    REFERENCES alma.tal_almacen(id_almacen)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+    NOT DEFERRABLE, 
+  CONSTRAINT fk_tal_movimiento__id_mocimiento_fk FOREIGN KEY (id_movimiento_fk)
+    REFERENCES alma.tal_movimiento(id_movimiento)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+    NOT DEFERRABLE, 
+  CONSTRAINT fk_tal_movimiento__id_tipo_movimiento FOREIGN KEY (id_tipo_movimiento)
+    REFERENCES alma.tal_tipo_movimiento(id_tipo_movimiento)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+    NOT DEFERRABLE
+) WITHOUT OIDS;
+
+/************alma.tal_solicitud_salida**********/
+
+CREATE TABLE alma.tal_solicitud_salida (
+  id_solicitud_salida SERIAL, 
+  id_almacen INTEGER NOT NULL, 
+  id_unidad_organizacional INTEGER NOT NULL, 
+  id_empleado INTEGER NOT NULL, 
+  cargo_empleado VARCHAR(50) NOT NULL, 
+  id_aprobador INTEGER NOT NULL, 
+  cargo_aprobador VARCHAR(50) NOT NULL, 
+  codigo VARCHAR(50), 
+  fecha_solicitud TIMESTAMP WITHOUT TIME ZONE NOT NULL, 
+  descripcion VARCHAR(1000) NOT NULL, 
+  estado VARCHAR NOT NULL, 
+  usuario_reg VARCHAR(50) DEFAULT "current_user"() NOT NULL, 
+  fecha_reg TIMESTAMP WITHOUT TIME ZONE DEFAULT now() NOT NULL, 
+  CONSTRAINT tal_solicitud_salida_pkey PRIMARY KEY(id_solicitud_salida), 
+  CONSTRAINT chk_tal_solicitud_salida__estado CHECK ((((((estado)::text = 'borrador'::text) OR ((estado)::text = 'pendiente_aprobacion'::text)) OR ((estado)::text = 'pendiente_entrega'::text)) OR ((estado)::text = 'proceso_entrega'::text)) OR ((estado)::text = 'entregado'::text)), 
+  CONSTRAINT fk_tal_solicitud_salida__id_almacen FOREIGN KEY (id_almacen)
+    REFERENCES alma.tal_almacen(id_almacen)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+    NOT DEFERRABLE, 
+  CONSTRAINT fk_tal_solicitud_salida__id_empleado FOREIGN KEY (id_empleado)
+    REFERENCES kard.tkp_empleado(id_empleado)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+    NOT DEFERRABLE, 
+  CONSTRAINT fk_tal_solicitud_salida__id_unidad_organizacional FOREIGN KEY (id_unidad_organizacional)
+    REFERENCES kard.tkp_unidad_organizacional(id_unidad_organizacional)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+    NOT DEFERRABLE
+) WITHOUT OIDS;
+
+
+/***************alma.tal_stock_item***************/
+
+CREATE TABLE alma.tal_stock_item (
+  id_stock_item SERIAL, 
+  id_almacen INTEGER NOT NULL, 
+  id_item INTEGER NOT NULL, 
+  minimo NUMERIC(18,2) NOT NULL, 
+  maximo NUMERIC(18,2) NOT NULL, 
+  usuario_reg VARCHAR(50) DEFAULT "current_user"() NOT NULL, 
+  fecha_reg TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT now() NOT NULL, 
+  CONSTRAINT tal_stock_item_pkey PRIMARY KEY(id_stock_item), 
+  CONSTRAINT fk_tal_stock_item__id_almacen FOREIGN KEY (id_almacen)
+    REFERENCES alma.tal_almacen(id_almacen)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+    NOT DEFERRABLE, 
+  CONSTRAINT fk_tal_stock_item__id_item FOREIGN KEY (id_item)
+    REFERENCES alma.tal_item(id_item)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+    NOT DEFERRABLE
+) WITHOUT OIDS;
+
+/**********alma.tal_tipo_movimiento**********/
+
+CREATE TABLE alma.tal_tipo_movimiento (
+  id_tipo_movimiento SERIAL, 
+  id_documento INTEGER NOT NULL, 
+  tipo VARCHAR(20) NOT NULL, 
+  requiere_aprobacion VARCHAR(2), 
+  usuario_reg VARCHAR(50) DEFAULT "current_user"() NOT NULL, 
+  fecha_reg TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT now() NOT NULL, 
+  CONSTRAINT tal_tipo_movimiento_pkey PRIMARY KEY(id_tipo_movimiento), 
+  CONSTRAINT fk_tal_tipo_movimiento__id_documento FOREIGN KEY (id_documento)
+    REFERENCES param.tpm_documento(id_documento)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+    NOT DEFERRABLE
+) WITHOUT OIDS;
+
+ALTER TABLE alma.tal_tipo_movimiento
+  ALTER COLUMN id_tipo_movimiento SET STATISTICS 0;
+
+/***********alma.tal_ubicacion**********/
+
+CREATE TABLE alma.tal_ubicacion (
+  id_ubicacion SERIAL, 
+  codigo VARCHAR(20) NOT NULL, 
+  nombre VARCHAR(100) NOT NULL, 
+  estado VARCHAR(15) NOT NULL, 
+  id_almacen INTEGER, 
+  id_ubicacion_fk INTEGER, 
+  usuario_reg VARCHAR(50) DEFAULT "current_user"() NOT NULL, 
+  fecha_reg TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT now() NOT NULL, 
+  CONSTRAINT tal_ubicacion_pkey PRIMARY KEY(id_ubicacion), 
+  CONSTRAINT chk_tal_ubicacion__estado CHECK (((estado)::text = 'activo'::text) OR ((estado)::text = 'inactivo'::text)), 
+  CONSTRAINT fk_tal_ubicacion__id_almacen FOREIGN KEY (id_almacen)
+    REFERENCES alma.tal_almacen(id_almacen)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+    NOT DEFERRABLE, 
+  CONSTRAINT fk_tal_ubicacion__id_ubicacion_fk FOREIGN KEY (id_ubicacion_fk)
+    REFERENCES alma.tal_ubicacion(id_ubicacion)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+    NOT DEFERRABLE
+) WITHOUT OIDS;
+
+ALTER TABLE alma.tal_ubicacion
+  ALTER COLUMN id_ubicacion SET STATISTICS 0;
+
+/*********alma.tal_unidad_constructiva*********/
+
+CREATE TABLE alma.tal_unidad_constructiva (
+  id_unidad_constructiva SERIAL, 
+  id_unidad_constructiva_fk INTEGER NOT NULL, 
+  codigo VARCHAR(20) NOT NULL, 
+  nombre VARCHAR(100) NOT NULL, 
+  descripcion VARCHAR(100) NOT NULL, 
+  observaciones VARCHAR(200), 
+  estado VARCHAR(15) NOT NULL, 
+  usuario_reg VARCHAR(50) DEFAULT "current_user"() NOT NULL, 
+  fecha_reg TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT now() NOT NULL, 
+  CONSTRAINT tal_unidad_constructiva_pkey PRIMARY KEY(id_unidad_constructiva), 
+  CONSTRAINT fk_tal_unidad_constructiva__id_unidad_constructiva_fk FOREIGN KEY (id_unidad_constructiva_fk)
+    REFERENCES alma.tal_unidad_constructiva(id_unidad_constructiva)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+    NOT DEFERRABLE
+) WITHOUT OIDS;
+
+
+
+/**************alma.tal_valoracion_tmp*************/
+
+CREATE TABLE alma.tal_valoracion_tmp (
+  id_valoracion_temp SERIAL, 
+  id_almacen INTEGER NOT NULL, 
+  id_item INTEGER NOT NULL, 
+  tipo_movimiento VARCHAR(50) NOT NULL, 
+  cantidad_item NUMERIC(18,2) NOT NULL, 
+  costo_unitario_item NUMERIC(18,6) DEFAULT 0 NOT NULL, 
+  costo_item NUMERIC(18,6) NOT NULL, 
+  cantidad_total NUMERIC(18,2) DEFAULT 0, 
+  costo_unitario_act NUMERIC(18,6) DEFAULT 0, 
+  costo_act NUMERIC(18,6) DEFAULT 0, 
+  id_movimiento INTEGER NOT NULL, 
+  id_detalle_movimiento INTEGER NOT NULL, 
+  fecha_fin_mov TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, 
+  fecha_reg TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT now() NOT NULL, 
+  usuario_reg VARCHAR(50) DEFAULT "current_user"() NOT NULL, 
+  CONSTRAINT tal_valoracion_tmp_pkey PRIMARY KEY(id_valoracion_temp)
+) WITHOUT OIDS;
+
+COMMENT ON TABLE alma.tal_valoracion_tmp
+IS 'tabla donde se registra el detalle de los items valorados en un almacen';
+
+
+/***********alma.tal_movimiento_proyecto************/
+CREATE TABLE alma.tal_movimiento_proyecto (
+  id_movimiento_proyecto SERIAL, 
+  id_almacen INTEGER NOT NULL, 
+  id_tipo_movimiento INTEGER NOT NULL, 
+  fecha_ingreso TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, 
+  origen_ingreso VARCHAR(30), 
+  id_contratista INTEGER, 
+  id_proveedor INTEGER, 
+  id_empleado INTEGER, 
+  id_institucion INTEGER, 
+  concepto_ingreso VARCHAR(255), 
+  observaciones VARCHAR(255), 
+  estado VARCHAR(20) DEFAULT 'borrador'::character varying NOT NULL, 
+  usuario_reg VARCHAR(100) DEFAULT "current_user"() NOT NULL, 
+  fecha_reg TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT now() NOT NULL, 
+  CONSTRAINT tal_proyecto_mov_pkey PRIMARY KEY(id_movimiento_proyecto), 
+  CONSTRAINT chk_tal_movimiento_proyecto__origen_ingreso CHECK (((((origen_ingreso)::text = 'contratista'::text) OR ((origen_ingreso)::text = 'proveedor'::text)) OR ((origen_ingreso)::text = 'empleado'::text)) OR ((origen_ingreso)::text = 'institucion'::text)), 
+  CONSTRAINT fk_tal_movimiento_proyecto__id_almacen FOREIGN KEY (id_almacen)
+    REFERENCES alma.tal_almacen(id_almacen)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+    NOT DEFERRABLE, 
+  CONSTRAINT fk_tal_movimiento_proyecto__id_contratista FOREIGN KEY (id_contratista)
+    REFERENCES param.tpm_contratista(id_contratista)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+    NOT DEFERRABLE, 
+  CONSTRAINT fk_tal_movimiento_proyecto__id_empleado FOREIGN KEY (id_empleado)
+    REFERENCES kard.tkp_empleado(id_empleado)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+    NOT DEFERRABLE, 
+  CONSTRAINT fk_tal_movimiento_proyecto__id_institucion FOREIGN KEY (id_institucion)
+    REFERENCES param.tpm_institucion(id_institucion)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+    NOT DEFERRABLE, 
+  CONSTRAINT fk_tal_movimiento_proyecto__id_proveedor FOREIGN KEY (id_proveedor)
+    REFERENCES compro.tad_proveedor(id_proveedor)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+    NOT DEFERRABLE, 
+  CONSTRAINT fk_tal_movimiento_proyecto__id_tipo_movimiento FOREIGN KEY (id_tipo_movimiento)
+    REFERENCES alma.tal_tipo_movimiento(id_tipo_movimiento)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+    NOT DEFERRABLE
+) WITHOUT OIDS;
+
+ALTER TABLE alma.tal_movimiento_proyecto
+  ALTER COLUMN id_movimiento_proyecto SET STATISTICS 0;
+
+COMMENT ON COLUMN alma.tal_movimiento_proyecto.origen_ingreso
+IS '1. origen=contratista->param.tpm_contratista
+2. origen=proveedor->compro.tad_proveedor
+3. origen=funcionario->kard.tkp_empleado
+4. origen=institucion->param.tpm_institucion';
+
+/**************alma.tal_movimiento_proyecto_det***********/
+
+CREATE TABLE alma.tal_movimiento_proyecto_det (
+  id_proyecto_mov_det SERIAL, 
+  id_item INTEGER NOT NULL, 
+  id_movimiento_proyecto INTEGER NOT NULL, 
+  cantidad NUMERIC(18,2) DEFAULT 0 NOT NULL, 
+  unidad_medida VARCHAR(50), 
+  usuario_reg VARCHAR(50) DEFAULT "current_user"(), 
+  fecha_reg TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT now(), 
+  CONSTRAINT tal_proyecto_mov_det_pkey PRIMARY KEY(id_proyecto_mov_det), 
+  CONSTRAINT fk_tal_movimiento_proyecto_det__id_item FOREIGN KEY (id_item)
+    REFERENCES alma.tal_item(id_item)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+    NOT DEFERRABLE, 
+  CONSTRAINT fk_tal_movimiento_proyecto_det__id_movimiento_proyecto FOREIGN KEY (id_movimiento_proyecto)
+    REFERENCES alma.tal_movimiento_proyecto(id_movimiento_proyecto)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+    NOT DEFERRABLE
+) WITHOUT OIDS;

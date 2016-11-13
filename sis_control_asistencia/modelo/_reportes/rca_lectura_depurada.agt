@@ -1,0 +1,246 @@
+<?xml version="1.0"?>
+<Report>
+    <Version>7.5</Version>
+    <Properties>
+        <Description></Description>
+        <Title></Title>
+        <Author></Author>
+        <Keywords></Keywords>
+        <Date></Date>
+        <FrameSize></FrameSize>
+    </Properties>
+
+    <Header>
+        <Body></Body>
+        <Align>center</Align>
+    </Header>
+
+    <Footer>
+        <Body></Body>
+        <Align>center</Align>
+    </Footer>
+
+    <Parameters>
+        <fecha_inicio>
+            <value>12/8/2007</value>
+        </fecha_inicio>
+
+        <fecha_fin>
+            <value>12/24/2007</value>
+        </fecha_fin>
+
+        <login_usuario>
+            <value>Ana Maria Villegas Quispe</value>
+        </login_usuario>
+
+        <id_empleado>
+            <value>3</value>
+        </id_empleado>
+
+    </Parameters>
+
+    <DataSet>
+        <DataSource>
+            <Name>endesis_desarrollo</Name>
+        </DataSource>
+
+        <Query>
+            <Select>distinct lr.id_empleado,(COALESCE(PERSON.apellido_paterno,' ')||'  '||COALESCE(PERSON.apellido_materno,' ')||'  '||COALESCE(PERSON.nombre,' ')) AS desc_empleado</Select>
+            <From>casis.tca_lectura_depurada lr 
+                  INNER JOIN kard.tkp_empleado EMPLEA 
+                  ON EMPLEA.id_empleado=lr.id_empleado
+                  INNER JOIN sss.tsg_persona PERSON
+                  ON PERSON.id_persona=EMPLEA.id_persona</From>
+            <Where>lr.id_empleado=$id_empleado</Where>
+            <GroupBy></GroupBy>
+            <OrderBy></OrderBy>
+            <Config>
+                <Distinct></Distinct>
+                <OffSet>0</OffSet>
+                <Limit>0</Limit>
+            </Config>
+
+        </Query>
+
+        <Groups>
+            <Config>
+                <ShowGroup></ShowGroup>
+                <ShowDetail>1</ShowDetail>
+                <ShowLabel></ShowLabel>
+                <ShowNumber>1</ShowNumber>
+                <ShowIndent>1</ShowIndent>
+            </Config>
+
+        </Groups>
+
+        <Fields>
+            <Column1>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column1>
+
+        </Fields>
+
+    </DataSet>
+
+    <PageSetup></PageSetup>
+    <Graph>
+        <Title></Title>
+        <TitleX></TitleX>
+        <TitleY></TitleY>
+        <Width>480</Width>
+        <Height>268</Height>
+        <Description></Description>
+        <ShowData>1</ShowData>
+        <ShowValues>1</ShowValues>
+        <Orientation>columns</Orientation>
+    </Graph>
+
+    <Merge>
+        <ReportHeader>#setcffdfdfd  Reporte ENDESIS  Copyright Â©2007, ENDE S.A... Todos los derechos reservados. 
+#setftb14
+#setcf010101
+#sety050 #tab160 MARCAS DEPURADAS 
+</ReportHeader>
+
+        <Details>
+            <Detail1>
+                <GroupHeader>#sety000#tab400  #image ../../../../lib/images/logo_reporte.jpg
+ #sety75 #tab020 #setfab12  Funcionario: #tab100 #setfan12   $var2   
+ #sety90 #tab020 #setfab12  Desde:    #tab070 #setfan12 $fecha_inicio  #tab140 #setfan12 Hasta: #tab190 #setfan12$fecha_fin
+
+#sety120 #rect*020*010*370*025*1*#22105e*#22105e
+#rect*020*000*370*025*1*#ffd200*#ffd200
+#tab035#setfan10 #setcfffffff#setcfffc364 #setcf000000 Fecha  #tab125 Hora  #tab200 Tipo Movimiento  #tab300 Observaciones
+#sety145  #setcf000000      </GroupHeader>
+
+                <DataSet1>
+                    <Body> #tab020  $subfield2  $subfield3 $subfield4  $subfield5</Body>
+                    <Query>
+                        <Select>lr.id_empleado, lr.fecha, lr.hora, lr.tipo_movimiento, lr.observaciones</Select>
+                        <From>casis.tca_lectura_depurada lr</From>
+                        <Where>lr.fecha &gt;=$fecha_inicio and lr.fecha&lt;=$fecha_fin and lr.id_empleado=$var1 and lr.aprobado='si'</Where>
+                        <GroupBy></GroupBy>
+                        <OrderBy>lr.fecha ASC , lr.hora ASC</OrderBy>
+                        <Config>
+                            <Distinct></Distinct>
+                            <OffSet>0</OffSet>
+                            <Limit>0</Limit>
+                        </Config>
+
+                    </Query>
+
+                    <Fields>
+                        <Column1>
+                            <Chars>30</Chars>
+                            <Points>60</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column1>
+
+                        <Column2>
+                            <Chars>30</Chars>
+                            <Points>100</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column2>
+
+                        <Column3>
+                            <Chars>30</Chars>
+                            <Points>100</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column3>
+
+                        <Column4>
+                            <Chars>30</Chars>
+                            <Points>70</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column4>
+
+                        <Column5>
+                            <Chars>30</Chars>
+                            <Points>90</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column5>
+
+                    </Fields>
+
+                </DataSet1>
+
+                <NumberSubSql>0</NumberSubSql>
+                <GroupFooter> #tab020#lineH370
+#sety700 #tab010 #setfan8  Usuario:$login_usuario  #tab230#setftn8 Página $page de  $pagecounting        #tab460#setfan8 fecha: $day - $month - $year 
+#sety710 #tab010 #setfan8 CASIS #tab460#setfan8 hora: $time </GroupFooter>
+
+            </Detail1>
+
+        </Details>
+
+        <ReportFooter></ReportFooter>
+        <FinalSummary></FinalSummary>
+        <PageSetup>
+            <Format>Letter</Format>
+            <Orientation>portrait</Orientation>
+            <LeftMargin>25</LeftMargin>
+            <RightMargin>25</RightMargin>
+            <TopMargin>25</TopMargin>
+            <BottomMargin>25</BottomMargin>
+            <LineSpace>14</LineSpace>
+        </PageSetup>
+
+    </Merge>
+
+    <Label>
+        <Body></Body>
+        <Config>
+            <HorizontalSpacing>15</HorizontalSpacing>
+            <VerticalSpacing>0</VerticalSpacing>
+            <LabelWidth>288</LabelWidth>
+            <LabelHeight>72</LabelHeight>
+            <LeftMargin>11</LeftMargin>
+            <TopMargin>36</TopMargin>
+            <Columns>2</Columns>
+            <Rows>10</Rows>
+            <PageFormat>A3</PageFormat>
+            <LineSpacing>14</LineSpacing>
+        </Config>
+
+    </Label>
+
+    <OpenOffice>
+        <Source></Source>
+        <Config>
+            <FixedDetails>1</FixedDetails>
+            <ExpandDetails></ExpandDetails>
+            <printEmptyDetail>1</printEmptyDetail>
+            <SumByTotal>1</SumByTotal>
+            <RepeatHeader>1</RepeatHeader>
+            <RepeatFooter>1</RepeatFooter>
+        </Config>
+
+    </OpenOffice>
+
+</Report>

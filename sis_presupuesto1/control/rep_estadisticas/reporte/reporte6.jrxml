@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="graf_ejec_pres_recursos" language="groovy" pageWidth="612" pageHeight="1000" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<parameter name="id_parametro" class="java.lang.Integer"/>
+	<parameter name="id_moneda" class="java.lang.Integer"/>
+	<parameter name="fecha_fin" class="java.lang.String"/>
+	<parameter name="imagen_ende" class="java.lang.String"/>
+	<parameter name="desc_moneda" class="java.lang.String"/>
+	<parameter name="fuente" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\Ana\\ReportesV01\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="desc_usuario" class="java.lang.String"/>
+	<parameter name="desc_gestion" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT case when codigo_actividad='CON' THEN
+                 'PROYECTOS EN EJECUCION'
+             ELSE
+                 'ESTUDIOS'
+              END AS codigo_actividad , sum(vig_tot) as vig_tot , sum(eje_tot) as eje_tot ,(sum(eje_tot)/sum(vig_tot))*100 as por_tot
+ FROM presto.a7_f_tpr_repeje_inversion_sel_new(131,'192.168.1.160','ejeres',
+'PR_INVMESR_SEL', NULL, $P{id_parametro},$P{fecha_fin}, $P{id_moneda},
+'todos', 'todos', 'todos', 'todos', 'todos', 'todos',
+'', '', '','','', '',
+'IN', 'PP')
+AS(codigo_proyecto varchar, descrip VARCHAR, financia VARCHAR, proyecto VARCHAR,id_presupuesto integer, id_actividad integer,id_programa integer,
+                                                      codigo_actividad varchar,codigo_programa varchar,codigo_sisin varchar,
+                                                      cod_prg VARCHAR,cod_proy VARCHAR ,cod_act VARCHAR,
+                                                      cod_fin VARCHAR ,cod_org VARCHAR, vig_tot NUMERIC(18,2), eje_tot NUMERIC(18,2), por_tot NUMERIC(18,2),modi_tot NUMERIC(18,2),for_tot NUMERIC(18,2),
+                                                      ejec_1  NUMERIC(18,2),ejec_2  NUMERIC(18,2),ejec_3  NUMERIC(18,2),ejec_4  NUMERIC(18,2),ejec_5  NUMERIC(18,2),
+                                                      ejec_6  NUMERIC(18,2),ejec_7  NUMERIC(18,2),ejec_8  NUMERIC(18,2),ejec_9  NUMERIC(18,2),ejec_10  NUMERIC(18,2),ejec_11  NUMERIC(18,2),
+                                                      ejec_12  NUMERIC(18,2),por_for_ejec_tot NUMERIC(18,2),
+                                                      for_tot_sum NUMERIC(18,2), vig_tot_sum NUMERIC(18,2),
+                                                      eje_tot_sum NUMERIC(18,2), modi_tot_sum NUMERIC(18,2),
+                                                      por_for_ejec_total NUMERIC(18,2),por_eje_tot NUMERIC(18,2),
+                                                      saldo NUMERIC(18,2),saldo_sum NUMERIC(18,2))
+
+group by codigo_actividad
+ order by codigo_actividad]]>
+	</queryString>
+	<field name="codigo_actividad" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="vig_tot" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="eje_tot" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="por_tot" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="sum_ejecutado" class="java.lang.String" incrementType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{vig_tot}]]></variableExpression>
+	</variable>
+	<variable name="devengado_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{eje_tot}]]></variableExpression>
+	</variable>
+	<variable name="vigente_1" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{vig_tot}]]></variableExpression>
+	</variable>
+	<variable name="por_eje_1" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[($V{devengado_1}/$V{vigente_1})*100]]></variableExpression>
+	</variable>
+	<title>
+		<band height="72">
+			<subreport>
+				<reportElement x="-22" y="-20" width="179" height="76"/>
+				<subreportParameter name="titulo">
+					<subreportParameterExpression><![CDATA["RESUMEN DE INVERSIONES - ENDE"]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fecha_fin">
+					<subreportParameterExpression><![CDATA[$P{fecha_fin}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="desc_gestion">
+					<subreportParameterExpression><![CDATA[$P{desc_gestion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fuente">
+					<subreportParameterExpression><![CDATA[$P{fuente}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="id_parametro">
+					<subreportParameterExpression><![CDATA[$P{id_parametro}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="imagen_ende">
+					<subreportParameterExpression><![CDATA[$P{imagen_ende}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="desc_moneda">
+					<subreportParameterExpression><![CDATA[$P{desc_moneda}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "cabecera_a2.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="-22" y="52" width="590" height="20"/>
+				<subreportParameter name="fecha_fin">
+					<subreportParameterExpression><![CDATA[$P{fecha_fin}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="desc_gestion">
+					<subreportParameterExpression><![CDATA[$P{desc_gestion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fuente">
+					<subreportParameterExpression><![CDATA[$P{fuente}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="id_parametro">
+					<subreportParameterExpression><![CDATA[$P{id_parametro}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="desc_moneda">
+					<subreportParameterExpression><![CDATA[$P{desc_moneda}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "cabecera_1.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="20">
+			<rectangle>
+				<reportElement x="0" y="0" width="572" height="20" backcolor="#CCCCCC"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="472" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[% DE EJECUCIÓN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="272" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PRESUPUESTO VIGENTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="272" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESCRIPCION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="372" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EJECUTADO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="12">
+			<line>
+				<reportElement x="0" y="11" width="572" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.25" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="0" y="0" width="272" height="12"/>
+				<textElement>
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{codigo_actividad}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="272" y="0" width="100" height="12"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{vig_tot}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="373" y="0" width="100" height="12"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{eje_tot}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="471" y="0" width="100" height="12"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{por_tot}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20">
+			<textField evaluationTime="Report">
+				<reportElement x="294" y="0" width="72" height="10" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="6" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="472" y="2" width="100" height="10" forecolor="#000000"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="0" y="0" width="204" height="10" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="6" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Usuario: " + $P{desc_usuario}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" isBlankWhenNull="true">
+				<reportElement x="0" y="10" width="88" height="10" forecolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="6" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Sistema: ENDESIS - PRESTO"]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH:mm:ss">
+				<reportElement x="472" y="10" width="100" height="10" forecolor="#000000"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="6"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="204" y="0" width="90" height="10" forecolor="#000000"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="6" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="572" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.25" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="274" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="572" height="15" backcolor="#CCCCCC"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<textField pattern="#,##0.00">
+				<reportElement x="372" y="0" width="100" height="15"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{devengado_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="272" y="0" width="100" height="15"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{vigente_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="472" y="0" width="100" height="15"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{por_eje_1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="273" height="15"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[TOTAL GENERAL]]></text>
+			</staticText>
+			<bar3DChart>
+				<chart>
+					<reportElement x="0" y="20" width="572" height="254"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend>
+						<font fontName="Arial" size="7"/>
+					</chartLegend>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["PRESUPUESTO VIGENTE"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{codigo_actividad}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{vig_tot}]]></valueExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["EJECUTADO A JUNIO"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{codigo_actividad}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{eje_tot}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<bar3DPlot isShowLabels="true">
+					<plot/>
+					<itemLabel color="#000000" backgroundColor="#FFFFFF">
+						<font fontName="Arial" size="5"/>
+					</itemLabel>
+					<categoryAxisFormat>
+						<axisFormat verticalTickLabels="true">
+							<labelFont>
+								<font fontName="Arial" size="7"/>
+							</labelFont>
+							<tickLabelFont>
+								<font fontName="Arial" size="7"/>
+							</tickLabelFont>
+						</axisFormat>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat verticalTickLabels="false">
+							<labelFont>
+								<font fontName="Arial" size="7"/>
+							</labelFont>
+							<tickLabelFont>
+								<font fontName="Arial" size="7"/>
+							</tickLabelFont>
+						</axisFormat>
+					</valueAxisFormat>
+				</bar3DPlot>
+			</bar3DChart>
+		</band>
+	</summary>
+</jasperReport>

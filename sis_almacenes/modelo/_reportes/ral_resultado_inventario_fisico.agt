@@ -1,0 +1,352 @@
+<?xml version="1.0"?>
+<Report>
+    <Version>7.5</Version>
+    <Properties>
+        <Description></Description>
+        <Title></Title>
+        <Author></Author>
+        <Keywords></Keywords>
+        <Date></Date>
+
+        <FrameSize></FrameSize>
+    </Properties>
+
+    <Header>
+        <Body></Body>
+        <Align>center</Align>
+    </Header>
+
+    <Footer>
+
+        <Body></Body>
+        <Align>center</Align>
+    </Footer>
+
+    <Parameters>
+        <id>
+            <value>165</value>
+        </id>
+
+    </Parameters>
+
+    <DataSet>
+        <DataSource>
+            <Name>Almacenes</Name>
+        </DataSource>
+
+        <Query>
+            <Select>distinct  SUPGRU.nombre as super, SUPGRU.id_supergrupo, ALMACE.nombre as almacen_fisico, COALESCE(PERSON.apellido_materno,'')||', '||COALESCE(PERSON.apellido_paterno,'')||'  '||COALESCE(PERSON.nombre,'') AS responsable, COALESCE(PERSON1.apellido_materno,'')||', '||COALESCE(PERSON1.apellido_paterno,'')||'  '||COALESCE(PERSON1.nombre,'') AS almacenero, INVENT.fecha_inicio, INVENT.fecha_fin, (select CASE when INVENT.id_almacen is not null then ( select distinct reg.nombre_regional from param.tpm_regional reg inner join param.tpm_fina_regi_prog_proy_acti frppa on frppa.id_regional=reg.id_regional inner join almin.tal_almacen alm on alm.id_regional=reg.id_regional inner join almin.tal_inventario inv on inv.id_almacen=alm.id_almacen and inv.id_inventario=INVENT.id_inventario ) end)</Select>
+
+            <From>almin.tal_item ITEM inner join almin.tal_inventario_det INVDET on INVDET.id_item= ITEM.id_item inner join almin.tal_supergrupo SUPGRU on SUPGRU.id_supergrupo= ITEM.id_supergrupo INNER JOIN almin.tal_grupo GRUPOO ON GRUPOO.id_grupo= ITEM.id_grupo INNER JOIN almin.tal_subgrupo SUBGRU ON SUBGRU.id_subgrupo= ITEM.id_subgrupo AND SUBGRU.id_grupo= GRUPOO.id_grupo INNER JOIN almin.tal_id1 IID1 ON  IID1.id_id1= ITEM.id_id1 AND IID1.id_subgrupo = SUBGRU.id_subgrupo INNER JOIN almin.tal_id2 IID2 ON  IID2.id_id2= ITEM.id_id2 AND IID2.id_id1= IID1.id_id1 INNER JOIN almin.tal_id3 IID3 ON IID3.id_id3= ITEM.id_id3 AND IID3.id_id2= IID2.id_id2 INNER JOIN almin.tal_inventario INVENT ON INVENT.id_inventario= INVDET.id_inventario INNER JOIN almin.tal_almacen ALMACE ON ALMACE.id_almacen = INVENT.id_almacen INNER JOIN almin.tal_almacen_ep ALMAEP ON ALMAEP.id_almacen= ALMACE.id_almacen INNER JOIN almin.tal_almacen_logico ALMLOG ON ALMLOG.id_almacen_ep = ALMAEP.id_almacen_ep INNER JOIN almin.tal_responsable_almacen RESALM ON RESALM.id_almacen = ALMACE.id_almacen AND RESALM.id_responsable_almacen = INVENT.id_responsable_almacen INNER JOIN kard.tkp_empleado EMPLEA ON EMPLEA.id_empleado = RESALM.id_empleado INNER JOIN sss.tsg_persona PERSON ON PERSON.id_persona = EMPLEA.id_persona INNER JOIN almin.tal_responsable_almacen RESALM1 ON RESALM1.id_almacen = ALMACE.id_almacen AND RESALM1.id_responsable_almacen = INVENT.id_almacenero INNER JOIN kard.tkp_empleado EMPLEA1 ON EMPLEA1.id_empleado = RESALM1.id_empleado INNER JOIN sss.tsg_persona PERSON1 ON PERSON1.id_persona = EMPLEA1.id_persona AND RESALM1.id_responsable_almacen = INVENT.id_almacenero LEFT JOIN almin.tal_almacen_sector ALMSEC ON ALMSEC.id_almacen= ALMACE.id_almacen LEFT JOIN almin.tal_tipo_sector TIPSEC ON TIPSEC.id_tipo_sector= ALMSEC.id_tipo_sector LEFT JOIN almin.tal_tipo_sector_sg TISESG ON TISESG.id_tipo_sector = TIPSEC.id_tipo_sector</From>
+            <Where>INVENT.id_inventario=$id</Where>
+            <GroupBy>SUPGRU.nombre ,SUPGRU.id_supergrupo, GRUPOO.nombre,GRUPOO.id_grupo, SUBGRU.nombre , SUBGRU.id_subgrupo, IID1.nombre ,IID1.id_id1, IID2.nombre ,IID2.id_id2, IID3.nombre , IID3.id_id3,ALMACE.nombre, INVENT.id_almacen_logico, PERSON.apellido_paterno, PERSON.apellido_materno,PERSON.nombre, PERSON1.apellido_paterno, PERSON1.apellido_materno, PERSON1.nombre, INVENT.fecha_inicio, INVENT.fecha_fin, INVENT.fecha_inicio, INVENT.id_almacen, INVENT.id_inventario</GroupBy>
+            <OrderBy>SUPGRU.nombre</OrderBy>
+            <Config>
+                <Distinct></Distinct>
+                <OffSet>0</OffSet>
+
+                <Limit>0</Limit>
+            </Config>
+
+        </Query>
+
+        <Groups>
+            <Config>
+                <ShowGroup></ShowGroup>
+                <ShowDetail>1</ShowDetail>
+
+                <ShowLabel></ShowLabel>
+                <ShowNumber>1</ShowNumber>
+                <ShowIndent>1</ShowIndent>
+            </Config>
+
+        </Groups>
+
+        <Fields>
+            <Column1>
+
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+
+            </Column1>
+
+            <Column2>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column2>
+
+            <Column3>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column3>
+
+            <Column4>
+                <Chars>30</Chars>
+                <Points>60</Points>
+
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column4>
+
+            <Column5>
+                <Chars>30</Chars>
+
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column5>
+
+            <Column6>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+
+                <Conditional></Conditional>
+            </Column6>
+
+            <Column7>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column7>
+
+            <Column8>
+                <Chars>30</Chars>
+                <Points>60</Points>
+
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column8>
+
+        </Fields>
+
+    </DataSet>
+
+    <PageSetup>
+        <Format>A4</Format>
+        <Orientation>landscape</Orientation>
+        <LeftMargin>0</LeftMargin>
+        <RightMargin>0</RightMargin>
+
+        <TopMargin>0</TopMargin>
+        <BottomMargin>0</BottomMargin>
+        <LineSpace>14</LineSpace>
+    </PageSetup>
+
+    <Graph>
+        <Title></Title>
+
+        <TitleX></TitleX>
+        <TitleY></TitleY>
+        <Width>480</Width>
+        <Height>268</Height>
+        <Description></Description>
+        <ShowData>1</ShowData>
+        <ShowValues>1</ShowValues>
+
+        <Orientation>columns</Orientation>
+    </Graph>
+
+    <Merge>
+        <ReportHeader>#sety030#setfab14#tab220RESULTADOS DE INVENTARIO DE MATERIALES
+#sety060#tab065#setfan10Almacén: #tab130    $var3    #tab465 Regional:    					  #tab570    $var8 
+#sety075#tab065Responsable: 		 #tab130   $var4 	#tab465Fecha Inicio: 					#tab570   	  $var6 
+#sety090#tab065Almacenero: 			  #tab130   $var5  #tab465 Fecha Finalizacion:            #tab570 $var7 
+
+#sety105
+</ReportHeader>
+
+        <Details>
+            <Detail1>
+                <GroupHeader>#tab060#setfab12 $var1   
+
+#rect*060*010*720*025*1*#22105e*#22105e
+#rect*060*000*720*025*1*#22105e*#22105e
+
+#tab070#setfan10 #setcfffffff    	        Descripción y Caracteristicas                                            Fecha de Conteo #tab460	             Cantidad Contada    #tab590           Cantidad Estimada         #tab708   Diferencia
+#sety190 </GroupHeader>
+
+                <DataSet1>
+                    <Body>#tab070#setcf070707      $subfield2    #tab337$subfield3   #tab465 $subfield4       #tab595 $subfield5     #tab690 $subfield6 
+#tab060#lineH720</Body>
+
+                    <Query>
+                        <Select>distinct ITEM.codigo, ITEM.descripcion,INVDET.fecha_conteo, INVDET.cantidad_contada, INVDET.cantidad_estimada, (INVDET.cantidad_contada-INVDET.cantidad_estimada) as diferencia</Select>
+                        <From>almin.tal_item ITEM  INNER JOIN almin.tal_inventario_det INVDET ON INVDET.id_item= ITEM.id_item</From>
+                        <Where>ITEM.id_supergrupo= $var2 AND ITEM.id_item= INVDET.id_item AND INVDET.id_inventario=$id</Where>
+
+                        <GroupBy></GroupBy>
+                        <OrderBy></OrderBy>
+                        <Config>
+                            <Distinct></Distinct>
+                            <OffSet>0</OffSet>
+                            <Limit>0</Limit>
+                        </Config>
+
+                    </Query>
+
+                    <Fields>
+                        <Column1>
+                            <Chars>30</Chars>
+                            <Points>80</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column1>
+
+                        <Column2>
+                            <Chars>30</Chars>
+                            <Points>200</Points>
+
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column2>
+
+                        <Column3>
+                            <Chars>30</Chars>
+
+                            <Points>60</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column3>
+
+                        <Column4>
+                            <Chars>30</Chars>
+                            <Points>80</Points>
+                            <Align>right</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+
+                            <Conditional></Conditional>
+                        </Column4>
+
+                        <Column5>
+                            <Chars>30</Chars>
+                            <Points>80</Points>
+                            <Align>right</Align>
+                            <Mask></Mask>
+
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column5>
+
+                        <Column6>
+                            <Chars>30</Chars>
+                            <Points>60</Points>
+
+                            <Align>right</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column6>
+
+                    </Fields>
+
+                </DataSet1>
+
+                <NumberSubSql>0</NumberSubSql>
+                <GroupFooter></GroupFooter>
+            </Detail1>
+
+        </Details>
+
+        <ReportFooter>#tab060#rect*000*000*720*002*1*#081392*#000000
+#sety510#tab342_____________________
+#sety520#tab355Firma Responsable
+#setcf030303#sety540 #tab035 #setfan8 Usuario:$login_usuario  #tab370#setftn8 Página $page de  $pagecounting         #tab700#setfan8 fecha: $day - $month - $year 
+#sety550#tab700#setfan8 hora: $time </ReportFooter>
+
+        <FinalSummary></FinalSummary>
+        <PageSetup>
+            <Format>A4</Format>
+            <Orientation>landscape</Orientation>
+            <LeftMargin>0</LeftMargin>
+            <RightMargin>0</RightMargin>
+
+            <TopMargin>0</TopMargin>
+            <BottomMargin>0</BottomMargin>
+            <LineSpace>14</LineSpace>
+        </PageSetup>
+
+    </Merge>
+
+    <Label>
+
+        <Body></Body>
+        <Config>
+            <HorizontalSpacing>15</HorizontalSpacing>
+            <VerticalSpacing>0</VerticalSpacing>
+            <LabelWidth>288</LabelWidth>
+            <LabelHeight>72</LabelHeight>
+            <LeftMargin>11</LeftMargin>
+
+            <TopMargin>36</TopMargin>
+            <Columns>2</Columns>
+            <Rows>10</Rows>
+            <PageFormat>A3</PageFormat>
+            <LineSpacing>14</LineSpacing>
+        </Config>
+
+    </Label>
+
+    <OpenOffice>
+        <Source></Source>
+        <Config>
+            <FixedDetails>1</FixedDetails>
+            <ExpandDetails></ExpandDetails>
+            <printEmptyDetail>1</printEmptyDetail>
+
+            <SumByTotal>1</SumByTotal>
+            <RepeatHeader>1</RepeatHeader>
+            <RepeatFooter>1</RepeatFooter>
+        </Config>
+
+    </OpenOffice>
+
+</Report>

@@ -1,0 +1,424 @@
+<?xml version="1.0"?>
+<Report>
+    <Version>7.5</Version>
+    <Properties>
+        <Description></Description>
+        <Title></Title>
+        <Author></Author>
+        <Keywords></Keywords>
+        <Date></Date>
+
+        <FrameSize></FrameSize>
+    </Properties>
+
+    <Header>
+        <Body></Body>
+        <Align>center</Align>
+    </Header>
+
+    <Footer>
+
+        <Body></Body>
+        <Align>center</Align>
+    </Footer>
+
+    <Parameters>
+        <id_almacen>
+            <value>%</value>
+        </id_almacen>
+
+        <id_financiador>
+            <value>%</value>
+        </id_financiador>
+
+        <id_regional>
+            <value>%</value>
+        </id_regional>
+
+        <id_programa>
+            <value>%</value>
+        </id_programa>
+
+        <id_proyecto>
+            <value>%</value>
+        </id_proyecto>
+
+        <id_actividad>
+
+            <value>%</value>
+        </id_actividad>
+
+        <id_almacen_logico>
+            <value>%</value>
+        </id_almacen_logico>
+
+        <fecha_cierre>
+            <value>11/22/2007</value>
+
+        </fecha_cierre>
+
+        <fecha_apertura>
+            <value>11/22/2007</value>
+        </fecha_apertura>
+
+    </Parameters>
+
+    <DataSet>
+        <DataSource>
+
+            <Name>endesis_factur23</Name>
+        </DataSource>
+
+        <Query>
+            <Select>distinct ALMLOG.id_almacen_logico, ALMACE.fecha_cierre, ALMACE.fecha_apertura, fina.nombre_financiador, regi.nombre_regional, prog.nombre_programa, proy.nombre_proyecto, acti.nombre_actividad, ALMAEP.descripcion, ALMACE.nombre, ALMLOG.nombre, ALMACE.id_almacen</Select>
+            <From>almin.tal_salida SALIDA INNER JOIN almin.tal_almacen_logico ALMLOG ON (ALMLOG.id_almacen_logico=SALIDA.id_almacen_logico) INNER JOIN almin.tal_almacen_ep ALMAEP ON (ALMAEP.id_almacen_ep=ALMLOG.id_almacen_ep) INNER JOIN almin.tal_almacen ALMACE ON (ALMACE.id_almacen=ALMAEP.id_almacen) INNER JOIN almin.tal_motivo_salida_cuenta MSALCU ON (MSALCU.id_motivo_salida_cuenta=SALIDA.id_motivo_salida_cuenta)  INNER JOIN almin.tal_motivo_salida MSALIDA ON (MSALCU.id_motivo_salida= MSALIDA.id_motivo_salida)  INNER JOIN sci.tct_cuenta c ON (c.id_cuenta=MSALCU.id_cuenta) INNER JOIN param.tpm_fina_regi_prog_proy_acti    frppa ON (frppa.id_fina_regi_prog_proy_acti=ALMAEP.id_fina_regi_prog_proy_acti) INNER JOIN param.tpm_programa_proyecto_actividad ppa on (frppa.id_prog_proy_acti=ppa.id_prog_proy_acti) LEFT JOIN param.tpm_financiador fina ON frppa.id_financiador= fina.id_financiador LEFT JOIN param.tpm_regional regi ON frppa.id_regional= regi.id_regional LEFT JOIN param.tpm_programa prog  ON ppa.id_programa = prog.id_programa LEFT JOIN param.tpm_proyecto proy  ON ppa.id_proyecto= proy.id_proyecto LEFT JOIN param.tpm_actividad acti ON ppa.id_actividad = acti.id_actividad INNER JOIN almin.tal_salida_detalle SALDET ON (SALDET.id_salida=SALIDA.id_salida)</From>
+            <Where>ALMACE.fecha_cierre &gt;= $fecha_cierre and ALMACE.fecha_apertura &lt;= $fecha_apertura AND SALIDA.estado_salida='Finalizado'  AND ALMACE.id_almacen like $id_almacen AND frppa.id_financiador like $id_financiador and frppa.id_regional like $id_regional AND ppa.id_programa like $id_programa AND ppa.id_proyecto like $id_proyecto AND ppa.id_actividad like $id_actividad AND ALMLOG.id_almacen_logico like $id_almacen_logico</Where>
+
+            <GroupBy></GroupBy>
+            <OrderBy></OrderBy>
+            <Config>
+                <Distinct></Distinct>
+                <OffSet>0</OffSet>
+                <Limit>0</Limit>
+            </Config>
+
+        </Query>
+
+        <Groups>
+            <Config>
+                <ShowGroup></ShowGroup>
+                <ShowDetail>1</ShowDetail>
+                <ShowLabel></ShowLabel>
+                <ShowNumber>1</ShowNumber>
+
+                <ShowIndent>1</ShowIndent>
+            </Config>
+
+        </Groups>
+
+        <Fields>
+            <Column1>
+                <Chars>30</Chars>
+                <Points>60</Points>
+
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column1>
+
+            <Column2>
+                <Chars>30</Chars>
+
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column2>
+
+            <Column3>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+
+                <Conditional></Conditional>
+            </Column3>
+
+            <Column4>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column4>
+
+            <Column5>
+                <Chars>30</Chars>
+                <Points>60</Points>
+
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column5>
+
+            <Column6>
+                <Chars>30</Chars>
+
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column6>
+
+            <Column7>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+
+                <Conditional></Conditional>
+            </Column7>
+
+            <Column8>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column8>
+
+            <Column9>
+                <Chars>30</Chars>
+                <Points>60</Points>
+
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column9>
+
+            <Column10>
+                <Chars>30</Chars>
+
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column10>
+
+            <Column11>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+
+                <Conditional></Conditional>
+            </Column11>
+
+            <Column12>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column12>
+
+        </Fields>
+
+    </DataSet>
+
+    <PageSetup></PageSetup>
+
+    <Graph>
+        <Title></Title>
+        <TitleX></TitleX>
+        <TitleY></TitleY>
+        <Width>480</Width>
+        <Height>268</Height>
+        <Description></Description>
+
+        <ShowData>1</ShowData>
+        <ShowValues>1</ShowValues>
+        <Orientation>columns</Orientation>
+    </Graph>
+
+    <Merge>
+        <ReportHeader>
+#setfab12#tab145 SALIDAS DE MATERIALES  POR ALMACEN LOGICO
+                         
+#tab015#setfab10Almacen:#setfan10#tab100   $var10 #setfab10 
+#tab015#setfab10Almacen EP:#setfan10#tab100 $var9 #setfab10 #tab350  Fecha de Cierre: #setfan10 #tab447$var2   
+#tab015#setfab10Almacen Lógico: #setfan10 #tab100$var11 #tab350#setfab10 Fecha de Apertura: #setfan10 #tab447$var3
+ #tab015#setfab10Financiador:#setfan10 #tab100  $var4  #tab350#setfab10Regional: #setfan10 #tab400  $var5  
+#tab015#setfab10Programa:#setfan10#tab100 $var6 #tab350#setfab10 Actividad:#setfan10  #tab400 $var8  
+#tab015#setfab10Proyecto:#setfan10#tab100  $var7
+
+</ReportHeader>
+        <Details>
+            <Detail1>
+                <GroupHeader> #rect*015*010*555*030*1*#22105e*#22105e
+#rect*015*000*555*030*1*#22105e*#22105e
+#tab015#setfan10 #setcfffffff Motivo de Salida #tab215 Cuenta            #tab370Costo     #tab470 Fecha de        
+#tab370Total #tab473Salida
+#setcf030303 </GroupHeader>
+
+                <DataSet1>
+                    <Body>#tab015  $subfield3   $subfield4 #tab325  $subfield2 #tab450 $subfield6 
+#tab015#lineH550
+</Body>
+
+                    <Query>
+
+                        <Select>SALDET.id_salida, (select SUM(COALESCE (SALDET.costo,0))                                                 from almin.tal_salida_detalle SALDET                                                 WHERE SALDET.id_salida=SALIDA.id_salida)AS costo, MSALIDA.nombre, c.nro_cuenta, ALMLOG.nombre, SALIDA.fecha_finalizado_cancelado</Select>
+                        <From>almin.tal_salida SALIDA INNER JOIN almin.tal_salida_detalle SALDET ON (SALDET.id_salida=SALIDA.id_salida) INNER JOIN almin.tal_almacen_logico ALMLOG ON (ALMLOG.id_almacen_logico=SALIDA.id_almacen_logico) INNER JOIN almin.tal_almacen_ep ALMAEP ON (ALMAEP.id_almacen_ep=ALMLOG.id_almacen_ep) INNER JOIN almin.tal_almacen ALMACE ON (ALMACE.id_almacen=ALMAEP.id_almacen) INNER JOIN almin.tal_motivo_salida_cuenta MSALCU ON (MSALCU.id_motivo_salida_cuenta=SALIDA.id_motivo_salida_cuenta)  INNER JOIN almin.tal_motivo_salida MSALIDA ON (MSALCU.id_motivo_salida= MSALIDA.id_motivo_salida)  INNER JOIN sci.tct_cuenta c ON (c.id_cuenta=MSALCU.id_cuenta)</From>
+                        <Where>ALMACE.fecha_cierre &gt;= $fecha_cierre and ALMACE.fecha_apertura &lt;= $fecha_apertura and SALIDA.estado_salida='Finalizado' and ALMACE.id_almacen like $var12 and ALMLOG.id_almacen_logico like $var1</Where>
+                        <GroupBy>SALIDA.id_salida, SALDET.id_salida, MSALIDA.nombre, c.nro_cuenta, ALMLOG.nombre, SALIDA.fecha_finalizado_cancelado</GroupBy>
+                        <OrderBy>SALIDA.fecha_finalizado_cancelado</OrderBy>
+
+                        <Config>
+                            <Distinct></Distinct>
+                            <OffSet>0</OffSet>
+                            <Limit>0</Limit>
+                        </Config>
+
+                    </Query>
+
+                    <Fields>
+
+                        <Column1>
+                            <Chars>30</Chars>
+                            <Points>100</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+
+                            <Conditional></Conditional>
+                        </Column1>
+
+                        <Column2>
+                            <Chars>30</Chars>
+                            <Points>80</Points>
+                            <Align>right</Align>
+                            <Mask>#  -9,999.s</Mask>
+
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column2>
+
+                        <Column3>
+                            <Chars>30</Chars>
+                            <Points>200</Points>
+
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column3>
+
+                        <Column4>
+                            <Chars>30</Chars>
+
+                            <Points>100</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column4>
+
+                        <Column5>
+                            <Chars>30</Chars>
+                            <Points>80</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+
+                            <Conditional></Conditional>
+                        </Column5>
+
+                        <Column6>
+                            <Chars>30</Chars>
+                            <Points>100</Points>
+                            <Align>center</Align>
+                            <Mask></Mask>
+
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column6>
+
+                    </Fields>
+
+                </DataSet1>
+
+                <NumberSubSql>0</NumberSubSql>
+
+                <GroupFooter> #tab015#rect*000*000*550*002*1*#081392*#000000
+</GroupFooter>
+
+            </Detail1>
+
+        </Details>
+
+        <ReportFooter>#setcf030303#sety710 #tab010 #setfan8 Usuario:$login_usuario  #tab270#setftn8 Página $page de  $pagecounting         #tab472#setfan8 Fecha: $day - $month - $year 
+#sety720#tab472#setfan8 Hora: $time </ReportFooter>
+
+        <FinalSummary></FinalSummary>
+
+        <PageSetup>
+            <Format>Letter</Format>
+            <Orientation>portrait</Orientation>
+            <LeftMargin>25</LeftMargin>
+            <RightMargin>25</RightMargin>
+            <TopMargin>25</TopMargin>
+
+            <BottomMargin>25</BottomMargin>
+            <LineSpace>14</LineSpace>
+        </PageSetup>
+
+    </Merge>
+
+    <Label>
+        <Body></Body>
+        <Config>
+
+            <HorizontalSpacing>15</HorizontalSpacing>
+            <VerticalSpacing>0</VerticalSpacing>
+            <LabelWidth>288</LabelWidth>
+            <LabelHeight>72</LabelHeight>
+            <LeftMargin>11</LeftMargin>
+            <TopMargin>36</TopMargin>
+
+            <Columns>2</Columns>
+            <Rows>10</Rows>
+            <PageFormat>A3</PageFormat>
+            <LineSpacing>14</LineSpacing>
+        </Config>
+
+    </Label>
+
+    <OpenOffice>
+        <Source></Source>
+        <Config>
+            <FixedDetails>1</FixedDetails>
+            <ExpandDetails></ExpandDetails>
+            <printEmptyDetail>1</printEmptyDetail>
+            <SumByTotal>1</SumByTotal>
+
+            <RepeatHeader>1</RepeatHeader>
+            <RepeatFooter>1</RepeatFooter>
+        </Config>
+
+    </OpenOffice>
+
+</Report>

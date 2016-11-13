@@ -1,0 +1,330 @@
+<?xml version="1.0"?>
+<Report>
+    <Version>7.5</Version>
+    <Properties>
+        <Description></Description>
+        <Title></Title>
+        <Author></Author>
+        <Keywords></Keywords>
+        <Date></Date>
+
+        <FrameSize></FrameSize>
+    </Properties>
+
+    <Header>
+        <Body></Body>
+        <Align>center</Align>
+    </Header>
+
+    <Footer>
+
+        <Body></Body>
+        <Align>center</Align>
+    </Footer>
+
+    <Parameters>
+        <id_motivo_ingreso>
+            <value>%</value>
+        </id_motivo_ingreso>
+
+    </Parameters>
+
+    <DataSet>
+        <DataSource>
+            <Name>fdddsadfsdffdfd</Name>
+        </DataSource>
+
+        <Query>
+            <Select>distinct MOTING.id_motivo_ingreso, MOTING.nombre, MOTING.descripcion, MOTING.estado_registro, MOTING.codigo, MOTING.tipo</Select>
+
+            <From>almin.tal_motivo_ingreso MOTING  INNER JOIN almin.tal_motivo_ingreso_cuenta MOTCUE ON (MOTCUE.id_motivo_ingreso=MOTING.id_motivo_ingreso)</From>
+            <Where>MOTING.id_motivo_ingreso like $id_motivo_ingreso</Where>
+            <GroupBy></GroupBy>
+            <OrderBy></OrderBy>
+            <Config>
+                <Distinct></Distinct>
+                <OffSet>0</OffSet>
+
+                <Limit>0</Limit>
+            </Config>
+
+        </Query>
+
+        <Groups>
+            <Config>
+                <ShowGroup></ShowGroup>
+                <ShowDetail>1</ShowDetail>
+
+                <ShowLabel></ShowLabel>
+                <ShowNumber>1</ShowNumber>
+                <ShowIndent>1</ShowIndent>
+            </Config>
+
+        </Groups>
+
+        <Fields>
+            <Column1>
+
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+
+            </Column1>
+
+            <Column2>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column2>
+
+            <Column3>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column3>
+
+            <Column4>
+                <Chars>30</Chars>
+                <Points>60</Points>
+
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column4>
+
+            <Column5>
+                <Chars>30</Chars>
+
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+            </Column5>
+
+            <Column6>
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+
+                <Conditional></Conditional>
+            </Column6>
+
+        </Fields>
+
+    </DataSet>
+
+    <PageSetup></PageSetup>
+    <Graph>
+        <Title></Title>
+
+        <TitleX></TitleX>
+        <TitleY></TitleY>
+        <Width>480</Width>
+        <Height>268</Height>
+        <Description></Description>
+        <ShowData>1</ShowData>
+        <ShowValues>1</ShowValues>
+
+        <Orientation>columns</Orientation>
+    </Graph>
+
+    <Merge>
+        <ReportHeader>
+#tab550 #bgimage C:\AGATA\REPORTS\COBIJA\IMAGES\logo_reporte_factur.jpg
+
+#setfab12#tab250MOTIVOS DE INGRESO CUENTAS
+
+#tab015Motivo de Ingreso:   $var2 
+#tab015Código:   $var5 #sety072</ReportHeader>
+
+        <Details>
+            <Detail1>
+
+                <GroupHeader> #rect*015*010*730*030*1*#22105e*#22105e
+#rect*015*000*730*030*1*#22105e*#22105e
+#tab015#setfan10 #setcfffffff Descripción #tab135Cuenta             #tab205 Financiador       #tab355Regional        #tab435Programa  #tab515 Proyecto  #tab665  Actividad
+#setcf030303
+
+</GroupHeader>
+
+                <DataSet1>
+                    <Body>#tab015 $subfield1  $subfield2 $subfield3  $subfield4  $subfield5   $subfield6  $subfield7 
+#tab015#lineH730
+</Body>
+
+                    <Query>
+                        <Select>MOTICU.descripcion,CUENTA.nro_cuenta,fina.nombre_financiador,        regi.nombre_regional, prog.nombre_programa,proy.nombre_proyecto,        acti.nombre_actividad</Select>
+                        <From>almin.tal_motivo_ingreso_cuenta MOTICU INNER JOIN almin.tal_motivo_ingreso MOTING ON(MOTING.id_motivo_ingreso=MOTICU.id_motivo_ingreso) INNER JOIN sci.tct_cuenta CUENTA ON (MOTICU.id_cuenta=CUENTA.id_cuenta) INNER JOIN param.tpm_fina_regi_prog_proy_acti  frppa ON (frppa.id_fina_regi_prog_proy_acti=MOTICU.id_fina_regi_prog_proy_acti) INNER JOIN param.tpm_programa_proyecto_actividad ppa on (frppa.id_prog_proy_acti=ppa.id_prog_proy_acti)  LEFT JOIN param.tpm_financiador fina ON frppa.id_financiador= fina.id_financiador  LEFT JOIN param.tpm_regional regi ON frppa.id_regional= regi.id_regional  LEFT JOIN param.tpm_programa prog  ON ppa.id_programa = prog.id_programa  LEFT JOIN param.tpm_proyecto proy  ON ppa.id_proyecto= proy.id_proyecto  LEFT JOIN param.tpm_actividad acti ON ppa.id_actividad = acti.id_actividad</From>
+
+                        <Where>MOTING.id_motivo_ingreso= $var1</Where>
+                        <GroupBy></GroupBy>
+                        <OrderBy></OrderBy>
+                        <Config>
+                            <Distinct></Distinct>
+                            <OffSet>0</OffSet>
+                            <Limit>0</Limit>
+
+                        </Config>
+
+                    </Query>
+
+                    <Fields>
+                        <Column1>
+                            <Chars>30</Chars>
+                            <Points>120</Points>
+                            <Align>left</Align>
+
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column1>
+
+                        <Column2>
+                            <Chars>30</Chars>
+                            <Points>70</Points>
+
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column2>
+
+                        <Column3>
+                            <Chars>30</Chars>
+
+                            <Points>150</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column3>
+
+                        <Column4>
+                            <Chars>30</Chars>
+                            <Points>80</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+
+                            <Conditional></Conditional>
+                        </Column4>
+
+                        <Column5>
+                            <Chars>30</Chars>
+                            <Points>80</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column5>
+
+                        <Column6>
+                            <Chars>30</Chars>
+                            <Points>150</Points>
+
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column6>
+
+                        <Column7>
+                            <Chars>30</Chars>
+
+                            <Points>80</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column7>
+
+                    </Fields>
+
+                </DataSet1>
+
+                <NumberSubSql>0</NumberSubSql>
+                <GroupFooter></GroupFooter>
+            </Detail1>
+
+        </Details>
+
+        <ReportFooter>#setcf030303#sety560 #tab010 #setfan8 Usuario:$login_usuario  #tab330#setftn8 Página $page de  $pagecounting         #tab660#setfan8 fecha: $day - $month - $year 
+#sety570#tab660#setfan8 hora: $time </ReportFooter>
+
+        <FinalSummary></FinalSummary>
+        <PageSetup>
+            <Format>Letter</Format>
+            <Orientation>landscape</Orientation>
+            <LeftMargin>25</LeftMargin>
+
+            <RightMargin>0</RightMargin>
+            <TopMargin>15</TopMargin>
+            <BottomMargin>25</BottomMargin>
+            <LineSpace>14</LineSpace>
+        </PageSetup>
+
+    </Merge>
+
+    <Label>
+        <Body></Body>
+        <Config>
+            <HorizontalSpacing>15</HorizontalSpacing>
+            <VerticalSpacing>0</VerticalSpacing>
+            <LabelWidth>288</LabelWidth>
+            <LabelHeight>72</LabelHeight>
+
+            <LeftMargin>11</LeftMargin>
+            <TopMargin>36</TopMargin>
+            <Columns>2</Columns>
+            <Rows>10</Rows>
+            <PageFormat>A3</PageFormat>
+            <LineSpacing>14</LineSpacing>
+
+        </Config>
+
+    </Label>
+
+    <OpenOffice>
+        <Source></Source>
+        <Config>
+            <FixedDetails>1</FixedDetails>
+            <ExpandDetails></ExpandDetails>
+
+            <printEmptyDetail>1</printEmptyDetail>
+            <SumByTotal>1</SumByTotal>
+            <RepeatHeader>1</RepeatHeader>
+            <RepeatFooter>1</RepeatFooter>
+        </Config>
+
+    </OpenOffice>
+
+</Report>

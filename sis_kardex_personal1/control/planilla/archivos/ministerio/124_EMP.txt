@@ -1,0 +1,106 @@
+000000003155466AGUILAR                  PEREZ                                             HENRY                    RAMIRO                   M080119650026941144                        
+000000003099414ANDRADE                  DAVILA                                            GUSTAVO                  MARTIN                   M010619710037042336                        
+000000004329789APAZA                    TICONA                                            IRINEO                   NESTOR                   M210719740001697869                        
+000000002406485ARANIBAR                 CHAVEZ                                            BEATRIZ                  LUISA                    F140619640035284389                        
+000000003762655ARREAÑO                  TAMES                                             JENNY                    MARCELA                  F080219710035868089                        
+000000006119923ARTEAGA                  COPARI                                            RENSI                                             M161119820035284390                        
+000000002864313ARZE                     CASTRO                                            JOSE                     TEOFILO                  M230319590002244019                        
+000000003314456AYAVIRI                  VILLEGAS                                          DANIEL                   HENRY                    M031019700033463232                        
+000000003623123AYMA                     RODRIGUEZ                                         MARIO                    CESAR                    M150419690002442401                        
+000000001864381BALDIVIEZO               AGUILAR                                           HERNAN                                            M030719710100167196                        
+000000001764275BENAVIDES                OPE                                               JUAN                     DAVID                    M110419730035399260                        
+000000003770831BERAMENDI                ORELLANA                                          MARVIN                   VICENTE                  M180819740033790012                        
+000000001724864BRAVO                    MENDEZ                                            LUIS                     ALBERTO                  M030119600003118897                        
+000000000924185CABALLERO                VARGAS                                            JHONNY                   NELSON                   M080219640025957405                        
+000000003504972CALIZAYA                 CHACA                                             EFRAIN                   OMAR                     M060519710025732420                        
+000000004414461CAMACHO                  TERAN                                             GERBERTH                 CRISTIAN                 M201019750035272478                        
+000000003620669CANO                     CARDONA                                           RICARDO                                           M310119710003991982                        
+000000003754990CARREÑO                  MERCADO                                           DAVID                    JORGE                    M190119700004198591                        
+000000002868172CARVALLO                 CACERES                                           JOSE                     LUIS                     M220419580004267813                        
+000000001393649CASTELLON                UGARTE                                            SERGIO                   JUSTO                    M290419630004343670                        
+000000003417050CHOQUE                   FLORES                                            YASSIR                   ISRAEL                   M280219750035309131                        
+000000004754817CHUMACERO                MOSCOSO                                           RODRIGO                  MARTIN                   M290119800033940605                        
+000000003590483CLAROS                   ROJAS                                             PATRICIA                 LILIANA                  F121019730033393059                        
+000000001145020CONTRERAS                CERVANTES                                         JULIO                                             M120219710006086381                        
+000000003693620COPA                     CAYO                                              CARLOS                                            M280319700033911071                        
+000000001370502COPA                     LOPEZ                                             VIDAL                                             M220419640003553747                        
+000000001761242CORREA                   RACUA                                             FRANZ                                             M170619670006305180                        
+000000003778826COSSIO                   CLAURE                                            RICHARD                                           M020719730006363921                        
+000000002692604CRUZ                     COLQUE                                            GERMAN                                            M240919630006466205                        
+000000003424667DAGA                     QUISPE                                            VALERIO                                           M170719690034706094                        
+000000002398296DAZA                     SCHULTZ                                           CARLA                    PAOLA                    F241219750032252936                        
+000000002914344DELGADILLO               GONZALES                                          JOSE                     LUIS                     M260919640006901165                        
+000000005213524DIAZ                     PANTOJA                                           MANUEL                   ANTONIO                  M271219830037887336                        
+000000003007474ECHEVERRIA               HERRERA                                           CARLOS                   ANTONIO                  M291219630007142675                        
+000000000959934ENCINAS                  MORATO                                            ANTONIO                                           M120619510007191996                        
+000000003786262ESCOBAR                  GUARACHI                                          ROBERTO                                           M080619700032244642                        
+000000002868347ESCOBAR                  SELEME                                            MARCO                    ANTONIO                  M020719640007310092                        
+000000003137460ESCRIVA                  VARGAS                                            TERESA                   GUADALUPE                F011119710007320036                        
+000000003078110FLORES                   ROCHA                                             JUAN                     RAMIRO                   M270619680030371961                        
+000000000763269FUENTES                  ORELLANA                                          GUILLERMO                                         M030419490008209704                        
+000000000936305FUERTES                  LAZCANO                                           JUAN                     CARLOS                   M061019640008204196                        
+000000005151886GARCIA                   ARAUCO                                            GUALBERTO                                         M110719750035286052                        
+000000003622065GARCIA                   VARGAS                                            JAVIER                                            M021219690026793076                        
+000000003555930GONZALES                 BOLIVAR                                           JOSE                     MARTIN                   M010919740034228895                        
+000000001760686HERRERA                  ARTEAGA                                           IVANKA                   MARGARITA                F110319680009372829                        
+000000003482063HUANQUIRI                QUISPE                                            ROGELIO                                           M240619710009699764                        
+000000005585263HURTADO                  AGUILERA                                          CARMELO                                           M060119790034737170                        
+000000001705458IBAÑEZ                   ICHU                                              CORNELIO                                          M301119530009925995                        
+000000003541567IGNACIO                  SANCHEZ                                           MISAEL                                            M171119750032435216                        
+000000004413353JIMENEZ                  VILLARROEL                                        MARCELO                                           M180319760035399259                        
+000000004800059JIMENO                   BELTRAN                                           MARCO                    ANTONIO                  M090619770033699902                        
+000000000803131LEAÑO                    PADILLA                                           JOSE                     LUIS                     M300619500034083650                        
+000000004884164MACERES                  DEL CARPIO                                        MARIANA                  ANDREA                   F121019800034083650                        
+000000002879279MACHACA                  RODRIGUEZ                                         AMALIA                   TERESA                   F100719640011420595                        
+000000004433781MALDONADO                SALAZAR                                           CESAR                    ALEJANDRO                M150919810039005628                        
+000000000671862MANZANEDA                MAMANI                                            JUVENAL                                           M150219580012153357                        
+000000001147649MENDOZA                  OÑA                                               ALFREDO                  MANUEL                   M040219730012873901                        
+000000001145022MENDOZA                  POLARES                                           GREGORIO                                          M120319710012880231                        
+000000002045701MERCADO                  ARAMAYO                                           GUILLERMO                ARMANDO                  M100219530012940549                        
+000000001932618MONASTERIO               CUELLAR                                           FABIOLA                                           F220119770013865006                        
+000000003831838MONTAÑO                  RODRIGUEZ                                         MARIA                    GRETHEL                  F120919710033422722                        
+000000000855279MOSQUERA                                                                   FELIX                                             M231119530000310931                        
+000000003157668NUMBELA                  ZUBIETA                                           NELSON                   LUIS                     M070219700014007976                        
+000000003729038ORELLANA                 GONZALES                                          JHIMMY                   SANDRO                   M110219710014231323                        
+000000003720522ORTEGA                   VASQUEZ                                           JHONNY                   MILTON                   M080619680014352795                        
+000000005179460PALOMO                   POMA                                              ALEX                     RUVEN                    M020519800031978848                        
+000000004410789PANIAGUA                 CHAMBI                                            YONI                                              M090319790033019356                        
+000000003025505PARDO                    IRIARTE                                           JAVIER                   ROLANDO                  M050119650014844953                        
+000000000999086PAREDES                  JALDIN                                            EDUARDO                  JOAQUIN                  M200319620031988064                        
+000000003782731PARRA                    FLORES                                            ERICK                    DAVID                    M151119680014931035                        
+000000003594400PINTO                    DAVALOS                                           HEBER                    RICHARD                  M240419710015484555                        
+000000004461894PONCE                    GONZALES                                          ADALIT                   MILTON                   M280219770033477644                        
+000000004870962PUCHO                    LLANQUECHOQUE                                     GUILLERMO                GERMAN                   M100219790038592836                        
+000000000568138RAMIREZ                  ESPINOZA                                          PERCY                    WILLY                    M170719460016477340                        
+000000003518117RIOS                     RODRIGUEZ                                         ERICK                    CIFFRIT                  M230719750034087242                        
+000000005250028ROCHA                    CAMACHO                                           ARNOL                    WILLY                    M050519810033715622                        
+000000003064016ROCHA                    PEREZ                                             EDGAR                    FELIPE                   M260519640033422758                        
+000000004022515RODRIGUEZ                VILLCA                                            ALFREDO                                           M100519790037147912                        
+000000004415402ROJAS                    ESCOBAR                                           JOSE                     GUSTAVO                  M120119750035286027                        
+000000004394647ROJAS                    VALENZUELA                                        JULIO                    ALBERTO                  M301219780032259001                        
+000000005198940ROMAY                    BORTOLINI                                         JOSE                     MARIA                    M021019800039154105                        
+000000003753027SANCHEZ                  FLORES                                            ZENON                                             M251019700026333843                        
+000000003621269SANCHEZ                  GUZMAN                                            FELIPE                                            M240519690018228203                        
+000000005903134SANTANDER                VILLARROEL                                        JIMMY                    OMAR                     M150819840035191843                        
+000000003742365SIÑANIZ                  COBA                                              MARITZA                  NOEMI                    F171019710033547351                        
+000000004782994SILBERSTEIN              CABRERA                                           ERICK                    YASSIR                   M150319790037254273                        
+000000003720627SOLIS                    MARQUINA                                          JULIO                    CESAR                    M120419690018942362                        
+000000003556438SOLIZ                    POVEDA                                            VEIMAR                   JHIMMY                   M101019770036740056                        
+000000002894101SOLORZANO                ROCHA                                             ESTELA                   JACQUELINE               F170919650018888781                        
+000000003674267SUBIA                                                                      ROBERTO                                           M230419650018807197                        
+000000000953021TEJADA                   FERRUFINO                                         ALBERTO                  SERGIO                   M300819570010661921                        
+000000001714032TITIBOCO                 YMANAREICO                                        ESPIRITU                                          M240119580033182668                        
+000000004175209TOVIAS                   VACA                                              IBETH                                             M020319810033782490                        
+000000003778798UDAETA                   ORELLANA                                          EDDSON                   MIRKO                    M250919730020153430                        
+000000004459862UMACACHU                 ARACA                                             FABIAN                                            M200119780036348673                        
+000000004702349VACA                     PERALTA                                           RAUL                                              M210519780035191855                        
+000000003131710VARGAS                   CORDOVA                                           JUAN                     CARLOS                   M290519650020619236                        
+000000003127091VARGAS                   MALDONADO                                         EDWIN                    ORLANDO                  M211119640020672640                        
+000000002551314VARGAS                   RAMOS                                             ISIDORO                  RUBEN                    M040419640020722281                        
+000000001733260VELASCO                  GUZMAN                                            GUSTAVO                  ADOLFO                   M241219720031862342                        
+000000002139897VERA                     GONZALES                                          ROLANDO                  JAVIER                   M230519640021154211                        
+000000006521939VIDAL                    ROUSSEAU                                          MARIA                    JEANNETTE                F190219890037706184                        
+000000007603238YAPARI                   RIOS                                              CLAUDIO                  FELIX                    M180519610021674267                        
+000000000778882YRADY                                                                      EDGAR                                             M090819480000230492                        
+000000000960278ZAMORA                   CASTAÑON                                          LUZ                      CYNTHIA                  F290919630021920072                        
+000000004467420ZURITA                   PORCEL                                            NEIDA                    JIMENA                   F040219770033190732                        

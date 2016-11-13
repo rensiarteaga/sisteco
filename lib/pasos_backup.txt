@@ -1,0 +1,22 @@
+ ra sacar backup 
+
+
+ pg_dump -U rarteaga -sv dbendesis -O > /backups_bd/dbendesis.estructyuras.sql
+
+
+para restaruar
+
+como  postgres
+
+psql
+
+
+CREATE DATABASE dbendesis ENCODING .LATIN9';
+
+luego nos salimos de la consola de postgres con el siguiente comando:
+
+\q y presionamos enter.
+
+Ya estando de vuela en la consola de sistema, ejecutaremos el siguiente comando:
+
+psql dbendesi  < path_00000.sql

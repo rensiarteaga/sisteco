@@ -1,0 +1,1984 @@
+dhuarita       17/02/2011 08:38:14      D            OUR COMPANY                    
+dhuarita       17/02/2011 12:57:24      0            OUR COMPANY                    
+dhuarita       17/02/2011 14:34:14      D            OUR COMPANY                    
+dhuarita       17/02/2011 18:58:13      0            OUR COMPANY                    
+dhuarita       18/02/2011 08:37:48      D            OUR COMPANY                    
+dhuarita       18/02/2011 12:33:33      0            OUR COMPANY                    
+dhuarita       18/02/2011 14:30:32      D            OUR COMPANY                    
+dhuarita       18/02/2011 18:57:06      0            OUR COMPANY                    
+dhuarita       21/02/2011 08:36:46      D            OUR COMPANY                    
+dhuarita       21/02/2011 12:39:51      0            OUR COMPANY                    
+dhuarita       21/02/2011 14:36:04      D            OUR COMPANY                    
+dhuarita       21/02/2011 18:44:35      0            OUR COMPANY                    
+rvia           17/02/2011 08:35:47      D            OUR COMPANY                    
+rvia           17/02/2011 12:44:20      0            OUR COMPANY                    
+rvia           17/02/2011 13:36:22      D            OUR COMPANY                    
+rvia           17/02/2011 18:34:27      0            OUR COMPANY                    
+rvia           21/02/2011 08:28:23      I            OUR COMPANY                    
+rvia           21/02/2011 12:39:45      0            OUR COMPANY                    
+rvia           21/02/2011 14:38:54      D            OUR COMPANY                    
+rvia           21/02/2011 18:36:56      0            OUR COMPANY                    
+despinoza      17/02/2011 08:34:11      I            OUR COMPANY                    
+despinoza      17/02/2011 12:35:30      0            OUR COMPANY                    
+despinoza      17/02/2011 14:26:56      D            OUR COMPANY                    
+despinoza      17/02/2011 14:27:00      D            OUR COMPANY                    
+despinoza      17/02/2011 18:35:52      0            OUR COMPANY                    
+despinoza      18/02/2011 08:04:41      I            OUR COMPANY                    
+despinoza      18/02/2011 12:31:30      0            OUR COMPANY                    
+despinoza      18/02/2011 14:18:21      D            OUR COMPANY                    
+despinoza      18/02/2011 18:48:50      0            OUR COMPANY                    
+despinoza      21/02/2011 08:30:20      I            OUR COMPANY                    
+despinoza      21/02/2011 12:36:50      0            OUR COMPANY                    
+despinoza      21/02/2011 14:32:34      D            OUR COMPANY                    
+despinoza      21/02/2011 18:49:32      0            OUR COMPANY                    
+eudaeta        17/02/2011 08:55:20      D            OUR COMPANY                    
+eudaeta        17/02/2011 12:32:54      0            OUR COMPANY                    
+eudaeta        17/02/2011 14:30:36      D            OUR COMPANY                    
+eudaeta        17/02/2011 20:42:41      0            OUR COMPANY                    
+eudaeta        18/02/2011 09:10:56      D            OUR COMPANY                    
+eudaeta        18/02/2011 12:43:53      0            OUR COMPANY                    
+eudaeta        18/02/2011 14:08:48      D            OUR COMPANY                    
+eudaeta        18/02/2011 20:20:26      0            OUR COMPANY                    
+eudaeta        21/02/2011 08:44:53      D            OUR COMPANY                    
+eudaeta        21/02/2011 12:56:12      0            OUR COMPANY                    
+eudaeta        21/02/2011 14:38:18      D            OUR COMPANY                    
+eudaeta        21/02/2011 22:03:24      I            OUR COMPANY                    
+fsanchez       17/02/2011 08:37:20      D            OUR COMPANY                    
+fsanchez       17/02/2011 12:32:43      0            OUR COMPANY                    
+fsanchez       17/02/2011 14:19:50      D            OUR COMPANY                    
+fsanchez       17/02/2011 20:17:08      0            OUR COMPANY                    
+fsanchez       18/02/2011 08:33:58      D            OUR COMPANY                    
+fsanchez       18/02/2011 12:40:26      0            OUR COMPANY                    
+fsanchez       18/02/2011 13:35:58      D            OUR COMPANY                    
+fsanchez       19/02/2011 01:29:33      I            OUR COMPANY                    
+fsanchez       20/02/2011 14:28:19      I            OUR COMPANY                    
+fsanchez       20/02/2011 19:37:31      I            OUR COMPANY                    
+fsanchez       21/02/2011 15:47:54      D            OUR COMPANY                    
+fsanchez       21/02/2011 20:13:59      0            OUR COMPANY                    
+fmosquera      17/02/2011 08:39:46      D            OUR COMPANY                    
+fmosquera      17/02/2011 14:37:25      D            OUR COMPANY                    
+fmosquera      17/02/2011 20:01:23      0            OUR COMPANY                    
+fmosquera      18/02/2011 08:41:58      D            OUR COMPANY                    
+fmosquera      18/02/2011 12:30:46      0            OUR COMPANY                    
+fmosquera      18/02/2011 14:28:02      D            OUR COMPANY                    
+fmosquera      18/02/2011 18:45:39      0            OUR COMPANY                    
+fmosquera      21/02/2011 08:38:30      D            OUR COMPANY                    
+fmosquera      21/02/2011 12:32:57      D            OUR COMPANY                    
+fmosquera      21/02/2011 14:32:40      D            OUR COMPANY                    
+fmosquera      21/02/2011 21:10:45      0            OUR COMPANY                    
+hcaceres       17/02/2011 08:28:58      I            OUR COMPANY                    
+hcaceres       17/02/2011 12:34:31      0            OUR COMPANY                    
+hcaceres       17/02/2011 14:35:13      D            OUR COMPANY                    
+hcaceres       17/02/2011 18:48:36      0            OUR COMPANY                    
+hcaceres       18/02/2011 08:08:36      I            OUR COMPANY                    
+hcaceres       18/02/2011 12:31:41      0            OUR COMPANY                    
+hcaceres       18/02/2011 14:35:33      D            OUR COMPANY                    
+hcaceres       18/02/2011 18:50:28      0            OUR COMPANY                    
+hcaceres       21/02/2011 08:25:11      I            OUR COMPANY                    
+hcaceres       21/02/2011 12:31:37      0            OUR COMPANY                    
+hcaceres       21/02/2011 14:32:46      D            OUR COMPANY                    
+jleano         17/02/2011 08:17:26      I            OUR COMPANY                    
+jleano         17/02/2011 20:23:32      0            OUR COMPANY                    
+jleano         18/02/2011 08:21:24      I            OUR COMPANY                    
+jleano         18/02/2011 20:03:37      0            OUR COMPANY                    
+jleano         19/02/2011 09:32:42      I            OUR COMPANY                    
+jleano         21/02/2011 08:19:11      I            OUR COMPANY                    
+jleano         21/02/2011 20:23:45      0            OUR COMPANY                    
+jrojas         17/02/2011 08:13:18      I            OUR COMPANY                    
+jrojas         17/02/2011 12:30:45      0            OUR COMPANY                    
+jrojas         17/02/2011 14:15:04      D            OUR COMPANY                    
+jrojas         17/02/2011 18:41:05      0            OUR COMPANY                    
+jrojas         18/02/2011 08:08:18      I            OUR COMPANY                    
+jrojas         18/02/2011 18:30:07      0            OUR COMPANY                    
+jrojas         21/02/2011 08:11:45      I            OUR COMPANY                    
+jrojas         21/02/2011 12:30:20      0            OUR COMPANY                    
+jrojas         21/02/2011 14:22:08      D            OUR COMPANY                    
+jrojas         21/02/2011 18:34:49      0            OUR COMPANY                    
+lgalindo       17/02/2011 08:47:30      D            OUR COMPANY                    
+lgalindo       17/02/2011 12:37:29      D            OUR COMPANY                    
+lgalindo       17/02/2011 14:28:00      D            OUR COMPANY                    
+lgalindo       17/02/2011 18:42:17      0            OUR COMPANY                    
+lgalindo       18/02/2011 08:40:26      D            OUR COMPANY                    
+lgalindo       18/02/2011 12:41:08      D            OUR COMPANY                    
+lgalindo       18/02/2011 14:24:19      D            OUR COMPANY                    
+lgalindo       18/02/2011 18:47:15      0            OUR COMPANY                    
+lgalindo       21/02/2011 08:34:45      D            OUR COMPANY                    
+lgalindo       21/02/2011 12:56:02      0            OUR COMPANY                    
+lgalindo       21/02/2011 14:35:26      D            OUR COMPANY                    
+lgalindo       21/02/2011 18:56:50      0            OUR COMPANY                    
+eargandona     17/02/2011 08:35:51      I            OUR COMPANY                    
+eargandona     17/02/2011 12:34:24      0            OUR COMPANY                    
+eargandona     17/02/2011 14:37:10      D            OUR COMPANY                    
+eargandona     17/02/2011 19:24:24      D            OUR COMPANY                    
+eargandona     18/02/2011 08:39:57      D            OUR COMPANY                    
+eargandona     18/02/2011 12:29:49      0            OUR COMPANY                    
+eargandona     18/02/2011 14:21:56      D            OUR COMPANY                    
+eargandona     18/02/2011 19:20:01      0            OUR COMPANY                    
+eargandona     21/02/2011 08:38:51      D            OUR COMPANY                    
+eargandona     21/02/2011 12:51:30      0            OUR COMPANY                    
+eargandona     21/02/2011 12:55:21      D            OUR COMPANY                    
+eargandona     21/02/2011 12:56:55      D            OUR COMPANY                    
+aponce         17/02/2011 08:09:52      I            OUR COMPANY                    
+aponce         17/02/2011 12:30:24      0            OUR COMPANY                    
+aponce         17/02/2011 14:19:59      D            OUR COMPANY                    
+aponce         17/02/2011 19:10:54      0            OUR COMPANY                    
+aponce         18/02/2011 08:30:45      I            OUR COMPANY                    
+aponce         18/02/2011 12:31:47      0            OUR COMPANY                    
+aponce         18/02/2011 12:31:51      0            OUR COMPANY                    
+aponce         18/02/2011 12:37:31      D            OUR COMPANY                    
+aponce         18/02/2011 14:07:43      D            OUR COMPANY                    
+aponce         19/02/2011 01:30:51      I            OUR COMPANY                    
+aponce         21/02/2011 08:30:28      I            OUR COMPANY                    
+aponce         21/02/2011 12:31:17      0            OUR COMPANY                    
+aponce         21/02/2011 14:50:58      D            OUR COMPANY                    
+aponce         21/02/2011 19:40:16      0            OUR COMPANY                    
+dpalomino      17/02/2011 08:24:46      I            OUR COMPANY                    
+dpalomino      17/02/2011 12:30:47      0            OUR COMPANY                    
+dpalomino      17/02/2011 14:36:28      D            OUR COMPANY                    
+dpalomino      17/02/2011 18:52:19      0            OUR COMPANY                    
+dpalomino      18/02/2011 08:10:55      I            OUR COMPANY                    
+dpalomino      18/02/2011 12:32:26      0            OUR COMPANY                    
+dpalomino      18/02/2011 13:32:22      D            OUR COMPANY                    
+dpalomino      18/02/2011 18:00:52      D            OUR COMPANY                    
+dpalomino      18/02/2011 18:33:48      0            OUR COMPANY                    
+dpalomino      21/02/2011 08:35:56      D            OUR COMPANY                    
+dpalomino      21/02/2011 13:05:03      0            OUR COMPANY                    
+dpalomino      21/02/2011 14:32:05      D            OUR COMPANY                    
+dpalomino      21/02/2011 19:14:45      0            OUR COMPANY                    
+nzurita        18/02/2011 08:22:25      I            OUR COMPANY                    
+nzurita        18/02/2011 12:40:39      0            OUR COMPANY                    
+nzurita        18/02/2011 13:35:50      D            OUR COMPANY                    
+nzurita        19/02/2011 01:30:23      I            OUR COMPANY                    
+nzurita        21/02/2011 08:17:08      I            OUR COMPANY                    
+nzurita        21/02/2011 12:31:11      0            OUR COMPANY                    
+nzurita        21/02/2011 14:20:54      D            OUR COMPANY                    
+nzurita        21/02/2011 19:55:44      0            OUR COMPANY                    
+rvera          17/02/2011 08:03:38      I            OUR COMPANY                    
+rvera          17/02/2011 09:18:31      0            OUR COMPANY                    
+rvera          17/02/2011 10:34:26      D            OUR COMPANY                    
+rvera          17/02/2011 12:32:36      0            OUR COMPANY                    
+rvera          17/02/2011 14:23:42      D            OUR COMPANY                    
+rvera          17/02/2011 19:25:13      0            OUR COMPANY                    
+rvera          18/02/2011 10:38:12      D            OUR COMPANY                    
+rvera          18/02/2011 12:43:28      0            OUR COMPANY                    
+rvera          18/02/2011 14:08:56      D            OUR COMPANY                    
+rvera          18/02/2011 20:03:10      0            OUR COMPANY                    
+rvera          21/02/2011 08:40:07      D            OUR COMPANY                    
+rvera          21/02/2011 12:47:07      0            OUR COMPANY                    
+rvera          21/02/2011 14:42:30      D            OUR COMPANY                    
+rvera          21/02/2011 21:52:56      I            OUR COMPANY                    
+tescriva       17/02/2011 08:47:21      D            OUR COMPANY                    
+tescriva       17/02/2011 12:35:02      0            OUR COMPANY                    
+tescriva       17/02/2011 14:30:25      D            OUR COMPANY                    
+tescriva       17/02/2011 20:52:27      0            OUR COMPANY                    
+tescriva       18/02/2011 08:12:14      I            OUR COMPANY                    
+tescriva       18/02/2011 12:42:01      0            OUR COMPANY                    
+tescriva       18/02/2011 14:34:10      D            OUR COMPANY                    
+tescriva       18/02/2011 19:18:21      0            OUR COMPANY                    
+tescriva       21/02/2011 08:43:58      D            OUR COMPANY                    
+tescriva       21/02/2011 12:38:14      0            OUR COMPANY                    
+tescriva       21/02/2011 14:26:32      D            OUR COMPANY                    
+tescriva       21/02/2011 20:54:17      0            OUR COMPANY                    
+dcastro        21/02/2011 08:42:25      D            OUR COMPANY                    
+dcastro        21/02/2011 12:38:34      0            OUR COMPANY                    
+dcastro        21/02/2011 14:46:30      D            OUR COMPANY                    
+dcastro        21/02/2011 19:05:03      0            OUR COMPANY                    
+ebeltran       17/02/2011 08:25:31      I            OUR COMPANY                    
+ebeltran       17/02/2011 12:30:35      0            OUR COMPANY                    
+ebeltran       17/02/2011 14:31:12      D            OUR COMPANY                    
+ebeltran       17/02/2011 18:43:25      0            OUR COMPANY                    
+ebeltran       18/02/2011 08:40:33      D            OUR COMPANY                    
+ebeltran       18/02/2011 12:34:02      0            OUR COMPANY                    
+ebeltran       18/02/2011 14:28:10      D            OUR COMPANY                    
+ebeltran       18/02/2011 18:36:57      0            OUR COMPANY                    
+ebeltran       21/02/2011 08:33:45      D            OUR COMPANY                    
+ebeltran       21/02/2011 12:31:44      0            OUR COMPANY                    
+ebeltran       21/02/2011 14:44:13      D            OUR COMPANY                    
+ebeltran       21/02/2011 18:39:41      0            OUR COMPANY                    
+fvega          17/02/2011 08:32:24      I            OUR COMPANY                    
+fvega          17/02/2011 12:59:10      0            OUR COMPANY                    
+fvega          17/02/2011 19:54:01      0            OUR COMPANY                    
+fvega          18/02/2011 08:35:13      D            OUR COMPANY                    
+fvega          18/02/2011 12:43:16      0            OUR COMPANY                    
+fvega          18/02/2011 13:55:38      D            OUR COMPANY                    
+fvega          18/02/2011 19:47:05      0            OUR COMPANY                    
+fvega          21/02/2011 08:30:07      I            OUR COMPANY                    
+fvega          21/02/2011 13:07:35      0            OUR COMPANY                    
+fvega          21/02/2011 14:38:13      D            OUR COMPANY                    
+fvega          21/02/2011 20:07:37      0            OUR COMPANY                    
+jquispe        21/02/2011 08:46:38      D            OUR COMPANY                    
+jquispe        21/02/2011 12:35:49      0            OUR COMPANY                    
+jquispe        21/02/2011 14:50:14      D            OUR COMPANY                    
+jquispe        21/02/2011 19:54:15      0            OUR COMPANY                    
+msinaniz       17/02/2011 08:23:26      I            OUR COMPANY                    
+msinaniz       17/02/2011 12:35:52      0            OUR COMPANY                    
+msinaniz       17/02/2011 14:23:34      D            OUR COMPANY                    
+msinaniz       17/02/2011 18:47:43      0            OUR COMPANY                    
+msinaniz       18/02/2011 08:22:54      I            OUR COMPANY                    
+msinaniz       18/02/2011 12:39:09      0            OUR COMPANY                    
+msinaniz       18/02/2011 13:42:46      D            OUR COMPANY                    
+msinaniz       18/02/2011 18:47:28      0            OUR COMPANY                    
+msinaniz       21/02/2011 08:34:56      D            OUR COMPANY                    
+msinaniz       21/02/2011 12:38:25      0            OUR COMPANY                    
+msinaniz       21/02/2011 14:38:40      D            OUR COMPANY                    
+msinaniz       21/02/2011 18:52:05      0            OUR COMPANY                    
+ecaero         17/02/2011 08:06:05      I            OUR COMPANY                    
+ecaero         17/02/2011 12:30:51      0            OUR COMPANY                    
+ecaero         17/02/2011 14:33:56      D            OUR COMPANY                    
+ecaero         17/02/2011 18:45:28      0            OUR COMPANY                    
+ecaero         17/02/2011 18:49:47      0            OUR COMPANY                    
+ecaero         18/02/2011 08:22:08      I            OUR COMPANY                    
+ecaero         18/02/2011 12:34:25      0            OUR COMPANY                    
+ecaero         18/02/2011 14:25:20      D            OUR COMPANY                    
+ecaero         18/02/2011 19:13:18      0            OUR COMPANY                    
+ecaero         21/02/2011 08:23:21      I            OUR COMPANY                    
+ecaero         21/02/2011 12:30:50      0            OUR COMPANY                    
+ecaero         21/02/2011 14:24:14      D            OUR COMPANY                    
+ecaero         21/02/2011 19:36:20      0            OUR COMPANY                    
+ovelarde       17/02/2011 08:21:41      I            OUR COMPANY                    
+ovelarde       17/02/2011 12:32:59      0            OUR COMPANY                    
+ovelarde       17/02/2011 14:21:52      D            OUR COMPANY                    
+ovelarde       17/02/2011 18:39:39      0            OUR COMPANY                    
+ovelarde       18/02/2011 08:24:09      I            OUR COMPANY                    
+ovelarde       18/02/2011 12:32:22      0            OUR COMPANY                    
+ovelarde       18/02/2011 14:31:40      D            OUR COMPANY                    
+ovelarde       18/02/2011 18:36:06      0            OUR COMPANY                    
+ovelarde       21/02/2011 08:16:07      I            OUR COMPANY                    
+ovelarde       21/02/2011 12:30:40      0            OUR COMPANY                    
+ovelarde       21/02/2011 14:31:50      D            OUR COMPANY                    
+ovelarde       21/02/2011 18:42:46      0            OUR COMPANY                    
+mayma          17/02/2011 07:56:26      I            OUR COMPANY                    
+mayma          17/02/2011 12:31:12      0            OUR COMPANY                    
+mayma          17/02/2011 14:33:45      D            OUR COMPANY                    
+mayma          17/02/2011 18:16:15      0            OUR COMPANY                    
+mayma          18/02/2011 08:30:47      D            OUR COMPANY                    
+mayma          18/02/2011 12:38:19      0            OUR COMPANY                    
+mayma          18/02/2011 14:32:23      D            OUR COMPANY                    
+mayma          18/02/2011 18:21:44      0            OUR COMPANY                    
+mayma          21/02/2011 07:36:10      I            OUR COMPANY                    
+mayma          21/02/2011 12:34:57      0            OUR COMPANY                    
+mayma          21/02/2011 14:38:06      D            OUR COMPANY                    
+mayma          21/02/2011 18:49:13      0            OUR COMPANY                    
+jparra         17/02/2011 08:36:59      I            OUR COMPANY                    
+jparra         17/02/2011 12:55:33      0            OUR COMPANY                    
+jparra         17/02/2011 13:59:59      D            OUR COMPANY                    
+jparra         17/02/2011 20:47:03      0            OUR COMPANY                    
+jparra         18/02/2011 08:33:02      D            OUR COMPANY                    
+jparra         18/02/2011 12:39:51      0            OUR COMPANY                    
+jparra         18/02/2011 14:06:23      D            OUR COMPANY                    
+jparra         18/02/2011 22:01:12      I            OUR COMPANY                    
+jparra         21/02/2011 08:30:45      I            OUR COMPANY                    
+jparra         21/02/2011 12:47:13      0            OUR COMPANY                    
+jparra         21/02/2011 13:28:32      D            OUR COMPANY                    
+jparra         21/02/2011 20:41:19      0            OUR COMPANY                    
+fprudencio     17/02/2011 08:43:01      D            OUR COMPANY                    
+fprudencio     17/02/2011 12:30:37      0            OUR COMPANY                    
+fprudencio     17/02/2011 14:33:10      D            OUR COMPANY                    
+fprudencio     17/02/2011 18:45:45      0            OUR COMPANY                    
+fprudencio     18/02/2011 08:55:27      D            OUR COMPANY                    
+fprudencio     18/02/2011 12:38:28      0            OUR COMPANY                    
+fprudencio     18/02/2011 13:39:16      D            OUR COMPANY                    
+fprudencio     18/02/2011 18:37:27      0            OUR COMPANY                    
+fprudencio     21/02/2011 08:41:28      D            OUR COMPANY                    
+fprudencio     21/02/2011 12:37:07      0            OUR COMPANY                    
+fprudencio     21/02/2011 14:27:44      D            OUR COMPANY                    
+fprudencio     21/02/2011 18:36:02      0            OUR COMPANY                    
+jmita          17/02/2011 08:45:42      D            OUR COMPANY                    
+jmita          17/02/2011 12:34:15      0            OUR COMPANY                    
+jmita          17/02/2011 14:14:39      D            OUR COMPANY                    
+jmita          17/02/2011 18:51:12      0            OUR COMPANY                    
+jmita          18/02/2011 08:34:11      D            OUR COMPANY                    
+jmita          18/02/2011 12:33:19      0            OUR COMPANY                    
+jmita          18/02/2011 13:58:30      D            OUR COMPANY                    
+jmita          18/02/2011 19:09:36      0            OUR COMPANY                    
+jmita          21/02/2011 08:35:01      D            OUR COMPANY                    
+jmita          21/02/2011 12:33:15      0            OUR COMPANY                    
+jmita          21/02/2011 14:35:30      D            OUR COMPANY                    
+jmita          21/02/2011 19:30:39      0            OUR COMPANY                    
+mjaldin        17/02/2011 08:06:24      I            OUR COMPANY                    
+mjaldin        17/02/2011 12:58:39      0            OUR COMPANY                    
+mjaldin        17/02/2011 13:57:44      D            OUR COMPANY                    
+mjaldin        17/02/2011 20:47:35      0            OUR COMPANY                    
+mjaldin        18/02/2011 08:31:21      D            OUR COMPANY                    
+mjaldin        18/02/2011 13:14:18      0            OUR COMPANY                    
+mjaldin        18/02/2011 13:15:02      D            OUR COMPANY                    
+mjaldin        18/02/2011 22:03:25      I            OUR COMPANY                    
+mjaldin        21/02/2011 08:10:03      I            OUR COMPANY                    
+mjaldin        21/02/2011 13:30:04      0            OUR COMPANY                    
+mjaldin        21/02/2011 13:34:11      D            OUR COMPANY                    
+mjaldin        21/02/2011 20:40:28      0            OUR COMPANY                    
+malmanza       17/02/2011 08:34:04      I            OUR COMPANY                    
+malmanza       17/02/2011 12:30:30      0            OUR COMPANY                    
+malmanza       17/02/2011 14:03:45      D            OUR COMPANY                    
+malmanza       17/02/2011 18:43:47      0            OUR COMPANY                    
+malmanza       18/02/2011 08:39:43      D            OUR COMPANY                    
+malmanza       18/02/2011 12:47:14      0            OUR COMPANY                    
+malmanza       18/02/2011 12:47:23      D            OUR COMPANY                    
+malmanza       18/02/2011 18:44:34      0            OUR COMPANY                    
+malmanza       21/02/2011 08:31:52      I            OUR COMPANY                    
+malmanza       21/02/2011 12:28:57      0            OUR COMPANY                    
+malmanza       21/02/2011 15:10:46      D            OUR COMPANY                    
+malmanza       21/02/2011 19:20:34      0            OUR COMPANY                    
+nnumbela       17/02/2011 08:05:24      I            OUR COMPANY                    
+nnumbela       17/02/2011 12:31:27      0            OUR COMPANY                    
+nnumbela       17/02/2011 14:08:28      D            OUR COMPANY                    
+nnumbela       17/02/2011 18:46:38      0            OUR COMPANY                    
+nnumbela       18/02/2011 08:29:27      I            OUR COMPANY                    
+nnumbela       18/02/2011 12:32:47      0            OUR COMPANY                    
+nnumbela       18/02/2011 13:56:49      D            OUR COMPANY                    
+nnumbela       18/02/2011 18:41:18      0            OUR COMPANY                    
+pclaros        17/02/2011 08:45:05      D            OUR COMPANY                    
+pclaros        17/02/2011 12:40:06      0            OUR COMPANY                    
+pclaros        17/02/2011 14:34:33      D            OUR COMPANY                    
+pclaros        17/02/2011 19:09:02      0            OUR COMPANY                    
+pclaros        18/02/2011 08:30:22      D            OUR COMPANY                    
+pclaros        18/02/2011 12:33:04      0            OUR COMPANY                    
+pclaros        18/02/2011 12:57:55      D            OUR COMPANY                    
+pclaros        18/02/2011 19:53:53      0            OUR COMPANY                    
+pclaros        21/02/2011 08:21:49      I            OUR COMPANY                    
+pclaros        21/02/2011 12:53:31      0            OUR COMPANY                    
+pclaros        21/02/2011 14:29:06      D            OUR COMPANY                    
+pclaros        21/02/2011 21:00:13      0            OUR COMPANY                    
+vdaga          17/02/2011 08:37:43      D            OUR COMPANY                    
+vdaga          17/02/2011 12:44:30      0            OUR COMPANY                    
+vdaga          17/02/2011 14:15:56      D            OUR COMPANY                    
+vdaga          17/02/2011 18:38:54      0            OUR COMPANY                    
+vdaga          18/02/2011 08:47:41      D            OUR COMPANY                    
+vdaga          18/02/2011 12:31:55      D            OUR COMPANY                    
+vdaga          18/02/2011 13:44:19      D            OUR COMPANY                    
+vdaga          18/02/2011 18:34:11      0            OUR COMPANY                    
+vdaga          21/02/2011 08:39:59      D            OUR COMPANY                    
+vdaga          21/02/2011 12:32:37      0            OUR COMPANY                    
+vdaga          21/02/2011 14:36:31      D            OUR COMPANY                    
+vdaga          21/02/2011 18:34:11      0            OUR COMPANY                    
+agutierrez     17/02/2011 09:12:35      D            OUR COMPANY                    
+agutierrez     17/02/2011 13:20:59      0            OUR COMPANY                    
+agutierrez     17/02/2011 14:42:11      D            OUR COMPANY                    
+agutierrez     17/02/2011 19:32:03      0            OUR COMPANY                    
+agutierrez     18/02/2011 09:41:33      D            OUR COMPANY                    
+agutierrez     18/02/2011 12:40:59      0            OUR COMPANY                    
+agutierrez     18/02/2011 14:52:24      D            OUR COMPANY                    
+agutierrez     18/02/2011 18:38:48      0            OUR COMPANY                    
+agutierrez     21/02/2011 10:49:19      D            OUR COMPANY                    
+agutierrez     21/02/2011 13:16:58      0            OUR COMPANY                    
+agutierrez     21/02/2011 15:02:32      D            OUR COMPANY                    
+agutierrez     21/02/2011 19:30:22      0            OUR COMPANY                    
+dmaldonado     17/02/2011 07:54:07      I            OUR COMPANY                    
+dmaldonado     17/02/2011 12:38:51      0            OUR COMPANY                    
+dmaldonado     17/02/2011 13:59:44      D            OUR COMPANY                    
+dmaldonado     17/02/2011 19:36:19      O            OUR COMPANY                    
+dmaldonado     18/02/2011 08:04:18      I            OUR COMPANY                    
+dmaldonado     18/02/2011 12:43:32      0            OUR COMPANY                    
+dmaldonado     18/02/2011 14:08:39      D            OUR COMPANY                    
+dmaldonado     18/02/2011 19:07:41      0            OUR COMPANY                    
+dmaldonado     21/02/2011 08:28:28      I            OUR COMPANY                    
+dmaldonado     21/02/2011 12:37:02      0            OUR COMPANY                    
+dmaldonado     21/02/2011 14:27:53      D            OUR COMPANY                    
+dmaldonado     21/02/2011 18:36:20      0            OUR COMPANY                    
+hbranez        17/02/2011 08:57:42      D            OUR COMPANY                    
+hbranez        17/02/2011 12:55:24      0            OUR COMPANY                    
+hbranez        17/02/2011 14:00:05      D            OUR COMPANY                    
+hbranez        17/02/2011 18:59:59      0            OUR COMPANY                    
+hbranez        18/02/2011 08:47:52      D            OUR COMPANY                    
+hbranez        18/02/2011 12:42:16      0            OUR COMPANY                    
+hbranez        18/02/2011 14:18:13      D            OUR COMPANY                    
+hbranez        18/02/2011 20:04:05      0            OUR COMPANY                    
+hbranez        21/02/2011 09:14:20      D            OUR COMPANY                    
+hbranez        21/02/2011 12:40:35      0            OUR COMPANY                    
+hbranez        21/02/2011 14:38:25      D            OUR COMPANY                    
+hbranez        21/02/2011 19:29:41      0            OUR COMPANY                    
+enotta         17/02/2011 08:29:02      I            OUR COMPANY                    
+enotta         17/02/2011 12:35:55      D            OUR COMPANY                    
+enotta         17/02/2011 14:23:13      D            OUR COMPANY                    
+enotta         17/02/2011 19:02:12      D            OUR COMPANY                    
+enotta         18/02/2011 08:52:54      D            OUR COMPANY                    
+enotta         18/02/2011 12:45:04      D            OUR COMPANY                    
+enotta         18/02/2011 13:32:36      D            OUR COMPANY                    
+enotta         18/02/2011 18:51:12      D            OUR COMPANY                    
+enotta         21/02/2011 09:00:31      D            OUR COMPANY                    
+enotta         21/02/2011 12:30:40      D            OUR COMPANY                    
+enotta         21/02/2011 14:27:38      D            OUR COMPANY                    
+enotta         21/02/2011 19:05:45      D            OUR COMPANY                    
+mgrandillert   17/02/2011 08:34:31      I            OUR COMPANY                    
+mgrandillert   17/02/2011 12:31:01      D            OUR COMPANY                    
+mgrandillert   17/02/2011 14:22:37      D            OUR COMPANY                    
+mgrandillert   17/02/2011 19:38:48      D            OUR COMPANY                    
+mgrandillert   18/02/2011 08:42:23      D            OUR COMPANY                    
+mgrandillert   18/02/2011 19:15:57      D            OUR COMPANY                    
+mgrandillert   21/02/2011 08:26:48      I            OUR COMPANY                    
+mgrandillert   21/02/2011 12:30:57      D            OUR COMPANY                    
+mgrandillert   21/02/2011 14:25:41      D            OUR COMPANY                    
+mgrandillert   21/02/2011 19:18:05      0            OUR COMPANY                    
+mescobar       17/02/2011 08:09:59      I            OUR COMPANY                    
+mescobar       17/02/2011 14:28:50      D            OUR COMPANY                    
+mescobar       17/02/2011 19:59:28      0            OUR COMPANY                    
+mescobar       18/02/2011 08:04:26      I            OUR COMPANY                    
+mescobar       18/02/2011 12:36:58      0            OUR COMPANY                    
+mescobar       18/02/2011 12:54:40      0            OUR COMPANY                    
+mescobar       18/02/2011 14:23:14      D            OUR COMPANY                    
+mescobar       18/02/2011 19:21:17      0            OUR COMPANY                    
+mescobar       21/02/2011 08:22:09      I            OUR COMPANY                    
+mescobar       21/02/2011 13:04:25      0            OUR COMPANY                    
+mescobar       21/02/2011 14:25:30      D            OUR COMPANY                    
+mescobar       21/02/2011 19:54:42      0            OUR COMPANY                    
+rvillarroel    17/02/2011 08:33:50      I            OUR COMPANY                    
+rvillarroel    17/02/2011 19:35:22      0            OUR COMPANY                    
+rvillarroel    18/02/2011 08:42:35      D            OUR COMPANY                    
+rvillarroel    18/02/2011 18:45:09      0            OUR COMPANY                    
+rvillarroel    21/02/2011 08:07:04      I            OUR COMPANY                    
+rvillarroel    21/02/2011 12:37:24      0            OUR COMPANY                    
+rvillarroel    21/02/2011 14:10:44      D            OUR COMPANY                    
+rvillarroel    21/02/2011 18:59:52      0            OUR COMPANY                    
+amaldonado     17/02/2011 08:28:54      I            OUR COMPANY                    
+amaldonado     17/02/2011 12:43:26      0            OUR COMPANY                    
+amaldonado     17/02/2011 14:26:18      D            OUR COMPANY                    
+amaldonado     17/02/2011 19:05:48      0            OUR COMPANY                    
+amaldonado     18/02/2011 08:45:42      D            OUR COMPANY                    
+amaldonado     18/02/2011 12:53:34      0            OUR COMPANY                    
+amaldonado     18/02/2011 13:39:11      D            OUR COMPANY                    
+amaldonado     18/02/2011 18:56:31      0            OUR COMPANY                    
+amaldonado     21/02/2011 08:36:02      D            OUR COMPANY                    
+amaldonado     21/02/2011 20:52:11      0            OUR COMPANY                    
+gaguilar       17/02/2011 12:33:51      0            OUR COMPANY                    
+gaguilar       17/02/2011 14:30:42      D            OUR COMPANY                    
+gaguilar       17/02/2011 19:54:37      0            OUR COMPANY                    
+gaguilar       18/02/2011 08:40:04      D            OUR COMPANY                    
+gaguilar       18/02/2011 13:51:45      0            OUR COMPANY                    
+gaguilar       18/02/2011 13:51:52      D            OUR COMPANY                    
+gaguilar       18/02/2011 19:12:55      0            OUR COMPANY                    
+gaguilar       21/02/2011 08:54:21      D            OUR COMPANY                    
+gaguilar       21/02/2011 13:54:57      0            OUR COMPANY                    
+gaguilar       21/02/2011 13:55:07      D            OUR COMPANY                    
+gaguilar       21/02/2011 20:52:05      0            OUR COMPANY                    
+eescobar       17/02/2011 08:32:16      I            OUR COMPANY                    
+eescobar       17/02/2011 12:36:54      0            OUR COMPANY                    
+eescobar       17/02/2011 14:33:34      D            OUR COMPANY                    
+eescobar       17/02/2011 18:43:39      0            OUR COMPANY                    
+eescobar       18/02/2011 08:35:19      D            OUR COMPANY                    
+eescobar       18/02/2011 12:35:39      0            OUR COMPANY                    
+eescobar       18/02/2011 14:06:43      D            OUR COMPANY                    
+eescobar       18/02/2011 19:57:00      0            OUR COMPANY                    
+eescobar       21/02/2011 08:33:37      D            OUR COMPANY                    
+eescobar       21/02/2011 12:36:04      0            OUR COMPANY                    
+eescobar       21/02/2011 14:34:14      D            OUR COMPANY                    
+pdaza          17/02/2011 08:22:19      I            OUR COMPANY                    
+pdaza          17/02/2011 12:31:29      0            OUR COMPANY                    
+pdaza          17/02/2011 14:35:58      D            OUR COMPANY                    
+pdaza          17/02/2011 18:02:50      D            OUR COMPANY                    
+pdaza          18/02/2011 08:56:36      D            OUR COMPANY                    
+pdaza          18/02/2011 19:04:55      0            OUR COMPANY                    
+pdaza          21/02/2011 09:12:41      D            OUR COMPANY                    
+pdaza          21/02/2011 12:38:46      0            OUR COMPANY                    
+pdaza          21/02/2011 14:30:15      D            OUR COMPANY                    
+pdaza          21/02/2011 19:01:43      0            OUR COMPANY                    
+rcoronel       17/02/2011 08:22:01      I            OUR COMPANY                    
+rcoronel       17/02/2011 12:33:20      0            OUR COMPANY                    
+rcoronel       17/02/2011 14:34:31      D            OUR COMPANY                    
+rcoronel       17/02/2011 20:12:02      0            OUR COMPANY                    
+rcoronel       18/02/2011 08:27:18      I            OUR COMPANY                    
+rcoronel       18/02/2011 12:38:49      0            OUR COMPANY                    
+rcoronel       18/02/2011 14:32:02      D            OUR COMPANY                    
+rcoronel       18/02/2011 18:42:28      0            OUR COMPANY                    
+rcoronel       21/02/2011 08:16:37      I            OUR COMPANY                    
+rcoronel       21/02/2011 12:34:52      0            OUR COMPANY                    
+rcoronel       21/02/2011 18:36:27      0            OUR COMPANY                    
+mgonzalez      17/02/2011 08:28:48      I            OUR COMPANY                    
+mgonzalez      17/02/2011 12:40:17      0            OUR COMPANY                    
+mgonzalez      17/02/2011 14:27:13      D            OUR COMPANY                    
+mgonzalez      17/02/2011 18:37:02      0            OUR COMPANY                    
+mgonzalez      18/02/2011 08:35:57      D            OUR COMPANY                    
+mgonzalez      18/02/2011 12:37:12      0            OUR COMPANY                    
+mgonzalez      18/02/2011 14:21:51      D            OUR COMPANY                    
+mgonzalez      18/02/2011 19:40:07      0            OUR COMPANY                    
+mgonzalez      21/02/2011 08:23:31      I            OUR COMPANY                    
+mgonzalez      21/02/2011 12:45:50      0            OUR COMPANY                    
+mgonzalez      21/02/2011 14:12:21      D            OUR COMPANY                    
+mgonzalez      21/02/2011 20:27:23      0            OUR COMPANY                    
+hvillegas      17/02/2011 08:27:32      I            OUR COMPANY                    
+hvillegas      17/02/2011 12:34:47      0            OUR COMPANY                    
+hvillegas      17/02/2011 13:55:51      D            OUR COMPANY                    
+hvillegas      17/02/2011 19:32:12      0            OUR COMPANY                    
+hvillegas      18/02/2011 08:13:27      I            OUR COMPANY                    
+hvillegas      18/02/2011 12:36:05      0            OUR COMPANY                    
+hvillegas      18/02/2011 13:47:32      D            OUR COMPANY                    
+hvillegas      18/02/2011 19:34:23      0            OUR COMPANY                    
+hvillegas      21/02/2011 08:22:54      I            OUR COMPANY                    
+hvillegas      21/02/2011 12:31:27      0            OUR COMPANY                    
+hvillegas      21/02/2011 13:58:14      D            OUR COMPANY                    
+hvillegas      21/02/2011 18:45:13      0            OUR COMPANY                    
+sortiz         17/02/2011 08:30:32      I            OUR COMPANY                    
+sortiz         17/02/2011 12:36:15      0            OUR COMPANY                    
+sortiz         17/02/2011 14:29:35      D            OUR COMPANY                    
+sortiz         17/02/2011 18:45:12      0            OUR COMPANY                    
+sortiz         18/02/2011 08:27:11      I            OUR COMPANY                    
+sortiz         18/02/2011 12:32:54      0            OUR COMPANY                    
+sortiz         18/02/2011 14:27:56      D            OUR COMPANY                    
+sortiz         18/02/2011 19:09:59      0            OUR COMPANY                    
+sortiz         21/02/2011 08:17:53      I            OUR COMPANY                    
+sortiz         21/02/2011 12:36:32      0            OUR COMPANY                    
+sortiz         21/02/2011 14:33:51      D            OUR COMPANY                    
+sortiz         21/02/2011 20:01:17      0            OUR COMPANY                    
+aayaviri       17/02/2011 08:33:57      I            OUR COMPANY                    
+aayaviri       17/02/2011 12:36:50      0            OUR COMPANY                    
+aayaviri       17/02/2011 14:34:05      D            OUR COMPANY                    
+aayaviri       17/02/2011 18:41:23      0            OUR COMPANY                    
+aayaviri       18/02/2011 08:32:56      D            OUR COMPANY                    
+aayaviri       18/02/2011 12:37:06      0            OUR COMPANY                    
+aayaviri       18/02/2011 14:32:41      D            OUR COMPANY                    
+aayaviri       18/02/2011 19:56:55      0            OUR COMPANY                    
+aayaviri       21/02/2011 08:43:35      D            OUR COMPANY                    
+aayaviri       21/02/2011 12:36:14      0            OUR COMPANY                    
+aayaviri       21/02/2011 14:34:10      D            OUR COMPANY                    
+aayaviri       21/02/2011 19:45:47      0            OUR COMPANY                    
+mcarvajal      17/02/2011 08:26:01      I            OUR COMPANY                    
+mcarvajal      17/02/2011 12:43:32      0            OUR COMPANY                    
+mcarvajal      17/02/2011 14:25:04      D            OUR COMPANY                    
+mcarvajal      17/02/2011 19:33:26      0            OUR COMPANY                    
+mcarvajal      18/02/2011 08:28:02      I            OUR COMPANY                    
+mcarvajal      18/02/2011 12:41:38      0            OUR COMPANY                    
+mcarvajal      18/02/2011 14:19:28      D            OUR COMPANY                    
+mcarvajal      18/02/2011 19:04:44      0            OUR COMPANY                    
+mcarvajal      21/02/2011 08:33:08      I            OUR COMPANY                    
+mcarvajal      21/02/2011 12:52:09      0            OUR COMPANY                    
+mcarvajal      21/02/2011 14:27:23      D            OUR COMPANY                    
+mcarvajal      21/02/2011 19:06:10      0            OUR COMPANY                    
+abustillos     17/02/2011 08:23:19      I            OUR COMPANY                    
+abustillos     17/02/2011 12:32:53      0            OUR COMPANY                    
+abustillos     17/02/2011 14:33:23      D            OUR COMPANY                    
+abustillos     17/02/2011 18:34:46      0            OUR COMPANY                    
+abustillos     18/02/2011 08:29:32      I            OUR COMPANY                    
+abustillos     18/02/2011 12:34:34      D            OUR COMPANY                    
+abustillos     18/02/2011 14:24:57      D            OUR COMPANY                    
+abustillos     18/02/2011 18:37:06      0            OUR COMPANY                    
+abustillos     21/02/2011 08:16:27      I            OUR COMPANY                    
+abustillos     21/02/2011 12:41:57      0            OUR COMPANY                    
+abustillos     21/02/2011 14:22:24      D            OUR COMPANY                    
+abustillos     21/02/2011 18:42:06      0            OUR COMPANY                    
+flucas         17/02/2011 08:31:00      I            OUR COMPANY                    
+flucas         17/02/2011 12:31:59      0            OUR COMPANY                    
+flucas         17/02/2011 14:36:04      D            OUR COMPANY                    
+flucas         17/02/2011 18:50:52      0            OUR COMPANY                    
+flucas         18/02/2011 08:49:40      D            OUR COMPANY                    
+flucas         18/02/2011 12:50:05      0            OUR COMPANY                    
+flucas         18/02/2011 12:50:16      D            OUR COMPANY                    
+flucas         18/02/2011 18:54:22      0            OUR COMPANY                    
+flucas         21/02/2011 08:38:57      D            OUR COMPANY                    
+flucas         21/02/2011 12:30:25      0            OUR COMPANY                    
+flucas         21/02/2011 14:40:35      D            OUR COMPANY                    
+flucas         21/02/2011 18:57:22      0            OUR COMPANY                    
+cacastellon    17/02/2011 07:52:42      I            OUR COMPANY                    
+cacastellon    17/02/2011 12:33:35      0            OUR COMPANY                    
+cacastellon    17/02/2011 13:22:43      0            OUR COMPANY                    
+cacastellon    17/02/2011 13:31:10      D            OUR COMPANY                    
+cacastellon    17/02/2011 13:36:14      D            OUR COMPANY                    
+cacastellon    17/02/2011 18:29:30      0            OUR COMPANY                    
+cacastellon    18/02/2011 08:45:35      D            OUR COMPANY                    
+cacastellon    18/02/2011 12:53:58      0            OUR COMPANY                    
+cacastellon    18/02/2011 13:08:57      D            OUR COMPANY                    
+cacastellon    18/02/2011 18:32:48      0            OUR COMPANY                    
+cacastellon    21/02/2011 09:09:26      D            OUR COMPANY                    
+cacastellon    21/02/2011 12:37:36      0            OUR COMPANY                    
+cacastellon    21/02/2011 14:33:36      D            OUR COMPANY                    
+cacastellon    21/02/2011 18:41:21      0            OUR COMPANY                    
+gbellott       17/02/2011 08:21:34      I            OUR COMPANY                    
+gbellott       17/02/2011 14:15:31      D            OUR COMPANY                    
+gbellott       17/02/2011 18:38:00      0            OUR COMPANY                    
+gbellott       18/02/2011 08:31:25      D            OUR COMPANY                    
+gbellott       18/02/2011 13:22:11      0            OUR COMPANY                    
+gbellott       18/02/2011 14:32:58      D            OUR COMPANY                    
+gbellott       18/02/2011 18:52:46      0            OUR COMPANY                    
+jvelasco       17/02/2011 08:58:02      D            OUR COMPANY                    
+jvelasco       17/02/2011 12:41:49      0            OUR COMPANY                    
+jvelasco       17/02/2011 12:55:49      D            OUR COMPANY                    
+jvelasco       17/02/2011 19:02:42      0            OUR COMPANY                    
+jvelasco       18/02/2011 08:23:26      I            OUR COMPANY                    
+jvelasco       18/02/2011 08:48:31      0            OUR COMPANY                    
+jvelasco       18/02/2011 09:42:27      D            OUR COMPANY                    
+jvelasco       18/02/2011 12:41:03      0            OUR COMPANY                    
+jvelasco       18/02/2011 12:47:00      D            OUR COMPANY                    
+jvelasco       18/02/2011 20:44:41      0            OUR COMPANY                    
+jvelasco       19/02/2011 07:53:47      I            OUR COMPANY                    
+jvelasco       19/02/2011 12:12:43      I            OUR COMPANY                    
+jvelasco       19/02/2011 13:26:17      I            OUR COMPANY                    
+jvelasco       19/02/2011 19:58:23      I            OUR COMPANY                    
+jvelasco       20/02/2011 08:41:32      I            OUR COMPANY                    
+jvelasco       20/02/2011 12:44:49      I            OUR COMPANY                    
+jvelasco       20/02/2011 13:42:38      I            OUR COMPANY                    
+jvelasco       20/02/2011 19:54:10      I            OUR COMPANY                    
+jvelasco       21/02/2011 08:24:38      I            OUR COMPANY                    
+jvelasco       21/02/2011 12:39:41      0            OUR COMPANY                    
+jvelasco       21/02/2011 12:51:43      D            OUR COMPANY                    
+jvelasco       21/02/2011 18:39:34      0            OUR COMPANY                    
+hmedrano       21/02/2011 08:31:36      I            OUR COMPANY                    
+hmedrano       21/02/2011 12:36:51      0            OUR COMPANY                    
+hmedrano       21/02/2011 14:31:37      D            OUR COMPANY                    
+hmedrano       21/02/2011 19:19:46      0            OUR COMPANY                    
+abautista      17/02/2011 14:35:48      D            OUR COMPANY                    
+abautista      17/02/2011 19:01:11      0            OUR COMPANY                    
+abautista      18/02/2011 08:30:25      D            OUR COMPANY                    
+abautista      18/02/2011 12:35:32      0            OUR COMPANY                    
+abautista      18/02/2011 13:33:22      D            OUR COMPANY                    
+abautista      18/02/2011 19:02:25      0            OUR COMPANY                    
+abautista      21/02/2011 08:41:43      I            OUR COMPANY                    
+abautista      21/02/2011 12:40:50      0            OUR COMPANY                    
+abautista      21/02/2011 14:35:08      D            OUR COMPANY                    
+abautista      21/02/2011 19:40:14      0            OUR COMPANY                    
+lsuarez        17/02/2011 08:21:10      I            OUR COMPANY                    
+lsuarez        17/02/2011 12:37:55      0            OUR COMPANY                    
+lsuarez        17/02/2011 14:37:21      D            OUR COMPANY                    
+lsuarez        17/02/2011 18:58:12      0            OUR COMPANY                    
+lsuarez        18/02/2011 08:19:44      I            OUR COMPANY                    
+lsuarez        18/02/2011 12:45:31      0            OUR COMPANY                    
+lsuarez        18/02/2011 14:25:10      D            OUR COMPANY                    
+lsuarez        18/02/2011 19:34:14      0            OUR COMPANY                    
+lsuarez        21/02/2011 08:11:48      I            OUR COMPANY                    
+lsuarez        21/02/2011 12:39:07      0            OUR COMPANY                    
+lsuarez        21/02/2011 14:46:45      D            OUR COMPANY                    
+lsuarez        21/02/2011 18:32:31      0            OUR COMPANY                    
+wsoto          17/02/2011 08:00:46      I            OUR COMPANY                    
+wsoto          17/02/2011 12:41:47      0            OUR COMPANY                    
+wsoto          17/02/2011 14:26:29      D            OUR COMPANY                    
+wsoto          17/02/2011 19:18:46      0            OUR COMPANY                    
+wsoto          18/02/2011 08:46:13      D            OUR COMPANY                    
+wsoto          18/02/2011 12:54:49      0            OUR COMPANY                    
+wsoto          18/02/2011 14:06:31      D            OUR COMPANY                    
+wsoto          18/02/2011 19:16:45      0            OUR COMPANY                    
+wsoto          21/02/2011 08:03:57      I            OUR COMPANY                    
+wsoto          21/02/2011 12:35:27      0            OUR COMPANY                    
+wsoto          21/02/2011 14:34:34      D            OUR COMPANY                    
+wsoto          21/02/2011 19:43:01      0            OUR COMPANY                    
+wmaldonado     17/02/2011 08:38:08      D            OUR COMPANY                    
+wmaldonado     17/02/2011 12:34:11      0            OUR COMPANY                    
+wmaldonado     17/02/2011 14:17:28      D            OUR COMPANY                    
+wmaldonado     17/02/2011 19:14:21      0            OUR COMPANY                    
+wmaldonado     18/02/2011 08:22:41      I            OUR COMPANY                    
+wmaldonado     18/02/2011 12:34:44      0            OUR COMPANY                    
+wmaldonado     18/02/2011 14:18:07      D            OUR COMPANY                    
+wmaldonado     18/02/2011 18:50:39      0            OUR COMPANY                    
+wmaldonado     21/02/2011 08:29:15      I            OUR COMPANY                    
+wmaldonado     21/02/2011 12:37:19      0            OUR COMPANY                    
+wmaldonado     21/02/2011 14:18:38      D            OUR COMPANY                    
+wmaldonado     21/02/2011 18:45:51      0            OUR COMPANY                    
+framirez       21/02/2011 09:01:14      D            OUR COMPANY                    
+nmercado       17/02/2011 07:59:13      I            OUR COMPANY                    
+nmercado       17/02/2011 12:44:06      D            OUR COMPANY                    
+nmercado       17/02/2011 14:25:09      D            OUR COMPANY                    
+nmercado       17/02/2011 18:54:14      D            OUR COMPANY                    
+nmercado       17/02/2011 18:54:23      0            OUR COMPANY                    
+nmercado       18/02/2011 08:26:10      I            OUR COMPANY                    
+nmercado       18/02/2011 12:44:04      0            OUR COMPANY                    
+nmercado       18/02/2011 14:10:26      D            OUR COMPANY                    
+nmercado       18/02/2011 18:51:49      0            OUR COMPANY                    
+nmercado       21/02/2011 08:03:47      I            OUR COMPANY                    
+nmercado       21/02/2011 12:48:15      D            OUR COMPANY                    
+nmercado       21/02/2011 14:33:05      D            OUR COMPANY                    
+nmercado       21/02/2011 18:34:29      0            OUR COMPANY                    
+mcjimenez      17/02/2011 08:18:01      I            OUR COMPANY                    
+mcjimenez      17/02/2011 12:36:55      0            OUR COMPANY                    
+mcjimenez      17/02/2011 12:37:15      0            OUR COMPANY                    
+mcjimenez      17/02/2011 14:36:09      D            OUR COMPANY                    
+mcjimenez      17/02/2011 19:06:36      0            OUR COMPANY                    
+mcjimenez      18/02/2011 08:39:30      D            OUR COMPANY                    
+mcjimenez      18/02/2011 12:39:39      0            OUR COMPANY                    
+mcjimenez      18/02/2011 14:33:51      D            OUR COMPANY                    
+mcjimenez      18/02/2011 19:39:31      0            OUR COMPANY                    
+mcjimenez      21/02/2011 08:40:43      I            OUR COMPANY                    
+mcjimenez      21/02/2011 12:40:35      0            OUR COMPANY                    
+mcjimenez      21/02/2011 14:29:11      D            OUR COMPANY                    
+mcjimenez      21/02/2011 19:17:53      0            OUR COMPANY                    
+lsagarnaga     17/02/2011 08:31:28      I            OUR COMPANY                    
+lsagarnaga     17/02/2011 12:30:06      0            OUR COMPANY                    
+lsagarnaga     17/02/2011 14:31:11      D            OUR COMPANY                    
+lsagarnaga     17/02/2011 18:35:07      0            OUR COMPANY                    
+lsagarnaga     18/02/2011 08:33:42      D            OUR COMPANY                    
+lsagarnaga     18/02/2011 12:37:59      0            OUR COMPANY                    
+lsagarnaga     18/02/2011 13:47:40      D            OUR COMPANY                    
+lsagarnaga     18/02/2011 18:52:51      0            OUR COMPANY                    
+rvillegas      17/02/2011 08:36:53      I            OUR COMPANY                    
+rvillegas      17/02/2011 12:33:35      0            OUR COMPANY                    
+rvillegas      17/02/2011 14:27:54      D            OUR COMPANY                    
+rvillegas      17/02/2011 18:59:37      0            OUR COMPANY                    
+rvillegas      18/02/2011 08:28:41      I            OUR COMPANY                    
+rvillegas      18/02/2011 12:42:43      0            OUR COMPANY                    
+rvillegas      18/02/2011 12:50:41      D            OUR COMPANY                    
+rvillegas      18/02/2011 18:54:16      0            OUR COMPANY                    
+rvillegas      21/02/2011 08:26:48      I            OUR COMPANY                    
+rvillegas      21/02/2011 12:30:52      0            OUR COMPANY                    
+rvillegas      21/02/2011 14:22:01      D            OUR COMPANY                    
+rvillegas      21/02/2011 18:52:37      0            OUR COMPANY                    
+eterceros      17/02/2011 08:36:15      I            OUR COMPANY                    
+eterceros      17/02/2011 12:32:08      0            OUR COMPANY                    
+eterceros      17/02/2011 14:31:05      D            OUR COMPANY                    
+eterceros      17/02/2011 18:59:47      0            OUR COMPANY                    
+eterceros      18/02/2011 08:27:23      I            OUR COMPANY                    
+eterceros      18/02/2011 12:33:47      D            OUR COMPANY                    
+eterceros      18/02/2011 14:25:36      D            OUR COMPANY                    
+eterceros      18/02/2011 19:03:06      0            OUR COMPANY                    
+eterceros      21/02/2011 08:23:24      I            OUR COMPANY                    
+eterceros      21/02/2011 12:32:07      0            OUR COMPANY                    
+eterceros      21/02/2011 14:32:00      D            OUR COMPANY                    
+eterceros      21/02/2011 19:24:48      0            OUR COMPANY                    
+jleoni         17/02/2011 08:10:07      I            OUR COMPANY                    
+jleoni         17/02/2011 12:34:30      0            OUR COMPANY                    
+jleoni         17/02/2011 14:36:19      D            OUR COMPANY                    
+jleoni         17/02/2011 19:12:43      0            OUR COMPANY                    
+jleoni         18/02/2011 07:57:51      I            OUR COMPANY                    
+jleoni         18/02/2011 12:38:54      0            OUR COMPANY                    
+jleoni         18/02/2011 14:10:40      D            OUR COMPANY                    
+jleoni         18/02/2011 18:53:45      0            OUR COMPANY                    
+jleoni         19/02/2011 10:28:49      I            OUR COMPANY                    
+jleoni         19/02/2011 10:55:22      I            OUR COMPANY                    
+jleoni         21/02/2011 07:58:51      I            OUR COMPANY                    
+jleoni         21/02/2011 12:46:57      0            OUR COMPANY                    
+jleoni         21/02/2011 14:39:37      D            OUR COMPANY                    
+jleoni         21/02/2011 19:58:20      0            OUR COMPANY                    
+aalarcon       17/02/2011 08:38:46      D            OUR COMPANY                    
+aalarcon       17/02/2011 12:56:26      0            OUR COMPANY                    
+aalarcon       17/02/2011 14:07:32      D            OUR COMPANY                    
+aalarcon       17/02/2011 20:47:22      0            OUR COMPANY                    
+aalarcon       18/02/2011 08:48:48      D            OUR COMPANY                    
+aalarcon       18/02/2011 13:25:06      0            OUR COMPANY                    
+aalarcon       18/02/2011 19:52:14      0            OUR COMPANY                    
+aalarcon       21/02/2011 08:46:16      D            OUR COMPANY                    
+aalarcon       21/02/2011 12:45:20      0            OUR COMPANY                    
+aalarcon       21/02/2011 14:34:19      D            OUR COMPANY                    
+aalarcon       21/02/2011 19:33:51      0            OUR COMPANY                    
+mflores        17/02/2011 08:27:50      I            OUR COMPANY                    
+mflores        17/02/2011 12:37:01      0            OUR COMPANY                    
+mflores        17/02/2011 14:32:28      D            OUR COMPANY                    
+mflores        17/02/2011 18:43:34      0            OUR COMPANY                    
+mflores        18/02/2011 08:30:46      D            OUR COMPANY                    
+mflores        18/02/2011 12:35:44      0            OUR COMPANY                    
+mflores        18/02/2011 14:06:29      0            OUR COMPANY                    
+mflores        18/02/2011 14:06:36      D            OUR COMPANY                    
+mflores        18/02/2011 20:02:58      0            OUR COMPANY                    
+mflores        21/02/2011 08:16:57      I            OUR COMPANY                    
+mflores        21/02/2011 12:34:42      0            OUR COMPANY                    
+mflores        21/02/2011 14:33:35      D            OUR COMPANY                    
+mflores        21/02/2011 18:57:03      0            OUR COMPANY                    
+kgutierrez     17/02/2011 08:28:47      I            OUR COMPANY                    
+kgutierrez     17/02/2011 12:31:43      0            OUR COMPANY                    
+kgutierrez     17/02/2011 14:28:31      D            OUR COMPANY                    
+kgutierrez     17/02/2011 18:55:04      0            OUR COMPANY                    
+kgutierrez     18/02/2011 08:35:12      D            OUR COMPANY                    
+kgutierrez     18/02/2011 12:36:33      0            OUR COMPANY                    
+kgutierrez     18/02/2011 13:36:11      D            OUR COMPANY                    
+kgutierrez     18/02/2011 18:38:19      0            OUR COMPANY                    
+kgutierrez     21/02/2011 08:41:50      D            OUR COMPANY                    
+kgutierrez     21/02/2011 12:35:09      0            OUR COMPANY                    
+kgutierrez     21/02/2011 14:31:28      D            OUR COMPANY                    
+kgutierrez     21/02/2011 19:14:52      0            OUR COMPANY                    
+ccastellon     17/02/2011 08:20:06      I            OUR COMPANY                    
+ccastellon     17/02/2011 12:32:21      0            OUR COMPANY                    
+ccastellon     17/02/2011 14:22:02      D            OUR COMPANY                    
+ccastellon     17/02/2011 18:44:00      0            OUR COMPANY                    
+ccastellon     18/02/2011 08:50:32      D            OUR COMPANY                    
+ccastellon     18/02/2011 12:32:40      0            OUR COMPANY                    
+ccastellon     18/02/2011 14:23:53      D            OUR COMPANY                    
+ccastellon     18/02/2011 18:42:22      0            OUR COMPANY                    
+ccastellon     21/02/2011 08:46:44      D            OUR COMPANY                    
+ccastellon     21/02/2011 14:40:06      D            OUR COMPANY                    
+ccastellon     21/02/2011 18:55:24      0            OUR COMPANY                    
+pclaure        17/02/2011 08:30:53      I            OUR COMPANY                    
+pclaure        17/02/2011 12:34:17      0            OUR COMPANY                    
+pclaure        17/02/2011 14:13:17      D            OUR COMPANY                    
+pclaure        17/02/2011 19:38:32      0            OUR COMPANY                    
+pclaure        18/02/2011 08:27:05      I            OUR COMPANY                    
+pclaure        18/02/2011 12:36:24      0            OUR COMPANY                    
+pclaure        18/02/2011 14:05:50      D            OUR COMPANY                    
+pclaure        18/02/2011 18:38:22      0            OUR COMPANY                    
+pclaure        21/02/2011 08:36:51      D            OUR COMPANY                    
+pclaure        21/02/2011 19:17:20      0            OUR COMPANY                    
+mviveros       17/02/2011 08:30:46      I            OUR COMPANY                    
+mviveros       17/02/2011 12:43:31      0            OUR COMPANY                    
+mviveros       17/02/2011 14:18:44      D            OUR COMPANY                    
+mviveros       17/02/2011 19:42:10      0            OUR COMPANY                    
+mviveros       18/02/2011 08:27:52      I            OUR COMPANY                    
+mviveros       18/02/2011 12:40:54      0            OUR COMPANY                    
+mviveros       18/02/2011 13:36:07      D            OUR COMPANY                    
+mviveros       19/02/2011 01:30:41      I            OUR COMPANY                    
+mviveros       19/02/2011 13:02:33      I            OUR COMPANY                    
+mviveros       20/02/2011 16:01:29      I            OUR COMPANY                    
+mviveros       20/02/2011 19:21:10      I            OUR COMPANY                    
+mviveros       21/02/2011 08:30:39      I            OUR COMPANY                    
+mviveros       21/02/2011 12:33:41      0            OUR COMPANY                    
+mviveros       21/02/2011 14:17:43      D            OUR COMPANY                    
+mviveros       21/02/2011 20:14:54      0            OUR COMPANY                    
+jjrodriguez    21/02/2011 07:53:00      I            OUR COMPANY                    
+jjrodriguez    21/02/2011 12:30:45      0            OUR COMPANY                    
+jjrodriguez    21/02/2011 13:41:08      D            OUR COMPANY                    
+jjrodriguez    21/02/2011 18:32:40      0            OUR COMPANY                    
+gperedo        17/02/2011 08:24:25      I            OUR COMPANY                    
+gperedo        17/02/2011 12:36:30      0            OUR COMPANY                    
+gperedo        17/02/2011 14:30:21      D            OUR COMPANY                    
+gperedo        17/02/2011 19:36:39      0            OUR COMPANY                    
+gperedo        18/02/2011 08:23:03      I            OUR COMPANY                    
+gperedo        18/02/2011 12:43:04      0            OUR COMPANY                    
+gperedo        18/02/2011 14:11:24      D            OUR COMPANY                    
+gperedo        19/02/2011 01:30:34      I            OUR COMPANY                    
+gperedo        20/02/2011 16:01:21      I            OUR COMPANY                    
+gperedo        20/02/2011 19:20:59      I            OUR COMPANY                    
+gperedo        20/02/2011 19:21:06      I            OUR COMPANY                    
+gperedo        21/02/2011 08:33:12      D            OUR COMPANY                    
+gperedo        21/02/2011 12:31:03      0            OUR COMPANY                    
+gperedo        21/02/2011 14:32:25      D            OUR COMPANY                    
+gperedo        21/02/2011 20:13:32      0            OUR COMPANY                    
+kvalenzuela    17/02/2011 08:24:30      I            OUR COMPANY                    
+kvalenzuela    17/02/2011 12:32:48      0            OUR COMPANY                    
+kvalenzuela    17/02/2011 14:30:31      D            OUR COMPANY                    
+kvalenzuela    17/02/2011 18:34:56      0            OUR COMPANY                    
+kvalenzuela    18/02/2011 08:26:30      I            OUR COMPANY                    
+kvalenzuela    18/02/2011 12:32:00      0            OUR COMPANY                    
+kvalenzuela    18/02/2011 14:29:30      D            OUR COMPANY                    
+kvalenzuela    18/02/2011 18:50:34      0            OUR COMPANY                    
+kvalenzuela    21/02/2011 08:23:14      I            OUR COMPANY                    
+kvalenzuela    21/02/2011 12:34:07      0            OUR COMPANY                    
+kvalenzuela    21/02/2011 14:33:56      D            OUR COMPANY                    
+kvalenzuela    21/02/2011 18:32:06      D            OUR COMPANY                    
+svelasco       17/02/2011 08:24:57      I            OUR COMPANY                    
+svelasco       17/02/2011 12:32:27      D            OUR COMPANY                    
+svelasco       17/02/2011 14:25:56      D            OUR COMPANY                    
+svelasco       17/02/2011 19:20:01      0            OUR COMPANY                    
+svelasco       18/02/2011 08:33:36      D            OUR COMPANY                    
+svelasco       18/02/2011 12:32:07      0            OUR COMPANY                    
+svelasco       18/02/2011 14:29:58      D            OUR COMPANY                    
+svelasco       18/02/2011 18:42:33      0            OUR COMPANY                    
+svelasco       21/02/2011 08:29:00      I            OUR COMPANY                    
+svelasco       21/02/2011 12:33:37      0            OUR COMPANY                    
+svelasco       21/02/2011 14:32:09      D            OUR COMPANY                    
+svelasco       21/02/2011 19:10:11      0            OUR COMPANY                    
+dfranco        17/02/2011 08:40:39      D            OUR COMPANY                    
+dfranco        17/02/2011 12:50:31      0            OUR COMPANY                    
+dfranco        17/02/2011 13:24:36      D            OUR COMPANY                    
+dfranco        17/02/2011 19:27:28      0            OUR COMPANY                    
+dfranco        18/02/2011 08:40:42      D            OUR COMPANY                    
+dfranco        18/02/2011 12:35:27      0            OUR COMPANY                    
+dfranco        18/02/2011 13:44:34      D            OUR COMPANY                    
+dfranco        18/02/2011 18:45:13      0            OUR COMPANY                    
+dfranco        21/02/2011 08:35:19      D            OUR COMPANY                    
+dfranco        21/02/2011 12:42:59      0            OUR COMPANY                    
+dfranco        21/02/2011 13:29:37      D            OUR COMPANY                    
+dfranco        21/02/2011 18:45:37      0            OUR COMPANY                    
+spinto         17/02/2011 08:06:17      I            OUR COMPANY                    
+spinto         17/02/2011 12:38:47      0            OUR COMPANY                    
+spinto         17/02/2011 12:59:01      D            OUR COMPANY                    
+spinto         17/02/2011 18:43:17      0            OUR COMPANY                    
+spinto         21/02/2011 08:11:54      I            OUR COMPANY                    
+spinto         21/02/2011 12:39:14      0            OUR COMPANY                    
+spinto         21/02/2011 12:46:55      D            OUR COMPANY                    
+spinto         21/02/2011 19:26:33      0            OUR COMPANY                    
+cmercado       17/02/2011 08:19:42      I            OUR COMPANY                    
+cmercado       17/02/2011 12:33:43      0            OUR COMPANY                    
+cmercado       17/02/2011 14:27:23      D            OUR COMPANY                    
+cmercado       17/02/2011 18:34:47      0            OUR COMPANY                    
+cmercado       18/02/2011 08:21:31      I            OUR COMPANY                    
+cmercado       18/02/2011 12:32:13      0            OUR COMPANY                    
+cmercado       18/02/2011 14:11:37      D            OUR COMPANY                    
+cmercado       18/02/2011 18:52:23      0            OUR COMPANY                    
+cmercado       21/02/2011 08:21:36      I            OUR COMPANY                    
+cmercado       21/02/2011 12:34:32      0            OUR COMPANY                    
+cmercado       21/02/2011 14:28:16      D            OUR COMPANY                    
+cmercado       21/02/2011 19:07:09      0            OUR COMPANY                    
+hcarrasco      17/02/2011 08:30:38      I            OUR COMPANY                    
+hcarrasco      17/02/2011 12:32:28      0            OUR COMPANY                    
+hcarrasco      17/02/2011 14:30:59      D            OUR COMPANY                    
+hcarrasco      17/02/2011 18:34:18      0            OUR COMPANY                    
+hcarrasco      18/02/2011 08:27:36      I            OUR COMPANY                    
+hcarrasco      18/02/2011 12:37:39      D            OUR COMPANY                    
+hcarrasco      18/02/2011 14:25:49      D            OUR COMPANY                    
+hcarrasco      18/02/2011 18:34:26      0            OUR COMPANY                    
+hcarrasco      21/02/2011 08:32:15      I            OUR COMPANY                    
+hcarrasco      21/02/2011 12:34:01      0            OUR COMPANY                    
+hcarrasco      21/02/2011 14:47:57      D            OUR COMPANY                    
+hcarrasco      21/02/2011 18:34:39      0            OUR COMPANY                    
+adelgadillo    17/02/2011 08:33:21      I            OUR COMPANY                    
+adelgadillo    17/02/2011 12:31:16      0            OUR COMPANY                    
+adelgadillo    17/02/2011 14:38:54      D            OUR COMPANY                    
+adelgadillo    17/02/2011 19:13:21      0            OUR COMPANY                    
+adelgadillo    18/02/2011 08:42:47      D            OUR COMPANY                    
+adelgadillo    18/02/2011 12:34:10      0            OUR COMPANY                    
+adelgadillo    18/02/2011 14:28:32      0            OUR COMPANY                    
+adelgadillo    18/02/2011 18:45:06      0            OUR COMPANY                    
+adelgadillo    21/02/2011 08:36:18      D            OUR COMPANY                    
+adelgadillo    21/02/2011 12:36:01      0            OUR COMPANY                    
+adelgadillo    21/02/2011 14:33:17      D            OUR COMPANY                    
+adelgadillo    21/02/2011 19:38:08      0            OUR COMPANY                    
+amachaca       18/02/2011 08:35:26      D            OUR COMPANY                    
+amachaca       18/02/2011 12:42:48      0            OUR COMPANY                    
+amachaca       18/02/2011 14:30:46      D            OUR COMPANY                    
+amachaca       18/02/2011 18:49:55      0            OUR COMPANY                    
+amachaca       21/02/2011 08:27:46      I            OUR COMPANY                    
+amachaca       21/02/2011 20:13:00      0            OUR COMPANY                    
+cflores        17/02/2011 08:59:03      D            OUR COMPANY                    
+cflores        17/02/2011 12:49:40      0            OUR COMPANY                    
+cflores        17/02/2011 14:18:45      D            OUR COMPANY                    
+cflores        17/02/2011 19:15:33      0            OUR COMPANY                    
+cflores        18/02/2011 08:44:26      D            OUR COMPANY                    
+cflores        18/02/2011 13:07:20      0            OUR COMPANY                    
+cflores        18/02/2011 13:07:31      D            OUR COMPANY                    
+cflores        18/02/2011 20:04:16      0            OUR COMPANY                    
+cflores        21/02/2011 09:01:05      D            OUR COMPANY                    
+cflores        21/02/2011 13:06:45      0            OUR COMPANY                    
+cflores        21/02/2011 14:37:24      D            OUR COMPANY                    
+cflores        21/02/2011 18:47:58      0            OUR COMPANY                    
+cvalverde      17/02/2011 08:32:13      I            OUR COMPANY                    
+cvalverde      17/02/2011 12:32:36      0            OUR COMPANY                    
+cvalverde      17/02/2011 14:28:39      D            OUR COMPANY                    
+cvalverde      17/02/2011 18:33:21      0            OUR COMPANY                    
+cvalverde      18/02/2011 08:00:51      I            OUR COMPANY                    
+cvalverde      18/02/2011 13:47:21      D            OUR COMPANY                    
+cvalverde      18/02/2011 18:53:34      0            OUR COMPANY                    
+cvalverde      21/02/2011 08:52:28      D            OUR COMPANY                    
+cvalverde      21/02/2011 12:49:29      0            OUR COMPANY                    
+cvalverde      21/02/2011 14:35:24      D            OUR COMPANY                    
+cvalverde      21/02/2011 18:39:55      0            OUR COMPANY                    
+yecuari        21/02/2011 07:33:37      I            OUR COMPANY                    
+yecuari        21/02/2011 19:08:47      0            OUR COMPANY                    
+dsuarez        17/02/2011 08:35:03      I            OUR COMPANY                    
+dsuarez        17/02/2011 12:36:43      0            OUR COMPANY                    
+dsuarez        17/02/2011 14:34:21      D            OUR COMPANY                    
+dsuarez        17/02/2011 18:47:30      0            OUR COMPANY                    
+dsuarez        18/02/2011 08:30:36      D            OUR COMPANY                    
+dsuarez        18/02/2011 12:35:09      0            OUR COMPANY                    
+dsuarez        18/02/2011 14:32:30      D            OUR COMPANY                    
+dsuarez        18/02/2011 18:59:12      0            OUR COMPANY                    
+dsuarez        21/02/2011 08:40:26      D            OUR COMPANY                    
+dsuarez        21/02/2011 12:35:36      0            OUR COMPANY                    
+dsuarez        21/02/2011 14:43:07      D            OUR COMPANY                    
+dsuarez        21/02/2011 19:12:48      0            OUR COMPANY                    
+arojas         17/02/2011 08:15:36      I            OUR COMPANY                    
+arojas         17/02/2011 12:33:58      0            OUR COMPANY                    
+arojas         17/02/2011 14:17:03      D            OUR COMPANY                    
+arojas         17/02/2011 19:06:02      0            OUR COMPANY                    
+arojas         18/02/2011 08:30:56      I            OUR COMPANY                    
+arojas         18/02/2011 12:34:41      0            OUR COMPANY                    
+arojas         18/02/2011 14:31:40      D            OUR COMPANY                    
+arojas         18/02/2011 18:42:20      0            OUR COMPANY                    
+arojas         21/02/2011 08:45:08      D            OUR COMPANY                    
+arojas         21/02/2011 12:33:57      0            OUR COMPANY                    
+arojas         21/02/2011 14:53:59      D            OUR COMPANY                    
+arojas         21/02/2011 19:08:52      0            OUR COMPANY                    
+jbenavides     17/02/2011 07:23:43      I            OUR COMPANY                    
+jbenavides     17/02/2011 12:36:57      0            OUR COMPANY                    
+jbenavides     17/02/2011 15:16:04      D            OUR COMPANY                    
+jbenavides     17/02/2011 18:41:58      0            OUR COMPANY                    
+jbenavides     18/02/2011 07:25:45      I            OUR COMPANY                    
+jbenavides     18/02/2011 15:35:31      0            OUR COMPANY                    
+equenallata    17/02/2011 07:07:22      I            OUR COMPANY                    
+equenallata    17/02/2011 15:37:33      0            OUR COMPANY                    
+equenallata    18/02/2011 07:11:17      I            OUR COMPANY                    
+equenallata    18/02/2011 15:38:53      0            OUR COMPANY                    
+equenallata    19/02/2011 15:28:19      I            OUR COMPANY                    
+equenallata    19/02/2011 23:30:02      I            OUR COMPANY                    
+equenallata    19/02/2011 23:30:10      I            OUR COMPANY                    
+equenallata    20/02/2011 14:58:12      I            OUR COMPANY                    
+equenallata    20/02/2011 23:33:58      I            OUR COMPANY                    
+equenallata    21/02/2011 14:30:13      D            OUR COMPANY                    
+equenallata    21/02/2011 23:33:32      I            OUR COMPANY                    
+equenallata    21/02/2011 23:33:44      I            OUR COMPANY                    
+jlrojas        17/02/2011 07:22:57      I            OUR COMPANY                    
+jlrojas        17/02/2011 12:33:24      0            OUR COMPANY                    
+jlrojas        17/02/2011 15:24:28      D            OUR COMPANY                    
+jlrojas        17/02/2011 18:40:35      0            OUR COMPANY                    
+jlrojas        18/02/2011 07:26:00      I            OUR COMPANY                    
+jlrojas        18/02/2011 12:32:07      0            OUR COMPANY                    
+jlrojas        18/02/2011 15:18:18      D            OUR COMPANY                    
+jlrojas        18/02/2011 18:33:18      0            OUR COMPANY                    
+jlrojas        21/02/2011 07:27:22      I            OUR COMPANY                    
+jlrojas        21/02/2011 12:31:26      0            OUR COMPANY                    
+jlrojas        21/02/2011 15:27:50      D            OUR COMPANY                    
+jlrojas        21/02/2011 18:55:04      0            OUR COMPANY                    
+mmaceres       17/02/2011 08:34:18      I            OUR COMPANY                    
+mmaceres       17/02/2011 13:17:51      D            OUR COMPANY                    
+mmaceres       17/02/2011 14:32:09      D            OUR COMPANY                    
+mmaceres       17/02/2011 19:16:13      D            OUR COMPANY                    
+mmaceres       18/02/2011 08:10:58      I            OUR COMPANY                    
+mmaceres       18/02/2011 12:36:49      D            OUR COMPANY                    
+mmaceres       18/02/2011 14:29:19      D            OUR COMPANY                    
+mmaceres       18/02/2011 18:48:21      D            OUR COMPANY                    
+mmaceres       21/02/2011 08:21:59      I            OUR COMPANY                    
+mmaceres       21/02/2011 12:37:28      0            OUR COMPANY                    
+mmaceres       21/02/2011 14:42:20      D            OUR COMPANY                    
+mmaceres       21/02/2011 20:52:31      0            OUR COMPANY                    
+sgonzalesp     17/02/2011 08:16:52      I            OUR COMPANY                    
+sgonzalesp     17/02/2011 12:36:37      0            OUR COMPANY                    
+sgonzalesp     17/02/2011 14:26:51      D            OUR COMPANY                    
+sgonzalesp     17/02/2011 19:05:07      0            OUR COMPANY                    
+sgonzalesp     18/02/2011 08:23:16      I            OUR COMPANY                    
+sgonzalesp     18/02/2011 12:46:46      0            OUR COMPANY                    
+sgonzalesp     18/02/2011 14:24:40      D            OUR COMPANY                    
+sgonzalesp     18/02/2011 20:22:34      0            OUR COMPANY                    
+sgonzalesp     21/02/2011 08:26:57      I            OUR COMPANY                    
+sgonzalesp     21/02/2011 08:27:05      I            OUR COMPANY                    
+sgonzalesp     21/02/2011 12:32:23      0            OUR COMPANY                    
+sgonzalesp     21/02/2011 14:09:38      D            OUR COMPANY                    
+sgonzalesp     21/02/2011 20:07:28      0            OUR COMPANY                    
+jbalderrama    17/02/2011 08:23:50      I            OUR COMPANY                    
+jbalderrama    17/02/2011 12:45:12      0            OUR COMPANY                    
+jbalderrama    17/02/2011 14:08:12      D            OUR COMPANY                    
+jbalderrama    17/02/2011 20:47:13      0            OUR COMPANY                    
+jbalderrama    18/02/2011 08:27:28      I            OUR COMPANY                    
+jbalderrama    18/02/2011 12:40:04      0            OUR COMPANY                    
+jbalderrama    18/02/2011 14:13:51      D            OUR COMPANY                    
+jbalderrama    18/02/2011 22:03:14      I            OUR COMPANY                    
+jbalderrama    21/02/2011 08:28:33      I            OUR COMPANY                    
+jbalderrama    21/02/2011 12:58:22      0            OUR COMPANY                    
+jbalderrama    21/02/2011 14:18:09      D            OUR COMPANY                    
+eferreira      17/02/2011 08:15:04      I            OUR COMPANY                    
+eferreira      17/02/2011 12:58:46      0            OUR COMPANY                    
+eferreira      17/02/2011 13:56:43      D            OUR COMPANY                    
+eferreira      17/02/2011 20:37:11      0            OUR COMPANY                    
+eferreira      18/02/2011 08:44:47      D            OUR COMPANY                    
+eferreira      18/02/2011 12:40:33      0            OUR COMPANY                    
+eferreira      18/02/2011 14:07:00      D            OUR COMPANY                    
+eferreira      18/02/2011 22:03:08      I            OUR COMPANY                    
+eferreira      21/02/2011 08:20:10      I            OUR COMPANY                    
+agonzales      17/02/2011 08:30:01      I            OUR COMPANY                    
+agonzales      17/02/2011 12:32:03      0            OUR COMPANY                    
+agonzales      17/02/2011 14:58:41      I            OUR COMPANY                    
+agonzales      18/02/2011 08:33:52      D            OUR COMPANY                    
+agonzales      18/02/2011 12:38:17      0            OUR COMPANY                    
+agonzales      18/02/2011 13:47:52      D            OUR COMPANY                    
+agonzales      18/02/2011 18:13:42      D            OUR COMPANY                    
+agonzales      21/02/2011 08:31:44      I            OUR COMPANY                    
+agonzales      21/02/2011 12:33:45      D            OUR COMPANY                    
+agonzales      21/02/2011 14:40:14      D            OUR COMPANY                    
+agonzales      21/02/2011 18:37:09      0            OUR COMPANY                    
+gperez         17/02/2011 08:29:35      I            OUR COMPANY                    
+gperez         17/02/2011 12:33:32      0            OUR COMPANY                    
+gperez         17/02/2011 14:28:32      D            OUR COMPANY                    
+gperez         17/02/2011 19:04:25      0            OUR COMPANY                    
+gperez         18/02/2011 08:31:42      D            OUR COMPANY                    
+gperez         18/02/2011 12:43:51      D            OUR COMPANY                    
+gperez         18/02/2011 14:32:25      D            OUR COMPANY                    
+gperez         18/02/2011 18:50:49      0            OUR COMPANY                    
+gperez         21/02/2011 08:35:23      D            OUR COMPANY                    
+gperez         21/02/2011 12:46:29      0            OUR COMPANY                    
+gperez         21/02/2011 14:39:54      D            OUR COMPANY                    
+gperez         21/02/2011 18:50:31      0            OUR COMPANY                    
+wrojas         17/02/2011 08:25:54      I            OUR COMPANY                    
+wrojas         17/02/2011 08:27:16      I            OUR COMPANY                    
+wrojas         17/02/2011 12:32:45      0            OUR COMPANY                    
+wrojas         17/02/2011 14:38:08      D            OUR COMPANY                    
+wrojas         17/02/2011 20:08:45      0            OUR COMPANY                    
+wrojas         18/02/2011 08:42:14      D            OUR COMPANY                    
+wrojas         21/02/2011 08:35:57      D            OUR COMPANY                    
+wrojas         21/02/2011 14:37:49      D            OUR COMPANY                    
+wrojas         21/02/2011 14:38:01      D            OUR COMPANY                    
+eparedes       17/02/2011 08:37:56      D            OUR COMPANY                    
+eparedes       17/02/2011 12:37:22      0            OUR COMPANY                    
+eparedes       17/02/2011 14:40:40      D            OUR COMPANY                    
+eparedes       17/02/2011 20:45:31      0            OUR COMPANY                    
+eparedes       18/02/2011 08:30:30      D            OUR COMPANY                    
+eparedes       18/02/2011 21:20:54      0            OUR COMPANY                    
+eparedes       19/02/2011 08:45:34      I            OUR COMPANY                    
+eparedes       19/02/2011 20:38:01      I            OUR COMPANY                    
+eparedes       21/02/2011 08:42:15      D            OUR COMPANY                    
+eparedes       21/02/2011 12:39:04      0            OUR COMPANY                    
+eparedes       21/02/2011 14:43:26      D            OUR COMPANY                    
+eparedes       21/02/2011 20:24:15      0            OUR COMPANY                    
+esolis         17/02/2011 08:29:52      I            OUR COMPANY                    
+esolis         17/02/2011 12:35:06      0            OUR COMPANY                    
+esolis         17/02/2011 14:35:13      D            OUR COMPANY                    
+esolis         17/02/2011 18:50:26      0            OUR COMPANY                    
+esolis         18/02/2011 08:40:50      D            OUR COMPANY                    
+esolis         18/02/2011 12:31:13      D            OUR COMPANY                    
+esolis         18/02/2011 14:41:32      D            OUR COMPANY                    
+esolis         18/02/2011 19:55:30      0            OUR COMPANY                    
+esolis         21/02/2011 08:37:56      D            OUR COMPANY                    
+esolis         21/02/2011 12:39:26      0            OUR COMPANY                    
+esolis         21/02/2011 14:27:16      D            OUR COMPANY                    
+esolis         21/02/2011 14:27:31      D            OUR COMPANY                    
+esolis         21/02/2011 18:37:47      0            OUR COMPANY                    
+jtorrico       17/02/2011 08:23:41      I            OUR COMPANY                    
+jtorrico       17/02/2011 12:42:00      0            OUR COMPANY                    
+jtorrico       17/02/2011 14:27:33      D            OUR COMPANY                    
+jtorrico       17/02/2011 18:36:33      0            OUR COMPANY                    
+jtorrico       18/02/2011 08:18:57      I            OUR COMPANY                    
+jtorrico       18/02/2011 12:34:59      0            OUR COMPANY                    
+jtorrico       18/02/2011 14:12:43      D            OUR COMPANY                    
+jtorrico       18/02/2011 23:52:35      I            OUR COMPANY                    
+jtorrico       21/02/2011 08:20:19      I            OUR COMPANY                    
+jtorrico       21/02/2011 12:32:16      0            OUR COMPANY                    
+jtorrico       21/02/2011 14:26:53      D            OUR COMPANY                    
+jtorrico       21/02/2011 20:07:14      O            OUR COMPANY                    
+dalanis        17/02/2011 08:23:15      I            OUR COMPANY                    
+dalanis        17/02/2011 13:09:09      0            OUR COMPANY                    
+dalanis        17/02/2011 14:35:05      D            OUR COMPANY                    
+dalanis        17/02/2011 20:11:18      D            OUR COMPANY                    
+dalanis        18/02/2011 08:20:23      I            OUR COMPANY                    
+dalanis        18/02/2011 13:04:51      D            OUR COMPANY                    
+dalanis        18/02/2011 13:51:39      D            OUR COMPANY                    
+dalanis        18/02/2011 18:55:18      0            OUR COMPANY                    
+dalanis        21/02/2011 08:36:31      D            OUR COMPANY                    
+dalanis        21/02/2011 12:29:04      D            OUR COMPANY                    
+dalanis        21/02/2011 13:46:26      D            OUR COMPANY                    
+dalanis        21/02/2011 20:12:44      0            OUR COMPANY                    
+rcossio        17/02/2011 08:24:36      I            OUR COMPANY                    
+rcossio        17/02/2011 14:26:45      D            OUR COMPANY                    
+rcossio        17/02/2011 19:54:27      0            OUR COMPANY                    
+rcossio        18/02/2011 08:25:09      I            OUR COMPANY                    
+rcossio        18/02/2011 12:40:14      0            OUR COMPANY                    
+rcossio        18/02/2011 14:08:44      D            OUR COMPANY                    
+rcossio        18/02/2011 19:12:48      0            OUR COMPANY                    
+rcossio        21/02/2011 20:43:19      0            OUR COMPANY                    
+gpucho         17/02/2011 16:35:59      I            OUR COMPANY                    
+gpucho         17/02/2011 18:35:32      D            OUR COMPANY                    
+gpucho         17/02/2011 18:35:43      0            OUR COMPANY                    
+gpucho         18/02/2011 08:36:07      D            OUR COMPANY                    
+gpucho         18/02/2011 12:40:46      0            OUR COMPANY                    
+gpucho         18/02/2011 14:29:37      D            OUR COMPANY                    
+gpucho         18/02/2011 19:21:39      0            OUR COMPANY                    
+gpucho         21/02/2011 09:14:05      D            OUR COMPANY                    
+gpucho         21/02/2011 16:23:10      D            OUR COMPANY                    
+gpucho         21/02/2011 20:23:31      0            OUR COMPANY                    
+kperedo        17/02/2011 15:43:38      I            OUR COMPANY                    
+kperedo        17/02/2011 19:05:45      D            OUR COMPANY                    
+kperedo        18/02/2011 08:44:39      D            OUR COMPANY                    
+kperedo        18/02/2011 12:38:01      0            OUR COMPANY                    
+kperedo        18/02/2011 14:34:34      D            OUR COMPANY                    
+kperedo        18/02/2011 18:58:58      0            OUR COMPANY                    
+kperedo        21/02/2011 08:40:56      D            OUR COMPANY                    
+kperedo        21/02/2011 12:39:59      0            OUR COMPANY                    
+kperedo        21/02/2011 14:37:45      D            OUR COMPANY                    
+kperedo        21/02/2011 18:47:42      0            OUR COMPANY                    
+dhinojosa      21/02/2011 10:44:41      D            OUR COMPANY                    
+dhinojosa      21/02/2011 12:35:56      0            OUR COMPANY                    
+dhinojosa      21/02/2011 14:18:58      D            OUR COMPANY                    
+dhinojosa      21/02/2011 18:43:58      0            OUR COMPANY                    
+haguilar       21/02/2011 10:47:57      I            OUR COMPANY                    
+haguilar       21/02/2011 12:53:39      0            OUR COMPANY                    
+haguilar       21/02/2011 14:22:57      D            OUR COMPANY                    
+haguilar       21/02/2011 20:03:03      0            OUR COMPANY                    
+ehermoso       17/02/2011 08:43:41      D            OUR COMPANY                    
+ehermoso       17/02/2011 12:36:06      0            OUR COMPANY                    
+ehermoso       17/02/2011 14:22:49      D            OUR COMPANY                    
+ehermoso       17/02/2011 18:52:04      0            OUR COMPANY                    
+ehermoso       21/02/2011 07:59:20      I            OUR COMPANY                    
+ehermoso       21/02/2011 12:39:58      0            OUR COMPANY                    
+ehermoso       21/02/2011 14:22:12      D            OUR COMPANY                    
+ehermoso       21/02/2011 18:37:22      0            OUR COMPANY                    
+icvargas       17/02/2011 08:45:12      D            OUR COMPANY                    
+icvargas       17/02/2011 12:37:25      0            OUR COMPANY                    
+icvargas       17/02/2011 14:37:00      D            OUR COMPANY                    
+icvargas       17/02/2011 19:33:19      0            OUR COMPANY                    
+icvargas       18/02/2011 08:37:41      D            OUR COMPANY                    
+icvargas       18/02/2011 12:41:19      0            OUR COMPANY                    
+icvargas       18/02/2011 14:31:29      D            OUR COMPANY                    
+icvargas       18/02/2011 21:10:14      D            OUR COMPANY                    
+icvargas       21/02/2011 08:36:17      D            OUR COMPANY                    
+icvargas       21/02/2011 12:36:25      0            OUR COMPANY                    
+icvargas       21/02/2011 14:30:15      D            OUR COMPANY                    
+icvargas       21/02/2011 19:05:40      0            OUR COMPANY                    
+jcarvallo      17/02/2011 06:46:11      I            OUR COMPANY                    
+jcarvallo      17/02/2011 12:52:26      0            OUR COMPANY                    
+jcarvallo      17/02/2011 13:40:32      D            OUR COMPANY                    
+jcarvallo      17/02/2011 20:15:53      0            OUR COMPANY                    
+jcarvallo      18/02/2011 06:57:55      I            OUR COMPANY                    
+jcarvallo      18/02/2011 13:16:09      0            OUR COMPANY                    
+jcarvallo      18/02/2011 13:51:02      D            OUR COMPANY                    
+jcarvallo      18/02/2011 20:04:27      0            OUR COMPANY                    
+jcarvallo      19/02/2011 14:30:36      I            OUR COMPANY                    
+jcarvallo      19/02/2011 20:24:30      I            OUR COMPANY                    
+jcarvallo      21/02/2011 08:21:13      I            OUR COMPANY                    
+jcarvallo      21/02/2011 13:11:03      0            OUR COMPANY                    
+jcarvallo      21/02/2011 13:44:51      D            OUR COMPANY                    
+jcarvallo      21/02/2011 13:52:11      D            OUR COMPANY                    
+jcarvallo      21/02/2011 20:28:04      0            OUR COMPANY                    
+mmontano       21/02/2011 08:02:30      I            OUR COMPANY                    
+mmontano       21/02/2011 12:40:09      0            OUR COMPANY                    
+mmontano       21/02/2011 14:44:54      D            OUR COMPANY                    
+mmontano       21/02/2011 19:16:59      0            OUR COMPANY                    
+oferrufino     17/02/2011 08:19:55      I            OUR COMPANY                    
+oferrufino     17/02/2011 12:34:38      0            OUR COMPANY                    
+oferrufino     17/02/2011 14:19:09      D            OUR COMPANY                    
+oferrufino     17/02/2011 18:47:50      0            OUR COMPANY                    
+oferrufino     18/02/2011 08:20:02      I            OUR COMPANY                    
+oferrufino     18/02/2011 12:43:47      0            OUR COMPANY                    
+oferrufino     18/02/2011 14:26:04      D            OUR COMPANY                    
+oferrufino     21/02/2011 08:08:17      I            OUR COMPANY                    
+rayala         17/02/2011 08:40:48      D            OUR COMPANY                    
+rayala         17/02/2011 12:30:29      0            OUR COMPANY                    
+rayala         17/02/2011 14:34:52      D            OUR COMPANY                    
+rayala         17/02/2011 18:32:30      0            OUR COMPANY                    
+rayala         18/02/2011 08:47:18      D            OUR COMPANY                    
+rayala         18/02/2011 12:34:03      0            OUR COMPANY                    
+rayala         18/02/2011 14:41:22      D            OUR COMPANY                    
+rayala         18/02/2011 18:36:54      0            OUR COMPANY                    
+rayala         21/02/2011 08:37:43      D            OUR COMPANY                    
+rayala         21/02/2011 12:31:50      0            OUR COMPANY                    
+rayala         21/02/2011 14:32:47      D            OUR COMPANY                    
+rayala         21/02/2011 18:35:16      0            OUR COMPANY                    
+smarino        17/02/2011 08:40:22      D            OUR COMPANY                    
+smarino        17/02/2011 12:32:23      0            OUR COMPANY                    
+smarino        17/02/2011 14:19:43      D            OUR COMPANY                    
+smarino        17/02/2011 18:36:10      0            OUR COMPANY                    
+smarino        18/02/2011 08:31:07      D            OUR COMPANY                    
+smarino        18/02/2011 12:37:03      0            OUR COMPANY                    
+smarino        18/02/2011 13:42:49      D            OUR COMPANY                    
+smarino        18/02/2011 18:42:22      0            OUR COMPANY                    
+smarino        21/02/2011 09:12:54      D            OUR COMPANY                    
+smarino        21/02/2011 13:03:57      0            OUR COMPANY                    
+smarino        21/02/2011 14:30:54      D            OUR COMPANY                    
+smarino        21/02/2011 18:32:00      0            OUR COMPANY                    
+acamacho       17/02/2011 08:37:12      D            OUR COMPANY                    
+acamacho       17/02/2011 12:34:06      0            OUR COMPANY                    
+acamacho       17/02/2011 14:11:45      D            OUR COMPANY                    
+acamacho       17/02/2011 20:20:50      0            OUR COMPANY                    
+acamacho       18/02/2011 08:21:34      I            OUR COMPANY                    
+acamacho       18/02/2011 12:35:12      0            OUR COMPANY                    
+acamacho       18/02/2011 13:36:20      D            OUR COMPANY                    
+acamacho       18/02/2011 18:59:30      0            OUR COMPANY                    
+acamacho       21/02/2011 08:50:44      I            OUR COMPANY                    
+acamacho       21/02/2011 12:31:09      0            OUR COMPANY                    
+acamacho       21/02/2011 19:37:27      0            OUR COMPANY                    
+mgutierrez     21/02/2011 08:30:14      I            OUR COMPANY                    
+mgutierrez     21/02/2011 12:43:07      0            OUR COMPANY                    
+mgutierrez     21/02/2011 14:52:57      D            OUR COMPANY                    
+mgutierrez     21/02/2011 19:16:57      0            OUR COMPANY                    
+fllallagua     17/02/2011 09:00:05      D            OUR COMPANY                    
+fllallagua     17/02/2011 12:33:53      0            OUR COMPANY                    
+fllallagua     17/02/2011 14:11:56      D            OUR COMPANY                    
+fllallagua     17/02/2011 19:58:22      0            OUR COMPANY                    
+fllallagua     18/02/2011 08:36:42      D            OUR COMPANY                    
+fllallagua     18/02/2011 12:35:23      0            OUR COMPANY                    
+fllallagua     18/02/2011 13:29:06      D            OUR COMPANY                    
+fllallagua     18/02/2011 18:42:14      0            OUR COMPANY                    
+fllallagua     21/02/2011 08:43:02      D            OUR COMPANY                    
+fllallagua     21/02/2011 12:52:47      0            OUR COMPANY                    
+fllallagua     21/02/2011 13:29:41      D            OUR COMPANY                    
+fllallagua     21/02/2011 19:00:05      0            OUR COMPANY                    
+galcala        17/02/2011 08:41:17      D            OUR COMPANY                    
+galcala        17/02/2011 12:34:02      0            OUR COMPANY                    
+galcala        17/02/2011 14:43:12      D            OUR COMPANY                    
+galcala        17/02/2011 20:09:04      D            OUR COMPANY                    
+galcala        18/02/2011 08:45:29      D            OUR COMPANY                    
+galcala        18/02/2011 12:34:39      0            OUR COMPANY                    
+galcala        18/02/2011 14:43:07      D            OUR COMPANY                    
+galcala        18/02/2011 18:55:46      0            OUR COMPANY                    
+galcala        21/02/2011 08:46:37      D            OUR COMPANY                    
+galcala        21/02/2011 12:32:35      0            OUR COMPANY                    
+galcala        21/02/2011 14:33:44      D            OUR COMPANY                    
+galcala        21/02/2011 18:53:12      0            OUR COMPANY                    
+jbaptista      17/02/2011 08:33:11      I            OUR COMPANY                    
+jbaptista      17/02/2011 12:31:14      0            OUR COMPANY                    
+jbaptista      17/02/2011 14:36:37      D            OUR COMPANY                    
+jbaptista      17/02/2011 18:55:11      0            OUR COMPANY                    
+jbaptista      18/02/2011 08:38:14      D            OUR COMPANY                    
+jbaptista      18/02/2011 12:32:20      0            OUR COMPANY                    
+jbaptista      18/02/2011 14:36:48      0            OUR COMPANY                    
+jbaptista      18/02/2011 14:36:58      D            OUR COMPANY                    
+jbaptista      21/02/2011 08:42:37      D            OUR COMPANY                    
+jbaptista      21/02/2011 12:35:20      0            OUR COMPANY                    
+jbaptista      21/02/2011 14:28:18      D            OUR COMPANY                    
+jbaptista      21/02/2011 19:19:04      0            OUR COMPANY                    
+jdurandal      17/02/2011 08:15:28      I            OUR COMPANY                    
+jdurandal      17/02/2011 12:34:29      0            OUR COMPANY                    
+jdurandal      17/02/2011 14:29:04      D            OUR COMPANY                    
+jdurandal      17/02/2011 19:13:48      0            OUR COMPANY                    
+jdurandal      18/02/2011 08:21:29      I            OUR COMPANY                    
+jdurandal      18/02/2011 12:41:20      0            OUR COMPANY                    
+jdurandal      18/02/2011 14:07:31      D            OUR COMPANY                    
+jdurandal      18/02/2011 18:51:03      0            OUR COMPANY                    
+jdurandal      21/02/2011 08:20:18      I            OUR COMPANY                    
+jdurandal      21/02/2011 12:44:36      0            OUR COMPANY                    
+jdurandal      21/02/2011 14:20:41      D            OUR COMPANY                    
+jdurandal      21/02/2011 19:07:37      0            OUR COMPANY                    
+jduran         17/02/2011 08:34:54      I            OUR COMPANY                    
+jduran         17/02/2011 12:32:10      0            OUR COMPANY                    
+jduran         17/02/2011 14:23:28      D            OUR COMPANY                    
+jduran         17/02/2011 18:37:44      0            OUR COMPANY                    
+jduran         18/02/2011 08:38:47      D            OUR COMPANY                    
+jduran         18/02/2011 12:31:20      0            OUR COMPANY                    
+jduran         18/02/2011 14:39:46      D            OUR COMPANY                    
+jduran         18/02/2011 18:41:40      0            OUR COMPANY                    
+jduran         21/02/2011 08:31:18      I            OUR COMPANY                    
+jduran         21/02/2011 12:38:26      0            OUR COMPANY                    
+jduran         21/02/2011 14:39:26      D            OUR COMPANY                    
+jduran         21/02/2011 18:34:43      0            OUR COMPANY                    
+kmontalvo      17/02/2011 08:32:03      I            OUR COMPANY                    
+kmontalvo      17/02/2011 12:33:12      0            OUR COMPANY                    
+kmontalvo      17/02/2011 14:22:24      D            OUR COMPANY                    
+kmontalvo      17/02/2011 19:34:13      0            OUR COMPANY                    
+kmontalvo      18/02/2011 08:01:01      I            OUR COMPANY                    
+kmontalvo      18/02/2011 12:34:19      0            OUR COMPANY                    
+kmontalvo      18/02/2011 13:47:14      D            OUR COMPANY                    
+kmontalvo      18/02/2011 18:48:03      0            OUR COMPANY                    
+kmontalvo      21/02/2011 08:52:36      D            OUR COMPANY                    
+kmontalvo      21/02/2011 12:49:23      0            OUR COMPANY                    
+kmontalvo      21/02/2011 14:40:48      D            OUR COMPANY                    
+kmontalvo      21/02/2011 18:59:34      0            OUR COMPANY                    
+rcordova       17/02/2011 08:28:02      I            OUR COMPANY                    
+rcordova       17/02/2011 13:06:45      0            OUR COMPANY                    
+rcordova       17/02/2011 14:08:57      D            OUR COMPANY                    
+rcordova       17/02/2011 20:29:29      0            OUR COMPANY                    
+rcordova       18/02/2011 08:37:43      D            OUR COMPANY                    
+rcordova       18/02/2011 12:33:13      0            OUR COMPANY                    
+rcordova       18/02/2011 14:14:37      D            OUR COMPANY                    
+rcordova       18/02/2011 19:05:57      0            OUR COMPANY                    
+rcordova       21/02/2011 08:39:28      D            OUR COMPANY                    
+rcordova       21/02/2011 12:35:47      0            OUR COMPANY                    
+rcordova       21/02/2011 14:31:08      D            OUR COMPANY                    
+rcordova       21/02/2011 20:09:33      0            OUR COMPANY                    
+schopitea      17/02/2011 08:39:20      D            OUR COMPANY                    
+schopitea      17/02/2011 12:31:24      0            OUR COMPANY                    
+schopitea      17/02/2011 14:31:53      D            OUR COMPANY                    
+schopitea      17/02/2011 18:51:47      0            OUR COMPANY                    
+schopitea      18/02/2011 08:35:01      D            OUR COMPANY                    
+schopitea      18/02/2011 12:32:01      0            OUR COMPANY                    
+schopitea      18/02/2011 12:36:25      0            OUR COMPANY                    
+schopitea      18/02/2011 13:44:25      D            OUR COMPANY                    
+schopitea      18/02/2011 18:33:32      0            OUR COMPANY                    
+schopitea      21/02/2011 08:34:43      I            OUR COMPANY                    
+schopitea      21/02/2011 08:34:48      D            OUR COMPANY                    
+schopitea      21/02/2011 12:35:36      0            OUR COMPANY                    
+schopitea      21/02/2011 14:32:20      D            OUR COMPANY                    
+schopitea      21/02/2011 18:39:05      0            OUR COMPANY                    
+rsalamanca     21/02/2011 08:23:11      I            OUR COMPANY                    
+rsalamanca     21/02/2011 12:39:49      0            OUR COMPANY                    
+rsalamanca     21/02/2011 14:44:27      D            OUR COMPANY                    
+rsalamanca     21/02/2011 19:27:08      0            OUR COMPANY                    
+wrioja         17/02/2011 08:30:12      I            OUR COMPANY                    
+wrioja         17/02/2011 12:40:16      0            OUR COMPANY                    
+wrioja         17/02/2011 14:32:32      D            OUR COMPANY                    
+wrioja         17/02/2011 19:26:05      0            OUR COMPANY                    
+wrioja         18/02/2011 08:59:39      D            OUR COMPANY                    
+wrioja         18/02/2011 12:33:52      0            OUR COMPANY                    
+wrioja         18/02/2011 13:31:09      D            OUR COMPANY                    
+wrioja         18/02/2011 18:42:13      0            OUR COMPANY                    
+wrioja         21/02/2011 08:44:16      D            OUR COMPANY                    
+wrioja         21/02/2011 12:34:58      0            OUR COMPANY                    
+wrioja         21/02/2011 14:28:26      D            OUR COMPANY                    
+wrioja         21/02/2011 20:01:23      0            OUR COMPANY                    
+avillegas      17/02/2011 07:23:32      I            OUR COMPANY                    
+avillegas      17/02/2011 12:48:52      0            OUR COMPANY                    
+avillegas      17/02/2011 14:36:59      D            OUR COMPANY                    
+avillegas      17/02/2011 18:37:09      0            OUR COMPANY                    
+avillegas      18/02/2011 07:57:43      I            OUR COMPANY                    
+avillegas      18/02/2011 12:32:48      0            OUR COMPANY                    
+avillegas      18/02/2011 14:29:37      D            OUR COMPANY                    
+avillegas      18/02/2011 19:56:58      0            OUR COMPANY                    
+avillegas      21/02/2011 08:03:19      I            OUR COMPANY                    
+avillegas      21/02/2011 12:32:51      0            OUR COMPANY                    
+avillegas      21/02/2011 14:31:41      D            OUR COMPANY                    
+avillegas      21/02/2011 18:39:24      0            OUR COMPANY                    
+alaura         17/02/2011 08:23:30      I            OUR COMPANY                    
+alaura         17/02/2011 12:34:56      0            OUR COMPANY                    
+alaura         17/02/2011 14:09:21      D            OUR COMPANY                    
+alaura         17/02/2011 18:46:02      0            OUR COMPANY                    
+alaura         18/02/2011 08:29:20      I            OUR COMPANY                    
+alaura         18/02/2011 12:31:14      0            OUR COMPANY                    
+alaura         18/02/2011 13:57:16      D            OUR COMPANY                    
+alaura         18/02/2011 19:33:40      0            OUR COMPANY                    
+alaura         18/02/2011 19:35:13      0            OUR COMPANY                    
+alaura         21/02/2011 08:42:39      D            OUR COMPANY                    
+alaura         21/02/2011 12:47:21      0            OUR COMPANY                    
+alaura         21/02/2011 13:43:20      D            OUR COMPANY                    
+frojas         17/02/2011 12:49:50      0            OUR COMPANY                    
+frojas         17/02/2011 13:06:34      0            OUR COMPANY                    
+frojas         17/02/2011 14:31:35      D            OUR COMPANY                    
+frojas         17/02/2011 22:00:54      I            OUR COMPANY                    
+frojas         18/02/2011 08:47:51      D            OUR COMPANY                    
+frojas         18/02/2011 12:38:42      0            OUR COMPANY                    
+frojas         18/02/2011 14:41:44      D            OUR COMPANY                    
+frojas         18/02/2011 22:07:42      I            OUR COMPANY                    
+frojas         18/02/2011 22:07:47      I            OUR COMPANY                    
+frojas         21/02/2011 08:40:39      D            OUR COMPANY                    
+frojas         21/02/2011 10:54:57      0            OUR COMPANY                    
+frojas         21/02/2011 12:00:44      D            OUR COMPANY                    
+frojas         21/02/2011 13:36:56      D            OUR COMPANY                    
+frojas         21/02/2011 13:37:13      D            OUR COMPANY                    
+frojas         21/02/2011 13:57:21      D            OUR COMPANY                    
+frojas         21/02/2011 18:59:17      0            OUR COMPANY                    
+gvelasquez     17/02/2011 08:40:04      D            OUR COMPANY                    
+gvelasquez     17/02/2011 12:33:03      0            OUR COMPANY                    
+gvelasquez     17/02/2011 14:31:20      D            OUR COMPANY                    
+gvelasquez     17/02/2011 19:05:47      0            OUR COMPANY                    
+gvelasquez     18/02/2011 08:11:28      I            OUR COMPANY                    
+gvelasquez     18/02/2011 12:47:28      0            OUR COMPANY                    
+gvelasquez     18/02/2011 14:31:30      D            OUR COMPANY                    
+gvelasquez     18/02/2011 19:00:21      0            OUR COMPANY                    
+gvelasquez     21/02/2011 08:37:31      D            OUR COMPANY                    
+gvelasquez     21/02/2011 12:32:59      0            OUR COMPANY                    
+gvelasquez     21/02/2011 14:11:44      D            OUR COMPANY                    
+gvelasquez     21/02/2011 18:56:32      0            OUR COMPANY                    
+jrivera        17/02/2011 07:09:12      I            OUR COMPANY                    
+jrivera        17/02/2011 12:37:04      0            OUR COMPANY                    
+jrivera        17/02/2011 13:49:21      D            OUR COMPANY                    
+jrivera        17/02/2011 18:45:10      0            OUR COMPANY                    
+jrivera        18/02/2011 07:16:47      I            OUR COMPANY                    
+jrivera        18/02/2011 12:37:35      0            OUR COMPANY                    
+jrivera        18/02/2011 13:58:50      D            OUR COMPANY                    
+jrivera        18/02/2011 18:38:08      0            OUR COMPANY                    
+jrivera        21/02/2011 08:32:22      I            OUR COMPANY                    
+jrivera        21/02/2011 12:34:36      0            OUR COMPANY                    
+jrivera        21/02/2011 14:35:18      D            OUR COMPANY                    
+jrivera        21/02/2011 19:00:41      0            OUR COMPANY                    
+jfuertes       17/02/2011 08:10:56      I            OUR COMPANY                    
+jfuertes       17/02/2011 12:30:09      0            OUR COMPANY                    
+jfuertes       17/02/2011 14:23:55      D            OUR COMPANY                    
+jfuertes       17/02/2011 18:45:42      0            OUR COMPANY                    
+jfuertes       18/02/2011 08:10:06      I            OUR COMPANY                    
+jfuertes       18/02/2011 12:36:24      0            OUR COMPANY                    
+jfuertes       18/02/2011 12:52:47      D            OUR COMPANY                    
+jfuertes       18/02/2011 19:10:45      0            OUR COMPANY                    
+jfuertes       21/02/2011 08:08:26      I            OUR COMPANY                    
+jfuertes       21/02/2011 12:30:07      0            OUR COMPANY                    
+jfuertes       21/02/2011 14:34:05      D            OUR COMPANY                    
+jfuertes       21/02/2011 18:51:46      0            OUR COMPANY                    
+jguarachi      17/02/2011 08:05:20      I            OUR COMPANY                    
+jguarachi      17/02/2011 12:32:11      0            OUR COMPANY                    
+jguarachi      17/02/2011 13:18:54      D            OUR COMPANY                    
+jguarachi      17/02/2011 19:28:18      0            OUR COMPANY                    
+jguarachi      21/02/2011 08:38:04      D            OUR COMPANY                    
+jguarachi      21/02/2011 12:37:48      0            OUR COMPANY                    
+jguarachi      21/02/2011 13:22:14      D            OUR COMPANY                    
+rclaure        21/02/2011 08:18:02      I            OUR COMPANY                    
+rclaure        21/02/2011 12:33:06      0            OUR COMPANY                    
+rclaure        21/02/2011 14:27:02      D            OUR COMPANY                    
+rclaure        21/02/2011 19:02:30      0            OUR COMPANY                    
+mzambrana      17/02/2011 08:35:40      D            OUR COMPANY                    
+mzambrana      17/02/2011 12:36:55      0            OUR COMPANY                    
+mzambrana      17/02/2011 14:33:48      D            OUR COMPANY                    
+mzambrana      17/02/2011 20:58:08      0            OUR COMPANY                    
+mzambrana      18/02/2011 07:45:12      I            OUR COMPANY                    
+mzambrana      18/02/2011 12:37:42      0            OUR COMPANY                    
+mzambrana      18/02/2011 13:58:57      D            OUR COMPANY                    
+mzambrana      18/02/2011 19:57:06      0            OUR COMPANY                    
+mzambrana      21/02/2011 08:35:13      D            OUR COMPANY                    
+mzambrana      21/02/2011 12:34:29      0            OUR COMPANY                    
+mzambrana      21/02/2011 14:43:17      D            OUR COMPANY                    
+mzambrana      21/02/2011 20:18:19      0            OUR COMPANY                    
+rarteaga       17/02/2011 08:30:32      I            OUR COMPANY                    
+rarteaga       17/02/2011 12:33:27      0            OUR COMPANY                    
+rarteaga       17/02/2011 13:54:42      D            OUR COMPANY                    
+rarteaga       17/02/2011 18:45:50      0            OUR COMPANY                    
+rarteaga       18/02/2011 08:29:58      I            OUR COMPANY                    
+rarteaga       18/02/2011 12:36:18      0            OUR COMPANY                    
+rarteaga       18/02/2011 14:32:36      D            OUR COMPANY                    
+rarteaga       18/02/2011 19:04:26      D            OUR COMPANY                    
+rarteaga       18/02/2011 19:04:31      0            OUR COMPANY                    
+rarteaga       21/02/2011 08:28:49      I            OUR COMPANY                    
+rarteaga       21/02/2011 12:39:10      0            OUR COMPANY                    
+rarteaga       21/02/2011 14:35:02      D            OUR COMPANY                    
+rarteaga       21/02/2011 18:54:12      0            OUR COMPANY                    
+rchumacero     17/02/2011 08:25:41      I            OUR COMPANY                    
+rchumacero     17/02/2011 12:37:13      0            OUR COMPANY                    
+rchumacero     17/02/2011 14:35:30      D            OUR COMPANY                    
+rchumacero     17/02/2011 19:38:43      0            OUR COMPANY                    
+rchumacero     21/02/2011 08:45:18      D            OUR COMPANY                    
+rchumacero     21/02/2011 12:38:05      0            OUR COMPANY                    
+rchumacero     21/02/2011 14:42:15      D            OUR COMPANY                    
+rchumacero     21/02/2011 19:31:26      0            OUR COMPANY                    
+sclaros        17/02/2011 08:39:48      D            OUR COMPANY                    
+sclaros        17/02/2011 12:40:00      0            OUR COMPANY                    
+sclaros        17/02/2011 14:33:29      D            OUR COMPANY                    
+sclaros        17/02/2011 18:56:47      0            OUR COMPANY                    
+sclaros        18/02/2011 08:23:08      I            OUR COMPANY                    
+sclaros        18/02/2011 12:47:20      0            OUR COMPANY                    
+sclaros        18/02/2011 14:31:39      D            OUR COMPANY                    
+sclaros        18/02/2011 19:03:36      0            OUR COMPANY                    
+sclaros        21/02/2011 08:13:14      I            OUR COMPANY                    
+sclaros        21/02/2011 12:34:40      0            OUR COMPANY                    
+sclaros        21/02/2011 14:10:24      D            OUR COMPANY                    
+sclaros        21/02/2011 18:56:44      0            OUR COMPANY                    
+vsoliz         17/02/2011 08:25:11      I            OUR COMPANY                    
+vsoliz         17/02/2011 12:46:27      0            OUR COMPANY                    
+vsoliz         17/02/2011 13:57:24      D            OUR COMPANY                    
+vsoliz         17/02/2011 20:47:44      0            OUR COMPANY                    
+vsoliz         18/02/2011 08:29:40      I            OUR COMPANY                    
+vsoliz         18/02/2011 12:38:37      0            OUR COMPANY                    
+vsoliz         18/02/2011 13:39:30      D            OUR COMPANY                    
+vsoliz         18/02/2011 20:08:11      0            OUR COMPANY                    
+vsoliz         19/02/2011 17:39:43      I            OUR COMPANY                    
+vsoliz         19/02/2011 21:49:41      I            OUR COMPANY                    
+vsoliz         20/02/2011 17:44:31      I            OUR COMPANY                    
+vsoliz         20/02/2011 19:30:22      I            OUR COMPANY                    
+vsoliz         21/02/2011 12:37:29      0            OUR COMPANY                    
+vsoliz         21/02/2011 13:45:32      D            OUR COMPANY                    
+vsoliz         21/02/2011 21:03:55      0            OUR COMPANY                    
+asaldias       21/02/2011 08:38:39      D            OUR COMPANY                    
+asaldias       21/02/2011 12:32:51      0            OUR COMPANY                    
+asaldias       21/02/2011 14:40:22      D            OUR COMPANY                    
+asaldias       21/02/2011 19:37:08      0            OUR COMPANY                    
+lcotana        17/02/2011 08:34:44      I            OUR COMPANY                    
+lcotana        17/02/2011 12:31:03      0            OUR COMPANY                    
+lcotana        17/02/2011 14:29:26      D            OUR COMPANY                    
+lcotana        17/02/2011 18:32:48      0            OUR COMPANY                    
+lcotana        18/02/2011 08:25:51      I            OUR COMPANY                    
+lcotana        18/02/2011 12:42:33      D            OUR COMPANY                    
+lcotana        21/02/2011 08:40:29      D            OUR COMPANY                    
+lcotana        21/02/2011 12:30:32      0            OUR COMPANY                    
+lcotana        21/02/2011 14:42:09      D            OUR COMPANY                    
+lcotana        21/02/2011 18:37:33      0            OUR COMPANY                    
+farnez         17/02/2011 08:27:43      I            OUR COMPANY                    
+farnez         17/02/2011 12:31:33      0            OUR COMPANY                    
+farnez         17/02/2011 14:19:29      D            OUR COMPANY                    
+farnez         17/02/2011 19:02:23      0            OUR COMPANY                    
+farnez         18/02/2011 08:42:24      D            OUR COMPANY                    
+farnez         18/02/2011 12:33:45      0            OUR COMPANY                    
+farnez         18/02/2011 13:49:52      D            OUR COMPANY                    
+farnez         18/02/2011 18:36:07      0            OUR COMPANY                    
+farnez         21/02/2011 08:40:17      D            OUR COMPANY                    
+farnez         21/02/2011 12:33:29      0            OUR COMPANY                    
+farnez         21/02/2011 14:19:56      D            OUR COMPANY                    
+farnez         21/02/2011 18:44:05      0            OUR COMPANY                    
+gherbas        17/02/2011 08:39:55      D            OUR COMPANY                    
+gherbas        17/02/2011 12:32:19      D            OUR COMPANY                    
+gherbas        17/02/2011 14:34:43      D            OUR COMPANY                    
+gherbas        17/02/2011 19:20:31      0            OUR COMPANY                    
+gherbas        18/02/2011 08:30:50      I            OUR COMPANY                    
+gherbas        18/02/2011 12:36:13      0            OUR COMPANY                    
+gherbas        18/02/2011 14:38:33      D            OUR COMPANY                    
+gherbas        18/02/2011 18:50:08      0            OUR COMPANY                    
+gherbas        21/02/2011 08:03:11      I            OUR COMPANY                    
+gherbas        21/02/2011 12:46:54      0            OUR COMPANY                    
+gherbas        21/02/2011 14:08:10      D            OUR COMPANY                    
+gherbas        21/02/2011 19:18:51      0            OUR COMPANY                    
+jsolorzano     17/02/2011 08:13:29      I            OUR COMPANY                    
+jsolorzano     17/02/2011 12:36:45      0            OUR COMPANY                    
+jsolorzano     17/02/2011 14:36:49      D            OUR COMPANY                    
+jsolorzano     17/02/2011 18:42:30      0            OUR COMPANY                    
+jsolorzano     18/02/2011 07:55:02      I            OUR COMPANY                    
+jsolorzano     18/02/2011 12:37:17      0            OUR COMPANY                    
+jsolorzano     18/02/2011 14:06:21      D            OUR COMPANY                    
+jsolorzano     18/02/2011 18:43:27      0            OUR COMPANY                    
+jsolorzano     21/02/2011 08:10:53      I            OUR COMPANY                    
+jsolorzano     21/02/2011 12:35:09      0            OUR COMPANY                    
+jsolorzano     21/02/2011 14:25:14      D            OUR COMPANY                    
+jsolorzano     21/02/2011 18:45:21      0            OUR COMPANY                    
+jcardenas      21/02/2011 08:42:46      D            OUR COMPANY                    
+jcardenas      21/02/2011 12:33:18      0            OUR COMPANY                    
+jcardenas      21/02/2011 14:38:59      D            OUR COMPANY                    
+jcardenas      21/02/2011 18:36:36      0            OUR COMPANY                    
+mmejia         17/02/2011 08:41:54      D            OUR COMPANY                    
+mmejia         17/02/2011 12:30:40      0            OUR COMPANY                    
+mmejia         17/02/2011 14:18:27      D            OUR COMPANY                    
+mmejia         17/02/2011 18:44:27      0            OUR COMPANY                    
+mmejia         18/02/2011 08:30:37      D            OUR COMPANY                    
+mmejia         18/02/2011 12:38:44      0            OUR COMPANY                    
+mmejia         18/02/2011 14:21:41      D            OUR COMPANY                    
+mmejia         18/02/2011 18:31:36      0            OUR COMPANY                    
+mmejia         21/02/2011 08:37:50      D            OUR COMPANY                    
+mmejia         21/02/2011 12:31:49      0            OUR COMPANY                    
+mmejia         21/02/2011 14:37:39      D            OUR COMPANY                    
+mmejia         21/02/2011 18:36:43      0            OUR COMPANY                    
+plema          17/02/2011 08:32:09      I            OUR COMPANY                    
+plema          17/02/2011 12:36:21      0            OUR COMPANY                    
+plema          17/02/2011 14:36:51      D            OUR COMPANY                    
+plema          17/02/2011 18:31:17      0            OUR COMPANY                    
+plema          18/02/2011 08:34:06      D            OUR COMPANY                    
+plema          18/02/2011 12:34:51      0            OUR COMPANY                    
+plema          18/02/2011 14:33:25      D            OUR COMPANY                    
+plema          18/02/2011 18:35:49      0            OUR COMPANY                    
+plema          21/02/2011 12:37:18      0            OUR COMPANY                    
+plema          21/02/2011 14:29:14      D            OUR COMPANY                    
+plema          21/02/2011 18:42:54      0            OUR COMPANY                    
+rmedrano       17/02/2011 08:59:21      D            OUR COMPANY                    
+rmedrano       17/02/2011 12:31:53      0            OUR COMPANY                    
+rmedrano       17/02/2011 13:08:57      D            OUR COMPANY                    
+rmedrano       17/02/2011 21:03:10      0            OUR COMPANY                    
+rmedrano       18/02/2011 08:09:37      I            OUR COMPANY                    
+rmedrano       18/02/2011 12:51:04      0            OUR COMPANY                    
+rmedrano       18/02/2011 18:34:42      0            OUR COMPANY                    
+rmedrano       21/02/2011 08:50:16      D            OUR COMPANY                    
+rmedrano       21/02/2011 12:33:57      0            OUR COMPANY                    
+rmedrano       21/02/2011 13:47:36      D            OUR COMPANY                    
+rmedrano       21/02/2011 18:36:48      0            OUR COMPANY                    
+gmontano       17/02/2011 08:07:41      I            OUR COMPANY                    
+gmontano       17/02/2011 12:29:47      0            OUR COMPANY                    
+gmontano       17/02/2011 14:23:41      D            OUR COMPANY                    
+gmontano       17/02/2011 18:32:40      0            OUR COMPANY                    
+gmontano       18/02/2011 08:27:06      I            OUR COMPANY                    
+gmontano       18/02/2011 12:37:26      0            OUR COMPANY                    
+gmontano       21/02/2011 07:39:10      I            OUR COMPANY                    
+gmontano       21/02/2011 12:35:27      0            OUR COMPANY                    
+gmontano       21/02/2011 14:36:45      D            OUR COMPANY                    
+gmontano       21/02/2011 18:43:37      0            OUR COMPANY                    
+rmijaria       21/02/2011 08:22:44      I            OUR COMPANY                    
+rmijaria       21/02/2011 12:33:06      0            OUR COMPANY                    
+rmijaria       21/02/2011 14:23:05      D            OUR COMPANY                    
+rmijaria       21/02/2011 19:54:24      0            OUR COMPANY                    
+eyrady         17/02/2011 08:09:50      I            OUR COMPANY                    
+eyrady         17/02/2011 12:22:52      0            OUR COMPANY                    
+eyrady         17/02/2011 14:19:57      D            OUR COMPANY                    
+eyrady         18/02/2011 08:32:57      D            OUR COMPANY                    
+eyrady         18/02/2011 12:37:10      0            OUR COMPANY                    
+eyrady         21/02/2011 08:31:28      I            OUR COMPANY                    
+eyrady         21/02/2011 12:32:48      0            OUR COMPANY                    
+eyrady         21/02/2011 14:05:01      D            OUR COMPANY                    
+eyrady         21/02/2011 18:28:07      D            OUR COMPANY                    
+jcanedo        17/02/2011 08:27:09      I            OUR COMPANY                    
+jcanedo        17/02/2011 12:31:50      0            OUR COMPANY                    
+jcanedo        17/02/2011 14:28:39      D            OUR COMPANY                    
+jcanedo        17/02/2011 18:33:06      0            OUR COMPANY                    
+jcanedo        18/02/2011 08:27:49      I            OUR COMPANY                    
+jcanedo        18/02/2011 12:30:59      0            OUR COMPANY                    
+jcanedo        18/02/2011 14:27:02      D            OUR COMPANY                    
+jcanedo        18/02/2011 18:44:32      0            OUR COMPANY                    
+jcanedo        21/02/2011 08:23:46      I            OUR COMPANY                    
+jcanedo        21/02/2011 12:30:18      0            OUR COMPANY                    
+jcanedo        21/02/2011 14:24:05      D            OUR COMPANY                    
+jgarcia        17/02/2011 08:00:29      I            OUR COMPANY                    
+jgarcia        17/02/2011 12:36:32      0            OUR COMPANY                    
+jgarcia        17/02/2011 14:20:55      D            OUR COMPANY                    
+jgarcia        17/02/2011 18:40:40      0            OUR COMPANY                    
+jgarcia        18/02/2011 08:20:25      I            OUR COMPANY                    
+jgarcia        18/02/2011 12:31:11      0            OUR COMPANY                    
+jgarcia        18/02/2011 14:23:00      D            OUR COMPANY                    
+jgarcia        18/02/2011 18:36:56      0            OUR COMPANY                    
+jgarcia        21/02/2011 08:27:31      I            OUR COMPANY                    
+jgarcia        21/02/2011 12:32:36      0            OUR COMPANY                    
+jgarcia        21/02/2011 14:26:11      D            OUR COMPANY                    
+jgarcia        21/02/2011 18:47:40      0            OUR COMPANY                    
+jheredia       17/02/2011 07:57:35      I            OUR COMPANY                    
+jheredia       17/02/2011 12:31:38      0            OUR COMPANY                    
+jheredia       17/02/2011 14:07:16      D            OUR COMPANY                    
+jheredia       17/02/2011 18:43:10      0            OUR COMPANY                    
+jheredia       18/02/2011 07:44:49      I            OUR COMPANY                    
+jheredia       18/02/2011 12:29:38      0            OUR COMPANY                    
+jheredia       18/02/2011 14:32:52      D            OUR COMPANY                    
+jheredia       18/02/2011 18:31:45      D            OUR COMPANY                    
+jheredia       21/02/2011 08:04:46      I            OUR COMPANY                    
+jheredia       21/02/2011 12:28:53      0            OUR COMPANY                    
+jheredia       21/02/2011 14:04:00      D            OUR COMPANY                    
+jheredia       21/02/2011 18:46:26      0            OUR COMPANY                    
+lsaravia       17/02/2011 08:39:42      D            OUR COMPANY                    
+lsaravia       17/02/2011 12:36:06      0            OUR COMPANY                    
+lsaravia       17/02/2011 14:31:16      D            OUR COMPANY                    
+lsaravia       17/02/2011 19:03:30      0            OUR COMPANY                    
+lsaravia       18/02/2011 08:50:43      D            OUR COMPANY                    
+lsaravia       18/02/2011 12:37:49      0            OUR COMPANY                    
+lsaravia       18/02/2011 14:06:00      D            OUR COMPANY                    
+lsaravia       18/02/2011 14:06:10      D            OUR COMPANY                    
+lsaravia       18/02/2011 18:40:04      0            OUR COMPANY                    
+lsaravia       21/02/2011 08:33:51      D            OUR COMPANY                    
+lsaravia       21/02/2011 12:33:23      0            OUR COMPANY                    
+lsaravia       21/02/2011 14:33:27      D            OUR COMPANY                    
+lsaravia       21/02/2011 19:08:07      0            OUR COMPANY                    
+lortuno        17/02/2011 07:48:54      I            OUR COMPANY                    
+lortuno        17/02/2011 12:30:15      0            OUR COMPANY                    
+lortuno        17/02/2011 13:53:08      D            OUR COMPANY                    
+lortuno        17/02/2011 18:34:29      0            OUR COMPANY                    
+lortuno        18/02/2011 07:48:35      I            OUR COMPANY                    
+lortuno        18/02/2011 12:36:32      0            OUR COMPANY                    
+lortuno        18/02/2011 13:45:39      D            OUR COMPANY                    
+lortuno        18/02/2011 18:35:13      0            OUR COMPANY                    
+lortuno        21/02/2011 07:47:46      I            OUR COMPANY                    
+lortuno        21/02/2011 12:32:28      0            OUR COMPANY                    
+lortuno        21/02/2011 14:09:08      D            OUR COMPANY                    
+lortuno        21/02/2011 18:39:14      0            OUR COMPANY                    
+fmeza          17/02/2011 08:37:49      D            OUR COMPANY                    
+fmeza          17/02/2011 12:35:52      0            OUR COMPANY                    
+fmeza          17/02/2011 14:38:16      D            OUR COMPANY                    
+fmeza          17/02/2011 18:46:21      0            OUR COMPANY                    
+fmeza          18/02/2011 08:31:51      D            OUR COMPANY                    
+fmeza          18/02/2011 12:31:29      D            OUR COMPANY                    
+fmeza          18/02/2011 14:40:18      D            OUR COMPANY                    
+fmeza          18/02/2011 18:59:10      0            OUR COMPANY                    
+fmeza          21/02/2011 08:40:35      D            OUR COMPANY                    
+fmeza          21/02/2011 12:41:26      0            OUR COMPANY                    
+fmeza          21/02/2011 14:25:22      D            OUR COMPANY                    
+fmeza          21/02/2011 19:25:39      0            OUR COMPANY                    
+pramirez       17/02/2011 08:31:31      I            OUR COMPANY                    
+pramirez       17/02/2011 12:33:44      0            OUR COMPANY                    
+pramirez       17/02/2011 14:25:58      D            OUR COMPANY                    
+pramirez       17/02/2011 18:36:40      0            OUR COMPANY                    
+pramirez       18/02/2011 08:33:05      D            OUR COMPANY                    
+pramirez       18/02/2011 12:30:49      0            OUR COMPANY                    
+pramirez       18/02/2011 14:31:49      D            OUR COMPANY                    
+pramirez       18/02/2011 18:56:20      0            OUR COMPANY                    
+pramirez       21/02/2011 08:29:11      I            OUR COMPANY                    
+pramirez       21/02/2011 12:35:17      0            OUR COMPANY                    
+rsoliz         21/02/2011 08:40:26      I            OUR COMPANY                    
+rsoliz         21/02/2011 12:41:45      0            OUR COMPANY                    
+rsoliz         21/02/2011 14:32:54      D            OUR COMPANY                    
+rsoliz         21/02/2011 19:53:50      0            OUR COMPANY                    
+rmartinez      17/02/2011 07:51:09      I            OUR COMPANY                    
+rmartinez      17/02/2011 12:35:34      0            OUR COMPANY                    
+rmartinez      17/02/2011 14:25:49      D            OUR COMPANY                    
+rmartinez      17/02/2011 18:46:10      0            OUR COMPANY                    
+rmartinez      18/02/2011 08:19:17      I            OUR COMPANY                    
+rmartinez      18/02/2011 12:36:35      D            OUR COMPANY                    
+rmartinez      18/02/2011 12:36:48      0            OUR COMPANY                    
+rmartinez      18/02/2011 14:05:31      D            OUR COMPANY                    
+rmartinez      18/02/2011 18:59:19      0            OUR COMPANY                    
+rmartinez      21/02/2011 07:50:02      I            OUR COMPANY                    
+rmartinez      21/02/2011 12:33:33      0            OUR COMPANY                    
+rmartinez      21/02/2011 14:23:40      D            OUR COMPANY                    
+rmartinez      21/02/2011 19:17:29      0            OUR COMPANY                    
+aencinas       17/02/2011 08:25:11      I            OUR COMPANY                    
+aencinas       17/02/2011 12:30:15      0            OUR COMPANY                    
+aencinas       17/02/2011 14:20:38      D            OUR COMPANY                    
+aencinas       17/02/2011 18:30:06      0            OUR COMPANY                    
+aencinas       18/02/2011 08:27:44      I            OUR COMPANY                    
+aencinas       18/02/2011 12:31:23      0            OUR COMPANY                    
+aencinas       18/02/2011 14:24:51      D            OUR COMPANY                    
+aencinas       18/02/2011 18:35:59      0            OUR COMPANY                    
+aencinas       21/02/2011 08:28:24      I            OUR COMPANY                    
+aencinas       21/02/2011 12:30:14      0            OUR COMPANY                    
+aencinas       21/02/2011 14:28:09      D            OUR COMPANY                    
+aencinas       21/02/2011 18:33:08      0            OUR COMPANY                    
+baranibar      17/02/2011 08:16:39      I            OUR COMPANY                    
+baranibar      17/02/2011 12:34:40      0            OUR COMPANY                    
+baranibar      17/02/2011 14:13:41      D            OUR COMPANY                    
+baranibar      17/02/2011 18:41:49      0            OUR COMPANY                    
+baranibar      18/02/2011 07:55:36      I            OUR COMPANY                    
+baranibar      18/02/2011 12:30:53      0            OUR COMPANY                    
+baranibar      18/02/2011 13:44:48      D            OUR COMPANY                    
+baranibar      18/02/2011 18:48:03      0            OUR COMPANY                    
+baranibar      21/02/2011 08:14:48      I            OUR COMPANY                    
+baranibar      21/02/2011 12:31:56      0            OUR COMPANY                    
+baranibar      21/02/2011 14:12:59      D            OUR COMPANY                    
+baranibar      21/02/2011 18:36:27      0            OUR COMPANY                    
+czamora        17/02/2011 08:39:13      D            OUR COMPANY                    
+czamora        17/02/2011 12:34:18      0            OUR COMPANY                    
+czamora        17/02/2011 14:19:20      D            OUR COMPANY                    
+czamora        17/02/2011 19:24:55      0            OUR COMPANY                    
+czamora        18/02/2011 08:29:25      I            OUR COMPANY                    
+czamora        18/02/2011 13:59:25      D            OUR COMPANY                    
+czamora        18/02/2011 18:31:49      0            OUR COMPANY                    
+czamora        21/02/2011 08:25:00      I            OUR COMPANY                    
+czamora        21/02/2011 12:38:28      0            OUR COMPANY                    
+czamora        21/02/2011 19:07:12      0            OUR COMPANY                    
+cquiroga       17/02/2011 08:33:36      I            OUR COMPANY                    
+cquiroga       17/02/2011 12:58:55      0            OUR COMPANY                    
+cquiroga       17/02/2011 13:57:13      D            OUR COMPANY                    
+cquiroga       17/02/2011 19:04:08      0            OUR COMPANY                    
+cquiroga       18/02/2011 08:45:22      D            OUR COMPANY                    
+cquiroga       18/02/2011 12:41:33      0            OUR COMPANY                    
+cquiroga       18/02/2011 14:18:00      D            OUR COMPANY                    
+cquiroga       18/02/2011 19:04:42      0            OUR COMPANY                    
+cquiroga       20/02/2011 09:29:07      I            OUR COMPANY                    
+cquiroga       20/02/2011 12:44:38      I            OUR COMPANY                    
+cquiroga       21/02/2011 08:36:24      D            OUR COMPANY                    
+cquiroga       21/02/2011 12:47:37      0            OUR COMPANY                    
+cquiroga       21/02/2011 14:50:51      D            OUR COMPANY                    
+dayaviri       17/02/2011 08:25:21      I            OUR COMPANY                    
+dayaviri       17/02/2011 12:38:12      0            OUR COMPANY                    
+dayaviri       17/02/2011 14:22:31      D            OUR COMPANY                    
+dayaviri       17/02/2011 18:39:52      0            OUR COMPANY                    
+dayaviri       18/02/2011 08:32:46      D            OUR COMPANY                    
+dayaviri       18/02/2011 12:37:22      0            OUR COMPANY                    
+dayaviri       18/02/2011 13:41:06      D            OUR COMPANY                    
+dayaviri       18/02/2011 18:48:36      0            OUR COMPANY                    
+dayaviri       21/02/2011 08:41:39      D            OUR COMPANY                    
+dayaviri       21/02/2011 12:35:20      0            OUR COMPANY                    
+dayaviri       21/02/2011 14:20:48      D            OUR COMPANY                    
+dayaviri       21/02/2011 18:46:59      0            OUR COMPANY                    
+gandrade       17/02/2011 08:31:11      I            COBIJA                         
+gandrade       17/02/2011 13:51:58      0            COBIJA                         
+gandrade       17/02/2011 15:54:05      D            COBIJA                         
+gandrade       17/02/2011 23:06:22      I            COBIJA                         
+gandrade       18/02/2011 08:34:09      D            COBIJA                         
+gandrade       18/02/2011 12:57:56      0            COBIJA                         
+gandrade       18/02/2011 16:15:29      D            COBIJA                         
+gandrade       18/02/2011 22:41:19      I            COBIJA                         
+gandrade       21/02/2011 08:40:28      D            COBIJA                         
+gandrade       21/02/2011 16:32:09      D            COBIJA                         
+gandrade       21/02/2011 22:28:21      I            COBIJA                         
+iapaza         17/02/2011 07:27:30      I            COBIJA                         
+iapaza         18/02/2011 07:23:52      I            COBIJA                         
+iapaza         18/02/2011 12:33:31      0            COBIJA                         
+iapaza         18/02/2011 15:27:37      D            COBIJA                         
+iapaza         21/02/2011 07:26:29      I            COBIJA                         
+iapaza         21/02/2011 12:31:02      0            COBIJA                         
+iapaza         21/02/2011 15:27:20      D            COBIJA                         
+iapaza         21/02/2011 18:34:03      0            COBIJA                         
+ecalizaya      17/02/2011 00:40:55      I            COBIJA                         
+ecalizaya      17/02/2011 15:29:17      I            COBIJA                         
+ecalizaya      18/02/2011 00:34:50      I            COBIJA                         
+ecalizaya      18/02/2011 15:25:33      D            COBIJA                         
+ecalizaya      18/02/2011 23:38:23      I            COBIJA                         
+ecalizaya      19/02/2011 15:28:09      I            COBIJA                         
+ecalizaya      19/02/2011 23:30:37      I            COBIJA                         
+ecalizaya      20/02/2011 15:30:33      I            COBIJA                         
+ecalizaya      20/02/2011 23:35:18      I            COBIJA                         
+ecalizaya      21/02/2011 23:26:40      I            COBIJA                         
+ccamacho       17/02/2011 07:26:30      I            COBIJA                         
+ccamacho       17/02/2011 12:37:25      0            COBIJA                         
+ccamacho       17/02/2011 15:26:31      D            COBIJA                         
+ccamacho       17/02/2011 18:40:42      D            COBIJA                         
+ccamacho       18/02/2011 07:29:07      I            COBIJA                         
+ccamacho       18/02/2011 12:34:18      0            COBIJA                         
+ccamacho       18/02/2011 15:19:35      D            COBIJA                         
+ccamacho       18/02/2011 18:37:56      0            COBIJA                         
+ccamacho       21/02/2011 07:30:49      I            COBIJA                         
+ccamacho       21/02/2011 12:35:42      0            COBIJA                         
+ccamacho       21/02/2011 15:20:48      0            COBIJA                         
+ccamacho       21/02/2011 15:20:59      D            COBIJA                         
+ccamacho       21/02/2011 18:57:28      0            COBIJA                         
+ychoque        19/02/2011 07:26:45      I            COBIJA                         
+ychoque        19/02/2011 15:41:48      I            COBIJA                         
+ychoque        20/02/2011 07:28:34      I            COBIJA                         
+ychoque        21/02/2011 07:21:47      I            COBIJA                         
+ychoque        21/02/2011 15:34:16      I            COBIJA                         
+fcorrea        17/02/2011 07:18:40      I            COBIJA                         
+fcorrea        17/02/2011 12:52:09      D            COBIJA                         
+fcorrea        17/02/2011 15:31:34      D            COBIJA                         
+fcorrea        17/02/2011 18:34:44      0            COBIJA                         
+fcorrea        18/02/2011 07:25:26      I            COBIJA                         
+fcorrea        18/02/2011 13:02:25      0            COBIJA                         
+fcorrea        18/02/2011 15:33:55      D            COBIJA                         
+fcorrea        18/02/2011 18:55:28      D            COBIJA                         
+fcorrea        21/02/2011 07:22:50      I            COBIJA                         
+fcorrea        21/02/2011 19:05:15      0            COBIJA                         
+gcruz          17/02/2011 07:28:11      I            COBIJA                         
+gcruz          17/02/2011 12:30:25      0            COBIJA                         
+gcruz          17/02/2011 15:30:21      I            COBIJA                         
+gcruz          17/02/2011 18:35:16      0            COBIJA                         
+gcruz          18/02/2011 07:22:49      I            COBIJA                         
+gcruz          18/02/2011 12:30:35      0            COBIJA                         
+gcruz          18/02/2011 15:13:34      D            COBIJA                         
+gcruz          18/02/2011 18:35:23      0            COBIJA                         
+gcruz          21/02/2011 07:26:21      I            COBIJA                         
+gcruz          21/02/2011 12:30:06      0            COBIJA                         
+gcruz          21/02/2011 15:19:07      D            COBIJA                         
+gcruz          21/02/2011 18:33:50      0            COBIJA                         
+jdelgadillo    17/02/2011 07:27:54      I            COBIJA                         
+jdelgadillo    17/02/2011 12:32:43      0            COBIJA                         
+jdelgadillo    17/02/2011 15:33:43      D            COBIJA                         
+jdelgadillo    17/02/2011 18:34:16      0            COBIJA                         
+jdelgadillo    18/02/2011 07:25:01      I            COBIJA                         
+jdelgadillo    18/02/2011 12:31:29      0            COBIJA                         
+jdelgadillo    18/02/2011 15:29:02      D            COBIJA                         
+jdelgadillo    18/02/2011 18:32:42      0            COBIJA                         
+jdelgadillo    21/02/2011 07:34:58      I            COBIJA                         
+jdelgadillo    21/02/2011 12:30:47      D            COBIJA                         
+jdelgadillo    21/02/2011 15:34:07      D            COBIJA                         
+jdelgadillo    21/02/2011 18:33:41      D            COBIJA                         
+rescobar       17/02/2011 07:31:13      I            COBIJA                         
+rescobar       17/02/2011 12:32:33      0            COBIJA                         
+rescobar       17/02/2011 15:27:49      D            COBIJA                         
+rescobar       17/02/2011 18:30:32      D            COBIJA                         
+rescobar       18/02/2011 07:34:31      I            COBIJA                         
+rescobar       18/02/2011 12:30:05      0            COBIJA                         
+rescobar       18/02/2011 15:27:23      D            COBIJA                         
+rescobar       18/02/2011 18:36:04      0            COBIJA                         
+rescobar       21/02/2011 07:29:05      I            COBIJA                         
+rescobar       21/02/2011 12:54:11      D            COBIJA                         
+rescobar       21/02/2011 12:59:05      0            COBIJA                         
+rescobar       21/02/2011 13:29:22      D            COBIJA                         
+rescobar       21/02/2011 15:30:44      I            COBIJA                         
+jflores        17/02/2011 07:27:42      I            COBIJA                         
+jflores        17/02/2011 12:39:26      0            COBIJA                         
+jflores        17/02/2011 15:24:00      D            COBIJA                         
+jflores        17/02/2011 18:40:59      0            COBIJA                         
+jflores        18/02/2011 07:22:40      I            COBIJA                         
+jflores        18/02/2011 12:31:52      0            COBIJA                         
+jflores        18/02/2011 15:25:57      D            COBIJA                         
+jflores        18/02/2011 19:09:56      0            COBIJA                         
+jflores        21/02/2011 07:28:15      I            COBIJA                         
+jflores        21/02/2011 12:35:49      0            COBIJA                         
+jflores        21/02/2011 12:36:01      0            COBIJA                         
+jflores        21/02/2011 15:31:45      D            COBIJA                         
+jflores        21/02/2011 19:02:41      0            COBIJA                         
+iherrera       17/02/2011 07:26:43      I            COBIJA                         
+iherrera       17/02/2011 15:18:29      D            COBIJA                         
+iherrera       17/02/2011 18:30:09      0            COBIJA                         
+iherrera       18/02/2011 07:28:54      I            COBIJA                         
+iherrera       18/02/2011 12:35:06      0            COBIJA                         
+iherrera       18/02/2011 15:33:18      D            COBIJA                         
+iherrera       18/02/2011 18:38:59      0            COBIJA                         
+iherrera       21/02/2011 07:28:05      I            COBIJA                         
+iherrera       21/02/2011 12:30:27      0            COBIJA                         
+iherrera       21/02/2011 15:20:13      D            COBIJA                         
+iherrera       21/02/2011 18:37:05      0            COBIJA                         
+rhuanquiri     17/02/2011 07:29:15      I            COBIJA                         
+rhuanquiri     17/02/2011 15:31:46      0            COBIJA                         
+rhuanquiri     18/02/2011 07:28:35      I            COBIJA                         
+rhuanquiri     18/02/2011 15:31:28      0            COBIJA                         
+rhuanquiri     18/02/2011 23:30:30      I            COBIJA                         
+rhuanquiri     19/02/2011 07:36:14      I            COBIJA                         
+rhuanquiri     19/02/2011 23:25:12      I            COBIJA                         
+rhuanquiri     20/02/2011 07:33:32      I            COBIJA                         
+rhuanquiri     20/02/2011 23:30:32      I            COBIJA                         
+rhuanquiri     21/02/2011 07:33:47      I            COBIJA                         
+mjimenez       17/02/2011 07:40:42      I            COBIJA                         
+mjimenez       18/02/2011 15:25:16      D            COBIJA                         
+mjimenez       18/02/2011 19:49:22      0            COBIJA                         
+mjimenez       19/02/2011 09:02:23      I            COBIJA                         
+mjimenez       19/02/2011 14:49:06      I            COBIJA                         
+mjimenez       21/02/2011 07:38:07      I            COBIJA                         
+mjimenez       21/02/2011 13:24:00      0            COBIJA                         
+mjimenez       21/02/2011 15:27:04      D            COBIJA                         
+mjimenez       21/02/2011 20:17:45      0            COBIJA                         
+mjimeno        17/02/2011 07:32:47      I            COBIJA                         
+mjimeno        17/02/2011 12:38:43      0            COBIJA                         
+mjimeno        17/02/2011 15:32:00      D            COBIJA                         
+mjimeno        17/02/2011 18:39:47      0            COBIJA                         
+mjimeno        18/02/2011 07:37:43      I            COBIJA                         
+mjimeno        18/02/2011 12:37:23      0            COBIJA                         
+mjimeno        18/02/2011 15:29:36      D            COBIJA                         
+mjimeno        18/02/2011 19:10:58      0            COBIJA                         
+mjimeno        21/02/2011 07:37:12      I            COBIJA                         
+mjimeno        21/02/2011 15:25:52      D            COBIJA                         
+mjimeno        21/02/2011 18:48:58      0            COBIJA                         
+mortega        17/02/2011 07:23:15      I            COBIJA                         
+mortega        17/02/2011 12:31:15      0            COBIJA                         
+mortega        17/02/2011 15:24:37      D            COBIJA                         
+mortega        17/02/2011 18:31:02      0            COBIJA                         
+mortega        18/02/2011 07:26:42      I            COBIJA                         
+mortega        18/02/2011 12:35:36      0            COBIJA                         
+mortega        18/02/2011 15:34:26      D            COBIJA                         
+mortega        18/02/2011 19:43:59      0            COBIJA                         
+mortega        21/02/2011 07:32:12      I            COBIJA                         
+mortega        21/02/2011 12:33:41      0            COBIJA                         
+mortega        21/02/2011 15:27:27      D            COBIJA                         
+mortega        21/02/2011 20:17:25      0            COBIJA                         
+apalomo        18/02/2011 07:35:17      I            COBIJA                         
+apalomo        18/02/2011 12:34:04      0            COBIJA                         
+apalomo        18/02/2011 15:24:58      D            COBIJA                         
+apalomo        18/02/2011 18:36:17      0            COBIJA                         
+apalomo        21/02/2011 07:30:58      I            COBIJA                         
+ypaniagua      17/02/2011 15:24:16      D            COBIJA                         
+ypaniagua      17/02/2011 23:31:07      I            COBIJA                         
+ypaniagua      18/02/2011 15:25:47      D            COBIJA                         
+ypaniagua      18/02/2011 23:37:43      I            COBIJA                         
+ypaniagua      19/02/2011 07:25:16      I            COBIJA                         
+ypaniagua      19/02/2011 15:34:24      I            COBIJA                         
+ypaniagua      20/02/2011 07:28:24      I            COBIJA                         
+ypaniagua      20/02/2011 15:34:50      I            COBIJA                         
+ypaniagua      21/02/2011 07:27:46      I            COBIJA                         
+ypaniagua      21/02/2011 15:34:29      0            COBIJA                         
+eparra         17/02/2011 07:35:41      I            COBIJA                         
+eparra         17/02/2011 23:21:18      I            COBIJA                         
+eparra         18/02/2011 07:40:58      I            COBIJA                         
+eparra         21/02/2011 15:21:11      D            COBIJA                         
+arocha         17/02/2011 07:29:07      I            COBIJA                         
+arocha         17/02/2011 12:34:57      0            COBIJA                         
+arocha         17/02/2011 15:34:06      D            COBIJA                         
+arocha         17/02/2011 20:20:06      0            COBIJA                         
+arocha         18/02/2011 07:27:16      I            COBIJA                         
+arocha         18/02/2011 15:35:39      0            COBIJA                         
+arocha         21/02/2011 07:31:39      I            COBIJA                         
+arocha         21/02/2011 15:26:19      D            COBIJA                         
+jsolis         18/02/2011 07:19:31      I            COBIJA                         
+rvacap         17/02/2011 07:26:21      I            COBIJA                         
+rvacap         17/02/2011 12:40:06      0            COBIJA                         
+rvacap         17/02/2011 15:17:07      D            COBIJA                         
+rvacap         17/02/2011 18:39:36      0            COBIJA                         
+rvacap         18/02/2011 07:25:12      I            COBIJA                         
+rvacap         18/02/2011 13:07:16      0            COBIJA                         
+rvacap         18/02/2011 15:21:29      D            COBIJA                         
+rvacap         18/02/2011 18:55:57      0            COBIJA                         
+gzunagua       17/02/2011 07:23:25      I            COBIJA                         
+gzunagua       18/02/2011 07:26:10      I            COBIJA                         
+gzunagua       18/02/2011 12:30:21      0            COBIJA                         
+gzunagua       21/02/2011 07:27:58      I            COBIJA                         
+gzunagua       21/02/2011 12:35:32      0            COBIJA                         
+gzunagua       21/02/2011 14:20:33      D            COBIJA                         
+gzunagua       21/02/2011 15:27:37      D            COBIJA                         
+gzunagua       21/02/2011 18:56:30      0            COBIJA                         
+oromero        17/02/2011 07:30:37      I            COBIJA                         
+oromero        17/02/2011 12:32:06      0            COBIJA                         
+oromero        17/02/2011 15:29:25      I            COBIJA                         
+oromero        17/02/2011 18:37:29      0            COBIJA                         
+oromero        18/02/2011 07:32:51      I            COBIJA                         
+oromero        18/02/2011 12:32:32      0            COBIJA                         
+oromero        18/02/2011 15:26:21      D            COBIJA                         
+oromero        18/02/2011 18:37:14      0            COBIJA                         
+oromero        21/02/2011 08:29:40      I            COBIJA                         
+oromero        21/02/2011 12:31:34      0            COBIJA                         
+oromero        21/02/2011 15:26:57      I            COBIJA                         
+oromero        21/02/2011 19:33:10      0            COBIJA                         

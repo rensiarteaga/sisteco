@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<parameter name="fecha_inicio" class="java.util.Date"/>
+	<parameter name="fecha_fin" class="java.util.Date"/>
+	<parameter name="id_unidad_organizacional" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select UO.id_unidad_organizacional
+
+       ,UO.nombre_unidad
+       ,UO.codigo
+       ,coalesce((select count(distinct (CORR.numero))
+                       from flujo.tfl_correspondencia CORR
+                       where CORR.estado <> 'anulado'
+                             and CORR.estado = 'enviado'
+                             and CORR.tipo = 'emitida'
+                             and CORR.id_uo = UO.id_unidad_organizacional
+                             and corr.fecha_reg between $P{fecha_inicio} and $P{fecha_fin}),0) as externo_emitido
+       ,coalesce((select count(distinct (CORR.numero))
+                       from flujo.tfl_correspondencia CORR
+                       where CORR.estado <> 'anulado'
+                             and CORR.estado = 'enviado'
+                             and CORR.tipo = 'interna'
+                             and CORR.id_uo = UO.id_unidad_organizacional
+                             and corr.fecha_reg between $P{fecha_inicio} and $P{fecha_fin}),0) as interno_emitido
+       ,coalesce((select count(distinct (CORR.numero))
+                       from flujo.tfl_correspondencia CORR
+                       where CORR.estado <> 'anulado'
+                             and (CORR.estado = 'recibido' or CORR.estado='pendiente_recibido')
+                             and CORR.tipo = 'externa'
+                             and CORR.id_uo = UO.id_unidad_organizacional
+                              and corr.fecha_reg between $P{fecha_inicio} and $P{fecha_fin}),0) as externo_recibido
+       ,coalesce((select count(distinct (CORR.numero))
+                       from flujo.tfl_correspondencia CORR
+                       where CORR.estado <> 'anulado'
+                             and (CORR.estado = 'recibido' or CORR.estado='pendiente_recibido')
+                             and CORR.tipo = 'interna'
+                             and CORR.id_uo = UO.id_unidad_organizacional
+                              and corr.fecha_reg between  $P{fecha_inicio} and $P{fecha_fin}),0) as interno_recibido
+from kard.tkp_unidad_organizacional UO
+where UO.correspondencia = 'si'
+and uo.id_unidad_organizacional like $P{id_unidad_organizacional}
+order by prioridad]]>
+	</queryString>
+	<field name="id_unidad_organizacional" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre_unidad" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="codigo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="externo_emitido" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="interno_emitido" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="externo_recibido" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="interno_recibido" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="572" splitType="Stretch">
+			<pie3DChart>
+				<chart renderType="draw" theme="default">
+					<reportElement x="10" y="204" width="346" height="181"/>
+					<chartTitle>
+						<font size="12" isBold="true"/>
+						<titleExpression><![CDATA["DOCUMENTOS EXTERNOS EMITIDOS"]]></titleExpression>
+					</chartTitle>
+					<chartSubtitle>
+						<font size="5"/>
+					</chartSubtitle>
+					<chartLegend position="Bottom">
+						<font size="5"/>
+					</chartLegend>
+				</chart>
+				<pieDataset>
+					<keyExpression><![CDATA[$F{codigo}]]></keyExpression>
+					<valueExpression><![CDATA[$F{externo_emitido}]]></valueExpression>
+					<labelExpression><![CDATA[$F{codigo}+" - "+$F{externo_emitido}]]></labelExpression>
+				</pieDataset>
+				<pie3DPlot>
+					<plot>
+						<seriesColor seriesOrder="0" color="#000066"/>
+						<seriesColor seriesOrder="1" color="#0033FF"/>
+						<seriesColor seriesOrder="2" color="#F7F733"/>
+						<seriesColor seriesOrder="3" color="#336600"/>
+						<seriesColor seriesOrder="4" color="#FFFFFF"/>
+						<seriesColor seriesOrder="5" color="#006666"/>
+						<seriesColor seriesOrder="6" color="#ABA5BE"/>
+						<seriesColor seriesOrder="7" color="#659507"/>
+						<seriesColor seriesOrder="8" color="#333333"/>
+						<seriesColor seriesOrder="9" color="#3A5965"/>
+						<seriesColor seriesOrder="10" color="#2F87A5"/>
+					</plot>
+					<itemLabel color="#000000" backgroundColor="#FFFFFF">
+						<font size="5"/>
+					</itemLabel>
+				</pie3DPlot>
+			</pie3DChart>
+			<bar3DChart>
+				<chart theme="default">
+					<reportElement x="10" y="0" width="742" height="191"/>
+					<chartTitle position="Top">
+						<font size="8"/>
+						<titleExpression><![CDATA["DOCUMENTOS POR UO "]]></titleExpression>
+					</chartTitle>
+					<chartSubtitle/>
+					<chartLegend position="Bottom"/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Externo Emitido"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{codigo}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{externo_emitido}]]></valueExpression>
+						<labelExpression><![CDATA[$F{externo_emitido}]]></labelExpression>
+						<itemHyperlink hyperlinkType="Reference" hyperlinkTarget="Top">
+							<hyperlinkReferenceExpression><![CDATA[$F{codigo}]]></hyperlinkReferenceExpression>
+						</itemHyperlink>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["Interno Emitido"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{codigo}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{interno_emitido}]]></valueExpression>
+						<labelExpression><![CDATA[$F{interno_emitido}]]></labelExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["Externo Recibido"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{codigo}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{externo_recibido}]]></valueExpression>
+						<labelExpression><![CDATA[$F{externo_recibido}]]></labelExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["Interno Recibido"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{codigo}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{interno_recibido}]]></valueExpression>
+						<labelExpression><![CDATA[$F{interno_recibido}]]></labelExpression>
+					</categorySeries>
+				</categoryDataset>
+				<bar3DPlot xOffset="10.0" yOffset="10.0">
+					<plot labelRotation="5.0">
+						<seriesColor seriesOrder="0" color="#FF6600"/>
+						<seriesColor seriesOrder="1" color="#009933"/>
+						<seriesColor seriesOrder="2" color="#CC0000"/>
+						<seriesColor seriesOrder="3" color="#0033FF"/>
+					</plot>
+					<itemLabel color="#000000" backgroundColor="#FFFFFF">
+						<font size="5"/>
+					</itemLabel>
+					<categoryAxisLabelExpression><![CDATA["Unidades Organizacionales"]]></categoryAxisLabelExpression>
+					<categoryAxisFormat labelRotation="5.0">
+						<axisFormat>
+							<labelFont>
+								<font size="5"/>
+							</labelFont>
+							<tickLabelFont>
+								<font size="5"/>
+							</tickLabelFont>
+						</axisFormat>
+					</categoryAxisFormat>
+					<valueAxisLabelExpression><![CDATA["Cantidades de Documentos"]]></valueAxisLabelExpression>
+					<valueAxisFormat>
+						<axisFormat>
+							<labelFont>
+								<font size="5"/>
+							</labelFont>
+							<tickLabelFont>
+								<font size="5"/>
+							</tickLabelFont>
+						</axisFormat>
+					</valueAxisFormat>
+				</bar3DPlot>
+			</bar3DChart>
+			<pie3DChart>
+				<chart renderType="draw" theme="default">
+					<reportElement x="421" y="204" width="317" height="181"/>
+					<chartTitle>
+						<font size="12" isBold="true"/>
+						<titleExpression><![CDATA["DOCUMENTOS INTERNOS EMITIDOS"]]></titleExpression>
+					</chartTitle>
+					<chartSubtitle>
+						<font size="5"/>
+					</chartSubtitle>
+					<chartLegend position="Bottom">
+						<font size="5"/>
+					</chartLegend>
+				</chart>
+				<pieDataset>
+					<keyExpression><![CDATA[$F{codigo}]]></keyExpression>
+					<valueExpression><![CDATA[$F{interno_emitido}]]></valueExpression>
+					<labelExpression><![CDATA[$F{codigo}+" - "+$F{interno_emitido}]]></labelExpression>
+				</pieDataset>
+				<pie3DPlot>
+					<plot>
+						<seriesColor seriesOrder="0" color="#000066"/>
+						<seriesColor seriesOrder="1" color="#0033FF"/>
+						<seriesColor seriesOrder="2" color="#F7F733"/>
+						<seriesColor seriesOrder="3" color="#336600"/>
+						<seriesColor seriesOrder="4" color="#3706CF"/>
+						<seriesColor seriesOrder="5" color="#6666FF"/>
+						<seriesColor seriesOrder="6" color="#F7F419"/>
+						<seriesColor seriesOrder="7" color="#FFFFFF"/>
+						<seriesColor seriesOrder="8" color="#0AAFAD"/>
+						<seriesColor seriesOrder="9" color="#006666"/>
+						<seriesColor seriesOrder="10" color="#ABA5BE"/>
+						<seriesColor seriesOrder="11" color="#F5E749"/>
+						<seriesColor seriesOrder="12" color="#659507"/>
+						<seriesColor seriesOrder="13" color="#333333"/>
+						<seriesColor seriesOrder="14" color="#009999"/>
+					</plot>
+					<itemLabel color="#000000" backgroundColor="#FFFFFF">
+						<font size="5"/>
+					</itemLabel>
+				</pie3DPlot>
+			</pie3DChart>
+			<pie3DChart>
+				<chart renderType="draw" theme="default">
+					<reportElement x="10" y="391" width="346" height="181"/>
+					<chartTitle>
+						<font size="12" isBold="true"/>
+						<titleExpression><![CDATA["DOCUMENTOS EXTERNOS RECIBIDOS"]]></titleExpression>
+					</chartTitle>
+					<chartSubtitle>
+						<font size="5"/>
+					</chartSubtitle>
+					<chartLegend position="Bottom">
+						<font size="5"/>
+					</chartLegend>
+				</chart>
+				<pieDataset>
+					<keyExpression><![CDATA[$F{codigo}]]></keyExpression>
+					<valueExpression><![CDATA[$F{externo_recibido}]]></valueExpression>
+					<labelExpression><![CDATA[$F{codigo}+" - "+$F{externo_recibido}]]></labelExpression>
+				</pieDataset>
+				<pie3DPlot>
+					<plot>
+						<seriesColor seriesOrder="0" color="#000066"/>
+						<seriesColor seriesOrder="1" color="#0033FF"/>
+						<seriesColor seriesOrder="2" color="#F7F733"/>
+						<seriesColor seriesOrder="3" color="#336600"/>
+						<seriesColor seriesOrder="4" color="#3706CF"/>
+						<seriesColor seriesOrder="5" color="#6666FF"/>
+						<seriesColor seriesOrder="6" color="#F7F419"/>
+						<seriesColor seriesOrder="7" color="#FFFFFF"/>
+						<seriesColor seriesOrder="8" color="#0AAFAD"/>
+						<seriesColor seriesOrder="9" color="#006666"/>
+						<seriesColor seriesOrder="10" color="#ABA5BE"/>
+						<seriesColor seriesOrder="11" color="#F5E749"/>
+						<seriesColor seriesOrder="12" color="#659507"/>
+						<seriesColor seriesOrder="13" color="#333333"/>
+						<seriesColor seriesOrder="14" color="#009999"/>
+					</plot>
+					<itemLabel color="#000000" backgroundColor="#FFFFFF">
+						<font size="5"/>
+					</itemLabel>
+				</pie3DPlot>
+			</pie3DChart>
+			<pie3DChart>
+				<chart renderType="draw" theme="default">
+					<reportElement x="421" y="385" width="317" height="181"/>
+					<chartTitle>
+						<font size="12" isBold="true"/>
+						<titleExpression><![CDATA["DOCUMENTOS INTERNOS RECIBIDOS"]]></titleExpression>
+					</chartTitle>
+					<chartSubtitle>
+						<font size="5"/>
+					</chartSubtitle>
+					<chartLegend position="Bottom">
+						<font size="5"/>
+					</chartLegend>
+				</chart>
+				<pieDataset>
+					<keyExpression><![CDATA[$F{codigo}]]></keyExpression>
+					<valueExpression><![CDATA[$F{interno_recibido}]]></valueExpression>
+					<labelExpression><![CDATA[$F{codigo}+" - "+$F{interno_recibido}]]></labelExpression>
+				</pieDataset>
+				<pie3DPlot>
+					<plot>
+						<seriesColor seriesOrder="0" color="#000066"/>
+						<seriesColor seriesOrder="1" color="#0033FF"/>
+						<seriesColor seriesOrder="2" color="#F7F733"/>
+						<seriesColor seriesOrder="3" color="#336600"/>
+						<seriesColor seriesOrder="4" color="#3706CF"/>
+						<seriesColor seriesOrder="5" color="#6666FF"/>
+						<seriesColor seriesOrder="6" color="#F7F419"/>
+						<seriesColor seriesOrder="7" color="#FFFFFF"/>
+						<seriesColor seriesOrder="8" color="#0AAFAD"/>
+						<seriesColor seriesOrder="9" color="#006666"/>
+						<seriesColor seriesOrder="10" color="#ABA5BE"/>
+						<seriesColor seriesOrder="11" color="#F5E749"/>
+						<seriesColor seriesOrder="12" color="#659507"/>
+						<seriesColor seriesOrder="13" color="#333333"/>
+						<seriesColor seriesOrder="14" color="#009999"/>
+					</plot>
+					<itemLabel color="#000000" backgroundColor="#FFFFFF">
+						<font size="5"/>
+					</itemLabel>
+				</pie3DPlot>
+			</pie3DChart>
+		</band>
+	</summary>
+</jasperReport>

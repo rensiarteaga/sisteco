@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rep_siet_seguimiento_fa" language="groovy" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<parameter name="pr_id_siet_declara" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[select *,(importe_sol-importe_rendicion) as saldo
+from presto.f_pr_siet_rep_seg_fa($P{pr_id_siet_declara})as (periodo_sol varchar,periodo_dev varchar,nro_cuenta_banco varchar,nro_cheque varchar,nro_fa varchar,id_cbte_sol integer,nro_cbte_sol varchar,importe_sol numeric,fecha_cbte_sol date,estado_rendicion varchar,
+                           id_cbte_dev integer,nro_cbte_dev varchar,importe_dev numeric,fecha_cbte_dev date,id_cuenta_doc integer,importe_rendicion numeric)
+ORDER BY nro_cuenta_banco,nro_cbte_sol]]>
+	</queryString>
+	<field name="nro_cuenta_banco" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nro_cheque" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nro_fa" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_cbte_sol" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nro_cbte_sol" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="importe_sol" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha_cbte_sol" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="estado_rendicion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_cbte_dev" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nro_cbte_dev" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="importe_dev" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha_cbte_dev" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_cuenta_doc" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="importe_rendicion" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="saldo" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="periodo_sol" class="java.lang.String"/>
+	<field name="periodo_dev" class="java.lang.String"/>
+	<variable name="importe_dev_1" class="java.math.BigDecimal" resetType="Group" resetGroup="cuenta_bancaria" calculation="Sum">
+		<variableExpression><![CDATA[$F{importe_dev}]]></variableExpression>
+	</variable>
+	<variable name="importe_sol_1" class="java.math.BigDecimal" resetType="Group" resetGroup="cuenta_bancaria" calculation="Sum">
+		<variableExpression><![CDATA[$F{importe_sol}]]></variableExpression>
+	</variable>
+	<variable name="importe_rendicion_1" class="java.math.BigDecimal" resetType="Group" resetGroup="cuenta_bancaria" calculation="Sum">
+		<variableExpression><![CDATA[$F{importe_rendicion}]]></variableExpression>
+	</variable>
+	<variable name="saldo_1" class="java.math.BigDecimal" resetType="Group" resetGroup="cuenta_bancaria" calculation="Sum">
+		<variableExpression><![CDATA[$F{saldo}]]></variableExpression>
+	</variable>
+	<group name="cuenta_bancaria">
+		<groupExpression><![CDATA[$F{nro_cuenta_banco}]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<staticText>
+					<reportElement x="0" y="10" width="60" height="10"/>
+					<textElement>
+						<font size="6" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Nro FA]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="65" y="10" width="60" height="10"/>
+					<textElement>
+						<font size="6" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Nro CBTE SOL.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="130" y="10" width="60" height="10"/>
+					<textElement>
+						<font size="6" isBold="true"/>
+					</textElement>
+					<text><![CDATA[FECHA CBTE SOL.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="195" y="10" width="60" height="10"/>
+					<textElement>
+						<font size="6" isBold="true"/>
+					</textElement>
+					<text><![CDATA[IMPORTE SOL.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="260" y="10" width="60" height="10"/>
+					<textElement>
+						<font size="6" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ESTADO RENDICIÓN]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="390" y="10" width="60" height="10"/>
+					<textElement>
+						<font size="6" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Nro. CBTE. DEV]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="325" y="10" width="60" height="10" isPrintWhenDetailOverflows="true"/>
+					<textElement>
+						<font size="6" isBold="true"/>
+					</textElement>
+					<text><![CDATA[IMPORTE REN.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="455" y="10" width="60" height="10" isPrintWhenDetailOverflows="true"/>
+					<textElement>
+						<font size="6" isBold="true"/>
+					</textElement>
+					<text><![CDATA[FECHA CBTE DEV]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="520" y="10" width="60" height="10" isPrintWhenDetailOverflows="true"/>
+					<textElement>
+						<font size="6" isBold="true"/>
+					</textElement>
+					<text><![CDATA[IMPORTE DEV.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="585" y="10" width="60" height="10" isPrintWhenDetailOverflows="true"/>
+					<textElement>
+						<font size="6" isBold="true"/>
+					</textElement>
+					<text><![CDATA[SALDO]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="0" y="0" width="177" height="10"/>
+					<textElement>
+						<font size="6" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{nro_cuenta_banco}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="657" y="10" width="44" height="10" isPrintWhenDetailOverflows="true"/>
+					<textElement>
+						<font size="6" isBold="true"/>
+					</textElement>
+					<text><![CDATA[PERIODO SOL.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="708" y="10" width="44" height="10" isPrintWhenDetailOverflows="true"/>
+					<textElement>
+						<font size="6" isBold="true"/>
+					</textElement>
+					<text><![CDATA[PERIODO DEV.]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="11">
+				<textField pattern="#,##0.00;-#,##0.00">
+					<reportElement x="520" y="0" width="60" height="10"/>
+					<textElement textAlignment="Right">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{importe_dev_1}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00;-#,##0.00">
+					<reportElement x="195" y="0" width="60" height="10"/>
+					<textElement textAlignment="Right">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{importe_sol_1}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00;-#,##0.00">
+					<reportElement x="325" y="0" width="60" height="10"/>
+					<textElement textAlignment="Right">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{importe_rendicion_1}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00;-#,##0.00">
+					<reportElement x="585" y="0" width="60" height="10"/>
+					<textElement textAlignment="Right">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{saldo_1}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="23" splitType="Stretch">
+			<staticText>
+				<reportElement x="260" y="0" width="255" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SEGUIMIENTO DE FONDOS EN AVANCE]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="1" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="10" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="60" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nro_fa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="65" y="0" width="60" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nro_cbte_sol}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="130" y="0" width="60" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{fecha_cbte_sol}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="260" y="0" width="60" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{estado_rendicion}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;-#,##0.00">
+				<reportElement x="195" y="0" width="60" height="10"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{importe_sol}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="390" y="0" width="60" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nro_cbte_dev}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="0" width="60" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{fecha_cbte_dev}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="585" y="0" width="60" height="10"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{saldo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;-#,##0.00">
+				<reportElement x="520" y="0" width="60" height="10"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{importe_dev}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;-#,##0.00">
+				<reportElement x="325" y="0" width="60" height="10"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{importe_rendicion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="657" y="0" width="44" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{periodo_sol}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="708" y="0" width="44" height="10"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{periodo_dev}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

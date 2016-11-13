@@ -1,0 +1,329 @@
+<?xml version="1.0"?>
+<Report>
+    <Version>7.5</Version>
+    <Properties>
+        <Description></Description>
+        <Title></Title>
+        <Author></Author>
+        <Keywords></Keywords>
+        <Date></Date>
+
+        <FrameSize></FrameSize>
+    </Properties>
+
+    <Header>
+        <Body></Body>
+        <Align>center</Align>
+    </Header>
+
+    <Footer>
+
+        <Body></Body>
+        <Align>center</Align>
+    </Footer>
+
+    <Parameters>
+        <id_almacen>
+            <mask></mask>
+            <value>%</value>
+
+        </id_almacen>
+
+        <id_almacen_ep>
+            <mask></mask>
+            <value>%</value>
+        </id_almacen_ep>
+
+        <id_almacen_logico>        
+            <mask></mask>
+            <value>%</value>
+
+        </id_almacen_logico>
+
+        <fecha_desde>
+            <mask></mask>
+            <value>2007-01-24</value>
+        </fecha_desde>
+
+        <fecha_hasta>
+            <mask></mask>
+
+            <value>2008-02-26</value>
+        </fecha_hasta>
+
+        <estado_salida>
+            <mask></mask>
+            <value>Finalizado</value>
+        </estado_salida>
+
+    </Parameters>
+
+    <DataSet>
+        <DataSource>
+            <Name>Almacenes</Name>
+        </DataSource>
+
+        <Query>
+            <Select>distinct salida.estado_salida
+  </Select>
+
+            <From> almin.tal_salida salida</From>
+            <Where>salida.estado_salida=$estado_salida</Where>
+            <GroupBy></GroupBy>
+            <OrderBy></OrderBy>
+            <Config>
+                <Distinct></Distinct>
+                <OffSet>0</OffSet>
+
+                <Limit>0</Limit>
+            </Config>
+
+        </Query>
+
+        <Groups>
+            <Config>
+                <ShowGroup></ShowGroup>
+                <ShowDetail>1</ShowDetail>
+
+                <ShowLabel></ShowLabel>
+                <ShowNumber>1</ShowNumber>
+                <ShowIndent>1</ShowIndent>
+            </Config>
+
+        </Groups>
+
+        <Fields>
+            <Column1>
+
+                <Chars>30</Chars>
+                <Points>60</Points>
+                <Align>left</Align>
+                <Mask></Mask>
+                <Function></Function>
+                <Cross></Cross>
+                <Conditional></Conditional>
+
+            </Column1>
+
+        </Fields>
+
+    </DataSet>
+
+    <PageSetup>
+        <Format>A4</Format>
+        <Orientation>landscape</Orientation>
+
+        <LeftMargin>0</LeftMargin>
+        <RightMargin>0</RightMargin>
+        <TopMargin>0</TopMargin>
+        <BottomMargin>0</BottomMargin>
+        <LineSpace>14</LineSpace>
+    </PageSetup>
+
+    <Graph>
+        <Title></Title>
+        <TitleX></TitleX>
+        <TitleY></TitleY>
+        <Width>480</Width>
+        <Height>268</Height>
+        <Description></Description>
+
+        <ShowData>1</ShowData>
+        <ShowValues>1</ShowValues>
+        <Orientation>columns</Orientation>
+    </Graph>
+
+    <Merge>
+        <ReportHeader>
+
+#tab279#setfan12 Detalle de Salidas en estado $var1 #sety032
+
+#tab278 De: $fecha_desde    Hasta:  $fecha_hasta#sety072</ReportHeader>
+        <Details>
+            <Detail1>
+                <GroupHeader> #rect*020*010*797*030*1*#22105e*#22105e
+#rect*020*000*797*030*1*#22105e*#22105e
+#tab022#setfan09 #setcfffffffGestion #tab065Almacen#tab150Almacen EP  #tab268Almacen Logico #tab375Solicitante #tab520Correlativo #tab580Descripcion #tab760Fecha 
+#tab760$estado_salida#setcf030303 
+</GroupHeader>
+
+                <DataSet1>
+                    <Body>#setfan07#tab025 $subfield9  #tab060  $subfield6 #tab140 $subfield7   #tab265$subfield8  #tab370 $subfield4 #tab490 $subfield3#tab585   $subfield2   #tab770 $subfield5 
+#tab020#lineH795</Body>
+
+                    <Query>
+                        <Select>salida.id_salida,salida.descripcion, (select case    when salida.correlativo_sal&gt;0 then       (select salida.correlativo_sal) end)as correlativo,              (select case     when salida.id_contratista is not null          then( select case                 when contra.id_institucion is not null                    then (select instit1.nombre from param.tpm_contratista contra1                          inner join param.tpm_institucion instit1 on instit1.id_institucion=contra1.id_institucion                          where contra1.id_contratista =contra.id_contratista )                  when contra.id_persona is not null then ( select coalesce(person.nombre,'')||' '||coalesce(person.apellido_paterno,'')||' '||coalesce(person.apellido_materno,'')                          from  param.tpm_contratista contra1                          inner join sss.tsg_persona person on person.id_persona=contra1.id_persona                          and contra1.id_contratista=contra.id_contratista)                          end)                  when salida.id_empleado is not null then (select coalesce(person.nombre,'')||' '||coalesce(person.apellido_paterno,'')||' '||coalesce(person.apellido_materno,'')                          from almin.tal_salida salida1 inner join kard.tkp_empleado emplea on salida1.id_empleado=emplea.id_empleado                          inner join sss.tsg_persona person on person.id_persona=emplea.id_persona and salida1.id_salida=salida.id_salida)                  when salida.id_institucion is not null then (select coalesce(person.nombre,'')||' '||coalesce(person.apellido_paterno,'')||' '||coalesce(person.apellido_materno,'')                          from almin.tal_salida salida1 inner join param.tpm_institucion instit on instit.id_institucion=salida1.id_institucion                          inner join sss.tsg_persona person on person.id_persona=instit.id_persona and salida1.id_salida=salida.id_salida)                   end) as solicitante, (select case   when salida.fecha_finalizado_cancelado is  not null then ( select salida.fecha_finalizado_cancelado)   when salida.fecha_entregado is not null then (select salida.fecha_entregado)   when salida.fecha_provisional is not null then (select salida.fecha_provisional)   when salida.fecha_aprobado_rechazado is not  null then (select salida.fecha_aprobado_rechazado)   when salida.fecha_pendiente is not null then (select salida.fecha_pendiente)   when salida.fecha_borrador is not null then (select salida.fecha_borrador) end)as fecha_estado,almace.nombre ,almaep.descripcion, almlog.nombre, paralm.gestion</Select>
+                        <From>almin.tal_salida salida  inner join almin.tal_almacen_logico almlog on almlog.id_almacen_logico=salida.id_almacen_logico  inner join almin.tal_almacen_ep almaep on almaep.id_almacen_ep= almlog.id_almacen_ep  inner join almin.tal_almacen almace on almace.id_almacen= almaep.id_almacen  left join param.tpm_contratista contra on contra.id_contratista=salida.id_contratista  inner join almin.tal_parametro_almacen paralm on paralm.id_parametro_almacen=salida.id_parametro_almacen and paralm.bloqueado='no'</From>
+                        <Where>almlog.id_almacen_logico like $id_almacen_logico and almaep.id_almacen_ep like $id_almacen_ep and almace.id_almacen like $id_almacen and salida.estado_registro='activo' and salida.estado_salida like $estado_salida and salida.fecha_reg &gt;=$fecha_desde and salida.fecha_reg&lt;=$fecha_hasta</Where>
+                        <GroupBy></GroupBy>
+
+                        <OrderBy></OrderBy>
+                        <Config>
+                            <Distinct></Distinct>
+                            <OffSet>0</OffSet>
+                            <Limit>0</Limit>
+                        </Config>
+
+                    </Query>
+
+                    <Fields>
+                        <Column1>
+                            <Chars>30</Chars>
+                            <Points>60</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column1>
+
+                        <Column2>
+                            <Chars>30</Chars>
+                            <Points>180</Points>
+                            <Align>left</Align>
+
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column2>
+
+                        <Column3>
+                            <Chars>30</Chars>
+                            <Points>60</Points>
+
+                            <Align>right</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column3>
+
+                        <Column4>
+                            <Chars>30</Chars>
+
+                            <Points>150</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column4>
+
+                        <Column5>
+                            <Chars>30</Chars>
+                            <Points>50</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+
+                            <Conditional></Conditional>
+                        </Column5>
+
+                        <Column6>
+                            <Chars>30</Chars>
+                            <Points>120</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column6>
+
+                        <Column7>
+                            <Chars>30</Chars>
+                            <Points>120</Points>
+
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column7>
+
+                        <Column8>
+                            <Chars>30</Chars>
+
+                            <Points>120</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+                            <Conditional></Conditional>
+                        </Column8>
+
+                        <Column9>
+                            <Chars>30</Chars>
+                            <Points>60</Points>
+                            <Align>left</Align>
+                            <Mask></Mask>
+                            <Function></Function>
+                            <Cross></Cross>
+
+                            <Conditional></Conditional>
+                        </Column9>
+
+                    </Fields>
+
+                </DataSet1>
+
+                <NumberSubSql>0</NumberSubSql>
+                <GroupFooter></GroupFooter>
+            </Detail1>
+
+        </Details>
+
+        <ReportFooter>#setcf030303#sety550 #tab020 #setfan8 Usuario:$login_usuario  #tab380#setftn8 Página $page de  $pagecounting         #tab720#setfan8 fecha: $day - $month - $year 
+#sety560#tab720#setfan8 hora: $time</ReportFooter>
+
+        <FinalSummary></FinalSummary>
+        <PageSetup>
+            <Format>A4</Format>
+            <Orientation>landscape</Orientation>
+
+            <LeftMargin>0</LeftMargin>
+            <RightMargin>0</RightMargin>
+            <TopMargin>0</TopMargin>
+            <BottomMargin>0</BottomMargin>
+            <LineSpace>14</LineSpace>
+        </PageSetup>
+
+    </Merge>
+
+    <Label>
+        <Body></Body>
+        <Config>
+            <HorizontalSpacing>15</HorizontalSpacing>
+            <VerticalSpacing>0</VerticalSpacing>
+            <LabelWidth>288</LabelWidth>
+
+            <LabelHeight>72</LabelHeight>
+            <LeftMargin>11</LeftMargin>
+            <TopMargin>36</TopMargin>
+            <Columns>2</Columns>
+            <Rows>10</Rows>
+            <PageFormat>A3</PageFormat>
+
+            <LineSpacing>14</LineSpacing>
+        </Config>
+
+    </Label>
+
+    <OpenOffice>
+        <Source></Source>
+        <Config>
+            <FixedDetails>1</FixedDetails>
+
+            <ExpandDetails></ExpandDetails>
+            <printEmptyDetail>1</printEmptyDetail>
+            <SumByTotal>1</SumByTotal>
+            <RepeatHeader>1</RepeatHeader>
+            <RepeatFooter>1</RepeatFooter>
+        </Config>
+
+    </OpenOffice>
+
+</Report>

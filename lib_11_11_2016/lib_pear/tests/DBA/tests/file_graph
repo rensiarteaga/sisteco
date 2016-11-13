@@ -1,0 +1,11 @@
+set size 1.0, 1.0
+set terminal postscript portrait "Helvetica" 12
+set title "driver: file"
+set xlabel "# of transactions"
+set ylabel "time in seconds"
+set out "file.ps"
+plot "file_1600.dat" using 1:2 title 'file, 1600 keys' with lines,\
+ "file_3200.dat" using 1:2 title 'file, 3200 keys' with lines,\
+ "file_6400.dat" using 1:2 title 'file, 6400 keys' with lines,\
+ "file_12800.dat" using 1:2 title 'file, 12800 keys' with lines,\
+ "file_25600.dat" using 1:2 title 'file, 25600 keys' with lines
