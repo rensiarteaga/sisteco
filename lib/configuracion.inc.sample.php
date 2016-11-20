@@ -26,7 +26,7 @@ $_SESSION["USUARIO"]=addslashes(htmlentities($login_usuario,ENT_QUOTES));
 $_SESSION["CONTRASENA"]=md5($_SESSION["_SEMILLA"].md5(trim($contrasenia)));
 
 
-$_SESSION["BASE_DATOS"]	= "dbendesis";
+$_SESSION["BASE_DATOS"]="dbendesis"; 
 $_SESSION["logo"]="../images/logo_reporte.jpg";
 
 //RAC:  CREDENCIALES EXCLUSIVAS PARA VERIFICAR EL LOGUEO

@@ -1,6 +1,6 @@
 --------------- SQL ---------------
 
-CREATE FUNCTION almin.f_al_prueba (
+CREATE FUNCTION alma.f_al_prueba (
 )
 RETURNS boolean AS
 $body$

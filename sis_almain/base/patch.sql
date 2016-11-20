@@ -1,6 +1,6 @@
 
 /***********************************I-SCP-RAC-PARAM-1-21/11/2016****************************************/
-CREATE TABLE almin.tprueba (
+CREATE TABLE alma.tprueba (
   id_prueba SERIAL NOT NULL,
   nombre VARCHAR DEFAULT 'hola' NOT NULL,
   PRIMARY KEY(id_prueba)

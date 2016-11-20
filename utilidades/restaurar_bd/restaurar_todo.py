@@ -150,45 +150,51 @@ def execute_script (systems , kind, file_log):
     	patches = os.listdir( item + 'base/' )
     	for f in patches:
             if f.startswith(kind):
-		file_log.write("*************"+ kind + " : " + item + " ("+")\n")
-            	
-		sql_scripts = generate_scripts(item + 'base/' + f)
-   		
-		for script in sql_scripts:
-					if (host == '127.0.0.1' or host == 'localhost'):
-							command = 'psql -t -1 -q -A -c "select pxp.f_is_loaded_script(\$\$' + script['codigo']  + '\$\$)" -d ' + db
-					else:
-							validar_pgpass()
-							command = 'psql -t -1 -q -A -c "select pxp.f_is_loaded_script(\$\$' + script['codigo']  + '\$\$)" -d ' + db	+ ' -h ' + host + ' -U ' + usuario
-                    	        
-					for line in run_command(command):
-							if kind == 'custom_type':
-								print line 
-							if (line.strip() == '0'):
-								f_command = open('/tmp/file_command.txt','w')
-                        					f_command.write('BEGIN;')
-                        					f_command.write(script['query'])
-                        					f_command.write("INSERT INTO pxp.tscript_version VALUES('" + script['codigo']  + "');")
-                        					f_command.write('COMMIT;')
-                        					f_command.close()
-                        					if (host == '127.0.0.1' or host == 'localhost'):
-									command = 'psql -t -1 -q -A -d ' + db + ' < /tmp/file_command.txt'
+				file_log.write("*************"+ kind + " : " + item + " ("+")\n")
+		            	
+				sql_scripts = generate_scripts(item + 'base/' + f)
+		   		
+				for script in sql_scripts:
+							if (host == '127.0.0.1' or host == 'localhost'):
+								command = 'psql -t  -q -A -c "select pxp.f_is_loaded_script(\$\$' + script['codigo']  + '\$\$)" -d ' + db
+							else:
+								validar_pgpass()
+								command = 'psql -t  -q -A -c "select pxp.f_is_loaded_script(\$\$' + script['codigo']  + '\$\$)" -d ' + db	+ ' -h ' + host + ' -U ' + usuario
+							
+							print command
+							print '-----------------------------'
+							f_log.write(command + "\n")
+							for line in run_command(command):
+								if kind == 'custom_type':
+									print line 
+								print line.strip()
+								print line
+								if (line.strip() == '0'):
+									print 'entra por 0 -----------'
+									f_command = open('/tmp/file_command.txt','w')
+									f_command.write('BEGIN;')
+									f_command.write(script['query'])
+									f_command.write("INSERT INTO pxp.tscript_version VALUES('" + script['codigo']  + "');")
+									f_command.write('COMMIT;')
+									f_command.close()
+									if (host == '127.0.0.1' or host == 'localhost'):
+										command = 'psql -t  -q -A -d ' + db + ' < /tmp/file_command.txt'
+									else:
+										validar_pgpass()
+										command = 'psql -t -h ' + host + ' -U ' + usuario + '  -q -A -d ' + db + ' < /tmp/file_command.txt'
+									f_log.write("/***********************************" + script['codigo']  + "("+ item +"base/"+ f +") *****************************/\n")
+									for line in run_command(command):
+										f_log.write(line)
 								else:
-									validar_pgpass()
-									command = 'psql -t -h ' + host + ' -U ' + usuario + ' -1 -q -A -d ' + db + ' < /tmp/file_command.txt'
-                    
-                        					f_log.write("/***********************************" + script['codigo']  + "("+ item +"base/"+ f +") *****************************/\n")
-                        					for line in run_command(command):
-                            	    					f_log.write(line)
+									f_log.write(line)
 
 def run_command(command):
-    p = subprocess.Popen(command,
-                         stdout=subprocess.PIPE,stderr=subprocess.STDOUT,shell=True)
-     
-    line = p.stdout.readline()
-    while line:
-        yield line
-        line = p.stdout.readline()
+	#f_log.write(command + "\n")
+	p = subprocess.Popen(command,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,shell=True)
+	line = p.stdout.readline()
+	while line:
+		yield line
+		line = p.stdout.readline()
 
 def obtener_usuario():
 	usuario = ''
@@ -200,7 +206,7 @@ try:
 	file1 = open(os.path.dirname(__file__) + '/../../lib/configuracion.inc.php', 'r')
 
 	for line in file1:
-		if line.find('$_SESSION["BASE_DATOS"]') != -1 :
+		if line.find('$_SESSION["BASE_DATOS"]=') != -1 :
 			vars = line.split('=')
 			db = vars[1]
 			db = db.strip()
@@ -228,7 +234,7 @@ print '3. Actualizar los scripts faltantes en la bd solo sobre un sistema'
 print '4. Comparar funciones de un esquema en la bd con archivos en codigo fuente'
 print '5. Obtener un backup de la BD (sin el esquema log)'
 print '6. Salir del programa'
-opcion = raw_input('Ingrese una opcion (1,2,3,4,5 o 6): ')
+opcion = raw_input('Ingrese una opcion (3,4,5 o 6): ')
 sistema = 'indefinido'
 if (opcion != '3' and opcion != '4' and opcion != '5') :
 	sys.exit("Ha abandonado la restauracion de la base de datos")
@@ -276,41 +282,26 @@ except:
         print 'Solo se han recuperado los esquemas basicos del framework. (No existe el archivo sistemas.txt o no es posible leerlo'
 
 
-# Primero se restaura los esquemas
-for item in url:
-	for line in run_command('echo "/********************ESQUEMAS: ' + item + '*******************/"'):
-    		f_log.write(line)
-	#restaurar subsistema
-        #esquema pxp:se crea el esquema sin usar la funcion manage schema ya q td no existe
-	
-		
-	esquemas = get_schema(item + 'base/schema.sql')
-	for esquema in esquemas:		
-		if (host == '127.0.0.1' or host == 'localhost'):
-			command = 'psql '+ db + ' -c  "select pxp.f_manage_schema(\$\$' + esquema  + '\$\$,' + opcion + ')"'
-		else:
-			validar_pgpass()
-			command = 'psql '+ db + ' -h ' + host + ' -U ' + usuario + ' -c  "select pxp.f_manage_schema(\$\$' + esquema  + '\$\$,' + opcion + ')"'
-						
-		for line in run_command(command):
-       			f_log.write(line)
 
-#Se crean los tipos
-execute_script(url, 'custom_type', f_log)
 #crear objetos de cada esquema
+print 'crea los objetos del PATH'
 execute_script(url, 'patch', f_log)
 
+
+print 'FIN >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> PATH'
+
 #Crear funcion para eliminar funciones
-if (host == '127.0.0.1' or host == 'localhost'):
-	command = 'psql -q -d ' + db + ' < ' + url[0] +   'base/funciones/pxp.f_delfunc.sql'
-else:
-	validar_pgpass()
-	command = 'psql -h ' + host + ' -U ' + usuario + ' -q -d ' + db + ' < ' + url[0] +   'base/funciones/pxp.f_delfunc.sql'          	
+#if (host == '127.0.0.1' or host == 'localhost'):
+#	command = 'psql -q -d ' + db + ' < ../base/funciones/pxp.f_delfunc.sql'
+#else:
+#	validar_pgpass()
+#	command = 'psql -h ' + host + ' -U ' + usuario + ' -q -d ' + db + ' <  ../base/funciones/pxp.f_delfunc.sql'          	
 			
-for line in run_command(command):
-	f_log.write(line)
+#for line in run_command(command):
+#	f_log.write(line)
                                     
 #Crear funciones
+
 for item in url:
 	 #restaurar subsistema
 	for line in run_command('echo "/********************FUNCIONES: ' + item + '*******************/"'):
@@ -321,17 +312,8 @@ for item in url:
     		if f.endswith('.sql'):
     			f_log.write('restaurando '+funciones_dir + f+'\n')
     			#solo eliminar si la funcion no es pxp.f_delfunc.sql
-    			if (f != 'pxp.f_delfunc.sql'):
-				validar_funcion(funciones_dir + f,f.replace('.sql',''))
-    				if (host == '127.0.0.1' or host == 'localhost'):
-					command = 'psql '+ db + ' -c  "select pxp.f_delfunc(\$\$' + f.replace('.sql','')  + '\$\$)"'
-				else:
-					validar_pgpass()
-					command = 'psql '+ db + ' -h ' + host + ' -U ' + usuario + ' -c  "select pxp.f_delfunc(\$\$' + f.replace('.sql','')  + '\$\$)"'
-    			 	    				
-    			  	for line in run_command(command):
-                                    f_log.write(line)
-					#Ejecutar la creacion de la funcion
+    			
+			#Ejecutar la creacion de la funcion
 			if (host == '127.0.0.1' or host == 'localhost'):
 				command = 'psql -q -d ' + db + ' < ' + funciones_dir + f  
 			else:
@@ -343,21 +325,15 @@ for item in url:
 				f_log.write(line)
 
 #insertar datos de cada esquema
+print 'Inica recuperacion del archivo DATA......' 
 execute_script(url,'data', f_log)
 
 #crear dependencias de cada esquema
+print 'Inicia recuperacion delarchivo de depedencias....' 
 execute_script(url, 'dependencies',f_log)
   
 
-#Actualizacion de las secuencias
-if (host == '127.0.0.1' or host == 'localhost'):
-	command = 'psql '+ db + ' -c  \'select pxp.f_update_sequences()\''
-else:
-	validar_pgpass()
-	command = 'psql  -h ' + host + ' -U ' + usuario + ' '+ db + ' -c  \'select pxp.f_update_sequences()\''
-	
-for line in run_command(command):
-	f_log.write(line)
+
 print 'Se ha generado un log de la restauracion (/tmp/log_restaurar_bd.log)' 	
 f_log.close()
 

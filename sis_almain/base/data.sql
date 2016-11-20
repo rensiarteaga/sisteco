@@ -1,7 +1,6 @@
 /***********************************I-DAT-JRR-PARAM-1-19/11/2012****************************************/
-INSERT INTO almin.tprueba ("id_prueba", "nombre")
+INSERT INTO alma.tprueba ("id_prueba", "nombre")
 VALUES 
-  (5, E'test tes t'),
-  (3, E' tes tes test');
+  (5, 'test tes t');
   
 /***********************************F-DAT-JRR-PARAM-1-19/11/2012****************************************/
