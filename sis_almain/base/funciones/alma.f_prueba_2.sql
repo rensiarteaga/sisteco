@@ -1,15 +1,14 @@
 --------------- SQL ---------------
 
-CREATE FUNCTION alma.f_al_prueba (
+CREATE FUNCTION alma.f_prueba_2 (
 )
 RETURNS boolean AS
 $body$
 DECLARE
- 
-BEGIN
   
-raise exception 'llega ....funcion modificada';
-return  true;
+BEGIN
+raise exception 'HOLAAAAAAAAAAAAA';
+return false;
 END;
 $body$
 LANGUAGE 'plpgsql'

@@ -8,3 +8,20 @@ CREATE TABLE alma.tprueba (
 /***********************************F-SCP-RAC-PARAM-1-21/11/2016****************************************/ 
 
 
+/***********************************I-SCP-RAC-PARAM-1-23/11/2016****************************************/ 
+
+--------------- SQL ---------------
+
+CREATE TABLE alma.tprueba_2 (
+  id_prueba_2 SERIAL NOT NULL,
+  codigo VARCHAR,
+  nombre VARCHAR,
+  PRIMARY KEY(id_prueba_2)
+) WITHOUT OIDS;
+
+
+
+/***********************************F-SCP-RAC-PARAM-1-23/11/2016****************************************/ 
+
+
+
