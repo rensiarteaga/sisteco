@@ -1,6 +1,7 @@
 --------------- SQL ---------------
 
-CREATE FUNCTION alma.f_prueba_2 (
+
+CREATE OR REPLACE FUNCTION alma.f_prueba_2 (
 )
 RETURNS boolean AS
 $body$

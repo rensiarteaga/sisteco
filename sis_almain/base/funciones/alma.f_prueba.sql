@@ -1,6 +1,6 @@
 --------------- SQL ---------------
 
-CREATE FUNCTION alma.f_al_prueba (
+CREATE OR REPLACE FUNCTION alma.f_al_prueba (
 )
 RETURNS boolean AS
 $body$
@@ -15,4 +15,4 @@ $body$
 LANGUAGE 'plpgsql'
 VOLATILE
 CALLED ON NULL INPUT
-SECURITY INVOKER;
+SECURITY INVOKER;  
