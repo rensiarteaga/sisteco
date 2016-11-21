@@ -16,7 +16,6 @@ session_start();
    
 <link rel="stylesheet" type="text/css" href="../../../lib/css/dependency.css" />
 <script type='text/javascript' src='../../../sis_almacenes/vista/tipo_unidad_constructiva/js/tipo_unidad_constructiva_combo.js'></script>
-   <script type='text/javascript' src='../../../sis_almacenes/vista/tipo_unidad_constructiva/js/tuc_arb.js'></script>
    <script type='text/javascript' src='../../../sis_almacenes/vista/tipo_unidad_constructiva/js/tuc_arb_main.php?idContenedor=<?php echo "$idContenedor";?>'></script>
 </head>
 <body>

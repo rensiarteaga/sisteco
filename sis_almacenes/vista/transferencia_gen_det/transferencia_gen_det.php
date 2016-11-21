@@ -14,7 +14,6 @@ session_start();
 <meta http-equiv='Content-Type' content='text/html; charset=iso-8859-15'>
 <title>sis_almacenes transferencia_det</title>
  <script type='text/javascript' src='../../../sis_almacenes/vista/transferencia_gen_det/js/transferencia_gen_det_combo.js'></script>
- <script type='text/javascript' src='../../../sis_almacenes/vista/transferencia_gen_det/js/transferencia_gen_det.js'></script>
  <script type='text/javascript' src='../../../sis_almacenes/vista/transferencia_gen_det/js/transferencia_gen_det_main.php?idContenedorPadre=<?php echo "$idContenedorPadre";?>&idContenedor=<?php echo "$idContenedor";?>&m_id_transferencia=<?php echo "$m_id_transferencia";?>&m_id_almacen_logico=<?php echo "$m_id_almacen_logico";?>&m_almacen_logico=<?php echo "$m_almacen_logico";?>'></script>	
  
 </head>

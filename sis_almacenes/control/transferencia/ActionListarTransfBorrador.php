@@ -142,7 +142,6 @@ if($_SESSION['autentificado']=='SI')
 			$xml->add_nodo('codigo_regional_dest',$f["codigo_regional_dest"]);
 			$xml->add_nodo('codigo_programa_dest',$f["codigo_programa_dest"]);
 			$xml->add_nodo('codigo_proyecto_dest',$f["codigo_proyecto_dest"]);
-
 			$xml->add_nodo('codigo_actividad_dest',$f["codigo_actividad_dest"]);
 			$xml->add_nodo('fecha_borrador',$f["fecha_borrador"]);
 			$xml->add_nodo('fecha_pendiente',$f["fecha_pendiente"]);
@@ -153,11 +152,18 @@ if($_SESSION['autentificado']=='SI')
 			$xml->add_nodo('desc_tipo_material',$f["desc_tipo_material"]);
 			$xml->add_nodo('id_motivo_salida_cuenta',$f["id_motivo_salida_cuenta"]);
 			$xml->add_nodo('desc_motivo_salida_cuenta',$f["desc_motivo_salida_cuenta"]);
-
 			$xml->add_nodo('desc_motivo_ingreso',$f["desc_motivo_ingreso"]);
 			$xml->add_nodo('desc_motivo_salida',$f["desc_motivo_salida"]);
 			$xml->add_nodo('id_ingreso_prestamo',$f["id_ingreso_prestamo"]);
-			$xml->add_nodo('id_salida_prestamo',$f["id_salida_prestamo"]);
+			$xml->add_nodo('id_salida_prestamo',$f["id_salida_prestamo"]);			
+			$xml->add_nodo('id_almacen_destino',$f["id_almacen_dest"]);			
+			$xml->add_nodo('id_almacen',$f["id_almacen_orig"]);			
+			$xml->add_nodo('id_motivo_salida',$f["id_motivo_salida"]);			
+			$xml->add_nodo('id_motivo_ingreso',$f["id_motivo_ingreso"]);
+			
+			
+			
+			
 			$xml->fin_rama();
 		}
 		$xml->mostrar_xml();

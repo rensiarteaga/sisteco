@@ -121,7 +121,7 @@ class cls_DBMotivoSalida
 		//Obtiene la cadena con que se llamó a la función de postgres
 		$this->query = $this->var->query;
 		
-		//echo "query:". $this->query;
+		//echo $this->query;
 		return $res;
 	}
 	

@@ -30,7 +30,7 @@ if (!isset($_SESSION['autentificado']))
 }
 if($_SESSION['autentificado']=="SI")
 {
- 
+
 	//sonsulta con filtro sincrona se construye el arbol
 	if($node=='id' && $filtrar=='true'){
 		
@@ -81,7 +81,7 @@ if($_SESSION['autentificado']=="SI")
 					if($sw){
 						
 						
-				 		
+						
 						$t_spg= $t_spg.',"children":['.$t_g.',"children":['.$t_sbg.',"children":['.$t_id1.',"children":['.$t_id2.',"children":['.$t_id3.',"children":['.$t_item.']}]}]}]}]}]}';
 						$sw_item=false;				
 						$sw_id3=false;
@@ -516,7 +516,6 @@ if($_SESSION['autentificado']=="SI")
 			}
 
 			$res = $Custom->ListarSuperGrupo("NULL",0,'nombre','asc',$param_filtro,$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad);
-			
 			if($res)
 			{
 				foreach ($Custom->salida as $f)
@@ -571,7 +570,6 @@ if($_SESSION['autentificado']=="SI")
 
 
 			$res = $Custom->ListarGrupo("NULL",0,'nombre','asc',$cond->obtener_criterio_filtro(),$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad);
-			
 			if($res)
 			{
 				foreach ($Custom->salida as $f)
@@ -629,7 +627,6 @@ if($_SESSION['autentificado']=="SI")
 
 			}
 			$res = $Custom->ListarSubGrupo("NULL",0,'nombre','asc',$cond->obtener_criterio_filtro(),$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad);
-			
 			if($res)
 			{
 				foreach ($Custom->salida as $f)
@@ -687,8 +684,6 @@ if($_SESSION['autentificado']=="SI")
 
 			}
 			$res = $Custom->ListarId1("NULL",0,'nombre','asc',$cond->obtener_criterio_filtro(),$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad);
-			
-			
 			if($res)
 			{
 				foreach ($Custom->salida as $f)
@@ -746,7 +741,6 @@ if($_SESSION['autentificado']=="SI")
 
 			}
 			$res = $Custom->ListarId2("NULL",0,'nombre','asc',$cond->obtener_criterio_filtro(),$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad);
-			
 			if($res)
 			{
 				foreach ($Custom->salida as $f)
@@ -804,8 +798,6 @@ if($_SESSION['autentificado']=="SI")
 
 			}
 			$res = $Custom->ListarId3("NULL",0,'nombre','asc',$cond->obtener_criterio_filtro(),$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad);
-			
-			
 			if($res)
 			{
 				foreach ($Custom->salida as $f)
@@ -863,7 +855,6 @@ if($_SESSION['autentificado']=="SI")
 
 			}
 			$res = $Custom->ListarItem("NULL",0,'nombre','asc',$cond->obtener_criterio_filtro(),$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad);
-			
 			if($res)
 			{
 				foreach ($Custom->salida as $f)

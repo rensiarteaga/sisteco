@@ -54,7 +54,7 @@ class cls_DBValoracion
 		$this->var->add_param("'$id_ep'");
 		$this->var->add_param("'$id_almacen_logico'");
 		$this->var->add_param("'$fecha'");
-
+/*
 		//Carga la definición de columnas con sus tipos de datos
 		$this->var->add_def_cols('id_item','integer');
 		$this->var->add_def_cols('fecha','date');
@@ -70,29 +70,23 @@ class cls_DBValoracion
 		$this->var->add_def_cols('un_med_bas','varchar');
 		$this->var->add_def_cols('saldo_fis','numeric');
 		$this->var->add_def_cols('costo','numeric');
-		$this->var->add_def_cols('saldo_eco','numeric');
+		$this->var->add_def_cols('saldo_eco','numeric');*/
+		//$this->var->add_def_cols('fecha_finalizado_exacta','timestamp');
 		
-		
-
-
-		/*$this->var->add_def_cols('id','integer');
 		$this->var->add_def_cols('id_item','integer');
-		$this->var->add_def_cols('fecha','date');
 		$this->var->add_def_cols('ingresos','numeric');
 		$this->var->add_def_cols('salidas','numeric');
-		$this->var->add_def_cols('costo','numeric');
-		$this->var->add_def_cols('final','varchar');
-		$this->var->add_def_cols('almacen','varchar');
+		$this->var->add_def_cols('costo_ingreso','numeric');
+	    $this->var->add_def_cols('costo_salida','numeric');
+	    $this->var->add_def_cols('almacen','varchar');
 		$this->var->add_def_cols('almacen_log','varchar');
-		$this->var->add_def_cols('gestion','varchar');
 		$this->var->add_def_cols('fecha_rep','varchar');
-		$this->var->add_def_cols('item','varchar');
+		$this->var->add_def_cols('gestion','varchar');
+		$this->var->add_def_cols('nombre_item','varchar');
 		$this->var->add_def_cols('desc_item','varchar');
-		$this->var->add_def_cols('desc_medida','varchar');
-		$this->var->add_def_cols('saldo_fis','numeric');
-		$this->var->add_def_cols('costo_unit','numeric');
-		$this->var->add_def_cols('saldo_eco','numeric');*/
-
+		$this->var->add_def_cols('un_med_bas','varchar');
+		
+		
 		//Ejecuta la función de consulta
 		$res = $this->var->exec_query();
 

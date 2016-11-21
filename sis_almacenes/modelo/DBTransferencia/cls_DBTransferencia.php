@@ -122,6 +122,14 @@ class cls_DBTransferencia
 		$this->var->add_def_cols('desc_motivo_salida','varchar');
 		$this->var->add_def_cols('id_ingreso_prestamo','int4');
 		$this->var->add_def_cols('id_salida_prestamo','int4');
+		
+		$this->var->add_def_cols('id_almacen_dest','int4');
+       
+        $this->var->add_def_cols('id_almacen_orig','int4');
+		
+		$this->var->add_def_cols('id_motivo_salida','int4');
+       $this->var->add_def_cols('id_motivo_ingreso','int4');
+       
 
 		//Ejecuta la función de consulta
 		$res = $this->var->exec_query();

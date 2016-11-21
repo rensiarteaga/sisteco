@@ -33,7 +33,7 @@ class PDF extends FPDF
 	{
 		//Llama al constructor de la clase padre
 		$this->FPDF($orientation,$unit,$format);
-		//Iniciación de variables
+		
 	}
 
 	function Header()
@@ -111,7 +111,7 @@ class PDF extends FPDF
 		echo "</pre>";
 		exit;*/
 	}
-
+/*
 	function CalcularSaldos(){
 		$id=0;
 		$id_item='x';
@@ -124,152 +124,25 @@ class PDF extends FPDF
 		$a_final=array();
 		$sg=0;
 
-		//echo "tamaño data: ".count($this->data);
-		//exit;
-		//foreach ($this->data as $row){
+		
 		for($i=0;$i<count($this->data);$i++){
-			//echo "item:".$row['id_item']."<br>";
-			if($this->data[$i]['id_item']==4849){
-				$sg+=1;
-			}
-			if($id_item!=$this->data[$i]['id_item']){
-				//echo "entra ddd";
-				if($primera_iteracion==0){
-					//Actualiza el registro anterior como final
-					//echo "XXXXXX: ".$id;
-					$a_final[$cont]=$this->data[$id-1];
-					$a_final[$cont]['final']='si';
-					$a_final[$cont][4]='si';
-					if($a_final[$cont]['saldo_fis']==0){
-						$a_final[$cont]['costo']=0;
-						$a_final[$cont][13]=0;
-					}
-					else{
-						$a_final[$cont]['costo']=$a_final[$cont]['saldo_eco']/$a_final[$cont]['saldo_fis'];
-						$a_final[$cont][13]=$a_final[$cont]['saldo_eco']/$a_final[$cont]['saldo_fis'];
-					}
-					//if($this->data[$i]['id_item']==4849){echo 'enter 1';exit;}
-					if($id_item==4849){
-						echo "<pre>";
-						//print_r($a_final[$cont]);
-						print_r($this->data[$id-1]);
-						echo "</pre>";
-						echo "entra";
-						exit;
-					}
-					
-	
-					/*echo"<pre>";
-					print_r($this->data[$id-1]);
-					echo"</pre>";
-					exit;*/
-
-
-					$cont++;
-
-				}
-				else{
-					//Entra sólo en la primera iteración
-					$primera_iteracion=0;
-				}
-
-
-				/*echo " XXX saldo fis:".$saldo_fis;
-				echo " XXX saldo eco:".$saldo_eco;
-				echo " XXX costo:".$val_sal;*/
-				$id_item=$this->data[$i]['id_item'];
-				/*if($id_item==4849){
-						echo "<pre>";
-						//print_r($a_final[$cont]);
-						print_r($this->data[$id]);
-						echo "</pre>";
-						echo "entra";
-						exit;
-					}*/
-				$saldo_fis=0;
-				$saldo_eco=0;
-				$val_sal=0;
-				$costo_unitario=0;
-			}
-
-			if($this->data[$i]['salidas'] > 0){
-				//if($this->data[$i]['id_item']==4849){echo 'enter 1';exit;}
-				if($saldo_fis!=0){
-					$costo_unitario = $saldo_eco / $saldo_fis;
-					$val_sal = $costo_unitario * $this->data[$i]['salidas'];
-				}
-				//Actualización del Saldo Económico cuando es Salida
-				$saldo_eco = $saldo_eco - $val_sal;
-			}
-			else{
-				//Actualización del Saldo Económico cuando es Ingreso
-				$saldo_eco += $this->data[$i]['costo'];
-				//if($this->data[$i]['id_item']==4849){echo 'enter 2: '.$saldo_eco;exit;}
-			}
-
-			//Actualización del Saldo Físico
-			$saldo_fis += $this->data[$i]['ingresos'] - $this->data[$i]['salidas'];
-		//if($this->data[$i]['id_item']==4849){echo 'enter 2: '.$saldo_fis;exit;}
-
-			//Actualización de tabla
-			if($this->data[$i]['salidas']>0){
-				//Salidas
-				$this->data[$id]['saldo_fis']=$saldo_fis;
-				$this->data[$id][12]=$saldo_fis;
-				$this->data[$id]['costo']=$val_sal;
-				$this->data[$id][13]=$val_sal;
-				$this->data[$id]['saldo_eco']=$saldo_eco;
-				$this->data[$id][14]=$saldo_eco;
-			}
-			else{
-				//Ingresos
-				$this->data[$id]['saldo_fis']=$saldo_fis;
-				$this->data[$id][12]=$saldo_fis;
-				$this->data[$id]['saldo_eco']=$saldo_eco;
-				$this->data[$id][14]=$saldo_eco;
-
-				//echo " variab saldo fis:".$saldo_fis;
-				//echo " array saldo fis:".$this->data[$id]['saldo_fis'];
-			}
+				
+			$a_final[$i]=$this->data[$i];
 			
-			$id++;
+			
+			
+		    
+		   $a_final[$cont]['saldo_fis'] = $this->data[$i]['ingresos'] - $this->data[$i]['salidas'];
 		}
 		
-		//RCM: 06/0/2011 ('cambio para mostrar la baliza') Para el último registro
-		$a_final[$cont]=$this->data[$id-1];
-		$a_final[$cont]['final']='si';
-		$a_final[$cont][4]='si';
-		if($a_final[$cont]['saldo_fis']==0){
-			$a_final[$cont]['costo']=0;
-			$a_final[$cont][13]=0;
-		} else{
-			$a_final[$cont]['costo']=$a_final[$cont]['saldo_eco']/$a_final[$cont]['saldo_fis'];
-			$a_final[$cont][13]=$a_final[$cont]['saldo_eco']/$a_final[$cont]['saldo_fis'];
-		}
 		
-		//echo "cantidaditems: ".$sg;
-		//exit;
-
-		/*echo "saldo fis:".$saldo_fis;
-		echo " XXX saldo eco:".$saldo_eco;
-		echo " XXX costo:".$val_sal;
-		exit;*/
-
-		/*echo"<pre>";
-		print_r($a_final);
-		echo"</pre>";
-		exit;*/
 		
-	//var_dump($this->data);exit;
-
+		
+		
+		
 		$this->data=$a_final;
-		//echo 'balizas:'.$sg;exit;
 		
-		/*echo"<pre>";
-		print_r($this->data);
-		echo"</pre>";
-		exit;*/
-	}
+	}*/
 
 	//Tabla coloreada
 	function crear_pdf()
@@ -296,9 +169,72 @@ class PDF extends FPDF
 
 		$total=0;
 		for ($i=0;$i<sizeof($this->data);$i++){
+				
 			$cont=$i+1;
+			
+			//$this->data[$i]['saldo_eco'] = $this->data[$i]['costo_ingreso'] - $this->data[$i]['costo_salida'];
+			
 			$total+=$this->data[$i]['saldo_eco'];
-			$this->MultiTabla(array_merge((array)$cont,(array)$this->data[$i]),2,3,3.5,6);
+			
+			//$this->MultiTabla(array_merge( (array)$cont, (array)$this->data[$i]), 2,3,3.5,6);
+			
+
+			
+			
+			$saldo_fisico = $this->data[$i]['ingresos'] - $this->data[$i]['salidas'];
+			$saldo_eco = $this->data[$i]['costo_ingreso'] - $this->data[$i]['costo_salida'];
+			if($saldo_fisico!= 0){
+				$costo_unitario = ($saldo_eco)/$saldo_fisico;			
+			}
+			else{
+				$costo_unitario = 0;			
+			}
+			
+			$a_final = Array
+					(
+					    0 => $i+1,
+					  
+					     1=> $i+1,
+					    'id_item' => $i+1,
+					    2 => '300.00',
+					    'ingresos' => '300.00',
+					    3 => '100.00',
+					    'salidas' => '100.00',
+					    4 => 6000.000000,
+					    'costo_ingreso' => 6000.000000,
+					    5 => 2000.00,
+					    'costo_salida' => 2000.00,
+					    6 => 'test',
+					    'almacen' => 'test',
+					    7 => 'test',
+					    'almacen_log' => 'test',
+					    8 => '29/11/2016',
+					    'fecha_rep' => '29/11/2016',
+					    9 => '2016',
+					    'gestion' => '2016',
+					    10 => $this->data[$i]['nombre_item'],
+					    'nombre_item' => $this->data[$i]['nombre_item'],
+					    11 => $this->data[$i]['desc_item'],
+					    'desc_item' => $this->data[$i]['desc_item'],
+					    12 =>$this->data[$i]['un_med_bas'],
+					    'un_med_bas' => $this->data[$i]['un_med_bas'],
+					    13 => $saldo_fisico,
+					    'saldo_fisico' => $saldo_fisico,
+					    14 => $costo_unitario,
+					    'costo_unitario' => $costo_unitario,
+					    15 => $saldo_eco,
+					    'saldo_eco' => $saldo_eco
+					);
+														
+			
+			
+			
+			
+			
+			$this->MultiTabla($a_final, 2,3,3.5,6);
+			
+			
+			
 		}
 		//$this->Ln();
 		$this->SetFont('Arial','B',6);
@@ -337,7 +273,7 @@ $pdf->fecha = $fecha;
 $pdf->LoadData();
 
 //Procesar los datos para la impresion
-$pdf->CalcularSaldos();
+//$pdf->CalcularSaldos();
 
 //Títulos de las columnas
 $pdf->cols=array('Nro.','Item','Descripción','Unidad','Cantidad','Precio Unit. Bs.','Importe Bs.');

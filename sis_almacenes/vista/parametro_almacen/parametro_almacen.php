@@ -14,7 +14,6 @@ session_start();
 <meta http-equiv='Content-Type' content='text/html; charset=iso-8859-15'>
 <title>sis_almacenes parametro_almacen</title>
    <script type='text/javascript' src='../../../sis_almacenes/vista/parametro_almacen/js/parametro_almacen_combo.js'></script>
-   <script type='text/javascript' src='../../../sis_almacenes/vista/parametro_almacen/js/parametro_almacen.js'></script>
    <script type='text/javascript' src='../../../sis_almacenes/vista/parametro_almacen/js/parametro_almacen_main.php?idContenedor=<?php echo "$idContenedor";?>'></script>
 </head>
 <body>

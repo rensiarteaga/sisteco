@@ -112,7 +112,7 @@ function pagina_tipo_unidad_constructiva(idContenedor,direccion,paramConfig)
 			name:'codigo',
 			fieldLabel:'Código',
 			allowBlank:false,
-			maxLength:18,
+			maxLength:100,
 			minLength:0,
 			selectOnFocus:true,
 			vtype:'texto',

@@ -194,8 +194,6 @@ class cls_DBAlmacenLogico
 		//Obtiene la cadena con que se llamó a la función de postgres
 		$this->query = $this->var->query;
 		
-//		echo "query:".$this->query;
-		//exit;
 		
 		
 		return $res;

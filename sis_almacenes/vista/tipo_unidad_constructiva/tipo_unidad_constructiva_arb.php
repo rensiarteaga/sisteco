@@ -14,7 +14,6 @@ session_start();
 <meta http-equiv='Content-Type' content='text/html; charset=iso-8859-15'>
 <title>sis_almacenes tipo_unidad_constructiva</title>
    <link rel="stylesheet" type="text/css" href="../../../lib/css/dependency.css" />
-   <script type='text/javascript' src='../../../sis_almacenes/vista/tipo_unidad_constructiva/js/tipo_unidad_constructiva_arb.js'></script>
    <script type='text/javascript' src='../../../sis_almacenes/vista/tipo_unidad_constructiva/js/tipo_unidad_constructiva_arb_main.php?idContenedor=<?php echo "$idContenedor";?>'></script>
 </head>
 <body>
