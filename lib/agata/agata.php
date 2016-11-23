@@ -1,15 +1,13 @@
 +-----------------------------------------------------------------+
-| AGATA Report                                                    |
-| Copyleft (l) 2001-2006 Solis Lajeado/RS - Brasil                |
+| AGATA                                                           |
 +-----------------------------------------------------------------+
 | Licensed under GPL: www.fsf.org for further details             |
 |                                                                 |
-| Site: http://www.agata.org.br                                   |
+| Site: http://www.pablo.blog.br/agata                            |
 +-----------------------------------------------------------------+
 | Abstract: A Database reporting tool written in PHP-GTK          |
 |                                                                 |
 | Started in  August, 10, 2001                                    |
-| Maintainers: Jamiel Spezia (jamiel@solis.coop.br)               |
 | Author: Pablo Dall'Oglio (pablo@dalloglio.net)                  |
 +-----------------------------------------------------------------+
 
@@ -45,7 +43,6 @@ else
     setlocale(LC_ALL, 'pt_BR');
 }
 define("AGATA_PATH", getcwd());
-define("AGATA_VERSION", "7.5");
 
 include_once 'include/util.inc';
 include_once 'include/define.inc';
@@ -80,7 +77,7 @@ class App
         {
             $aLanguages = array('en', 'pt', 'es', 'de', 'fr', 'it', 'se', 'tk');
             $aThemes = array_merge('No theme', getSimpleDirArray('themes', false));
-            
+        /*    
             if ($this->agataConfig['general']['SplashScreen'])
             {
                 $this->StartWindow = &new Gtkwindow(GTK_WINDOW_POPUP);
@@ -134,13 +131,14 @@ class App
             else
             {
                 $this->Start();
-            }
+            }*/
+	    $this->Start();
         }
     }
     
     
     function Start()
-    {
+    {/*
         if ($this->agataConfig['general']['SplashScreen'])
         {
             $this->StartWindow->hide();
@@ -152,9 +150,9 @@ class App
         else
         {
             include 'include/setup.inc';
-        }
+        }*/
+        include 'include/setup.inc';
         $agataConfig = AgataConfig::FixConfig($this->agataConfig);
-        
         if ($agataConfig)
         {
             if (AgataConfig::WriteSetup($Theme, $Language))

@@ -1,0 +1,237 @@
+<?
+/*******************************************************************************/
+/* AgataWEB
+/* WEB for report generation
+/* by Pablo Dall'Oglio - 2001 - 2006
+/*******************************************************************************/
+class AgataWEB
+{
+    function AgataWEB()
+    {
+        
+    }
+    
+    function readReports($V676, $V743)
+    {
+        $V834ermissions = C85::F233('C56');
+        $V512 = getSimpleDirArray($V743, true);
+        
+        foreach($V512 as $V677)
+        {
+            $V579 = $V743 . bar . $V677;
+            $V579 = str_replace('/', bar, $V579);
+            $V579 = str_replace('\\', bar, $V579);
+            $V558->login  = array('=', $V676);
+            $V558->report = array('=', $V579);
+            if ($V834ermissions->F201($V558) or $V676 == 'admin')
+            {
+                $V585[] = $V579;
+            }
+        }
+        
+        return $V585;
+    }
+
+    function canAdjust($V676)
+    {
+        $Users = C85::F233('C106');
+        $V676  = $Users->F215($V676);
+        return $V676->canadjust;
+    }
+
+    function canSchedule($V676)
+    {
+        $Users = C85::F233('C106');
+        $V676  = $Users->F215($V676);
+        return $V676->canschedule;
+    }
+    
+    
+    function DirList($BrowseDir, $V558, $V587, $V448)
+    {
+        if ($V587 == 'browse.php?goal=2')
+        {
+            $V559Dir = $V448['general']['OutputDir'];
+            $V743_len = strlen($V559Dir);
+            if (substr($BrowseDir,0,$V743_len) != $V559Dir)
+            {
+                $BrowseDir = $V559Dir;
+            }
+        }
+        else
+        {
+            $RptDir = $V448['general']['RptDir'];
+            $V743_len = strlen($RptDir);
+            if (substr($BrowseDir,0,$V743_len) != $RptDir)
+            {
+                $BrowseDir = $RptDir;
+            }    
+        }
+    
+        $V485        = 'imagens/folder.png';
+        $V602['sql']    = 'imagens/ico_sql.png';
+        $V602['agt']    = 'imagens/ico_agt.png';
+        $V602['html']   = 'imagens/ico_html.png';
+        $V602['sxw']    = 'imagens/ico_sxw.png';
+        $V602['txt']    = 'imagens/ico_txt.png';
+        $V602['pdf']    = 'imagens/ico_pdf.png';
+        $V602['ps']     = 'imagens/ico_ps.png';
+        $V602['csv']    = 'imagens/ico_csv.png';
+        $V602['xml']    = 'imagens/ico_xml.png';
+        $V602['dia']    = 'imagens/ico_dia.png';
+        $V602['generic']= 'imagens/generic.png';
+    
+        # Opens the Sql's Dir
+        
+        $V512 = getSimpleDirArray($BrowseDir, false);
+        if ($V512)
+        {
+            echo '<link href="site.css" rel="stylesheet" type="text/css">';
+            echo '<table width=700 cellspacing=0 class=table border=0>';
+            echo '<tr height=30 class=tabletitle>';
+            echo '<td colspan=6>';
+            if ($V587 == 'browse.php?goal=1')
+            {
+                echo '<b>&nbsp; Agata Report:: ' . _a('Query Explorer') .'</b>';
+                echo '</td>';
+                echo '</tr>';
+                echo '<tr class=line1>';
+                echo '<td colspan=6 align=right>';
+                echo '<a href=browse.php?goal=2>' . _a('Repository Explorer') . '</a>';
+            }
+            else
+            {
+                echo '<b>&nbsp; Agata Report:: ' . _a('Repository Explorer') . '</b>';
+                echo '</td>';
+                echo '</tr>';
+                echo '<tr class=line1>';
+                echo '<td colspan=6 align=right>';
+                echo '<a href=browse.php?goal=1>' . _a('Query Explorer') . '</a>';
+            }
+            echo '</td>';
+            echo '</tr>';
+    
+            echo '<tr class=tablepath>';
+            echo '<td colspan=6>';
+            echo '&nbsp;' . $BrowseDir;
+            echo '</td>';
+            echo '</tr>';
+    
+            
+            $V705 = dir_back($BrowseDir);
+            if ($V705 != $V448['general']['AgataDir'])
+            {
+                echo '<tr>';
+                echo '<td width=10% align=center>';
+                echo "<a href=$V587&BrowseDir=$V705><img src=$V485 border=0></a>";
+                echo '</td>';
+                echo '<td width=40% colspan=5 align=left>';
+                echo "<a href=$V587&BrowseDir=$V705>..</a>";
+                echo '</td>';
+                echo '</tr>';
+            }
+            $V816 = 0;
+            foreach ($V512 as $V541)
+            {
+                $V541 = trim($V541);
+                $V681 = $BrowseDir . bar . $V541;
+                $V816++;
+                
+                if (($V816 % 2) == 0)
+                {
+                    $class = 'line1';
+                }
+                else
+                {
+                    $class = 'line2';
+                }
+                
+                if (is_dir($V681))
+                {
+                    $V702 = "$V587&BrowseDir=$V681";
+                    echo "<tr class=$class>";
+                    echo '<td width=5% align=center>';
+                    echo "<a href=$V702><img src=$V485 border=0></a>";
+                    echo '</td>';
+                    echo '<td width=95% colspan=5 align=left valign=center>';
+                    echo "<a class=report href=$V702>$V541</a>";
+                    echo '</td>';
+                    echo '</tr>';
+                }
+                else
+                {
+                    if (count($V558) == 1)
+                    {
+                        $V776 = ($V558) ? (in_array(substr($V681,-strlen($V558[0])), $V558)) : true;
+                    }
+                    else
+                    {
+                        $V747 = ($V558) ? (in_array(substr($V681,-2), $V558)) : true;
+                        $V748 = ($V558) ? (in_array(substr($V681,-3), $V558)) : true;
+                        $V749 = ($V558) ? (in_array(substr($V681,-4), $V558)) : true;
+                        $V776 = ($V747 or $V748 or $V749);
+                    }
+                    if ($V776)
+                    {
+                        $V547 = strpos($V541, '.');
+                        $V750 = substr($V541, $V547+1);
+                        $V751 = $V602[$V750];
+        
+                        if (!$V751)
+                        {
+                            $V751 = $V602['generic'];
+                        }
+        
+                        echo "<tr class=$class>";
+                        echo '<td class=report width=5% align=center>';
+    
+                        if ($V587 == 'browse.php?goal=2')
+                        {
+                            $V702 = "download.php?file=$V681&download=$V541&type=$V750";
+                            echo "<a href=$V702><img src=$V751 border=0></a>";
+                            echo '</td>';
+                            echo '<td width=30% align=left valign=center>';
+                            echo "<a href=$V702>$V541</a>";
+                        }
+                        else
+                        {
+                            $V689 = Trans::F183();
+                            $V702 = "agataweb.php?file=$V681&lang=$V689&AgataDir=" . AgataDir;
+                            echo "<a href=$V702><img src=$V751 border=0></a>";
+                            echo '</td>';
+                            echo '<td width=30% align=left valign=center>';
+                            
+                            echo "<a class=report href=$V702>$V541</a>";
+                        }
+                        if (substr($V681,-3)=='agt')
+                        {
+                            $V557 = Report::OpenReport($V681);
+                        }
+                        echo '</td>';
+                        echo '<td width=5% align=right>';
+                        if ($V557['Report']['Properties']['Layout'] and $V557['Report']['Properties']['Format'])
+                        {
+                            echo "<a href='fastgenerate.php?file=$V681'><img border=0 src=imagens/generate.png></a>";
+                        }
+                        echo '</td>';
+                        
+                        echo '<td class=texto width=10% align=right>';
+                        echo file_size($V681);
+                        echo '</td>';
+                        
+                        echo '<td class=texto width=30% align=center>';
+                        echo file_date($V681);
+                        echo '</td>';
+                        
+                        echo '<td class=texto width=20%>';
+                        echo '<font size=2><i>'. $V557['Report']['Properties']['Description'].'</i></font>';
+                        echo '</td>';
+                        echo '</tr>';
+                    }
+                }
+            }
+            echo "</table>";
+        }
+    }
+}
+?>

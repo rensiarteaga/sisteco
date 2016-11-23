@@ -8,6 +8,7 @@ function yyyymmdd2ddmmaaaa($string_column, $array_row)
 	$year = substr($string_column,0,4);
 	$month= substr($string_column,5,2);
 	$day  = substr($string_column,8,2);
-	return "$day/$month/$year";
+    
+	return "{$day}/{$month}/{$year}";
 }
 ?>

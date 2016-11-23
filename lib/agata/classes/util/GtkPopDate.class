@@ -13,17 +13,19 @@ class GtkPopDate
         global $Pixmaps;
         $this->Mask = $Mask;
         $tooltip = &new GtkTooltips;
+        
+        $this->Mask = $Mask;
+        
         $newmask = $Mask;
         $newmask = str_replace('yyyy', '9999',  $newmask);
         $newmask = str_replace('mm',   '99',    $newmask);
         $newmask = str_replace('dd',   '99',    $newmask);
         
         $this->entry = &new GtkEntryMask($newmask);
-
         $this->widget = $box = &new GtkHBox;
         $this->button = new Button(array($this, 'DateSel'), _a('Date Selection'), $Pixmaps['popdate'], ICONBUTTON, $isdir, true);
         $this->button->set_relief(GTK_RELIEF_NONE);
-
+        
         $box->pack_start($this->entry);
         $box->pack_start($this->button);
     }
@@ -105,9 +107,21 @@ class GtkPopDate
         $this->janela->connect_object('key_press_event', array(&$this,'KeyTest'), $this->janela);
         $this->janela->set_position(GTK_WIN_POS_CENTER);
         $calendar = &new GtkCalendar;
-        $calendar->select_month(date('n') -1, date('Y'));
-        $calendar->select_day(date('j'));
         $calendar->connect_object('day-selected-double-click', array(&$this, 'GetDate'), &$calendar);
+        
+        // posiciona na data atual
+        $ano_pos = strpos($this->Mask, 'yyyy');
+        $mes_pos = strpos($this->Mask, 'mm');
+        $dia_pos = strpos($this->Mask, 'dd');
+        
+        $this->Content = $this->entry->get_text();
+        $ano = substr($this->Content, $ano_pos, 4);
+        $mes = substr($this->Content, $mes_pos, 2);
+        $dia = substr($this->Content, $dia_pos, 2);
+        
+        $calendar->select_month($mes -1, $ano);
+        $calendar->select_day($dia);
+        
         $this->janela->add($calendar);
         $this->janela->show_all();
     }

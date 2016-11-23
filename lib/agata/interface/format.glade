@@ -64,7 +64,7 @@
 	  <editable>True</editable>
 	  <text_visible>True</text_visible>
 	  <text_max_length>1</text_max_length>
-	  <text>.</text>
+	  <text>,</text>
 	</widget>
 
 	<widget>
@@ -81,7 +81,7 @@
 	  <update_policy>GTK_UPDATE_ALWAYS</update_policy>
 	  <snap>False</snap>
 	  <wrap>False</wrap>
-	  <value>1</value>
+	  <value>2</value>
 	  <lower>0</lower>
 	  <upper>9</upper>
 	  <step>1</step>
@@ -100,7 +100,7 @@
 	  <editable>True</editable>
 	  <text_visible>True</text_visible>
 	  <text_max_length>1</text_max_length>
-	  <text>,</text>
+	  <text>.</text>
 	</widget>
 
 	<widget>
@@ -212,19 +212,6 @@
 	  <xpad>0</xpad>
 	  <ypad>0</ypad>
 	  <build_insensitive>True</build_insensitive>
-	</widget>
-
-	<widget>
-	  <class>GtkCheckButton</class>
-	  <name>check_thousand</name>
-	  <x>0</x>
-	  <y>98</y>
-	  <width>24</width>
-	  <height>24</height>
-	  <can_focus>True</can_focus>
-	  <label></label>
-	  <active>True</active>
-	  <draw_indicator>True</draw_indicator>
 	</widget>
 
 	<widget>

@@ -14,7 +14,6 @@ session_start();
 <meta http-equiv='Content-Type' content='text/html; charset=iso-8859-15'>
 <title>sis_almacenes almacen</title>
    
-   <script type='text/javascript' src='../../../sis_almacenes/vista/_reportes/valoracion_saldos/js/valoracion_saldos.js'></script>
    <script type='text/javascript' src='../../../sis_almacenes/vista/_reportes/valoracion_saldos/js/valoracion_saldos_main.php?idContenedor=<?php echo "$idContenedor";?>'></script>
 </head>
 <body>

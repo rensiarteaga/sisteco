@@ -118,10 +118,13 @@ class AgataXml extends AgataReport
             fputs($fd, "    $HeaderRow\n");
             for ($z=0; $z<=count($this->Columns) -1; $z++)
             {
-                $colnum = $z +1;
-                $Column = trim($this->Columns[$z]);
-                eval("\$var = \"$HeaderCol\";");
-                fputs($fd, "      $var\n");
+                if (!$this->Adjustments[$z+1]['Hidden'])
+                {
+                    $colnum = $z +1;
+                    $Column = trim($this->Columns[$z]);
+                    eval("\$var = \"$HeaderCol\";");
+                    fputs($fd, "      $var\n");
+                }
             }
             fputs($fd, "    $HeaderRow_\n");
             fputs($fd, "  $HeaderTag_\n");
@@ -160,7 +163,10 @@ class AgataXml extends AgataReport
                     $stringline .=  $this->Replicate(' ', $MarginBreaks);
                     
                     eval("\$var = \"$DataCol\";");
-                    $stringline .= "    $var\n";
+                    if (!$this->Adjustments[$y]['Hidden'])
+                    {
+                        $stringline .= "    $var\n";
+                    }
                 }
             }
             
@@ -289,7 +295,10 @@ class AgataXml extends AgataReport
                         $colnum = $z +1;
                         //fputs($fd, "    <col type=\"header\" colnum=\"$colnum\"> $Column </col>\n");
                         eval("\$var = \"$HeaderCol\";");
-                        fputs($fd, "    $var\n");
+                        if (!$this->Adjustments[$z+1]['Hidden'])
+                        {
+                            fputs($fd, "    $var\n");
+                        }
                     }
                 }
                 fputs($fd, $this->Replicate(' ', $MarginBreaks));
@@ -351,17 +360,20 @@ class AgataXml extends AgataReport
                             $w ++;
                             if (($this->ShowBreakColumns) || (!$this->ShowBreakColumns && (!$this->Breaks[$w])))
                             {
-                                $content = trim($content);
-                                if ($content)
+                                if (!$this->Adjustments[$w]['Hidden'])
                                 {
-                                    $tmp = explode(':', $content);
-                                    $formula = trim($tmp[0]);
-                                    $Value = trim($tmp[1]);
-                                    fputs($fd, $this->Replicate(' ', $MarginHeader +2));
-                                    $colnum = $w;
-                                    //fputs($fd, "    <col type=\"total\" formula=\"$formula\" colnum=\"$colnum\"> $Value </col>\n");
-                                    eval("\$var = \"$TotalCol\";");
-                                    fputs($fd, "    $var\n");
+                                    $content = trim($content);
+                                    if ($content)
+                                    {
+                                        $tmp = explode(':', $content);
+                                        $formula = trim($tmp[0]);
+                                        $Value = trim($tmp[1]);
+                                        fputs($fd, $this->Replicate(' ', $MarginHeader +2));
+                                        $colnum = $w;
+                                        //fputs($fd, "    <col type=\"total\" formula=\"$formula\" colnum=\"$colnum\"> $Value </col>\n");
+                                        eval("\$var = \"$TotalCol\";");
+                                        fputs($fd, "    $var\n");
+                                    }
                                 }
                             }
                         }

@@ -90,7 +90,7 @@ class AgataPdf extends AgataReport
         $this->PDF->SetMargins($this->LeftMargin,$this->TopMargin,$this->RightMargin);
         $this->PDF->SetCreator('Agata Report');
         $this->PDF->SetTitle('Report');
-        $this->PDF->SetKeywords('www.agata.org.br');
+        $this->PDF->SetKeywords('pablo.blog.br/agata');
         $this->PDF->AliasNbPages();
         $this->PDF->Parameters   = $this->Parameters;
         $this->PDF->textHeader   = $this->textHeader;
@@ -168,7 +168,10 @@ class AgataPdf extends AgataReport
         {
             if (($this->ShowBreakColumns) || (!$this->ShowBreakColumns && !$this->Breaks[$n])) //aquipbreak
             {
-                $Cols += $this->Adjustments[$n]['Points'];
+                if (!$this->Adjustments[$n]['Hidden'])
+                {
+                    $Cols += $this->Adjustments[$n]['Points'];
+                }
             }
         }
         $this->LineSize = $Cols + $MarginBreaks;
@@ -182,7 +185,10 @@ class AgataPdf extends AgataReport
                 
                 $width = $this->Adjustments[$z+1]['Points'];
                 $align = strtoupper(substr($this->Adjustments[$z+1]['Align'],0,1));
-                $this->PDF->Cell($width,$lineheight,$Column,$border,0,$align, 1);
+                if (!$this->Adjustments[$z+1]['Hidden'])
+                {
+                    $this->PDF->Cell($width,$lineheight,$Column,$border,0,$align, 1);
+                }
             }
         }
         $this->PDF->Ln($lineheight);
@@ -222,16 +228,25 @@ class AgataPdf extends AgataReport
                         $cond_high  = parent::EvalConditional($this->Adjustments[$y]['Conditional'], $UnformattedCell, $QueryLine);
                         if ($cond_high)
                         {
-                            $stringline[] = array($y, $QueryCell, $align, $this->Adjustments[$y]['Points'], $cond_high);
+                            if (!$this->Adjustments[$y]['Hidden'])
+                            {
+                                $stringline[] = array($y, $QueryCell, $align, $this->Adjustments[$y]['Points'], $cond_high);
+                            }
                         }
                         else
                         {
-                            $stringline[] = array($y, $QueryCell, $align, $this->Adjustments[$y]['Points'], null);
+                            if (!$this->Adjustments[$y]['Hidden'])
+                            {
+                                $stringline[] = array($y, $QueryCell, $align, $this->Adjustments[$y]['Points'], null);
+                            }
                         }
                     }
                     else
                     {
-                        $stringline[] = array($y, $QueryCell, $align, $this->Adjustments[$y]['Points'], null);
+                        if (!$this->Adjustments[$y]['Hidden'])
+                        {
+                            $stringline[] = array($y, $QueryCell, $align, $this->Adjustments[$y]['Points'], null);
+                        }
                     }
                 }
             }
@@ -276,15 +291,18 @@ class AgataPdf extends AgataReport
                                 $w ++;
                                 if (($this->ShowBreakColumns) || (!$this->ShowBreakColumns && (!$this->Breaks[$w])))
                                 {
-                                    if ($content)
+                                    if (!$this->Adjustments[$w]['Hidden'])
                                     {
-                                        $width = (($this->Adjustments[$w]['Points']));
-                                        $align = $aligns[$this->Adjustments[$w]['Align']];
-                                        $this->PDF->Cell($width, $lineheight, $content, $border, 0, $align, 1);
-                                    }
-                                    else
-                                    {
-                                        $this->PDF->Cell(($this->Adjustments[$w]['Points']), $lineheight, '', 0, 0);
+                                        if ($content)
+                                        {
+                                            $width = (($this->Adjustments[$w]['Points']));
+                                            $align = $aligns[$this->Adjustments[$w]['Align']];
+                                            $this->PDF->Cell($width, $lineheight, $content, $border, 0, $align, 1);
+                                        }
+                                        else
+                                        {
+                                            $this->PDF->Cell(($this->Adjustments[$w]['Points']), $lineheight, '', 0, 0);
+                                        }
                                     }
                                 }
                             }
@@ -339,7 +357,10 @@ class AgataPdf extends AgataReport
                     {
                         $width = $this->Adjustments[$z+1]['Points'];
                         $align = strtoupper(substr($this->Adjustments[$z+1]['Align'],0,1));
-                        $this->PDF->Cell($width, $lineheight, $Column, $border, 0, $align, 1);
+                        if (!$this->Adjustments[$z+1]['Hidden'])
+                        {
+                            $this->PDF->Cell($width, $lineheight, $Column, $border, 0, $align, 1);
+                        }
                     }
                     
                 }
@@ -348,6 +369,7 @@ class AgataPdf extends AgataReport
             
             if ($this->ShowDataColumns)
             {
+                $this->SetTextConfig($datafont, $datacolor, $databgcolor);
                 if ($stringline)
                 {
                     $color = 1;
@@ -372,7 +394,7 @@ class AgataPdf extends AgataReport
                         $result = null;
                         $firstpiece = true;
                         
-                        if (($this->PDF->GetStringWidth("$_QueryCell  ")) > $_len)
+                        if (($this->PDF->GetStringWidth("$_QueryCell ")) > $_len)
                         {
                             $pieces = explode(' ', trim($_QueryCell));
                             foreach ($pieces as $piece)
@@ -383,7 +405,7 @@ class AgataPdf extends AgataReport
                                     $result[$_i] = "$piece ";
                                     $firstpiece = false;
                                 }
-                                else if (($this->PDF->GetStringWidth("$test  "))> $_len)
+                                else if (($this->PDF->GetStringWidth("$test "))> $_len)
                                 {
                                     $_i ++;
                                     $result[$_i] = "$piece ";
@@ -428,6 +450,7 @@ class AgataPdf extends AgataReport
                             else
                             {
                                 $this->SetTextConfig($datafont, $datacolor, $databgcolor);
+                                //var_dump($datafont);
                             }
                             
                             if ($border) // from schema
@@ -507,15 +530,18 @@ class AgataPdf extends AgataReport
                             $w ++;
                             if (($this->ShowBreakColumns) || (!$this->ShowBreakColumns && (!$this->Breaks[$w])))
                             {
-                                if ($content)
+                                if (!$this->Adjustments[$w]['Hidden'])
                                 {
-                                    $width = $this->Adjustments[$w]['Points'];
-                                    $align = $aligns[$this->Adjustments[$w]['Align']];
-                                    $this->PDF->Cell($width, $lineheight, $content, $border, 0,  $align, 1);
-                                }
-                                else
-                                {
-                                    $this->PDF->Cell(($this->Adjustments[$w]['Points']), $lineheight, '', 0, 0);
+                                    if ($content)
+                                    {
+                                        $width = $this->Adjustments[$w]['Points'];
+                                        $align = $aligns[$this->Adjustments[$w]['Align']];
+                                        $this->PDF->Cell($width, $lineheight, $content, $border, 0,  $align, 1);
+                                    }
+                                    else
+                                    {
+                                        $this->PDF->Cell(($this->Adjustments[$w]['Points']), $lineheight, '', 0, 0);
+                                    }
                                 }
                             }
                         }

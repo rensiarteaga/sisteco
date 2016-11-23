@@ -1,184 +1,134 @@
 <?xml version="1.0"?>
-<Report>
-    <Version>7.5</Version>
-    <Properties>
-        <Description>Labels with photo</Description>
-        <Title></Title>
-        <Author></Author>
-        <Keywords></Keywords>
-        <Date></Date>
-        <FrameSize></FrameSize>
-    </Properties>
+<report>
+    <description>Labels with photo</description>
+    <datasource>
+        <name>Samples</name>
+    </datasource>
 
-    <Header>
-        <Body></Body>
-        <Align>center</Align>
-    </Header>
+    <header>
+        <body></body>
+        <align>center</align>
+    </header>
 
-    <Footer>
-        <Body></Body>
-        <Align>center</Align>
-    </Footer>
+    <footer>
+        <body></body>
+        <align>center</align>
+    </footer>
 
-    <DataSet>
-        <DataSource>
-            <Name>sqlite</Name>
-        </DataSource>
+    <preferences>
+        <showgroup></showgroup>
+        <showdetail>1</showdetail>
+        <showlabel></showlabel>
+        <shownumber>1</shownumber>
+        <showindent>1</showindent>
+        <distinct></distinct>
+    </preferences>
 
-        <Query>
-            <Select>customer.code as "Customer Code", customer.name as "Customer Name", customer.phone as "Customer Phone", customer.address as "Customer Address", customer.age as "Customer Age", customer.photo as "Customer Photo", customer.ref_city as "Customer City Code", city.description as "City Description", state.code as "State Code", state.description as "State Description"</Select>
-            <From>customer,city,state</From>
-            <Where>city.ref_state = state.code and customer.ref_city = city.code</Where>
-            <GroupBy></GroupBy>
-            <OrderBy>customer.name asc</OrderBy>
-            <Config>
-                <Distinct></Distinct>
-                <OffSet>0</OffSet>
-                <Limit>0</Limit>
-            </Config>
+    <query>
+        <select>customer.code as "Customer Code", customer.name as "Customer Name", customer.phone as "Customer Phone", customer.address as "Customer Address", customer.age as "Customer Age", customer.photo as "Customer Photo", customer.ref_city as "Customer City Code", city.description as "City Description", state.code as "State Code", state.description as "State Description"</select>
+        <from>customer,city,state</from>
+        <where>city.ref_state = state.code and customer.ref_city = city.code</where>
+        <groupby></groupby>
+        <orderby>customer.name asc</orderby>
+    </query>
 
-        </Query>
+    <adjustments>
+        <column1>
+            <chars>30</chars>
+            <points>100</points>
+            <align>left</align>
+            <function></function>
+            <cross></cross>
+        </column1>
 
-        <Groups>
-            <Config>
-                <ShowGroup></ShowGroup>
-                <ShowDetail>1</ShowDetail>
-                <ShowLabel></ShowLabel>
-                <ShowNumber>1</ShowNumber>
-                <ShowIndent>1</ShowIndent>
-            </Config>
+        <column2>
+            <chars>30</chars>
+            <points>100</points>
+            <align>left</align>
+            <function>/strings/a_upper.fun</function>
+            <cross></cross>
+        </column2>
 
-        </Groups>
+        <column3>
+            <chars>30</chars>
+            <points>100</points>
+            <align>left</align>
+            <function></function>
+            <cross></cross>
+        </column3>
 
-        <Fields>
-            <Column1>
-                <Chars>30</Chars>
-                <Points>100</Points>
-                <Align>left</Align>
-                <Mask></Mask>
-                <Function></Function>
-                <Cross></Cross>
-                <Conditional></Conditional>
-            </Column1>
+        <column4>
+            <chars>30</chars>
+            <points>100</points>
+            <align>left</align>
+            <function></function>
+            <cross></cross>
+        </column4>
 
-            <Column2>
-                <Chars>30</Chars>
-                <Points>100</Points>
-                <Align>left</Align>
-                <Mask></Mask>
-                <Function>/strings/a_upper.fun</Function>
-                <Cross></Cross>
-                <Conditional></Conditional>
-            </Column2>
+        <column5>
+            <chars>30</chars>
+            <points>100</points>
+            <align>left</align>
+            <function></function>
+            <cross></cross>
+        </column5>
 
-            <Column3>
-                <Chars>30</Chars>
-                <Points>100</Points>
-                <Align>left</Align>
-                <Mask></Mask>
-                <Function></Function>
-                <Cross></Cross>
-                <Conditional></Conditional>
-            </Column3>
+        <column6>
+            <chars>30</chars>
+            <points>100</points>
+            <align>left</align>
+            <function></function>
+            <cross></cross>
+        </column6>
 
-            <Column4>
-                <Chars>30</Chars>
-                <Points>100</Points>
-                <Align>left</Align>
-                <Mask></Mask>
-                <Function></Function>
-                <Cross></Cross>
-                <Conditional></Conditional>
-            </Column4>
+        <column7>
+            <chars>30</chars>
+            <points>100</points>
+            <align>left</align>
+            <function></function>
+            <cross></cross>
+        </column7>
 
-            <Column5>
-                <Chars>30</Chars>
-                <Points>100</Points>
-                <Align>left</Align>
-                <Mask></Mask>
-                <Function></Function>
-                <Cross></Cross>
-                <Conditional></Conditional>
-            </Column5>
+        <column8>
+            <chars>30</chars>
+            <points>100</points>
+            <align>left</align>
+            <function></function>
+            <cross></cross>
+        </column8>
 
-            <Column6>
-                <Chars>30</Chars>
-                <Points>100</Points>
-                <Align>left</Align>
-                <Mask></Mask>
-                <Function></Function>
-                <Cross></Cross>
-                <Conditional></Conditional>
-            </Column6>
+        <column9>
+            <chars>30</chars>
+            <points>100</points>
+            <align>left</align>
+            <function></function>
+            <cross></cross>
+        </column9>
 
-            <Column7>
-                <Chars>30</Chars>
-                <Points>100</Points>
-                <Align>left</Align>
-                <Mask></Mask>
-                <Function></Function>
-                <Cross></Cross>
-                <Conditional></Conditional>
-            </Column7>
+        <column10>
+            <chars>30</chars>
+            <points>100</points>
+            <align>left</align>
+            <function></function>
+            <cross></cross>
+        </column10>
 
-            <Column8>
-                <Chars>30</Chars>
-                <Points>100</Points>
-                <Align>left</Align>
-                <Mask></Mask>
-                <Function></Function>
-                <Cross></Cross>
-                <Conditional></Conditional>
-            </Column8>
+    </adjustments>
 
-            <Column9>
-                <Chars>30</Chars>
-                <Points>100</Points>
-                <Align>left</Align>
-                <Mask></Mask>
-                <Function></Function>
-                <Cross></Cross>
-                <Conditional></Conditional>
-            </Column9>
+    <graph>
+        <title></title>
+        <titlex></titlex>
+        <titley></titley>
+        <width>480</width>
+        <height>268</height>
+        <description></description>
+        <showdata>1</showdata>
+        <showvalues>1</showvalues>
+        <orientation>lines</orientation>
+    </graph>
 
-            <Column10>
-                <Chars>30</Chars>
-                <Points>100</Points>
-                <Align>left</Align>
-                <Mask></Mask>
-                <Function></Function>
-                <Cross></Cross>
-                <Conditional></Conditional>
-            </Column10>
-
-        </Fields>
-
-    </DataSet>
-
-    <PageSetup>
-        <Format></Format>
-        <Orientation></Orientation>
-        <LeftMargin></LeftMargin>
-        <RightMargin></RightMargin>
-        <TopMargin></TopMargin>
-        <BottomMargin></BottomMargin>
-        <LineSpace></LineSpace>
-    </PageSetup>
-
-    <Graph>
-        <Title></Title>
-        <TitleX></TitleX>
-        <TitleY></TitleY>
-        <Width>480</Width>
-        <Height>268</Height>
-        <Description></Description>
-        <ShowData>1</ShowData>
-        <ShowValues>1</ShowValues>
-        <Orientation>lines</Orientation>
-    </Graph>
-
-    <Merge>
-        <ReportHeader>
+    <merge>
+        <header>
 #setftb18
 #setcf010101
 #tab240Credit Company Letter
@@ -205,144 +155,104 @@
 #tab060 If you would like to make a payment to clear any undisputed amount, we would be pleased to accept this within the next seven days, and assure you that all monies received will be promptly remitted to our client.  
 
 #tab060 Please accept our sincere apologies for any inconvenience this may have caused.  
-</ReportHeader>
-        <Details>
-            <Detail1>
-                <GroupHeader>#rect*062*002*480*020*1*#000000*#000000
+</header>
+        <groupheader>#rect*062*002*480*020*1*#000000*#000000
 #rect*060*000*480*020*1*#c5c6bd*#010101
 #tab070Code    #tab120Description #tab320Amount  #tab420Date    #tab480Price
-</GroupHeader>
+</groupheader>
 
-                <DataSet1>
-                    <Body> #tab070$subfield1  #tab120$subfield2 #tab340$subfield3  #tab400$subfield4  #tab480$subfield5 </Body>
-                    <Query>
-                        <Select>product.code as "Product Code", product.description as "Product Description", sales.amount as "Amount", sales.date as "Date", sales.price as "Price"</Select>
-                        <From>sales,product</From>
-                        <Where>sales.ref_product = product.code and sales.ref_customer  = $var1</Where>
-                        <GroupBy></GroupBy>
-                        <OrderBy></OrderBy>
-                        <Config>
-                            <Distinct></Distinct>
-                            <OffSet>0</OffSet>
-                            <Limit>0</Limit>
-                        </Config>
-
-                    </Query>
-
-                    <Fields>
-                        <Column1>
-                            <Chars>30</Chars>
-                            <Points>100</Points>
-                            <Align>left</Align>
-                            <Mask></Mask>
-                            <Function></Function>
-                            <Cross></Cross>
-                            <Conditional></Conditional>
-                        </Column1>
-
-                        <Column2>
-                            <Chars>30</Chars>
-                            <Points>100</Points>
-                            <Align>left</Align>
-                            <Mask></Mask>
-                            <Function></Function>
-                            <Cross></Cross>
-                            <Conditional></Conditional>
-                        </Column2>
-
-                        <Column3>
-                            <Chars>30</Chars>
-                            <Points>100</Points>
-                            <Align>left</Align>
-                            <Mask></Mask>
-                            <Function></Function>
-                            <Cross></Cross>
-                            <Conditional></Conditional>
-                        </Column3>
-
-                        <Column4>
-                            <Chars>30</Chars>
-                            <Points>100</Points>
-                            <Align>left</Align>
-                            <Mask></Mask>
-                            <Function></Function>
-                            <Cross></Cross>
-                            <Conditional></Conditional>
-                        </Column4>
-
-                        <Column5>
-                            <Chars>30</Chars>
-                            <Points>100</Points>
-                            <Align>left</Align>
-                            <Mask></Mask>
-                            <Function></Function>
-                            <Cross></Cross>
-                            <Conditional></Conditional>
-                        </Column5>
-
-                    </Fields>
-
-                </DataSet1>
-
-                <NumberSubSql>0</NumberSubSql>
-                <GroupFooter>
+        <detail> #tab070$subfield1  #tab120$subfield2 #tab340$subfield3  #tab400$subfield4  #tab480$subfield5 </detail>
+        <groupfooter>
 #setcf6a1000
 #rect*060*000*480*020*1*#e5f3ff*#010101
-#tab120Sumarization #tab480$subfield5_sum</GroupFooter>
-            </Detail1>
-
-        </Details>
-
-        <ReportFooter>#setcf010000
+#tab120Sumarization #tab480$subfield5_sum</groupfooter>
+        <footer>#setcf010000
 #setfti14
 
 #tab460 Yours sincerely 
-#tab460 Credit Company</ReportFooter>
+#tab460 Credit Company</footer>
 
-        <FinalSummary></FinalSummary>
-        <PageSetup>
-            <Format>A4</Format>
-            <Orientation>portrait</Orientation>
-            <LeftMargin>0</LeftMargin>
-            <RightMargin>0</RightMargin>
-            <TopMargin>0</TopMargin>
-            <BottomMargin>0</BottomMargin>
-            <LineSpace>14</LineSpace>
-        </PageSetup>
+        <adjustments>
+            <column1>
+                <chars>30</chars>
+                <points>100</points>
+                <align>left</align>
+                <function></function>
+                <cross></cross>
+            </column1>
 
-    </Merge>
+            <column2>
+                <chars>30</chars>
+                <points>100</points>
+                <align>left</align>
+                <function></function>
+                <cross></cross>
+            </column2>
 
-    <Label>
-        <Body>#image $var6 
+            <column3>
+                <chars>30</chars>
+                <points>100</points>
+                <align>left</align>
+                <function></function>
+                <cross></cross>
+            </column3>
 
-</Body>
+            <column4>
+                <chars>30</chars>
+                <points>100</points>
+                <align>left</align>
+                <function></function>
+                <cross></cross>
+            </column4>
 
-        <Config>
-            <HorizontalSpacing>7</HorizontalSpacing>
-            <VerticalSpacing>5</VerticalSpacing>
-            <LabelWidth>100</LabelWidth>
-            <LabelHeight>103</LabelHeight>
-            <LeftMargin>23</LeftMargin>
-            <TopMargin>37</TopMargin>
-            <Columns>7</Columns>
-            <Rows>4</Rows>
-            <PageFormat>Automatic</PageFormat>
-            <LineSpacing>14</LineSpacing>
-        </Config>
+            <column5>
+                <chars>30</chars>
+                <points>100</points>
+                <align>left</align>
+                <function></function>
+                <cross></cross>
+            </column5>
 
-    </Label>
+        </adjustments>
 
-    <OpenOffice>
-        <Source></Source>
-        <Config>
-            <FixedDetails>1</FixedDetails>
-            <ExpandDetails></ExpandDetails>
-            <printEmptyDetail></printEmptyDetail>
-            <SumByTotal></SumByTotal>
-            <RepeatHeader></RepeatHeader>
-            <RepeatFooter></RepeatFooter>
-        </Config>
+        <pagesetup>
+            <format>A4</format>
+            <orientation>portrait</orientation>
+            <marginleft>0</marginleft>
+            <marginright>0</marginright>
+            <margintop>0</margintop>
+            <marginbottom>0</marginbottom>
+            <linespace>14</linespace>
+        </pagesetup>
 
-    </OpenOffice>
+        <query>
+            <select>product.code as "Product Code", product.description as "Product Description", sales.amount as "Amount", sales.date as "Date", sales.price as "Price"</select>
+            <from>sales,product</from>
+            <where>sales.ref_product = product.code and sales.ref_customer  = $var1</where>
+            <groupby></groupby>
+            <orderby></orderby>
+        </query>
 
-</Report>
+    </merge>
+
+    <label>
+        <body>#image $var6 
+
+</body>
+
+        <config>
+            <horizontal_spacing>7</horizontal_spacing>
+            <vertical_spacing>5</vertical_spacing>
+            <label_width>100</label_width>
+            <label_height>103</label_height>
+            <left_margin>23</left_margin>
+            <top_margin>37</top_margin>
+            <label_cols>7</label_cols>
+            <label_rows>4</label_rows>
+            <page_format>Automatic</page_format>
+            <line_spacing>14</line_spacing>
+        </config>
+
+    </label>
+
+</report>

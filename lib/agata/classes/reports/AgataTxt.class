@@ -65,7 +65,10 @@ class AgataTxt extends AgataReport
         {
             if (($this->ShowBreakColumns) || (!$this->ShowBreakColumns && !$this->Breaks[$n])) //aquipbreak
             {
-                $Cols += $this->Adjustments[$n]['Chars'];
+                if (!$this->Adjustments[$n]['Hidden'])
+                {
+                    $Cols += $this->Adjustments[$n]['Chars'];
+                }
             }
         }
 
@@ -87,17 +90,20 @@ class AgataTxt extends AgataReport
                 fputs($fd, str_pad($tmp, $linesize, ' ', $aligns[$this->alignHeader]) . "\n");
             }
         }
-
+        
         if ((!$this->Breaks) || ((count($this->Breaks)==1) && ($this->Breaks['0']))) //aquipbreak
         {
             for ($z=0; $z<=count($this->Columns); $z++)
             {
-                $Column = $this->Columns[$z];
-                fputs($fd, $this->FormatString($Column, $this->Adjustments[$z+1]['Chars'], $this->Adjustments[$z+1]['Align']) . ' ');
+                if (!$this->Adjustments[$z+1]['Hidden'])
+                {
+                    $Column = $this->Columns[$z];
+                    fputs($fd, $this->FormatString($Column, $this->Adjustments[$z+1]['Chars'], $this->Adjustments[$z+1]['Align']) . ' ');
+                }
             }
             fputs($fd, "\n" . $this->Replicate('-', $linesize) . "\n" );
         }
-
+        
         while ($QueryLine = $this->CurrentQuery->FetchNext())
         {
             $this->BreakMatrix = null;
@@ -119,7 +125,10 @@ class AgataTxt extends AgataReport
                 
                 if (($this->ShowBreakColumns) || (!$this->ShowBreakColumns && !$this->Breaks[$y])) //aquipbreak
                 {
-                    $stringline .= $this->FormatString($QueryCell, $this->Adjustments[$y]['Chars'], $this->Adjustments[$y]['Align']) . ' ';
+                    if (!$this->Adjustments[$y]['Hidden'])
+                    {
+                        $stringline .= $this->FormatString($QueryCell, $this->Adjustments[$y]['Chars'], $this->Adjustments[$y]['Align']) . ' ';
+                    }
                 }
             }
             
@@ -163,13 +172,16 @@ class AgataTxt extends AgataReport
                                 $w ++;
                                 if (($this->ShowBreakColumns) || (!$this->ShowBreakColumns && (!$this->Breaks[$w]))) //aquipbreak
                                 {
-                                    if ($content)
+                                    if (!$this->Adjustments[$w]['Hidden'])
                                     {
-                                        fputs($fd, $this->FormatString($content, $this->Adjustments[$w]['Chars'], $this->Adjustments[$w]['Align']) . ' ');
-                                    }
-                                    else
-                                    {
-                                        fputs($fd, $this->FormatString(' ', $this->Adjustments[$w]['Chars'], 'right') . ' ');
+                                        if ($content)
+                                        {
+                                            fputs($fd, $this->FormatString($content, $this->Adjustments[$w]['Chars'], $this->Adjustments[$w]['Align']) . ' ');
+                                        }
+                                        else
+                                        {
+                                            fputs($fd, $this->FormatString(' ', $this->Adjustments[$w]['Chars'], 'right') . ' ');
+                                        }
                                     }
                                 }
                             }
@@ -219,7 +231,10 @@ class AgataTxt extends AgataReport
                     if (($this->ShowBreakColumns) || (!$this->ShowBreakColumns && !$this->Breaks[($z +1)])) //aquipbreak
                     {
                         //fputs($fd, $this->FormatString($Column, $this->MaxLen[$z+1] +2));
-                        fputs($fd, $this->FormatString($Column, $this->Adjustments[$z+1]['Chars'], $this->Adjustments[$z+1]['Align']) . ' ');
+                        if (!$this->Adjustments[$z+1]['Hidden'])
+                        {
+                            fputs($fd, $this->FormatString($Column, $this->Adjustments[$z+1]['Chars'], $this->Adjustments[$z+1]['Align']) . ' ');
+                        }
                     }
                 }
                 fputs($fd, "\n" . $this->Replicate(' ', $MarginBreaks));
@@ -276,15 +291,18 @@ class AgataTxt extends AgataReport
                             $w ++;
                             if (($this->ShowBreakColumns) || (!$this->ShowBreakColumns && (!$this->Breaks[$w])))  //aquipbreak
                             {
-                                if ($content)
+                                if (!$this->Adjustments[$w]['Hidden'])
                                 {
-                                    //fputs($fd, $content);
-                                    fputs($fd, $this->FormatString($content, $this->Adjustments[$w]['Chars'], $this->Adjustments[$w]['Align']) . ' ');
-                                }
-                                else
-                                {
-                                    //fputs($fd, $this->FormatString(' ', $this->MaxLen[$w] +2, 'right'));
-                                    fputs($fd, $this->FormatString(' ', $this->Adjustments[$w]['Chars'], 'right') . ' ');
+                                    if ($content)
+                                    {
+                                        //fputs($fd, $content);
+                                        fputs($fd, $this->FormatString($content, $this->Adjustments[$w]['Chars'], $this->Adjustments[$w]['Align']) . ' ');
+                                    }
+                                    else
+                                    {
+                                        //fputs($fd, $this->FormatString(' ', $this->MaxLen[$w] +2, 'right'));
+                                        fputs($fd, $this->FormatString(' ', $this->Adjustments[$w]['Chars'], 'right') . ' ');
+                                    }
                                 }
                             }
                         }

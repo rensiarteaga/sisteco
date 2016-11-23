@@ -1,7 +1,6 @@
 <?
 #+-----------------------------------------------------------------+
-#| AGATA Report  (http://www.agata.org.br)                         |
-#| Copyleft (l) 2004  Solis - Lajeado - RS - Brasil                |
+#| AGATA Report  (http://pablo.blog.br/agata)                      |
 #| Licensed under GPL: http://www.fsf.org for further details      |
 #+-----------------------------------------------------------------+
 #| Started in  2001, August, 10                                    |
@@ -17,8 +16,8 @@ include_once '/agata/classes/core/AgataAPI.class';
 # Instantiate AgataAPI
 $api = new AgataAPI;
 $api->setLanguage('en'); //'en', 'pt', 'es', 'de', 'fr', 'it', 'se'
-$api->setReportPath('/agata/reports/samples/customers.agt');
-$api->setProject('sqlite');
+$api->setReportPath('/agata/reports/samples/general/customers.agt');
+$api->setProject('Samples');
 $api->setOutputPath('/tmp/teste2.sxw');
 #How to set parameters, if they exist
 $api->setParameter('$city', 1);

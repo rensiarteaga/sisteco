@@ -68,6 +68,7 @@ class AgataAPI
             include_once AGATA_PATH . "/classes/util/Trans.class";
             include_once AGATA_PATH . "/classes/util/XmlArray.class";
             include_once AGATA_PATH . "/classes/reports/AgataReport.class";
+            include_once AGATA_PATH . "/web/class/sys.html/core/TMaster.class.php";
         }
     }
 
@@ -124,6 +125,14 @@ class AgataAPI
     # Return the report parameters
     function getParameters()
     {
+        # Reading the Report
+        $Report = $this->getReport();
+        if (!$Report)
+        {
+            return;
+        }
+        $this->project = $this->project ? $this->project : $Report['Report']['DataSet']['DataSource']['Name'];
+
         # You can set the Database connection this way, too:
         $Project = @Project::ReadProject($this->project);
         if (!$Project)
@@ -132,13 +141,7 @@ class AgataAPI
             return;
         }
         
-        # Reading the Report
-        $Report = $this->getReport();
-        if (!$Report)
-        {
-            return;
-        }
-        if ($params = array_keys($Report['Report']['Parameters']))
+        if ($params = @array_keys($Report['Report']['Parameters']))
         {
             foreach ($params as $name)
             {
@@ -222,6 +225,14 @@ class AgataAPI
     
     function generateReport()
     {
+        # Reading the Report
+        $Report = $this->getReport();
+        if (!$Report)
+        {
+            return;
+        }
+        $this->project = $this->project ? $this->project : $Report['Report']['DataSet']['DataSource']['Name'];
+
         # You can set the Database connection this way, too:
         $Project = @Project::ReadProject($this->project);
         if (!$Project)
@@ -230,12 +241,6 @@ class AgataAPI
             return;
         }
         
-        # Reading the Report
-        $Report = $this->getReport();
-        if (!$Report)
-        {
-            return;
-        }
 
         if ($this->parameters)
         {
@@ -280,7 +285,15 @@ class AgataAPI
     function generateDocument()
     {
         $this->format = 'pdf';
-        
+
+         # Reading the Report
+        $Report = $this->getReport();
+        if (!$Report)
+        {
+            return;
+        }
+        $this->project = $this->project ? $this->project : $Report['Report']['DataSet']['DataSource']['Name'];
+       
         # You can set the Database connection this way, too:
         $Project = @Project::ReadProject($this->project);
         if (!$Project)
@@ -289,12 +302,6 @@ class AgataAPI
             return;
         }
         
-        # Reading the Report
-        $Report = $this->getReport();
-        if (!$Report)
-        {
-            return;
-        }
         
         $DataSet = $Report['Report']['DataSet'];
         
@@ -324,6 +331,14 @@ class AgataAPI
     {
         $this->format = 'sxw';
 
+        # Reading the Report
+        $Report = $this->getReport();
+        if (!$Report)
+        {
+            return;
+        }
+        $this->project = $this->project ? $this->project : $Report['Report']['DataSet']['DataSource']['Name'];
+
         # You can set the Database connection this way, too:
         $Project = @Project::ReadProject($this->project);
         if (!$Project)
@@ -332,12 +347,6 @@ class AgataAPI
             return;
         }
         
-        # Reading the Report
-        $Report = $this->getReport();
-        if (!$Report)
-        {
-            return;
-        }
         
         $DataSet = $Report['Report']['DataSet'];
         
@@ -372,7 +381,15 @@ class AgataAPI
     function generateLabel()
     {
         $this->format = 'pdf';
-        
+ 
+        # Reading the Report
+        $Report = $this->getReport();
+        if (!$Report)
+        {
+            return;
+        }
+        $this->project = $this->project ? $this->project : $Report['Report']['DataSet']['DataSource']['Name'];
+       
         # You can set the Database connection this way, too:
         $Project = @Project::ReadProject($this->project);
         if (!$Project)
@@ -381,12 +398,6 @@ class AgataAPI
             return;
         }
         
-        # Reading the Report
-        $Report = $this->getReport();
-        if (!$Report)
-        {
-            return;
-        }
         
         $DataSet = $Report['Report']['DataSet'];
         

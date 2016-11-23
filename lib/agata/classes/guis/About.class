@@ -7,7 +7,7 @@ class About
     function About()
     {
         $this->about = new GtkWindow;
-        $this->about->set_title('Agata Report ' . AGATA_VERSION);
+        $this->about->set_title('Agata Report 8.0');
         $this->about->connect_object('key_press_event', array(&$this, 'Close'));
 		$this->about->realize();
 

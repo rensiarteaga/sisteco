@@ -65,7 +65,6 @@ class HeaderFooterArea
         $option16 = new MyNormalMenuItem($Pixmaps['ico_chars'], _a('Commented Line'), null);
         $option17 = new MyNormalMenuItem($Pixmaps['ico_chars'], _a('File Name'), null);
         $option18 = new MyNormalMenuItem($Pixmaps['ico_chars'], _a('Page Number'), null);
-        $option19 = new MyNormalMenuItem($Pixmaps['ico_chars'], _a('Page counting'), null);
     
         $this->MenuChars->append($option1);
         $this->MenuChars->append($option2);
@@ -85,7 +84,6 @@ class HeaderFooterArea
         $this->MenuChars->append($option16);
         $this->MenuChars->append($option17);
         $this->MenuChars->append($option18);
-        $this->MenuChars->append($option19);
     
         $option1->connect_object('activate', array(&$this, 'TypeChar'), ' $sup1 ');
         $option2->connect_object('activate', array(&$this, 'TypeChar'), ' $sup2 ');
@@ -105,7 +103,6 @@ class HeaderFooterArea
         $option16->connect_object('activate', array(&$this, 'TypeChar'), "\n// ");
         $option17->connect_object('activate', array(&$this, 'TypeChar'), ' $filename ');
         $option18->connect_object('activate', array(&$this, 'TypeChar'), ' $page ');
-        $option19->connect_object('activate', array(&$this, 'TypeChar'), ' $pagecounting ');
 
         $this->MenuDateTime = new GtkMenu;
         $option1 = new MyNormalMenuItem($Pixmaps['ico_cal'],  _a('Year'), null);

@@ -243,7 +243,6 @@ $this->Containers['frameCommonFunction'] = $this->glade->get_widget('frameCommon
 $this->Containers['boxLabel'] = $this->glade->get_widget('boxLabel');
 $this->Containers['boxHeader'] = $this->glade->get_widget('boxHeader');
 $this->Containers['boxFooter'] = $this->glade->get_widget('boxFooter');
-$this->Containers['boxFinalSummary'] = $this->glade->get_widget('boxFinalSummary');
 $this->Containers['boxGroupFooter'] = $this->glade->get_widget('boxGroupFooter');
 $this->Containers['boxGroupHeader'] = $this->glade->get_widget('boxGroupHeader');
 $this->Containers['boxDetail'] = $this->glade->get_widget('boxDetail');
@@ -257,7 +256,6 @@ $this->Containers['hboxCloseSubWindow'] = $this->glade->get_widget('hboxCloseSub
 $this->Containers['hboxMainQueryField'] = $this->glade->get_widget('hboxMainQueryField');
 $this->Containers['viewportFixed'] = $this->glade->get_widget('viewportFixed');
 $this->Containers['hboxOpenOffice'] = $this->glade->get_widget('hboxOpenOffice');
-$this->Containers['hboxCrossTab'] = $this->glade->get_widget('hboxCrossTab');
 
 $this->Buttons['RequireTables'] = 	$this->glade->get_widget('buttonRequire');
 $this->Buttons['Clear'] = 		    $this->glade->get_widget('buttonClear');

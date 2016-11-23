@@ -131,10 +131,9 @@ class SelectList
     /***********************************************************/
     /* Connects the signals
     /***********************************************************/
-    function connect_object($signal, $callback, $param=null)
+    function connect_object($signal, $callback)
     {
         $this->callbacks[$signal] = $callback;
-        $this->param = $param;
     }
 
     /***********************************************************/
@@ -154,7 +153,7 @@ class SelectList
         $this->Reload();
         if ($this->callbacks['changed'])
         {
-            call_user_func($this->callbacks['changed'], $this->param);
+            call_user_func($this->callbacks['changed']);
         }
     }
 
@@ -219,7 +218,7 @@ class SelectList
             $this->SelectList->Close();
             $this->SelectList = null;
         }
-        
+        $this->ElementsBefore = $Elements;
         $this->SelectList = new Wlist(_a('List Edition'), array($Clause), $Elements, 400, 200, false, null);
         $this->SelectList->SetCallBack(array(&$this, 'ReturnSelectList'), $Clause);
         $this->SelectList->Exibe();
@@ -262,9 +261,22 @@ class SelectList
         $this->Block[$Clause][1] = $strings;
         $this->LoadBlocks($this->Block);
         $SelectList->CloseList();
+        if ($this->ElementsBefore)
+        {
+            foreach ($this->ElementsBefore as $Element)
+            {
+                $ElementsBefore[] = $Element;
+            }
+            
+            foreach ($ElementsBefore as $key=>$Element)
+            {
+                $key2 = array_search($Element, $items);
+                $newPositions[$key]  = $key2;
+            }
+        }
         if ($this->callbacks['return-select'])
         {
-            call_user_func($this->callbacks['return-select'], $Clause);
+            call_user_func($this->callbacks['return-select'], $Clause, $newPositions);
         }
         if ($this->callbacks['changed'])
         {

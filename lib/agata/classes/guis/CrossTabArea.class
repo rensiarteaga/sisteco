@@ -1,0 +1,161 @@
+<?
+class CrossTabArea
+{
+    function CrossTabArea($glade)
+    {
+        global $Pixmaps;
+        $frameRows = $glade->get_widget('frameRows');
+        $frameCols = $glade->get_widget('frameCols');
+        $frameData = $glade->get_widget('frameData');
+        $this->fixedCrossTab   = $glade->get_widget('fixedCrossTab');
+        $this->fixedFields = $glade->get_widget('fixedFields');
+        
+        $this->Buttons['CrossTabPdf'] =    $glade->get_widget('buttonCrossTabPdf');
+        $this->Buttons['CrossTabHtml'] =   $glade->get_widget('buttonCrossTabHtml');
+        
+        $this->fixedCrossTab->connect('drag_data_received', array(&$this, 'dragReceive'));
+        $targets = array(array('text/plain', 0, -1));
+        $this->fixedCrossTab->drag_dest_set(GTK_DEST_DEFAULT_ALL, $targets, GDK_ACTION_COPY);
+        
+        $this->fixedRows = &new FieldArea;
+        $this->fixedCols = &new FieldArea(false);
+        $this->fixedData = &new FieldArea(false, true);
+        
+        $scrollRows = &new GtkScrolledWindow;
+        $scrollRows->set_policy(GTK_POLICY_NEVER, GTK_POLICY_ALWAYS);
+        $scrollCols = &new GtkScrolledWindow;
+        $scrollCols->set_policy(GTK_POLICY_ALWAYS, GTK_POLICY_NEVER);
+        $frameRows->add($scrollRows);
+        $frameCols->add($scrollCols);
+        $scrollRows->add_with_viewport($this->fixedRows);
+        $scrollCols->add_with_viewport($this->fixedCols);
+        
+        $frameData->add($this->fixedData);
+        
+        
+        //$this->Buttons['CrossTabHtml']->connect_object('clicked', array(&$this, 'CrossTabHtml'));
+        $this->Buttons['CrossTabPdf']->set_relief(GTK_RELIEF_NONE);
+        $this->Buttons['CrossTabHtml']->set_relief(GTK_RELIEF_NONE);
+
+        $this->fixedRows->connect_object('receive', array(&$this, 'Erase'));
+        $this->fixedCols->connect_object('receive', array(&$this, 'Erase'));
+        $this->fixedData->connect_object('receive', array(&$this, 'Erase'));
+        $this->row = 4;
+    }
+    
+    
+    function drawButtons($Content)
+    {
+        $Elements = MyExplode(trim($Content), null);
+        $this->Clear();
+        if ($Elements)
+        {
+            $i = 1;
+            foreach ($Elements as $element)
+            {
+                $label = $element;
+                $element = $i . '#' . $element;
+                
+                if (eregi(' as ', $element))
+                {
+                    $pieces = explode(' as ', $element);
+                    $label  = $pieces[1];
+                }
+                $this->addButton(array($label, $element));
+                $i ++;
+            }
+        }
+    }
+    
+    function addButton($data)
+    {
+        global $Pixmaps;
+        $targets = array(array('text/plain', 0, -1));
+        
+        $button = &new VoidButton($data[0], $Pixmaps['field'], IMAGEBUTTON);
+        
+        # set_tip com a descricao full
+        $tooltips = $button->tooltips;
+        $tooltips->set_tip($button, $data[1]);
+        
+        $this->fixedFields->put($button, 4, $this->row);
+        $this->row += 30;
+        $button->set_usize(164,26);
+        $button->connect('drag_data_get', array(&$this, 'getDrag'), serialize($data));
+        $button->drag_source_set(GDK_BUTTON1_MASK, $targets, GDK_ACTION_COPY);
+        $button->show_all();
+    }
+    
+    # botao vai para o fixed especifico
+    function getDrag($widget, $context, $selection_data, $info, $time, $data)
+    {
+        $selection_data->set($selection_data->target, 8, $data);
+    }
+    
+    function Clear()
+    {
+        $this->row = 4;
+        if ($this->fixedFields->children())
+        {
+            foreach ($this->fixedFields->children() as $widget)
+            {
+                $this->fixedFields->remove($widget);
+            }
+        }
+        
+        $this->fixedRows->Clear();
+        $this->fixedCols->Clear();
+        $this->fixedData->Clear();
+    }
+    
+    # erase botao (arrastar para o fixed de trás)
+    function dragReceive($widget, $context, $x, $y, $data, $info, $time)
+    {
+        $udata = unserialize($data->data);
+    }
+
+    # Erase when moving from one to another fixed
+    function Erase($data)
+    {
+        $this->fixedRows->EraseByName($data[1]);
+        $this->fixedCols->EraseByName($data[1]);
+        $this->fixedData->EraseByName($data[1]);
+    }
+    
+    function GetInfo()
+    {
+        $return['Rows'] = $this->fixedRows->GetInfo();
+        $return['Cols'] = $this->fixedCols->GetInfo();
+        $return['Summ'] = $this->fixedData->GetInfo();
+        return $return;
+    }
+    
+    function Validate()
+    {
+        $return['Rows'] = $this->fixedRows->GetInfo();
+        $return['Cols'] = $this->fixedCols->GetInfo();
+        $return['Summ'] = $this->fixedData->GetInfo();
+        
+        if ($return['Rows'] and $return['Cols'] and $return['Summ'])
+        {
+            return true;
+        }
+        else
+        {
+            if (!$return['Rows'])
+            {
+                new Dialog(_a('You must selecte fields for rows'));
+            }
+            if (!$return['Cols'])
+            {
+                new Dialog(_a('You must selecte fields for columns'));
+            }
+            if (!$return['Summ'])
+            {
+                new Dialog(_a('You must selecte fields for summarization'));
+            }
+            return false;
+        }
+    }
+}
+?>

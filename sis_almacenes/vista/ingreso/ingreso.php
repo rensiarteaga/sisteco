@@ -14,7 +14,6 @@ session_start();
 <meta http-equiv='Content-Type' content='text/html; charset=iso-8859-15'>
 <title>sis_almacenes ingreso</title>
    <script type='text/javascript' src='../../../sis_almacenes/vista/ingreso/js/ingreso_combo.js'></script>
-   <script type='text/javascript' src='../../../sis_almacenes/vista/ingreso/js/ingreso.js'></script>
    <script type='text/javascript' src='../../../sis_almacenes/vista/ingreso/js/ingreso_main.php?idContenedor=<?php echo "$idContenedor";?>'></script>
 </head>
 <body>

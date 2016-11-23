@@ -1,13 +1,6 @@
-Version 7.5 (17.0 Mb) 2006-03-22
-# One record per page or not (jamiel)
-# SubQuerys based on the detail (jamiel)
-# Final summary (jamiel)
-# Variavel contend total number of pages (jamiel)
-# Bug Fixed on OpenOffice (jamiel
-
-Version 7.4 (?.? Mb) 2005-
+Version 8.0
+===========
 # Open Office parsing (pablo);
-# Cross-Tab Reports (pablo);
 # Allow Parameters on Form Letters (pablo);
 # ms-Access bug-fixes (jose);
 # Postgres schema support (pablo);
@@ -17,6 +10,9 @@ Version 7.4 (?.? Mb) 2005-
 # Oracle schema support (dagles);
 # New .agt File Structure and Compability layer (pablo);
 # Merge Generation improvements (pablo);
+
+Version 7.4
+===========
 # Turkish translation (Ismail çakir);
 # Report Properties (pablo);
 # Conditional Highlight (pablo);

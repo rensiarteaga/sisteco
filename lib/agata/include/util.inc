@@ -766,8 +766,11 @@ function FormatMask($mask, $Conteudo)
     {
         if (substr($mask,0,1)=='@')
         {
-            $Conteudo_umask = UnMask($Conteudo, $mask);
-            $Conteudo = Mask(substr($mask,1), $Conteudo_umask);
+            if ($Conteudo)
+            {
+                $Conteudo_umask = UnMask($Conteudo, $mask);
+                $Conteudo = Mask(substr($mask,1), $Conteudo_umask);
+            }
         }
         else if (substr($mask,0,1)=='#')
         {

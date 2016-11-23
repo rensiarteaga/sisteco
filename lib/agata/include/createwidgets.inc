@@ -105,6 +105,7 @@ $this->AdjustmentsConfig->clistProjects->set_usize(180,-1);
 $this->AdjustmentsConfig->MultiPage->set_usize(220,-1);
 $this->Containers['vboxAdjustments']->show_all();
 
+
 $hbox = &new GtkHBox;
 $this->Containers['vboxSubAdjustments']->add($hbox);
 $this->SubAdjustmentsConfig = &new Preferences(&$hbox);

@@ -1,0 +1,36 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<TITLE>Write HTML tables</TITLE>
+<STYLE>
+BODY {font-family:"Times New Roman",serif}
+H2 {color:#4000A0}
+.st {font-weight:bold; color:#900000}
+</STYLE>
+</HEAD>
+<BODY>
+<H2>Write HTML tables</H2>
+<H4 CLASS="st">Informations</H4>Author: <A HREF="mailto:ricky@home.nl?subject=Write%20HTML%20tables">Rick van Buuren</A><BR>License: Freeware
+<H4 CLASS="st">Description</H4>This script allows you to parse HTML tables to PDF Cells (and has got some other
+functionality too).<BR>
+It can parse:<BR>
+<BR>
+&lt;table border="<I>border</I>"><BR>
+where <I>border</I> can be 1 or 0<BR>
+<BR>
+&lt;tr><BR>
+which makes a new row<BR>
+<BR>
+&lt;td width="<I>width</I>" height="<I>height</I>" bgcolor="<I>bgcolor</I>"><BR>
+where <I>width</I> and <I>height</I> are integers and <I>bgcolor</I> is html color code<BR>
+<BR>
+It's a really simple script. Inner tags can give some problems; &lt;td>&lt;b>big&lt;/b> small&lt;td>
+won't give a proper output for example. It also doesn't place pictures in a correct way, although you
+can use a table to align a picture:<BR>
+<BR>
+&lt;table>&lt;tr>&lt;td width="200">&amp;nbsp;&lt;/td>&lt;td width="200">&lt;img src="..." width="..." height="...">&lt;/td>&lt;/tr>&lt;/table><BR>
+<BR>
+will align a picture in the middle.<BR>
+You need to use &amp;nbsp; when you want a blank cell.
+</BODY>
+</HTML>

@@ -1,4 +1,4 @@
 <?
   $Theme='AceIce';
-  $Language='en';
+  $Language='pt';
 ?>

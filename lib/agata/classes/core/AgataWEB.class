@@ -21,8 +21,8 @@ class AgataWEB
             $report = $dir . bar . $file;
             $report = str_replace('/', bar, $report);
             $report = str_replace('\\', bar, $report);
-            $filter->login  = $user;
-            $filter->report = $report;
+            $filter->login  = array('=', $user);
+            $filter->report = array('=', $report);
             if ($permissions->getObjects($filter) or $user == 'admin')
             {
                 $return[] = $report;
@@ -30,6 +30,20 @@ class AgataWEB
         }
         
         return $return;
+    }
+
+    function canAdjust($user)
+    {
+        $Users = TMaster::getModel('Users');
+        $user  = $Users->getObject($user);
+        return $user->canadjust;
+    }
+
+    function canSchedule($user)
+    {
+        $Users = TMaster::getModel('Users');
+        $user  = $Users->getObject($user);
+        return $user->canschedule;
     }
     
     

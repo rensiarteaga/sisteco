@@ -1,0 +1,4435 @@
+<?xml version="1.0"?>
+<tables xmlns:dic='http://pablo.blog.br/agata'>
+    <dic:areas_ensino>
+        <dic:groups>
+            <dic:name>Academico</dic:name>
+        </dic:groups>
+
+        <dic:label>Áreas de Ensino</dic:label>
+        <dic:fields>
+            <dic:area>
+                <dic:label>Descrição da Área de Ensino</dic:label>
+            </dic:area>
+
+            <dic:id>
+                <dic:label>Código da Área de Ensino</dic:label>
+            </dic:id>
+
+        </dic:fields>
+
+    </dic:areas_ensino>
+
+    <dic:atestados>
+        <dic:groups>
+            <dic:name>Academico</dic:name>
+        </dic:groups>
+
+        <dic:label>Atestados</dic:label>
+        <dic:fields>
+            <dic:id>
+                <dic:label>Código do Atestado</dic:label>
+            </dic:id>
+
+            <dic:ref_pessoa>
+                <dic:label>Pessoa</dic:label>
+                <dic:link>pessoas.id</dic:link>
+            </dic:ref_pessoa>
+
+            <dic:tipo>
+                <dic:label>Tipo de Atestado</dic:label>
+            </dic:tipo>
+
+        </dic:fields>
+
+    </dic:atestados>
+
+    <dic:aux_bairros>
+        <dic:groups>
+            <dic:name>Academico</dic:name>
+        </dic:groups>
+
+        <dic:label>Bairros</dic:label>
+        <dic:fields>
+            <dic:nome>
+                <dic:label>Nome do Bairro</dic:label>
+            </dic:nome>
+
+        </dic:fields>
+
+    </dic:aux_bairros>
+
+    <dic:aux_cidades>
+        <dic:groups>
+            <dic:name>Academico</dic:name>
+        </dic:groups>
+
+        <dic:label>Cidades</dic:label>
+        <dic:fields>
+            <dic:cep>
+                <dic:label>CEP</dic:label>
+            </dic:cep>
+
+            <dic:id>
+                <dic:label>Código da Cidade</dic:label>
+            </dic:id>
+
+            <dic:nome>
+                <dic:label>Descrição da Cidade</dic:label>
+            </dic:nome>
+
+            <dic:praca>
+                <dic:label>Praça</dic:label>
+            </dic:praca>
+
+            <dic:ref_estado>
+                <dic:label>Estado</dic:label>
+            </dic:ref_estado>
+
+            <dic:ref_pais>
+                <dic:label>País</dic:label>
+            </dic:ref_pais>
+
+        </dic:fields>
+
+    </dic:aux_cidades>
+
+    <dic:cadastro_duplo>
+        <dic:groups>
+            <dic:name>Academico</dic:name>
+        </dic:groups>
+
+        <dic:label>Cadastro Duplo</dic:label>
+        <dic:fields>
+            <dic:id_new>
+                <dic:label>Código Novo</dic:label>
+            </dic:id_new>
+
+            <dic:id_old>
+                <dic:label>Código Velho</dic:label>
+            </dic:id_old>
+
+            <dic:tipo>
+                <dic:label>Tipo (Aluno/Instituição)</dic:label>
+            </dic:tipo>
+
+        </dic:fields>
+
+    </dic:cadastro_duplo>
+
+    <dic:campus>
+        <dic:groups>
+            <dic:name>Academico</dic:name>
+            <dic:name>Financeiro</dic:name>
+        </dic:groups>
+
+        <dic:label>Campus</dic:label>
+        <dic:fields>
+            <dic:cidade_campus>
+                <dic:label>Cidade do Campus</dic:label>
+            </dic:cidade_campus>
+
+            <dic:codigo_contabil>
+                <dic:label>Código Contábil do Campus</dic:label>
+            </dic:codigo_contabil>
+
+            <dic:color>
+                <dic:label>Cor do Campus</dic:label>
+            </dic:color>
+
+            <dic:id>
+                <dic:label>Código do Campus</dic:label>
+            </dic:id>
+
+            <dic:nome_campus>
+                <dic:label>Nome do Campus</dic:label>
+            </dic:nome_campus>
+
+            <dic:ref_empresa>
+                <dic:label>Código da Empresa Mantenedora</dic:label>
+            </dic:ref_empresa>
+
+        </dic:fields>
+
+    </dic:campus>
+
+    <dic:carga_horaria_bimestre>
+        <dic:groups>
+            <dic:name>Academico</dic:name>
+        </dic:groups>
+
+        <dic:label>Carga Horária Bimestre</dic:label>
+        <dic:fields>
+            <dic:aulas_dadas>
+                <dic:label>Quantidade de Aulas Dadas</dic:label>
+            </dic:aulas_dadas>
+
+            <dic:bimestre>
+                <dic:label>Bimestre</dic:label>
+            </dic:bimestre>
+
+            <dic:carga_horaria>
+                <dic:label>Carga Horária</dic:label>
+            </dic:carga_horaria>
+
+            <dic:id>
+                <dic:label>Código da Carga Horária</dic:label>
+            </dic:id>
+
+            <dic:ref_disciplina>
+                <dic:label>Código da Disciplina</dic:label>
+                <dic:link>disciplinas.id</dic:link>
+            </dic:ref_disciplina>
+
+            <dic:ref_periodo>
+                <dic:label>Código do Período</dic:label>
+                <dic:link>periodos.id</dic:link>
+            </dic:ref_periodo>
+
+            <dic:turma>
+                <dic:label>Turma</dic:label>
+            </dic:turma>
+
+        </dic:fields>
+
+    </dic:carga_horaria_bimestre>
+
+    <dic:carimbos>
+        <dic:groups>
+            <dic:name>Academico</dic:name>
+        </dic:groups>
+
+        <dic:label>Carimbos</dic:label>
+        <dic:fields>
+            <dic:id>
+                <dic:label>Código do Carimbo</dic:label>
+            </dic:id>
+
+            <dic:nome>
+                <dic:label>Nome do Funcionário/Colaborador</dic:label>
+            </dic:nome>
+
+            <dic:ref_setor>
+                <dic:label>Código do Setor</dic:label>
+            </dic:ref_setor>
+
+            <dic:texto>
+                <dic:label>Função</dic:label>
+            </dic:texto>
+
+        </dic:fields>
+
+    </dic:carimbos>
+
+    <dic:contratos>
+        <dic:groups>
+            <dic:name>Academico</dic:name>
+            <dic:name>Financeiro</dic:name>
+        </dic:groups>
+
+        <dic:label>Contratos</dic:label>
+        <dic:fields>
+            <dic:agencia>
+                <dic:label>Agência</dic:label>
+            </dic:agencia>
+
+            <dic:cod_status>
+                <dic:label>Status do Livro Matrícula</dic:label>
+            </dic:cod_status>
+
+            <dic:desconto>
+                <dic:label>Desconto</dic:label>
+            </dic:desconto>
+
+            <dic:dia_vencimento>
+                <dic:label>Dia de Vencimento da mensalidade</dic:label>
+            </dic:dia_vencimento>
+
+            <dic:dt_apostila>
+                <dic:label>Data da Apostila</dic:label>
+            </dic:dt_apostila>
+
+            <dic:dt_ativacao>
+                <dic:label>Data da Ativação do Contrato</dic:label>
+            </dic:dt_ativacao>
+
+            <dic:dt_conclusao>
+                <dic:label>Data de Conclusão do Curso</dic:label>
+            </dic:dt_conclusao>
+
+            <dic:dt_desativacao>
+                <dic:label>Data da Desativação do Contrato</dic:label>
+            </dic:dt_desativacao>
+
+            <dic:dt_diploma>
+                <dic:label>Data do Diploma</dic:label>
+            </dic:dt_diploma>
+
+            <dic:dt_formatura>
+                <dic:label>Data da Formatura</dic:label>
+            </dic:dt_formatura>
+
+            <dic:dt_provao>
+                <dic:label>Data do Provão</dic:label>
+            </dic:dt_provao>
+
+            <dic:dv_agencia>
+                <dic:label>Dígito Verificador da Agência</dic:label>
+            </dic:dv_agencia>
+
+            <dic:dv_conta>
+                <dic:label>Dígito Verificador da Conta</dic:label>
+            </dic:dv_conta>
+
+            <dic:fl_debito_automatico>
+                <dic:label>Débito Automático</dic:label>
+            </dic:fl_debito_automatico>
+
+            <dic:fl_formando>
+                <dic:label>Aluno Formando</dic:label>
+            </dic:fl_formando>
+
+            <dic:fl_ouvinte>
+                <dic:label>Aluno Ouvinte</dic:label>
+            </dic:fl_ouvinte>
+
+            <dic:id_vestibular>
+                <dic:label>Código do Vestibular</dic:label>
+            </dic:id_vestibular>
+
+            <dic:num_conta>
+                <dic:label>Número da Conta</dic:label>
+            </dic:num_conta>
+
+            <dic:num_contrato>
+                <dic:label>Número do Contrato</dic:label>
+            </dic:num_contrato>
+
+            <dic:obs>
+                <dic:label>Observação</dic:label>
+            </dic:obs>
+
+            <dic:percentual_pago>
+                <dic:label>Percentual Pago</dic:label>
+            </dic:percentual_pago>
+
+            <dic:ref_banco>
+                <dic:label>Código do Banco</dic:label>
+            </dic:ref_banco>
+
+            <dic:ref_campus>
+                <dic:label>Código do Campus</dic:label>
+                <dic:link>campus.id</dic:link>
+            </dic:ref_campus>
+
+            <dic:ref_curso>
+                <dic:label>Código do Curso</dic:label>
+                <dic:link>cursos.id</dic:link>
+            </dic:ref_curso>
+
+            <dic:ref_last_periodo>
+                <dic:label>Último Período</dic:label>
+                <dic:link>periodos.id</dic:link>
+            </dic:ref_last_periodo>
+
+            <dic:ref_motivo_ativacao>
+                <dic:label>Código do Motivo da Ativação</dic:label>
+                <dic:link>motivos.id</dic:link>
+            </dic:ref_motivo_ativacao>
+
+            <dic:ref_motivo_desativacao>
+                <dic:label>Código do Motivo da Desativação</dic:label>
+                <dic:link>motivos.id</dic:link>
+            </dic:ref_motivo_desativacao>
+
+            <dic:ref_motivo_entrada>
+                <dic:label>Código do Motivo de Entrada</dic:label>
+                <dic:link>motivos.id</dic:link>
+            </dic:ref_motivo_entrada>
+
+            <dic:ref_motivo_inicial>
+                <dic:label>Código do Motivo Inicial</dic:label>
+                <dic:link>motivos.id</dic:link>
+            </dic:ref_motivo_inicial>
+
+            <dic:ref_periodo_formatura>
+                <dic:label>Código do Período de Formatura</dic:label>
+                <dic:link>periodos.id</dic:link>
+            </dic:ref_periodo_formatura>
+
+            <dic:ref_pessoa>
+                <dic:label>Código da Pessoa</dic:label>
+                <dic:link>pessoas.id</dic:link>
+            </dic:ref_pessoa>
+
+        </dic:fields>
+
+    </dic:contratos>
+
+    <dic:cursos>
+        <dic:groups>
+            <dic:name>Academico</dic:name>
+            <dic:name>Financeiro</dic:name>
+        </dic:groups>
+
+        <dic:label>Cursos</dic:label>
+        <dic:fields>
+            <dic:abreviatura>
+                <dic:label>Abreviatura do Curso</dic:label>
+            </dic:abreviatura>
+
+            <dic:agrupo_curso>
+                <dic:label>Agrupamento do Curso</dic:label>
+            </dic:agrupo_curso>
+
+            <dic:autorizacao>
+                <dic:label>Resolução do Conselho Superior Acadêmico</dic:label>
+            </dic:autorizacao>
+
+            <dic:ccusto>
+                <dic:label>Centro de Custo do Curso</dic:label>
+            </dic:ccusto>
+
+            <dic:descricao>
+                <dic:label>Descrição do Curso</dic:label>
+            </dic:descricao>
+
+            <dic:exigencias>
+                <dic:label>Exigências do Curso</dic:label>
+            </dic:exigencias>
+
+            <dic:grau_academico>
+                <dic:label>Grau Acadêmico do Curso</dic:label>
+            </dic:grau_academico>
+
+            <dic:historico>
+                <dic:label>Histórico do Curso</dic:label>
+            </dic:historico>
+
+            <dic:id>
+                <dic:label>Código do Curso</dic:label>
+            </dic:id>
+
+            <dic:reconhecimento>
+                <dic:label>Portaria do MEC que reconhece o Curso</dic:label>
+            </dic:reconhecimento>
+
+            <dic:ref_end_of_conta>
+                <dic:label>Sufixo da Conta Contábil</dic:label>
+            </dic:ref_end_of_conta>
+
+            <dic:ref_ini_of_conta>
+                <dic:label>Prefixo da Conta Contábil</dic:label>
+            </dic:ref_ini_of_conta>
+
+            <dic:ref_tipo_curso>
+                <dic:label>Código do Tipo de Curso</dic:label>
+                <dic:link>tipos_curso.id</dic:link>
+            </dic:ref_tipo_curso>
+
+            <dic:total_creditos>
+                <dic:label>Total de Créditos do Curso</dic:label>
+            </dic:total_creditos>
+
+            <dic:total_semestres>
+                <dic:label>Total de Semestres do Curso</dic:label>
+            </dic:total_semestres>
+
+            <dic:turno>
+                <dic:label>Turno do Curso</dic:label>
+            </dic:turno>
+
+        </dic:fields>
+
+    </dic:cursos>
+
+    <dic:cursos_disciplinas>
+        <dic:groups>
+            <dic:name>Academico</dic:name>
+        </dic:groups>
+
+        <dic:label>Cursos/Disciplinas</dic:label>
+        <dic:fields>
+            <dic:curriculo_mco>
+                <dic:label>Currículo MCOPA</dic:label>
+            </dic:curriculo_mco>
+
+            <dic:curso_substituido>
+                <dic:label>Curso antigo que este substitui</dic:label>
+            </dic:curso_substituido>
+
+            <dic:disciplina_substituida>
+                <dic:label>Disciplina antiga que esta substitui</dic:label>
+            </dic:disciplina_substituida>
+
+            <dic:dt_final_curriculo>
+                <dic:label>Data do Final da vigência do Currículo</dic:label>
+            </dic:dt_final_curriculo>
+
+            <dic:dt_inicio_curriculo>
+                <dic:label>Data do Início da vigência do Currículo</dic:label>
+            </dic:dt_inicio_curriculo>
+
+            <dic:equivalencia_disciplina>
+                <dic:label>Disciplina Equivalente</dic:label>
+                <dic:link>disciplinas.id</dic:link>
+            </dic:equivalencia_disciplina>
+
+            <dic:esconde_historico>
+                <dic:label>Suprimir do HIstórico</dic:label>
+            </dic:esconde_historico>
+
+            <dic:exibe_historico>
+                <dic:label>Exibir no Histórico</dic:label>
+            </dic:exibe_historico>
+
+            <dic:is_optativa>
+                <dic:label>É Disciplina Eletiva</dic:label>
+            </dic:is_optativa>
+
+            <dic:pre_requisito_hora>
+                <dic:label>Quantidade de horas-aula exigidas para cursar a disciplina</dic:label>
+            </dic:pre_requisito_hora>
+
+            <dic:ref_area>
+                <dic:label>Código da Área de Ensino</dic:label>
+                <dic:link>areas_ensino.id</dic:link>
+            </dic:ref_area>
+
+            <dic:ref_campus>
+                <dic:label>Código do Campus</dic:label>
+                <dic:link>campus.id</dic:link>
+            </dic:ref_campus>
+
+            <dic:ref_curso>
+                <dic:label>Código do Curso</dic:label>
+                <dic:link>cursos.id</dic:link>
+            </dic:ref_curso>
+
+            <dic:ref_disciplina>
+                <dic:label>Código da Disciplina</dic:label>
+                <dic:link>disciplinas.id</dic:link>
+            </dic:ref_disciplina>
+
+            <dic:semestre_curso>
+                <dic:label>Semestre do Curso</dic:label>
+            </dic:semestre_curso>
+
+        </dic:fields>
+
+    </dic:cursos_disciplinas>
+
+    <dic:cursos_externos>
+        <dic:groups>
+            <dic:name>Academico</dic:name>
+        </dic:groups>
+
+        <dic:label>Cursos Externos</dic:label>
+        <dic:fields>
+            <dic:id>
+                <dic:label>Código do Curso Externo</dic:label>
+            </dic:id>
+
+            <dic:nome>
+                <dic:label>Nome do Curso Externo</dic:label>
+            </dic:nome>
+
+            <dic:obs>
+                <dic:label>Observação</dic:label>
+            </dic:obs>
+
+            <dic:sucinto>
+                <dic:label>Nome Sucinto do Curso Externo</dic:label>
+            </dic:sucinto>
+
+        </dic:fields>
+
+    </dic:cursos_externos>
+
+    <dic:departamentos>
+        <dic:groups>
+            <dic:name>Academico</dic:name>
+        </dic:groups>
+
+        <dic:label>Departamentos</dic:label>
+        <dic:fields>
+            <dic:descricao>
+                <dic:label>Descrição do Departamento</dic:label>
+            </dic:descricao>
+
+            <dic:id>
+                <dic:label>Código do Departamento</dic:label>
+            </dic:id>
+
+        </dic:fields>
+
+    </dic:departamentos>
+
+    <dic:disciplinas>
+        <dic:groups>
+            <dic:name>Academico</dic:name>
+        </dic:groups>
+
+        <dic:label>Disciplinas</dic:label>
+        <dic:fields>
+            <dic:carga_horaria>
+                <dic:label>Carga Horária da Disciplina</dic:label>
+            </dic:carga_horaria>
+
+            <dic:descricao_disciplina>
+                <dic:label>Descrição Breve da Disciplina</dic:label>
+            </dic:descricao_disciplina>
+
+            <dic:descricao_extenso>
+                <dic:label>Descrição Completa da Disciplina</dic:label>
+            </dic:descricao_extenso>
+
+            <dic:id>
+                <dic:label>Código da Disciplina</dic:label>
+            </dic:id>
+
+            <dic:num_creditos>
+                <dic:label>Número de Créditos da Disciplina</dic:label>
+            </dic:num_creditos>
+
+            <dic:ref_departamento>
+                <dic:label>Código do Departamento</dic:label>
+                <dic:link>departamentos.id</dic:link>
+            </dic:ref_departamento>
+
+            <dic:ref_grupo>
+                <dic:label>Código do Grupo da Disciplina</dic:label>
+                <dic:link>grupos_disciplinas.id</dic:link>
+            </dic:ref_grupo>
+
+        </dic:fields>
+
+    </dic:disciplinas>
+
+    <dic:disciplinas_equivalentes>
+        <dic:groups>
+            <dic:name>Academico</dic:name>
+        </dic:groups>
+
+        <dic:label>Disciplinas Equivalentes</dic:label>
+        <dic:fields>
+            <dic:id>
+                <dic:label>Código da Equivalência de Disciplinas</dic:label>
+            </dic:id>
+
+            <dic:ref_disciplina>
+                <dic:label>Código da Disciplina</dic:label>
+                <dic:link>departamentos.id</dic:link>
+            </dic:ref_disciplina>
+
+            <dic:ref_disciplina_equivalente>
+                <dic:label>Código da Disciplina Equivalente</dic:label>
+                <dic:link>departamentos.id</dic:link>
+            </dic:ref_disciplina_equivalente>
+
+        </dic:fields>
+
+    </dic:disciplinas_equivalentes>
+
+    <dic:disciplinas_ofer>
+        <dic:groups>
+            <dic:name>Academico</dic:name>
+        </dic:groups>
+
+        <dic:label>Disciplinas Oferecidas</dic:label>
+        <dic:fields>
+            <dic:conteudo>
+                <dic:label>Conteúdo da Disciplina</dic:label>
+            </dic:conteudo>
+
+            <dic:fixar_num_sala>
+                <dic:label>Fixar número da Sala</dic:label>
+            </dic:fixar_num_sala>
+
+            <dic:id>
+                <dic:label>Código da Disciplina Oferecida</dic:label>
+            </dic:id>
+
+            <dic:is_cancelada>
+                <dic:label>Disciplina Cancelada</dic:label>
+            </dic:is_cancelada>
+
+            <dic:num_alunos>
+                <dic:label>Número Máximo de Alunos</dic:label>
+            </dic:num_alunos>
+
+            <dic:num_matriculados>
+                <dic:label>Número de alunos matriculados</dic:label>
+            </dic:num_matriculados>
+
+            <dic:ref_campus>
+                <dic:label>Código do Campus</dic:label>
+                <dic:link>campus.id</dic:link>
+            </dic:ref_campus>
+
+            <dic:ref_curso>
+                <dic:label>Código do Curso</dic:label>
+                <dic:link>cursos.id</dic:link>
+            </dic:ref_curso>
+
+            <dic:ref_disciplina>
+                <dic:label>Código da Disciplina</dic:label>
+                <dic:link>disciplinas.id</dic:link>
+            </dic:ref_disciplina>
+
+            <dic:ref_periodo>
+                <dic:label>Código do Período</dic:label>
+                <dic:link>periodos.id</dic:link>
+            </dic:ref_periodo>
+
+        </dic:fields>
+
+    </dic:disciplinas_ofer>
+
+    <dic:disciplinas_ofer_compl>
+        <dic:groups>
+            <dic:name>Academico</dic:name>
+        </dic:groups>
+
+        <dic:label>Disciplina Oferecida Complementar</dic:label>
+        <dic:fields>
+            <dic:desconto>
+                <dic:label>Desconto</dic:label>
+            </dic:desconto>
+
+            <dic:dia_semana>
+                <dic:label>Dia da semana em que a disciplina é oferecida</dic:label>
+            </dic:dia_semana>
+
+            <dic:dia_semana_aux>
+                <dic:label>Outro Dia da Semana em que a disciplina é oferecida</dic:label>
+            </dic:dia_semana_aux>
+
+            <dic:id>
+                <dic:label>Código da Disciplina Oferecida Complementar</dic:label>
+            </dic:id>
+
+            <dic:num_creditos_desconto>
+                <dic:label>Número de Créditos Desconto</dic:label>
+            </dic:num_creditos_desconto>
+
+            <dic:num_sala>
+                <dic:label>Número da Sala</dic:label>
+            </dic:num_sala>
+
+            <dic:num_sala_aux>
+                <dic:label>Número da outra sala</dic:label>
+            </dic:num_sala_aux>
+
+            <dic:observacao>
+                <dic:label>Observação</dic:label>
+            </dic:observacao>
+
+            <dic:ref_disciplina_ofer>
+                <dic:label>Código da Disciplina Oferecida</dic:label>
+                <dic:link>disciplinas_ofer.id</dic:link>
+            </dic:ref_disciplina_ofer>
+
+            <dic:ref_professor_aux>
+                <dic:label>Código do Segundo Professor</dic:label>
+                <dic:link>pessoas.id</dic:link>
+            </dic:ref_professor_aux>
+
+            <dic:turno>
+                <dic:label>Turno em que a disciplina é oferecida</dic:label>
+            </dic:turno>
+
+        </dic:fields>
+
+    </dic:disciplinas_ofer_compl>
+
+    <dic:disciplinas_ofer_prof>
+        <dic:groups>
+            <dic:name>Academico</dic:name>
+        </dic:groups>
+
+        <dic:label>Professor da Disciplina Oferecida</dic:label>
+        <dic:fields>
+            <dic:id>
+                <dic:label>Código do Professor da Disciplina Oferecida</dic:label>
+            </dic:id>
+
+            <dic:ref_disciplina_compl>
+                <dic:label>Código da Disciplina Complementar</dic:label>
+                <dic:link>disciplinas_ofer_compl.id</dic:link>
+            </dic:ref_disciplina_compl>
+
+            <dic:ref_disciplina_ofer>
+                <dic:label>Código da Disciplina Oferecida</dic:label>
+                <dic:link>disciplinas_ofer.id</dic:link>
+            </dic:ref_disciplina_ofer>
+
+            <dic:ref_professor>
+                <dic:label>Código do Professor</dic:label>
+                <dic:link>pessoas.id</dic:link>
+            </dic:ref_professor>
+
+        </dic:fields>
+
+    </dic:disciplinas_ofer_prof>
+
+    <dic:disciplinas_todos_alunos>
+        <dic:groups>
+            <dic:name>Academico</dic:name>
+        </dic:groups>
+
+        <dic:label>Dados do último material de matrícula</dic:label>
+        <dic:fields>
+            <dic:fl_autorizado>
+                <dic:label>Autorização para quebra de pré-requisito</dic:label>
+            </dic:fl_autorizado>
+
+            <dic:ref_campus>
+                <dic:label>Código do Campus</dic:label>
+                <dic:link>campus.id</dic:link>
+            </dic:ref_campus>
+
+            <dic:ref_curso>
+                <dic:label>Código do Curso</dic:label>
+                <dic:link>cursos.id</dic:link>
+            </dic:ref_curso>
+
+            <dic:ref_disciplina>
+                <dic:label>Código da Disciplina</dic:label>
+                <dic:link>disciplinas.id</dic:link>
+            </dic:ref_disciplina>
+
+            <dic:ref_pessoa>
+                <dic:label>Código da Pessoa</dic:label>
+                <dic:link>pessoas.id</dic:link>
+            </dic:ref_pessoa>
+
+            <dic:status>
+                <dic:label>Status de Aprovação</dic:label>
+            </dic:status>
+
+        </dic:fields>
+
+    </dic:disciplinas_todos_alunos>
+
+    <dic:documentos>
+        <dic:groups>
+            <dic:name>Academico</dic:name>
+        </dic:groups>
+
+        <dic:label>Documentos</dic:label>
+        <dic:fields>
+            <dic:anotacoes>
+                <dic:label>Anotações</dic:label>
+            </dic:anotacoes>
+
+            <dic:atestado_medico>
+                <dic:label>Atestado Médico</dic:label>
+            </dic:atestado_medico>
+
+            <dic:cpf>
+                <dic:label>Número do CPF</dic:label>
+            </dic:cpf>
+
+            <dic:diploma_autenticado>
+                <dic:label>Diploma Autenticado</dic:label>
+            </dic:diploma_autenticado>
+
+            <dic:doc_militar>
+                <dic:label>Documento Militar</dic:label>
+            </dic:doc_militar>
+
+            <dic:foto>
+                <dic:label>Fotografia</dic:label>
+            </dic:foto>
+
+            <dic:hist_escolar>
+                <dic:label>Histórico Escolar</dic:label>
+            </dic:hist_escolar>
+
+            <dic:hist_original>
+                <dic:label>Histórico Original</dic:label>
+            </dic:hist_original>
+
+            <dic:obs_documentos>
+                <dic:label>Observação</dic:label>
+            </dic:obs_documentos>
+
+            <dic:quitacao_eleitoral>
+                <dic:label>Comprovante de Quitação Eleitoral</dic:label>
+            </dic:quitacao_eleitoral>
+
+            <dic:ref_pessoa>
+                <dic:label>Código da Pessoa</dic:label>
+                <dic:link>pessoas.id</dic:link>
+            </dic:ref_pessoa>
+
+            <dic:rg_num>
+                <dic:label>Número do RG</dic:label>
+            </dic:rg_num>
+
+            <dic:solteiro_emancipado>
+                <dic:label>Certidão de Solteiro Emancipado</dic:label>
+            </dic:solteiro_emancipado>
+
+            <dic:titulo_eleitor>
+                <dic:label>Número do Título de Eleitor</dic:label>
+            </dic:titulo_eleitor>
+
+        </dic:fields>
+
+    </dic:documentos>
+
+    <dic:dt_exames_periodos>
+        <dic:groups>
+            <dic:name>Academico</dic:name>
+        </dic:groups>
+
+        <dic:label>Data de Exame</dic:label>
+        <dic:fields>
+            <dic:descricao>
+                <dic:label>Descrição do Exame</dic:label>
+            </dic:descricao>
+
+            <dic:dia_semana>
+                <dic:label>Dia da Semana</dic:label>
+            </dic:dia_semana>
+
+            <dic:dt_exame>
+                <dic:label>Data do Exame</dic:label>
+            </dic:dt_exame>
+
+            <dic:fl_exame>
+                <dic:label>Flag Exame</dic:label>
+            </dic:fl_exame>
+
+            <dic:ref_campus>
+                <dic:label>Código do Campus</dic:label>
+                <dic:link>campus.id</dic:link>
+            </dic:ref_campus>
+
+            <dic:ref_periodo>
+                <dic:label>Código do Período</dic:label>
+                <dic:link>periodos.id</dic:link>
+            </dic:ref_periodo>
+
+        </dic:fields>
+
+    </dic:dt_exames_periodos>
+
+    <dic:filiacao>
+        <dic:groups>
+            <dic:name>Academico</dic:name>
+        </dic:groups>
+
+        <dic:label>Filiação</dic:label>
+        <dic:fields>
+            <dic:id>
+                <dic:label>Código da Filiação</dic:label>
+            </dic:id>
+
+            <dic:mae_fone>
+                <dic:label>Telefone da Mãe do Aluno</dic:label>
+            </dic:mae_fone>
+
+            <dic:mae_instrucao>
+                <dic:label>Grau de Instrução da Mãe do Aluno</dic:label>
+            </dic:mae_instrucao>
+
+            <dic:mae_loc_trabalho>
+                <dic:label>Local de Trabalho da Mãe do Aluno</dic:label>
+            </dic:mae_loc_trabalho>
+
+            <dic:mae_nome>
+                <dic:label>Nome da Mãe do Aluno</dic:label>
+            </dic:mae_nome>
+
+            <dic:mae_profissao>
+                <dic:label>Profissão da Mãe do Aluno</dic:label>
+            </dic:mae_profissao>
+
+            <dic:pai_fone>
+                <dic:label>Telefone do Pai do Aluno</dic:label>
+            </dic:pai_fone>
+
+            <dic:pai_instrucao>
+                <dic:label>Grau de Instrução do Pai do Aluno</dic:label>
+            </dic:pai_instrucao>
+
+            <dic:pai_loc_trabalho>
+                <dic:label>Local de Trabalho do Pai do Aluno</dic:label>
+            </dic:pai_loc_trabalho>
+
+            <dic:pai_nome>
+                <dic:label>Nome do Pai do Aluno</dic:label>
+            </dic:pai_nome>
+
+            <dic:pai_profissao>
+                <dic:label>Profissão do Pai do Aluno</dic:label>
+            </dic:pai_profissao>
+
+        </dic:fields>
+
+    </dic:filiacao>
+
+    <dic:grupos_disciplinas>
+        <dic:groups>
+            <dic:name>Academico</dic:name>
+        </dic:groups>
+
+        <dic:label>Grupos de Disciplinas</dic:label>
+        <dic:fields>
+            <dic:descricao>
+                <dic:label>Descrição do Grupo de Disciplina</dic:label>
+            </dic:descricao>
+
+            <dic:id>
+                <dic:label>Código de Grupo de Disciplina</dic:label>
+            </dic:id>
+
+        </dic:fields>
+
+    </dic:grupos_disciplinas>
+
+    <dic:historicos>
+        <dic:groups>
+            <dic:name>Academico</dic:name>
+            <dic:name>Financeiro</dic:name>
+        </dic:groups>
+
+        <dic:label>Históricos</dic:label>
+        <dic:fields>
+            <dic:descr_cont>
+                <dic:label>Descrição Contábil</dic:label>
+            </dic:descr_cont>
+
+            <dic:descricao>
+                <dic:label>Descrição do Histórico</dic:label>
+            </dic:descricao>
+
+            <dic:fl_balanco>
+                <dic:label>Aparece no Balanço</dic:label>
+            </dic:fl_balanco>
+
+            <dic:fl_extinto>
+                <dic:label>É um Histórico Extinto</dic:label>
+            </dic:fl_extinto>
+
+            <dic:fl_servico>
+                <dic:label>Aparece no Resumo de Serviços</dic:label>
+            </dic:fl_servico>
+
+            <dic:id>
+                <dic:label>Código do Histórico</dic:label>
+            </dic:id>
+
+            <dic:indice_op>
+                <dic:label>Índice da Operação (1 ou -1)</dic:label>
+            </dic:indice_op>
+
+            <dic:mensagem>
+                <dic:label>Mensagem</dic:label>
+            </dic:mensagem>
+
+            <dic:operacao>
+                <dic:label>Operação</dic:label>
+            </dic:operacao>
+
+            <dic:tipo_historico>
+                <dic:label>Tipo de Histórico</dic:label>
+            </dic:tipo_historico>
+
+        </dic:fields>
+
+    </dic:historicos>
+
+    <dic:instituicoes>
+        <dic:groups>
+            <dic:name>Academico</dic:name>
+        </dic:groups>
+
+        <dic:label>Instituições</dic:label>
+        <dic:fields>
+            <dic:id>
+                <dic:label>Código da Instituição</dic:label>
+            </dic:id>
+
+            <dic:nome>
+                <dic:label>Nome Completo da Instituição</dic:label>
+            </dic:nome>
+
+            <dic:nome_atual>
+                <dic:label>Nome Atual da Instituição - Caso tenha mudado</dic:label>
+            </dic:nome_atual>
+
+            <dic:sucinto>
+                <dic:label>Nome Sucinto da Instituição - Sigla</dic:label>
+            </dic:sucinto>
+
+        </dic:fields>
+
+    </dic:instituicoes>
+
+    <dic:matricula>
+        <dic:groups>
+            <dic:name>Academico</dic:name>
+        </dic:groups>
+
+        <dic:label>Matrícula</dic:label>
+        <dic:fields>
+            <dic:carga_horaria_aprov>
+                <dic:label>Carga Horária Aproveitada</dic:label>
+            </dic:carga_horaria_aprov>
+
+            <dic:complemento_disc>
+                <dic:label>Texto complementar (ênfase)</dic:label>
+            </dic:complemento_disc>
+
+            <dic:conceito>
+                <dic:label>Conceito</dic:label>
+            </dic:conceito>
+
+            <dic:conceito_exame>
+                <dic:label>Conceito de Exame</dic:label>
+            </dic:conceito_exame>
+
+            <dic:conceito_final>
+                <dic:label>Conceito Final</dic:label>
+            </dic:conceito_final>
+
+            <dic:creditos_aprov>
+                <dic:label>Número de Créditos Aproveitados</dic:label>
+            </dic:creditos_aprov>
+
+            <dic:dt_cancelamento>
+                <dic:label>Data do Cancelamento da Matrícula</dic:label>
+            </dic:dt_cancelamento>
+
+            <dic:dt_matricula>
+                <dic:label>Data da Matrícula</dic:label>
+            </dic:dt_matricula>
+
+            <dic:fl_exibe_displ_hist>
+                <dic:label>Exibe Disciplina no Histórico</dic:label>
+            </dic:fl_exibe_displ_hist>
+
+            <dic:fl_liberado>
+                <dic:label>Estado da Matrícula</dic:label>
+            </dic:fl_liberado>
+
+            <dic:hora_matricula>
+                <dic:label>Hora da Matrícula</dic:label>
+            </dic:hora_matricula>
+
+            <dic:id>
+                <dic:label>Código da Matrícula</dic:label>
+            </dic:id>
+
+            <dic:nota>
+                <dic:label>Nota</dic:label>
+            </dic:nota>
+
+            <dic:nota1>
+                <dic:label>Nota 1</dic:label>
+            </dic:nota1>
+
+            <dic:nota2>
+                <dic:label>Nota 2</dic:label>
+            </dic:nota2>
+
+            <dic:nota3>
+                <dic:label>Nota 3</dic:label>
+            </dic:nota3>
+
+            <dic:nota_exame>
+                <dic:label>Nota do Exame</dic:label>
+            </dic:nota_exame>
+
+            <dic:nota_final>
+                <dic:label>Nota Final</dic:label>
+            </dic:nota_final>
+
+            <dic:notap1>
+                <dic:label>Nota 1 do Projeto</dic:label>
+            </dic:notap1>
+
+            <dic:notap2>
+                <dic:label>Nota 2 do Projeto</dic:label>
+            </dic:notap2>
+
+            <dic:num_faltas>
+                <dic:label>Número de Faltas</dic:label>
+            </dic:num_faltas>
+
+            <dic:num_faltas1>
+                <dic:label>Número de Faltas 1</dic:label>
+            </dic:num_faltas1>
+
+            <dic:num_faltas2>
+                <dic:label>Número de Faltas 2</dic:label>
+            </dic:num_faltas2>
+
+            <dic:num_faltas3>
+                <dic:label>Número de Faltas 3</dic:label>
+            </dic:num_faltas3>
+
+            <dic:num_faltasp1>
+                <dic:label>Número de Faltas 1 do Projeto</dic:label>
+            </dic:num_faltasp1>
+
+            <dic:num_faltasp2>
+                <dic:label>Número de Faltas 2 do Projeto</dic:label>
+            </dic:num_faltasp2>
+
+            <dic:obs1>
+                <dic:label>Observação 1</dic:label>
+            </dic:obs1>
+
+            <dic:obs2>
+                <dic:label>Observação 2</dic:label>
+            </dic:obs2>
+
+            <dic:obs3>
+                <dic:label>Observação 3</dic:label>
+            </dic:obs3>
+
+            <dic:obs_aproveitamento>
+                <dic:label>Observação do Aproveitamento</dic:label>
+            </dic:obs_aproveitamento>
+
+            <dic:obs_final>
+                <dic:label>Observação Final</dic:label>
+            </dic:obs_final>
+
+            <dic:obsp1>
+                <dic:label>Observação 1 do Projeto</dic:label>
+            </dic:obsp1>
+
+            <dic:obsp2>
+                <dic:label>Observação 2 do Projeto</dic:label>
+            </dic:obsp2>
+
+            <dic:ref_campus>
+                <dic:label>Código do Campus</dic:label>
+                <dic:link>campus.id</dic:link>
+            </dic:ref_campus>
+
+            <dic:ref_contrato>
+                <dic:label>Código do Contrato</dic:label>
+                <dic:link>contratos.id</dic:link>
+            </dic:ref_contrato>
+
+            <dic:ref_curso>
+                <dic:label>Código do Curso do Currículo</dic:label>
+                <dic:link>cursos.id</dic:link>
+            </dic:ref_curso>
+
+            <dic:ref_curso_subst>
+                <dic:label>Código do Curso Substituto</dic:label>
+                <dic:link>cursos.id</dic:link>
+            </dic:ref_curso_subst>
+
+            <dic:ref_disciplina>
+                <dic:label>Código da Disciplina do Currículo</dic:label>
+                <dic:link>disciplinas.id</dic:link>
+            </dic:ref_disciplina>
+
+            <dic:ref_disciplina_ofer>
+                <dic:label>Código da Disciplina Oferecida</dic:label>
+                <dic:link>disciplinas_ofer.id</dic:link>
+            </dic:ref_disciplina_ofer>
+
+            <dic:ref_disciplina_subst>
+                <dic:label>Código da Disciplina Substituta</dic:label>
+            </dic:ref_disciplina_subst>
+
+            <dic:ref_instituicao>
+                <dic:label>Código da Instituição</dic:label>
+            </dic:ref_instituicao>
+
+            <dic:ref_liberacao_ed_fisica>
+                <dic:label>Código de Liberação da Educação Física</dic:label>
+            </dic:ref_liberacao_ed_fisica>
+
+            <dic:ref_motivo_cancelamento>
+                <dic:label>Código do Motivo do Cancelamento da Matrícula</dic:label>
+                <dic:link>motivos.id</dic:link>
+            </dic:ref_motivo_cancelamento>
+
+            <dic:ref_motivo_matricula>
+                <dic:label>Código do Motivo da Matrícula</dic:label>
+                <dic:link>motivos.id</dic:link>
+            </dic:ref_motivo_matricula>
+
+            <dic:ref_periodo>
+                <dic:label>Código do Período</dic:label>
+                <dic:link>periodos.id</dic:link>
+            </dic:ref_periodo>
+
+            <dic:ref_pessoa>
+                <dic:label>Código da Pessoa</dic:label>
+                <dic:link>pessoas.id</dic:link>
+            </dic:ref_pessoa>
+
+            <dic:status_disciplina>
+                <dic:label>Status da Disciplina</dic:label>
+            </dic:status_disciplina>
+
+            <dic:turma>
+                <dic:label>Turma</dic:label>
+            </dic:turma>
+
+        </dic:fields>
+
+    </dic:matricula>
+
+    <dic:mensagens>
+        <dic:groups>
+            <dic:name>Academico</dic:name>
+        </dic:groups>
+
+        <dic:label>Mensagens</dic:label>
+        <dic:fields>
+            <dic:fl_ouvinte>
+                <dic:label>Flag Aluno Ouvinte</dic:label>
+            </dic:fl_ouvinte>
+
+            <dic:fonte>
+                <dic:label>Fonte</dic:label>
+            </dic:fonte>
+
+            <dic:id>
+                <dic:label>Código da Mensagem</dic:label>
+            </dic:id>
+
+            <dic:ref_periodo>
+                <dic:label>Código do Período</dic:label>
+                <dic:link>periodos.id</dic:link>
+            </dic:ref_periodo>
+
+            <dic:ref_status>
+                <dic:label>Status</dic:label>
+            </dic:ref_status>
+
+            <dic:sequencia>
+                <dic:label>Seqüência</dic:label>
+            </dic:sequencia>
+
+            <dic:tamanho>
+                <dic:label>Tamanho</dic:label>
+            </dic:tamanho>
+
+            <dic:texto>
+                <dic:label>Texto</dic:label>
+            </dic:texto>
+
+        </dic:fields>
+
+    </dic:mensagens>
+
+    <dic:motivos>
+        <dic:groups>
+            <dic:name>Academico</dic:name>
+        </dic:groups>
+
+        <dic:label>Motivos</dic:label>
+        <dic:fields>
+            <dic:descricao>
+                <dic:label>Descrição do Motivo</dic:label>
+            </dic:descricao>
+
+            <dic:id>
+                <dic:label>Código do Motivo</dic:label>
+            </dic:id>
+
+            <dic:ref_tipo_motivo>
+                <dic:label>Código do Tipo de Motivo</dic:label>
+                <dic:link>tipos_motivos.id</dic:link>
+            </dic:ref_tipo_motivo>
+
+        </dic:fields>
+
+    </dic:motivos>
+
+    <dic:notas_bimestre>
+        <dic:groups>
+            <dic:name>Academico</dic:name>
+        </dic:groups>
+
+        <dic:label>Notas Bimestre</dic:label>
+        <dic:fields>
+            <dic:bimestre>
+                <dic:label>Bimestre</dic:label>
+            </dic:bimestre>
+
+            <dic:conceito_nota>
+                <dic:label>Conceito Nota</dic:label>
+            </dic:conceito_nota>
+
+            <dic:conceito_nota_recuperacao>
+                <dic:label>Conceito Nota de Recuperação</dic:label>
+            </dic:conceito_nota_recuperacao>
+
+            <dic:faltas>
+                <dic:label>Faltas</dic:label>
+            </dic:faltas>
+
+            <dic:id>
+                <dic:label>Código Nota Bimestre</dic:label>
+            </dic:id>
+
+            <dic:nota>
+                <dic:label>Nota</dic:label>
+            </dic:nota>
+
+            <dic:nota_recuperacao>
+                <dic:label>Nota de Recuperação</dic:label>
+            </dic:nota_recuperacao>
+
+            <dic:obs>
+                <dic:label>Observação</dic:label>
+            </dic:obs>
+
+            <dic:ref_disciplina_ofer>
+                <dic:label>Código da Disciplina Oferecida</dic:label>
+                <dic:link>disciplinas_ofer.id</dic:link>
+            </dic:ref_disciplina_ofer>
+
+            <dic:ref_pessoa>
+                <dic:label>Código da Pessoa</dic:label>
+                <dic:link>pessoas.id</dic:link>
+            </dic:ref_pessoa>
+
+        </dic:fields>
+
+    </dic:notas_bimestre>
+
+    <dic:periodos>
+        <dic:groups>
+            <dic:name>Academico</dic:name>
+            <dic:name>Financeiro</dic:name>
+        </dic:groups>
+
+        <dic:label>Períodos</dic:label>
+        <dic:fields>
+            <dic:descricao>
+                <dic:label>Descrição do Período</dic:label>
+            </dic:descricao>
+
+            <dic:dt_final>
+                <dic:label>Data Final do Período</dic:label>
+            </dic:dt_final>
+
+            <dic:dt_inicial>
+                <dic:label>Data Inicial do Período</dic:label>
+            </dic:dt_inicial>
+
+            <dic:fl_livro_matricula>
+                <dic:label>Flag Livro Matrícula</dic:label>
+            </dic:fl_livro_matricula>
+
+            <dic:id>
+                <dic:label>Código do Período</dic:label>
+            </dic:id>
+
+            <dic:media_final>
+                <dic:label>Média Final</dic:label>
+            </dic:media_final>
+
+            <dic:ref_anterior>
+                <dic:label>Código do Período Anterior</dic:label>
+            </dic:ref_anterior>
+
+            <dic:ref_cobranca>
+                <dic:label>Código do Tipo de Cobrança</dic:label>
+                <dic:link>tipos_cobr.id</dic:link>
+            </dic:ref_cobranca>
+
+            <dic:ref_historico>
+                <dic:label>Código do Histórico</dic:label>
+                <dic:link>historicos.id</dic:link>
+            </dic:ref_historico>
+
+            <dic:ref_historico_acresc>
+                <dic:label>Código do Histórico de Acréscimo</dic:label>
+                <dic:link>historicos.id</dic:link>
+            </dic:ref_historico_acresc>
+
+            <dic:ref_historico_bolsa>
+                <dic:label>Código do Histórico do Incentivo</dic:label>
+                <dic:link>historicos.id</dic:link>
+            </dic:ref_historico_bolsa>
+
+            <dic:ref_historico_cancel>
+                <dic:label>Código do Histórico de Cancelamento</dic:label>
+                <dic:link>historicos.id</dic:link>
+            </dic:ref_historico_cancel>
+
+            <dic:ref_historico_dce>
+                <dic:label>Código do Histórico do DCE</dic:label>
+                <dic:link>historicos.id</dic:link>
+            </dic:ref_historico_dce>
+
+            <dic:ref_local>
+                <dic:label>Código do Local de Pagamento</dic:label>
+                <dic:link>locais_pgto.id</dic:link>
+            </dic:ref_local>
+
+            <dic:ref_ocorrencia>
+                <dic:label>Código da Ocorrência</dic:label>
+                <dic:link>ocorrencia_titulos.id</dic:link>
+            </dic:ref_ocorrencia>
+
+            <dic:ref_origem>
+                <dic:label>Código da Origem</dic:label>
+                <dic:link>origens.id</dic:link>
+            </dic:ref_origem>
+
+            <dic:ref_status_vest>
+                <dic:label>Status Vestibular</dic:label>
+            </dic:ref_status_vest>
+
+            <dic:tipo>
+                <dic:label>Tipo</dic:label>
+            </dic:tipo>
+
+            <dic:tx_acresc>
+                <dic:label>Taxa de Acréscimo</dic:label>
+            </dic:tx_acresc>
+
+            <dic:tx_banco>
+                <dic:label>Taxa de Banco</dic:label>
+            </dic:tx_banco>
+
+            <dic:tx_cancel>
+                <dic:label>Taxa de Cancelamento</dic:label>
+            </dic:tx_cancel>
+
+            <dic:tx_dce_normal>
+                <dic:label>Taxa do DCE Normal</dic:label>
+            </dic:tx_dce_normal>
+
+            <dic:tx_dce_vest>
+                <dic:label>Taxa do DCE Vestibular</dic:label>
+            </dic:tx_dce_vest>
+
+            <dic:ref_historico_taxa>
+                <dic:link>historicos.id</dic:link>
+            </dic:ref_historico_taxa>
+
+        </dic:fields>
+
+    </dic:periodos>
+
+    <dic:pessoas>
+        <dic:groups>
+            <dic:name>Academico</dic:name>
+            <dic:name>Financeiro</dic:name>
+        </dic:groups>
+
+        <dic:label>Pessoas</dic:label>
+        <dic:fields>
+            <dic:ano_1g>
+                <dic:label>Ano de Conclusão de Primeiro Grau</dic:label>
+            </dic:ano_1g>
+
+            <dic:ano_2g>
+                <dic:label>Ano de Conclusão de Segundo Grau</dic:label>
+            </dic:ano_2g>
+
+            <dic:bairro>
+                <dic:label>Bairro</dic:label>
+            </dic:bairro>
+
+            <dic:cep>
+                <dic:label>CEP</dic:label>
+            </dic:cep>
+
+            <dic:cidade>
+                <dic:label>Cidade</dic:label>
+            </dic:cidade>
+
+            <dic:cidade_1g>
+                <dic:label>Cidade de Conclusão de Primeiro Grau</dic:label>
+            </dic:cidade_1g>
+
+            <dic:cidade_2g>
+                <dic:label>Cidade de Conclusão de Segundo Grau</dic:label>
+            </dic:cidade_2g>
+
+            <dic:cod_cpf_cgc>
+                <dic:label>CGC ou CPF</dic:label>
+            </dic:cod_cpf_cgc>
+
+            <dic:cod_externo>
+                <dic:label>Código no sistema externo</dic:label>
+            </dic:cod_externo>
+
+            <dic:cod_inscricao_estadual>
+                <dic:label>Código da Inscrição Estadual</dic:label>
+            </dic:cod_inscricao_estadual>
+
+            <dic:cod_passivo>
+                <dic:label>Código Passivo</dic:label>
+            </dic:cod_passivo>
+
+            <dic:complemento>
+                <dic:label>Complemento</dic:label>
+            </dic:complemento>
+
+            <dic:conta_laboratorio>
+                <dic:label>Conta Laboratório</dic:label>
+            </dic:conta_laboratorio>
+
+            <dic:conta_provedor>
+                <dic:label>Conta Provedor</dic:label>
+            </dic:conta_provedor>
+
+            <dic:credo>
+                <dic:label>Credo</dic:label>
+            </dic:credo>
+
+            <dic:deficiencia>
+                <dic:label>Portador de Deficiência</dic:label>
+            </dic:deficiencia>
+
+            <dic:deficiencia_desc>
+                <dic:label>Descrição da Deficiência</dic:label>
+            </dic:deficiencia_desc>
+
+            <dic:dt_cadastro>
+                <dic:label>Data de Cadastro</dic:label>
+            </dic:dt_cadastro>
+
+            <dic:dt_nascimento>
+                <dic:label>Data de Nascimento</dic:label>
+            </dic:dt_nascimento>
+
+            <dic:email>
+                <dic:label>Endereço de e-mail</dic:label>
+            </dic:email>
+
+            <dic:email_alt>
+                <dic:label>Endereço de e-mail alternativo</dic:label>
+            </dic:email_alt>
+
+            <dic:escola_1g>
+                <dic:label>Escola de Primeiro Grau</dic:label>
+            </dic:escola_1g>
+
+            <dic:escola_2g>
+                <dic:label>Escola de Segundo Grau</dic:label>
+            </dic:escola_2g>
+
+            <dic:estado_civil>
+                <dic:label>Estado Civil</dic:label>
+            </dic:estado_civil>
+
+            <dic:fl_cartao>
+                <dic:label>Recebeu identidade estudantil</dic:label>
+            </dic:fl_cartao>
+
+            <dic:fl_dbfolha>
+                <dic:label>Tem Débito em Folha</dic:label>
+            </dic:fl_dbfolha>
+
+            <dic:fl_documentos>
+                <dic:label>Apresentou documentos</dic:label>
+            </dic:fl_documentos>
+
+            <dic:fl_documentos_fora>
+                <dic:label>Apresentou documentos externos</dic:label>
+            </dic:fl_documentos_fora>
+
+            <dic:fl_quitacao_eleitoral>
+                <dic:label>Apresentou documentos de quitação eleitoral</dic:label>
+            </dic:fl_quitacao_eleitoral>
+
+            <dic:fl_segurado>
+                <dic:label>Tem Seguro Estudantil</dic:label>
+            </dic:fl_segurado>
+
+            <dic:fone_celular>
+                <dic:label>Fone Celular</dic:label>
+            </dic:fone_celular>
+
+            <dic:fone_particular>
+                <dic:label>Fone Particular</dic:label>
+            </dic:fone_particular>
+
+            <dic:fone_profissional>
+                <dic:label>Fone Profissional</dic:label>
+            </dic:fone_profissional>
+
+            <dic:fone_recado>
+                <dic:label>Fone Recado</dic:label>
+            </dic:fone_recado>
+
+            <dic:graduacao>
+                <dic:label>Graduação</dic:label>
+            </dic:graduacao>
+
+            <dic:id>
+                <dic:label>Código da Pessoa</dic:label>
+            </dic:id>
+
+            <dic:in_sagu>
+                <dic:label>Referência a sistema externo</dic:label>
+            </dic:in_sagu>
+
+            <dic:nacionalidade>
+                <dic:label>Nacionalidade</dic:label>
+            </dic:nacionalidade>
+
+            <dic:nome>
+                <dic:label>Nome</dic:label>
+            </dic:nome>
+
+            <dic:nome2>
+                <dic:label>Nome processado (sem acento)</dic:label>
+            </dic:nome2>
+
+            <dic:nome_fantasia>
+                <dic:label>Nome Fantasia</dic:label>
+            </dic:nome_fantasia>
+
+            <dic:obs>
+                <dic:label>Observação</dic:label>
+            </dic:obs>
+
+            <dic:placa_carro>
+                <dic:label>Placa do Carro</dic:label>
+            </dic:placa_carro>
+
+            <dic:ref_assistmed>
+                <dic:label>Código da Assistência Médica</dic:label>
+            </dic:ref_assistmed>
+
+            <dic:ref_cidade>
+                <dic:label>Código da Cidade</dic:label>
+                <dic:link>aux_cidades.id</dic:link>
+            </dic:ref_cidade>
+
+            <dic:ref_cobranca>
+                <dic:label>Código da Cobrança</dic:label>
+                <dic:link>cobranca_pessoa.id</dic:link>
+            </dic:ref_cobranca>
+
+            <dic:ref_curso_1g>
+                <dic:label>Código de Curso de Primeiro Grau</dic:label>
+            </dic:ref_curso_1g>
+
+            <dic:ref_curso_2g>
+                <dic:label>Código de Curso de Segundo Grau</dic:label>
+            </dic:ref_curso_2g>
+
+            <dic:ref_filiacao>
+                <dic:label>Código da Filiação</dic:label>
+            </dic:ref_filiacao>
+
+            <dic:ref_nacionalidade>
+                <dic:label>Código da Nacionalidade</dic:label>
+                <dic:link>aux_paises.id</dic:link>
+            </dic:ref_nacionalidade>
+
+            <dic:ref_naturalidade>
+                <dic:label>Código da Naturalidade</dic:label>
+                <dic:link>aux_cidades.id</dic:link>
+            </dic:ref_naturalidade>
+
+            <dic:ref_pessoa_folha>
+                <dic:label>Responsável pelo Pagamento</dic:label>
+            </dic:ref_pessoa_folha>
+
+            <dic:ref_segurado>
+                <dic:label>Código do Segurado</dic:label>
+            </dic:ref_segurado>
+
+            <dic:regc_folha>
+                <dic:label>Registro do Cartório - Folha</dic:label>
+            </dic:regc_folha>
+
+            <dic:regc_livro>
+                <dic:label>Registro do Cartório - Livro</dic:label>
+            </dic:regc_livro>
+
+            <dic:regc_local>
+                <dic:label>Registro do Cartório - Local</dic:label>
+            </dic:regc_local>
+
+            <dic:regc_nasc_casam>
+                <dic:label>Registro do Cartório - Casamento/Nascimento</dic:label>
+            </dic:regc_nasc_casam>
+
+            <dic:rg_cidade>
+                <dic:label>Cidade que foi expedido o RG</dic:label>
+            </dic:rg_cidade>
+
+            <dic:rg_data>
+                <dic:label>Data que foi expedido o RG</dic:label>
+            </dic:rg_data>
+
+            <dic:rg_numero>
+                <dic:label>Número do RG</dic:label>
+            </dic:rg_numero>
+
+            <dic:rg_orgao>
+                <dic:label>Órgão Emissor do RG</dic:label>
+            </dic:rg_orgao>
+
+            <dic:rua>
+                <dic:label>Rua</dic:label>
+            </dic:rua>
+
+            <dic:senha>
+                <dic:label>Senha</dic:label>
+            </dic:senha>
+
+            <dic:sexo>
+                <dic:label>Sexo</dic:label>
+            </dic:sexo>
+
+            <dic:tipo_pessoa>
+                <dic:label>Tipo de Pessoa (Física/Jurídica)</dic:label>
+            </dic:tipo_pessoa>
+
+            <dic:titulo_academico>
+                <dic:label>Título Acadêmico</dic:label>
+            </dic:titulo_academico>
+
+            <dic:titulo_eleitor>
+                <dic:label>Número do Título de Eleitor</dic:label>
+            </dic:titulo_eleitor>
+
+        </dic:fields>
+
+    </dic:pessoas>
+
+    <dic:pre_requisitos>
+        <dic:groups>
+            <dic:name>Academico</dic:name>
+        </dic:groups>
+
+        <dic:label>Pré-Requisitos</dic:label>
+        <dic:fields>
+            <dic:horas_area>
+                <dic:label>Número de Horas Pré-Requisito Área</dic:label>
+            </dic:horas_area>
+
+            <dic:id>
+                <dic:label>Código do Pré-Requisito</dic:label>
+            </dic:id>
+
+            <dic:ref_area>
+                <dic:label>Código da Área</dic:label>
+            </dic:ref_area>
+
+            <dic:ref_curso>
+                <dic:label>Código do Curso</dic:label>
+                <dic:link>cursos.id</dic:link>
+            </dic:ref_curso>
+
+            <dic:ref_disciplina>
+                <dic:label>Código da Disciplina</dic:label>
+                <dic:link>disciplinas.id</dic:link>
+            </dic:ref_disciplina>
+
+            <dic:ref_disciplina_pre>
+                <dic:label>Código da Disciplina Pré-Requisito</dic:label>
+            </dic:ref_disciplina_pre>
+
+            <dic:tipo>
+                <dic:label>Tipo</dic:label>
+            </dic:tipo>
+
+        </dic:fields>
+
+    </dic:pre_requisitos>
+
+    <dic:salas>
+        <dic:groups>
+            <dic:name>Academico</dic:name>
+        </dic:groups>
+
+        <dic:label>Salas</dic:label>
+        <dic:fields>
+            <dic:capacidade>
+                <dic:label>Capacidade da Sala</dic:label>
+            </dic:capacidade>
+
+            <dic:id>
+                <dic:label>Código da Sala</dic:label>
+            </dic:id>
+
+            <dic:numero>
+                <dic:label>Número da Sala</dic:label>
+            </dic:numero>
+
+            <dic:ref_campus>
+                <dic:label>Código do Campus</dic:label>
+                <dic:link>campus.id</dic:link>
+            </dic:ref_campus>
+
+        </dic:fields>
+
+    </dic:salas>
+
+    <dic:status_matricula>
+        <dic:groups>
+            <dic:name>Academico</dic:name>
+        </dic:groups>
+
+        <dic:label>Status da Matrícula</dic:label>
+        <dic:fields>
+            <dic:descricao>
+                <dic:label>Descrição</dic:label>
+            </dic:descricao>
+
+            <dic:fl_in_lm>
+                <dic:label>Está no Livro Matrícula</dic:label>
+            </dic:fl_in_lm>
+
+            <dic:id>
+                <dic:label>Código</dic:label>
+            </dic:id>
+
+        </dic:fields>
+
+    </dic:status_matricula>
+
+    <dic:tipos_curso>
+        <dic:groups>
+            <dic:name>Academico</dic:name>
+        </dic:groups>
+
+        <dic:label>Tipos de Curso</dic:label>
+        <dic:fields>
+            <dic:descricao>
+                <dic:label>Descrição do Tipo de Curso</dic:label>
+            </dic:descricao>
+
+            <dic:id>
+                <dic:label>Código do Tipo de Curso</dic:label>
+            </dic:id>
+
+        </dic:fields>
+
+    </dic:tipos_curso>
+
+    <dic:tipos_motivos>
+        <dic:groups>
+            <dic:name>Academico</dic:name>
+        </dic:groups>
+
+        <dic:label>Tipos de Motivos</dic:label>
+        <dic:fields>
+            <dic:descricao>
+                <dic:label>Descrição do Tipo de Motivo</dic:label>
+            </dic:descricao>
+
+            <dic:id>
+                <dic:label>Código do Tipo de Motivo</dic:label>
+            </dic:id>
+
+        </dic:fields>
+
+    </dic:tipos_motivos>
+
+    <dic:turmas_2g>
+        <dic:groups>
+            <dic:name>Academico</dic:name>
+        </dic:groups>
+
+        <dic:label>Turmas do Ensino Médio</dic:label>
+        <dic:fields>
+            <dic:id>
+                <dic:label>Código</dic:label>
+            </dic:id>
+
+            <dic:ref_disciplina_ofer>
+                <dic:label>Código da Disciplina Oferecida</dic:label>
+                <dic:link>disciplinas_ofer.id</dic:link>
+            </dic:ref_disciplina_ofer>
+
+            <dic:ref_professor>
+                <dic:label>Código do Professor</dic:label>
+            </dic:ref_professor>
+
+            <dic:turma>
+                <dic:label>Número da Turma</dic:label>
+            </dic:turma>
+
+        </dic:fields>
+
+    </dic:turmas_2g>
+
+    <dic:ccusto>
+        <dic:groups>
+            <dic:name>Contabil</dic:name>
+        </dic:groups>
+
+        <dic:label>Centro de Custo</dic:label>
+        <dic:fields>
+            <dic:cod_ccusto>
+                <dic:label>Código do Centro de Custo</dic:label>
+            </dic:cod_ccusto>
+
+            <dic:descricao>
+                <dic:label>Descrição do Centro de Custo</dic:label>
+            </dic:descricao>
+
+            <dic:filial>
+                <dic:label>Filial (Unidade)</dic:label>
+            </dic:filial>
+
+        </dic:fields>
+
+    </dic:ccusto>
+
+    <dic:conf_finan_cont>
+        <dic:groups>
+            <dic:name>Contabil</dic:name>
+        </dic:groups>
+
+        <dic:label>Configuração Financeiro/Contábil</dic:label>
+        <dic:fields>
+            <dic:chave>
+                <dic:label>Parâmetro</dic:label>
+            </dic:chave>
+
+            <dic:conteudo>
+                <dic:label>Conteúdo</dic:label>
+            </dic:conteudo>
+
+        </dic:fields>
+
+    </dic:conf_finan_cont>
+
+    <dic:limites_contabeis>
+        <dic:groups>
+            <dic:name>Contabil</dic:name>
+        </dic:groups>
+
+        <dic:label>Limites Contábeis</dic:label>
+        <dic:fields>
+            <dic:data>
+                <dic:label>Data Limite</dic:label>
+            </dic:data>
+
+            <dic:id>
+                <dic:label>Código do Usuário Habilitado</dic:label>
+            </dic:id>
+
+            <dic:manager>
+                <dic:label>Usuário Habilitado</dic:label>
+            </dic:manager>
+
+        </dic:fields>
+
+    </dic:limites_contabeis>
+
+    <dic:pconta>
+        <dic:groups>
+            <dic:name>Contabil</dic:name>
+        </dic:groups>
+
+    </dic:pconta>
+
+    <dic:rel_curso_cc>
+        <dic:groups>
+            <dic:name>Contabil</dic:name>
+        </dic:groups>
+
+        <dic:label>Relação Contábil de um Curso</dic:label>
+        <dic:fields>
+            <dic:cod_ccusto>
+                <dic:label>Código do Centro de Custo</dic:label>
+                <dic:link>ccusto.cod_ccusto</dic:link>
+            </dic:cod_ccusto>
+
+            <dic:ref_campus>
+                <dic:label>Código do Campus</dic:label>
+                <dic:link>campus.id</dic:link>
+            </dic:ref_campus>
+
+            <dic:ref_curso>
+                <dic:label>Código do Curso</dic:label>
+                <dic:link>cursos.id</dic:link>
+            </dic:ref_curso>
+
+        </dic:fields>
+
+    </dic:rel_curso_cc>
+
+    <dic:saldos_contabeis>
+        <dic:groups>
+            <dic:name>Contabil</dic:name>
+        </dic:groups>
+
+        <dic:fields>
+            <dic:ref_campus>
+                <dic:link>campus.id</dic:link>
+            </dic:ref_campus>
+
+            <dic:ref_curso>
+                <dic:link>cursos.id</dic:link>
+            </dic:ref_curso>
+
+        </dic:fields>
+
+    </dic:saldos_contabeis>
+
+    <dic:sdw_account_balance>
+        <dic:groups>
+            <dic:name>Contabil</dic:name>
+        </dic:groups>
+
+        <dic:label>Balanço das Contas Contábeis</dic:label>
+        <dic:fields>
+            <dic:account_prefix>
+                <dic:label>Prefixo da Conta</dic:label>
+            </dic:account_prefix>
+
+            <dic:account_suffix>
+                <dic:label>Sufixo da Conta</dic:label>
+            </dic:account_suffix>
+
+            <dic:course_id>
+                <dic:label>Código do Curso</dic:label>
+                <dic:link>cursos.id</dic:link>
+            </dic:course_id>
+
+            <dic:source>
+                <dic:label>Procedência (P ou L)</dic:label>
+            </dic:source>
+
+            <dic:topdate>
+                <dic:label>Data Limite</dic:label>
+            </dic:topdate>
+
+            <dic:unit_id>
+                <dic:label>Campus</dic:label>
+                <dic:link>campus.id</dic:link>
+            </dic:unit_id>
+
+            <dic:value>
+                <dic:label>Valor</dic:label>
+            </dic:value>
+
+        </dic:fields>
+
+    </dic:sdw_account_balance>
+
+    <dic:sdw_person_balance>
+        <dic:groups>
+            <dic:name>Contabil</dic:name>
+        </dic:groups>
+
+        <dic:label>Balanço das Pessoas</dic:label>
+        <dic:fields>
+            <dic:account_prefix>
+                <dic:label>Prefixo da Conta</dic:label>
+            </dic:account_prefix>
+
+            <dic:account_suffix>
+                <dic:label>Sufixo da Conta</dic:label>
+            </dic:account_suffix>
+
+            <dic:course_id>
+                <dic:label>Código do Curso</dic:label>
+                <dic:link>cursos.id</dic:link>
+            </dic:course_id>
+
+            <dic:person_id>
+                <dic:label>Código da Pessoa</dic:label>
+                <dic:link>pessoas.id</dic:link>
+            </dic:person_id>
+
+            <dic:source>
+                <dic:label>Procedência (P ou L)</dic:label>
+            </dic:source>
+
+            <dic:topdate>
+                <dic:label>Data Limite</dic:label>
+            </dic:topdate>
+
+            <dic:unit_id>
+                <dic:label>Campus</dic:label>
+                <dic:link>campus.id</dic:link>
+            </dic:unit_id>
+
+            <dic:value>
+                <dic:label>Valor</dic:label>
+            </dic:value>
+
+        </dic:fields>
+
+    </dic:sdw_person_balance>
+
+    <dic:aux_bolsas>
+        <dic:groups>
+            <dic:name>Financeiro</dic:name>
+        </dic:groups>
+
+        <dic:label>Tipos de Incentivos</dic:label>
+        <dic:fields>
+            <dic:ativo>
+                <dic:label>Ativo</dic:label>
+            </dic:ativo>
+
+            <dic:ccusto_obrigatorio>
+                <dic:label>Centro de Custo</dic:label>
+            </dic:ccusto_obrigatorio>
+
+            <dic:cod_bolsa>
+                <dic:label>Sigla do Tipo de Incentivo</dic:label>
+                <dic:link>bolsas.id</dic:link>
+            </dic:cod_bolsa>
+
+            <dic:descricao>
+                <dic:label>Descrição do Tipo de Incentivo</dic:label>
+            </dic:descricao>
+
+            <dic:financiador>
+                <dic:label>Órgão Financiador do Incentivo</dic:label>
+            </dic:financiador>
+
+            <dic:gera_titulo>
+                <dic:label>Gerar Título</dic:label>
+            </dic:gera_titulo>
+
+            <dic:id>
+                <dic:label>Código do Tipo de Incentivo</dic:label>
+            </dic:id>
+
+            <dic:prefixo>
+                <dic:label>Prefixo do Incentivo</dic:label>
+            </dic:prefixo>
+
+            <dic:ref_curso>
+                <dic:label>Curso</dic:label>
+            </dic:ref_curso>
+
+            <dic:ref_historico>
+                <dic:label>Histórico do Incentivo</dic:label>
+                <dic:link>historicos.id</dic:link>
+            </dic:ref_historico>
+
+            <dic:ref_historico2>
+                <dic:label>Segundo Histórico do Incentivo</dic:label>
+                <dic:link>historicos.id</dic:link>
+            </dic:ref_historico2>
+
+            <dic:ref_historico_matricula>
+                <dic:label>Histórico da Matrícula</dic:label>
+                <dic:link>historicos.id</dic:link>
+            </dic:ref_historico_matricula>
+
+            <dic:ref_pessoaj>
+                <dic:label>Pessoa Jurídica resposável pelo Incentivo</dic:label>
+                <dic:link>pessoas.id</dic:link>
+            </dic:ref_pessoaj>
+
+            <dic:sintetiza>
+                <dic:label>Sintetizar</dic:label>
+            </dic:sintetiza>
+
+            <dic:sufixo>
+                <dic:label>Sufixo do Incentivo</dic:label>
+            </dic:sufixo>
+
+        </dic:fields>
+
+    </dic:aux_bolsas>
+
+    <dic:aux_empresas>
+        <dic:groups>
+            <dic:name>Financeiro</dic:name>
+        </dic:groups>
+
+        <dic:label>Empresas</dic:label>
+        <dic:fields>
+            <dic:id>
+                <dic:label>Código da Empresa</dic:label>
+            </dic:id>
+
+            <dic:nome>
+                <dic:label>Nome da Empresa</dic:label>
+            </dic:nome>
+
+        </dic:fields>
+
+    </dic:aux_empresas>
+
+    <dic:bolsas>
+        <dic:groups>
+            <dic:name>Financeiro</dic:name>
+        </dic:groups>
+
+        <dic:label>Incentivos</dic:label>
+        <dic:fields>
+            <dic:cod_ccusto>
+                <dic:label>Código do Centro de Custo</dic:label>
+            </dic:cod_ccusto>
+
+            <dic:dt_inicio>
+                <dic:label>Data de Início da concessão</dic:label>
+            </dic:dt_inicio>
+
+            <dic:dt_validade>
+                <dic:label>Data de Validade</dic:label>
+            </dic:dt_validade>
+
+            <dic:id>
+                <dic:label>Código do Incentivo</dic:label>
+            </dic:id>
+
+            <dic:percentual>
+                <dic:label>Percentual</dic:label>
+            </dic:percentual>
+
+            <dic:ref_contrato>
+                <dic:label>Contrato</dic:label>
+            </dic:ref_contrato>
+
+            <dic:ref_pessoa>
+                <dic:label>Pessoa Favorecida</dic:label>
+            </dic:ref_pessoa>
+
+            <dic:ref_pessoaj>
+                <dic:label>Pessoa Jurídica responsável pelo Incentivo</dic:label>
+            </dic:ref_pessoaj>
+
+            <dic:ref_tipo_bolsa>
+                <dic:label>Tipo de Incentivo</dic:label>
+            </dic:ref_tipo_bolsa>
+
+        </dic:fields>
+
+    </dic:bolsas>
+
+    <dic:cobranca_pessoa>
+        <dic:groups>
+            <dic:name>Financeiro</dic:name>
+        </dic:groups>
+
+        <dic:label>Dados Pessoais para Cobrança</dic:label>
+        <dic:fields>
+            <dic:agencia>
+                <dic:label>Agência</dic:label>
+            </dic:agencia>
+
+            <dic:bairro>
+                <dic:label>Bairro</dic:label>
+            </dic:bairro>
+
+            <dic:banco>
+                <dic:label>Banco</dic:label>
+            </dic:banco>
+
+            <dic:cep>
+                <dic:label>CEP</dic:label>
+            </dic:cep>
+
+            <dic:cidade>
+                <dic:label>Cidade</dic:label>
+            </dic:cidade>
+
+            <dic:complemento>
+                <dic:label>Complemento</dic:label>
+            </dic:complemento>
+
+            <dic:conta>
+                <dic:label>Conta</dic:label>
+            </dic:conta>
+
+            <dic:cpf>
+                <dic:label>CPF da Pessoa</dic:label>
+            </dic:cpf>
+
+            <dic:dt_autorizacao>
+                <dic:label>Data da Autorização</dic:label>
+            </dic:dt_autorizacao>
+
+            <dic:id>
+                <dic:label>Código da Cobrança Pessoa</dic:label>
+            </dic:id>
+
+            <dic:nome>
+                <dic:label>Nome da Pessoa</dic:label>
+            </dic:nome>
+
+            <dic:ref_pessoa>
+                <dic:label>Código da Pessoa</dic:label>
+                <dic:link>pessoas.id</dic:link>
+            </dic:ref_pessoa>
+
+            <dic:rua>
+                <dic:label>Rua</dic:label>
+            </dic:rua>
+
+            <dic:ref_folha_titular>
+                <dic:link>pessoas.id</dic:link>
+            </dic:ref_folha_titular>
+
+        </dic:fields>
+
+    </dic:cobranca_pessoa>
+
+    <dic:cobrancas>
+        <dic:groups>
+            <dic:name>Financeiro</dic:name>
+        </dic:groups>
+
+        <dic:label>Cobranças</dic:label>
+        <dic:fields>
+            <dic:id>
+                <dic:label>Código da Cobrança</dic:label>
+            </dic:id>
+
+            <dic:tipo>
+                <dic:label>Tipo de Cobrança</dic:label>
+            </dic:tipo>
+
+        </dic:fields>
+
+    </dic:cobrancas>
+
+    <dic:configuracao_empresa>
+        <dic:groups>
+            <dic:name>Financeiro</dic:name>
+        </dic:groups>
+
+        <dic:label>Configuração de Empresa</dic:label>
+        <dic:fields>
+            <dic:bairro>
+                <dic:label>Bairro</dic:label>
+            </dic:bairro>
+
+            <dic:cep>
+                <dic:label>CEP</dic:label>
+            </dic:cep>
+
+            <dic:cgc>
+                <dic:label>CGC</dic:label>
+            </dic:cgc>
+
+            <dic:complemento>
+                <dic:label>Complemento</dic:label>
+            </dic:complemento>
+
+            <dic:id>
+                <dic:label>Código da Empresa</dic:label>
+            </dic:id>
+
+            <dic:logotipo>
+                <dic:label>Logotipo</dic:label>
+            </dic:logotipo>
+
+            <dic:razao_social>
+                <dic:label>Razão Social</dic:label>
+            </dic:razao_social>
+
+            <dic:ref_cidade>
+                <dic:label>Código da Cidade</dic:label>
+                <dic:link>aux_cidades.id</dic:link>
+            </dic:ref_cidade>
+
+            <dic:rua>
+                <dic:label>Rua</dic:label>
+            </dic:rua>
+
+            <dic:sigla>
+                <dic:label>Sigla da Empresa</dic:label>
+            </dic:sigla>
+
+        </dic:fields>
+
+    </dic:configuracao_empresa>
+
+    <dic:convenios_medicos>
+        <dic:groups>
+            <dic:name>Financeiro</dic:name>
+        </dic:groups>
+
+        <dic:label>Convênios Médicos</dic:label>
+        <dic:fields>
+            <dic:id>
+                <dic:label>Código do Convênio Médico</dic:label>
+            </dic:id>
+
+            <dic:nome>
+                <dic:label>Nome do Convênio Médico</dic:label>
+            </dic:nome>
+
+        </dic:fields>
+
+    </dic:convenios_medicos>
+
+    <dic:ctrl_bancos>
+        <dic:groups>
+            <dic:name>Financeiro</dic:name>
+        </dic:groups>
+
+        <dic:label>Sequências dos Bancos</dic:label>
+        <dic:fields>
+            <dic:abertura_contas_bb>
+                <dic:label>Abertura de Contas Banco do Brasil</dic:label>
+            </dic:abertura_contas_bb>
+
+            <dic:banco_brasil>
+                <dic:label>Banco do Brasil</dic:label>
+            </dic:banco_brasil>
+
+            <dic:banrisul>
+                <dic:label>Banrisul</dic:label>
+            </dic:banrisul>
+
+            <dic:caixa_federal>
+                <dic:label>Caixa Econômica Federal</dic:label>
+            </dic:caixa_federal>
+
+            <dic:seq_estagiarios_bb>
+                <dic:label>Sequência dos Estagiários</dic:label>
+            </dic:seq_estagiarios_bb>
+
+            <dic:sicredi>
+                <dic:label>Sicredi</dic:label>
+            </dic:sicredi>
+
+        </dic:fields>
+
+    </dic:ctrl_bancos>
+
+    <dic:integra_lancamentos>
+        <dic:groups>
+            <dic:name>Financeiro</dic:name>
+        </dic:groups>
+
+        <dic:label>Integra Lançamentos</dic:label>
+        <dic:fields>
+            <dic:ccusto_credito>
+                <dic:label>Centro de Custo do Crédito</dic:label>
+            </dic:ccusto_credito>
+
+            <dic:ccusto_debito>
+                <dic:label>Centro de Custo do Débito</dic:label>
+            </dic:ccusto_debito>
+
+            <dic:cod_lcto>
+                <dic:label>Código do Lançamento</dic:label>
+            </dic:cod_lcto>
+
+            <dic:conta_credito>
+                <dic:label>Conta Crédito</dic:label>
+            </dic:conta_credito>
+
+            <dic:conta_debito>
+                <dic:label>Conta Débito</dic:label>
+            </dic:conta_debito>
+
+            <dic:historico>
+                <dic:label>Histórico</dic:label>
+            </dic:historico>
+
+            <dic:ref_historico>
+                <dic:label>Código do Histórico</dic:label>
+                <dic:link>historicos.id</dic:link>
+            </dic:ref_historico>
+
+            <dic:tipo_lcto>
+                <dic:label>Tipo do Lançamento</dic:label>
+            </dic:tipo_lcto>
+
+        </dic:fields>
+
+    </dic:integra_lancamentos>
+
+    <dic:integra_previsoes>
+        <dic:groups>
+            <dic:name>Financeiro</dic:name>
+        </dic:groups>
+
+        <dic:label>Integra Previsões</dic:label>
+        <dic:fields>
+            <dic:ccusto_credito>
+                <dic:label>Centro de Custo Crédito</dic:label>
+            </dic:ccusto_credito>
+
+            <dic:ccusto_debito>
+                <dic:label>Centro de Custo Débito</dic:label>
+            </dic:ccusto_debito>
+
+            <dic:cod_lcto>
+                <dic:label>Código do Lançamento</dic:label>
+            </dic:cod_lcto>
+
+            <dic:conta_credito>
+                <dic:label>Conta Crédito</dic:label>
+            </dic:conta_credito>
+
+            <dic:conta_debito>
+                <dic:label>Conta Débito</dic:label>
+            </dic:conta_debito>
+
+            <dic:historico>
+                <dic:label>Histórico</dic:label>
+            </dic:historico>
+
+            <dic:ref_historico>
+                <dic:label>Código do Histórico</dic:label>
+                <dic:link>historicos.id</dic:link>
+            </dic:ref_historico>
+
+            <dic:tipo_lcto>
+                <dic:label>Tipo do Lançamento</dic:label>
+            </dic:tipo_lcto>
+
+        </dic:fields>
+
+    </dic:integra_previsoes>
+
+    <dic:lancamentos_cr>
+        <dic:groups>
+            <dic:name>Financeiro</dic:name>
+        </dic:groups>
+
+        <dic:label>Lançamentos dos Títulos</dic:label>
+        <dic:fields>
+            <dic:dt_lancto>
+                <dic:label>Data do Lançamento</dic:label>
+            </dic:dt_lancto>
+
+            <dic:fl_cont>
+                <dic:label>Contabilizado</dic:label>
+            </dic:fl_cont>
+
+            <dic:id>
+                <dic:label>Código do Lançamento</dic:label>
+            </dic:id>
+
+            <dic:id_ret_banco>
+                <dic:label>Código de Retorno Bancário</dic:label>
+            </dic:id_ret_banco>
+
+            <dic:info_historico>
+                <dic:label>Observação</dic:label>
+            </dic:info_historico>
+
+            <dic:last_date_update>
+                <dic:label>Última Data de Atualização</dic:label>
+            </dic:last_date_update>
+
+            <dic:last_time_update>
+                <dic:label>Última Hora de Atualização</dic:label>
+            </dic:last_time_update>
+
+            <dic:last_user>
+                <dic:label>Último Usuário</dic:label>
+            </dic:last_user>
+
+            <dic:ref_historico>
+                <dic:label>Código do Histórico</dic:label>
+                <dic:link>historicos.id</dic:link>
+            </dic:ref_historico>
+
+            <dic:ref_titulo>
+                <dic:label>Código do Título</dic:label>
+                <dic:link>titulos_cr.id</dic:link>
+            </dic:ref_titulo>
+
+            <dic:tipo_criacao>
+                <dic:label>Tipo de Criação (M=Manual e A=Automático)</dic:label>
+            </dic:tipo_criacao>
+
+            <dic:valor_lancto>
+                <dic:label>Valor do Lançamento</dic:label>
+            </dic:valor_lancto>
+
+        </dic:fields>
+
+    </dic:lancamentos_cr>
+
+    <dic:mensagens_financeiro>
+        <dic:groups>
+            <dic:name>Financeiro</dic:name>
+        </dic:groups>
+
+        <dic:label>Mensagens Setor Financeiro</dic:label>
+        <dic:fields>
+            <dic:lin1>
+                <dic:label>Linha 1</dic:label>
+            </dic:lin1>
+
+            <dic:lin2>
+                <dic:label>Linha 2</dic:label>
+            </dic:lin2>
+
+            <dic:ref_historico>
+                <dic:label>Código do Histórico</dic:label>
+                <dic:link>historicos.id</dic:link>
+            </dic:ref_historico>
+
+            <dic:titulo>
+                <dic:label>Título</dic:label>
+            </dic:titulo>
+
+        </dic:fields>
+
+    </dic:mensagens_financeiro>
+
+    <dic:mot_ret_banco>
+        <dic:groups>
+            <dic:name>Financeiro</dic:name>
+        </dic:groups>
+
+        <dic:label>Motivo de Retorno do Banco</dic:label>
+        <dic:fields>
+            <dic:comando>
+                <dic:label>Comando</dic:label>
+            </dic:comando>
+
+            <dic:descricao>
+                <dic:label>Descrição</dic:label>
+            </dic:descricao>
+
+            <dic:id>
+                <dic:label>Código do Motivo</dic:label>
+            </dic:id>
+
+            <dic:is_processa>
+                <dic:label>Processa (Sim/Não)</dic:label>
+            </dic:is_processa>
+
+            <dic:motivo>
+                <dic:label>Motivo</dic:label>
+            </dic:motivo>
+
+        </dic:fields>
+
+    </dic:mot_ret_banco>
+
+    <dic:mov_rec_banco>
+        <dic:groups>
+            <dic:name>Financeiro</dic:name>
+        </dic:groups>
+
+        <dic:label>Movimento de Retorno Bancário</dic:label>
+        <dic:fields>
+            <dic:abatimento_nao_aproveitado>
+                <dic:label>Abatimento não aproveitado</dic:label>
+            </dic:abatimento_nao_aproveitado>
+
+            <dic:agencia_cobr>
+                <dic:label>Agência de Cobrança</dic:label>
+            </dic:agencia_cobr>
+
+            <dic:comando>
+                <dic:label>Comando</dic:label>
+            </dic:comando>
+
+            <dic:desconto>
+                <dic:label>Desconto</dic:label>
+            </dic:desconto>
+
+            <dic:dt_credito>
+                <dic:label>Data de Crédito</dic:label>
+            </dic:dt_credito>
+
+            <dic:dt_gravacao>
+                <dic:label>Data de Gravação</dic:label>
+            </dic:dt_gravacao>
+
+            <dic:dt_operacao>
+                <dic:label>Data da Operação</dic:label>
+            </dic:dt_operacao>
+
+            <dic:id>
+                <dic:label>Código</dic:label>
+            </dic:id>
+
+            <dic:iof>
+                <dic:label>IOF</dic:label>
+            </dic:iof>
+
+            <dic:juros>
+                <dic:label>Juros</dic:label>
+            </dic:juros>
+
+            <dic:juros_do_desconto>
+                <dic:label>Juros do Desconto</dic:label>
+            </dic:juros_do_desconto>
+
+            <dic:motivo>
+                <dic:label>Código do Motivo</dic:label>
+            </dic:motivo>
+
+            <dic:nome_arquivo>
+                <dic:label>Nome do Arquivo</dic:label>
+            </dic:nome_arquivo>
+
+            <dic:numero_banco>
+                <dic:label>Número do Banco</dic:label>
+            </dic:numero_banco>
+
+            <dic:outras_despesas>
+                <dic:label>Outras Despesas</dic:label>
+            </dic:outras_despesas>
+
+            <dic:outros_recebimentos>
+                <dic:label>Outros Recebimentos</dic:label>
+            </dic:outros_recebimentos>
+
+            <dic:ref_letra>
+                <dic:label>Código da Letra</dic:label>
+            </dic:ref_letra>
+
+            <dic:ref_titulo>
+                <dic:label>Código do Título</dic:label>
+                <dic:link>titulos_cr.id</dic:link>
+            </dic:ref_titulo>
+
+            <dic:valor_abatimento>
+                <dic:label>Valor do Abatimento</dic:label>
+            </dic:valor_abatimento>
+
+            <dic:valor_lancamento>
+                <dic:label>Valor do Lançamento</dic:label>
+            </dic:valor_lancamento>
+
+            <dic:valor_recebido>
+                <dic:label>Valor Recebido</dic:label>
+            </dic:valor_recebido>
+
+            <dic:valor_tarifa>
+                <dic:label>Valor da Tarifa</dic:label>
+            </dic:valor_tarifa>
+
+        </dic:fields>
+
+    </dic:mov_rec_banco>
+
+    <dic:ocorr_locais_pgto>
+        <dic:groups>
+            <dic:name>Financeiro</dic:name>
+        </dic:groups>
+
+        <dic:label>Ocorrência dos Locais de Pagamento</dic:label>
+        <dic:fields>
+            <dic:descricao>
+                <dic:label>Descrição</dic:label>
+            </dic:descricao>
+
+            <dic:fl_processa_entr>
+                <dic:label>Processa Entrada (Sim/Não)</dic:label>
+            </dic:fl_processa_entr>
+
+            <dic:hist_abat>
+                <dic:label>Abatimento</dic:label>
+                <dic:link>historicos.id</dic:link>
+            </dic:hist_abat>
+
+            <dic:hist_abat_n_aprov>
+                <dic:label>Abatimento não aprovado</dic:label>
+                <dic:link>historicos.id</dic:link>
+            </dic:hist_abat_n_aprov>
+
+            <dic:hist_desc_conced>
+                <dic:label>Desconto Concedido</dic:label>
+                <dic:link>historicos.id</dic:link>
+            </dic:hist_desc_conced>
+
+            <dic:hist_iof_desc>
+                <dic:label>IOF do Desconto</dic:label>
+                <dic:link>historicos.id</dic:link>
+            </dic:hist_iof_desc>
+
+            <dic:hist_jur_desc>
+                <dic:label>Juros do Desconto</dic:label>
+                <dic:link>historicos.id</dic:link>
+            </dic:hist_jur_desc>
+
+            <dic:hist_juros_mora>
+                <dic:label>Juros de Mora</dic:label>
+                <dic:link>historicos.id</dic:link>
+            </dic:hist_juros_mora>
+
+            <dic:hist_out_tar>
+                <dic:label>Outras Tarifas</dic:label>
+                <dic:link>historicos.id</dic:link>
+            </dic:hist_out_tar>
+
+            <dic:hist_outros_receb>
+                <dic:label>Outros Recebimentos</dic:label>
+                <dic:link>historicos.id</dic:link>
+            </dic:hist_outros_receb>
+
+            <dic:hist_val_ajuste>
+                <dic:label>Valor do Ajuste</dic:label>
+                <dic:link>historicos.id</dic:link>
+            </dic:hist_val_ajuste>
+
+            <dic:hist_val_lcto>
+                <dic:label>Valor do Lançamento</dic:label>
+                <dic:link>historicos.id</dic:link>
+            </dic:hist_val_lcto>
+
+            <dic:hist_val_tar>
+                <dic:label>Valor da Tarifa</dic:label>
+                <dic:link>historicos.id</dic:link>
+            </dic:hist_val_tar>
+
+            <dic:ocorrencia>
+                <dic:label>Ocorrência</dic:label>
+            </dic:ocorrencia>
+
+            <dic:ref_local>
+                <dic:label>Código do Local de Pagamento</dic:label>
+                <dic:link>locais_pgto.id</dic:link>
+            </dic:ref_local>
+
+        </dic:fields>
+
+    </dic:ocorr_locais_pgto>
+
+    <dic:ocorrencia_titulos>
+        <dic:groups>
+            <dic:name>Financeiro</dic:name>
+        </dic:groups>
+
+        <dic:label>Ocorrência de Títulos</dic:label>
+        <dic:fields>
+            <dic:dt_ocorr>
+                <dic:label>Data da Ocorrência</dic:label>
+            </dic:dt_ocorr>
+
+            <dic:id>
+                <dic:label>Código de Ocorrência de Títulos</dic:label>
+            </dic:id>
+
+            <dic:letra>
+                <dic:label>Letra</dic:label>
+            </dic:letra>
+
+            <dic:local_pagto>
+                <dic:label>Local de Pagamento</dic:label>
+            </dic:local_pagto>
+
+            <dic:ocorrencia>
+                <dic:label>Ocorrência</dic:label>
+            </dic:ocorrencia>
+
+            <dic:ref_titulo>
+                <dic:label>Código do Título</dic:label>
+                <dic:link>titulos_cr.id</dic:link>
+            </dic:ref_titulo>
+
+        </dic:fields>
+
+    </dic:ocorrencia_titulos>
+
+    <dic:origens>
+        <dic:groups>
+            <dic:name>Financeiro</dic:name>
+        </dic:groups>
+
+        <dic:label>Origens</dic:label>
+        <dic:fields>
+            <dic:agencia_cedente>
+                <dic:label>Agência do Cedente</dic:label>
+            </dic:agencia_cedente>
+
+            <dic:cod_cedente>
+                <dic:label>Código do Cedente</dic:label>
+            </dic:cod_cedente>
+
+            <dic:desconto_mes>
+                <dic:label>Percentual de Desconto ao mês</dic:label>
+            </dic:desconto_mes>
+
+            <dic:descricao>
+                <dic:label>Descrição</dic:label>
+            </dic:descricao>
+
+            <dic:dias_desconto>
+                <dic:label>Tolerância de Desconto (em dias)</dic:label>
+            </dic:dias_desconto>
+
+            <dic:dias_multa>
+                <dic:label>Tolerância de multa (em dias)</dic:label>
+            </dic:dias_multa>
+
+            <dic:id>
+                <dic:label>Código da Origem</dic:label>
+            </dic:id>
+
+            <dic:instrucao1>
+                <dic:label>Instrução 1</dic:label>
+            </dic:instrucao1>
+
+            <dic:instrucao2>
+                <dic:label>Instrução 2</dic:label>
+            </dic:instrucao2>
+
+            <dic:mensagem>
+                <dic:label>Mensagem</dic:label>
+            </dic:mensagem>
+
+            <dic:multa_mes>
+                <dic:label>Percentual de Juros ao mês</dic:label>
+            </dic:multa_mes>
+
+            <dic:multa_pos>
+                <dic:label>Percentual de Multa</dic:label>
+            </dic:multa_pos>
+
+            <dic:ref_local_pgto>
+                <dic:label>Código do Local de Pagamento</dic:label>
+                <dic:link>locais_pgto.id</dic:link>
+            </dic:ref_local_pgto>
+
+            <dic:taxa_multa1>
+                <dic:label>Taxa de Multa 1</dic:label>
+            </dic:taxa_multa1>
+
+            <dic:taxa_multa2>
+                <dic:label>Taxa de Multa 2</dic:label>
+            </dic:taxa_multa2>
+
+        </dic:fields>
+
+    </dic:origens>
+
+    <dic:precos_curso>
+        <dic:groups>
+            <dic:name>Financeiro</dic:name>
+        </dic:groups>
+
+        <dic:label>Preços dos Cursos</dic:label>
+        <dic:fields>
+            <dic:id>
+                <dic:label>Código do Preço do Curso</dic:label>
+            </dic:id>
+
+            <dic:novo_preco_credito>
+                <dic:label>Novo Preço do Crédito (matrícula antecipada)</dic:label>
+            </dic:novo_preco_credito>
+
+            <dic:novo_preco_hora>
+                <dic:label>Novo Preço do Hora (matrícula antecipada)</dic:label>
+            </dic:novo_preco_hora>
+
+            <dic:preco_credito>
+                <dic:label>Preço do Crédito</dic:label>
+            </dic:preco_credito>
+
+            <dic:preco_hora>
+                <dic:label>Preço da Hora</dic:label>
+            </dic:preco_hora>
+
+            <dic:ref_campus>
+                <dic:label>Código do Campus</dic:label>
+                <dic:link>campus.id</dic:link>
+            </dic:ref_campus>
+
+            <dic:ref_curso>
+                <dic:label>Código do Curso</dic:label>
+                <dic:link>cursos.id</dic:link>
+            </dic:ref_curso>
+
+            <dic:ref_hist_desc_campus>
+                <dic:label>Código do Histórico de Desconto por Campus</dic:label>
+                <dic:link>historicos.id</dic:link>
+            </dic:ref_hist_desc_campus>
+
+            <dic:ref_historico_da>
+                <dic:label>Código do Histórico do Diretório Acadêmico</dic:label>
+            </dic:ref_historico_da>
+
+            <dic:ref_periodo>
+                <dic:label>Código do Período</dic:label>
+                <dic:link>periodos.id</dic:link>
+            </dic:ref_periodo>
+
+            <dic:tx_da>
+                <dic:label>Taxa do Diretório Acadêmico</dic:label>
+            </dic:tx_da>
+
+            <dic:validade>
+                <dic:label>Validade</dic:label>
+            </dic:validade>
+
+            <dic:valor_desc_campus>
+                <dic:label>Valor de Desconto por Campus</dic:label>
+            </dic:valor_desc_campus>
+
+        </dic:fields>
+
+    </dic:precos_curso>
+
+    <dic:previsao_lcto>
+        <dic:groups>
+            <dic:name>Financeiro</dic:name>
+        </dic:groups>
+
+        <dic:label>Previsão de Lançamento</dic:label>
+        <dic:fields>
+            <dic:dt_contabil>
+                <dic:label>Data Contábil</dic:label>
+            </dic:dt_contabil>
+
+            <dic:fl_lock>
+                <dic:label>Está Travada</dic:label>
+            </dic:fl_lock>
+
+            <dic:id>
+                <dic:label>Código de Previsão de Lançamento</dic:label>
+            </dic:id>
+
+            <dic:obs>
+                <dic:label>Observação</dic:label>
+            </dic:obs>
+
+            <dic:ref_campus>
+                <dic:label>Código do Campus</dic:label>
+                <dic:link>campus.id</dic:link>
+            </dic:ref_campus>
+
+            <dic:ref_contrato>
+                <dic:label>Código do Contrato</dic:label>
+                <dic:link>contratos.id</dic:link>
+            </dic:ref_contrato>
+
+            <dic:ref_curso>
+                <dic:label>Código do Curso</dic:label>
+                <dic:link>cursos.id</dic:link>
+            </dic:ref_curso>
+
+            <dic:ref_historico>
+                <dic:label>Código do Histórico</dic:label>
+                <dic:link>historicos.id</dic:link>
+            </dic:ref_historico>
+
+            <dic:ref_periodo>
+                <dic:label>Código do Período</dic:label>
+                <dic:link>periodos.id</dic:link>
+            </dic:ref_periodo>
+
+            <dic:ref_pessoa>
+                <dic:label>Código de Pessoa</dic:label>
+                <dic:link>pessoas.id</dic:link>
+            </dic:ref_pessoa>
+
+            <dic:seq_titulo>
+                <dic:label>Mês de sequência do título</dic:label>
+            </dic:seq_titulo>
+
+            <dic:suprimida>
+                <dic:label>Está Suprimida</dic:label>
+            </dic:suprimida>
+
+            <dic:valor>
+                <dic:label>Valor</dic:label>
+            </dic:valor>
+
+        </dic:fields>
+
+    </dic:previsao_lcto>
+
+    <dic:previsoes_vcto>
+        <dic:groups>
+            <dic:name>Financeiro</dic:name>
+        </dic:groups>
+
+        <dic:label>Previsões de Vencimento</dic:label>
+        <dic:fields>
+            <dic:dt_vencimento>
+                <dic:label>Data do Vencimento</dic:label>
+            </dic:dt_vencimento>
+
+            <dic:id>
+                <dic:label>Código de Previsão de Vencimento</dic:label>
+            </dic:id>
+
+            <dic:ref_periodo>
+                <dic:label>Código de Período</dic:label>
+                <dic:link>periodos.id</dic:link>
+            </dic:ref_periodo>
+
+            <dic:sequencia>
+                <dic:label>Seqüência (número da parcela)</dic:label>
+            </dic:sequencia>
+
+        </dic:fields>
+
+    </dic:previsoes_vcto>
+
+    <dic:sequencial_banco>
+        <dic:groups>
+            <dic:name>Financeiro</dic:name>
+        </dic:groups>
+
+        <dic:label>Sequência Bancária</dic:label>
+        <dic:fields>
+            <dic:ano>
+                <dic:label>Ano</dic:label>
+            </dic:ano>
+
+            <dic:byte_bb>
+                <dic:label>Byte do Banco do Brasil</dic:label>
+            </dic:byte_bb>
+
+            <dic:byte_ctrl>
+                <dic:label>Byte de Controle</dic:label>
+            </dic:byte_ctrl>
+
+            <dic:id>
+                <dic:label>Código</dic:label>
+            </dic:id>
+
+        </dic:fields>
+
+    </dic:sequencial_banco>
+
+    <dic:tipos_cobr>
+        <dic:groups>
+            <dic:name>Financeiro</dic:name>
+        </dic:groups>
+
+        <dic:label>Tipos de Cobrança</dic:label>
+        <dic:fields>
+            <dic:descricao>
+                <dic:label>Descrição do Tipo de Cobrança</dic:label>
+            </dic:descricao>
+
+            <dic:id>
+                <dic:label>Código do Tipo de Cobrança</dic:label>
+            </dic:id>
+
+        </dic:fields>
+
+    </dic:tipos_cobr>
+
+    <dic:tipos_pgto>
+        <dic:groups>
+            <dic:name>Financeiro</dic:name>
+        </dic:groups>
+
+        <dic:label>Tipos de Pagamento</dic:label>
+        <dic:fields>
+            <dic:descricao>
+                <dic:label>Descrição do Tipo de Pagamento</dic:label>
+            </dic:descricao>
+
+            <dic:id>
+                <dic:label>Código do Tipo de Pagamento</dic:label>
+            </dic:id>
+
+        </dic:fields>
+
+    </dic:tipos_pgto>
+
+    <dic:titulos_cr>
+        <dic:groups>
+            <dic:name>Financeiro</dic:name>
+        </dic:groups>
+
+        <dic:label>Títulos</dic:label>
+        <dic:fields>
+            <dic:cod_banco>
+                <dic:label>Código do Banco</dic:label>
+            </dic:cod_banco>
+
+            <dic:dt_baixa>
+                <dic:label>Data de Baixa</dic:label>
+            </dic:dt_baixa>
+
+            <dic:dt_emissao>
+                <dic:label>Data de Emissão</dic:label>
+            </dic:dt_emissao>
+
+            <dic:dt_pagamento>
+                <dic:label>Data de Pagamento</dic:label>
+            </dic:dt_pagamento>
+
+            <dic:dt_remessa>
+                <dic:label>Data de Remessa</dic:label>
+            </dic:dt_remessa>
+
+            <dic:dt_retorno>
+                <dic:label>Data de Retorno</dic:label>
+            </dic:dt_retorno>
+
+            <dic:dt_vencimento>
+                <dic:label>Data de Vencimento</dic:label>
+            </dic:dt_vencimento>
+
+            <dic:fl_debito_automatico>
+                <dic:label>Possui Débito Automático</dic:label>
+            </dic:fl_debito_automatico>
+
+            <dic:fl_gera_manual>
+                <dic:label>É Gerado manualmente</dic:label>
+            </dic:fl_gera_manual>
+
+            <dic:id>
+                <dic:label>Código do Título</dic:label>
+            </dic:id>
+
+            <dic:observacao>
+                <dic:label>Observação</dic:label>
+            </dic:observacao>
+
+            <dic:ref_campus>
+                <dic:label>Código do Campus</dic:label>
+                <dic:link>campus.id</dic:link>
+            </dic:ref_campus>
+
+            <dic:ref_cobranca>
+                <dic:label>Código da Cobrança</dic:label>
+                <dic:link>cobranca_pessoa.id</dic:link>
+            </dic:ref_cobranca>
+
+            <dic:ref_curso>
+                <dic:label>Código do Curso</dic:label>
+                <dic:link>cursos.id</dic:link>
+            </dic:ref_curso>
+
+            <dic:ref_local>
+                <dic:label>Código do Local de Pagamento</dic:label>
+                <dic:link>locais_pgto.id</dic:link>
+            </dic:ref_local>
+
+            <dic:ref_ocorrencia>
+                <dic:label>Ocorrência</dic:label>
+                <dic:link>ocorrencia_titulos.id</dic:link>
+            </dic:ref_ocorrencia>
+
+            <dic:ref_origem>
+                <dic:label>Origem</dic:label>
+                <dic:link>origens.id</dic:link>
+            </dic:ref_origem>
+
+            <dic:ref_periodo>
+                <dic:label>Código do Período</dic:label>
+                <dic:link>periodos.id</dic:link>
+            </dic:ref_periodo>
+
+            <dic:ref_pessoa>
+                <dic:label>Código da Pessoa</dic:label>
+                <dic:link>pessoas.id</dic:link>
+            </dic:ref_pessoa>
+
+            <dic:seq_titulo>
+                <dic:label>Mês de Sequência</dic:label>
+            </dic:seq_titulo>
+
+            <dic:valor_aberto>
+                <dic:label>Valor Aberto</dic:label>
+            </dic:valor_aberto>
+
+            <dic:valor_nominal>
+                <dic:label>Valor Nominal</dic:label>
+            </dic:valor_nominal>
+
+            <dic:valor_pago>
+                <dic:label>Valor Pago</dic:label>
+            </dic:valor_pago>
+
+        </dic:fields>
+
+    </dic:titulos_cr>
+
+    <dic:aux_estados>
+        <dic:groups>
+            <dic:name>Vestibular</dic:name>
+        </dic:groups>
+
+        <dic:label>Estados</dic:label>
+        <dic:fields>
+            <dic:id>
+                <dic:label>Código do Estado</dic:label>
+            </dic:id>
+
+            <dic:nome>
+                <dic:label>Nome do Estado</dic:label>
+            </dic:nome>
+
+            <dic:ref_pais>
+                <dic:label>País</dic:label>
+            </dic:ref_pais>
+
+        </dic:fields>
+
+    </dic:aux_estados>
+
+    <dic:aux_paises>
+        <dic:groups>
+            <dic:name>Vestibular</dic:name>
+        </dic:groups>
+
+        <dic:label>Países</dic:label>
+        <dic:fields>
+            <dic:id>
+                <dic:label>Código do País</dic:label>
+            </dic:id>
+
+            <dic:nacionalidade>
+                <dic:label>Nacionalidade</dic:label>
+            </dic:nacionalidade>
+
+            <dic:nome>
+                <dic:label>Nome do País</dic:label>
+            </dic:nome>
+
+        </dic:fields>
+
+    </dic:aux_paises>
+
+    <dic:aux_ruas>
+        <dic:groups>
+            <dic:name>Vestibular</dic:name>
+        </dic:groups>
+
+        <dic:label>Ruas</dic:label>
+        <dic:fields>
+            <dic:nome>
+                <dic:label>Nome da Rua</dic:label>
+            </dic:nome>
+
+        </dic:fields>
+
+    </dic:aux_ruas>
+
+    <dic:vest_cursos_disp>
+        <dic:groups>
+            <dic:name>Vestibular</dic:name>
+        </dic:groups>
+
+        <dic:label>Vestibular - Cursos Disponíveis</dic:label>
+        <dic:fields>
+            <dic:fl_disponivel>
+                <dic:label>Flag Disponível (Sim/Não)</dic:label>
+            </dic:fl_disponivel>
+
+            <dic:id>
+                <dic:label>Código Vestibular - Cursos Disponíveis</dic:label>
+            </dic:id>
+
+            <dic:numero_vagas>
+                <dic:label>Número de Vagas</dic:label>
+            </dic:numero_vagas>
+
+            <dic:ref_campus>
+                <dic:label>Código Campus</dic:label>
+                <dic:link>campus.id</dic:link>
+            </dic:ref_campus>
+
+            <dic:ref_curso>
+                <dic:label>Código Curso</dic:label>
+                <dic:link>cursos.id</dic:link>
+            </dic:ref_curso>
+
+            <dic:ref_curso_comp>
+                <dic:label>Código Curso Compatível</dic:label>
+            </dic:ref_curso_comp>
+
+            <dic:ref_vestibular>
+                <dic:label>Código Vestibular</dic:label>
+                <dic:link>vestibular.id</dic:link>
+            </dic:ref_vestibular>
+
+        </dic:fields>
+
+    </dic:vest_cursos_disp>
+
+    <dic:vest_datas>
+        <dic:groups>
+            <dic:name>Vestibular</dic:name>
+        </dic:groups>
+
+        <dic:label>Vestibular - Data</dic:label>
+        <dic:fields>
+            <dic:descricao>
+                <dic:label>Descrição do Vestibular</dic:label>
+            </dic:descricao>
+
+            <dic:dt_data>
+                <dic:label>Data do Vestibular</dic:label>
+            </dic:dt_data>
+
+            <dic:id>
+                <dic:label>Código Vestibular - Data</dic:label>
+            </dic:id>
+
+            <dic:ref_vestibular>
+                <dic:label>Código Vestibular</dic:label>
+                <dic:link>vestibular.id</dic:link>
+            </dic:ref_vestibular>
+
+        </dic:fields>
+
+    </dic:vest_datas>
+
+    <dic:vest_inscricoes>
+        <dic:groups>
+            <dic:name>Vestibular</dic:name>
+        </dic:groups>
+
+        <dic:label>Vestibular - Inscrições</dic:label>
+        <dic:fields>
+            <dic:colocacao>
+                <dic:label>Colocação</dic:label>
+            </dic:colocacao>
+
+            <dic:concluiu_2g>
+                <dic:label>Concluiu o Segundo Grau (Sim/Não)</dic:label>
+            </dic:concluiu_2g>
+
+            <dic:dt_inscricao>
+                <dic:label>Data de Inscrição</dic:label>
+            </dic:dt_inscricao>
+
+            <dic:enem1>
+                <dic:label>Nota ENEM 1</dic:label>
+            </dic:enem1>
+
+            <dic:enem2>
+                <dic:label>Nota ENEM 2</dic:label>
+            </dic:enem2>
+
+            <dic:enem3>
+                <dic:label>Nota ENEM 3</dic:label>
+            </dic:enem3>
+
+            <dic:enem4>
+                <dic:label>Nota ENEM 4</dic:label>
+            </dic:enem4>
+
+            <dic:enem5>
+                <dic:label>Nota ENEM 5</dic:label>
+            </dic:enem5>
+
+            <dic:fl_internet>
+                <dic:label>Inscrição de Internet</dic:label>
+            </dic:fl_internet>
+
+            <dic:id>
+                <dic:label>Código Vestibular - Inscrições</dic:label>
+            </dic:id>
+
+            <dic:inscricao_enem>
+                <dic:label>Inscrição no ENEM</dic:label>
+            </dic:inscricao_enem>
+
+            <dic:lingua>
+                <dic:label>Língua</dic:label>
+            </dic:lingua>
+
+            <dic:local_prova>
+                <dic:label>Local da Prova</dic:label>
+                <dic:link>locais_pgto.id</dic:link>
+            </dic:local_prova>
+
+            <dic:nota_enem>
+                <dic:label>Nota ENEM</dic:label>
+            </dic:nota_enem>
+
+            <dic:nota_red_enem>
+                <dic:label>Nota da Redação ENEM</dic:label>
+            </dic:nota_red_enem>
+
+            <dic:num_predio>
+                <dic:label>Número do Prédio</dic:label>
+            </dic:num_predio>
+
+            <dic:num_sala>
+                <dic:label>Número da Sala</dic:label>
+            </dic:num_sala>
+
+            <dic:ref_campus1>
+                <dic:label>Código Campus 1</dic:label>
+                <dic:link>campus.id</dic:link>
+            </dic:ref_campus1>
+
+            <dic:ref_campus2>
+                <dic:label>Código Campus 2</dic:label>
+                <dic:link>campus.id</dic:link>
+            </dic:ref_campus2>
+
+            <dic:ref_campus3>
+                <dic:label>Código Campus 3</dic:label>
+            </dic:ref_campus3>
+
+            <dic:ref_opcao1>
+                <dic:label>Código Opção 1</dic:label>
+                <dic:link>cursos.id</dic:link>
+            </dic:ref_opcao1>
+
+            <dic:ref_opcao2>
+                <dic:label>Código Opção 2</dic:label>
+                <dic:link>cursos.id</dic:link>
+            </dic:ref_opcao2>
+
+            <dic:ref_opcao3>
+                <dic:label>Código Opção 3</dic:label>
+                <dic:link>cursos.id</dic:link>
+            </dic:ref_opcao3>
+
+            <dic:ref_pessoa>
+                <dic:label>Código Pessoa</dic:label>
+                <dic:link>pessoas.id</dic:link>
+            </dic:ref_pessoa>
+
+            <dic:ref_vestibular>
+                <dic:label>Código Vestibular</dic:label>
+                <dic:link>vestibular.id</dic:link>
+            </dic:ref_vestibular>
+
+            <dic:tipo_classificacao>
+                <dic:label>Tipo de Classificação</dic:label>
+            </dic:tipo_classificacao>
+
+            <dic:tipo_processo>
+                <dic:label>Tipo de Processo</dic:label>
+            </dic:tipo_processo>
+
+            <dic:total_de_pontos>
+                <dic:label>Total de Pontos</dic:label>
+            </dic:total_de_pontos>
+
+        </dic:fields>
+
+    </dic:vest_inscricoes>
+
+    <dic:vest_lingua>
+        <dic:groups>
+            <dic:name>Vestibular</dic:name>
+        </dic:groups>
+
+        <dic:label>Vestibular - Língua</dic:label>
+        <dic:fields>
+            <dic:descricao>
+                <dic:label>Descrição Língua</dic:label>
+            </dic:descricao>
+
+            <dic:id>
+                <dic:label>Código Vestibular - Língua</dic:label>
+            </dic:id>
+
+        </dic:fields>
+
+    </dic:vest_lingua>
+
+    <dic:vest_locais>
+        <dic:groups>
+            <dic:name>Vestibular</dic:name>
+        </dic:groups>
+
+        <dic:label>Vestibular - Locais</dic:label>
+        <dic:fields>
+            <dic:c2g>
+                <dic:label>Conclusão do Segundo Grau</dic:label>
+            </dic:c2g>
+
+            <dic:lingua>
+                <dic:label>Língua</dic:label>
+            </dic:lingua>
+
+            <dic:local_prova>
+                <dic:label>Local da Prova</dic:label>
+            </dic:local_prova>
+
+            <dic:ref_vestibular>
+                <dic:label>Código Vestibular</dic:label>
+                <dic:link>vestibular.id</dic:link>
+            </dic:ref_vestibular>
+
+        </dic:fields>
+
+    </dic:vest_locais>
+
+    <dic:vest_notas>
+        <dic:groups>
+            <dic:name>Vestibular</dic:name>
+        </dic:groups>
+
+        <dic:label>Vestibular - Notas</dic:label>
+        <dic:fields>
+            <dic:nota>
+                <dic:label>Nota</dic:label>
+            </dic:nota>
+
+            <dic:ref_inscricao>
+                <dic:label>Código da Inscrição</dic:label>
+                <dic:link>vest_inscricoes.id</dic:link>
+            </dic:ref_inscricao>
+
+            <dic:ref_prova>
+                <dic:label>Código da Prova</dic:label>
+                <dic:link>vest_provas.id</dic:link>
+            </dic:ref_prova>
+
+            <dic:ref_vestibular>
+                <dic:label>Código Vestibular</dic:label>
+                <dic:link>vestibular.id</dic:link>
+            </dic:ref_vestibular>
+
+        </dic:fields>
+
+    </dic:vest_notas>
+
+    <dic:vest_provas>
+        <dic:groups>
+            <dic:name>Vestibular</dic:name>
+        </dic:groups>
+
+        <dic:label>Vestibular - Provas</dic:label>
+        <dic:fields>
+            <dic:descricao>
+                <dic:label>Descrição das Provas</dic:label>
+            </dic:descricao>
+
+            <dic:dt_prova>
+                <dic:label>Data da Prova</dic:label>
+            </dic:dt_prova>
+
+            <dic:id>
+                <dic:label>Código Vestibular - Provas</dic:label>
+            </dic:id>
+
+            <dic:max_pontos>
+                <dic:label>Número Máximo de Pontos</dic:label>
+            </dic:max_pontos>
+
+            <dic:observacao>
+                <dic:label>Observação</dic:label>
+            </dic:observacao>
+
+            <dic:ref_vestibular>
+                <dic:label>Código do Vestibular</dic:label>
+                <dic:link>vestibular.id</dic:link>
+            </dic:ref_vestibular>
+
+        </dic:fields>
+
+    </dic:vest_provas>
+
+    <dic:vest_provas_curso>
+        <dic:groups>
+            <dic:name>Vestibular</dic:name>
+        </dic:groups>
+
+        <dic:label>Vestibular - Provas/Curso</dic:label>
+        <dic:fields>
+            <dic:peso>
+                <dic:label>Peso da Prova</dic:label>
+            </dic:peso>
+
+            <dic:ref_campus>
+                <dic:label>Código do Campus</dic:label>
+                <dic:link>campus.id</dic:link>
+            </dic:ref_campus>
+
+            <dic:ref_curso>
+                <dic:label>Código do Curso</dic:label>
+                <dic:link>cursos.id</dic:link>
+            </dic:ref_curso>
+
+            <dic:ref_prova>
+                <dic:label>Código da Prova</dic:label>
+                <dic:link>vest_provas.id</dic:link>
+            </dic:ref_prova>
+
+            <dic:ref_vestibular>
+                <dic:label>Código do Vestibular</dic:label>
+                <dic:link>vestibular.id</dic:link>
+            </dic:ref_vestibular>
+
+        </dic:fields>
+
+    </dic:vest_provas_curso>
+
+    <dic:vest_salas>
+        <dic:groups>
+            <dic:name>Vestibular</dic:name>
+        </dic:groups>
+
+        <dic:label>Vestibular - Salas</dic:label>
+        <dic:fields>
+            <dic:lingua>
+                <dic:label>Língua</dic:label>
+            </dic:lingua>
+
+            <dic:local_prova>
+                <dic:label>Local da Prova</dic:label>
+            </dic:local_prova>
+
+            <dic:num_ocupantes>
+                <dic:label>Número de Ocupantes</dic:label>
+            </dic:num_ocupantes>
+
+            <dic:num_predio>
+                <dic:label>Número do Prédio</dic:label>
+            </dic:num_predio>
+
+            <dic:num_sala>
+                <dic:label>Número da Sala</dic:label>
+            </dic:num_sala>
+
+            <dic:ocupado>
+                <dic:label>Ocupado (Sim/Não)</dic:label>
+            </dic:ocupado>
+
+            <dic:ordem_ocupacao>
+                <dic:label>Ordem de Ocupação</dic:label>
+            </dic:ordem_ocupacao>
+
+            <dic:ref_vestibular>
+                <dic:label>Código Vestibular</dic:label>
+                <dic:link>vestibular.id</dic:link>
+            </dic:ref_vestibular>
+
+        </dic:fields>
+
+    </dic:vest_salas>
+
+    <dic:vestibular>
+        <dic:groups>
+            <dic:name>Vestibular</dic:name>
+        </dic:groups>
+
+        <dic:label>Vestibular</dic:label>
+        <dic:fields>
+            <dic:descricao>
+                <dic:label>Descrição</dic:label>
+            </dic:descricao>
+
+            <dic:dt_ordem>
+                <dic:label>Data de Ordenação</dic:label>
+            </dic:dt_ordem>
+
+            <dic:ensalamento_lingua>
+                <dic:label>Ensalamento por Língua (Sim/Não)</dic:label>
+            </dic:ensalamento_lingua>
+
+            <dic:fl_gera_contratos>
+                <dic:label>Flag Gera Contratos (Sim/Não)</dic:label>
+            </dic:fl_gera_contratos>
+
+            <dic:id>
+                <dic:label>Código do Vestibular</dic:label>
+            </dic:id>
+
+            <dic:instituicao>
+                <dic:label>Instituição</dic:label>
+            </dic:instituicao>
+
+            <dic:max_pontos>
+                <dic:label>Número Máximo de Pontos</dic:label>
+            </dic:max_pontos>
+
+            <dic:min_valido>
+                <dic:label>Número Mínimo de Pontos Válido</dic:label>
+            </dic:min_valido>
+
+            <dic:observacao>
+                <dic:label>Observação</dic:label>
+            </dic:observacao>
+
+            <dic:ref_empresa>
+                <dic:label>Código da Empresa</dic:label>
+            </dic:ref_empresa>
+
+            <dic:ref_periodo>
+                <dic:label>Código do Período</dic:label>
+                <dic:link>periodos.id</dic:link>
+            </dic:ref_periodo>
+
+        </dic:fields>
+
+    </dic:vestibular>
+
+    <dic:cmn_grupo>
+        <dic:groups>
+            <dic:name>common</dic:name>
+        </dic:groups>
+
+        <dic:label>Grupos de Pessoas</dic:label>
+        <dic:fields>
+            <dic:codigodogrupo>
+                <dic:label>Código do Grupo</dic:label>
+            </dic:codigodogrupo>
+
+            <dic:descricao>
+                <dic:label>Descrição do Grupo</dic:label>
+            </dic:descricao>
+
+            <dic:nivel>
+                <dic:label>Nível do Grupo</dic:label>
+            </dic:nivel>
+
+        </dic:fields>
+
+    </dic:cmn_grupo>
+
+    <dic:cmn_pessoas>
+        <dic:groups>
+            <dic:name>common</dic:name>
+        </dic:groups>
+
+        <dic:fields>
+            <dic:ref_cidade>
+                <dic:link>aux_cidades.id</dic:link>
+            </dic:ref_cidade>
+
+            <dic:ref_cobranca>
+                <dic:link>cobranca_pessoa.id</dic:link>
+            </dic:ref_cobranca>
+
+            <dic:ref_nacionalidade>
+                <dic:link>aux_paises.id</dic:link>
+            </dic:ref_nacionalidade>
+
+            <dic:ref_naturalidade>
+                <dic:link>aux_cidades.id</dic:link>
+            </dic:ref_naturalidade>
+
+            <dic:ref_segurado>
+                <dic:link>pessoas.id</dic:link>
+            </dic:ref_segurado>
+
+        </dic:fields>
+
+    </dic:cmn_pessoas>
+
+    <dic:cmn_vinculo>
+        <dic:groups>
+            <dic:name>common</dic:name>
+        </dic:groups>
+
+        <dic:label>Vínculos</dic:label>
+        <dic:fields>
+            <dic:codigodapessoa>
+                <dic:label>Código da Pessoa</dic:label>
+                <dic:link>cmn_pessoas.id</dic:link>
+            </dic:codigodapessoa>
+
+            <dic:codigodogrupo>
+                <dic:label>Código do Grupo</dic:label>
+                <dic:link>cmn_grupo.codigodogrupo</dic:link>
+            </dic:codigodogrupo>
+
+            <dic:datavalidade>
+                <dic:label>Validade do Vínculo</dic:label>
+            </dic:datavalidade>
+
+        </dic:fields>
+
+    </dic:cmn_vinculo>
+
+    <dic:gnuteca_pessoas>
+        <dic:groups>
+            <dic:name>common</dic:name>
+        </dic:groups>
+
+        <dic:fields>
+            <dic:ref_cobranca>
+                <dic:link>cobranca_pessoa.id</dic:link>
+            </dic:ref_cobranca>
+
+            <dic:ref_nacionalidade>
+                <dic:link>aux_paises.id</dic:link>
+            </dic:ref_nacionalidade>
+
+            <dic:ref_naturalidade>
+                <dic:link>aux_cidades.id</dic:link>
+            </dic:ref_naturalidade>
+
+            <dic:ref_segurado>
+                <dic:link>pessoas.id</dic:link>
+            </dic:ref_segurado>
+
+        </dic:fields>
+
+    </dic:gnuteca_pessoas>
+
+    <dic:sagu_header>
+        <dic:groups>
+            <dic:name>common</dic:name>
+        </dic:groups>
+
+        <dic:label>Sagu - Cabeçalhos</dic:label>
+        <dic:fields>
+            <dic:ref_pagina>
+                <dic:label>Código da Página</dic:label>
+                <dic:link>sagu_paginas.id</dic:link>
+            </dic:ref_pagina>
+
+            <dic:ref_usuario>
+                <dic:label>Código do Usuário</dic:label>
+                <dic:link>sagu_usuarios.id</dic:link>
+            </dic:ref_usuario>
+
+        </dic:fields>
+
+    </dic:sagu_header>
+
+    <dic:sagu_modulos>
+        <dic:groups>
+            <dic:name>common</dic:name>
+        </dic:groups>
+
+        <dic:label>Sagu - Módulos</dic:label>
+        <dic:fields>
+            <dic:id>
+                <dic:label>Código do Módulo</dic:label>
+            </dic:id>
+
+            <dic:nome_modulo>
+                <dic:label>Nome do Módulo</dic:label>
+            </dic:nome_modulo>
+
+        </dic:fields>
+
+    </dic:sagu_modulos>
+
+    <dic:sagu_paginas>
+        <dic:groups>
+            <dic:name>common</dic:name>
+        </dic:groups>
+
+        <dic:label>Sagu - Páginas</dic:label>
+        <dic:fields>
+            <dic:descricao>
+                <dic:label>Descrição da Página</dic:label>
+            </dic:descricao>
+
+            <dic:endereco>
+                <dic:label>Endereço da Página</dic:label>
+            </dic:endereco>
+
+            <dic:id>
+                <dic:label>Código da Página</dic:label>
+            </dic:id>
+
+            <dic:modulo>
+                <dic:label>Sagu - Setores</dic:label>
+                <dic:link>sagu_modulos.id</dic:link>
+            </dic:modulo>
+
+            <dic:nome>
+                <dic:label>Nome da Página</dic:label>
+            </dic:nome>
+
+        </dic:fields>
+
+    </dic:sagu_paginas>
+
+    <dic:sagu_setores>
+        <dic:groups>
+            <dic:name>common</dic:name>
+        </dic:groups>
+
+        <dic:fields>
+            <dic:email>
+                <dic:label>E-mail do Setor</dic:label>
+            </dic:email>
+
+            <dic:id>
+                <dic:label>Código do Setor</dic:label>
+            </dic:id>
+
+            <dic:nome_setor>
+                <dic:label>Nome do Setor</dic:label>
+            </dic:nome_setor>
+
+        </dic:fields>
+
+    </dic:sagu_setores>
+
+    <dic:sagu_usuarios>
+        <dic:groups>
+            <dic:name>common</dic:name>
+        </dic:groups>
+
+        <dic:label>Sagu - Usuários</dic:label>
+        <dic:fields>
+            <dic:email>
+                <dic:label>E-mail</dic:label>
+            </dic:email>
+
+            <dic:grupo>
+                <dic:label>Código do Grupo</dic:label>
+            </dic:grupo>
+
+            <dic:id>
+                <dic:label>Código do Usuário</dic:label>
+            </dic:id>
+
+            <dic:nome>
+                <dic:label>Login do Usuário</dic:label>
+            </dic:nome>
+
+            <dic:nome_completo>
+                <dic:label>Nome Completo</dic:label>
+            </dic:nome_completo>
+
+            <dic:obs>
+                <dic:label>Observação</dic:label>
+            </dic:obs>
+
+            <dic:setor>
+                <dic:label>Código do Setor</dic:label>
+                <dic:link>sagu_setores.id</dic:link>
+            </dic:setor>
+
+        </dic:fields>
+
+    </dic:sagu_usuarios>
+
+    <dic:salarios>
+        <dic:groups>
+            <dic:name>common</dic:name>
+        </dic:groups>
+
+        <dic:label>Salários dos Estagiários</dic:label>
+        <dic:fields>
+            <dic:dt_cancelamento>
+                <dic:label>Data de Cancelamento</dic:label>
+            </dic:dt_cancelamento>
+
+            <dic:dv_agencia>
+                <dic:label>Dígito Verificador da Agência</dic:label>
+            </dic:dv_agencia>
+
+            <dic:dv_conta>
+                <dic:label>Dígito Verificador da Conta</dic:label>
+            </dic:dv_conta>
+
+            <dic:fl_conta_aberta>
+                <dic:label>Já possui Conta</dic:label>
+            </dic:fl_conta_aberta>
+
+            <dic:id>
+                <dic:label>Código</dic:label>
+            </dic:id>
+
+            <dic:num_conta>
+                <dic:label>Número da Conta</dic:label>
+            </dic:num_conta>
+
+            <dic:ref_agencia>
+                <dic:label>Código da Agência</dic:label>
+            </dic:ref_agencia>
+
+            <dic:ref_banco>
+                <dic:label>Código do Banco</dic:label>
+            </dic:ref_banco>
+
+            <dic:ref_pessoa>
+                <dic:label>Código da Pessoa</dic:label>
+                <dic:link>pessoas.id</dic:link>
+            </dic:ref_pessoa>
+
+            <dic:seu_numero>
+                <dic:label>Código do Título</dic:label>
+            </dic:seu_numero>
+
+            <dic:tipo_conta>
+                <dic:label>Tipo de Conta</dic:label>
+            </dic:tipo_conta>
+
+            <dic:valor>
+                <dic:label>Valor</dic:label>
+            </dic:valor>
+
+        </dic:fields>
+
+    </dic:salarios>
+
+    <dic:siga_vinculos>
+        <dic:groups>
+            <dic:name>common</dic:name>
+        </dic:groups>
+
+        <dic:label>Vínculos do Sistema Externo</dic:label>
+        <dic:fields>
+            <dic:cod_siga>
+                <dic:label>Código no Sistema Externo</dic:label>
+            </dic:cod_siga>
+
+            <dic:is_estagiario>
+                <dic:label>É Estagiário</dic:label>
+            </dic:is_estagiario>
+
+            <dic:is_professor>
+                <dic:label>É Professor</dic:label>
+            </dic:is_professor>
+
+            <dic:nome>
+                <dic:label>Nome</dic:label>
+            </dic:nome>
+
+            <dic:validade>
+                <dic:label>Validade</dic:label>
+            </dic:validade>
+
+        </dic:fields>
+
+    </dic:siga_vinculos>
+
+    <dic:acordos_obs>
+        <dic:fields>
+            <dic:dt_cadastro>
+                <dic:label>Data do Cadastro</dic:label>
+            </dic:dt_cadastro>
+
+            <dic:id>
+                <dic:label>Código do Acordo</dic:label>
+            </dic:id>
+
+            <dic:obs>
+                <dic:label>Observação</dic:label>
+            </dic:obs>
+
+            <dic:ref_pessoa>
+                <dic:label>Código da Pessoa</dic:label>
+            </dic:ref_pessoa>
+
+            <dic:titulo>
+                <dic:label>Título</dic:label>
+            </dic:titulo>
+
+        </dic:fields>
+
+    </dic:acordos_obs>
+
+    <dic:codexterno>
+        <dic:label>Código Externo</dic:label>
+        <dic:fields>
+            <dic:cod_externo>
+                <dic:label>Código do Código Externo</dic:label>
+            </dic:cod_externo>
+
+        </dic:fields>
+
+    </dic:codexterno>
+
+    <dic:livro_matricula>
+        <dic:label>Livro Matrícula</dic:label>
+        <dic:fields>
+            <dic:id>
+                <dic:label>Código do Livro Matrícula</dic:label>
+            </dic:id>
+
+            <dic:ref_campus_anterior>
+                <dic:label>Código do Campus Anterior</dic:label>
+                <dic:link>campus.id</dic:link>
+            </dic:ref_campus_anterior>
+
+            <dic:ref_campus_atual>
+                <dic:label>Código do Campus Atual</dic:label>
+                <dic:link>campus.id</dic:link>
+            </dic:ref_campus_atual>
+
+            <dic:ref_curso_anterior>
+                <dic:label>Código do Curso Anterior</dic:label>
+                <dic:link>cursos.id</dic:link>
+            </dic:ref_curso_anterior>
+
+            <dic:ref_curso_atual>
+                <dic:label>Código do Curso Atual</dic:label>
+                <dic:link>cursos.id</dic:link>
+            </dic:ref_curso_atual>
+
+            <dic:ref_periodo>
+                <dic:label>Código do Período</dic:label>
+                <dic:link>periodos.id</dic:link>
+            </dic:ref_periodo>
+
+            <dic:ref_pessoa>
+                <dic:label>Código da Pessoa</dic:label>
+                <dic:link>pessoas.id</dic:link>
+            </dic:ref_pessoa>
+
+            <dic:ref_status>
+                <dic:label>Status do Livro Matrícula</dic:label>
+            </dic:ref_status>
+
+            <dic:sequencia>
+                <dic:label>Seqüência</dic:label>
+            </dic:sequencia>
+
+        </dic:fields>
+
+    </dic:livro_matricula>
+
+    <dic:locais_pgto>
+        <dic:label>Locais de Pagamento</dic:label>
+        <dic:fields>
+            <dic:arq_remessa>
+                <dic:label>Arquivo de Remessa</dic:label>
+            </dic:arq_remessa>
+
+            <dic:arq_retorno>
+                <dic:label>Arquivo Retorno</dic:label>
+            </dic:arq_retorno>
+
+            <dic:carteira>
+                <dic:label>Carteira</dic:label>
+            </dic:carteira>
+
+            <dic:cod_banco>
+                <dic:label>Código do Banco</dic:label>
+            </dic:cod_banco>
+
+            <dic:cod_cedente>
+                <dic:label>Código do Cedente</dic:label>
+            </dic:cod_cedente>
+
+            <dic:cod_responsa>
+                <dic:label>Código do Responsável</dic:label>
+            </dic:cod_responsa>
+
+            <dic:comiss_permanencia>
+                <dic:label>Comissão de Permanência</dic:label>
+            </dic:comiss_permanencia>
+
+            <dic:conta_caucao>
+                <dic:label>Conta caução</dic:label>
+            </dic:conta_caucao>
+
+            <dic:convenente_lider>
+                <dic:label>Convenente líder</dic:label>
+            </dic:convenente_lider>
+
+            <dic:dbconta_arq_gerar>
+                <dic:label>Arquivo a Gerar</dic:label>
+            </dic:dbconta_arq_gerar>
+
+            <dic:dbconta_arq_ler>
+                <dic:label>Arquivo a Ler</dic:label>
+            </dic:dbconta_arq_ler>
+
+            <dic:dbconta_cod_conv>
+                <dic:label>Código do Convênio</dic:label>
+            </dic:dbconta_cod_conv>
+
+            <dic:dbconta_seq_arq>
+                <dic:label>Seqüência do Arquivo</dic:label>
+            </dic:dbconta_seq_arq>
+
+            <dic:descricao>
+                <dic:label>Descrição do Local de Pagamento</dic:label>
+            </dic:descricao>
+
+            <dic:digito_agencia>
+                <dic:label>Dígito Verificador da Agência</dic:label>
+            </dic:digito_agencia>
+
+            <dic:digito_ccorrente>
+                <dic:label>Dígito Verificador da Conta Corrente</dic:label>
+            </dic:digito_ccorrente>
+
+            <dic:especie_titulo>
+                <dic:label>Espécie de Título</dic:label>
+            </dic:especie_titulo>
+
+            <dic:id>
+                <dic:label>Código do Local de Pagamento</dic:label>
+            </dic:id>
+
+            <dic:instrucao_cobr1>
+                <dic:label>Instrução de Cobrança 1</dic:label>
+            </dic:instrucao_cobr1>
+
+            <dic:instrucao_cobr2>
+                <dic:label>Instrução de Cobrança 2</dic:label>
+            </dic:instrucao_cobr2>
+
+            <dic:instrucao_cobr3>
+                <dic:label>Instrução de Cobrança 3</dic:label>
+            </dic:instrucao_cobr3>
+
+            <dic:mensagem_bloqueto>
+                <dic:label>Mensagem no Bloqueto</dic:label>
+            </dic:mensagem_bloqueto>
+
+            <dic:num_ccorrente>
+                <dic:label>Número da Conta Corrente</dic:label>
+            </dic:num_ccorrente>
+
+            <dic:num_convenio>
+                <dic:label>Número do Convênio</dic:label>
+            </dic:num_convenio>
+
+            <dic:num_dias_multa>
+                <dic:label>Número de dias limite para multa</dic:label>
+            </dic:num_dias_multa>
+
+            <dic:num_dias_protesto>
+                <dic:label>Número de dias limite para protesto</dic:label>
+            </dic:num_dias_protesto>
+
+            <dic:ocorr_remessa>
+                <dic:label>Ocorrência da Remessa</dic:label>
+            </dic:ocorr_remessa>
+
+            <dic:prefixo_agencia>
+                <dic:label>Prefixo da Agência</dic:label>
+            </dic:prefixo_agencia>
+
+            <dic:prefixo_titulo>
+                <dic:label>Prefixo do Título</dic:label>
+            </dic:prefixo_titulo>
+
+            <dic:ref_hist_taxa>
+                <dic:label>Histórico da Taxa</dic:label>
+                <dic:link>historicos.id</dic:link>
+            </dic:ref_hist_taxa>
+
+            <dic:seq_envio_arq>
+                <dic:label>Seqüência de Envio do Arquivo</dic:label>
+            </dic:seq_envio_arq>
+
+            <dic:tipo_impressao>
+                <dic:label>Tipo de Impressão</dic:label>
+            </dic:tipo_impressao>
+
+            <dic:tx_bancaria>
+                <dic:label>Taxa Bancária</dic:label>
+            </dic:tx_bancaria>
+
+            <dic:tx_dia_pgto_ant>
+                <dic:label>Taxa ao dia para pagamento antecipado</dic:label>
+            </dic:tx_dia_pgto_ant>
+
+            <dic:variacao>
+                <dic:label>Variação</dic:label>
+            </dic:variacao>
+
+        </dic:fields>
+
+    </dic:locais_pgto>
+
+    <dic:log_titulos>
+        <dic:label>Controle de Títulos Gerados</dic:label>
+        <dic:fields>
+            <dic:datahora>
+                <dic:label>Data de Geração</dic:label>
+            </dic:datahora>
+
+            <dic:ref_periodo>
+                <dic:label>Código do Período</dic:label>
+                <dic:link>periodos.id</dic:link>
+            </dic:ref_periodo>
+
+            <dic:sequencia>
+                <dic:label>Mês de Sequência</dic:label>
+            </dic:sequencia>
+
+        </dic:fields>
+
+    </dic:log_titulos>
+
+</tables>

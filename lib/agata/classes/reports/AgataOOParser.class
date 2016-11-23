@@ -35,7 +35,18 @@ class AgataOOParser extends AgataMerge
             return;
         }
         
-        $this->prefix = temp . bar . RemoveExtension($source);
+        //var_dump($source);
+        //$this->prefix = temp . bar . RemoveExtension($source);
+        if (OS == 'WIN')
+        {
+            $this->prefix = temp . bar . substr(RemoveExtension($source), 3);
+        }
+        else
+        {
+            $this->prefix = temp . bar . substr(RemoveExtension($source), 1);
+        }
+        //var_dump($this->prefix);
+        
         $zip      = new PclZip($source);
         
         if (($list = $zip->listContent()) == 0)
@@ -49,12 +60,17 @@ class AgataOOParser extends AgataMerge
             adie("Error : ".$zip->errorInfo(true));
         }
         
-        $content= file_get_contents($this->prefix . '/content.xml');
+        $content= file_get_contents($this->prefix . bar . 'content.xml');
         
         # break xml tags
         $array_content = preg_split ('/(<(?:[^<>]+(?:"[^"]*"|\'[^\']*\')?)+>)/', trim ($content), -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
         
         $section = 'start';
+        if (!$array_content)
+        {
+            new Dialog('Problemas na leitura do arquivo');
+            return;
+        }
         foreach ($array_content as $line)
         {
             // <text:section text:style-name="Sect1" text:name="header">
@@ -90,30 +106,36 @@ class AgataOOParser extends AgataMerge
             
             # Substituição de Parâmetros
             krsort($vars);
-            $where = $this->XmlArray['Report']['Merge']['Details']['Detail1']['DataSet1']['Query']['Where'];
+            $where = $this->XmlArray['Report']['Merge']['Details']['Detail1']['DataSet']['Query']['Where'];
             foreach ($vars as $var => $content)
             {
                 $where = str_replace($var, $content, $where);
             }
-            $DataSet = $this->XmlArray['Report']['Merge']['Details']['Detail1']['DataSet1'];
-            $DataSet['Query']['Where'] = $where;
+            $DataSet = $this->XmlArray['Report']['Merge']['Details']['Detail1']['DataSet'];
+            $sub = array();
             
-            # Cria Query
-            $subQuery = AgataCore::CreateQuery($this->agataDB, $DataSet, $this->Parameters);
-            
-            if (is_agata_error($subQuery))
+            if ($DataSet['Query']['Select'])
             {
-                new Dialog($subQuery->GetError());
+                $DataSet['Query']['Where'] = $where;
                 
-                Wait::Off();
-                return false;
-            }
-            else
-            {
-                $sub = array();
-                while ($sub_row = $subQuery->FetchNext())
+                # Cria Query
+                $subQuery = AgataCore::CreateQuery($this->agataDB, $DataSet, $this->Parameters);
+                
+                if (is_agata_error($subQuery))
                 {
-                    $sub[] = $sub_row;
+                    new Dialog($subQuery->GetError());
+                    
+                    Wait::Off();
+                    return false;
+                }
+                else
+                {
+                    $sub = array();
+                    
+                    while ($sub_row = $subQuery->FetchNext())
+                    {
+                        $sub[] = $sub_row;
+                    }
                 }
             }
             
@@ -138,7 +160,17 @@ class AgataOOParser extends AgataMerge
                 {
                     $output .= $this->page_break;
                 }
-                $output .= $this->printSection('details', $line, $this->rest);
+                
+                if ($this->printEmptyDetail or $sub)
+                {
+                    $output .= $this->printSection('details', $line, $this->rest);
+                }
+                else // caso nao entre no IF, para evitar loop
+                {
+                    $this->rest = null;
+                    $this->SubTotals = array();
+                }
+                
                 if ($this->repeatFooter)
                 {
                     $output .= $this->printSection('footer',  $line);
@@ -147,7 +179,7 @@ class AgataOOParser extends AgataMerge
         }
         
         $output .= implode('', $this->buffer['end']);
-        $fd = fopen($this->prefix . '/content.xml', 'w');
+        $fd = fopen($this->prefix . bar . 'content.xml', 'w');
         fwrite($fd, $output);
         fclose($fd);
         
@@ -189,132 +221,118 @@ class AgataOOParser extends AgataMerge
         $totalFound = false;
         $details_stage = 0;
         $total_stage = 0;
-        foreach ($this->buffer[$section] as $text_line)
+        
+        if ($this->buffer[$section])
         {
-            for ($i=sizeof($data); $i>0; $i--)
+            foreach ($this->buffer[$section] as $text_line)
             {
-                $cell = $data[$i];
-                $text_line = str_replace('$var' . $i, utf8_encode($cell), $text_line);
-                $text_line = str_replace('[' . $this->CurrentQuery->ColumnNames[$i -1] . ']', utf8_encode($cell), $text_line);
-            }
-            
-            # Search by barCode
-            # Formato = {barcode_EAN128(var1)5x4}
-            if (preg_match('/{barcode_[A-z0-9]*\([A-z0-9]*\)[0-9]x[0-9]}/', $text_line, $matches))
-            {
-                $text_line = str_replace($matches[0], $this->barCode($matches[0]), $text_line);
-            }
-            
-            # Quebra a página, colocando o estilo de PageBreak
-            # Na primeira linha de cada 'header'
-            if (($line == 1) and ($section == 'header') and ($plus == true))
-            {
-                //<text:p text:style-name="Standard">
-                $begin = '<text:p text:style-name=';
-                if (substr($text_line, 0, strlen($begin)) == $begin)
+                $i = 1;
+                foreach ($data as $cell)
                 {
-                    # Faz o split para separar a expressao.
-                    $pattern   = '/(<text:p text:style-name=".*")/';
-                    $pieces    = preg_split($pattern, trim ($string), -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
-                    $text_line = '<text:p text:style-name="AgataPageBreak">' . $pieces[1];
-                }
-                else
-                {
-                    $text_line .= $this->page_break;
-                }
-            }
-            
-            if ($section == 'details')
-            {
-                # Fim do cabeçalho, começa a contar as linhas dos detalhes
-                if (substr($text_line, 0, 26) == '</table:table-header-rows>')
-                {
-                    $process = true;
+                    $text_line = str_replace('$var' . $i, utf8_encode($cell), $text_line);
+                    $text_line = str_replace('[' . $this->CurrentQuery->ColumnNames[$i -1] . ']', utf8_encode($cell), $text_line);
+                    
+                    $i ++;
                 }
                 
-                if ((substr($text_line, 0, 16) == '<table:table-row') and ($total_stage == 0))
+                # Search by barCode
+                # Formato = {barcode_EAN128(var1)5x4}
+                if (preg_match('/{barcode_[A-z0-9]*\([A-z0-9]*\)[0-9]x[0-9]}/', $text_line, $matches))
                 {
-                    $total_stage = 1;
-                    $totalContent = '';
+                    $text_line = str_replace($matches[0], $this->barCode($matches[0]), $text_line);
                 }
                 
-                if ($total_stage == 1)
+                # Quebra a página, colocando o estilo de PageBreak
+                # Na primeira linha de cada 'header'
+                if (($line == 1) and ($section == 'header') and ($plus == true))
                 {
-                    if ((strpos($text_line, '_sum') !== false) or (strpos($text_line, '_count') !== false) or
-                        (strpos($text_line, '_min') !== false) or (strpos($text_line, '_max') !== false) or
-                        (strpos($text_line, '_avg') !== false))
+                    //<text:p text:style-name="Standard">
+                    $begin = '<text:p text:style-name=';
+                    if (substr($text_line, 0, strlen($begin)) == $begin)
                     {
-                        $totalFound = true;
-                    }
-                    $totalContent .= $text_line;
-                }
-                
-                # substitui a linha template por todos registros
-                if ((substr($text_line, 0, 18) == '</table:table-row>') and ($total_stage == 1))
-                {
-                    if ($totalFound)
-                    {
-                        $total_stage = 2;
+                        # Faz o split para separar a expressao.
+                        $pattern   = '/(<text:p text:style-name=".*")/';
+                        $pieces    = preg_split($pattern, trim ($string), -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+                        $text_line = '<text:p text:style-name="AgataPageBreak">' . $pieces[1];
                     }
                     else
                     {
-                        $total_stage = 0;
+                        $text_line .= $this->page_break;
                     }
                 }
                 
-                if ($process)
+                if ($section == 'details')
                 {
-                    if ($this->fixedDetails)
+                    # Fim do cabeçalho, começa a contar as linhas dos detalhes
+                    if (substr($text_line, 0, 26) == '</table:table-header-rows>')
                     {
-                        if (substr($text_line, 0, 14) == '</table:table>')
+                        $process = true;
+                    }
+                    
+                    if ((substr($text_line, 0, 16) == '<table:table-row') and ($total_stage == 0))
+                    {
+                        $total_stage = 1;
+                        $totalContent = '';
+                    }
+                    
+                    if ($total_stage == 1)
+                    {
+                        if ((strpos($text_line, '_sum') !== false) or (strpos($text_line, '_count') !== false) or
+                            (strpos($text_line, '_min') !== false) or (strpos($text_line, '_max') !== false) or
+                            (strpos($text_line, '_avg') !== false))
                         {
-                            $process = false;
-                            for ($j = $sub_row; $j <= count($sub_data); $j ++)
-                            {
-                                $this->rest[] = $sub_data[$j];
-                            }
-                            
-                            if (!$this->rest and $sub_data and !$this->firstPage and $this->sumByTotal)
-                            {
-                                $text_line = $totalContent . $text_line;
-                                $text_line = $this->replaceTotal($text_line, 'grandtotal');
-                            }
+                            $totalFound = true;
                         }
-                        $text_line = $this->replaceTotal($text_line, 'subtotal');
+                        $totalContent .= $text_line;
+                    }
+                    
+                    # substitui a linha template por todos registros
+                    if ((substr($text_line, 0, 18) == '</table:table-row>') and ($total_stage == 1))
+                    {
                         
-                        if (substr($text_line, 0, 16) == '<table:table-row')
+                        if ($totalFound)
                         {
-                            $sub_row ++;
-                        }
-                        
-                        # Substituir as variáveis
-                        if ($sub_data[$sub_row])
-                        {
-                            $text_line = $this->replaceDetails($text_line, $sub_data[$sub_row]);
+                            $total_stage = 2;
                         }
                         else
                         {
-                            # Limpar ultimas linhas, quando já passou do eof
-                            for ($i = 20; $i >= 1; $i --)
-                            {
-                                $text_line = str_replace('$subfield' . $i, '', $text_line);
-                            }
+                            $total_stage = 0;
+                            $sub_row ++;
                         }
                     }
-                    else
+                    
+                    if ($process)
                     {
-                        if ((substr($text_line, 0, 16) == '<table:table-row') and ($details_stage == 0))
+                        if ($this->fixedDetails)
                         {
-                            $details_stage = 1;
-                        }
-                        
-                        if ($details_stage == 1)
-                        {
-                            $detailsContent .= $text_line;
-                            
-                            if ($sub_data)
+                            if (substr($text_line, 0, 14) == '</table:table>')
                             {
-                                $text_line = $this->replaceDetails($text_line, $sub_data[0]);
+                                $process = false;
+                                for ($j = $sub_row; $j <= count($sub_data) -1; $j ++)
+                                {
+                                    $this->rest[] = $sub_data[$j];
+                                }
+                                
+                                if (!$this->rest and $sub_data and !$this->firstPage and $this->sumByTotal)
+                                {
+                                    $text_line = $totalContent . $text_line;
+                                    $text_line = $this->replaceTotal($text_line, 'grandtotal');
+                                }
+                            }
+                            $text_line = $this->replaceTotal($text_line, 'subtotal');
+                            
+                            /* CÓDIGO MOVIDO ACIMA
+                            if (substr($text_line, 0, 16) == '<table:table-row')
+                            {
+                                $sub_row ++;
+                                echo "sub_row ++ = $sub_row";
+                            }
+                            */
+                            
+                            # Substituir as variáveis
+                            if ($sub_data[$sub_row])
+                            {
+                                $text_line = $this->replaceDetails($text_line, $sub_data[$sub_row]);
                             }
                             else
                             {
@@ -325,43 +343,68 @@ class AgataOOParser extends AgataMerge
                                 }
                             }
                         }
-                        
-                        # substitui a linha template por todos registros
-                        if ((substr($text_line, 0, 18) == '</table:table-row>') and ($details_stage == 1))
+                        else
                         {
-                            $details_stage = 2;
-                            if ($sub_data)
+                            if ((substr($text_line, 0, 16) == '<table:table-row') and ($details_stage == 0))
                             {
-                                # Substituir os detalhes
-                                $flexibleBuffer = '';
-                                foreach ($sub_data as $key => $sub_line)
+                                $details_stage = 1;
+                            }
+                            
+                            if ($details_stage == 1)
+                            {
+                                $detailsContent .= $text_line;
+                                
+                                if ($sub_data)
                                 {
-                                    if ($key>0)
+                                    $text_line = $this->replaceDetails($text_line, $sub_data[0]);
+                                }
+                                else
+                                {
+                                    # Limpar ultimas linhas, quando já passou do eof
+                                    for ($i = 20; $i >= 1; $i --)
                                     {
-                                        
-                                        $line_buffer = $detailsContent;
-                                        $line_buffer = $this->replaceDetails($line_buffer, $sub_line);
-                                        $flexibleBuffer .= $line_buffer;
+                                        $text_line = str_replace('$subfield' . $i, '', $text_line);
                                     }
                                 }
-                                $text_line .= $flexibleBuffer;
                             }
-                        }
-                        
-                        
-                        if ($details_stage == 2)
-                        {
-                            $text_line = $this->replaceTotal($text_line, 'subtotal');
-                            for ($i = 20; $i >= 1; $i --)
+                            
+                            # substitui a linha template por todos registros
+                            if ((substr($text_line, 0, 18) == '</table:table-row>') and ($details_stage == 1))
                             {
-                                $text_line = str_replace('$subfield' . $i, '', $text_line);
+                                $details_stage = 2;
+                                if ($sub_data)
+                                {
+                                    # Substituir os detalhes
+                                    $flexibleBuffer = '';
+                                    foreach ($sub_data as $key => $sub_line)
+                                    {
+                                        if ($key>0)
+                                        {
+                                            
+                                            $line_buffer = $detailsContent;
+                                            $line_buffer = $this->replaceDetails($line_buffer, $sub_line);
+                                            $flexibleBuffer .= $line_buffer;
+                                        }
+                                    }
+                                    $text_line .= $flexibleBuffer;
+                                }
+                            }
+                            
+                            
+                            if ($details_stage == 2)
+                            {
+                                $text_line = $this->replaceTotal($text_line, 'subtotal');
+                                for ($i = 20; $i >= 1; $i --)
+                                {
+                                    $text_line = str_replace('$subfield' . $i, '', $text_line);
+                                }
                             }
                         }
                     }
                 }
+                $output .= $text_line;
+                $line ++;
             }
-            $output .= $text_line;
-            $line ++;
         }
         //var_dump($detailsContent);
         return $output;

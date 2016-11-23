@@ -79,10 +79,10 @@ class cls_DBKardexItem
 
 		//Obtiene la cadena con que se llamó a la función de postgres
 		$this->query = $this->var->query;
-		/*if ($_SESSION['ss_id_usuario']==131){
-		echo $this->query;
-		exit;  
-		}*/
+		
+		//echo $this->query;
+		//exit;  
+		
 		return $res;
 	}
 }?>

@@ -15,7 +15,6 @@ session_start();
 <title>sis_almacenes ingreso</title>
     <!--<link rel="stylesheet" type="text/css" href='../../../lib/css/combos.css'/>-->
    <script language="JavaScript" type='text/javascript' src='../../../sis_almacenes/vista/proyecto_ingreso/js/ingreso_proy_combo.js'></script>
-   <script language="JavaScript" type='text/javascript' src='../../../sis_almacenes/vista/proyecto_ingreso/js/ingreso_proy.js'></script>
    <script language="JavaScript" type='text/javascript' src='../../../sis_almacenes/vista/proyecto_ingreso/js/ingreso_proy_main.php?idContenedor=<?php echo "$idContenedor";?>'></script>
 </head>
 <body>

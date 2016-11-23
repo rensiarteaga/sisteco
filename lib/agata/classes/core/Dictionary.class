@@ -178,7 +178,7 @@ class Dictionary
         if ($array)
         {
             $handler = fopen($file, 'w');
-            fwrite($handler, trim( XMLHEADER . Array2Xml($array, null, " xmlns:dic='http://www.agata.org.br'")));
+            fwrite($handler, trim( XMLHEADER . Array2Xml($array, null, " xmlns:dic='http://pablo.blog.br/agata'")));
             fclose($handler);
             return true;
         }

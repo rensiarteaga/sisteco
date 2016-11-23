@@ -1,15 +1,15 @@
 style "ice"
 {
     
-    #font = "-b&h-helvetica-medium-r-normal-*-14-140-*-*-p-*-iso8859-1"
-    font = "-*-helvetica-medium-r-normal-*-12-120-*-*-p-*-iso8859-1"
+    font = "-b&h-helvetica-medium-r-normal-*-14-140-*-*-p-*-iso8859-1"
+
     bg[ACTIVE]          = "#9c9c9c"
     fg[ACTIVE]          = "#000000"
     base[ACTIVE]        = "#cdcdcd"
     
     bg[NORMAL]          = "#dedede"
     fg[NORMAL]          = "#000000"
-    base[NORMAL]        = "#ffffff"
+    base[NORMAL]        = "#dedede"
     
     bg[INSENSITIVE]     = "#bcbcbc"
     fg[INSENSITIVE]     = "#777777"

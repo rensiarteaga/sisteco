@@ -427,6 +427,24 @@ function pagina_almacen_logico_det(idContenedor,direccion,paramConfig,maestro,id
 			})
 		}
 	}
+	
+	function btn_gestion_logico(){
+		var sm=getSelectionModel();var filas=ds.getModifiedRecords();var cont=filas.length;var NumSelect=sm.getCount();
+		if(NumSelect!=0){
+			var SelectionsRecord=sm.getSelected();
+			var data='m_id_almacen_logico='+SelectionsRecord.data.id_almacen_logico;
+			data=data+'&m_codigo='+SelectionsRecord.data.codigo;
+			data=data+'&m_nombre='+SelectionsRecord.data.nombre;
+			data=data+'&m_descripcion='+SelectionsRecord.data.descripcion;
+			var ParamVentana={Ventana:{width:'90%',height:'80%'}}
+			layout_almacen_logico.loadWindows(direccion+'../../../vista/parametro_almacen_logico/parametro_almacen_logico_det.php?'+data,'Almacenes Lógicos',ParamVentana);
+			layout_almacen_logico.getVentana().on('resize',function(){layout_almacen_logico.getLayout().layout()})
+		}
+		else{Ext.MessageBox.alert('Estado','Antes debe seleccionar un item.')
+		}
+	}
+	
+	
 	//Para manejo de eventos
 	function iniciarEventosFormularios(){
 		combo_bloqueado=ClaseMadre_getComponente('bloqueado');
@@ -471,6 +489,9 @@ function pagina_almacen_logico_det(idContenedor,direccion,paramConfig,maestro,id
 	this.InitBarraMenu(paramMenu);
 	this.InitFunciones(paramFunciones);
 	this.AdicionarBoton('../../../lib/imagenes/book_open.png','Kardex',btn_kardex_logico,true,'kardex_logico','');
+	this.AdicionarBoton('../../../lib/imagenes/book_open.png','Gestión',btn_gestion_logico,true,'parametro_almacen_logico','');
+	
+	
 	this.iniciaFormulario();
 	iniciarEventosFormularios();
 	layout_almacen_logico.getLayout().addListener('layout',this.onResize);

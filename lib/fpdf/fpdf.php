@@ -749,9 +749,6 @@ function MultiCell($w,$h,$txt,$border=0,$align='J',$fill=0)
 				$this->ws=0;
 				$this->_out('0 Tw');
 			}
-			
-			
-			
 			$this->Cell($w,$h,substr($s,$j,$i-$j),$b,2,$align,$fill);
 			$i++;
 			$sep=-1;
@@ -771,7 +768,7 @@ function MultiCell($w,$h,$txt,$border=0,$align='J',$fill=0)
 		}
 		$l+=$cw[$c];
 		if($l>$wmax)
-		{  
+		{
 			//Automatic line break
 			if($sep==-1)
 			{
@@ -785,7 +782,7 @@ function MultiCell($w,$h,$txt,$border=0,$align='J',$fill=0)
 				$this->Cell($w,$h,substr($s,$j,$i-$j),$b,2,$align,$fill);
 			}
 			else
-			{  
+			{
 				if($align=='J')
 				{
 					$this->ws=($ns>1) ? ($wmax-$ls)/1000*$this->FontSize/($ns-1) : 0;
@@ -813,10 +810,6 @@ function MultiCell($w,$h,$txt,$border=0,$align='J',$fill=0)
 	}
 	if($border && strpos($border,'B')!==false)
 		$b.='B';
-	
-	/*if($_SESSION['ss_id_usuario']==120 ){
-		echo "ffff".$this->GetY().'texto:'.substr($s,$j,$i-$j);
-	}*/
 	$this->Cell($w,$h,substr($s,$j,$i-$j),$b,2,$align,$fill);
 	$this->x=$this->lMargin;
 }
@@ -916,8 +909,12 @@ function Image($file,$x,$y,$w=0,$h=0,$type='',$link='')
 			$type=substr($file,$pos+1);
 		}
 		$type=strtolower($type);
-		$mqr=get_magic_quotes_runtime();
-		set_magic_quotes_runtime(0);
+		//$mqr=get_magic_quotes_runtime();
+		if (version_compare(PHP_VERSION, '5.3.0', '<')) {
+  		 $mqr=get_magic_quotes_runtime();  
+  		 set_magic_quotes_runtime(0);
+		}
+		
 		if($type=='jpg' || $type=='jpeg')
 			$info=$this->_parsejpg($file);
 		elseif($type=='png')
@@ -930,7 +927,10 @@ function Image($file,$x,$y,$w=0,$h=0,$type='',$link='')
 				$this->Error('Unsupported image type: '.$type);
 			$info=$this->$mtd($file);
 		}
-		set_magic_quotes_runtime($mqr);
+		//set_magic_quotes_runtime($mqr);
+		if (version_compare(PHP_VERSION, '5.3.0', '<')) {
+  		 set_magic_quotes_runtime(0);
+		}
 		$info['i']=count($this->images)+1;
 		$this->images[$file]=$info;
 	}
@@ -1171,8 +1171,14 @@ function _putfonts()
 		$this->_out('<</Type /Encoding /BaseEncoding /WinAnsiEncoding /Differences ['.$diff.']>>');
 		$this->_out('endobj');
 	}
-	$mqr=get_magic_quotes_runtime();
-	set_magic_quotes_runtime(0);
+	//$mqr=get_magic_quotes_runtime();
+	//set_magic_quotes_runtime(0);
+	
+	if (version_compare(PHP_VERSION, '5.3.0', '<')) {
+   	 $mqr=get_magic_quotes_runtime();
+    	set_magic_quotes_runtime(0);
+	}
+	
 	foreach($this->FontFiles as $file=>$info)
 	{
 		//Font file embedding
@@ -1210,7 +1216,10 @@ function _putfonts()
 		$this->_putstream($font);
 		$this->_out('endobj');
 	}
-	set_magic_quotes_runtime($mqr);
+	//set_magic_quotes_runtime($mqr);
+	if (version_compare(PHP_VERSION, '5.3.0', '<')) {
+        set_magic_quotes_runtime($mqr);
+    }
 	foreach($this->fonts as $k=>$font)
 	{
 		//Font objects
@@ -1803,13 +1812,9 @@ function MultiTabla($data,$nro_decimales=0,$borde=0,$stg=5,$tl=10,$fn=0)
         $this->SetFont('Arial','',$tl);
         $nb=max($nb,$this->NbLines($this->widths[$i],$data[$i]));
       
-      
-      
      }
     
     $h=$stg*$nb;
-    
-   
    // echo "este".$nb;
     //realiza page break si es necesario
     $this->CheckPageBreak($h);
@@ -1835,81 +1840,69 @@ function MultiTabla($data,$nro_decimales=0,$borde=0,$stg=5,$tl=10,$fn=0)
         $this->setFont($letra,$estilo,$tam_letra);
         $r=$font_color[0]; $g=$font_color[1];$b=$font_color[2];
         $this->SetTextColor($r,$g,$b);
-        
-        
-       
-        
-    if($fn==1){
+      if($fn==1){
       	 
       	 switch ($borde) {
-         case 0:
-		       $this->MultiCell($w,$s,($format_numbers==1)?number_format($data[$i],$nro_decimales):$data[$i],0,$a,$f);
-		          $this->SetXY($x+$w,$y);
-		          
-		        break;
-	    case 1: //borde a los costados
-	   
-	        $this->Line($x,$y,$x,$y+$h);
-	        $this->MultiCell($w,$s,($format_numbers==1)?number_format($data[$i],$nro_decimales):$data[$i],0,$a,$f);
-	         $this->SetXY($x+$w,$y);
-	         $this->Line($x+$w,$y,$x+$w,$y+$h); 
-	       
-	         
-	        break;
-	    case 2: // borde vertical
-	        $this->Line($x,$y,$x+$w,$y);
-	        $this->MultiCell($w,$s,($format_numbers==1)?number_format($data[$i],$nro_decimales):$data[$i],0,$a,$f);
-	         $this->SetXY($x+$w,$y);
-	        $this->Line($x,$y+$h,$x+$w,$y+$h);
-	     
-	        break;
-	    case 3: // borde total cuadriculado
-	        $this->Rect($x,$y,$w,$h);
-	        //$this->MultiCell($w,$s,is_numeric($data[$i])?number_format($data[$i],$nro_decimales):$data[$i],0,$a,$f);
-	        $this->MultiCell($w,$s,($format_numbers==1)?number_format($data[$i],$nro_decimales):$data[$i],0,$a,$f);
-	         $this->SetXY($x+$w,$y);
-	        
-	        break;
-	    case 4: //borde a los extremos
-	   
-	    	if($this->multitabla_borde_externo==1){
-	        	if($i==0){
-	        		$this->Line($x,$y,$x,$y+$h);
-	        	}
-	        	$this->MultiCell($w,$s,($format_numbers==1)?number_format($data[$i],$nro_decimales):$data[$i],0,$a,$f);
-	        	$this->SetXY($x+$w,$y);
-	        	if($i==count($data)-1){
-	        		$this->Line($x+$w,$y,$x+$w,$y+$h);
-	        	}
-	        	
-	    	}
-	    	else{
-	    		$this->Line($x,$y,$x,$y+$h);
-	        	$this->MultiCell($w,$s,($format_numbers==1)?number_format($data[$i],$nro_decimales):$data[$i],0,$a,$f);
-	        	$this->SetXY($x+$w,$y);
-	        	$this->Line($x+$w,$y,$x+$w,$y+$h);
-	        	
-	        	
-	    	}
-	         
-	        break;
-	       case 5:
-	
-	    	$yy=$this->NbLines($this->widths[$i],$data[$i]);
-	    	  $yh=$yy*$stg;
-	    	  
-	    	if ($yh<$h)
-	    	{
-	    		$s=$h/$yy;
-	    	}
-	    	
-	       $this->MultiCell($w,$s,($format_numbers==1)?number_format($data[$i],$nro_decimales):$data[$i],0,$a,$f);
-	          $this->SetXY($x+$w,$y);
-	        break;
-	    default:
-	    	  $this->MultiCell($w,$s,($format_numbers==1)?number_format($data[$i],$nro_decimales):$data[$i],0,$a,$f);
-	          $this->SetXY($x+$w,$y);
-	    	}
+    case 0:
+       $this->MultiCell($w,$s,($format_numbers==1)?number_format($data[$i],$nro_decimales):$data[$i],0,$a,$f);
+          $this->SetXY($x+$w,$y);
+        break;
+    case 1: //borde a los costados
+   
+        $this->Line($x,$y,$x,$y+$h);
+        $this->MultiCell($w,$s,($format_numbers==1)?number_format($data[$i],$nro_decimales):$data[$i],0,$a,$f);
+         $this->SetXY($x+$w,$y);
+         $this->Line($x+$w,$y,$x+$w,$y+$h); 
+        break;
+    case 2: // borde vertical
+        $this->Line($x,$y,$x+$w,$y);
+        $this->MultiCell($w,$s,($format_numbers==1)?number_format($data[$i],$nro_decimales):$data[$i],0,$a,$f);
+         $this->SetXY($x+$w,$y);
+        $this->Line($x,$y+$h,$x+$w,$y+$h);
+        break;
+    case 3: // borde total cuadriculado
+        $this->Rect($x,$y,$w,$h);
+        //$this->MultiCell($w,$s,is_numeric($data[$i])?number_format($data[$i],$nro_decimales):$data[$i],0,$a,$f);
+        $this->MultiCell($w,$s,($format_numbers==1)?number_format($data[$i],$nro_decimales):$data[$i],0,$a,$f);
+         $this->SetXY($x+$w,$y);
+        break;
+    case 4: //borde a los extremos
+   
+    	if($this->multitabla_borde_externo==1){
+        	if($i==0){
+        		$this->Line($x,$y,$x,$y+$h);
+        	}
+        	$this->MultiCell($w,$s,($format_numbers==1)?number_format($data[$i],$nro_decimales):$data[$i],0,$a,$f);
+        	$this->SetXY($x+$w,$y);
+        	if($i==count($data)-1){
+        		$this->Line($x+$w,$y,$x+$w,$y+$h);
+        	}
+    	}
+    	else{
+    		$this->Line($x,$y,$x,$y+$h);
+        	$this->MultiCell($w,$s,($format_numbers==1)?number_format($data[$i],$nro_decimales):$data[$i],0,$a,$f);
+        	$this->SetXY($x+$w,$y);
+        	$this->Line($x+$w,$y,$x+$w,$y+$h);
+    	}
+         
+        break;
+       case 5:
+
+    	$yy=$this->NbLines($this->widths[$i],$data[$i]);
+    	  $yh=$yy*$stg;
+    	  
+    	if ($yh<$h)
+    	{
+    		$s=$h/$yy;
+    	}
+    	
+       $this->MultiCell($w,$s,($format_numbers==1)?number_format($data[$i],$nro_decimales):$data[$i],0,$a,$f);
+          $this->SetXY($x+$w,$y);
+        break;
+    default:
+    	  $this->MultiCell($w,$s,($format_numbers==1)?number_format($data[$i],$nro_decimales):$data[$i],0,$a,$f);
+          $this->SetXY($x+$w,$y);
+    	}
       } else{
     switch ($borde) {
     case 0:
@@ -2691,7 +2684,7 @@ function num2letras($num, $fem = true, $dec = true) {
     * */
   
    if ($dec and $fra ) { 
-      $fin = ' ,'.$fra; 
+      $fin = ' '.$fra;  //,
    }else 
       $fin = ''; 
   
@@ -2703,8 +2696,8 @@ function num2letras($num, $fem = true, $dec = true) {
    while ( ($num = substr($ent, -3)) != '   ') { 
       $ent = substr($ent, 0, -3); 
       if (++$sub < 3 and $fem) { 
-         $matuni[1] = 'UNA'; 
-         $subcent = 'AS'; 
+         $matuni[1] = 'UNO'; //UNA
+         $subcent = 'OS'; //AS
       }else{ 
          $matuni[1] = $neutro ? 'UN' : 'UNO'; 
          $subcent = 'OS'; 
@@ -2734,6 +2727,10 @@ function num2letras($num, $fem = true, $dec = true) {
 		   }else{
 	         $t = ' CIENTO' . $t; 
     	   }
+	  
+	  
+	  
+	  
 	  }elseif ($n == 5){ 
          $t = ' ' . $matunisub[$n] . 'IENT' . $subcent . $t; 
       }elseif ($n != 0){ 
@@ -2747,7 +2744,187 @@ function num2letras($num, $fem = true, $dec = true) {
             $t .= ' MIL'; 
          } 
       }elseif ($num == 1) { 
-         $t .= ' ' . $matsub[$sub] . 'ON'; 
+         $t .= ' ' . $matsub[$sub] . 'ÓN'; 
+      }elseif ($num > 1){ 
+         $t .= ' ' . $matsub[$sub] . 'ONES'; 
+      }   
+      if ($num == '000') $mils ++; 
+      elseif ($mils != 0) { 
+         if (isset($matmil[$sub])) $t .= ' ' . $matmil[$sub]; 
+         $mils = 0; 
+      } 
+      $neutro = true; 
+      $tex = $t . $tex; 
+   } 
+   $tex = $neg . substr($tex, 1) . $fin .'/100 '; 
+   return ucfirst($tex); 
+}
+
+function num2letrasCheque($num, $fem = false, $dec = true) { 
+//if (strlen($num) > 14) die("El n?mero introducido es demasiado grande"); 
+   $matuni[2]  = "DOS"; 
+   $matuni[3]  = "TRES"; 
+   $matuni[4]  = "CUATRO"; 
+   $matuni[5]  = "CINCO"; 
+   $matuni[6]  = "SEIS"; 
+   $matuni[7]  = "SIETE"; 
+   $matuni[8]  = "OCHO"; 
+   $matuni[9]  = "NUEVE"; 
+   $matuni[10] = "DIEZ"; 
+   $matuni[11] = "ONCE"; 
+   $matuni[12] = "DOCE"; 
+   $matuni[13] = "TRECE"; 
+   $matuni[14] = "CATORCE"; 
+   $matuni[15] = "QUINCE"; 
+   $matuni[16] = "DIECISEIS"; 
+   $matuni[17] = "DIECISIETE"; 
+   $matuni[18] = "DIECIOCHO"; 
+   $matuni[19] = "DIECINUEVE"; 
+   $matuni[20] = "VEINTE"; 
+   $matunisub[2] = "DOS"; 
+   $matunisub[3] = "TRES"; 
+   $matunisub[4] = "CUATRO"; 
+   $matunisub[5] = "QUIN"; 
+   $matunisub[6] = "SEIS"; 
+   $matunisub[7] = "SETE"; 
+   $matunisub[8] = "OCHO"; 
+   $matunisub[9] = "NOVE"; 
+
+   $matdec[2] = "VEINT"; 
+   $matdec[3] = "TREINTA"; 
+   $matdec[4] = "CUARENTA"; 
+   $matdec[5] = "CINCUENTA"; 
+   $matdec[6] = "SESENTA"; 
+   $matdec[7] = "SETENTA"; 
+   $matdec[8] = "OCHENTA"; 
+   $matdec[9] = "NOVENTA"; 
+   $matsub[3]  = 'MILL'; 
+   $matsub[5]  = 'BILL'; 
+   $matsub[7]  = 'MILL'; 
+   $matsub[9]  = 'TRILL'; 
+   $matsub[11] = 'MILL'; 
+   $matsub[13] = 'BILL'; 
+   $matsub[15] = 'MILL'; 
+   $matmil[4]  = 'MILLONES'; 
+   $matmil[6]  = 'BILLONES'; 
+   $matmil[7]  = 'DE BILLONES'; 
+   $matmil[8]  = 'MILLONES DE BILLONES'; 
+   $matmil[10] = 'TRILLONES'; 
+   $matmil[11] = 'DE TRILLONES'; 
+   $matmil[12] = 'MILLONES DE TRILLONES'; 
+   $matmil[13] = 'DE TRILLONES'; 
+   $matmil[14] = 'BILLONES DE TRILLONES'; 
+   $matmil[15] = 'DE BILLONES DE TRILLONES'; 
+   $matmil[16] = 'MILLONES DE BILLONES DE TRILLONES'; 
+   $num=number_format($num,2,'.', '');
+
+   $num = trim((string)@$num); 
+   
+   if ($num[0] == '-') { 
+      $neg = 'menos '; 
+      $num = substr($num, 1); 
+   }else 
+      $neg = ''; 
+   
+   while ($num[0] == '0') $num = substr($num, 1); 
+   if ($num[0] < '1' or $num[0] > 9) $num = '0' . $num; 
+   $zeros = true; 
+   $punt = false; 
+   $ent = ''; 
+   $fra = ''; 
+     
+  for ($c = 0; $c < strlen($num); $c++) { 
+   	  
+      $n = $num[$c]; 
+      if (! (strpos(".,'''", $n) === false)) { 
+         if ($punt) break; 
+         else{ 
+            $punt = true; 
+            continue; 
+         } 
+
+      }elseif (! (strpos('0123456789', $n) === false)) { 
+         if ($punt) { 
+           if ($n != '0')$zeros = false; 
+                  
+            $fra =$fra.$n; 
+         }else 
+
+            $ent .= $n; 
+      }else 
+
+        break; 
+
+   } 
+    
+   $ent = '     ' . $ent; 
+   /// esto cambiare****************************************
+   /** le quite para que muestre los ceros 
+    * 
+    * */
+  
+   if ($dec and $fra ) { 
+      $fin = ' '.$fra;  //,
+   }else 
+      $fin = ''; 
+  
+   if ((int)$ent === 0) return 'CERO ' . $fin; 
+   $tex = ''; 
+   $sub = 0; 
+   $mils = 0; 
+   $neutro = false; 
+   while ( ($num = substr($ent, -3)) != '   ') { 
+      $ent = substr($ent, 0, -3); 
+      if (++$sub < 3 and $fem) { 
+         $matuni[1] = 'UNA'; //UNA
+         $subcent = 'AS'; //AS
+      }else{ 
+         $matuni[1] = $neutro ? 'UN' : 'UNO'; 
+         $subcent = 'OS'; 
+      } 
+      $t = ''; 
+      $n2 = substr($num, 1); 
+      if ($n2 == '00') { 
+      }elseif ($n2 < 21) 
+         $t = ' ' . $matuni[(int)$n2]; 
+      elseif ($n2 < 30) { 
+         $n3 = $num[2]; 
+         if ($n3 != 0) $t = 'I' . $matuni[$n3]; 
+         $n2 = $num[1]; 
+         $t = ' ' . $matdec[$n2] . $t; 
+      }else{ 
+         $n3 = $num[2]; 
+         if ($n3 != 0) $t = ' Y ' . $matuni[$n3]; 
+         $n2 = $num[1]; 
+         $t = ' ' . $matdec[$n2] . $t; 
+      } 
+      $n = $num[0]; 
+      if ($n == 1) { 
+	       if ($num[1]==0 && $num[2]==0){
+		 
+              $t = ' CIEN' . $t; 
+      
+		   }else{
+	         $t = ' CIENTO' . $t; 
+    	   }
+	  
+	  
+	  
+	  
+	  }elseif ($n == 5){ 
+         $t = ' ' . $matunisub[$n] . 'IENT' . $subcent . $t; 
+      }elseif ($n != 0){ 
+         $t = ' ' . $matunisub[$n] . 'CIENT' . $subcent . $t; 
+      } 
+      if ($sub == 1) { 
+      }elseif (! isset($matsub[$sub])) { 
+         if ($num == 1) { 
+            $t = ' UN MIL';  //MIL
+         }elseif ($num > 1){ 
+            $t .= ' MIL'; 
+         } 
+      }elseif ($num == 1) { 
+         $t .= ' ' . $matsub[$sub] . 'ÓN'; 
       }elseif ($num > 1){ 
          $t .= ' ' . $matsub[$sub] . 'ONES'; 
       }   
@@ -2985,22 +3162,14 @@ function tablaDatosExtensos($datas, $lineheight=8,$posx,$poscab=0)
         $r=$font_color[0]; $g=$font_color[1];$b=$font_color[2];
         $this->SetTextColor($r,$g,$b);
         $this->page = $currpage;
-        
-           if($_SESSION["ss_id_usuario"]==120 && $h>265 && $h<284 ){
-           	//echo 'pos l'.$l.'pos h'.$h. 'data:'.$txt.'///';
-           
-           	//$s=$s+10;
-           	//$h=$h+20;
-           }
-           $this->SetXY($l,$h+0.3);
-           /* */
+        $this->SetXY($l,$h);
+           /* echo 'pos l'.$l.'pos h'.$h;
+            exit;*/
            //	$this->MultiCell($w,$s,is_numeric($data[$i])?number_format($data[$i],$nro_decimales):$data[$i],0,$a,$f);
             $y=$this->GetY();
               
-           
-               
-                 $this->MultiCell($w,$s,is_numeric($txt)?number_format($txt,$nro_decimales):$txt,0,$a,$f);   
-                 
+             //  if ($y!=260){
+            $this->MultiCell($w,$s,is_numeric($txt)?number_format($txt,$nro_decimales):$txt,0,$a,$f);   	
               // }
            	
            	

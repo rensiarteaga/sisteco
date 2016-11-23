@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<tables xmlns:dic='http://www.agata.org.br'>
+<tables xmlns:dic='http://pablo.blog.br/agata'>
     <dic:city>
         <dic:groups>
             <dic:name>basic</dic:name>

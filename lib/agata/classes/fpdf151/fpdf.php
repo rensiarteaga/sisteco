@@ -425,13 +425,15 @@ function SetTextColor($r,$g=-1,$b=-1)
 
 function GetStringWidth($s)
 {
-	//Get width of a string in the current font
+    //Get width of a string in the current font
 	$s=(string)$s;
 	$cw=&$this->CurrentFont['cw'];
 	$w=0;
 	$l=strlen($s);
 	for($i=0;$i<$l;$i++)
-		$w+=$cw[$s{$i}];
+    {
+        $w+=$cw[$s{$i}];
+    }
 	return $w*$this->FontSize/1000;
 }
 

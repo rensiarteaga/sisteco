@@ -136,7 +136,7 @@ class Preferences extends CommonForm
         if ($this->container)
         {
             $this->window = $this->container;
-            //$this->window->realize();
+            $this->window->realize();
         }
         else
         {

@@ -18,6 +18,7 @@ class AgataCsv extends AgataReport
     
     function Process()
     {
+        $this->agataConfig = AgataConfig::ReadConfig();
         $SpreadSoft = $this->agataConfig['general']['SpreadSoft'];
         $Delimiter   = $this->agataConfig['general']['Delimiter'];
         
@@ -64,8 +65,11 @@ class AgataCsv extends AgataReport
         {
             for ($z=0; $z<=count($this->Columns) -1; $z++)
             {
-                $Column = $this->Columns[$z];
-                fputs($fd, "\"" . trim($Column) . "\"" . $Delimiter);
+                if (!$this->Adjustments[$z+1]['Hidden'])
+                {
+                    $Column = $this->Columns[$z];
+                    fputs($fd, "\"" . trim($Column) . "\"" . $Delimiter);
+                }
             }
             fputs($fd, "\n");
         }
@@ -91,7 +95,10 @@ class AgataCsv extends AgataReport
                 
                 if (($this->ShowBreakColumns) || (!$this->ShowBreakColumns && !$this->Breaks[$y]))
                 {
-                    $stringline .= "\"$QueryCell\"{$Delimiter}";
+                    if (!$this->Adjustments[$y]['Hidden'])
+                    {
+                        $stringline .= "\"$QueryCell\"{$Delimiter}";
+                    }
                 }
             }
             
@@ -139,13 +146,16 @@ class AgataCsv extends AgataReport
                             $w ++;
                             if (($this->ShowBreakColumns) || (!$this->ShowBreakColumns && (!$this->Breaks[$w])))
                             {
-                                if ($content)
+                                if (!$this->Adjustments[$w]['Hidden'])
                                 {
-                                    fputs($fd, "\"$content\"{$Delimiter}");
-                                }
-                                else
-                                {
-                                    fputs($fd, "$Delimiter");
+                                    if ($content)
+                                    {
+                                        fputs($fd, "\"$content\"{$Delimiter}");
+                                    }
+                                    else
+                                    {
+                                        fputs($fd, "$Delimiter");
+                                    }
                                 }
                             }
                         }
@@ -193,7 +203,10 @@ class AgataCsv extends AgataReport
                     $Column = $this->Columns[$z];
                     if (($this->ShowBreakColumns) || (!$this->ShowBreakColumns && !$this->Breaks[($z +1)])) //aquipbreak
                     {
-                        fputs($fd, "\"$Column\"{$Delimiter}");
+                        if (!$this->Adjustments[$z+1]['Hidden'])
+                        {
+                            fputs($fd, "\"$Column\"{$Delimiter}");
+                        }
                     }
                 }
                 //fputs($fd, "\n");
@@ -261,13 +274,16 @@ class AgataCsv extends AgataReport
                         $w ++;
                         if (($this->ShowBreakColumns) || (!$this->ShowBreakColumns && (!$this->Breaks[$w])))
                         {
-                            if ($content)
+                            if (!$this->Adjustments[$w]['Hidden'])
                             {
-                                fputs($fd, "\"$content\"{$Delimiter}");
-                            }
-                            else
-                            {
-                                fputs($fd, "$Delimiter");
+                                if ($content)
+                                {
+                                    fputs($fd, "\"$content\"{$Delimiter}");
+                                }
+                                else
+                                {
+                                    fputs($fd, "$Delimiter");
+                                }
                             }
                         }
                     }

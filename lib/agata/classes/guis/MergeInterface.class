@@ -15,7 +15,6 @@ class MergeInterface
         $this->MergeNotebook    = $glade->get_widget('MergeNotebook');
         $this->SectionsNotebook = $glade->get_widget('SectionsNotebook');
         $this->Tooltips = new GtkTooltips;
-        $this->numberSubReport = 0;
 
         $img_mimetypes = array('png', 'jpg', 'jpeg');
         $file_mimetypes= array('txt');
@@ -24,13 +23,12 @@ class MergeInterface
         $this->param['InsertBgImage']=array(array(&$this, 'TypeBgImage'), $img_mimetypes, null,     _a('Open'));
         $this->param['InsertFile'] = array(array(&$this, 'TypeFile'), $file_mimetypes, null,    _a('Open'));
 
-        $this->entryFonts             = $glade->get_widget( 'entryFonts' );
-        $this->entryStyles            = $glade->get_widget( 'entryStyles' );
-        $this->entrySizes             = $glade->get_widget( 'entrySizes' );
-        $this->entryFields            = $glade->get_widget( 'entryFields' );
-        $this->entrySubField          = $glade->get_widget( 'entrySubField' );
-        $this->entryTotalField        = $glade->get_widget( 'entryTotalField' );
-        $this->entryTotalFinalSummary = $glade->get_widget( 'entryTotalFinalSummary' );
+        $this->entryFonts           = $glade->get_widget( 'entryFonts' );
+        $this->entryStyles          = $glade->get_widget( 'entryStyles' );
+        $this->entrySizes           = $glade->get_widget( 'entrySizes' );
+        $this->entryFields          = $glade->get_widget( 'entryFields' );
+        $this->entrySubField        = $glade->get_widget( 'entrySubField' );
+        $this->entryTotalField      = $glade->get_widget( 'entryTotalField' );
         
         $this->entries['HSpacing']    = $glade->get_widget('spinHSpacing');
         $this->entries['VSpacing']    = $glade->get_widget('spinVSpacing');
@@ -43,13 +41,12 @@ class MergeInterface
         $this->entries['LabelFormat'] = $glade->get_widget('entryLabelFormat');
         $this->entries['LabelSpacing']= $glade->get_widget('spinLabelSpacing');
 
-        $this->textSections['@LabelText']    = &new TextArea;
-        $this->textSections['@MergeHeader']  = &new TextArea; // header
-        $this->textSections['@GroupHeader']  = &new TextArea; // groupheader
-        $this->textSections['@MergeDetail']  = &new TextArea; // detail
-        $this->textSections['@GroupFooter']  = &new TextArea; // groupfooter
-        $this->textSections['@MergeFooter']  = &new TextArea; // footer
-        $this->textSections['@FinalSummary'] = &new TextArea; // final summary
+        $this->textSections['@LabelText']   = &new TextArea;
+        $this->textSections['@MergeHeader'] = &new TextArea; // header
+        $this->textSections['@GroupHeader'] = &new TextArea; // groupheader
+        $this->textSections['@MergeDetail'] = &new TextArea; // detail
+        $this->textSections['@GroupFooter'] = &new TextArea; // groupfooter
+        $this->textSections['@MergeFooter'] = &new TextArea; // footer
         //$this->textSections['@MergeDetail']->connect_object('painted', array(&$this, 'alert'));
         //modified
         //painted
@@ -59,11 +56,10 @@ class MergeInterface
         $this->Containers['frameSubQuery'] = $glade->get_widget('frameSubQuery');
         $this->Containers['frameSubQuery']->set_label(_a('SubQuery Session'));
         
-        $this->comboFonts             = $glade->get_widget('comboFonts');
-        $this->comboFields            = $glade->get_widget('comboFields');
-        $this->comboSubFields         = $glade->get_widget('comboSubFields');
-        $this->comboTotalFields       = $glade->get_widget('comboTotalFields');
-        $this->comboTotalFinalSummary = $glade->get_widget('comboTotalFinalSummary');
+        $this->comboFonts = $glade->get_widget('comboFonts');
+        $this->comboFields = $glade->get_widget('comboFields');
+        $this->comboSubFields = $glade->get_widget('comboSubFields');
+        $this->comboTotalFields = $glade->get_widget('comboTotalFields');
 
         $fontsList  = $this->comboFonts->list;
         $fieldsList = $this->comboFields->list;
@@ -86,15 +82,14 @@ class MergeInterface
             $item->show_all();
         }
 
-        $this->SubSelectList[0] = &new SelectList(null);
-        $this->SubSelectList[0]->connect_object('changed', array(&$this, 'RefreshSubFields'), 0);
-        $this->Containers['frameSubQuery']->add($this->SubSelectList[0]->widget);
+        $this->SubSelectList = &new SelectList(null);
+        $this->SubSelectList->connect_object('changed', array(&$this, 'RefreshSubFields'));
+        $this->Containers['frameSubQuery']->add($this->SubSelectList->widget);
         //&new ColorButton($Description);
 
 
         $this->Labels['labelHeader'] = $glade->get_widget('labelHeader');
         $this->Labels['labelFooter'] = $glade->get_widget('labelFooter');
-        $this->Labels['labelFinalSummary'] = $glade->get_widget('labelFinalSummary');
         $this->Labels['labelDetail'] = $glade->get_widget('labelDetail');
         $this->Labels['labelGroupHeader'] = $glade->get_widget('labelGroupHeader');
         $this->Labels['labelGroupFooter'] = $glade->get_widget('labelGroupFooter');
@@ -118,7 +113,6 @@ class MergeInterface
 
         $this->Labels['labelHeader']->set_text(_a('Header'));
         $this->Labels['labelFooter']->set_text(_a('Footer'));
-        $this->Labels['labelFinalSummary']->set_text(_a('Final Summary'));
         $this->Labels['labelDetail']->set_text(_a('Detail'));
         $this->Labels['labelGroupHeader']->set_text(_a('Group Header'));
         $this->Labels['labelGroupFooter']->set_text(_a('Group Footer'));
@@ -163,7 +157,6 @@ class MergeInterface
         $this->Buttons['InsertLine'] =      $glade->get_widget('buttonLine');
         $this->Buttons['TypeField'] =       $glade->get_widget('buttonTypeField');
         $this->Buttons['Functions'] =       $glade->get_widget('buttonFunctions');
-        $this->Buttons['FinalSummaryFunctions'] =       $glade->get_widget('buttonFinalSummaryFunctions');
         $this->Buttons['BarCode'] =         $glade->get_widget('buttonBarCode');
         $this->Buttons['Preview'] =         $glade->get_widget('buttonPreview');
         $this->Buttons['TypeSubField'] =    $glade->get_widget('buttonTypeSubField');
@@ -233,20 +226,18 @@ class MergeInterface
         $this->Buttons['PageBreak']->connect_object('clicked', array(&$this, 'TypeChar'), "\n#pagebreak\n");
         $this->Buttons['TypeField']->connect_object('clicked', array(&$this, 'TypeFields'));
         $this->Buttons['Functions']->connect_object('clicked',array(&$this, 'PopFunctions'));
-        $this->Buttons['FinalSummaryFunctions']->connect_object('clicked',array(&$this, 'PopFunctions'));
         $this->Buttons['BarCode']->connect_object('clicked', array(&$this, 'GetBarCode'));
         $this->Buttons['TypeSubField']->connect_object('clicked', array(&$this, 'TypeSubField'));
         $this->Buttons['OpenLabelTemplates']->connect_object('clicked', array(&$this, 'OpenLabelTemplates'));
         //$this->Buttons['toggleEOL']->connect_object('clicked', array(&$this, 'setEOL'));
         //$this->Buttons['toggleWrap']->connect_object('clicked', array(&$this, 'setWrap'));
         //$this->Buttons['toggleCaret']->connect_object('clicked', array(&$this, 'setCaret'));
-        $this->Buttons['AddDetail']->connect_object('clicked', array(&$this, 'addDetail'), $glade);
+        //$this->Buttons['AddDetail']->connect_object('clicked', array(&$this, 'addDetail'));
         $this->Buttons['VSpace']->connect_object('clicked', array(&$this, 'setVSpace'));
         
         $this->Buttons['Preview']->set_relief(GTK_RELIEF_NONE);
         $this->Buttons['MergePdf']->set_relief(GTK_RELIEF_NONE);
         $this->Buttons['Functions']->set_relief(GTK_RELIEF_NONE);
-        $this->Buttons['FinalSummaryFunctions']->set_relief(GTK_RELIEF_NONE);
         $this->Buttons['ApplyFont']->set_relief(GTK_RELIEF_NONE);
         $this->Buttons['VText']->set_relief(GTK_RELIEF_NONE);
         $this->Buttons['TabWidth']->set_relief(GTK_RELIEF_NONE);
@@ -310,7 +301,6 @@ class MergeInterface
         $option16 = new MyNormalMenuItem($Pixmaps['ico_chars'], _a('Commented Line'), null);
         $option17 = new MyNormalMenuItem($Pixmaps['ico_chars'], _a('File Name'), null);
         $option18 = new MyNormalMenuItem($Pixmaps['ico_chars'], _a('Page Number'), null);
-        $option19 = new MyNormalMenuItem($Pixmaps['ico_chars'], _a('Page counting'), null);
     
         $this->MenuChars->append($option1);
         $this->MenuChars->append($option2);
@@ -330,7 +320,6 @@ class MergeInterface
         $this->MenuChars->append($option16);
         $this->MenuChars->append($option17);
         $this->MenuChars->append($option18);
-        $this->MenuChars->append($option19);
     
         $option1->connect_object('activate', array(&$this, 'TypeChar'), ' $sup1 ');
         $option2->connect_object('activate', array(&$this, 'TypeChar'), ' $sup2 ');
@@ -350,7 +339,6 @@ class MergeInterface
         $option16->connect_object('activate', array(&$this, 'TypeChar'), "\n// ");
         $option17->connect_object('activate', array(&$this, 'TypeChar'), ' $filename ');
         $option18->connect_object('activate', array(&$this, 'TypeChar'), ' $page ');
-        $option19->connect_object('activate', array(&$this, 'TypeChar'), ' $pagecounting ');
 
         $this->MenuDateTime = new GtkMenu;
         $option1 = new MyNormalMenuItem($Pixmaps['ico_cal'],  _a('Year'), null);
@@ -388,7 +376,6 @@ class MergeInterface
         $this->textSections['@MergeDetail']->set_caret_line_visible($this->caret);
         $this->textSections['@GroupFooter']->set_caret_line_visible($this->caret);
         $this->textSections['@MergeFooter']->set_caret_line_visible($this->caret);
-        $this->textSections['@FinalSummary']->set_caret_line_visible($this->caret);
     }
 
     /***********************************************************/
@@ -403,7 +390,6 @@ class MergeInterface
         $this->textSections['@MergeDetail']->set_view_eol($this->eol);
         $this->textSections['@GroupFooter']->set_view_eol($this->eol);
         $this->textSections['@MergeFooter']->set_view_eol($this->eol);
-        $this->textSections['@FinalSummary']->set_view_eol($this->eol);
     }
 
     /***********************************************************/
@@ -418,7 +404,6 @@ class MergeInterface
         $this->textSections['@MergeDetail']->set_wrap_mode($this->wrap);
         $this->textSections['@GroupFooter']->set_wrap_mode($this->wrap);
         $this->textSections['@MergeFooter']->set_wrap_mode($this->wrap);
-        $this->textSections['@FinalSummary']->set_wrap_mode($this->wrap);
     }
 
     /***********************************************************/
@@ -584,18 +569,6 @@ class MergeInterface
         }
     }
 
-    function GetCurrentPage()
-    {
-        $sections[0] = '@MergeHeader';
-        $sections[1] = '@GroupHeader';
-        $sections[2] = '@MergeDetail';
-        $sections[(3+$this->numberSubReport)] = '@GroupFooter';
-        $sections[(4+$this->numberSubReport)] = '@MergeFooter';
-        $sections[(5+$this->numberSubReport)] = '@FinalSummary';
-
-        return $sections[$this->SectionsNotebook->get_current_page()];
-    }
-
     /***********************************************************/
     /* Prints any char on current notebook
     /***********************************************************/
@@ -603,25 +576,25 @@ class MergeInterface
     {
         if ($this->MergeNotebook->get_current_page() == 0)
         {
-
-
-            $currentSubReport = $this->getCurrentSubReport();
-            if ($this->SubSelectList[$currentSubReport] && $currentSubReport != 0)
-            {
-                $this->SubSql[$currentSubReport]->addDetail($text);
-            }
-            else
-            {
-                $page = $this->GetCurrentPage();
-                $this->textSections[$page]->insertText($text);
-                $this->textSections[$page]->grab_focus();
-            }
+            $sections[0] = '@MergeHeader';
+            $sections[1] = '@GroupHeader';
+            $sections[2] = '@MergeDetail';
+            $sections[3] = '@GroupFooter';
+            $sections[4] = '@MergeFooter';
+            $page = $sections[$this->SectionsNotebook->get_current_page()];
+            $this->textSections[$page]->insertText($text);
+            $this->textSections[$page]->grab_focus();
+            //$this->textSections[$page]->set_position($this->textSections[$page]->get_position() + strlen($text));
+            //$this->textSections[$page]->char_right();
         }
         else
         {
             $this->textSections['@LabelText']->insertText($text);
             $this->textSections['@LabelText']->grab_focus();
+            //$this->textSections['@LabelText']->set_current_pos($this->textSections['@LabelText']->get_current_pos() + strlen($text));
+            //$this->textSections['@LabelText']->char_right();
         }
+        //$this->LoadBlocks();
     }
 
     /***********************************************************/
@@ -654,36 +627,18 @@ class MergeInterface
     /***********************************************************/
     function TypeSubField($function = null)
     {
-        $currentSubReport = $this->getCurrentSubReport();
-        if ($currentSubReport > 0)
-        {
-            $fieldsList = $this->SubSql[$currentSubReport]->comboSubFields->list;
-            $entrySubField = $this->SubSql[$currentSubReport]->comboSubFields->entry;
-            $entry = $entrySubField->get_text();
-        }
-        else
-        {
-            $fieldsList = $this->comboSubFields->list;
-            $entry = $this->entrySubField->get_text();
-        }
         if ($function)
         {
-            # Type the Field sumarizatio
-            if ( $this->GetCurrentPage() == '@GroupFooter' )
-            {
-                $entry = $this->entryTotalField->get_text();
-            }
-            else
-            {
-                $entry = $this->entryTotalFinalSummary->get_text();
-            }
-            $text = $this->MergeSubFields[$currentSubReport][$entry];
+            # Type the Field sumarization
+            $entry = $this->entryTotalField->get_text();
+            $text = $this->MergeSubFields[$entry];
             $this->TypeChar(' ' . trim($text) . '_' . $function .  ' ');
         }
         else
         {
             # Type the field
-            $text = $this->MergeSubFields[$currentSubReport][$entry];
+            $entry = $this->entrySubField->get_text();
+            $text = $this->MergeSubFields[$entry];
             $this->TypeChar($text);
         }
     }
@@ -941,21 +896,10 @@ class MergeInterface
     /***********************************************************/
     /* add a sub field on pop-up
     /***********************************************************/
-    function addSubField($pixmap, $caption, $value, $currentSubReport=null)
+    function addSubField($pixmap, $caption, $value)
     {
-        if (!$currentSubReport)
-        {
-            $currentSubReport = $this->getCurrentSubReport();
-        }
-        if ($currentSubReport > 0)
-        {
-            $fieldsList = $this->SubSql[$currentSubReport]->comboSubFields->list;
-        }
-        else
-        {
-            $fieldsList = $this->comboSubFields->list;
-        }
-        $this->MergeSubFields[$currentSubReport][$caption] = $value;
+        $fieldsList = $this->comboSubFields->list;
+        $this->MergeSubFields[$caption] = $value;
         # SubField
         $item = &new GtkListItem();
         $box = &new GtkHBox();
@@ -974,17 +918,8 @@ class MergeInterface
     /***********************************************************/
     function addTotalField($pixmap, $caption, $value)
     {
-        $currentSubReport = $this->getCurrentSubReport();
-        /*if ($currentSubReport > 0)
-        {
-            $fieldsList = $this->SubSql[$currentSubReport]->comboSubFields->list;
-        }
-        else
-        {
-            $fieldsList = $this->comboSubFields->list;
-        }*/
         $fieldsTotalList = $this->comboTotalFields->list;
-        $this->MergeSubFields[$currentSubReport][$caption] = $value;
+        $this->MergeSubFields[$caption] = $value;
         # SubField Sumarization
         $item = &new GtkListItem();
         $box = &new GtkHBox();
@@ -999,72 +934,30 @@ class MergeInterface
     }
 
     /***********************************************************/
-    /* add a field to be summarized
-    /***********************************************************/
-    function addTotalFinalSummary($pixmap, $caption, $value)
-    {
-        $currentSubReport = $this->getCurrentSubReport();
-        $fieldsTotalFinalSummaryList = $this->comboTotalFinalSummary->list;
-        $this->MergeSubFields[$currentSubReport][$caption] = $value;
-
-        # SubField Sumarization
-        $item = &new GtkListItem();
-        $box = &new GtkHBox();
-        $arrow = &new GtkPixmap($pixmap[0], $pixmap[1]);
-        $label = &new GtkLabel($caption);
-        $box->pack_start($arrow, false, false);
-        $box->pack_start($label, false, false, 2);
-        $this->comboTotalFinalSummary->set_item_string($item, $caption);
-        $item->add($box);
-        $fieldsTotalFinalSummaryList->add($item);
-        $item->show_all();
-    }
-
-    /***********************************************************/
     /* Launched when users change the SELECT statement of
     /* Sub Query
     /***********************************************************/
-    function RefreshSubFields($currentSubReport=null)
+    function RefreshSubFields()
     {
         global $Pixmaps;
-        if (!$currentSubReport)
-        {
-            $currentSubReport = $this->getCurrentSubReport();
-        }
-        $Content   = @$this->SubSelectList[$currentSubReport]->Block['Select'][1];
+        $Content   = @$this->SubSelectList->Block['Select'][1];
         if ($Content)
         {
-            $Elements  = $this->SubSelectList[$currentSubReport]->GetSelectColumns(_a('Column'));
+            $Elements  = $this->SubSelectList->GetSelectColumns(_a('Column'));
             if ($Elements)
             {
-                $this->MergeSubFields[$currentSubReport] = null;
+                $this->MergeSubFields = null;
+                $fieldsList = $this->comboSubFields->list;
+                $fieldsList->clear_items(0, -1);
+                
+                $fieldsTotalList = $this->comboTotalFields->list;
+                $fieldsTotalList->clear_items(0, -1);
                 $i = 1;
-                if ($currentSubReport > 0 )
-                {
-                    $fieldsList = $this->SubSql[$currentSubReport]->comboSubFields->list;
-                    $fieldsList->clear_items(0, -1);
-                    $subRepot = $currentSubReport;
-                }
-                else
-                {
-                    $fieldsList = $this->comboSubFields->list;
-                    $fieldsList->clear_items(0, -1);
-
-                    $fieldsTotalFinalSummaryList = $this->comboTotalFinalSummary->list;
-                    $fieldsTotalFinalSummaryList->clear_items(0, -1);
-
-                    $fieldsTotalList = $this->comboTotalFields->list;
-                    $fieldsTotalList->clear_items(0, -1);
-                    $subRepot = null;
-                }
+                //$this->addSubField($Pixmaps['field'], _a('Counter'), ' $counter ');
                 foreach ($Elements as $Element)
                 {
-                    $this->addSubField(   $Pixmaps['field'], $Element, ' $' . $subRepot . 'subfield' . $i . ' ', $currentSubReport);
-                    if (!$subRepot)
-                    {
-                        $this->addTotalField( $Pixmaps['field'], $Element, ' $' . $subRepot . 'subfield' . $i . ' ', $currentSubReport);
-                        $this->addTotalFinalSummary( $Pixmaps['field'], $Element, ' $subfield' . $i . '_summary ', $currentSubReport);
-                    }
+                    $this->addSubField(   $Pixmaps['field'], $Element, ' $subfield' . $i . ' ');
+                    $this->addTotalField( $Pixmaps['field'], $Element, ' $subfield' . $i . ' ');
                     $i ++;
                 }
             }
@@ -1131,16 +1024,12 @@ class MergeInterface
     /***********************************************************/
     function Clear()
     {
-        for ($x=0; $x<=$this->numberSubReport; $x++)
-        {
-            $this->SubSelectList[$x]->LoadBlocks(null);
-        }
+        $this->SubSelectList->LoadBlocks(null);
         $this->textSections['@MergeHeader']->clear_all();
         $this->textSections['@GroupHeader']->clear_all();
         $this->textSections['@MergeDetail']->clear_all();
         $this->textSections['@GroupFooter']->clear_all();
         $this->textSections['@MergeFooter']->clear_all();
-        $this->textSections['@FinalSummary']->clear_all();
         $this->textSections['@LabelText']->clear_all();
         $this->PageValues = null;
     }
@@ -1176,71 +1065,13 @@ class MergeInterface
         }
     }
     
-    function addDetail($glade)
+    function addDetail()
     {
-        $Content   = @$this->SubSelectList[0]->Block['Select'][1];
-        if ($Content)
-        {
-            $box = new GtkHBox;
-            $this->numberSubReport++;
-            $lBox = new GtkHBox();
-            $label = new GtkLabel($this->numberSubReport);
-            //$delButton = &new GtkButton('-');
-            //$delButton->connect_object('clicked', array(&$this, 'delDetail'), $this->numberSubReport);
-            //$delButton->show();
-
-            $this->SubSql[$this->numberSubReport] = &new SubSql($this->eventAddDetail, array(&$this, 'TypeSubField'));
-
-            $this->SubSelectList[$this->numberSubReport] = &$this->SubSql[$this->numberSubReport]->selectList;
-            $this->SubSelectList[$this->numberSubReport]->connect_object('changed', array(&$this, 'RefreshSubFields'), $this->numberSubReport);
-            $this->SubAdjustmentsConfig[$this->numberSubReport] = &$this->SubSql[$this->numberSubReport]->SubAdjustmentsConfig;
-
-            $box->pack_start($this->SubSql[$this->numberSubReport]->widget);
-            $box->show_all();
-
-            $lBox->pack_start($label);
-            //$lBox->pack_start($delButton);
-
-            $label->show_all();
-            $this->SectionsNotebook->insert_page($box, $lBox, $this->numberSubReport+2);
-        }
-        else
-        {
-            new Dialog(_a('You Have to build the Sub SQL Query firstly'));
-        }
-    }
-
-    function delDetail($numberSubReport)
-    {
-        $this->numberSubReport--;
-        $this->SectionsNotebook->remove_page($numberSubReport+2);
-        unset($this->SubSelectList[$numberSubReport],
-              $this->SubSql[$numberSubReport],
-              $this->SubAdjustmentsConfig[$numberSubReport]);
-    }
-
-    function delAllDetail()
-    {
-        $numberSubReport = $this->numberSubReport;
-        for ($x=$numberSubReport; $x>=1; $x--)
-        {
-            $this->delDetail($x);
-        }
-    }
-
-    function getCurrentSubReport()
-    {
-        $currentSubReport = $this->SectionsNotebook->get_current_page()-2;
-        if ($currentSubReport < 0 || $currentSubReport > $this->numberSubReport)
-        {
-            return 0;
-        }
-        return $currentSubReport;
-    }
-
-    function eventAddDetail($event)
-    {
-        $this->eventAddDetail = $event;
+        $box = new GtkHBox;
+        $label = new GtkLabel('a');
+        $box->show_all();
+        $label->show_all();
+        $this->SectionsNotebook->insert_page($box, $label, 3);
     }
 }
 ?>

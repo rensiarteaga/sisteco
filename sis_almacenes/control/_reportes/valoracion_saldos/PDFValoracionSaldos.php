@@ -174,7 +174,7 @@ class PDF extends FPDF
 			
 			//$this->data[$i]['saldo_eco'] = $this->data[$i]['costo_ingreso'] - $this->data[$i]['costo_salida'];
 			
-			$total+=$this->data[$i]['saldo_eco'];
+			
 			
 			//$this->MultiTabla(array_merge( (array)$cont, (array)$this->data[$i]), 2,3,3.5,6);
 			
@@ -189,7 +189,7 @@ class PDF extends FPDF
 			else{
 				$costo_unitario = 0;			
 			}
-			
+			$total+=$saldo_eco;
 			$a_final = Array
 					(
 					    0 => $i+1,

@@ -33,7 +33,7 @@ class MyPdf extends FPDF
         include 'include/report_vars.inc';
         $ReportName = $this->ReportName;
         $page       = $this->PageNo();
-        $pagecounting = $totalPages = '{nb}';
+        $totalPages = '{nb}';
         
         
         if ($this->Parameters)
@@ -84,7 +84,7 @@ class MyPdf extends FPDF
         include 'include/report_vars.inc';
         $ReportName = $this->ReportName;
         $page       = $this->PageNo();
-        $pagecounting = $totalPages = '{nb}';
+        $totalPages = '{nb}';
         
         if ($this->Parameters)
         {

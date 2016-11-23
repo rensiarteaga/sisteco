@@ -1,2 +1,1 @@
 ../../sis_almacenes/
-../../sis_almain/

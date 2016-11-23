@@ -7,7 +7,6 @@
  * Autor:					Rensi Arteaga Copari
  *
  */
-
 class cls_CustomDBAlmacenes
 {
 	//variable que contiene la salida de la ejecución de la función
@@ -2516,6 +2515,17 @@ class cls_CustomDBAlmacenes
 		return $res;
 	}
 	
+	function ComposicionTUC($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad)
+	{
+		$this->salida = "";
+		$dbSalida = new cls_DBSalida($this->decodificar);
+		$res = $dbSalida ->ComposicionTUC($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad);
+		$this->salida = $dbSalida ->salida;
+		$this->query = $dbSalida ->query;
+		return $res;
+	}
+	
+	
 	function PedidoMaterialesUCDet($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad)
 	{
 		$this->salida = "";
@@ -2583,6 +2593,5 @@ class cls_CustomDBAlmacenes
 		$this->query = $dbSal ->query;
 		return $res;
 	}
-
 }
 ?>

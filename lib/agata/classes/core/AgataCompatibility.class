@@ -4,7 +4,7 @@ class AgataCompatibility
     function readReport($FileName)
     {
         $array = Xml2Array($FileName);
-        # From 7.2 to 7.5
+        # From 7.2 to 7.4
         if (!$array['Version'])
         {
             $new_array['Version']                       = '7.4';
@@ -33,7 +33,7 @@ class AgataCompatibility
             $new_array['DataSet']['Groups']['Config']['ShowLabel']   = $array['preferences']['showlabel'];
             $new_array['DataSet']['Groups']['Config']['ShowNumber']  = $array['preferences']['shownumber'];
             $new_array['DataSet']['Groups']['Config']['ShowIndent']  = $array['preferences']['showindent'];
-
+            
             if ($array['groups'])
             {
                 foreach ($array['groups'] as $group => $formulas)
@@ -41,7 +41,7 @@ class AgataCompatibility
                     $new_array['DataSet']['Groups']['Formulas'][ucwords($group)] = $formulas;
                 }
             }
-
+            
             if ($array['adjustments'])
             {
                 foreach ($array['adjustments'] as $column => $properties)
@@ -65,12 +65,12 @@ class AgataCompatibility
             
             $new_array['Merge']['ReportHeader']                                      = $array['merge']['header'];
             $new_array['Merge']['Details']['Detail1']['GroupHeader']                 = $array['merge']['groupheader'];
-            $new_array['Merge']['Details']['Detail1']['DataSet1']['Body']            = $array['merge']['detail'];
-            $new_array['Merge']['Details']['Detail1']['DataSet1']['Query']['Select']  = $array['merge']['query']['select'];
-            $new_array['Merge']['Details']['Detail1']['DataSet1']['Query']['From']    = $array['merge']['query']['from'];
-            $new_array['Merge']['Details']['Detail1']['DataSet1']['Query']['Where']   = $array['merge']['query']['where'];
-            $new_array['Merge']['Details']['Detail1']['DataSet1']['Query']['GroupBy'] = $array['merge']['query']['groupby'];
-            $new_array['Merge']['Details']['Detail1']['DataSet1']['Query']['OrderBy'] = $array['merge']['query']['orderby'];
+            $new_array['Merge']['Details']['Detail1']['Body']                        = $array['merge']['detail'];
+            $new_array['Merge']['Details']['Detail1']['DataSet']['Query']['Select']  = $array['merge']['query']['select'];
+            $new_array['Merge']['Details']['Detail1']['DataSet']['Query']['From']    = $array['merge']['query']['from'];
+            $new_array['Merge']['Details']['Detail1']['DataSet']['Query']['Where']   = $array['merge']['query']['where'];
+            $new_array['Merge']['Details']['Detail1']['DataSet']['Query']['GroupBy'] = $array['merge']['query']['groupby'];
+            $new_array['Merge']['Details']['Detail1']['DataSet']['Query']['OrderBy'] = $array['merge']['query']['orderby'];
             $new_array['Merge']['Details']['Detail1']['GroupFooter']                 = $array['merge']['groupfooter'];
             $new_array['Merge']['ReportFooter']                                      = $array['merge']['footer'];
             
@@ -81,18 +81,18 @@ class AgataCompatibility
             $new_array['Merge']['PageSetup']['TopMargin']                            = $array['merge']['pagesetup']['margintop'];
             $new_array['Merge']['PageSetup']['BottomMargin']                         = $array['merge']['pagesetup']['marginbottom'];
             $new_array['Merge']['PageSetup']['LineSpace']                            = $array['merge']['pagesetup']['linespace'];
-
+            
             if ($array['merge']['adjustments'])
             {
                 foreach ($array['merge']['adjustments'] as $column => $properties)
                 {
                     foreach ($properties as $property => $value)
                     {
-                        $new_array['Merge']['Details']['Detail1']['DataSet1']['Fields'][ucwords($column)][ucwords($property)] = $value;
+                        $new_array['Merge']['Details']['Detail1']['DataSet']['Fields'][ucwords($column)][ucwords($property)] = $value;
                     }
                 }
             }
-
+            
             $new_array['Label']['Body']                         =  $array['label']['body'];
             $new_array['Label']['Config']['HorizontalSpacing']  =  $array['label']['config']['horizontal_spacing'];
             $new_array['Label']['Config']['VerticalSpacing']    =  $array['label']['config']['vertical_spacing'];
@@ -104,22 +104,12 @@ class AgataCompatibility
             $new_array['Label']['Config']['Rows']               =  $array['label']['config']['label_rows'];
             $new_array['Label']['Config']['PageFormat']         =  $array['label']['config']['page_format'];
             $new_array['Label']['Config']['LineSpacing']        =  $array['label']['config']['line_spacing'];
-
+            
             return $new_array;
         }
-        elseif ($array['Version'] == '7.4') # From 7.4 to 7.5
-        {
-            $array['Version']                                               = '7.5';
-            $array['Report']['Merge']['Details']['Detail1']['NumberSubSql'] = 0;
-            $array['Merge']['Details']['Detail1']['DataSet1']               = $array['Merge']['Details']['Detail1']['DataSet'];
-            $array['Merge']['Details']['Detail1']['DataSet1']['Body']       = $array['Merge']['Details']['Detail1']['Body'];
-
-            unset($array['Merge']['Details']['Detail1']['Body'],
-                  $array['Merge']['Details']['Detail1']['DataSet']);
-
-        }
-
+        
         return $array;
+        
     }
 }
 ?>

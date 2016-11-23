@@ -52,7 +52,10 @@ class AgataHtml extends AgataReport
         {
             if (($this->ShowBreakColumns) || (!$this->ShowBreakColumns && !$this->Breaks[$col])) //aquipbreak
             {
-                $TdCols ++;
+                if (!$this->Adjustments[$n]['Hidden'])
+                {
+                    $TdCols ++;
+                }
             }
         }
 
@@ -151,9 +154,12 @@ class AgataHtml extends AgataReport
             {
                 $Column = $this->Columns[$z];
                 $align = $this->Adjustments[$z+1]['Align'];
-                fputs($fd, "<td align=$align bgcolor=$columnbgcolor> $columnfont1");
-                fputs($fd, trim($Column));
-                fputs($fd, "$columnfont2</td>");
+                if (!$this->Adjustments[$z+1]['Hidden'])
+                {
+                    fputs($fd, "<td align=$align bgcolor=$columnbgcolor> $columnfont1");
+                    fputs($fd, trim($Column));
+                    fputs($fd, "$columnfont2</td>");
+                }
             }
             fputs($fd, "</tr>\n");
         }
@@ -192,16 +198,25 @@ class AgataHtml extends AgataReport
                             $condfontset = TreatFont($fontface, $fontcolor);
                             $condfont1 = $condfontset[0];
                             $condfont2 = $condfontset[1];
-                            $stringline .= "<td bgcolor=$cbgcolor align=$align $x> $condfont1 $QueryCell $condfont2</td>";
+                            if (!$this->Adjustments[$y]['Hidden'])
+                            {
+                                $stringline .= "<td bgcolor=$cbgcolor align=$align $x> $condfont1 $QueryCell $condfont2</td>";
+                            }
                         }
                         else
                         {
-                            $stringline .= "<td align=$align $x> $datafont1 $QueryCell $datadfont2</td>";
+                            if (!$this->Adjustments[$y]['Hidden'])
+                            {
+                                $stringline .= "<td align=$align $x> $datafont1 $QueryCell $datadfont2</td>";
+                            }
                         }
                     }
                     else
                     {
-                        $stringline .= "<td align=$align $x> $datafont1 $QueryCell $datafont2</td>";
+                        if (!$this->Adjustments[$y]['Hidden'])
+                        {
+                            $stringline .= "<td align=$align $x> $datafont1 $QueryCell $datafont2</td>";
+                        }
                     }
                 }
             }
@@ -250,14 +265,17 @@ class AgataHtml extends AgataReport
                                 $w ++;
                                 if (($this->ShowBreakColumns) || (!$this->ShowBreakColumns && (!$this->Breaks[$w])))
                                 {
-                                    if ($content)
+                                    if (!$this->Adjustments[$w]['Hidden'])
                                     {
-                                        $align = $this->Adjustments[$w]['Align'];
-                                        fputs($fd, "<td align=$align bgcolor=$totalbgcolor> $totalfont1 $content $totalfont2</td>\n");
-                                    }
-                                    else
-                                    {
-                                        fputs($fd, "<td bgcolor=$totalbgcolor>&nbsp;</td>\n");
+                                        if ($content)
+                                        {
+                                            $align = $this->Adjustments[$w]['Align'];
+                                            fputs($fd, "<td align=$align bgcolor=$totalbgcolor> $totalfont1 $content $totalfont2</td>\n");
+                                        }
+                                        else
+                                        {
+                                            fputs($fd, "<td bgcolor=$totalbgcolor>&nbsp;</td>\n");
+                                        }
                                     }
                                 }
                             }
@@ -314,7 +332,10 @@ class AgataHtml extends AgataReport
                     if (($this->ShowBreakColumns) || (!$this->ShowBreakColumns && !$this->Breaks[($z +1)])) //aquipbreak
                     {
                         $align = $this->Adjustments[$z+1]['Align'];
-                        fputs($fd, "<td align=$align bgcolor=$columnbgcolor> $columnfont1 $Column $columnfont2</td>\n");
+                        if (!$this->Adjustments[$z+1]['Hidden'])
+                        {
+                            fputs($fd, "<td align=$align bgcolor=$columnbgcolor> $columnfont1 $Column $columnfont2</td>\n");
+                        }
                     }
                 }
                 fputs($fd, "</tr>\n");
@@ -395,15 +416,18 @@ class AgataHtml extends AgataReport
                             $w ++;
                             if (($this->ShowBreakColumns) || (!$this->ShowBreakColumns && (!$this->Breaks[$w])))
                             {
-                                if ($content)
+                                if (!$this->Adjustments[$w]['Hidden'])
                                 {
-                                    $align = $this->Adjustments[$w]['Align'];
-                                    fputs($fd, "<td align=$align bgcolor=$totalbgcolor>".
-                                               "$totalfont1 $content $totalfont2 </td>\n");
-                                }
-                                else
-                                {
-                                    fputs($fd, "<td bgcolor=$totalbgcolor align=right>&nbsp;</td>\n");
+                                    if ($content)
+                                    {
+                                        $align = $this->Adjustments[$w]['Align'];
+                                        fputs($fd, "<td align=$align bgcolor=$totalbgcolor>".
+                                                   "$totalfont1 $content $totalfont2 </td>\n");
+                                    }
+                                    else
+                                    {
+                                        fputs($fd, "<td bgcolor=$totalbgcolor align=right>&nbsp;</td>\n");
+                                    }
                                 }
                             }
                         }

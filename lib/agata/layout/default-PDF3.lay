@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <layout>
     <data>
-        <font>Helvetica--11</font>
+        <font>Helvetica--8</font>
         <color>#000001</color>
         <bgcolor>#e6e7e7</bgcolor>
     </data>
 
     <total>
-        <font>Helvetica-B-12</font>
+        <font>Helvetica-BI-12</font>
         <color>#5a5959</color>
         <bgcolor>#ffffff</bgcolor>
     </total>

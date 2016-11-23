@@ -279,7 +279,15 @@ function _gendoc()
 	/// Creamos el archivo 'manifest.xml'
 	$this->zip->addFile(utf8_encode (
 		"<?xml version=\"1.0\" encoding=\"UTF-8\"?".">\n".
-		"<!DOCTYPE manifest:manifest PUBLIC \"-//OpenOffice.org//DTD Manifest 1.0//EN\" \"Manifest.dtd\">\n"
+		'<!DOCTYPE manifest:manifest PUBLIC "-//OpenOffice.org//DTD Manifest 1.0//EN" "Manifest.dtd">
+        <manifest:manifest xmlns:manifest="http://openoffice.org/2001/manifest">
+         <manifest:file-entry manifest:media-type="application/vnd.sun.xml.writer" manifest:full-path="/"/>
+         <manifest:file-entry manifest:media-type="" manifest:full-path="Pictures/"/>
+         <manifest:file-entry manifest:media-type="text/xml" manifest:full-path="content.xml"/>
+         <manifest:file-entry manifest:media-type="text/xml" manifest:full-path="styles.xml"/>
+         <manifest:file-entry manifest:media-type="text/xml" manifest:full-path="meta.xml"/>
+         <manifest:file-entry manifest:media-type="text/xml" manifest:full-path="settings.xml"/>
+        </manifest:manifest>'
 		), "META-INF/manifest.xml");
 	
 	///// Creamos el archivo 'mimetype'

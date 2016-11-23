@@ -1,0 +1,84 @@
+<?
+/***********************************************************/
+/* FileBox, used to allows the user to choose colors
+/* by Pablo Dall'Oglio 2004-2006
+/***********************************************************/
+class HiddenBox
+{
+    /***********************************************************/
+    /* Constructor Method
+    /***********************************************************/
+    function HiddenBox($Description)
+    {
+        global $Pixmaps;
+        $tooltip = &new GtkTooltips;
+        //$this->entry = &new GtkEntry;
+        
+        $box = &new GtkHBox;
+        $this->widget = &new GtkCheckButton($Description);
+        //$this->button = new Button(array(&$this, 'HiddenSel'), _a('Get External Field'), $Pixmaps['field'], ICONBUTTON, $isdir, true);
+        //$this->button->set_relief(GTK_RELIEF_NONE);
+        
+        //$box->pack_start($this->entry);
+        //$box->pack_start($this->button);
+        //$box->pack_start($this->widget);
+    }
+    /***********************************************************/
+    /* Changes the color
+    /***********************************************************/
+    function set_text($data)
+    {
+        //$this->entry->set_text($data);
+        $this->widget->set_active($data);
+    }
+
+    function set_editable($bool)
+    {
+        //$this->widget->set_editable($bool);
+    }
+
+    /***********************************************************/
+    /* Returns the color
+    /***********************************************************/
+    function get_text()
+    {
+        return $this->widget->get_active();
+    }
+
+    /***********************************************************/
+    /* Changes the visibility
+    /***********************************************************/    
+    function set_visibility($bool)
+    {
+        //$this->entry->set_visibility($bool);
+    }
+
+    /***********************************************************/
+    /* Show the button
+    /***********************************************************/
+    function show()
+    {
+        $this->widget->show_all();
+    }
+
+    /***********************************************************/
+    /* Define the size
+    /***********************************************************/
+    function set_usize($width, $height)
+    {
+        $this->widget->set_usize($width, $height);
+    }
+
+
+    /***********************************************************/
+    /* KeyTest Method
+    /***********************************************************/
+    function KeyTest($obj, $window)
+    {
+        if ($obj->keyval == K_ESC)
+        {
+            $window->hide();
+        }
+    }
+}
+?>

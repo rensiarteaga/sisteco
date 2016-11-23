@@ -59,7 +59,7 @@ class AgataLabel extends AgataMerge
         $this->PDF->SetMargins($this->LeftMargin,$this->TopMargin,$this->RightMargin);
         $this->PDF->SetCreator('Agata Report');
         $this->PDF->SetTitle('Label');
-        $this->PDF->SetKeywords('www.agata.org.br');
+        $this->PDF->SetKeywords('pablo.blog.br/agata');
         $this->PDF->Open();
         $this->PDF->AliasNbPages();
         $this->SetFont('an10');

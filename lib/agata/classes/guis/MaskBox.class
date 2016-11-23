@@ -83,7 +83,7 @@ class MaskBox
         $this->entry_decimal_sep  = $glade_format->get_widget('entry_decimal_sep');
         $this->entry_thousand_sep = $glade_format->get_widget('entry_thousand_sep');
         $this->combo_negatives    = $glade_format->get_widget('combo_negatives');
-        $this->check_thousand     = $glade_format->get_widget('check_thousand');
+        //$this->check_thousand     = $glade_format->get_widget('check_thousand');
         $this->clist_masks        = $glade_format->get_widget('clist_masks');
         $this->entry_custom       = $glade_format->get_widget('entry_custom');
         $this->entry_currency     = $glade_format->get_widget('entry_currency');
@@ -192,14 +192,14 @@ class MaskBox
         $currency  = substr($this->entry_currency->get_text(),0,2);
         $suffix    = $this->entry_suffix->get_text();
         
-        if ($this->check_thousand->get_active())
+        //if ($this->check_thousand->get_active())
         {
             $thousand_sep = $this->entry_thousand_sep->get_text();
         }
-        else
+        /*else
         {
             $thousand_sep = '9';
-        }
+        }*/
         
         $format = '#' . str_pad($currency, 2, ' ', STR_PAD_LEFT) . $negative1 . '9' . $thousand_sep . '999' .
                         $this->entry_decimal_sep->get_text() . 

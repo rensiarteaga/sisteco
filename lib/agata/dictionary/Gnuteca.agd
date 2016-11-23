@@ -1,0 +1,984 @@
+<?xml version="1.0"?>
+<tables xmlns:dic='http://pablo.blog.br/agata'>
+    <dic:gtc_areageografica>
+        <dic:groups>
+            <dic:name>gnuteca</dic:name>
+        </dic:groups>
+
+        <dic:label>Tabela de Areas Geograficas</dic:label>
+        <dic:fields>
+            <dic:codigodaareageografica>
+                <dic:label>Codigo da Area Geografica</dic:label>
+            </dic:codigodaareageografica>
+
+            <dic:descricao>
+                <dic:label>Descricao da Area Geografica</dic:label>
+            </dic:descricao>
+
+        </dic:fields>
+
+    </dic:gtc_areageografica>
+
+    <dic:gtc_busca_enc>
+        <dic:groups>
+            <dic:name>gnuteca</dic:name>
+        </dic:groups>
+
+        <dic:label>Tabela de Busca de Encantado</dic:label>
+        <dic:fields>
+            <dic:campo>
+                <dic:label>Codigo da Etiqueta Marc</dic:label>
+            </dic:campo>
+
+            <dic:conteudo>
+                <dic:label>Conteudo da Etiqueta</dic:label>
+            </dic:conteudo>
+
+            <dic:numerodecontrole>
+                <dic:label>Numero de Controle</dic:label>
+                <dic:link>gtc_material.numerodecontrole</dic:link>
+            </dic:numerodecontrole>
+
+        </dic:fields>
+
+    </dic:gtc_busca_enc>
+
+    <dic:gtc_busca_her>
+        <dic:groups>
+            <dic:name>gnuteca</dic:name>
+        </dic:groups>
+
+        <dic:label>Tabela de Busca de Herbario</dic:label>
+        <dic:fields>
+            <dic:campo>
+                <dic:label>Codigo da Etiqueta Marc</dic:label>
+            </dic:campo>
+
+            <dic:conteudo>
+                <dic:label>Conteudo da Etiqueta</dic:label>
+            </dic:conteudo>
+
+            <dic:numerodecontrole>
+                <dic:label>Numero de Controle</dic:label>
+                <dic:link>gtc_material.numerodecontrole</dic:link>
+            </dic:numerodecontrole>
+
+        </dic:fields>
+
+    </dic:gtc_busca_her>
+
+    <dic:gtc_busca_laj>
+        <dic:groups>
+            <dic:name>gnuteca</dic:name>
+        </dic:groups>
+
+        <dic:label>Tabela de Busca de Lajeado</dic:label>
+        <dic:fields>
+            <dic:campo>
+                <dic:label>Codigo da Etiqueta Marc</dic:label>
+            </dic:campo>
+
+            <dic:conteudo>
+                <dic:label>Conteudo da Etiqueta</dic:label>
+            </dic:conteudo>
+
+            <dic:numerodecontrole>
+                <dic:label>Numero de Controle</dic:label>
+                <dic:link>gtc_material.numerodecontrole</dic:link>
+            </dic:numerodecontrole>
+
+        </dic:fields>
+
+    </dic:gtc_busca_laj>
+
+    <dic:gtc_busca_taq>
+        <dic:groups>
+            <dic:name>gnuteca</dic:name>
+        </dic:groups>
+
+        <dic:label>Tabela de Busca Taquari</dic:label>
+        <dic:fields>
+            <dic:campo>
+                <dic:label>Codigo da Etiqueta</dic:label>
+            </dic:campo>
+
+            <dic:conteudo>
+                <dic:label>Conteudo da Etiqueta</dic:label>
+            </dic:conteudo>
+
+            <dic:numerodecontrole>
+                <dic:label>Numero de Controle</dic:label>
+                <dic:link>gtc_material.numerodecontrole</dic:link>
+            </dic:numerodecontrole>
+
+        </dic:fields>
+
+    </dic:gtc_busca_taq>
+
+    <dic:gtc_busca_teu>
+        <dic:groups>
+            <dic:name>gnuteca</dic:name>
+        </dic:groups>
+
+        <dic:label>Tabela de Busca de Teutonia</dic:label>
+        <dic:fields>
+            <dic:campo>
+                <dic:label>Codigo da Etiqueta Marc</dic:label>
+            </dic:campo>
+
+            <dic:numerodecontrole>
+                <dic:link>gtc_material.numerodecontrole</dic:link>
+            </dic:numerodecontrole>
+
+        </dic:fields>
+
+    </dic:gtc_busca_teu>
+
+    <dic:gtc_composicao>
+        <dic:groups>
+            <dic:name>gnuteca</dic:name>
+        </dic:groups>
+
+        <dic:label>Tabela de Composicao Reserva</dic:label>
+        <dic:fields>
+            <dic:codigodareserva>
+                <dic:label>Codigo da Reserva</dic:label>
+                <dic:link>gtc_reserva.codigodareserva</dic:link>
+            </dic:codigodareserva>
+
+            <dic:foiconfirmada>
+                <dic:label>Reserva Foi Confirmada?</dic:label>
+            </dic:foiconfirmada>
+
+            <dic:numerodotombo>
+                <dic:label>Numero do Tombo</dic:label>
+                <dic:link>gtc_exemplar.numerodotombo</dic:link>
+            </dic:numerodotombo>
+
+        </dic:fields>
+
+    </dic:gtc_composicao>
+
+    <dic:gtc_direito>
+        <dic:groups>
+            <dic:name>gnuteca</dic:name>
+        </dic:groups>
+
+        <dic:label>Tabela de Direitos dos Grupos</dic:label>
+        <dic:fields>
+            <dic:codigodaoperacao>
+                <dic:label>Codigo da Operacao</dic:label>
+                <dic:link>gtc_operacao.codigodaoperacao</dic:link>
+            </dic:codigodaoperacao>
+
+            <dic:codigodogenero>
+                <dic:label>Codigo do Genero</dic:label>
+                <dic:link>gtc_genero.codigodogenero</dic:link>
+            </dic:codigodogenero>
+
+            <dic:codigodogrupo>
+                <dic:label>Codigo do Grupo</dic:label>
+            </dic:codigodogrupo>
+
+        </dic:fields>
+
+    </dic:gtc_direito>
+
+    <dic:gtc_emprestimo>
+        <dic:groups>
+            <dic:name>gnuteca</dic:name>
+        </dic:groups>
+
+        <dic:label>Tabela de Emprestimos</dic:label>
+        <dic:fields>
+            <dic:codigodapessoa>
+                <dic:label>Codigo da Pessoa</dic:label>
+            </dic:codigodapessoa>
+
+            <dic:codigodoemprestimo>
+                <dic:label>Codigo do Emprestimo</dic:label>
+            </dic:codigodoemprestimo>
+
+            <dic:codigodogrupo>
+                <dic:label>Codigo do Grupo</dic:label>
+            </dic:codigodogrupo>
+
+            <dic:codigodooperadordevolucao>
+                <dic:label>Codigo do Operador da Devolucao</dic:label>
+            </dic:codigodooperadordevolucao>
+
+            <dic:codigodooperadoremprestimo>
+                <dic:label>Codigo do Operador do Emprestimo</dic:label>
+            </dic:codigodooperadoremprestimo>
+
+            <dic:data1>
+                <dic:label>Data 1</dic:label>
+            </dic:data1>
+
+            <dic:data2>
+                <dic:label>Data 2</dic:label>
+            </dic:data2>
+
+            <dic:datahoradadevolucao>
+                <dic:label>Data-Hora da Devolucao</dic:label>
+            </dic:datahoradadevolucao>
+
+            <dic:datahoradoemprestimo>
+                <dic:label>Data-Hora do Emprestimo</dic:label>
+            </dic:datahoradoemprestimo>
+
+            <dic:datahoraprevisaodevolucao>
+                <dic:label>Data-Hora Previsao da Devolucao</dic:label>
+            </dic:datahoraprevisaodevolucao>
+
+            <dic:numerodotombo>
+                <dic:label>Numero do Tombo</dic:label>
+                <dic:link>gtc_exemplar.numerodotombo</dic:link>
+            </dic:numerodotombo>
+
+            <dic:quantidadederenovacoes>
+                <dic:label>Quantidade de Renovacoes</dic:label>
+            </dic:quantidadederenovacoes>
+
+            <dic:quantidadederenovacoesweb>
+                <dic:label>Quantidade de Renovacoes Web</dic:label>
+            </dic:quantidadederenovacoesweb>
+
+        </dic:fields>
+
+    </dic:gtc_emprestimo>
+
+    <dic:gtc_estado>
+        <dic:groups>
+            <dic:name>gnuteca</dic:name>
+        </dic:groups>
+
+        <dic:label>Tabela de Estados dos Exemplares</dic:label>
+        <dic:fields>
+            <dic:codigodoestado>
+                <dic:label>Codigo do Estado</dic:label>
+            </dic:codigodoestado>
+
+            <dic:descricao>
+                <dic:label>Descricao do Estado</dic:label>
+            </dic:descricao>
+
+            <dic:mnemonico>
+                <dic:label>Mnemonico do Estado</dic:label>
+            </dic:mnemonico>
+
+        </dic:fields>
+
+    </dic:gtc_estado>
+
+    <dic:gtc_etiqueta>
+        <dic:groups>
+            <dic:name>gnuteca</dic:name>
+        </dic:groups>
+
+        <dic:label>Tabelas de Etiquetas Marc21</dic:label>
+        <dic:fields>
+            <dic:descricao>
+                <dic:label>Descricao da Etiqueta</dic:label>
+            </dic:descricao>
+
+            <dic:emconsultas>
+                <dic:label>Em consultas</dic:label>
+            </dic:emconsultas>
+
+            <dic:emdemonstracao>
+                <dic:label>Em demonstracao</dic:label>
+            </dic:emdemonstracao>
+
+            <dic:emlistas>
+                <dic:label>Em Listas</dic:label>
+            </dic:emlistas>
+
+            <dic:estaativo>
+                <dic:label>Esta Ativo</dic:label>
+            </dic:estaativo>
+
+            <dic:etiqueta>
+                <dic:label>Etiqueta</dic:label>
+            </dic:etiqueta>
+
+            <dic:mnemonico>
+                <dic:label>Mnemonico</dic:label>
+            </dic:mnemonico>
+
+            <dic:observacao>
+                <dic:label>Observacao</dic:label>
+            </dic:observacao>
+
+            <dic:obsoleto>
+                <dic:label>Obsoleto</dic:label>
+            </dic:obsoleto>
+
+            <dic:subcampo>
+                <dic:label>Sub-campo</dic:label>
+            </dic:subcampo>
+
+            <dic:temrepeticoes>
+                <dic:label>Tem Repeticoes</dic:label>
+            </dic:temrepeticoes>
+
+            <dic:temsubcampos>
+                <dic:label>Tem Sub-campos</dic:label>
+            </dic:temsubcampos>
+
+        </dic:fields>
+
+    </dic:gtc_etiqueta>
+
+    <dic:gtc_exemplar>
+        <dic:groups>
+            <dic:name>gnuteca</dic:name>
+        </dic:groups>
+
+        <dic:label>Tabela de Exemplares</dic:label>
+        <dic:fields>
+            <dic:codigodaunidade>
+                <dic:label>Codigo da Unidade</dic:label>
+                <dic:link>gtc_unidade.codigodaunidade</dic:link>
+            </dic:codigodaunidade>
+
+            <dic:codigodoestado>
+                <dic:label>Codigo do Estado</dic:label>
+                <dic:link>gtc_estado.codigodoestado</dic:link>
+            </dic:codigodoestado>
+
+            <dic:codigodoexemplar>
+                <dic:label>Codigo do Exemplar</dic:label>
+            </dic:codigodoexemplar>
+
+            <dic:datadabaixa>
+                <dic:label>Data da Baixa</dic:label>
+            </dic:datadabaixa>
+
+            <dic:datadeentrada>
+                <dic:label>Data de Entrada</dic:label>
+            </dic:datadeentrada>
+
+            <dic:exemplar>
+                <dic:label>Exemplar</dic:label>
+            </dic:exemplar>
+
+            <dic:numerodecontrole>
+                <dic:label>Numero de Controle</dic:label>
+                <dic:link>gtc_material.numerodecontrole</dic:link>
+            </dic:numerodecontrole>
+
+            <dic:numerodotombo>
+                <dic:label>Numero do Tombo</dic:label>
+            </dic:numerodotombo>
+
+            <dic:observacao>
+                <dic:label>Observacao</dic:label>
+            </dic:observacao>
+
+            <dic:patrimonio>
+                <dic:label>Patrimonio</dic:label>
+            </dic:patrimonio>
+
+            <dic:tipodeaquisicao>
+                <dic:label>Tipo de Aquisicao</dic:label>
+            </dic:tipodeaquisicao>
+
+            <dic:tomo>
+                <dic:label>Tomo</dic:label>
+            </dic:tomo>
+
+            <dic:volume>
+                <dic:label>Volume</dic:label>
+            </dic:volume>
+
+        </dic:fields>
+
+    </dic:gtc_exemplar>
+
+    <dic:gtc_feriado>
+        <dic:groups>
+            <dic:name>gnuteca</dic:name>
+        </dic:groups>
+
+        <dic:label>Tabela de Feriados</dic:label>
+        <dic:fields>
+            <dic:datadoferiado>
+                <dic:label>Data do Feriado</dic:label>
+            </dic:datadoferiado>
+
+            <dic:descricao>
+                <dic:label>Descricao do Feriado</dic:label>
+            </dic:descricao>
+
+        </dic:fields>
+
+    </dic:gtc_feriado>
+
+    <dic:gtc_ficha>
+        <dic:groups>
+            <dic:name>gnuteca</dic:name>
+        </dic:groups>
+
+        <dic:label>Tabela de Fichas</dic:label>
+        <dic:fields>
+            <dic:campos>
+                <dic:label>Campos da Ficha</dic:label>
+            </dic:campos>
+
+            <dic:categoria>
+                <dic:label>Categoria da Ficha</dic:label>
+            </dic:categoria>
+
+            <dic:nivel>
+                <dic:label>Nivel da Ficha</dic:label>
+            </dic:nivel>
+
+        </dic:fields>
+
+    </dic:gtc_ficha>
+
+    <dic:gtc_genero>
+        <dic:groups>
+            <dic:name>gnuteca</dic:name>
+        </dic:groups>
+
+        <dic:label>Tabela de Generos dos Materiais</dic:label>
+        <dic:fields>
+            <dic:codigodogenero>
+                <dic:label>Codigo do Genero</dic:label>
+            </dic:codigodogenero>
+
+            <dic:descricao>
+                <dic:label>Descricao do Genero</dic:label>
+            </dic:descricao>
+
+        </dic:fields>
+
+    </dic:gtc_genero>
+
+    <dic:gtc_idiomas>
+        <dic:groups>
+            <dic:name>gnuteca</dic:name>
+        </dic:groups>
+
+        <dic:label>Tabela de Idiomas</dic:label>
+        <dic:fields>
+            <dic:codigodoidioma>
+                <dic:label>Codigo do Idioma</dic:label>
+            </dic:codigodoidioma>
+
+            <dic:descricao>
+                <dic:label>Descricao do Idioma</dic:label>
+            </dic:descricao>
+
+        </dic:fields>
+
+    </dic:gtc_idiomas>
+
+    <dic:gtc_material>
+        <dic:groups>
+            <dic:name>gnuteca</dic:name>
+        </dic:groups>
+
+        <dic:label>Tabela de Materiais</dic:label>
+        <dic:fields>
+            <dic:conteudo>
+                <dic:label>Conteudo</dic:label>
+            </dic:conteudo>
+
+            <dic:etiqueta>
+                <dic:label>Codigo da Etiqueta Marc</dic:label>
+                <dic:link>gtc_etiqueta.etiqueta</dic:link>
+            </dic:etiqueta>
+
+            <dic:indicador1>
+                <dic:label>Indicador 1</dic:label>
+            </dic:indicador1>
+
+            <dic:indicador2>
+                <dic:label>Indicador 2</dic:label>
+            </dic:indicador2>
+
+            <dic:linha>
+                <dic:label>Linha</dic:label>
+            </dic:linha>
+
+            <dic:numerodecontrole>
+                <dic:label>Numero de Controle</dic:label>
+            </dic:numerodecontrole>
+
+            <dic:subcampo>
+                <dic:label>Sub-campo da etiqueta Marc</dic:label>
+                <dic:link>gtc_etiqueta.subcampo</dic:link>
+            </dic:subcampo>
+
+        </dic:fields>
+
+    </dic:gtc_material>
+
+    <dic:gtc_multa>
+        <dic:groups>
+            <dic:name>gnuteca</dic:name>
+        </dic:groups>
+
+        <dic:label>Tabela de Multas</dic:label>
+        <dic:fields>
+            <dic:codigodamulta>
+                <dic:label>Codigo da Multa</dic:label>
+            </dic:codigodamulta>
+
+            <dic:codigodapessoa>
+                <dic:label>Codigo da Pessoa</dic:label>
+            </dic:codigodapessoa>
+
+            <dic:codigodoemprestimo>
+                <dic:label>Codigo do Emprestimo</dic:label>
+                <dic:link>gtc_emprestimo.codigodoemprestimo</dic:link>
+            </dic:codigodoemprestimo>
+
+            <dic:datahora>
+                <dic:label>Data-Hora</dic:label>
+            </dic:datahora>
+
+            <dic:datahorafinal>
+                <dic:label>Data Hora Final</dic:label>
+            </dic:datahorafinal>
+
+            <dic:foiabonada>
+                <dic:label>Foi Abonada?</dic:label>
+            </dic:foiabonada>
+
+            <dic:foipaga>
+                <dic:label>Foi Paga?</dic:label>
+            </dic:foipaga>
+
+            <dic:justificaabono>
+                <dic:label>Justifica Abono</dic:label>
+            </dic:justificaabono>
+
+            <dic:observacao>
+                <dic:label>Observacao</dic:label>
+            </dic:observacao>
+
+            <dic:operador>
+                <dic:label>Operador</dic:label>
+            </dic:operador>
+
+            <dic:operadorfinal>
+                <dic:label>Operador Final</dic:label>
+            </dic:operadorfinal>
+
+            <dic:valor>
+                <dic:label>Valor da Multa</dic:label>
+            </dic:valor>
+
+            <dic:viaboleto>
+                <dic:label>Via Boleto?</dic:label>
+            </dic:viaboleto>
+
+        </dic:fields>
+
+    </dic:gtc_multa>
+
+    <dic:gtc_opcao>
+        <dic:groups>
+            <dic:name>gnuteca</dic:name>
+        </dic:groups>
+
+        <dic:label>Tabela de Opcoes de Listagens</dic:label>
+        <dic:fields>
+            <dic:descricao>
+                <dic:label>Descricao da Opcao</dic:label>
+            </dic:descricao>
+
+            <dic:id>
+                <dic:label>Id da Opcao</dic:label>
+            </dic:id>
+
+            <dic:opcoes>
+                <dic:label>Opcoes para Listar</dic:label>
+            </dic:opcoes>
+
+        </dic:fields>
+
+    </dic:gtc_opcao>
+
+    <dic:gtc_operacao>
+        <dic:groups>
+            <dic:name>gnuteca</dic:name>
+        </dic:groups>
+
+        <dic:label>Tabela de Operacoes do Gnuteca</dic:label>
+        <dic:fields>
+            <dic:codigodaoperacao>
+                <dic:label>Codigo da Operacao</dic:label>
+            </dic:codigodaoperacao>
+
+            <dic:descricao>
+                <dic:label>Descricao da Operacao</dic:label>
+            </dic:descricao>
+
+            <dic:mnemonico>
+                <dic:label>Mnemonico da Operacao</dic:label>
+            </dic:mnemonico>
+
+        </dic:fields>
+
+    </dic:gtc_operacao>
+
+    <dic:gtc_paises>
+        <dic:groups>
+            <dic:name>gnuteca</dic:name>
+        </dic:groups>
+
+        <dic:label>Tabela de Paises</dic:label>
+        <dic:fields>
+            <dic:codigodopais>
+                <dic:label>Codigo do Pais</dic:label>
+            </dic:codigodopais>
+
+            <dic:descricao>
+                <dic:label>Descricao do Pais</dic:label>
+            </dic:descricao>
+
+        </dic:fields>
+
+    </dic:gtc_paises>
+
+    <dic:gtc_penalidade>
+        <dic:groups>
+            <dic:name>gnuteca</dic:name>
+        </dic:groups>
+
+        <dic:label>Tabela de Penalidades</dic:label>
+        <dic:fields>
+            <dic:codigodapenalidade>
+                <dic:label>Codigo da Penalidade</dic:label>
+            </dic:codigodapenalidade>
+
+            <dic:codigodapessoa>
+                <dic:label>Codigo da Pessoa</dic:label>
+            </dic:codigodapessoa>
+
+            <dic:datahorafinalpenalidade>
+                <dic:label>Data-Hora Final da Penalidade</dic:label>
+            </dic:datahorafinalpenalidade>
+
+            <dic:datahorapenalidade>
+                <dic:label>Data-Hora da Penalidade</dic:label>
+            </dic:datahorapenalidade>
+
+            <dic:descricao>
+                <dic:label>Descricao da Penalidade</dic:label>
+            </dic:descricao>
+
+            <dic:operador>
+                <dic:label>Operador</dic:label>
+            </dic:operador>
+
+        </dic:fields>
+
+    </dic:gtc_penalidade>
+
+    <dic:gtc_perfil>
+        <dic:groups>
+            <dic:name>gnuteca</dic:name>
+        </dic:groups>
+
+        <dic:label>Tabela de Perfil da Pessoa</dic:label>
+        <dic:fields>
+            <dic:codigodapessoa>
+                <dic:label>Codigo da Pessoa</dic:label>
+            </dic:codigodapessoa>
+
+            <dic:receberemailatrasado>
+                <dic:label>Receber Email Atrasado?</dic:label>
+            </dic:receberemailatrasado>
+
+            <dic:receberemailreserva>
+                <dic:label>Receber Email Reserva?</dic:label>
+            </dic:receberemailreserva>
+
+            <dic:receberemailvencimento>
+                <dic:label>Receber Email Vencimento?</dic:label>
+            </dic:receberemailvencimento>
+
+        </dic:fields>
+
+    </dic:gtc_perfil>
+
+    <dic:gtc_politica>
+        <dic:groups>
+            <dic:name>gnuteca</dic:name>
+        </dic:groups>
+
+        <dic:label>Tabela das Politicas dos Grupos</dic:label>
+        <dic:fields>
+            <dic:codigodogenero>
+                <dic:label>Codigo do Genero</dic:label>
+                <dic:link>gtc_genero.codigodogenero</dic:link>
+            </dic:codigodogenero>
+
+            <dic:codigodogrupo>
+                <dic:label>Codigo do Grupo</dic:label>
+            </dic:codigodogrupo>
+
+            <dic:diasdeemprestimo>
+                <dic:label>Dias de Emprestimo</dic:label>
+            </dic:diasdeemprestimo>
+
+            <dic:diasdereserva>
+                <dic:label>Dias de Reserva</dic:label>
+            </dic:diasdereserva>
+
+            <dic:limitedeemprestimo>
+                <dic:label>Limite de Emprestimos</dic:label>
+            </dic:limitedeemprestimo>
+
+            <dic:limitederenovacao>
+                <dic:label>Limite de Renovacao</dic:label>
+            </dic:limitederenovacao>
+
+            <dic:limitederenovacaoweb>
+                <dic:label>Limite de Renovacao Web</dic:label>
+            </dic:limitederenovacaoweb>
+
+            <dic:limitedereserva>
+                <dic:label>Limite de Reserva</dic:label>
+            </dic:limitedereserva>
+
+            <dic:reinicializabonusrenovacaoweb>
+                <dic:label>Reinicializar Bonus Renovacao Web</dic:label>
+            </dic:reinicializabonusrenovacaoweb>
+
+            <dic:valordamulta>
+                <dic:label>Valor da Multa</dic:label>
+            </dic:valordamulta>
+
+        </dic:fields>
+
+    </dic:gtc_politica>
+
+    <dic:gtc_preferencia>
+        <dic:groups>
+            <dic:name>gnuteca</dic:name>
+        </dic:groups>
+
+        <dic:label>Tabela de Preferencias do Sistema</dic:label>
+        <dic:fields>
+            <dic:chave>
+                <dic:label>Chave da Preferencia</dic:label>
+            </dic:chave>
+
+            <dic:conteudo>
+                <dic:label>Conteudo da Preferencia</dic:label>
+            </dic:conteudo>
+
+            <dic:descricao>
+                <dic:label>Descricao da Preferencia</dic:label>
+            </dic:descricao>
+
+            <dic:grupo>
+                <dic:label>Grupo da Preferencia</dic:label>
+            </dic:grupo>
+
+            <dic:variaveis>
+                <dic:label>Variaves da Preferencia</dic:label>
+            </dic:variaveis>
+
+        </dic:fields>
+
+    </dic:gtc_preferencia>
+
+    <dic:gtc_relatorio>
+        <dic:groups>
+            <dic:name>gnuteca</dic:name>
+        </dic:groups>
+
+        <dic:label>Tabela de Relatorios</dic:label>
+        <dic:fields>
+            <dic:codigodaunidade>
+                <dic:label>Codigo da Unidade</dic:label>
+            </dic:codigodaunidade>
+
+            <dic:codigodorelatorio>
+                <dic:label>Codigo do Relatorio</dic:label>
+            </dic:codigodorelatorio>
+
+            <dic:descricao>
+                <dic:label>Descricao do Relatorio</dic:label>
+            </dic:descricao>
+
+            <dic:etiqueta>
+                <dic:label>Codigo da Etiqueta Marc</dic:label>
+            </dic:etiqueta>
+
+            <dic:grupos>
+                <dic:label>Grupos para pesquisa</dic:label>
+            </dic:grupos>
+
+            <dic:subcampo>
+                <dic:label>Sub-campo da Etiqueta Marc</dic:label>
+            </dic:subcampo>
+
+        </dic:fields>
+
+    </dic:gtc_relatorio>
+
+    <dic:gtc_renovacao>
+        <dic:groups>
+            <dic:name>gnuteca</dic:name>
+        </dic:groups>
+
+        <dic:label>Tabela de Renovacoes</dic:label>
+        <dic:fields>
+            <dic:codigodarenovacao>
+                <dic:label>Codigo da Renovacao</dic:label>
+            </dic:codigodarenovacao>
+
+            <dic:codigodoemprestimo>
+                <dic:label>Codigo do Emprestimo</dic:label>
+            </dic:codigodoemprestimo>
+
+            <dic:codigodogrupo>
+                <dic:label>Codigo do Grupo</dic:label>
+            </dic:codigodogrupo>
+
+            <dic:codigodooperador>
+                <dic:label>Codigo do Operador</dic:label>
+            </dic:codigodooperador>
+
+            <dic:datahoradarenovacao>
+                <dic:label>Data-Hora da Renovacao</dic:label>
+            </dic:datahoradarenovacao>
+
+            <dic:datahoraprevisaodevolucao>
+                <dic:label>Data-Hora Previsao Devolucao</dic:label>
+            </dic:datahoraprevisaodevolucao>
+
+            <dic:renovacaoweb>
+                <dic:label>Renovacao Web?</dic:label>
+            </dic:renovacaoweb>
+
+        </dic:fields>
+
+    </dic:gtc_renovacao>
+
+    <dic:gtc_reserva>
+        <dic:groups>
+            <dic:name>gnuteca</dic:name>
+        </dic:groups>
+
+        <dic:label>Tabela de Reservas</dic:label>
+        <dic:fields>
+            <dic:codigodapessoa>
+                <dic:label>Codigo da Pessoa</dic:label>
+            </dic:codigodapessoa>
+
+            <dic:codigodareserva>
+                <dic:label>Codigo da Reserva</dic:label>
+            </dic:codigodareserva>
+
+            <dic:codigodasituacao>
+                <dic:label>Codigo da Situacao</dic:label>
+                <dic:link>gtc_situacao.codigodasituacao</dic:link>
+            </dic:codigodasituacao>
+
+            <dic:codigodooperador>
+                <dic:label>Codigo do Operador</dic:label>
+            </dic:codigodooperador>
+
+            <dic:datahoradareserva>
+                <dic:label>Data-Hora da Reserva</dic:label>
+            </dic:datahoradareserva>
+
+            <dic:datahoradasituacao>
+                <dic:label>Data-Hora da Situacao</dic:label>
+            </dic:datahoradasituacao>
+
+            <dic:datahoraentrada>
+                <dic:label>Data-Hora da Entrada</dic:label>
+            </dic:datahoraentrada>
+
+            <dic:datahoralimite>
+                <dic:label>Data-Hora Limite</dic:label>
+            </dic:datahoralimite>
+
+            <dic:foiavisado>
+                <dic:label>Foi Avisado?</dic:label>
+            </dic:foiavisado>
+
+        </dic:fields>
+
+    </dic:gtc_reserva>
+
+    <dic:gtc_situacao>
+        <dic:groups>
+            <dic:name>gnuteca</dic:name>
+        </dic:groups>
+
+        <dic:label>Tabela de Situacoes das Reservas</dic:label>
+        <dic:fields>
+            <dic:codigodasituacao>
+                <dic:label>Codigo da Situacao da Reserva</dic:label>
+            </dic:codigodasituacao>
+
+            <dic:descricao>
+                <dic:label>Descricao da Reserva</dic:label>
+            </dic:descricao>
+
+            <dic:mnemonico>
+                <dic:label>Mnemonico da Reserva</dic:label>
+            </dic:mnemonico>
+
+        </dic:fields>
+
+    </dic:gtc_situacao>
+
+    <dic:gtc_transicao>
+        <dic:groups>
+            <dic:name>gnuteca</dic:name>
+        </dic:groups>
+
+        <dic:label>Tabela de Transicao das Operacoes</dic:label>
+        <dic:fields>
+            <dic:codigodaoperacao>
+                <dic:label>Codigo da Operacao</dic:label>
+                <dic:link>gtc_operacao.codigodaoperacao</dic:link>
+            </dic:codigodaoperacao>
+
+            <dic:codigodoestadofuturo>
+                <dic:label>Codigo do Estado Futuro</dic:label>
+                <dic:link>gtc_estado.codigodoestado</dic:link>
+            </dic:codigodoestadofuturo>
+
+            <dic:codigodoestadopresente>
+                <dic:label>Codigo do Estado Presente</dic:label>
+                <dic:link>gtc_estado.codigodoestado</dic:link>
+            </dic:codigodoestadopresente>
+
+        </dic:fields>
+
+    </dic:gtc_transicao>
+
+    <dic:gtc_unidade>
+        <dic:groups>
+            <dic:name>gnuteca</dic:name>
+        </dic:groups>
+
+        <dic:label>Tabela das Unidades da Biblioteca</dic:label>
+        <dic:fields>
+            <dic:codigodaunidade>
+                <dic:label>Codigo da Unidade</dic:label>
+            </dic:codigodaunidade>
+
+            <dic:descricao>
+                <dic:label>Descricao da Unidade</dic:label>
+            </dic:descricao>
+
+        </dic:fields>
+
+    </dic:gtc_unidade>
+
+</tables>

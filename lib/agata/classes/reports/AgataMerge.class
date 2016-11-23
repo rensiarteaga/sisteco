@@ -19,12 +19,8 @@ class AgataMerge
         $this->XmlArray     = $params[4];
         $this->posAction    = $params[5];
         $this->Parameters   = $params[6];
-        $this->oneRecordPerPage = $params[7];
         $this->Adjustments  = Report::ExtractAdjustments($this->XmlArray['Report']['DataSet']);
-        for ($x=0;$x<=$this->XmlArray['Report']['Merge']['Details']['Detail1']['NumberSubSql']; $x++)
-        {
-            $this->SubAdjustments[$x]=Report::ExtractAdjustments($this->XmlArray['Report']['Merge']['Details']['Detail1']['DataSet'.($x+1)]);
-        }
+        $this->SubAdjustments=Report::ExtractAdjustments($this->XmlArray['Report']['Merge']['Details']['Detail1']['DataSet']);
     }
 
     /***********************************************************/
@@ -309,28 +305,7 @@ class AgataMerge
                 $cellWidth= substr($Line, $pos+8, 3);
                 $cellAlign= substr($Line, $pos+7, 1);
                 $border   = (substr($Line, $pos+6, 1) == 'B') ? 1 : 0;
-
-                if ( !$this->oneRecordPerPage )
-                {
-                    if ($this->Orientation == 'landscape')
-                    {
-                        $limit = $this->Pages[$this->PageFormat][0];
-                    }
-                    else
-                    {
-                        $limit = $this->Pages[$this->PageFormat][1];
-                    }
-                    if ($this->PDF->GetY() >= $limit - $this->FooterMargin - 20 )
-                    {
-                        $x_ = $this->PDF->GetX();
-                        $this->PDF->AddPage($this->Orientation);
-                        $this->page++;
-                        $this->PDF->SetX($x_);
-                        $this->PDF->SetY($this->TopMargin);
-                        $this->PDF->SetLeftMargin($x_);
-                    }  
-                }
- 
+                
                 $x0 = $this->PDF->GetX();
                 $y0 = $this->PDF->GetY();
                 
@@ -342,18 +317,17 @@ class AgataMerge
                 else
                 {
                     $offset = strlen($Line);
-                } 
+                }
                 
                 $this->PDF->MultiCell($cellWidth,$this->LineHeight,$cellLine, $border, $cellAlign, $fill);
                 
                 $diffY = $this->PDF->GetY() - $y0;
                 $this->LastHeight = $diffY > $this->LastHeight ? $diffY : $this->LastHeight;
-               
+                
                 $this->PDF->SetX($x0 + $cellWidth);
                 $this->PDF->SetY($y0);
                 $this->PDF->SetLeftMargin($x0 + $cellWidth);
-
-            #frameBC200lskjfaslfsdf #tab
+                #frameBC200lskjfaslfsdf #tab
             }
             else if (substr($Line,$pos,5)=='#elip')
             {

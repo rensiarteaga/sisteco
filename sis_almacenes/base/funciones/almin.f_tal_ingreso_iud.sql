@@ -179,6 +179,8 @@ DECLARE
     g_ep                          text;
     g_gestion					  varchar;
     v_desc_item					  varchar;
+    g_id_parametro_almacen_logico	integer;
+    v_finalizacion_tmp				date;
 
 BEGIN
 
@@ -369,7 +371,12 @@ BEGIN
             g_respuesta := 't'||g_separador||g_descripcion_log_error||g_separador||g_id_ingreso;
 
         END;
-
+    /*
+      Autor:    RAC
+      fecha:    07/12/2016
+      Desc:		recalcular  la gestion al editar ingresos
+    
+    */
     ELSIF pm_codigo_procedimiento = 'AL_OINSOL_UPD' THEN
         -- Para modificar la solicitud de orden de ingreso que aún esté en borrador
         BEGIN
@@ -457,6 +464,21 @@ BEGIN
 
             --Obtiene la moneda principal (cambiar)
             g_id_moneda_nacionaliz=1;
+            
+             -- OBTIENE LA GESTIÓN VIGENTE RAC
+            SELECT 
+               l.id_parametro_almacen,
+               l.id_parametro_almacen_logico
+            INTO 
+               g_id_parametro_almacen,
+               g_id_parametro_almacen_logico
+            FROM almin.tal_parametro_almacen_logico l
+            WHERE     estado  = 'abierto'
+                  and  l.id_almacen_logico = al_id_almacen_logico;
+                  
+             IF g_id_parametro_almacen_logico is null THEN
+                raise exception 'no se encontro gestión para el almacen lógico';
+             END IF;     
 
             UPDATE almin.tal_ingreso SET
             descripcion                 = al_descripcion,
@@ -486,7 +508,9 @@ BEGIN
             dui                            = al_dui,
             monto_tot_factura            = al_monto_tot_factura,
             id_moneda_import            = al_id_moneda_import,
-            id_moneda_nacionaliz        = g_id_moneda_nacionaliz
+            id_moneda_nacionaliz        = g_id_moneda_nacionaliz,
+            id_parametro_almacen =  g_id_parametro_almacen,
+            id_parametro_almacen_logico = g_id_parametro_almacen_logico
             WHERE id_ingreso = al_id_ingreso;
 
             -- DESCRIPCIÓN DE ÉXITO PARA GUARDAR EN EL LOG
@@ -1686,11 +1710,34 @@ BEGIN
 
             --SE VERIFICA SI EL ALMACÉN ESTÁ BLOQUEADO O CERRADO
             SELECT
-            	id_almacen_logico
+            	id_almacen_logico,
+                id_parametro_almacen,
+                 id_almacen_logico
             INTO
-            	g_id_almacen_logico            
+            	g_id_almacen_logico,
+                g_id_parametro_almacen  ,
+                g_id_almacen_logico         
             FROM almin.tal_ingreso i
             WHERE id_ingreso = al_id_ingreso;
+            
+             --  validar que la fecha de inalizacion este dentro de la gestion 
+            select 
+               pa.gestion
+              into
+               g_gestion
+            from almin.tal_parametro_almacen pa 
+            where pa.id_parametro_almacen =  g_id_parametro_almacen;
+                    
+             v_finalizacion_tmp = now();
+            IF v_finalizacion_tmp < ('01/01/'||g_gestion::varchar)::date   THEN
+               v_finalizacion_tmp = ('01/01/'||g_gestion::varchar)::date;
+            END IF;
+            
+             IF  v_finalizacion_tmp > ('12/31/'||g_gestion::varchar)::date THEN
+               v_finalizacion_tmp =  ('12/31/'||g_gestion::varchar)::date;
+            END IF;
+            
+             
 
             IF almin.f_al_verificar_almacen_cerrado('logico',g_id_almacen_logico) THEN
 
@@ -1718,7 +1765,7 @@ BEGIN
                     --  ACTUALIZA EL ESTADO DE LA TRANSFERENCIA COMO FINALIZADO
                     UPDATE almin.tal_transferencia SET
                     estado_transferencia     = 'Finalizado',
-                    fecha_finalizado_anulado = now()
+                    fecha_finalizado_anulado = v_finalizacion_tmp
                     WHERE id_transferencia = g_id_transferencia;
                 
             END IF;
@@ -1770,28 +1817,12 @@ BEGIN
                     UPDATE almin.tal_ingreso SET
                       estado_ingreso               = 'Finalizado',
                       --observaciones                = al_observaciones,
-                      fecha_finalizado_cancelado   = COALESCE(fecha_finalizado_cancelado,now()),
+                      fecha_finalizado_cancelado   =  v_finalizacion_tmp,
                       correlativo_ing                 = g_correl,
                       fecha_finalizado_exacta = now()
                     WHERE id_ingreso = al_id_ingreso;
 
-                    --***ACTUALIZACIÓN DEL KARDEX LÓGICO
-                    -- Se obtiene el almacén lógico
-                    SELECT id_almacen_logico
-                    INTO g_id_almacen_logico
-                    FROM almin.tal_ingreso
-                    WHERE id_ingreso = al_id_ingreso;
-            
-                    OPEN g_cursor_ing_det(al_id_ingreso);
                    
-                    --TODO RAC verificar la gestion por almacen logico, parapermitir el cierre individual
-                    
-                    SELECT id_parametro_almacen
-                    INTO g_id_parametro_almacen
-                    FROM almin.tal_parametro_almacen
-                    WHERE cierre = 'no';
-                    
-                    
 
                     IF g_id_parametro_almacen IS NULL THEN
                         g_nivel_error := '3';
@@ -1808,8 +1839,10 @@ BEGIN
                     END IF;
                     
                     
+                   
                     
                     
+                      OPEN g_cursor_ing_det(al_id_ingreso);
                     
 
                     LOOP
@@ -1868,7 +1901,7 @@ BEGIN
 
                              INSERT INTO almin.tal_kardex_logico(
                              estado_item             ,stock_minimo           ,cantidad             ,costo_unitario,
-                             costo_total                ,reservado              ,id_item,
+                             costo_total             ,reservado              ,id_item,
                              id_almacen_logico       ,id_parametro_almacen
                              ) VALUES(
                              g_registros.estado_item ,10                     ,g_registros.cantidad ,COALESCE(g_registros.costo_unitario,0),
@@ -1905,6 +1938,13 @@ BEGIN
             g_respuesta := 't'||g_separador||g_descripcion_log_error;
 
         END;
+        
+    /*
+    Autor:		RAC
+    Fecha:		03/12/2016
+    Desc:		Se agrega el parametro id_parametro_almacen_logico para permitir lso cierres y aperturas de gestion de manera individual
+    
+    */
 
     ELSIF pm_codigo_procedimiento = 'AL_OIPROY_INS' THEN
         --Para insertar una solicitud de orden de ingreso para Proyectos
@@ -1971,11 +2011,20 @@ BEGIN
 
            
             
-            -- OBTIENE LA GESTIÓN VIGENTE
-            SELECT id_parametro_almacen
-            INTO g_id_parametro_almacen
-            FROM almin.tal_parametro_almacen
-            WHERE cierre = 'no';
+            -- OBTIENE LA GESTIÓN VIGENTE RAC
+            SELECT 
+               l.id_parametro_almacen,
+               l.id_parametro_almacen_logico
+            INTO 
+               g_id_parametro_almacen,
+               g_id_parametro_almacen_logico
+            FROM almin.tal_parametro_almacen_logico l
+            WHERE     estado  = 'abierto'
+                  and  l.id_almacen_logico = al_id_almacen_logico;
+            
+            
+            
+            
 
             IF g_id_parametro_almacen IS NULL THEN
 
@@ -2050,25 +2099,8 @@ BEGIN
                     RETURN 'f'||g_separador||g_respuesta||g_separador||g_reg_evento;
                 END IF;
 
-            --OBTIENE EL CORRELATIVO
-            /*g_correl = almin.f_al_obtener_correlativo('INGRES',to_char(COALESCE(al_fecha_reg,now()),'mm'));
-            IF g_correl = -1 THEN
-                g_nivel_error := '3';
-                g_descripcion_log_error := 'Ingreso no registrado: No se pudo obtener el correlativo';
-                g_respuesta := param.f_pm_mensaje_error(g_descripcion_log_error, g_nombre_funcion, g_nivel_error, pm_codigo_procedimiento);
+           
 
-                --REGISTRA EL LOG
-                g_reg_evento:= sss.f_tsg_registro_evento(pm_id_usuario             ,g_id_subsistema           ,g_id_lugar         ,g_descripcion_log_error,
-                                                         pm_ip_origen              ,pm_mac_maquina            ,'error'            ,NULL,
-                                                         pm_codigo_procedimiento   ,pm_proc_almacenado);
-
-                --DEVUELVE MENSAJE DE ERROR
-                RETURN 'f'||g_separador||g_respuesta||g_separador||g_reg_evento;
-            END IF;*/
-
-            --raise exception 'correlativo: %',g_correl;
-
-            --g_act = almin.f_al_actualizar_correlativo('INGRES',to_char(COALESCE(al_fecha_reg,now()),'mm'));
 
             --OBTIENE LA MONEDA PRINCIPAL (CAMBIAR CON FUNCION)
             g_id_moneda_principal = 1;
@@ -2086,7 +2118,7 @@ BEGIN
             importacion              ,flete                  ,seguro                      ,gastos_alm,
             gastos_aduana            ,iva                    ,rep_form                    ,peso_neto,
             id_moneda_import         ,id_moneda_nacionaliz   ,dui                         ,monto_tot_factura,
-            circuito
+            circuito,				  id_parametro_almacen_logico
             ) VALUES (
             al_descripcion,
             al_costo_total           ,g_contabilizar         ,'Borrador'                  ,'activo',
@@ -2099,7 +2131,7 @@ BEGIN
             al_importacion           ,al_flete               ,al_seguro                   ,al_gastos_alm,
             al_gastos_aduana         ,al_iva                 ,al_rep_form                 ,al_peso_neto,
             al_id_moneda_import      ,g_id_moneda_principal  ,al_dui                      ,al_monto_tot_factura,
-            'Simplificado'
+            'Simplificado',			  g_id_parametro_almacen_logico
             );
 
             -- DESCRIPCIÓN DE ÉXITO PARA GUARDAR EN EL LOG

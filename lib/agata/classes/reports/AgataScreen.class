@@ -36,8 +36,11 @@ class AgataScreen extends AgataReport
             $Column = trim($this->Columns[$z]);
             if (($this->ShowBreakColumns) || (!$this->ShowBreakColumns && !$this->Breaks[($z +1)])) //aquipbreak
             {
-                $TreeColumns[] = $Column;
-                $EmptyColumns[] = '';
+                if (!$this->Adjustments[$z+1]['Hidden'])
+                {
+                    $TreeColumns[] = $Column;
+                    $EmptyColumns[] = '';
+                }
             }
         }
         
@@ -141,7 +144,10 @@ class AgataScreen extends AgataReport
                 
                 if (($this->ShowBreakColumns) || (!$this->ShowBreakColumns && !$this->Breaks[$y])) //aquipbreak
                 {
-                    $stringline[] = $QueryCell;
+                    if (!$this->Adjustments[$y]['Hidden'])
+                    {
+                        $stringline[] = $QueryCell;
+                    }
                 }
             }
             
@@ -180,14 +186,17 @@ class AgataScreen extends AgataReport
                                 $w ++;
                                 if (($this->ShowBreakColumns) || (!$this->ShowBreakColumns && (!$this->Breaks[$w]))) //aquipbreak
                                 {
-                                    if ($content)
+                                    if (!$this->Adjustments[$w]['Hidden'])
                                     {
-                                        $totalline[] = trim($content);
-                                        $withcontent = true;
-                                    }
-                                    else
-                                    {
-                                        $totalline[] = null;
+                                        if ($content)
+                                        {
+                                            $totalline[] = trim($content);
+                                            $withcontent = true;
+                                        }
+                                        else
+                                        {
+                                            $totalline[] = null;
+                                        }
                                     }
                                 }
                             }
@@ -285,14 +294,17 @@ class AgataScreen extends AgataReport
                             $w ++;
                             if (($this->ShowBreakColumns) || (!$this->ShowBreakColumns && (!$this->Breaks[$w])))  //aquipbreak
                             {
-                                if ($content)
+                                if (!$this->Adjustments[$w]['Hidden'])
                                 {
-                                    $totalline[] = trim($content);
-                                    $withcontent = true;
-                                }
-                                else
-                                {
-                                    $totalline[] = null;
+                                    if ($content)
+                                    {
+                                        $totalline[] = trim($content);
+                                        $withcontent = true;
+                                    }
+                                    else
+                                    {
+                                        $totalline[] = null;
+                                    }
                                 }
                             }
                         }
@@ -357,7 +369,12 @@ class AgataScreen extends AgataReport
         $OutputDir = $this->agataConfig['general']['OutputDir'];
         $button = array('interface/output.xpm', _a('Output'), $OutputDir);
         $message = _a('Export to ' . strtoupper($type) . ' File');
-        new FileDialog($message, array($type), $button, $OutputDir, array(&$this, 'Generate'), $type);
+        $dialog = new FileDialog($message, array($type), $button, $OutputDir, array(&$this, 'Generate'), $type);
+        
+        if ($this->FileName)
+        {
+            $dialog->set_filename(RemoveExtension(GetFileName($this->FileName)) . ".{$type}");
+        }
     }
 
     function Generate($fileselection, $type)

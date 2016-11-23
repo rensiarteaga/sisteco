@@ -131,7 +131,7 @@ class AgataReport
                 
                 // if ($break == $y)
                 {
-                    $ClearColumns = null;
+                    $ClearColumns = array();
                     # Change in the algorithm: Instead of analize the last break change,
                     # analize all break changes.
                     $this->Summary[$break]['ActualValue'] = $QueryLine[$break];
@@ -170,7 +170,7 @@ class AgataReport
                                 }
                                 
                                 $this->BreakMatrix[$break][$column][] = $cellBreakContent;
-                                $ClearColumns = @array_merge($ClearColumns, $columns);
+                                $ClearColumns = array_merge($ClearColumns, $columns);
                             }
                             $FormattedCell = FormatMask($this->Adjustments[$y]['Mask'], $QueryLine[$break]);
                             $this->Headers[$CountBreak] = trim($this->Columns[$y -1]) . " : " . trim($FormattedCell);
@@ -239,7 +239,7 @@ class AgataReport
                 $break = $Break;
                 $Formulas = MyExplode($Formulafull, null);
                 
-                $ClearColumns = null;
+                $ClearColumns = array();
                 foreach ($Formulas as $Formula)
                 {
                     list($result, $column, $formula, $label, $columns) = $this->ProcessFormula($break, $Formula);

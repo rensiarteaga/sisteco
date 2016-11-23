@@ -245,7 +245,7 @@ class AgataMergeSxw extends AgataMerge
 		
 		$this->sxw = &new pdw_document();
 		$this->sxw->AddPageDef(array('name'=>'Standard','w'=>$width,'h'=>$height,'margins'=>$margins));
-		$this->sxw->SetKeywords('www.agata.org.br');
+		$this->sxw->SetKeywords('pablo.blog.br/agata');
 		$this->sxw->SetLanguage('en','US');
 		$this->sxw->SetTitle($FileName);
 		$this->sxw->SetAuthor('Agata Report');
@@ -321,6 +321,7 @@ class AgataMergeSxw extends AgataMerge
                 }
             }
         }
+
         $textMerge = $this->XmlArray['report']['merge'][$key];
 
         for ($y=1; $y<=count($this->QueryLine); $y++)

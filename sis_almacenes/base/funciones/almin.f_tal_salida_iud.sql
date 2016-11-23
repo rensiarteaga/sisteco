@@ -190,6 +190,11 @@ DECLARE
     g_costo_total_kardex		numeric;
     v_total_cant_solicitada		numeric;
     v_desc_item					varchar;
+    g_id_parametro_almacen_logico			integer;
+    g_id_parametro_almacen_salida			integer;
+    g_id_parametro_almacen_logico_salida	integer;
+    v_finalizacion_tmp						date;
+    g_gestion								integer;
 
 BEGIN
 
@@ -237,7 +242,8 @@ BEGIN
             g_privilegio_procedimiento := TRUE;
         END IF;
     END IF;
-
+    
+   -- raise exception 'llega';
 
     ---*** VERIFICACIÓN DE PERMISOS DEL USUARIO
     IF NOT g_privilegio_procedimiento THEN
@@ -276,6 +282,8 @@ BEGIN
     END IF;
 
     -- OBTIENE LA GESTIÓN VIGENTE
+    
+    /*  RAC 01/12/2016,comentado para que saltaen los errores de revision de la gestion vigente
     SELECT id_parametro_almacen
     INTO g_id_parametro_almacen
     FROM almin.tal_parametro_almacen
@@ -294,7 +302,17 @@ BEGIN
         --DEVUELVE MENSAJE DE ERROR
         RETURN 'f'||g_separador||g_respuesta||g_separador||g_reg_evento;
     END IF;
-
+   */ -- FIN RAC 
+      
+     /*
+       Autor: RAC
+       Fecha: 5/12/2016
+       DESC:  al isnertar epdido se define el parametro almacen logico para permitir que los almacenes trabajen en gestiones independientes
+     
+     */ 
+      
+      
+      
       --*** EJECUCIÓN DEL PROCEDIMIENTO ESPECÍFICO
     IF pm_codigo_procedimiento = 'AL_PEDIDO_INS' THEN
 
@@ -329,20 +347,7 @@ BEGIN
             --OBTENER EL CORRELATIVO SIGUIENTE
             g_correlativo_ped := 0;--almin.f_al_obtener_correlativo('PEDIDO');
 
-            /*IF g_correlativo_ped < 0 THEN
-
-                g_nivel_error := '3';
-                g_descripcion_log_error := 'Error al obtener correlativo';
-                g_respuesta := param.f_pm_mensaje_error(g_descripcion_log_error, g_nombre_funcion, g_nivel_error, pm_codigo_procedimiento);
-
-                --REGISTRA EL LOG
-                g_reg_evento:= sss.f_tsg_registro_evento(pm_id_usuario             ,g_id_subsistema           ,g_id_lugar         ,g_descripcion_log_error,
-                                                     pm_ip_origen              ,pm_mac_maquina            ,'error'            ,NULL,
-                                                     pm_codigo_procedimiento   ,pm_proc_almacenado);
-
-                --DEVUELVE MENSAJE DE ERROR
-                RETURN 'f'||g_separador||g_respuesta||g_separador||g_reg_evento;
-            END IF; */
+       
 
             -- SE OBTIENE LA FIRMA AUTORIZADA CORRESPONDIENTE
            SELECT
@@ -385,10 +390,15 @@ BEGIN
             WHERE ALMLOG.id_almacen_logico = al_id_almacen_logico;
 
             -- OBTIENE LA GESTIÓN VIGENTE
-            SELECT id_parametro_almacen
-            INTO g_id_parametro_almacen
-            FROM almin.tal_parametro_almacen
-            WHERE cierre = 'no';
+            SELECT 
+                pl.id_parametro_almacen,
+                pl.id_parametro_almacen_logico
+            INTO 
+                g_id_parametro_almacen,
+                g_id_parametro_almacen_logico
+            FROM almin.tal_parametro_almacen_logico pl
+            WHERE      pl.estado = 'abierto'
+                  and pl.id_almacen_logico = al_id_almacen_logico;
 
             IF g_id_parametro_almacen IS NULL THEN
 
@@ -407,8 +417,9 @@ BEGIN
 
             -- Obtiene el Almacenero
             SELECT
-            RESALM.id_responsable_almacen
-            INTO g_id_responsable_almacen
+                RESALM.id_responsable_almacen
+            INTO 
+                 g_id_responsable_almacen
             FROM almin.tal_almacen_logico ALMLOG
             INNER JOIN almin.tal_almacen_ep ALMAEP
             ON ALMAEP.id_almacen_ep = ALMLOG.id_almacen_ep
@@ -462,27 +473,27 @@ BEGIN
             END IF;  
             
             INSERT INTO almin.tal_salida(
-            correlativo_vale               ,descripcion                ,contabilizar,
-            estado_salida                  ,estado_registro            ,motivo_cancelacion             ,id_responsable_almacen,
-            id_almacen_logico              ,id_empleado                ,id_firma_autorizada            ,id_contratista,
-            id_tipo_material               ,id_institucion             ,id_subactividad                ,fecha_borrador,
-            fecha_pendiente                ,fecha_aprobado_rechazado   ,fecha_entregado                ,fecha_provisional,
-            fecha_consolidado              ,fecha_finalizado_cancelado ,correlativo_sal                ,id_motivo_salida_cuenta,
-            id_usuario                     ,emergencia                 ,id_parametro_almacen           ,tipo_pedido,
-            receptor                       ,id_tramo_subactividad      ,id_tramo_unidad_constructiva   ,observaciones,
-            id_supervisor                   ,receptor_ci                   ,solicitante                       ,solicitante_ci,
-            num_contrato                   ,id_jefe_almacen
+              correlativo_vale               ,descripcion                ,contabilizar,
+              estado_salida                  ,estado_registro            ,motivo_cancelacion             ,id_responsable_almacen,
+              id_almacen_logico              ,id_empleado                ,id_firma_autorizada            ,id_contratista,
+              id_tipo_material               ,id_institucion             ,id_subactividad                ,fecha_borrador,
+              fecha_pendiente                ,fecha_aprobado_rechazado   ,fecha_entregado                ,fecha_provisional,
+              fecha_consolidado              ,fecha_finalizado_cancelado ,correlativo_sal                ,id_motivo_salida_cuenta,
+              id_usuario                     ,emergencia                 ,id_parametro_almacen           ,tipo_pedido,
+              receptor                       ,id_tramo_subactividad      ,id_tramo_unidad_constructiva   ,observaciones,
+              id_supervisor                   ,receptor_ci                ,solicitante                       ,solicitante_ci,
+              num_contrato                   ,id_jefe_almacen				,id_parametro_almacen_logico
             ) VALUES (
-            g_correlativo_ped              ,al_descripcion             ,g_contabilizar,
-            'Borrador'                     ,'activo'                   ,NULL                            ,g_id_responsable_almacen,
-            al_id_almacen_logico           ,al_id_empleado             ,g_id_firma_autorizada           ,al_id_contratista,
-            al_id_tipo_material            ,al_id_institucion          ,al_id_subactividad              ,COALESCE(al_fecha_borrador,now()),
-            NULL                           ,NULL                       ,NULL                            ,NULL,
-            NULL                           ,NULL                       ,0                               ,al_id_motivo_salida_cuenta,
-            pm_id_usuario                  ,g_emergencia               ,g_id_parametro_almacen          ,al_tipo_pedido,
-            al_receptor                    ,al_id_tramo_subactividad   ,al_id_tramo_unidad_constructiva    ,al_observaciones,
-            al_id_supervisor               ,al_receptor_ci               ,al_solicitante                    ,al_solicitante_ci,
-            al_num_contrato                 ,g_id_jefe_almacen
+              g_correlativo_ped              ,al_descripcion             ,g_contabilizar,
+              'Borrador'                     ,'activo'                   ,NULL                            ,g_id_responsable_almacen,
+              al_id_almacen_logico           ,al_id_empleado             ,g_id_firma_autorizada           ,al_id_contratista,
+              al_id_tipo_material            ,al_id_institucion          ,al_id_subactividad              ,COALESCE(al_fecha_borrador,now()),
+              NULL                           ,NULL                       ,NULL                            ,NULL,
+              NULL                           ,NULL                       ,0                               ,al_id_motivo_salida_cuenta,
+              pm_id_usuario                  ,g_emergencia               ,g_id_parametro_almacen          ,al_tipo_pedido,
+              al_receptor                    ,al_id_tramo_subactividad   ,al_id_tramo_unidad_constructiva    ,al_observaciones,
+              al_id_supervisor               ,al_receptor_ci               ,al_solicitante                    ,al_solicitante_ci,
+              al_num_contrato                 ,g_id_jefe_almacen			,g_id_parametro_almacen_logico
             );
 
             --ACTUALIZAR EL CORRELATIVO
@@ -495,7 +506,11 @@ BEGIN
         END;
 
   --procedimiento de modificacion
-
+  /*
+  Autor: RAC
+  Fecha: 07/12/2016
+  Desc:   al editar se actuliza la gestion 
+  */
    ELSIF pm_codigo_procedimiento = 'AL_PEDIDO_UPD' THEN
 
         BEGIN
@@ -567,6 +582,21 @@ BEGIN
             INNER JOIN almin.tal_tipo_almacen TIPALM
             ON TIPALM.id_tipo_almacen = ALMLOG.id_tipo_almacen
             WHERE ALMLOG.id_almacen_logico = al_id_almacen_logico;
+            
+             -- OBTIENE LA GESTIÓN VIGENTE RAC
+            SELECT 
+               l.id_parametro_almacen,
+               l.id_parametro_almacen_logico
+            INTO 
+               g_id_parametro_almacen,
+               g_id_parametro_almacen_logico
+            FROM almin.tal_parametro_almacen_logico l
+            WHERE     estado  = 'abierto'
+                  and  l.id_almacen_logico = al_id_almacen_logico;
+                  
+             IF g_id_parametro_almacen_logico is null THEN
+                raise exception 'no se encontro gestión para el almacen lógico';
+             END IF; 
 
             UPDATE almin.tal_salida SET
             descripcion                  = al_descripcion,
@@ -590,7 +620,9 @@ BEGIN
             receptor_ci                  = al_receptor_ci,
             solicitante                  = al_solicitante,
             solicitante_ci               = al_solicitante_ci,
-            num_contrato                 = al_num_contrato
+            num_contrato                 = al_num_contrato,
+            id_parametro_almacen =  g_id_parametro_almacen,
+            id_parametro_almacen_logico = g_id_parametro_almacen_logico
             WHERE id_salida = al_id_salida;
 
             -- DESCRIPCIÓN DE ÉXITO PARA GUARDAR EN EL LOG
@@ -2001,7 +2033,7 @@ BEGIN
      autor: 	RAC
      desc:		- no permite los saiadas sin existencias
      			- calculo de salida segun promedio ponderado
-                - TODO   realizar salida  en la gestion abierta
+                - realizar salida  en la gestion abierta
      **************************************/
 
     ELSIF pm_codigo_procedimiento = 'AL_SAPROY_FIN' THEN --Finalizar Salida Proyectos
@@ -2030,10 +2062,33 @@ BEGIN
             END IF;
 
         	--SE OBTIENE EL ALMACEN LOGICO
-            SELECT id_almacen_logico
-            INTO g_id_almacen_logico
-            FROM almin.tal_salida
+            SELECT 
+               id_almacen_logico,
+               s.id_parametro_almacen,
+               s.id_parametro_almacen_logico
+            INTO 
+               g_id_almacen_logico,
+               g_id_parametro_almacen,
+               g_id_parametro_almacen_logico
+            FROM almin.tal_salida s
             WHERE id_salida = al_id_salida;
+            
+             --  validar que la fecha de inalizacion este dentro de la gestion 
+            select 
+               pa.gestion
+              into
+               g_gestion
+            from almin.tal_parametro_almacen pa 
+            where pa.id_parametro_almacen =  g_id_parametro_almacen;
+                    
+            v_finalizacion_tmp = now();
+            IF v_finalizacion_tmp < ('01/01/'||g_gestion::varchar)::date   THEN
+               v_finalizacion_tmp = ('01/01/'||g_gestion::varchar)::date;
+            END IF;
+            
+             IF  v_finalizacion_tmp > ('12/31/'||g_gestion::varchar)::date THEN
+               v_finalizacion_tmp =  ('12/31/'||g_gestion::varchar)::date;
+            END IF;
                   
             -- Obtiene el correlativo de la SALIDA
             g_correl = almin.f_al_obtener_correlativo('SALIDA',to_char(COALESCE(al_fecha_borrador,now()),'mm'),g_id_almacen_logico);
@@ -2051,7 +2106,7 @@ BEGIN
                 RETURN 'f'||g_separador||g_respuesta||g_separador||g_reg_evento;
             END IF;
             
-            
+             
             
             -- VERIFICA SI LA SALIDA ES DE UNA TRANSFERENCIA SE OBTIENE EL ID
             -- DE LA TRANSFERENCIA
@@ -2090,7 +2145,7 @@ BEGIN
 
                 UPDATE almin.tal_salida SET
                   estado_salida              = 'Finalizado',
-                  fecha_finalizado_cancelado = now(),    --TODO , RAC  sise hace en una fecah de  a siguiente gestion forzar al 31 de diciembre
+                  fecha_finalizado_cancelado = v_finalizacion_tmp,    --TODO , RAC  sise hace en una fecah de  a siguiente gestion forzar al 31 de diciembre
                   correlativo_sal            = g_correl,
                   fecha_finalizado_exacta = now()
                 WHERE id_salida= al_id_salida;   
@@ -2149,8 +2204,12 @@ BEGIN
                     
                     g_cant_tot := g_cant - ROUND(coalesce(g_registros.cant_entregada,0),2); 
                     g_nuevo_costo_tot = g_costo_total_kardex - (g_costo_unit * g_registros.cant_entregada);
-                    g_nuevo_costo_unit =   ROUND(coalesce(g_nuevo_costo_tot / g_cant_tot,0),2);       
-                                              
+                    
+                    IF g_cant_tot != 0 THEN
+                    	g_nuevo_costo_unit =   ROUND(coalesce(g_nuevo_costo_tot / g_cant_tot,0),2);       
+                    ELSE
+                        g_nuevo_costo_unit = 0;
+                    END IF;                          
                   
                     UPDATE almin.tal_kardex_logico SET
                         cantidad = ROUND(g_cant_tot,2),
@@ -2245,13 +2304,17 @@ BEGIN
                                      LIMIT 1;
                                      
                                      -- OBTIENE LA GESTIÓN VIGENTE
-                                     --TODO  agregar validacion de cierre por departamento logico
-                                     -- en transferencias validar que ambos almacenes stesn abiertos ......
                                     
-                                    SELECT id_parametro_almacen
-                                    INTO g_id_parametro_almacen
-                                    FROM almin.tal_parametro_almacen
-                                    WHERE cierre = 'no';
+                                    
+                                    SELECT 
+                                        pl.id_parametro_almacen,
+                                        pl.id_parametro_almacen_logico
+                                    INTO 
+                                          g_id_parametro_almacen_salida,
+                                          g_id_parametro_almacen_logico_salida
+                                    FROM almin.tal_parametro_almacen_logico pl
+                                    WHERE estado = 'abierto'
+                                          and pl.id_almacen_logico = g_registro.id_almacen_logico_destino;
                                     
                                     IF  g_id_parametro_almacen is null THEN
                                        raise exception 'no se encontro parametros gestion para abierto para el almacesn ';
@@ -2288,12 +2351,12 @@ BEGIN
                                                  ) VALUES ( g_id_ingreso,
                                                  g_registro.descripcion,
                                                  g_costo_total             ,g_contabilizar             ,'Aprobado'                             ,'activo',
-                                                 now()                     ,now()                      ,now()                                  ,g_id_responsable_almacen,
+                                                 now()                     ,now()                      ,v_finalizacion_tmp                     ,g_id_responsable_almacen,
                                                  NULL                      ,NULL                       ,g_registro.id_empleado                 ,g_registro.id_almacen_logico_destino,
                                                  g_id_firma_autorizada     ,NULL                       ,g_id_motivo_ingreso_cuenta,
                                                  NULL                      ,NULL                       ,NULL,
-                                                 NULL                      ,g_registro.observaciones   ,pm_id_usuario                          ,g_id_parametro_almacen,
-                                                 'Simplificado'
+                                                 NULL                      ,g_registro.observaciones   ,pm_id_usuario                          ,g_id_parametro_almacen_salida,
+                                                 'Simplificado'				,g_id_parametro_almacen_logico_salida
                                                  );
 
                                             -- CREACIÓN DEL DETALLE
@@ -2358,12 +2421,44 @@ BEGIN
      autor: 	RAC
      desc:		- no permite salida sin existencias
      			- calculo de salida segun promedio ponderado
-                - TODO   realizar la salida  en la gestion abierta
+                - realizar la salida  en la gestion abierta
      **************************************/
     ELSIF pm_codigo_procedimiento = 'AL_SAPRUC_FIN' THEN --Finalizar Salida Proyectos Unidades Constructivas
         BEGIN
           
         --RCM : Para terminar salidas de gestion 2008  (22/01/2009)
+        
+            --SE OBTIENE EL ALMACEN LOGICO
+            --RAC. 1/12/2016 obtener gestion vigente delalmacen logico
+            SELECT 
+               id_almacen_logico,
+               s.id_parametro_almacen,
+               s.id_parametro_almacen_logico
+            INTO 
+               g_id_almacen_logico,
+               g_id_parametro_almacen,
+               g_id_parametro_almacen_logico
+            FROM almin.tal_salida  s
+            WHERE id_salida = al_id_salida;
+        
+        
+              --  validar que la fecha de inalizacion este dentro de la gestion 
+            select 
+               pa.gestion
+              into
+               g_gestion
+            from almin.tal_parametro_almacen pa 
+            where pa.id_parametro_almacen =  g_id_parametro_almacen;
+                    
+             v_finalizacion_tmp = now();
+            IF v_finalizacion_tmp < ('01/01/'||g_gestion::varchar)::date   THEN
+               v_finalizacion_tmp = ('01/01/'||g_gestion::varchar)::date;
+            END IF;
+            
+             IF  v_finalizacion_tmp > ('12/31/'||g_gestion::varchar)::date THEN
+               v_finalizacion_tmp =  ('12/31/'||g_gestion::varchar)::date;
+            END IF;
+       
         
                 
             g_bandera:=0;
@@ -2405,11 +2500,7 @@ BEGIN
                 RETURN 'f'||g_separador||g_respuesta;
             END IF;
 
-         	--SE OBTIENE EL ALMACEN LOGICO
-            SELECT id_almacen_logico
-            INTO g_id_almacen_logico
-            FROM almin.tal_salida
-            WHERE id_salida = al_id_salida;
+         	
             
             --VERIFICA SI VIENE O NO DE UN PROCESO DE BAJA      
             IF NOT EXISTS (SELECT DISTINCT 1 FROM almin.tal_salida
@@ -2446,7 +2537,7 @@ BEGIN
                 --FINALIZA LA SALIDA
                 UPDATE almin.tal_salida  SET
                   estado_salida              = 'Finalizado',
-                  fecha_finalizado_cancelado = now(),
+                  fecha_finalizado_cancelado = v_finalizacion_tmp,
                   fecha_finalizado_exacta = now(),
                   correlativo_sal            = g_correl
                 WHERE id_salida= al_id_salida;
@@ -2537,8 +2628,8 @@ BEGIN
             ELSE
                 --VIENE DE UNA BAJA
                 UPDATE almin.tal_salida SET
-                estado_salida           = 'Finalizado',
-                fecha_finalizado_cancelado = now()
+                	estado_salida           = 'Finalizado',
+                	fecha_finalizado_cancelado = v_finalizacion_tmp
                 WHERE almin.tal_salida.id_salida= al_id_salida;
             END IF;
 

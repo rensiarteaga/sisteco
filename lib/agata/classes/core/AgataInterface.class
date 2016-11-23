@@ -1,11 +1,10 @@
 <?php
 # +-----------------------------------------------------------------+
 # | AGATA Report                                                    |
-# | Copyleft (l) 2003  Solis/UNIVATES Lajeado/RS - Brasil           |
 # +-----------------------------------------------------------------+
 # | Licensed under GPL: www.fsf.org for further details             |
 # |                                                                 |
-# | Site: http://www.agata.org.br                                   |
+# | Site: http://pablo.blog.br/agata                                   |
 # +-----------------------------------------------------------------+
 # | Abstract: A Database reporting tool written in PHP-GTK          |
 # |                                                                 |
@@ -48,6 +47,7 @@ include_once 'classes/util/GtkPopDate.class';
 include_once 'classes/guis/match.class';
 include_once 'classes/guis/CrossDB.class';
 include_once 'classes/guis/CrossBox.class';
+include_once 'classes/guis/HiddenBox.class';
 include_once 'classes/guis/FunctionBox.class';
 include_once 'classes/guis/CondHighBox.class';
 include_once 'classes/guis/MaskBox.class';
@@ -55,7 +55,6 @@ include_once 'classes/guis/About.class';
 include_once 'classes/guis/LinkMatch.class';
 include_once 'classes/guis/InWindow.class';
 include_once 'classes/guis/SelectList.class';
-include_once 'classes/guis/SubSql.class';
 include_once 'classes/guis/LevelsArea.class';
 include_once 'classes/guis/LinkedTables.class';
 include_once 'classes/guis/MergeInterface.class';
@@ -113,7 +112,6 @@ class AgataInterface
             $this->MergeInterface   = &new MergeInterface($this->glade, $this->agataConfig);
             $this->HeaderFooterArea = &new HeaderFooterArea($this->glade);
             $this->MergeInterface->Buttons['SubQuery']->connect_object('clicked', array(&$this, 'SubQuery'));
-            $this->MergeInterface->eventAddDetail(array(&$this, 'SubQuery'));
 
             $this->MergeInterface->Buttons['Preview']->connect_object('clicked', array(&$this, 'SaveTmpMerge'));
             $this->MergeInterface->Buttons['MergePdf']->connect_object('clicked', array(&$this, 'PreReport'), 'MergePdf');
@@ -124,7 +122,6 @@ class AgataInterface
             $this->Containers['boxDetail']->add($this->MergeInterface->textSections['@MergeDetail']);
             $this->Containers['boxGroupFooter']->add($this->MergeInterface->textSections['@GroupFooter']);
             $this->Containers['boxFooter']->add($this->MergeInterface->textSections['@MergeFooter']);
-            $this->Containers['boxFinalSummary']->add($this->MergeInterface->textSections['@FinalSummary']);
             
             /***********************************************************/
             /* OpenOffice Interface
@@ -386,7 +383,7 @@ class AgataInterface
     /***********************************************************/
     /* Returning from the function above
     /***********************************************************/
-    function ReturnSelectList($Clause)
+    function ReturnSelectList($Clause, $newPositions)
     {
         if ($Clause == 'From')
         {
@@ -397,6 +394,88 @@ class AgataInterface
             $this->ReadAdjustments();
             $this->LoadBlocks();
         }
+        
+        if ($Clause == 'Select')
+        {
+            # REODERING ALL THE STUFFS
+            //var_dump($newPositions);
+            
+            // old and new start at zero
+            if (count($newPositions) >1 )
+            {
+                $old_content = $this->SelectList->Block['Order by'][1];
+                # A cerquinha é usada pq se troca coluna 2 com a 3, fica:
+                # old 2, new 3
+                # old 3, new 2
+                # e troca uma pela outra e a outra pela uma.
+                foreach ($newPositions as $old => $new)
+                {
+                    $x=$old+1;
+                    $y=$new+1;
+                    if ($new !== FALSE)
+                    {
+                        $newAdjustments[$y] = $this->Adjustments[$x];
+                    }
+                    
+                    if ($this->LevelsArea->Breaks)
+                    {
+                        foreach ($this->LevelsArea->Breaks as $key => $formula)
+                        {
+                            $this->LevelsArea->Breaks[$key] = str_replace("($x)", "(#$y)", $this->LevelsArea->Breaks[$key]);
+                        }
+                    }
+                    # altera ordenação
+                    
+                    
+                    # Suprimido
+                    if ($new === FALSE)
+                    {
+                        $this->SelectList->SetBlock('Order by', str_replace(",$x", "", $this->SelectList->Block['Order by'][1]));
+                        $this->SelectList->SetBlock('Order by', str_replace("$x,", "", $this->SelectList->Block['Order by'][1]));
+                        $this->SelectList->SetBlock('Order by', str_replace("$x", "",  $this->SelectList->Block['Order by'][1]));
+                    }
+                    else
+                    {
+                        $this->SelectList->SetBlock('Order by', str_replace(",$x", ",#$y", $this->SelectList->Block['Order by'][1]));
+                        $this->SelectList->SetBlock('Order by', str_replace("$x,", "#$y,", $this->SelectList->Block['Order by'][1]));
+                        if ($old_content == (string)$x)
+                        {
+                            $this->SelectList->Block['Order by'][1] = $y;
+                        }
+                        //echo "$x - $y\n";
+                    }
+                }
+                
+                foreach ($newPositions as $old => $new)
+                {
+                    if ($this->LevelsArea->Breaks[$old+1])
+                    {
+                        $newBreaks[$new+1] = str_replace("(#", "(", $this->LevelsArea->Breaks[$old+1]);
+                    }
+                    
+                    if ($this->LevelsArea->Breaks[0])
+                    {
+                        $newBreaks[0] = str_replace("(#", "(", $this->LevelsArea->Breaks[0]);
+                    }
+                    
+                    $this->SelectList->SetBlock('Order by', str_replace("#", "", $this->SelectList->Block['Order by'][1]));
+                }
+                
+                $this->Adjustments = $newAdjustments;
+                if ($newBreaks)
+                {
+                    $this->LevelsArea->Breaks = $newBreaks;
+                }
+            }
+            
+            if ($this->LevelsArea->Breaks[0])
+            {
+                $newBreaks[0] = str_replace("(#", "(", $this->LevelsArea->Breaks[0]);
+            }
+        }
+        
+        $this->LevelsArea->ReDraw();
+        $this->DrawAdjustments(0);
     }
     
     /***********************************************************/
@@ -500,7 +579,6 @@ class AgataInterface
         $this->LevelsArea->comboBBreaks->set_popdown_strings(array(null));
         $this->PlottedColumns->Clear();
         $this->MergeInterface->comboFields->set_popdown_strings(array(null));
-        $this->MergeInterface->Buttons['breakPage']->set_active(true);
         
         $Content   = @$this->SelectList->Block['Select'][1];
         if ($Content)
@@ -541,21 +619,6 @@ class AgataInterface
                 $Menu->append($Menuitem);
                 $i ++;
             }
-            $i = 1;
-            if ($this->SubQueryFields)
-            {
-                $subMenu = new MyNormalMenuItem($Pixmaps['field'], _a('Sub Report'));
-                $subMenuItem = new GtkMenu;
-                foreach ($this->SubQueryFields as $SubQueryField)
-                {
-                    $var = "\$subfield{$i}";
-                    $Menuitem = new MyNormalMenuItem($Pixmaps['field'], $SubQueryField,  array(&$this, 'TypeExpression'), $var);
-                    $subMenuItem->append($Menuitem);
-                    $i ++;
-                }
-                $subMenu->set_submenu($subMenuItem);
-                $Menu->append($subMenu);
-            }
             $Menu->show_all();
             $Menu->popup(null, null, null, 1, 1);
         }
@@ -581,10 +644,7 @@ class AgataInterface
         }
         else
         {
-            if (!$this->subQuery)
-            {
-                $this->CustomParameters();
-            }
+            $this->CustomParameters();
         }
     }
     
@@ -729,9 +789,9 @@ class AgataInterface
                 $this->SelectList->setDistinct(false);
                 $this->SelectList->setOffSet(0);
                 $this->SelectList->setLimit(0);
-                $this->MergeInterface->SubSelectList[0]->setOffSet(0);
-                $this->MergeInterface->SubSelectList[0]->setLimit(0);
-                $this->MergeInterface->SubSelectList[0]->setDistinct(false);
+                $this->MergeInterface->SubSelectList->setOffSet(0);
+                $this->MergeInterface->SubSelectList->setLimit(0);
+                $this->MergeInterface->SubSelectList->setDistinct(false);
                 $this->LevelsArea->entryTotalLabel->set_text('');
                 $this->OfficeInterface->entryOpenOffice->set_text('');
             }
@@ -748,11 +808,8 @@ class AgataInterface
         if (!$this->subQuery)
         {
             $this->LevelsArea->DrawLevels($this->SelectList->Block['Select'][1]);
-            for ($x=0; $x<=$this->MergeInterface->numberSubReport; $x++)
-            {
-                $this->MergeInterface->SubSelectList[$x]->Reload();
-                $this->DrawAdjustments(1, $x);
-            }
+            $this->MergeInterface->SubSelectList->Reload();
+            $this->DrawAdjustments(1);
         }
         
         $this->Changed = $Changed;
@@ -764,23 +821,12 @@ class AgataInterface
     /***********************************************************/
     /* Draws breaks structure.
     /***********************************************************/
-    function DrawAdjustments($sub, $currentSubReport = null)
+    function DrawAdjustments($sub)
     {
         if ($sub)
         {
-            if (!$currentSubReport)
-            {
-                $currentSubReport = $this->MergeInterface->GetCurrentSubReport();
-            }
-            $Elements = $this->MergeInterface->SubSelectList[$currentSubReport]->GetSelectColumns(_a('Column'));
-            if ($currentSubReport == 0)
-            {
-                $Adjustments = $this->SubAdjustments;
-            }
-            else
-            {
-                $Adjustments = $this->MergeInterface->SubAdjustments[$currentSubReport];
-            }
+            $Elements = $this->MergeInterface->SubSelectList->GetSelectColumns(_a('Column'));
+            $Adjustments = $this->SubAdjustments;
         }
         else
         {
@@ -798,6 +844,7 @@ class AgataInterface
                 $oCross       = &new CrossBox(_a('Fields'));
                 $oCross->info = $Element;
                 $oMask        = &new MaskBox(_a('Format'));
+                $oHidden      = &new HiddenBox(_a('Hidden'));;
                 
                 $chars      = $Adjustments[$i]['Chars']       ? $Adjustments[$i]['Chars']   : 30;
                 $points     = $Adjustments[$i]['Points']      ? $Adjustments[$i]['Points']  : 60;
@@ -806,14 +853,16 @@ class AgataInterface
                 $cross      = $Adjustments[$i]['Cross']       ? $Adjustments[$i]['Cross']   : '';
                 $function   = $Adjustments[$i]['Function']    ? $Adjustments[$i]['Function']: '';
                 $conditional= $Adjustments[$i]['Conditional'] ? $Adjustments[$i]['Conditional']: '';
+                $hidden     = $Adjustments[$i]['Hidden']      ? $Adjustments[$i]['Hidden']: '';
                 
                 $Vars[$Element][] = array($chars,       _a('Characters'), false, 'spin',                           true);
                 $Vars[$Element][] = array($points,      _a('Points'),     false, 'spin',                           true);
                 $Vars[$Element][] = array($align,       _a('Align'),      false, array('left', 'center', 'right'), false);
                 $Vars[$Element][] = array($mask,        _a('Mask'),       false, $oMask,                           false);
                 $Vars[$Element][] = array($function,    _a('Functions'),  false, $oFunction,                       true);
-                $Vars[$Element][] = array($cross,       _a('Cross'),      false, $oCross,                           true);
-                $Vars[$Element][] = array($conditional, _a('Conditional highlight'),false, $oCondHigh,                       true);
+                $Vars[$Element][] = array($cross,       _a('Cross'),      false, $oCross,                          true);
+                $Vars[$Element][] = array($conditional, _a('Conditional highlight'),false, $oCondHigh,             true);
+                $Vars[$Element][] = array($hidden,      _a('Hidden'),     false, $oHidden,                         true);
                 
                 $i ++;
             }
@@ -821,21 +870,10 @@ class AgataInterface
 
         if ($sub)
         {
-            if ($currentSubReport == 0)
+            if ($this->SubAdjustmentsConfig)
             {
-                if ($this->SubAdjustmentsConfig)
-                {
-                    $this->SubAdjustmentsConfig->Clear();
-                    $this->SubAdjustmentsConfig->FillForms($Vars);
-                }
-            }
-            else
-            {
-                if ($this->MergeInterface->SubAdjustmentsConfig[$currentSubReport])
-                {
-                    $this->MergeInterface->SubAdjustmentsConfig[$currentSubReport]->Clear();
-                    $this->MergeInterface->SubAdjustmentsConfig[$currentSubReport]->FillForms($Vars);
-                }
+                $this->SubAdjustmentsConfig->Clear();
+                $this->SubAdjustmentsConfig->FillForms($Vars);
             }
         }
         else
@@ -1093,10 +1131,6 @@ class AgataInterface
         $this->RequiredTables = null;
         $this->SelectList->SetBlock('From', '');
         $this->LoadBlocks(null);
-        if ($this->MergeInterface)
-        {
-            $this->MergeInterface->delAllDetail();
-        }
     }
 
     /***********************************************************/
@@ -1175,7 +1209,7 @@ class AgataInterface
                         if (in_array($fk_reg[0], $From))
                         {
                             $text = $table . '.'. $field . ' = '.$fk_reg[0]. '.'.$fk_reg[1];
-                            if ((strpos($Where, $text) === false) and ($table != $fk_reg[0])) // evitar cíclico
+                            if ((strpos($Where, $text) === false) and ($table != $fk_reg[0])) // evitar cÃ­clico
                             {
                                 $linking[] = array(1, $table, $field, '=', $fk_reg[0], $fk_reg[1]);
                                 $Where .= ' ' . $text;
@@ -1200,7 +1234,7 @@ class AgataInterface
                         if (in_array($fk_reg[0], $tables))
                         {
                             $text = $table . '.'. $field . ' = '.$fk_reg[0]. '.'.$fk_reg[1];
-                            if ((strpos($Where, $text) === false) and ($table != $fk_reg[0]))// evitar cíclico
+                            if ((strpos($Where, $text) === false) and ($table != $fk_reg[0]))// evitar cÃ­clico
                             {
                                 $linking[] = array(1, $table, $field, '=', $fk_reg[0], $fk_reg[1]);
                                 $Where .= ' ' . $text;
@@ -1319,7 +1353,7 @@ class AgataInterface
                     if ($aFrom)
                     {
                         $Aside = $Bside = false;
-                        foreach ($aFrom as $FromTable)            $this->MergeInterface->setMainSelectList(&$this->SelectList);
+                        foreach ($aFrom as $FromTable)
                         {
                             if (strpos($elements[0], $FromTable . '.') !== false)
                             {
@@ -1383,7 +1417,7 @@ class AgataInterface
         }
         else
         {
-            $sql = Report::BlockToSql($this->MergeInterface->SubSelectList[0]->Block, true);
+            $sql = Report::BlockToSql($this->MergeInterface->SubSelectList->Block, true);
         }
         return $sql;
     }
@@ -1418,6 +1452,7 @@ class AgataInterface
                 return false;
             }
         }
+        
         $Parameters = $this->Parameters;
         if ($Parameters)
         {
@@ -1575,7 +1610,7 @@ class AgataInterface
             
             if ($type=='screen')
             {
-                $params[2] = '';
+                $params[2] = $this->FileName;
                 
                 $obj = AgataCore::CreateReport($type, $params);
                 $obj->Process();
@@ -1624,7 +1659,6 @@ class AgataInterface
                 
                 if ($this->MergeInterface->MergeNotebook->get_current_page() == 0)
                 {
-                    $params[7] = $this->MergeInterface->Buttons['breakPage']->get_active();
                     $obj = AgataCore::CreateMergedDocument($params, 'Pdf');
                     $obj->Generate();
                 }
@@ -1810,13 +1844,8 @@ class AgataInterface
             
             $this->SelectList->LoadBlocks(Report::ExtractBlock($XmlArray['Report']['DataSet']));
             $this->Adjustments       = Report::ExtractAdjustments($XmlArray['Report']['DataSet']);
-            $this->SubAdjustments    = Report::ExtractAdjustments($XmlArray['Report']['Merge']['Details']['Detail1']['DataSet1']);
-
-            for ($x=1; $x<=$XmlArray['Report']['Merge']['Details']['Detail1']['NumberSubSql']; $x++)
-            {
-                $this->MergeInterface->SubAdjustments[$x] = Report::ExtractAdjustments($XmlArray['Report']['Merge']['Details']['Detail1']['DataSet'.($x+1)]);;
-            }
-
+            $this->SubAdjustments    = Report::ExtractAdjustments($XmlArray['Report']['Merge']['Details']['Detail1']['DataSet']);
+            
             $this->SelectList->setDistinct($XmlArray['Report']['DataSet']['Query']['Config']['Distinct']);
             $this->SelectList->setOffSet($XmlArray['Report']['DataSet']['Query']['Config']['OffSet']);
             $this->SelectList->setLimit($XmlArray['Report']['DataSet']['Query']['Config']['Limit']);
@@ -1872,29 +1901,18 @@ class AgataInterface
                 $this->HeaderFooterArea->InsertFooter($XmlArray['Report']['Footer']['Body']);
                 $this->HeaderFooterArea->SetHeaderAlign($XmlArray['Report']['Header']['Align']);
                 $this->HeaderFooterArea->SetFooterAlign($XmlArray['Report']['Footer']['Body']);
-
+                
                 # resolver
-                for ($x=0; $x<=$XmlArray['Report']['Merge']['Details']['Detail1']['NumberSubSql']; $x++)
-                {
-                    $numSubSql = $x+1;
-                    if ($x > 0)
-                    {
-                        $this->MergeInterface->addDetail(&$this->glade);
-                        $this->MergeInterface->SubSql[$x]->setDetail($XmlArray['Report']['Merge']['Details']['Detail1']['DataSet' . $numSubSql]['GroupHeader'], 0);
-                        $this->MergeInterface->SubSql[$x]->setDetail($XmlArray['Report']['Merge']['Details']['Detail1']['DataSet' . $numSubSql]['Body'], 1);
-                    }
-                    $this->MergeInterface->SubSelectList[$x]->LoadBlocks(Report::ExtractBlock($XmlArray['Report']['Merge']['Details']['Detail1']['DataSet' . $numSubSql]));
-                    $this->MergeInterface->SubSelectList[$x]->setOffSet($XmlArray['Report']['Merge']['Details']['Detail1']['DataSet' . $numSubSql]['Query']['Config']['OffSet']);
-                    $this->MergeInterface->SubSelectList[$x]->setLimit($XmlArray['Report']['Merge']['Details']['Detail1']['DataSet' . $numSubSql]['Query']['Config']['Limit']);
-                    $this->MergeInterface->SubSelectList[$x]->setDistinct($XmlArray['Report']['Merge']['Details']['Detail1']['DataSet' . $numSubSql]['Query']['Config']['Distinct']);
-                }
-
+                $this->MergeInterface->SubSelectList->LoadBlocks(Report::ExtractBlock($XmlArray['Report']['Merge']['Details']['Detail1']['DataSet']));
+                $this->MergeInterface->SubSelectList->setOffSet($XmlArray['Report']['Merge']['Details']['Detail1']['DataSet']['Query']['Config']['OffSet']);
+                $this->MergeInterface->SubSelectList->setLimit($XmlArray['Report']['Merge']['Details']['Detail1']['DataSet']['Query']['Config']['Limit']);
+                $this->MergeInterface->SubSelectList->setDistinct($XmlArray['Report']['Merge']['Details']['Detail1']['DataSet']['Query']['Config']['Distinct']);
+                
                 $this->MergeInterface->textSections['@MergeHeader']->add_text($XmlArray['Report']['Merge']['ReportHeader']);
                 $this->MergeInterface->textSections['@GroupHeader']->add_text($XmlArray['Report']['Merge']['Details']['Detail1']['GroupHeader']);
-                $this->MergeInterface->textSections['@MergeDetail']->add_text($XmlArray['Report']['Merge']['Details']['Detail1']['DataSet1']['Body']);
+                $this->MergeInterface->textSections['@MergeDetail']->add_text($XmlArray['Report']['Merge']['Details']['Detail1']['Body']);
                 $this->MergeInterface->textSections['@GroupFooter']->add_text($XmlArray['Report']['Merge']['Details']['Detail1']['GroupFooter']);
                 $this->MergeInterface->textSections['@MergeFooter']->add_text($XmlArray['Report']['Merge']['ReportFooter']);
-                $this->MergeInterface->textSections['@FinalSummary']->add_text($XmlArray['Report']['Merge']['FinalSummary']);
                 
                 $this->OfficeInterface->entryOpenOffice->set_text($XmlArray['Report']['OpenOffice']['Source']);
                 
@@ -1936,7 +1954,7 @@ class AgataInterface
     /***********************************************************/
     function GetXmlArray()
     {
-        $XmlArray['Report']['Version']                          = AGATA_VERSION;
+        $XmlArray['Report']['Version']                          = '7.4';
         $XmlArray['Report']['Properties']['Description']        = $this->textAreas['@ReportDescription']->get_chars(0, -1);
         $XmlArray['Report']['Properties']['Title']              = $this->Properties['Title'];
         $XmlArray['Report']['Properties']['Author']             = $this->Properties['Author'];
@@ -2003,34 +2021,22 @@ class AgataInterface
 
         $XmlArray['Report']['Merge']['ReportHeader']                            = $this->MergeInterface->textSections['@MergeHeader']->get_text();
         $XmlArray['Report']['Merge']['Details']['Detail1']['GroupHeader']       = $this->MergeInterface->textSections['@GroupHeader']->get_text();
-        $XmlArray['Report']['Merge']['Details']['Detail1']['DataSet1']['Body']              = $this->MergeInterface->textSections['@MergeDetail']->get_text();
+        $XmlArray['Report']['Merge']['Details']['Detail1']['Body']              = $this->MergeInterface->textSections['@MergeDetail']->get_text();
         # Storing Sub-queries
-
-        $XmlArray['Report']['Merge']['Details']['Detail1']['NumberSubSql'] = $this->MergeInterface->numberSubReport;
-        for ($x=0; $x<=$this->MergeInterface->numberSubReport; $x++)
+        foreach ($this->MergeInterface->SubSelectList->Block as $key =>$Clause)
         {
-            $numSubSql = $x+1;
-            foreach ($this->MergeInterface->SubSelectList[$x]->Block as $key =>$Clause)
-            {
-                $key = alltrim(ucwords($key));
-                $XmlArray['Report']['Merge']['Details']['Detail1']['DataSet' . $numSubSql]['Query'][$key] = $Clause[1];
-            }
-
-            $XmlArray['Report']['Merge']['Details']['Detail1']['DataSet' . $numSubSql]['Query']['Config']['Distinct']  = $this->MergeInterface->SubSelectList[$x]->getDistinct();
-            $XmlArray['Report']['Merge']['Details']['Detail1']['DataSet' . $numSubSql]['Query']['Config']['OffSet']    = $this->MergeInterface->SubSelectList[$x]->getOffSet();
-            $XmlArray['Report']['Merge']['Details']['Detail1']['DataSet' . $numSubSql]['Query']['Config']['Limit']     = $this->MergeInterface->SubSelectList[$x]->getLimit();
-            if ($x > 0)
-            {
-                $XmlArray['Report']['Merge']['Details']['Detail1']['DataSet' . $numSubSql]['GroupHeader'] = $this->MergeInterface->SubSql[$x]->getDetail(0);
-                $XmlArray['Report']['Merge']['Details']['Detail1']['DataSet' . $numSubSql]['Body'] = $this->MergeInterface->SubSql[$x]->getDetail(1);
-            }
-            $XmlArray['Report']['Merge']['Details']['Detail1']['DataSet' . $numSubSql]['Fields'] = $this->ReadAdjustments(1, $x);
+            $key = alltrim(ucwords($key));
+            $XmlArray['Report']['Merge']['Details']['Detail1']['DataSet']['Query'][$key] = $Clause[1];
         }
-
+        
+        $XmlArray['Report']['Merge']['Details']['Detail1']['DataSet']['Query']['Config']['Distinct']  = $this->MergeInterface->SubSelectList->getDistinct();
+        $XmlArray['Report']['Merge']['Details']['Detail1']['DataSet']['Query']['Config']['OffSet']    = $this->MergeInterface->SubSelectList->getOffSet();
+        $XmlArray['Report']['Merge']['Details']['Detail1']['DataSet']['Query']['Config']['Limit']     = $this->MergeInterface->SubSelectList->getLimit();
+        
         $XmlArray['Report']['Merge']['Details']['Detail1']['GroupFooter']       = $this->MergeInterface->textSections['@GroupFooter']->get_text();
         $XmlArray['Report']['Merge']['ReportFooter']                            = $this->MergeInterface->textSections['@MergeFooter']->get_text();
-        $XmlArray['Report']['Merge']['FinalSummary']                            = $this->MergeInterface->textSections['@FinalSummary']->get_text();
         
+        $XmlArray['Report']['Merge']['Details']['Detail1']['DataSet']['Fields'] = $this->ReadAdjustments(1);
         $XmlArray['Report']['Merge']['PageSetup']                               = $this->MergeInterface->PageValues;
         
         $XmlArray['Report']['Label']['Body']                       = $this->MergeInterface->textSections['@LabelText']->get_text();
@@ -2140,9 +2146,16 @@ class AgataInterface
         $param = array('File' => substr($this->FileName, $len), 'text' => $texto, 'folder' => 'reports');
         $ret = $client->call('save_file', $param);
         
-        $texto2 = base64_encode(file_get_contents($OpenOffice));
-        $param2 = array('File' => substr($OpenOffice, $len2), 'text' => $texto2, 'folder' => 'resources');
-        $ret2 = $client->call('save_file', $param2);
+        if ($OpenOffice)
+        {
+            $texto2 = base64_encode(file_get_contents($OpenOffice));
+            $param2 = array('File' => substr($OpenOffice, $len2), 'text' => $texto2, 'folder' => 'resources');
+            $ret2 = $client->call('save_file', $param2);
+        }
+        else
+        {
+            $ret2 = true;
+        }
         
         if (!$ret or !$ret2)
         {
@@ -2154,18 +2167,11 @@ class AgataInterface
         }
     }
     
-    function ReadAdjustments($sub = false, $numSubSql = null)
+    function ReadAdjustments($sub = false)
     {
         if ($sub)
         {
-            if (!$numSubSql)
-            {
-                $Values = $this->SubAdjustmentsConfig->GetAllVars();
-            }
-            else
-            {
-                $Values = $this->MergeInterface->SubAdjustmentsConfig[$numSubSql]->GetAllVars();
-            }
+            $Values = $this->SubAdjustmentsConfig->GetAllVars();
         }
         else
         {
@@ -2184,7 +2190,8 @@ class AgataInterface
                 $Adjustments[$i]['Function']    = $AdjustmentsValues[4];
                 $Adjustments[$i]['Cross']       = $AdjustmentsValues[5];
                 $Adjustments[$i]['Conditional'] = $AdjustmentsValues[6];
-    
+                $Adjustments[$i]['Hidden']      = $AdjustmentsValues[7];
+                
                 $Array["Column$i"]['Chars']      = $AdjustmentsValues[0];
                 $Array["Column$i"]['Points']     = $AdjustmentsValues[1];
                 $Array["Column$i"]['Align']      = $AdjustmentsValues[2];
@@ -2192,26 +2199,16 @@ class AgataInterface
                 $Array["Column$i"]['Function']   = $AdjustmentsValues[4];
                 $Array["Column$i"]['Cross']      = $AdjustmentsValues[5];
                 $Array["Column$i"]['Conditional']= $AdjustmentsValues[6];
+                $Array["Column$i"]['Hidden']     = $AdjustmentsValues[7];
                 
                 $i ++;
             }
         }
 
         if ($sub)
-        {
-            if (!$numSubSql)
-            {
-                $this->SubAdjustments = $Adjustments;
-            }
-            else
-            {
-                $this->MergeInterface->SubAdjustments[$numSubSql] = $Adjustments;
-            }
-        }
+            $this->SubAdjustments = $Adjustments;
         else
-        {
             $this->Adjustments = $Adjustments;
-        }
             
         return $Array;
     }
@@ -2596,16 +2593,15 @@ class AgataInterface
                 {
                     $this->ReadAdjustments(1);
                     $Elements  = $this->SelectList->GetSelectColumns(_a('Column'));
-                    $currentSubReport = $this->MergeInterface->GetCurrentSubReport();
                     $this->Wizard = &new AgataInterface($this->agataConfig, true);
                     $this->Wizard->Connect($this->project, $this->agataDB);
-                    $this->Wizard->SelectList->LoadBlocks($this->MergeInterface->SubSelectList[$currentSubReport]->Block);
-                    $this->Wizard->SelectList->setDistinct($this->MergeInterface->SubSelectList[$currentSubReport]->getDistinct());
-                    $this->Wizard->SelectList->setOffSet($this->MergeInterface->SubSelectList[$currentSubReport]->getOffSet());
-                    $this->Wizard->SelectList->setLimit($this->MergeInterface->SubSelectList[$currentSubReport]->getLimit());
+                    $this->Wizard->SelectList->LoadBlocks($this->MergeInterface->SubSelectList->Block);
+                    $this->Wizard->SelectList->setDistinct($this->MergeInterface->SubSelectList->getDistinct());
+                    $this->Wizard->SelectList->setOffSet($this->MergeInterface->SubSelectList->getOffSet());
+                    $this->Wizard->SelectList->setLimit($this->MergeInterface->SubSelectList->getLimit());
                     $this->Wizard->Parameters = $this->Parameters;
                     
-                    if ($tables = get_tables_from($this->MergeInterface->SubSelectList[$currentSubReport]->Block['From'][1]))
+                    if ($tables = get_tables_from($this->MergeInterface->SubSelectList->Block['From'][1]))
                     {
                         $this->Wizard->LoadTables($tables, true);
                     }
@@ -2613,10 +2609,6 @@ class AgataInterface
                     $this->Wizard->LoadBlocks(null, false);
                     $this->Wizard->callback = array(&$this, 'GrabSubReport');
                     $this->Wizard->MainQueryFields = $Elements;
-                    if ($this->MergeInterface->getCurrentSubReport() > 0)
-                    {
-                        $this->Wizard->SubQueryFields = $this->MergeInterface->SubSelectList[0]->GetSelectColumns(_a('Column'));;
-                    }
                 }
                 else
                 {
@@ -2641,11 +2633,10 @@ class AgataInterface
     /***********************************************************/
     function GrabSubReport()
     {
-        $currentSubReport = $this->MergeInterface->GetCurrentSubReport();
-        $this->MergeInterface->SubSelectList[$currentSubReport]->LoadBlocks($this->Wizard->SelectList->Block);
-        $this->MergeInterface->SubSelectList[$currentSubReport]->setDistinct($this->Wizard->SelectList->getDistinct());
-        $this->MergeInterface->SubSelectList[$currentSubReport]->setLimit($this->Wizard->SelectList->getLimit());
-        $this->MergeInterface->SubSelectList[$currentSubReport]->setOffSet($this->Wizard->SelectList->getOffSet());
+        $this->MergeInterface->SubSelectList->LoadBlocks($this->Wizard->SelectList->Block);
+        $this->MergeInterface->SubSelectList->setDistinct($this->Wizard->SelectList->getDistinct());
+        $this->MergeInterface->SubSelectList->setLimit($this->Wizard->SelectList->getLimit());
+        $this->MergeInterface->SubSelectList->setOffSet($this->Wizard->SelectList->getOffSet());
         $this->SubAdjustments = $this->Wizard->Adjustments;
         $this->MergeInterface->RefreshSubFields();
         $this->LoadBlocks();
