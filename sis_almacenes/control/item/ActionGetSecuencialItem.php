@@ -84,7 +84,8 @@ if($_SESSION['autentificado']=="SI")
 
 
 	$res = $Custom->ListarItem("NULL",0,'ite.id_item desc, ite.codigo desc','desc',$condicion,$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad);
-	//	$res = $Custom->ContarItem("NULL",0,'id_item','asc',$condicion,$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad);
+	
+	
 	if($res){
 
 		foreach ($Custom->salida as $f)

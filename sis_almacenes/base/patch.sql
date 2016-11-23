@@ -120,4 +120,30 @@ ALTER TABLE almin.tal_salida
 /***********************************F-SCP-RAC-ALMIN-1-03/12/2016****************************************/ 
 
 
+/***********************************I-SCP-RAC-ALMIN-1-13/12/2016****************************************/ 
+
+
+CREATE TABLE almin.tal_item_tmp (
+  id_item_tmp SERIAL,
+  nro INTEGER,
+  nombre VARCHAR,
+  descripcion VARCHAR,
+  calidad VARCHAR,
+  unidad VARCHAR,
+  peso_unitario NUMERIC,
+  desc_aux VARCHAR,
+  mat_resp VARCHAR,
+  precio_venta NUMERIC,
+  costo_estimado NUMERIC,
+  stock_minimo NUMERIC,
+  codigo_id3 VARCHAR NOT NULL,
+  sw_migrado VARCHAR(6) DEFAULT 'no'::character varying NOT NULL,
+  CONSTRAINT table_pkey PRIMARY KEY(id_item_tmp)
+) WITHOUT OIDS;
+
+
+/***********************************F-SCP-RAC-ALMIN-1-13/12/2016****************************************/ 
+
+
+
 

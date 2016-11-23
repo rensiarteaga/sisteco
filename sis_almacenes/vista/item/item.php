@@ -12,7 +12,6 @@ session_start();
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">
 <title>Item</title>
    <script type="text/javascript" src="../../../sis_almacenes/vista/item/js/item_combo.js"></script>
-   <script type="text/javascript" src="../../../sis_almacenes/vista/item/js/item.js"></script>
    <script type="text/javascript" src="../../../sis_almacenes/vista/item/js/item_main.php?idContenedor=<?php echo "$idContenedor";?>&registro=<?php if($registro!="") {echo "$registro"; }?>"></script>
 </head>
 <body>
