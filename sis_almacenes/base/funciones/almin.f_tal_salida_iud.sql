@@ -2154,14 +2154,15 @@ BEGIN
                                                              AND MOTSAL.nombre LIKE 'Baja')
                 			AND id_salida = al_id_salida) THEN
 
+                
                 UPDATE almin.tal_salida SET
                   estado_salida              = 'Finalizado',
-                  fecha_finalizado_cancelado = v_finalizacion_tmp,    --TODO , RAC  sise hace en una fecah de  a siguiente gestion forzar al 31 de diciembre
+                  fecha_finalizado_cancelado = v_finalizacion_tmp,    --TODO , RAC  si se hace en una fecha de  la siguiente gestion forzar al 31 de diciembre
                   correlativo_sal            = g_correl,
                   fecha_finalizado_exacta = now()
                 WHERE id_salida= al_id_salida;   
                             
-                --SE OBTIENE EL ALMACEN LOGICO
+                -- SE OBTIENE EL ALMACEN LOGICO
                 SELECT id_almacen_logico
                 INTO g_id_almacen_logico
                 FROM almin.tal_salida
@@ -2383,21 +2384,13 @@ BEGIN
                                                    FROM almin.tal_transferencia_det
                                                    WHERE id_transferencia = g_id_transferencia;
 
-                                            -- HACER UPDATE TRANSFERENCIA PARA RELACIONAR EL ID INGRESO
-                                                  IF NOT g_prestamo THEN --solo transferencia
-                                                  --TODO: VERIFICAR CASO PRÉSTAMOS
-                                                     UPDATE almin.tal_transferencia SET
-                                                            estado_transferencia = 'Pendiente_ingreso',
-                                                            id_ingreso           = g_id_ingreso,
-                                                            fecha_pendiente_ing  = now()
-                                                            WHERE id_transferencia = g_id_transferencia;
-                                                  ELSE -- es prestamo
-                                                        UPDATE almin.tal_transferencia SET
-                                                        estado_transferencia   = 'Ingreso_prestamo',
-                                                        id_ingreso_prestamo    = g_id_ingreso,
-                                                        fecha_ingreso_prestamo = now()
-                                                        WHERE id_transferencia = g_id_transferencia;
-                                                  END IF;-- SI NO ES PRESTAMO
+                                            
+                                                   UPDATE almin.tal_transferencia SET
+                                                        estado_transferencia = 'Pendiente_ingreso',
+                                                   		id_ingreso           = g_id_ingreso,
+                                                   		fecha_pendiente_ing  = now()
+                                                    WHERE id_transferencia = g_id_transferencia;
+                                                
                                                    g_descripcion_log_error := 'Modificación exitosa en almin.tal_salida';
                                                    g_respuesta := 't'||g_separador||g_descripcion_log_error;
 

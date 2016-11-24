@@ -227,11 +227,11 @@ class cls_CustomDBAlmacenes
 	
 	//RCM: 17/10/2008
 	//Registra los datos de la valoraci�n
-	function InsertarValoracionIngreso($id_ingreso,$importacion,$flete,$seguro,$gastos_alm,$gastos_aduana,$iva,$rep_form,$peso_neto,$id_moneda_import,$id_moneda_nacionaliz,$dui)
+	function InsertarValoracionIngreso($id_ingreso,$importacion,$flete,$seguro,$gastos_alm,$gastos_aduana,$iva,$rep_form,$peso_neto,$id_moneda_import,$id_moneda_nacionaliz,$dui, $monto_tot_factura, $tipo_costeo)
 	{
 		$this->salida = "";
 		$dbIngreso = new cls_DBIngresoProy($this->decodificar);
-		$res = $dbIngreso ->InsertarValoracionIngreso($id_ingreso,$importacion,$flete,$seguro,$gastos_alm,$gastos_aduana,$iva,$rep_form,$peso_neto,$id_moneda_import,$id_moneda_nacionaliz,$dui);
+		$res = $dbIngreso ->InsertarValoracionIngreso($id_ingreso,$importacion,$flete,$seguro,$gastos_alm,$gastos_aduana,$iva,$rep_form,$peso_neto,$id_moneda_import,$id_moneda_nacionaliz,$dui, $monto_tot_factura, $tipo_costeo);
 		$this->salida = $dbIngreso ->salida;
 		$this->query = $dbIngreso ->query;
 		return $res;

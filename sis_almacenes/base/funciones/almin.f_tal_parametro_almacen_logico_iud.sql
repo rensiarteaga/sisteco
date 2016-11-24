@@ -71,13 +71,15 @@ DECLARE
                                                --      ERROR LÓGICO (INTERMEDIO) = 3
                                                --      ERROR LÓGICO (ADVERTENCIA) = 4
 
-    g_nombre_funcion              varchar;     -- NOMBRE FÍSICO DE LA FUNCIÓN
-    g_separador                   varchar(10); -- SEPARADOR DE CADENAS
-    g_id_fina_regi_prog_proy_acti integer;     -- VARIABLE DE LA ESTRUCTURA PROGRAMÁTICA
-    g_id_max_parametro         integer; --id maximo de la tabla parametro almacen
-    g_id_parametro_anterior    integer;--id de la ultima gestion que cerro
-    v_id_almacen_logico			integer;
-    v_respuesta					varchar;
+    g_nombre_funcion              	varchar;     -- NOMBRE FÍSICO DE LA FUNCIÓN
+    g_separador                   	varchar(10); -- SEPARADOR DE CADENAS
+    g_id_fina_regi_prog_proy_acti 	integer;     -- VARIABLE DE LA ESTRUCTURA PROGRAMÁTICA
+    g_id_max_parametro         		integer; --id maximo de la tabla parametro almacen
+    g_id_parametro_anterior    		integer;--id de la ultima gestion que cerro
+    v_id_almacen_logico				integer;
+    v_respuesta						varchar;
+    v_estado						varchar;
+    va_respuesta					varchar[];
    
  
 BEGIN  
@@ -149,11 +151,17 @@ BEGIN
     BEGIN
             
              select 
-             		al.id_almacen_logico
+             		al.id_almacen_logico,
+                    al.estado
                into
-                    v_id_almacen_logico
+                    v_id_almacen_logico,
+                    v_estado
              from almin.tal_parametro_almacen_logico al
              where al.id_parametro_almacen_logico = al_id_parametro_almacen_logico;
+             
+            IF  v_estado = 'cerrado'  THEN
+              raise exception 'la gestion seleccionada se encuentra cerrada';             
+            END IF; 
              
             IF  v_id_almacen_logico is null THEN
                raise exception 'Error, no se encontro el almacen logico';
@@ -161,6 +169,51 @@ BEGIN
                      
             -- cerrar la gestion delalmacen logico
             v_respuesta = almin.f_al_cierre_almacen_logico(pm_id_usuario, v_id_almacen_logico);
+
+            -- DESCRIPCIÓN DE ÉXITO PARA GUARDAR EN EL LOG
+            g_descripcion_log_error := 'Eliminación exitosa del registro en almin.tal_parametro_almacen';
+            g_respuesta := 't'||g_separador||g_descripcion_log_error;
+        END;
+        
+    ELSEIF pm_codigo_procedimiento = 'AL_REVLOG_IUD' THEN
+
+    BEGIN
+            
+             select 
+             		al.id_almacen_logico,
+                    al.estado
+               into
+                    v_id_almacen_logico,
+                    v_estado
+             from almin.tal_parametro_almacen_logico al
+             where al.id_parametro_almacen_logico = al_id_parametro_almacen_logico;
+             
+            IF  v_estado = 'cerrado'  THEN
+              raise exception 'la gestion seleccionada se encuentra cerrada';             
+            END IF; 
+             
+            IF  v_id_almacen_logico is null THEN
+               raise exception 'Error, no se encontro el almacen logico';
+            END IF;
+         
+            -- cerrar la gestion delalmacen logico  va_respuesta
+            va_respuesta = almin.f_adm_al_valoracion_gestion(al_id_parametro_almacen_logico);
+            
+             ---*** VALIDACIÓN DE LLAMADA POR USUARIO O FUNCIÓN
+            IF va_respuesta[1] = 'fallo' THEN
+              
+                    g_descripcion_log_error := va_respuesta[2];
+                    g_nivel_error := '2';
+                    g_respuesta := param.f_pm_mensaje_error(g_descripcion_log_error, g_nombre_funcion, g_nivel_error, pm_codigo_procedimiento);
+
+                    --REGISTRA EL LOG
+                    g_reg_evento:= sss.f_tsg_registro_evento(pm_id_usuario             ,g_id_subsistema           ,g_id_lugar         ,g_descripcion_log_error,
+                                                         pm_ip_origen              ,pm_mac_maquina            ,'error'            ,NULL,
+                                                         pm_codigo_procedimiento   ,pm_proc_almacenado);
+                    --DEVUELVE MENSAJE DE ERROR
+                    RETURN 'f'||g_separador||g_respuesta||g_separador||g_reg_evento;
+               
+            END IF;
 
             -- DESCRIPCIÓN DE ÉXITO PARA GUARDAR EN EL LOG
             g_descripcion_log_error := 'Eliminación exitosa del registro en almin.tal_parametro_almacen';

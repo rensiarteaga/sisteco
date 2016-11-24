@@ -391,6 +391,7 @@ class cls_DBOrdenIngresoSol
 		$this->var->add_param("NULL");
 		$this->var->add_param("NULL");
 		$this->var->add_param("NULL");
+		$this->var->add_param("NULL");
 
 
 		//Ejecuta la función

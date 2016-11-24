@@ -238,7 +238,7 @@ function pagina_parametro_almacen_logico_det(idContenedor,direccion,paramConfig,
 		var cont=filas.length;
 		var NumSelect=sm.getCount();
 		if(NumSelect!=0){
-			if(confirm("¿Está seguro de cerrar la gestión?")){
+			if(confirm("¿Está seguro de cerrar la gestión vigente?")){
 				var SelectionsRecord=sm.getSelected();
 				var data=SelectionsRecord.data.id_parametro_almacen_logico;
 				Ext.MessageBox.show({
@@ -262,10 +262,45 @@ function pagina_parametro_almacen_logico_det(idContenedor,direccion,paramConfig,
 			Ext.MessageBox.alert('Estado', 'Antes debe seleccionar un item.')
 		}
 	}
+	
+	
+	
+	//función revalorar costos en toda la gestion
+	function btn_revalorar(){
+		var sm=getSelectionModel();
+		var filas=ds.getModifiedRecords();
+		var cont=filas.length;
+		var NumSelect=sm.getCount();
+		if(NumSelect!=0){
+			if(confirm("¿Está seguro, puede  tardar varios minutos?")){
+				var SelectionsRecord=sm.getSelected();
+				var data=SelectionsRecord.data.id_parametro_almacen_logico;
+				Ext.MessageBox.show({
+					title: 'Ejecutando proceso',
+					msg:"<div><img src='../../../lib/ext-yui/resources/images/default/grid/loading.gif'/> Revalorando desde el primer ingreso ...</div>",
+					width:350,
+					height:200,
+					closable:false
+				});
+				
+				Ext.Ajax.request({
+					url:direccion+"../../../control/parametro_almacen_logico/ActionRevalorarGestion.php?hidden_id_parametro_almacen_logico="+data,
+					method:'GET',
+					success:terminado,
+					failure:Cm_conexionFailure,
+					timeout:9999999//TIEMPO DE ESPERA PARA DAR FALLO
+				})
+			}
+		}
+		else{
+			Ext.MessageBox.alert('Estado', 'Antes debe seleccionar un item.')
+		}
+	}
+	
 
 	function terminado(resp){
 		Ext.MessageBox.hide();
-		Ext.MessageBox.alert('Estado', '<br>Gestion finalizada.<br>');
+		Ext.MessageBox.alert('Estado', '<br>Proceso finalizado.<br>');
 		Cm_btnActualizar()
 	}
 	
@@ -286,7 +321,8 @@ function pagina_parametro_almacen_logico_det(idContenedor,direccion,paramConfig,
 	this.InitBarraMenu(paramMenu);
 	this.InitFunciones(paramFunciones);
 	this.AdicionarBoton('../../../lib/imagenes/book_open.png','Kardex',btn_kardex_logico,true,'kardex_logico','');
-	this.AdicionarBoton('../../../lib/imagenes/book_next.png','Cerrar Gestión',btn_fin_gestion,true,'ter_ges','');
+	this.AdicionarBoton('../../../lib/imagenes/lock_open.png','Cerrar Gestión',btn_fin_gestion,true,'ter_ges','');
+	this.AdicionarBoton('../../../lib/imagenes/proc.png','Revalorar Almacén',btn_revalorar,true,'ter_revalorar','');
 	
 	this.iniciaFormulario();
 	layout_parametro_almacen_logico.getLayout().addListener('layout',this.onResize);

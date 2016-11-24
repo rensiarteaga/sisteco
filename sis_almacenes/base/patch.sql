@@ -182,3 +182,55 @@ IS 'peso o precio, el mas comun es peso, solo cuando el motivo de ingreso es imp
 
 
 
+/***********************************I-SCP-RAC-ALMIN-1-20/12/2016****************************************/ 
+
+
+
+CREATE TABLE almin.tal_kardex_logico_aux (
+  id_kardex_logico SERIAL,
+  estado_item VARCHAR(10) DEFAULT 'Nuevo'::character varying NOT NULL,
+  stock_minimo INTEGER NOT NULL,
+  cantidad NUMERIC(18,2) NOT NULL,
+  costo_unitario NUMERIC NOT NULL,
+  costo_total NUMERIC NOT NULL,
+  fecha_reg DATE DEFAULT now() NOT NULL,
+  id_item INTEGER NOT NULL,
+  id_almacen_logico INTEGER NOT NULL,
+  reservado NUMERIC DEFAULT 0,
+  id_parametro_almacen INTEGER NOT NULL,
+  CONSTRAINT tal_kardex_logico_aux_pkey PRIMARY KEY(id_kardex_logico),
+  CONSTRAINT tal_kardex_logico_aux_estado_item_check CHECK (((estado_item)::text = 'Nuevo'::text) OR ((estado_item)::text = 'Usado'::text)),
+  CONSTRAINT fk_tal_kardex_logico__id_almacen_logico FOREIGN KEY (id_almacen_logico)
+    REFERENCES almin.tal_almacen_logico(id_almacen_logico)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+    NOT DEFERRABLE,
+  CONSTRAINT fk_tal_kardex_logico__id_item FOREIGN KEY (id_item)
+    REFERENCES almin.tal_item(id_item)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+    NOT DEFERRABLE,
+  CONSTRAINT fk_tal_kardex_logico__id_parametro_almacen FOREIGN KEY (id_parametro_almacen)
+    REFERENCES almin.tal_parametro_almacen(id_parametro_almacen)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+    NOT DEFERRABLE
+) WITHOUT OIDS;
+
+COMMENT ON TABLE almin.tal_kardex_logico_aux
+IS 'sistema=Almacenes&codigo=KARLOG&prefijo=AL&titulo=Kardex lógico';
+
+COMMENT ON COLUMN almin.tal_kardex_logico_aux.fecha_reg
+IS 'label=Fecha registro&disable=no&desc=Dominio para definir la fecha de registro de un dato';
+
+COMMENT ON COLUMN almin.tal_kardex_logico_aux.reservado
+IS 'label=Reservado';
+
+CREATE INDEX tal_kardex_logico_aux_fk_tal_kardex_logico__id_item ON almin.tal_kardex_logico_aux
+  USING btree (id_item);
+  
+  
+ /***********************************F-SCP-RAC-ALMIN-1-20/12/2016****************************************/ 
+
+
+  

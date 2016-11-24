@@ -97,6 +97,8 @@ DECLARE
     g_cant_tot                    numeric;
     g_costo_unit                  numeric;
     g_estado_item                 varchar;
+    g_codigo_mot_sal			  varchar;
+    v_registros					  record;
 
 BEGIN
 
@@ -160,23 +162,60 @@ BEGIN
         RETURN 'f'||g_separador||g_respuesta||g_separador||g_reg_evento;
     END IF;
 
-   SELECT emergencia INTO g_emergencia FROM almin.tal_salida where id_salida=al_id_salida;
+     SELECT emergencia INTO g_emergencia FROM almin.tal_salida where id_salida=al_id_salida;
             IF(g_emergencia='Si') THEN
                g_cant_consolidada= al_cant_solicitada;
                ELSE
                g_cant_consolidada=0;
             END IF;
       --*** EJECUCIÓN DEL PROCEDIMIENTO ESPECÍFICO
+    
+    
+    --raise exception 'llega % ', pm_codigo_procedimiento;
+    
+     /*
+		AUTOR:		RAC
+        FECHA		14/12/2016
+        DESCR		- validacion de exitencias en kardex logico 
+        			- no permitir inserciones en transferencias
+    
+    */  
+    
     IF pm_codigo_procedimiento = 'AL_SALDET_INS' THEN
 
         BEGIN
-           --TODO RAC --estos costos me aprce ue estan mal hechos  26/11/2016 lo voy a ignorar el costo de salida se calculara al finalizar la misma
+        
+        
+            select 
+             	s.id_salida,
+             	s.tipo_costeo,
+             	pal.estado,
+                s.id_almacen_logico,
+                s.id_parametro_almacen_logico,
+                s.id_parametro_almacen,
+                s.fecha_finalizado_cancelado,
+                al.costeo_obligatorio,
+                s.estado_ingreso                
+            into
+             	v_registros
+            from almin.tal_salida s
+            inner join almin.tal_almacen_logico al on al.id_almacen_logico = s.id_almacen_logico
+            inner join almin.tal_parametro_almacen_logico pal on pal.id_parametro_almacen_logico = s.id_parametro_almacen_logico
+            where i.id_salida = al_id_salida; 
+           
+           
+           
+           
             --VERIFICA SI EL MATERIAL ESTÁ REGISTRADO EN KARDEX
-            IF NOT EXISTS(SELECT 1 FROM almin.tal_kardex_logico KARLOG
-                          INNER JOIN almin.tal_parametro_almacen PARALM
-                          ON PARALM.id_parametro_almacen=KARLOG.id_parametro_almacen AND PARALM.cierre='no'
-                          WHERE KARLOG.id_item = al_id_item
-                          AND KARLOG.estado_item = al_estado_item) THEN
+            IF NOT EXISTS( SELECT 1 
+                           FROM almin.tal_kardex_logico KARLOG
+                           INNER JOIN almin.tal_parametro_almacen_logico PARALM 
+                                ON     PARALM.id_parametro_almacen = KARLOG.id_parametro_almacen
+                                   AND karlog.id_almacen_logico = paralm.id_almacen_logico    
+                                   
+                           WHERE     KARLOG.id_item = al_id_item
+                                 AND KARLOG.estado_item = al_estado_item
+                                 AND PARALM.id_parametro_almacen_logico = v_registros.id_parametro_almacen_logico ) THEN
                           
                 g_descripcion_log_error := 'Inserción no realizada: El material no está registrado en el Kardex';
                 g_nivel_error := '4';
@@ -186,12 +225,16 @@ BEGIN
             ELSE
                 --SE OBTIENE EL PRECIO Y EL COSTO UNITARIO DEL ITEM
                 SELECT
-                KARLOG.costo_unitario
-                INTO g_costo_unitario
+                  KARLOG.costo_unitario
+                INTO 
+                   g_costo_unitario
                 FROM almin.tal_kardex_logico KARLOG
-                INNER JOIN almin.tal_parametro_almacen PARALM ON PARALM.id_parametro_almacen=KARLOG.id_parametro_almacen AND PARALM.cierre='no'
-                WHERE KARLOG.id_item = al_id_item
-                AND KARLOG.estado_item = al_estado_item;
+                INNER JOIN almin.tal_parametro_almacen_logico PARALM 
+                                ON      PARALM.id_parametro_almacen = KARLOG.id_parametro_almacen
+                                   AND  karlog.id_almacen_logico = paralm.id_almacen_logico    
+                                   AND  PARALM.id_parametro_almacen_logico = v_registros.id_parametro_almacen_logico
+                WHERE     KARLOG.id_item = al_id_item
+                      AND KARLOG.estado_item = al_estado_item;
                 
             END IF;
             
@@ -206,6 +249,22 @@ BEGIN
                 g_respuesta := param.f_pm_mensaje_error(g_descripcion_log_error, g_nombre_funcion, g_nivel_error, pm_codigo_procedimiento);
                 RETURN 'f'||g_separador||g_respuesta;
                       
+            END IF;
+            
+             
+            SELECT
+               MOTING.codigo
+              INTO 
+               g_codigo_mot_sal
+            FROM almin.tal_salida INGRES
+            INNER JOIN almin.tal_motivo_salida_cuenta MOINCU ON MOINCU.id_motivo_salida_cuenta = INGRES.id_motivo_salida_cuenta
+            INNER JOIN almin.tal_motivo_salida MOTING ON MOTING.id_motivo_salida = MOINCU.id_motivo_salida
+            WHERE INGRES.id_salida = al_id_salida;
+                    
+    
+            
+            IF g_codigo_mot_ing = 'TRM' THEN              
+               raise exception 'No puede insertar registro en transferencias';
             END IF;
 
          
@@ -230,10 +289,33 @@ BEGIN
             g_respuesta := 't'||g_separador||g_descripcion_log_error;
 
         END;
-        
+    
+    /*
+		AUTOR:		RAC
+        FECHA		19/12/2016
+        DESCR		-  no permitir inserciones en transferencias
+    */    
     ELSIF pm_codigo_procedimiento = 'AL_PEDDET_UPD' THEN
 
         BEGIN
+        
+           select 
+             	s.id_salida,
+             	s.tipo_costeo,
+             	pal.estado,
+                s.id_almacen_logico,
+                s.id_parametro_almacen_logico,
+                s.fecha_finalizado_cancelado,
+                al.costeo_obligatorio,
+                s.estado_ingreso                
+            into
+             	v_registros
+            from almin.tal_salida s
+            inner join almin.tal_almacen_logico al on al.id_almacen_logico = s.id_almacen_logico
+            inner join almin.tal_parametro_almacen_logico pal on pal.id_parametro_almacen_logico = s.id_parametro_almacen_logico
+            where i.id_salida = al_id_salida; 
+            
+            
             --VERIFICA EXISTENCIA DEL REGISTRO
             IF NOT EXISTS(SELECT 1 FROM almin.tal_salida_detalle
                           WHERE almin.tal_salida_detalle.id_salida_detalle=al_id_salida_detalle) THEN
@@ -268,15 +350,29 @@ BEGIN
                 AND KARLOG.estado_item = al_estado_item;
 
             END IF;
+            
+            
+            SELECT
+               MOTING.codigo
+              INTO 
+               g_codigo_mot_sal
+            FROM almin.tal_salida INGRES
+            INNER JOIN almin.tal_motivo_salida_cuenta MOINCU ON MOINCU.id_motivo_salida_cuenta = INGRES.id_motivo_salida_cuenta
+            INNER JOIN almin.tal_motivo_salida MOTING ON MOTING.id_motivo_salida = MOINCU.id_motivo_salida
+            WHERE INGRES.id_salida = al_id_salida;
+
+            IF g_codigo_mot_sal = 'TRM' THEN  
+                 raise exception 'No puede modificar registro en transferencias';
+            END IF;
 
             UPDATE almin.tal_salida_detalle SET
-		    costo_unitario         = g_costo_unitario,
-		    precio_unitario        = 0,
-		    cant_solicitada        = al_cant_solicitada,
-		    cant_entregada         = al_cant_solicitada,
-		    id_item                = al_id_item,
-		    id_unidad_constructiva = al_id_unidad_constructiva,
-            estado_item            = al_estado_item
+              costo_unitario         = g_costo_unitario,
+              precio_unitario        = 0,
+              cant_solicitada        = al_cant_solicitada,
+              cant_entregada         = al_cant_solicitada,
+              id_item                = al_id_item,
+              id_unidad_constructiva = al_id_unidad_constructiva,
+              estado_item            = al_estado_item
 			WHERE almin.tal_salida_detalle.id_salida_detalle= al_id_salida_detalle;
 
             -- DESCRIPCIÓN DE ÉXITO PARA GUARDAR EN EL LOG
@@ -424,6 +520,15 @@ BEGIN
             g_respuesta := 't'||g_separador||g_descripcion_log_error;
 
         END;
+        
+   /*
+		AUTOR:		RAC
+        FECHA		19/12/2016
+        DESCR		-  bloquear eliminacion en transferencias
+    
+    */ 
+    
+          
   ELSIF pm_codigo_procedimiento = 'AL_SALDET_DEL' THEN
 
     BEGIN
@@ -436,6 +541,37 @@ BEGIN
                 g_respuesta := param.f_pm_mensaje_error(g_descripcion_log_error, g_nombre_funcion, g_nivel_error, pm_codigo_procedimiento);
                 RETURN 'f'||g_separador||g_respuesta;
 
+            END IF;
+            
+            select 
+             	i.tipo_costeo,
+             	pal.estado,
+                i.id_almacen_logico,
+                i.id_parametro_almacen_logico,
+                i.fecha_finalizado_cancelado,
+                al.costeo_obligatorio,
+                i.estado_salida,
+                i.id_salida
+            into
+             	v_registros
+            from almin.tal_salida i
+            inner join almin.tal_almacen_logico al on al.id_almacen_logico = i.id_almacen_logico
+            inner join almin.tal_parametro_almacen_logico pal on pal.id_parametro_almacen_logico = i.id_parametro_almacen_logico
+            inner join almin.tal_salida_detalle sd on sd.id_salida = i.id_salida
+            where sd.id_salida_detalle = al_id_salida_detalle;
+            
+            SELECT
+                MOTING.codigo
+            INTO g_codigo_mot_sal
+            FROM almin.tal_salida INGRES
+            INNER JOIN almin.tal_motivo_salida_cuenta MOINCU
+            ON MOINCU.id_motivo_salida_cuenta = INGRES.id_motivo_salida_cuenta
+            INNER JOIN almin.tal_motivo_salida MOTING
+            ON MOTING.id_motivo_salida = MOINCU.id_motivo_salida
+            WHERE INGRES.id_salida = v_registros.id_salida;
+            
+            IF g_codigo_mot_sal = 'TRM' THEN              
+               raise exception 'No puede eliminar  registro en transferencias';
             END IF;
 
          -- BORRADO DE DATO

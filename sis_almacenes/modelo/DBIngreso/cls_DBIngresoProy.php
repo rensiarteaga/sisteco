@@ -434,7 +434,7 @@ class cls_DBIngresoProy
 	 * Propósito:				Introducción de datos de valoración
 	 * Fecha de creación:		17/10/2008
 	 */
-	function InsertarValoracionIngreso($id_ingreso,$importacion,$flete,$seguro,$gastos_alm,$gastos_aduana,$iva,$rep_form,$peso_neto,$id_moneda_import,$id_moneda_nacionaliz,$dui)
+	function InsertarValoracionIngreso($id_ingreso,$importacion,$flete,$seguro,$gastos_alm,$gastos_aduana,$iva,$rep_form,$peso_neto,$id_moneda_import,$id_moneda_nacionaliz,$dui, $monto_tot_factura, $tipo_costeo)
 	{
 		$this->salida = "";
 		$this->nombre_funcion = 'f_tal_ingreso_iud';
@@ -484,8 +484,9 @@ class cls_DBIngresoProy
 		$this->var->add_param("$id_moneda_import");//40
 		$this->var->add_param("$id_moneda_nacionaliz");
 		$this->var->add_param("'$dui'");
+		$this->var->add_param("$monto_tot_factura");
 		$this->var->add_param("NULL");
-		$this->var->add_param("NULL");
+		$this->var->add_param("'$tipo_costeo'"); //rac 15 12 2016
 		
 		//echo "query: ".$this->var->get_query();
 		//exit;

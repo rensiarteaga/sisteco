@@ -111,6 +111,7 @@ if($_SESSION["autentificado"]=="SI")
 			$txt_id_moneda_import= $_GET["txt_id_moneda_import_$j"];
 			$txt_id_moneda_nacionaliz= $_GET["txt_id_moneda_nacionaliz_$j"];
 			$txt_dui= $_GET["txt_dui_$j"];
+			$txt_monto_tot_factura= $_GET["txt_monto_tot_factura_$j"];
 		}
 		else
 		{
@@ -126,31 +127,29 @@ if($_SESSION["autentificado"]=="SI")
 			$txt_id_moneda_import= $_POST["txt_id_moneda_import_$j"];
 			$txt_id_moneda_nacionaliz= $_POST["txt_id_moneda_nacionaliz_$j"];
 			$txt_dui= $_POST["txt_dui_$j"];
+			$txt_monto_tot_factura= $_POST["txt_monto_tot_factura_$j"];
+			$txt_tipo_costeo= $_POST["txt_tipo_costeo_$j"];
 		}
 
-		if ($hidden_id_ingreso == "undefined" || $hidden_id_ingreso == "")
-		{
-			////////////////////Inserción/////////////////////
+		
 
-			//Validación de datos (del lado del servidor)
-			/*$res = $Custom->ValidarIngreso("insert",$hidden_id_ingreso, $txt_correlativo_ord_ing,$txt_correlativo_ing,$txt_descripcion,$txt_costo_total,$txt_contabilizar,$txt_contabilizado,$txt_estado_ingreso,$txt_estado_registro,$txt_cod_inf_tec,$txt_resumen_inf_tec,$txt_fecha_borrador,$txt_fecha_pendiente,$txt_fecha_aprobado_rechazado,$txt_fecha_ing_fisico,$txt_fecha_ing_valorado,$txt_fecha_finalizado_cancelado,$txt_fecha_reg,$txt_id_responsable_almacen,$txt_id_proveedor,$txt_id_contratista,$txt_id_empleado,$txt_id_almacen_logico,$txt_id_firma_autorizada,$txt_id_institucion,$txt_id_motivo_ingreso_cuenta);
+		//Validación satisfactoria, se ejecuta la inserción en la tabla tal_ingreso
+		$res = $Custom -> InsertarValoracionIngreso($hidden_id_ingreso,
+														$txt_importacion,
+														$txt_flete,
+														$txt_seguro,
+														$txt_gastos_alm,
+														$txt_gastos_aduana,
+														$txt_iva,
+														$txt_rep_form,
+														$txt_peso_neto,
+														$txt_id_moneda_import,
+														$txt_id_moneda_nacionaliz,
+														$txt_dui,
+														$txt_monto_tot_factura, 
+														$txt_tipo_costeo);
 
-			if(!$res)
-			{
-				//Error de validación
-				$resp = new cls_manejo_mensajes(true, "406");
-				$resp->mensaje_error = $Custom->salida[1];
-				$resp->origen = $Custom->salida[2];
-				$resp->proc = $Custom->salida[3];
-				$resp->nivel = $Custom->salida[4];
-				echo $resp->get_mensaje();
-				exit;
-			}*/
-
-			//Validación satisfactoria, se ejecuta la inserción en la tabla tal_ingreso
-			$res = $Custom -> InsertarValoracionIngreso($hidden_id_ingreso,$txt_importacion,$txt_flete,$txt_seguro,$txt_gastos_alm,$txt_gastos_aduana,$txt_iva,$txt_rep_form,$txt_peso_neto,$txt_id_moneda_import,$txt_id_moneda_nacionaliz,$txt_dui);
-
-			if(!$res)
+		if(!$res)
 			{
 				//Se produjo un error
 				$resp = new cls_manejo_mensajes(true, "406");
@@ -161,41 +160,9 @@ if($_SESSION["autentificado"]=="SI")
 				$resp->query = $Custom->query;
 				echo $resp->get_mensaje();
 				exit;
-			}
 		}
-		else
-		{	///////////////////////Modificación////////////////////
-			
-			//Validación de datos (del lado del servidor)
-			/*$res = $Custom->ValidarIngreso("update",$hidden_id_ingreso, $txt_correlativo_ord_ing, $txt_correlativo_ing, $txt_descripcion, $txt_costo_total, $txt_contabilizar, $txt_contabilizado, $txt_estado_ingreso, $txt_estado_registro, $txt_cod_inf_tec, $txt_resumen_inf_tec, $txt_fecha_borrador, $txt_fecha_pendiente, $txt_fecha_aprobado_rechazado, $txt_fecha_ing_fisico, $txt_fecha_ing_valorado, $txt_fecha_finalizado_cancelado, $txt_fecha_reg, $txt_id_responsable_almacen, $txt_id_proveedor, $txt_id_contratista, $txt_id_empleado, $txt_id_almacen_logico, $txt_id_firma_autorizada, $txt_id_institucion, $txt_id_motivo_ingreso_cuenta);
-
-			if(!$res)
-			{
-				//Error de validación
-				$resp = new cls_manejo_mensajes(true, "406");
-				$resp->mensaje_error = $Custom->salida[1];
-				$resp->origen = $Custom->salida[2];
-				$resp->proc = $Custom->salida[3];
-				$resp->nivel = $Custom->salida[4];
-				echo $resp->get_mensaje();
-				exit;
-			}*/
-
-			$res = $Custom -> InsertarValoracionIngreso($hidden_id_ingreso,$txt_importacion,$txt_flete,$txt_seguro,$txt_gastos_alm,$txt_gastos_aduana,$txt_iva,$txt_rep_form,$txt_peso_neto,$txt_id_moneda_import,$txt_id_moneda_nacionaliz,$txt_dui);
-
-			if(!$res)
-			{
-				//Se produjo un error
-				$resp = new cls_manejo_mensajes(true, "406");
-				$resp->mensaje_error = $Custom->salida[1] . " (iteración $cont)";
-				$resp->origen = $Custom->salida[2];
-				$resp->proc = $Custom->salida[3];
-				$resp->nivel = $Custom->salida[4];
-				$resp->query = $Custom->query;
-				echo $resp->get_mensaje();
-				exit;
-			}
-		}
+		
+		
 
 	}//END FOR
 

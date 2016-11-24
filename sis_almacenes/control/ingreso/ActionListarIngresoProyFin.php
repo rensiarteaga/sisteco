@@ -182,6 +182,7 @@ if($_SESSION['autentificado']=='SI')
 			$xml->add_nodo('monto_tot_factura',$f["monto_tot_factura"]);
 			$xml->add_nodo('codigo_mot_ing',$f["codigo_mot_ing"]);
 			$xml->add_nodo('gestion',$f["gestion"]);
+			$xml->add_nodo('tipo_costeo',$f["tipo_costeo"]);
 			$xml->fin_rama();
 		}
 		$xml->mostrar_xml();

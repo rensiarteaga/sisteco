@@ -46,7 +46,7 @@ function pagina_ingreso_proy(idContenedor,direccion,paramConfig)
 	var tipo_ord='General';
 
 	var txt_importacion,txt_flete,txt_seguro,txt_gastos_alm,txt_gastos_aduana,txt_iva,txt_rep_form;
-	var	txt_peso_neto,txt_tot_import,txt_tot_nacionaliz,cmb_mon_imp,txt_dui,txt_monto_tot_factura,txt_codigo_mot_ing;
+	var	txt_peso_neto,txt_tot_import,txt_tot_nacionaliz,cmb_mon_imp,txt_dui,txt_monto_tot_factura,txt_codigo_mot_ing, txt_tipo_costeo;
 
 	/////////////////
 	//  DATA STORE //
@@ -126,7 +126,8 @@ function pagina_ingreso_proy(idContenedor,direccion,paramConfig)
 		'dui',
 		'monto_tot_factura',
 		'codigo_mot_ing',
-		'gestion'
+		'gestion',
+		'tipo_costeo'
 		]),remoteSort:true
 	});
 
@@ -964,7 +965,7 @@ function pagina_ingreso_proy(idContenedor,direccion,paramConfig)
 		validacion:{
 			name:'peso_neto',
 			fieldLabel:'Peso Neto(kg)',
-			allowBlank:false,
+			allowBlank:true,
 			maxLength:50,
 			minLength:0,
 			selectOnFocus:true,
@@ -1343,6 +1344,34 @@ function pagina_ingreso_proy(idContenedor,direccion,paramConfig)
 		filterColValue:'PARALM.gestion',
 		save_as:'gestion'
 	};
+	
+	vectorAtributos[40]= {
+		validacion: {
+			name:'tipo_costeo',
+			fieldLabel:'Tipo Costeo',
+			allowBlank:false,
+			typeAhead: true,
+			loadMask: true,
+			triggerAction: 'all',
+			store: new Ext.data.SimpleStore({fields: ['ID','valor'],data : [['peso','peso'],['precio','precio']]}),
+			valueField:'ID',
+			displayField:'valor',
+			lazyRender:true,
+			forceSelection:true,
+			grid_visible:false,
+			grid_editable:false,
+			width:300,
+			width_grid:60 // ancho de columna en el gris
+		},
+		tipo:'ComboBox',
+		filtro_0:false,
+		filtro_1:true,
+		filtro_2:true,
+		filterColValue:'',
+		defecto:'peso',
+		save_as:'txt_tipo_costeo',
+		id_grupo: 8
+	};
 
 
 
@@ -1423,7 +1452,8 @@ function pagina_ingreso_proy(idContenedor,direccion,paramConfig)
 		{tituloGrupo:'Datos ingreso',columna:0,id_grupo:4},
 		{tituloGrupo:'Valoración I: Importación',columna:0,id_grupo:5},
 		{tituloGrupo:'Valoración II: Nacionalización',columna:0,id_grupo:6},
-		{tituloGrupo:'Valoración',columna:0,id_grupo:7}
+		{tituloGrupo:'Valoración',columna:0,id_grupo:7},
+		{tituloGrupo:'Tipo Costeo',columna:0,id_grupo:8}
 		],
 		minWidth:150,minHeight:200,	closable:true,titulo:'Solicitud Orden Ingreso'}
 	};
@@ -1500,6 +1530,8 @@ function pagina_ingreso_proy(idContenedor,direccion,paramConfig)
 		txt_dui = ClaseMadre_getComponente('dui');
 		txt_monto_tot_factura = ClaseMadre_getComponente('monto_tot_factura');
 		txt_codigo_mot_ing = ClaseMadre_getComponente('codigo_mot_ing');
+		txt_tipo_costeo = ClaseMadre_getComponente('tipo_costeo');
+		
 
 		var onActTotalImportacion = function (e){
 			var vimport=isNaN(parseFloat(txt_importacion.getValue())) ? 0: parseFloat(txt_importacion.getValue());
@@ -1542,18 +1574,38 @@ function pagina_ingreso_proy(idContenedor,direccion,paramConfig)
 		CM_ocultarGrupo('Valoración I: Importación');
 		CM_ocultarGrupo('Valoración II: Nacionalización');
 		CM_ocultarGrupo('Valoración');
+		CM_ocultarGrupo('Tipo Costeo');
 
 		if(NumSelect!=0)
 		{
 			if(SelectionsRecord.data.codigo_mot_ing=='IMP')
 			{
-				CM_mostrarGrupo('Valoración I: Importación');
-				CM_mostrarGrupo('Valoración II: Nacionalización');
+					CM_mostrarGrupo('Valoración I: Importación');
+					CM_mostrarGrupo('Valoración II: Nacionalización');
+					cmb_mon_imp.allowBlank=false;
+					txt_importacion.allowBlank=false;
+					txt_flete.allowBlank=false;
+					txt_seguro.allowBlank=false;					
+					txt_dui.allowBlank=false;
+					txt_gastos_alm.allowBlank=false;
+					txt_gastos_aduana.allowBlank=false;
+					txt_iva.allowBlank=false;
+					txt_rep_form.allowBlank=false;
 			}
 			else
 			{
-				CM_mostrarGrupo('Valoración');
+					CM_mostrarGrupo('Valoración');
+					cmb_mon_imp.allowBlank=true;
+					txt_importacion.allowBlank=true;
+					txt_flete.allowBlank=true;
+					txt_seguro.allowBlank=true;					
+					txt_dui.allowBlank=true;
+					txt_gastos_alm.allowBlank=true;
+					txt_gastos_aduana.allowBlank=true;
+					txt_iva.allowBlank=true;
+					txt_rep_form.allowBlank=true;
 			}
+			CM_mostrarGrupo('Tipo Costeo');
 			ClaseMadre_btnEdit()
 		}
 		else
@@ -1569,12 +1621,7 @@ function pagina_ingreso_proy(idContenedor,direccion,paramConfig)
 		if(n){*/
 		if(idIngreso!=''){
 			var data='maestro_id_ingreso='+idIngreso;
-			//var data='maestro_id_salida='+n.attributes.id_salida;
-			/*data=data+'&maestro_id_tipo_unidad_constructiva='+n.attributes.id;
-			data=data+'&maestro_codigo='+n.attributes.codigo;
-			data=data+'&maestro_tipo='+n.attributes.tipo;
-			data=data+'&maestro_terminado='+n.attributes.terminado;
-			data=data+'&maestro_nombre='+n.attributes.nombre;*/
+			
 			window.open(direccion+'../../../control/_reportes/ingresos_fisico/ActionIngresos.php?'+data)
 		}
 		else{

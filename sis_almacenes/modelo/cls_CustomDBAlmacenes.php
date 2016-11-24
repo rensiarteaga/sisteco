@@ -3619,6 +3619,18 @@ class cls_CustomDBAlmacenes
 		return $res;
 	}
 	
+	function RevalorarGestionLogica($id_parametro_almacen_logico)
+	{
+		$this->salida = "";
+		$db = new cls_DBParametroAlmacenLogico($this->decodificar);
+		$res = $db -> RevalorarGestionLogica($id_parametro_almacen_logico);
+		$this->salida = $db ->salida;
+		$this->query = $db ->query;
+		return $res;
+	}
+	
+	
+	
 	/// --------------------- FIN tal_parametro_almacen_logico --------------------- ///
 	
 	

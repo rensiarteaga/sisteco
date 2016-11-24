@@ -84,14 +84,15 @@ BEGIN
       -- y  que no existan ingresos sin finalizat
       v_numeros = '';
       
-      FOR v_registros_ingreso in (select DISTINCT
+      FOR v_registros_ingreso in (
+      								select DISTINCT
                                           ing.correlativo_ing,
                                           ing.fecha_finalizado_cancelado,
-                                          ing.estado
+                                          ing.estado_ingreso
                                     from almin.tal_ingreso ing
                                     inner join almin.tal_ingreso_detalle id on id.id_ingreso = ing.id_ingreso
                                     where ing.id_parametro_almacen_logico = g_id_parametro_almacen_logico
-                                           and  (id.costo_unitario = 0 or  id.costo_unitario is null  or ing.estado != 'Finalizado' ) ) LOOP
+                                           and  (id.costo_unitario = 0 or  id.costo_unitario is null  or ing.estado_ingreso != 'Finalizado' ) ) LOOP
                v_numeros =  v_numeros||'( I-'||v_registros_ingreso.correlativo_ing::varchar||', '||v_registros_ingreso.fecha_finalizado_cancelado::varchar||')';
                 
       
@@ -111,11 +112,12 @@ BEGIN
        								select 
                                           DISTINCT
                                           sal.correlativo_sal,
-                                          sal.fecha_finalizado_cancelado
+                                          sal.fecha_finalizado_cancelado,
+                                          sal.estado_salida
                                     from almin.tal_salida sal
                                     inner join almin.tal_salida_detalle sd on sd.id_salida  = sal.id_salida
                                     where sal.id_parametro_almacen_logico = g_id_parametro_almacen_logico
-                                           and  (sd.costo_unitario = 0 or  sd.costo_unitario is null or  sal.estado != 'Finalizado')) LOOP
+                                           and  (sd.costo_unitario = 0 or  sd.costo_unitario is null or  sal.estado_salida != 'Finalizado')) LOOP
       
                 v_numeros =  v_numeros||'( S-'||v_registros_salida.correlativo_sal::varchar||', '||v_registros_salida.fecha_finalizado_cancelado::varchar||')';
                 

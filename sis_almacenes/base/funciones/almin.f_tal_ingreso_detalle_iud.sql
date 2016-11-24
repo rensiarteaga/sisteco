@@ -101,6 +101,8 @@ DECLARE
     g_costo_unitario			  numeric;
     g_error_val				  	  boolean;
     v_registros					  record;
+    g_aux_cotos_det				  numeric;
+    g_correlativo_ing			  integer;
 
 BEGIN
 
@@ -163,7 +165,7 @@ BEGIN
         --DEVUELVE MENSAJE DE ERROR
         RETURN 'f'||g_separador||g_respuesta||g_separador||g_reg_evento;
     END IF;
-   --raise exception 'llega';
+    --raise exception 'llega %', pm_codigo_procedimiento;
 
       --*** EJECUCIÓN DEL PROCEDIMIENTO ESPECÍFICO
     IF pm_codigo_procedimiento = 'AL_OISDET_INS' THEN
@@ -279,6 +281,13 @@ BEGIN
             g_respuesta := 't'||g_separador||g_descripcion_log_error;
 
         END;
+        
+    /*
+		AUTOR:		RAC
+        FECHA		19/12/2016
+        DESCR		-  bloquear eliminacion en transferencias
+    
+    */     
 
     ELSIF pm_codigo_procedimiento = 'AL_INGDET_DEL' THEN
 
@@ -293,6 +302,39 @@ BEGIN
                 RETURN 'f'||g_separador||g_respuesta;
 
             END IF;
+            
+             select 
+             	i.id_ingreso,
+             	i.tipo_costeo,
+             	pal.estado,
+                i.id_almacen_logico,
+                i.id_parametro_almacen_logico,
+                i.fecha_finalizado_cancelado,
+                al.costeo_obligatorio,
+                i.estado_ingreso
+            into
+             	v_registros
+            from almin.tal_ingreso i
+            inner join almin.tal_almacen_logico al on al.id_almacen_logico = i.id_almacen_logico
+            inner join almin.tal_parametro_almacen_logico pal on pal.id_parametro_almacen_logico = i.id_parametro_almacen_logico
+            inner join almin.tal_ingreso_detalle idt on id.id_ingreso = i.id_ingreso
+            where idt.id_ingreso_detalle = al_id_ingreso_detalle;
+            
+            SELECT
+            MOTING.codigo
+            INTO g_codigo_mot_ing
+            FROM almin.tal_ingreso INGRES
+            INNER JOIN almin.tal_motivo_ingreso_cuenta MOINCU
+            ON MOINCU.id_motivo_ingreso_cuenta = INGRES.id_motivo_ingreso_cuenta
+            INNER JOIN almin.tal_motivo_ingreso MOTING
+            ON MOTING.id_motivo_ingreso = MOINCU.id_motivo_ingreso
+            WHERE INGRES.id_ingreso = v_registros.id_ingreso;
+            
+            IF g_codigo_mot_ing = 'TAA' THEN              
+               raise exception 'No puede eliminar  registro en transferencias';
+            END IF;
+            
+            
 
          -- BORRADO DE DATO
             DELETE FROM almin.tal_ingreso_detalle WHERE almin.tal_ingreso_detalle.id_ingreso_detalle = al_id_ingreso_detalle;
@@ -307,20 +349,32 @@ BEGIN
         FECHA		14/12/2016
         DESCR		-  permitir ingresos con valor cero en borrador
          			-  solo puede ingresar item en ignresos con el estado en borrador
+                    -  en devolucion bloquear el registro de item que no tengan una salida previa en gestiones anteriores inlcuidas
+                    -  no permitir inserciones en transferencias
     
     */    
+ 
 
     ELSIF pm_codigo_procedimiento = 'AL_INDEPR_INS' THEN --INgreso DEtalle PRoyecto
 
         BEGIN
           
+            
             select 
-               ing.estado_ingreso,
-               ing.id_ingreso
+             	i.id_ingreso,
+             	i.tipo_costeo,
+             	pal.estado,
+                i.id_almacen_logico,
+                i.id_parametro_almacen_logico,
+                i.fecha_finalizado_cancelado,
+                al.costeo_obligatorio,
+                i.estado_ingreso
             into
-               v_registros
-            from almin.tal_ingreso ing
-            where ing.id_ingreso = al_id_ingreso;
+             	v_registros
+            from almin.tal_ingreso i
+            inner join almin.tal_almacen_logico al on al.id_almacen_logico = i.id_almacen_logico
+            inner join almin.tal_parametro_almacen_logico pal on pal.id_parametro_almacen_logico = i.id_parametro_almacen_logico
+            where i.id_ingreso = al_id_ingreso; 
 
             IF v_registros is null  THEN
         	    g_descripcion_log_error := 'Inserción no realizada: Ingreso inexistente';
@@ -347,8 +401,7 @@ BEGIN
             g_costo_unitario = 0;
             g_costo_total = 0;
 
-            --VALORACION: si es por IMPORTACION, al insertar el registro ya calcula su costo_unitario
-            --Si no es IMPORTACION no valora
+          
             SELECT
             MOTING.codigo
             INTO g_codigo_mot_ing
@@ -359,79 +412,41 @@ BEGIN
             ON MOTING.id_motivo_ingreso = MOINCU.id_motivo_ingreso
             WHERE INGRES.id_ingreso = al_id_ingreso;
 
-            raise notice 'Codigo importacion: %',g_codigo_mot_ing;
-
-            IF g_codigo_mot_ing = 'IMP' THEN
-            	--Hace la valoracion; obtiene el FD del ingreso
-                --Obtiene los datos del ingreso
-                SELECT
-				COALESCE(INGRES.importacion,0)+COALESCE(INGRES.flete,0)+COALESCE(INGRES.seguro,0) as tot_import,
-				COALESCE(INGRES.gastos_alm,0)+COALESCE(INGRES.gastos_aduana,0)+COALESCE(INGRES.iva,0)+COALESCE(INGRES.rep_form,0) as tot_nac,
-				INGRES.id_moneda_import, INGRES.id_moneda_nacionaliz, INGRES.fecha_factura, INGRES.peso_neto
-            	INTO g_tot_import, g_tot_nacionaliz, g_id_moneda_import, g_id_moneda_nacionaliz,
-            	g_fecha_factura ,g_peso_neto
-				FROM almin.tal_ingreso INGRES
-				LEFT JOIN param.tpm_tipo_cambio TIPCAM
-				ON TIPCAM.id_moneda = INGRES.id_moneda_import
-				AND TIPCAM.fecha = INGRES.fecha_factura
-				WHERE INGRES.id_ingreso = al_id_ingreso;
-
-                --Obtiene el Peso del Item
-                SELECT
-                COALESCE(peso_kg,0)
-                INTO g_peso_item
-                FROM almin.tal_item
-                WHERE id_item = al_id_item;
-
-                --Verifica que el peso neto no sea cero para evitar la division entre cero
-                IF g_peso_neto IS NULL OR g_peso_neto = 0 THEN
-                	g_error_val = true;
-            	END IF;
-
-                --CONVIERTE EL TOTAL IMPORTACION A LA MONEDA DE LA NACIONALIZACION
-                
-                --raise exception 'fecha: %',g_fecha_factura;
-            	g_tot_import_conv := param.f_pm_conversion_monedas(g_fecha_factura,g_tot_import,g_id_moneda_nacionaliz,g_id_moneda_import,'O'::varchar);
-            	raise notice 'tot_import_conv: %', g_tot_import_conv;
-
-                --Verifica que la conversion no sea cero
-                IF g_tot_import_conv = 0 OR g_tot_import_conv IS NULL THEN
-                    g_error_val = true;
-                END IF;
-
-                --SUMA EL TOTAL DE LA IMPORTACION MAS EL TOTAL DE LA NACIONALIZACION
-            	g_tot_valoracion = COALESCE(g_tot_nacionaliz,0) + COALESCE(g_tot_import_conv,0);
-            	raise notice 'tot_valoracion: %', g_tot_valoracion;
-
-            	--OBTIENE EL FACTOR DE VALORACION (FD)
-            	g_FD = g_tot_valoracion / g_peso_neto;
-
-                --Verifica que el FD no sea cero
-                IF g_FD IS NULL AND g_FD > 0 THEN
-                	g_error_val = true;
-            	END IF;
-				
-    			--Obtiene el costo unitario
-                g_precio_item = COALESCE((g_FD * g_peso_item) / al_cantidad,0);
-
-                --DEFINE EL COSTO UNITARIO DEL ITEM
-                IF g_error_val THEN
-                    g_costo_unitario = 0;
-                	g_costo_total = 0;
-                ELSE
-                    g_costo_unitario = g_precio_item;
-                	g_costo_total = g_precio_item * al_cantidad;
-                END IF;
-
-            	raise notice 'tot_import: %', g_tot_import;
-            	raise notice 'tot_nacionaliz: %', g_tot_nacionaliz;
-            	raise notice 'peso neto: %', g_peso_neto;
-            	raise notice 'fecha factura: %', g_fecha_factura;
-            ELSE
-            	g_costo_unitario = al_costo_unitario;
-            	g_costo_total = al_costo;
-
+            raise notice 'Codigo importacion: %',g_codigo_mot_ing;  
+            
+            
+                    
+    
+            
+            IF g_codigo_mot_ing = 'DEV' THEN
+            
+             			 select 
+                            COALESCE(sad.costo_unitario,0),
+                            s.correlativo_sal
+                         into
+                            g_aux_cotos_det,
+                            g_correlativo_ing
+                         from almin.tal_salida_detalle sad
+                         inner join almin.tal_salida s on s.id_salida = sad.id_salida
+                         where sad.id_item = al_id_item
+                         		AND s.id_almacen_logico = v_registros.id_almacen_logico
+                                AND s.estado_salida = 'Finalizado'
+                         ORDER BY sad.id_salida_detalle DESC
+                         LIMIT 1 OFFSET 0;
+                        
+                        
+                        
+            			IF g_aux_cotos_det is null THEN
+                            raise exception 'No existe una ultima salida finalizada para este  material, no puede ingresar por devolucion';
+                        END IF;
+            
+            ELSEIF g_codigo_mot_ing = 'TAA' THEN              
+               raise exception 'No puede insertar registro en transferencias';
             END IF;
+
+            
+            g_costo_unitario = al_costo_unitario;
+            g_costo_total = al_costo;
 
             INSERT INTO almin.tal_ingreso_detalle(
 		    cantidad                 ,costo            ,precio_venta     ,costo_unitario,
@@ -466,6 +481,7 @@ BEGIN
         FECHA		14/12/2016
         DESCR		-  permitir ingresos con valor cero en borrador
          			-  solo puede modificar  item en ignresos con el estado en borrador
+                    -  en devlucion bloquear la edición de item que no tengan una salida previa en gestiones anteriores inlcuidas
     */
 
       ELSIF pm_codigo_procedimiento = 'AL_INDEPR_UPD' THEN
@@ -473,13 +489,20 @@ BEGIN
         BEGIN
         
              select 
-               ing.estado_ingreso,
-               ing.id_ingreso
-             into
-               v_registros
-            
-             from almin.tal_ingreso ing
-             where ing.id_ingreso = al_id_ingreso;
+             	i.id_ingreso,
+             	i.tipo_costeo,
+             	pal.estado,
+                i.id_almacen_logico,
+                i.id_parametro_almacen_logico,
+                i.fecha_finalizado_cancelado,
+                al.costeo_obligatorio,
+                i.estado_ingreso
+            into
+             	v_registros
+            from almin.tal_ingreso i
+            inner join almin.tal_almacen_logico al on al.id_almacen_logico = i.id_almacen_logico
+            inner join almin.tal_parametro_almacen_logico pal on pal.id_parametro_almacen_logico = i.id_parametro_almacen_logico
+            where i.id_ingreso = al_id_ingreso; 
              
              
              IF v_registros.estado_ingreso != 'Borrador' THEN
@@ -526,76 +549,32 @@ BEGIN
             ON MOTING.id_motivo_ingreso = MOINCU.id_motivo_ingreso
             WHERE INGRES.id_ingreso = al_id_ingreso;
 
-            IF g_codigo_mot_ing = 'IMP' THEN
-            	--Hace la valoracion; obtiene el FD del ingreso
-                --Obtiene los datos del ingreso
-                SELECT
-				COALESCE(INGRES.importacion,0)+COALESCE(INGRES.flete,0)+COALESCE(INGRES.seguro,0) as tot_import,
-				COALESCE(INGRES.gastos_alm,0)+COALESCE(INGRES.gastos_aduana,0)+COALESCE(INGRES.iva,0)+COALESCE(INGRES.rep_form,0) as tot_nac,
-				INGRES.id_moneda_import, INGRES.id_moneda_nacionaliz, INGRES.fecha_factura, INGRES.peso_neto
-            	INTO g_tot_import, g_tot_nacionaliz, g_id_moneda_import, g_id_moneda_nacionaliz,
-            	g_fecha_factura ,g_peso_neto
-				FROM almin.tal_ingreso INGRES
-				LEFT JOIN param.tpm_tipo_cambio TIPCAM
-				ON TIPCAM.id_moneda = INGRES.id_moneda_import
-				AND TIPCAM.fecha = INGRES.fecha_factura
-				WHERE INGRES.id_ingreso = al_id_ingreso;
-
-                --Obtiene el Peso del Item
-                SELECT
-                COALESCE(peso_kg,0)
-                INTO g_peso_item
-                FROM almin.tal_item
-                WHERE id_item = al_id_item;
-
-                --Verifica que el peso neto no sea cero para evitar la division entre cero
-                IF g_peso_neto IS NULL OR g_peso_neto = 0 THEN
-                	g_error_val = true;
-            	END IF;
-
-                --CONVIERTE EL TOTAL IMPORTACION A LA MONEDA DE LA NACIONALIZACION
-            	g_tot_import_conv := param.f_pm_conversion_monedas(g_fecha_factura,g_tot_import,g_id_moneda_nacionaliz,g_id_moneda_import,'O'::varchar);
-            	raise notice 'tot_import_conv: %', g_tot_import_conv;
-
-                --Verifica que la conversion no sea cero
-                IF g_tot_import_conv = 0 OR g_tot_import_conv IS NULL THEN
-                    g_error_val = true;
+            IF g_codigo_mot_ing = 'DEV' THEN  
+                      
+                 select 
+                    COALESCE(sad.costo_unitario,0),
+                    s.correlativo_sal
+                 into
+                    g_aux_cotos_det,
+                    g_correlativo_ing
+                 from almin.tal_salida_detalle sad
+                 inner join almin.tal_salida s on s.id_salida = sad.id_salida
+                 where sad.id_item = al_id_item
+                        AND s.id_almacen_logico = v_registros.id_almacen_logico
+                        AND s.estado_salida = 'Finalizado'
+                 ORDER BY sad.id_salida_detalle DESC
+                 LIMIT 1 OFFSET 0;
+                 
+                IF g_aux_cotos_det is null THEN
+                    raise exception 'No existe una ultima salida finalizada para este  material, no puede ingresar por devolucion';
                 END IF;
-
-                --SUMA EL TOTAL DE LA IMPORTACION MAS EL TOTAL DE LA NACIONALIZACION
-            	g_tot_valoracion = COALESCE(g_tot_nacionaliz,0) + COALESCE(g_tot_import_conv,0);
-            	raise notice 'tot_valoracion: %', g_tot_valoracion;
-
-            	--OBTIENE EL FACTOR DE VALORACION (FD)
-            	g_FD = g_tot_valoracion / g_peso_neto;
-
-                --Verifica que el FD no sea cero
-                IF g_FD IS NULL AND g_FD > 0 THEN
-                	g_error_val = true;
-            	END IF;
-				
-    			--Obtiene el costo unitario
-                g_precio_item = COALESCE((g_FD * g_peso_item) / al_cantidad,0);
-
-                --DEFINE EL COSTO UNITARIO DEL ITEM
-                IF g_error_val THEN
-                    g_costo_unitario = 0;
-                	g_costo_total = 0;
-                ELSE
-                    g_costo_unitario = g_precio_item;
-                	g_costo_total = g_precio_item * al_cantidad;
-                END IF;
-
-            	raise notice 'tot_import: %', g_tot_import;
-            	raise notice 'tot_nacionaliz: %', g_tot_nacionaliz;
-            	raise notice 'peso neto: %', g_peso_neto;
-            	raise notice 'fecha factura: %', g_fecha_factura;
-			ELSE
-            	g_costo_unitario = al_costo_unitario;
-            	g_costo_total = al_costo;
+            
+            ELSEIF g_codigo_mot_ing = 'TAA' THEN              
+               raise exception 'No puede modificar registro en transferencias';
             END IF;
 
-
+			g_costo_unitario = al_costo_unitario;
+            g_costo_total = al_costo;
 
             UPDATE almin.tal_ingreso_detalle SET
 		    cantidad              = al_cantidad,
