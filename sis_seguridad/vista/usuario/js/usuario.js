@@ -323,7 +323,7 @@ function pagina_usuario(idContenedor,direccion,paramConfig)
 			validacion:{
 				name:'hora_ultima_modificacion',
 				fieldLabel:'Hora Ultima Modificación',
-				allowBlank:true,
+				allowBlank:false,
 				maxLength:8,
 				minLength:0,
 				selectOnFocus:true,
@@ -761,13 +761,14 @@ function pagina_usuario(idContenedor,direccion,paramConfig)
 
 			this.btnEdit=function()
 			{
-				CM_ocultarGrupo('Invisible');
+				alert('llega .....')
+				/*CM_ocultarGrupo('Invisible');
 				CM_ocultarGrupo('Datos de Usuario');
 				CM_ocultarGrupo('Datos de Registro');
 				CM_ocultarGrupo('Datos de Modificaciones');
 				CM_ocultarGrupo('Preferencias de Usuario');
 				CM_ocultarGrupo('Estado de Usuario');
-				CM_ocultarGrupo('Inactivacion Usuario');
+				CM_ocultarGrupo('Inactivacion Usuario');*/
 				//		var sm = getSelectionModel();
 				//		var filas = ds.getModifiedRecords();
 				//		var cont = filas.length;
@@ -784,6 +785,8 @@ function pagina_usuario(idContenedor,direccion,paramConfig)
 				get_fecha_bd();
 				get_hora_bd();
 				ClaseMadre_btnEdit()
+				
+				console.log('LLEGA .....')
 			};
 
 

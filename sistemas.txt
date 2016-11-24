@@ -1,1 +1,2 @@
+../../sis_activos_fijos/
 ../../sis_almacenes/
