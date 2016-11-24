@@ -948,21 +948,21 @@ class cls_CustomDBAlmacenes
 		return $res;
 	}
 
-	function InsertarAlmacenLogico($id_almacen_logico,$codigo,$bloqueado,$nombre,$descripcion,$fecha_reg,$obsevaciones,$id_almacen_ep,$id_tipo_almacen,$cerrado,$id_unidad_organizacional)
+	function InsertarAlmacenLogico($id_almacen_logico,$codigo,$bloqueado,$nombre,$descripcion,$fecha_reg,$obsevaciones,$id_almacen_ep,$id_tipo_almacen,$cerrado,$id_unidad_organizacional,$txt_costeo_obligatorio)
 	{
 		$this->salida = "";
 		$dbAlmacenLogico = new cls_DBAlmacenLogico($this->decodificar);
-		$res = $dbAlmacenLogico ->InsertarAlmacenLogico($id_almacen_logico,$codigo,$bloqueado,$nombre,$descripcion,$fecha_reg,$obsevaciones,$id_almacen_ep,$id_tipo_almacen,$cerrado,$id_unidad_organizacional);
+		$res = $dbAlmacenLogico ->InsertarAlmacenLogico($id_almacen_logico,$codigo,$bloqueado,$nombre,$descripcion,$fecha_reg,$obsevaciones,$id_almacen_ep,$id_tipo_almacen,$cerrado,$id_unidad_organizacional,$txt_costeo_obligatorio);
 		$this->salida = $dbAlmacenLogico ->salida;
 		$this->query = $dbAlmacenLogico ->query;
 		return $res;
 	}
 
-	function ModificarAlmacenLogico($id_almacen_logico,$codigo,$bloqueado,$nombre,$descripcion,$fecha_reg,$obsevaciones,$id_almacen_ep,$id_tipo_almacen,$cerrado,$id_unidad_organizacional)
+	function ModificarAlmacenLogico($id_almacen_logico,$codigo,$bloqueado,$nombre,$descripcion,$fecha_reg,$obsevaciones,$id_almacen_ep,$id_tipo_almacen,$cerrado,$id_unidad_organizacional,$txt_costeo_obligatorio)
 	{
 		$this->salida = "";
 		$dbAlmacenLogico = new cls_DBAlmacenLogico($this->decodificar);
-		$res = $dbAlmacenLogico ->ModificarAlmacenLogico($id_almacen_logico,$codigo,$bloqueado,$nombre,$descripcion,$fecha_reg,$obsevaciones,$id_almacen_ep,$id_tipo_almacen,$cerrado,$id_unidad_organizacional);
+		$res = $dbAlmacenLogico ->ModificarAlmacenLogico($id_almacen_logico,$codigo,$bloqueado,$nombre,$descripcion,$fecha_reg,$obsevaciones,$id_almacen_ep,$id_tipo_almacen,$cerrado,$id_unidad_organizacional,$txt_costeo_obligatorio);
 		$this->salida = $dbAlmacenLogico ->salida;
 		$this->query = $dbAlmacenLogico ->query;
 		return $res;

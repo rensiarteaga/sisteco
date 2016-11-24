@@ -16,7 +16,8 @@ CREATE OR REPLACE FUNCTION almin.f_tal_almacen_logico_iud (
   al_id_almacen_ep integer,
   al_id_tipo_almacen integer,
   al_cerrado varchar,
-  al_id_unidad_organizacional integer
+  al_id_unidad_organizacional integer,
+  al_costeo_obligatorio varchar
 )
 RETURNS varchar AS
 $body$
@@ -184,7 +185,8 @@ BEGIN
                 id_almacen_ep,
                 id_tipo_almacen,
                 cerrado,
-                id_unidad_organizacional
+                id_unidad_organizacional,
+                costeo_obligatorio
                         ) VALUES (
                  g_id_almacen_logico,
                  al_codigo,
@@ -196,7 +198,8 @@ BEGIN
                  al_id_almacen_ep,
                  al_id_tipo_almacen,
                  al_cerrado,
-                 al_id_unidad_organizacional
+                 al_id_unidad_organizacional,
+                 al_costeo_obligatorio
             );   
            
            
@@ -251,7 +254,8 @@ BEGIN
              ELSE*/  
                     
              g_cod_almacen_logico:=codigo from almin.tal_almacen_logico where almin.tal_almacen_logico.id_almacen_logico=al_id_almacen_logico;          
-             IF g_cod_almacen_logico = upper(al_codigo) THEN 
+             IF upper(g_cod_almacen_logico) = upper(al_codigo) THEN 
+               
                UPDATE almin.tal_almacen_logico SET
                             codigo          =upper(al_codigo),
                              bloqueado       =al_bloqueado,
@@ -262,12 +266,15 @@ BEGIN
                             id_almacen_ep   =al_id_almacen_ep,
                             id_tipo_almacen =al_id_tipo_almacen,
                             cerrado         =al_cerrado,
-                            id_unidad_organizacional = al_id_unidad_organizacional
+                            id_unidad_organizacional = al_id_unidad_organizacional,
+                            costeo_obligatorio = al_costeo_obligatorio
 
                WHERE almin.tal_almacen_logico.id_almacen_logico = al_id_almacen_logico;
                 g_descripcion_log_error := 'Modificacion exitosa de almacen_logico';
                 g_respuesta := 't'||g_separador||g_descripcion_log_error;
+                
               ELSE
+              
                   IF EXISTS(SELECT 1 FROM almin.tal_almacen_logico
                      INNER JOIN almin.tal_kardex_logico ON almin.tal_almacen_logico.id_almacen_logico = almin.tal_kardex_logico.id_almacen_logico
                      inner join almin.tal_parametro_almacen paralm on paralm.id_parametro_almacen= almin.tal_kardex_logico.id_parametro_almacen and paralm.cierre='no'
@@ -294,7 +301,8 @@ BEGIN
                             id_almacen_ep   =al_id_almacen_ep,
                             id_tipo_almacen =al_id_tipo_almacen,
                             cerrado         =al_cerrado,
-                            id_unidad_organizacional = al_id_unidad_organizacional
+                            id_unidad_organizacional = al_id_unidad_organizacional,
+                            costeo_obligatorio   =  al_costeo_obligatorio
                          WHERE almin.tal_almacen_logico.id_almacen_logico = al_id_almacen_logico;
                          g_descripcion_log_error := 'Modificación exitosa de almacen_logico';
                          g_respuesta := 't'||g_separador||g_descripcion_log_error;
@@ -320,17 +328,7 @@ BEGIN
                     
             END IF;
 
-             -- VERIFICACIÓN DE EXISTENCIA DE HIJOS
-         --   IF EXISTS(SELECT 1 FROM almin.tal_almacen_logico
-         --            INNER JOIN almin.tal_id1 ON almin.tal_almacen_logico.id_subgrupo = almin.tal_id1.id_subgrupo
-         --            WHERE almin.tal_almacen_logico.id_almacen_logico = al_id_almacen_logico) THEN
-         --            
-         --       g_nivel_error := '4';
-         --       g_descripcion_log_error := 'Eliminación no realizada: El registro en almin.tal_almacen_logico tiene regitros asociados en XXX';
-         --       g_respuesta := param.f_pm_mensaje_error(g_descripcion_log_error, g_nombre_funcion, g_nivel_error, pm_codigo_procedimiento);
-         --      RETURN 'f'||g_separador||g_respuesta;
-                
-         --   END IF;   
+         
          
          -- BORRADO DE DATO
             DELETE FROM almin.tal_almacen_logico WHERE almin.tal_almacen_logico.id_almacen_logico = al_id_almacen_logico;

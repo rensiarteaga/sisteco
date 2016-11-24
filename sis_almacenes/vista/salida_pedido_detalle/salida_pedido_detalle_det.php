@@ -15,7 +15,6 @@ session_start();
 <title>sis_almacenes salida_detalle</title>
   
    <script type='text/javascript' src='../../../sis_almacenes/vista/salida_pedido_detalle/js/salida_pedido_detalle_combo.js'></script>
-   <script type='text/javascript' src='../../../sis_almacenes/vista/salida_pedido_detalle/js/salida_pedido_detalle.js'></script>
    <script type='text/javascript' src='../../../sis_almacenes/vista/salida_pedido_detalle/js/salida_pedido_detalle_main.php?idContenedorPadre=<?php echo "$idContenedorPadre";?>&idContenedor=<?php echo "$idContenedor";?>&m_id_salida=<?php echo $m_id_salida;?>&m_descripcion=<?php echo $m_descripcion;?>&m_id_almacen_logico=<?php echo $m_id_almacen_logico?>'></script>	
 
    

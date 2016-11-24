@@ -100,6 +100,7 @@ DECLARE
     g_peso_item					  numeric;
     g_costo_unitario			  numeric;
     g_error_val				  	  boolean;
+    v_registros					  record;
 
 BEGIN
 
@@ -162,7 +163,7 @@ BEGIN
         --DEVUELVE MENSAJE DE ERROR
         RETURN 'f'||g_separador||g_respuesta||g_separador||g_reg_evento;
     END IF;
-
+   --raise exception 'llega';
 
       --*** EJECUCIÓN DEL PROCEDIMIENTO ESPECÍFICO
     IF pm_codigo_procedimiento = 'AL_OISDET_INS' THEN
@@ -300,18 +301,38 @@ BEGIN
             g_descripcion_log_error := 'Eliminación exitosa del registro en almin.tal_ingreso_detalle';
             g_respuesta := 't'||g_separador||g_descripcion_log_error;
         END;
+        
+    /*
+		AUTOR:		RAC
+        FECHA		14/12/2016
+        DESCR		-  permitir ingresos con valor cero en borrador
+         			-  solo puede ingresar item en ignresos con el estado en borrador
+    
+    */    
 
     ELSIF pm_codigo_procedimiento = 'AL_INDEPR_INS' THEN --INgreso DEtalle PRoyecto
 
         BEGIN
+          
+            select 
+               ing.estado_ingreso,
+               ing.id_ingreso
+            into
+               v_registros
+            from almin.tal_ingreso ing
+            where ing.id_ingreso = al_id_ingreso;
 
-            IF NOT EXISTS(SELECT 1 FROM almin.tal_ingreso
-            		  WHERE id_ingreso=al_id_ingreso) THEN
+            IF v_registros is null  THEN
         	    g_descripcion_log_error := 'Inserción no realizada: Ingreso inexistente';
                 g_nivel_error := '4';
                 g_respuesta := param.f_pm_mensaje_error(g_descripcion_log_error, g_nombre_funcion, g_nivel_error, pm_codigo_procedimiento);
                 RETURN 'f'||g_separador||g_respuesta;
         	END IF;
+            
+            
+            IF v_registros.estado_ingreso != 'Borrador' THEN
+               raise exception 'Solo puede agregar Items en ingresos con el estado Borrador';
+            END IF;
         	
         	IF EXISTS(SELECT 1 FROM almin.tal_ingreso_detalle
             		  WHERE id_item=al_id_item
@@ -439,10 +460,34 @@ BEGIN
             g_respuesta := 't'||g_separador||g_descripcion_log_error;
 
         END;
+        
+     /*
+		AUTOR:		RAC
+        FECHA		14/12/2016
+        DESCR		-  permitir ingresos con valor cero en borrador
+         			-  solo puede modificar  item en ignresos con el estado en borrador
+    */
 
       ELSIF pm_codigo_procedimiento = 'AL_INDEPR_UPD' THEN
 
         BEGIN
+        
+             select 
+               ing.estado_ingreso,
+               ing.id_ingreso
+             into
+               v_registros
+            
+             from almin.tal_ingreso ing
+             where ing.id_ingreso = al_id_ingreso;
+             
+             
+             IF v_registros.estado_ingreso != 'Borrador' THEN
+               raise exception 'Solo puede modificar  Items en ingresos con el estado Borrador';
+            END IF;
+            
+            
+            
             --VERIFICA EXISTENCIA DEL REGISTRO
             IF NOT EXISTS(SELECT 1 FROM almin.tal_ingreso_detalle
                           WHERE almin.tal_ingreso_detalle.id_ingreso_detalle=al_id_ingreso_detalle) THEN

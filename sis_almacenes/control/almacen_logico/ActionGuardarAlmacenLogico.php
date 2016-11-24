@@ -93,6 +93,7 @@ if($_SESSION["autentificado"]=="SI")
 			$txt_id_tipo_almacen= $_GET["txt_id_tipo_almacen_$j"];
 			$txt_cerrado= $_GET["txt_cerrado_$j"];
 			$txt_id_unidad_organizacional= $_GET["txt_id_unidad_organizacional_$j"];
+			$txt_costeo_obligatorio = $_GET["txt_costeo_obligatorio_$j"];
 
 		}
 		else
@@ -108,6 +109,7 @@ if($_SESSION["autentificado"]=="SI")
 			$txt_id_tipo_almacen=$_POST["txt_id_tipo_almacen_$j"];
 			$txt_cerrado=$_POST["txt_cerrado_$j"];
 			$txt_id_unidad_organizacional= $_POST["txt_id_unidad_organizacional_$j"];
+			$txt_costeo_obligatorio = $_POST["txt_costeo_obligatorio_$j"];
 
 		}
 
@@ -131,7 +133,7 @@ if($_SESSION["autentificado"]=="SI")
 			}
 
 			//Validación satisfactoria, se ejecuta la inserción en la tabla tal_almacen_logico
-			$res = $Custom -> InsertarAlmacenLogico($hidden_id_almacen_logico, $txt_codigo, $txt_bloqueado, $txt_nombre, $txt_descripcion, $txt_fecha_reg, $txt_obsevaciones, $txt_id_almacen_ep, $txt_id_tipo_almacen, $txt_cerrado,$txt_id_unidad_organizacional);
+			$res = $Custom -> InsertarAlmacenLogico($hidden_id_almacen_logico, $txt_codigo, $txt_bloqueado, $txt_nombre, $txt_descripcion, $txt_fecha_reg, $txt_obsevaciones, $txt_id_almacen_ep, $txt_id_tipo_almacen, $txt_cerrado,$txt_id_unidad_organizacional, $txt_costeo_obligatorio);
 
 			if(!$res)
 			{
@@ -164,7 +166,7 @@ if($_SESSION["autentificado"]=="SI")
 				exit;
 			}
 
-			$res = $Custom->ModificarAlmacenLogico($hidden_id_almacen_logico, $txt_codigo, $txt_bloqueado, $txt_nombre, $txt_descripcion, $txt_fecha_reg, $txt_obsevaciones, $txt_id_almacen_ep, $txt_id_tipo_almacen, $txt_cerrado,$txt_id_unidad_organizacional);
+			$res = $Custom->ModificarAlmacenLogico($hidden_id_almacen_logico, $txt_codigo, $txt_bloqueado, $txt_nombre, $txt_descripcion, $txt_fecha_reg, $txt_obsevaciones, $txt_id_almacen_ep, $txt_id_tipo_almacen, $txt_cerrado,$txt_id_unidad_organizacional,$txt_costeo_obligatorio);
 
 			if(!$res)
 			{

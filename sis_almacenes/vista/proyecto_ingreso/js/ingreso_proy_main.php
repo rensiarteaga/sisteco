@@ -47,7 +47,7 @@ function pagina_ingreso_proy(idContenedor,direccion,paramConfig)
 
 	var combo_almacen,cmbo_almacen_logico,combo_solicitante,combo_proveedor,combo_contratista,combo_empleado;
 	var combo_institucion,combo_motivo_ingreso,combo_motivo_ingreso_cuenta,cmb_ep;
-	var txt_importacion,txt_flete,txt_seguro,txt_gastos_alm,txt_gastos_aduana,txt_iva,txt_rep_form,txt_peso_neto;
+	var txt_importacion,txt_flete,txt_seguro,txt_gastos_alm,txt_gastos_aduana,txt_iva,txt_rep_form,txt_peso_neto,cmb_tipo_costeo;
 	var txt_tot_import,txt_tot_nacionaliz,txt_codigo_mot_ing;
 
 	/////////////////
@@ -130,7 +130,8 @@ function pagina_ingreso_proy(idContenedor,direccion,paramConfig)
 		'codigo_mot_ing',
 		'gestion',
 		'id_motivo_ingreso',
-		'id_almacen'
+		'id_almacen',
+		'tipo_costeo'
 		]),remoteSort:true
 	});
 
@@ -1329,6 +1330,34 @@ function pagina_ingreso_proy(idContenedor,direccion,paramConfig)
 		filterColValue:'PARALM.gestion',
 		save_as:'gestion'
 	};
+	
+	vectorAtributos[40]= {
+		validacion: {
+			name:'tipo_costeo',
+			fieldLabel:'Tipo Costeo',
+			allowBlank:false,
+			typeAhead: true,
+			loadMask: true,
+			triggerAction: 'all',
+			store: new Ext.data.SimpleStore({fields: ['ID','valor'],data : [['peso','peso'],['precio','precio']]}),
+			valueField:'ID',
+			displayField:'valor',
+			lazyRender:true,
+			forceSelection:true,
+			grid_visible:false,
+			grid_editable:false,
+			width:300,
+			width_grid:60 // ancho de columna en el gris
+		},
+		tipo:'ComboBox',
+		filtro_0:false,
+		filtro_1:true,
+		filtro_2:true,
+		filterColValue:'',
+		defecto:'peso',
+		save_as:'txt_tipo_costeo',
+		id_grupo:0
+	};
 
 	//////////////////////////////////////////////////////////////
 	// ----------            FUNCIONES RENDER    ---------------//
@@ -1445,8 +1474,11 @@ function pagina_ingreso_proy(idContenedor,direccion,paramConfig)
 
 		//Elige la primera opción del combo contratista
 		var rr = combo_contratista.store.getAt(0);
-		combo_contratista.setValue(rr.id)
-
+		if(rr){
+		  combo_contratista.setValue(rr.id)
+	
+		}
+		
 
 		//combo_contratista.valueField=rr.id
 		/*var p=new Array();
@@ -1573,6 +1605,7 @@ function pagina_ingreso_proy(idContenedor,direccion,paramConfig)
 		txt_dui = ClaseMadre_getComponente('dui');
 		txt_monto_tot_factura = ClaseMadre_getComponente('monto_tot_factura');
 		txt_codigo_mot_ing = ClaseMadre_getComponente('codigo_mot_ing');
+		cmb_tipo_costeo = ClaseMadre_getComponente('tipo_costeo');
 
 		//Carga el store del contratista para precargar con el primer dato de la lista
 		combo_contratista.store.load();
@@ -1608,6 +1641,7 @@ function pagina_ingreso_proy(idContenedor,direccion,paramConfig)
 					txt_gastos_aduana.allowBlank=true;
 					txt_iva.allowBlank=true;
 					txt_rep_form.allowBlank=true;
+					cmb_tipo_costeo.allowBlank=true;
 
 					//Define como opcional el monto total de la factura
 					txt_monto_tot_factura.allowBlank=true;
@@ -1625,6 +1659,7 @@ function pagina_ingreso_proy(idContenedor,direccion,paramConfig)
 					txt_importacion.allowBlank=true;
 					txt_flete.allowBlank=true;
 					txt_seguro.allowBlank=true;
+					cmb_tipo_costeo.allowBlank=true;
 					txt_dui.allowBlank=true;
 					txt_gastos_alm.allowBlank=true;
 					txt_gastos_aduana.allowBlank=true;
@@ -1640,6 +1675,7 @@ function pagina_ingreso_proy(idContenedor,direccion,paramConfig)
 					txt_importacion.setValue('');
 					txt_flete.setValue('');
 					txt_seguro.setValue('');
+					cmb_tipo_costeo.setValue('');
 					txt_dui.setValue('');
 					txt_gastos_alm.setValue('');
 					txt_gastos_aduana.setValue('');

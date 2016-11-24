@@ -188,11 +188,11 @@ BEGIN
               
              --determinar nuevo codigo
              if v_contador_aux is null then
-               v_codigo_item = v_registros.codigo_id3||'00';
+               v_codigo_item = v_registros.codigo_id3||'.00';
              elseif (v_contador_aux +1 ) < 10 then
-               v_codigo_item = v_registros.codigo_id3||'0'||(v_contador_aux + 1)::varchar; 
+               v_codigo_item = v_registros.codigo_id3||'.0'||(v_contador_aux + 1)::varchar; 
              else
-               v_codigo_item = v_registros.codigo_id3||(v_contador_aux + 1)::varchar; 
+               v_codigo_item = v_registros.codigo_id3||'.'||(v_contador_aux + 1)::varchar; 
              end if;
          
              ----------------------------------------------------

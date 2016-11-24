@@ -59,7 +59,8 @@ function pagina_almacen_logico_det(idContenedor,direccion,paramConfig,maestro,id
 		'desc_tipo_almacen',
 		'cerrado',
 		'id_unidad_organizacional',
-		'desc_unidad_organizacional'
+		'desc_unidad_organizacional',
+		'costeo_obligatorio'
 		]),remoteSort:true
 	});
 	ds.load({
@@ -356,6 +357,34 @@ function pagina_almacen_logico_det(idContenedor,direccion,paramConfig,maestro,id
 		filtro_0:true,
 		filterColValue:'UNIORG.nombre_unidad',
 		save_as:'txt_id_unidad_organizacional'
+	};
+	
+	vectorAtributos[11]={
+		validacion:{
+			name:'costeo_obligatorio',
+			fieldLabel:'Costero Forzado',
+			qtip:'Lllave que permite bloquear los ingresos y salidas sin costeo',
+			allowBlank:false,
+			typeAhead:true,
+			loadMask:true,
+			triggerAction:'all',
+			//store:new Ext.data.SimpleStore({fields:['ID','valor'],data:Ext.almacen_logico_combo.cerrado}),
+			store:new Ext.data.SimpleStore({fields:['ID','valor'],data:[['si','si'],['no','no']]}),
+			valueField:'ID',
+			displayField:'valor',
+			lazyRender:true,
+			forceSelection:true,
+			grid_visible:true,
+			grid_editable:true,
+			width_grid:60,
+			grid_indice:3
+		},
+		tipo:'ComboBox',
+		form: true,
+		filtro_0:true,
+		filterColValue:'ALMLOG.costeo_obligatorio',
+		defecto:'No',
+		save_as:'txt_costeo_obligatorio'
 	};
 	
 	//----------- FUNCIONES RENDER

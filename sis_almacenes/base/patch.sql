@@ -147,3 +147,38 @@ CREATE TABLE almin.tal_item_tmp (
 
 
 
+/***********************************I-SCP-RAC-ALMIN-1-14/12/2016****************************************/ 
+
+--------------- SQL ---------------
+
+ALTER TABLE almin.tal_almacen_logico
+  ADD COLUMN costeo_obligatorio VARCHAR(10) DEFAULT 'si' NOT NULL;
+
+
+/***********************************F-SCP-RAC-ALMIN-1-14/12/2016****************************************/ 
+
+
+
+/***********************************I-SCP-RAC-ALMIN-1-15/12/2016****************************************/ 
+
+--------------- SQL ---------------
+
+ALTER TABLE almin.tal_parametro_almacen_logico
+  ADD COLUMN costeo_pendiente VARCHAR(20) DEFAULT 'no' NOT NULL;
+
+COMMENT ON COLUMN almin.tal_parametro_almacen_logico.costeo_pendiente
+IS 'si o no, si la gestion tiene costeo pendiente no permitira realizar el cierre';
+
+--------------- SQL ---------------
+
+ALTER TABLE almin.tal_ingreso
+  ADD COLUMN tipo_costeo VARCHAR(30) DEFAULT 'peso' NOT NULL;
+
+COMMENT ON COLUMN almin.tal_ingreso.tipo_costeo
+IS 'peso o precio, el mas comun es peso, solo cuando el motivo de ingreso es importacion';
+
+
+/***********************************F-SCP-RAC-ALMIN-1-15/12/2016****************************************/ 
+
+
+

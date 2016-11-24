@@ -66,6 +66,9 @@ class cls_DBAlmacenLogico
 		$this->var->add_def_cols('cerrado','varchar');
 		$this->var->add_def_cols('id_unidad_organizacional','integer');
 		$this->var->add_def_cols('desc_unidad_organizacional','varchar');
+		$this->var->add_def_cols('costeo_obligatorio','varchar');
+		
+		
 
 		//Ejecuta la función de consulta
 		$res = $this->var->exec_query();
@@ -368,7 +371,7 @@ class cls_DBAlmacenLogico
 	 * Autor:				    (autogenerado)
 	 * Fecha de creación:		2007-10-25 18:52:59
 	 */
-	function InsertarAlmacenLogico($id_almacen_logico,$codigo,$bloqueado,$nombre,$descripcion,$fecha_reg,$obsevaciones,$id_almacen_ep,$id_tipo_almacen,$cerrado,$id_unidad_organizacional)
+	function InsertarAlmacenLogico($id_almacen_logico,$codigo,$bloqueado,$nombre,$descripcion,$fecha_reg,$obsevaciones,$id_almacen_ep,$id_tipo_almacen,$cerrado,$id_unidad_organizacional,$txt_costeo_obligatorio)
 	{
 		$this->salida = "";
 		$this->nombre_funcion = 'f_tal_almacen_logico_iud';
@@ -387,6 +390,7 @@ class cls_DBAlmacenLogico
 		$this->var->add_param($id_tipo_almacen);
 		$this->var->add_param("'$cerrado'");
 		$this->var->add_param($id_unidad_organizacional);
+		$this->var->add_param("'$txt_costeo_obligatorio'");
 
 		//Ejecuta la función
 		$res = $this->var->exec_non_query();
@@ -406,7 +410,7 @@ class cls_DBAlmacenLogico
 	 * Autor:				    (autogenerado)
 	 * Fecha de creación:		2007-10-25 18:52:59
 	 */
-	function ModificarAlmacenLogico($id_almacen_logico,$codigo,$bloqueado,$nombre,$descripcion,$fecha_reg,$obsevaciones,$id_almacen_ep,$id_tipo_almacen,$cerrado,$id_unidad_organizacional)
+	function ModificarAlmacenLogico($id_almacen_logico,$codigo,$bloqueado,$nombre,$descripcion,$fecha_reg,$obsevaciones,$id_almacen_ep,$id_tipo_almacen,$cerrado,$id_unidad_organizacional,$txt_costeo_obligatorio)
 	{
 		$this->salida = "";
 		$this->nombre_funcion = 'f_tal_almacen_logico_iud';
@@ -425,6 +429,10 @@ class cls_DBAlmacenLogico
 		$this->var->add_param($id_tipo_almacen);
 		$this->var->add_param("'$cerrado'");
 		$this->var->add_param($id_unidad_organizacional);
+		$this->var->add_param("'$txt_costeo_obligatorio'");
+		
+		
+		
 
 		//Ejecuta la función
 		$res = $this->var->exec_non_query();
@@ -453,6 +461,7 @@ class cls_DBAlmacenLogico
 		//Instancia la clase midlle para la ejecución de la función de la BD
 		$this->var = new cls_middle($this->nombre_funcion,$this->codigo_procedimiento,$this->decodificar);
 		$this->var->add_param($id_almacen_logico);
+		$this->var->add_param("NULL");
 		$this->var->add_param("NULL");
 		$this->var->add_param("NULL");
 		$this->var->add_param("NULL");

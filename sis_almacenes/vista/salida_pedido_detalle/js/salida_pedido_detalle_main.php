@@ -436,6 +436,17 @@ function pagina_salida_pedido_detalle(idContenedor,direccion,paramConfig,maestro
 			],
 			minWidth:150,minHeight:200,closable:true,titulo: 'Pedido - Materiales'}
 		};
+		
+		this.btnNew=function(){
+			ClaseMadre_btnNew();
+			cmb_Item.modificado = true;
+		}
+	
+	
+		this.btnEdit=function(){
+			ClaseMadre_btnEdit();
+			cmb_Item.modificado = true;
+		}
 
 
 		this.reload=function(params){
@@ -467,7 +478,8 @@ function pagina_salida_pedido_detalle(idContenedor,direccion,paramConfig,maestro
 				],
 				minWidth:150,minHeight:200,closable:true,titulo: 'Pedido - Materiales'}
 			};
-			this.InitFunciones(paramFunciones)
+			this.InitFunciones(paramFunciones);
+			
 		};
 		//-------------- DEFINICIÓN DE FUNCIONES PROPIAS --------------//
 

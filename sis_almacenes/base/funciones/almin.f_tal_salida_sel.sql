@@ -1342,7 +1342,12 @@ ON RESALM1.id_responsable_almacen = SALIDA.id_jefe_almacen
             -- DESCRIPCIÓN DE ÉXITO PARA GUARDAR EN EL LOG
             g_descripcion_log_error := 'Consulta ejecutada';
         END;    
-
+ /*
+ Autor	    	RAC
+ Fecha:			14/12/2016
+ Descripcion	- Corregir fallo al listar salidas por transferencias
+ 
+ */
 
   ELSIF pm_codigo_procedimiento  = 'AL_PMSIMP_SEL' THEN -- PMSIMP: Pedido Materiales Simplificado Reporte
         --Para reporte de Pedido de Materiales   Simplificado
@@ -1430,7 +1435,7 @@ FROM almin.tal_salida SALIDA
                         ON SUBACT.id_subactividad = TRASUB.id_subactividad
                         LEFT JOIN almin.tal_tramo_unidad_constructiva TRAMUC
                         ON TRAMUC.id_tramo_unidad_constructiva = SALIDA.id_tramo_unidad_constructiva
-                        INNER JOIN almin.tal_responsable_almacen RESALM1
+                        LEFT JOIN almin.tal_responsable_almacen RESALM1
                         ON RESALM1.id_responsable_almacen = SALIDA.id_jefe_almacen
 						WHERE ';
                         
@@ -1439,6 +1444,9 @@ FROM almin.tal_salida SALIDA
             -- SE AUMENTA EL ORDEN Y LOS PARÁMETROS DE LA CANTIDAD DE REGISTROS A DESPLEGAR
             g_consulta := g_consulta || ' ORDER BY ' || pm_sortcol;
             g_consulta := g_consulta || ' LIMIT ' || pm_cant || ' OFFSET ' || pm_puntero;
+            
+            
+            raise notice 'consulta %', g_consulta;
 
             FOR g_registros in EXECUTE(g_consulta) LOOP
                 RETURN NEXT g_registros;

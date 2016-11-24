@@ -105,6 +105,9 @@ if($_SESSION['autentificado']=='SI')
 			$xml->add_nodo('cerrado',$f["cerrado"]);
 			$xml->add_nodo('id_unidad_organizacional',$f["id_unidad_organizacional"]);
 			$xml->add_nodo('desc_unidad_organizacional',$f["desc_unidad_organizacional"]);
+			$xml->add_nodo('costeo_obligatorio',$f["costeo_obligatorio"]);
+			
+			
 
 			$xml->fin_rama();
 		}

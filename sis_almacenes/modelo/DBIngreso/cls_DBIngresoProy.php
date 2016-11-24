@@ -133,6 +133,8 @@ class cls_DBIngresoProy
 		$this->var->add_def_cols('gestion','varchar');
 		$this->var->add_def_cols('id_motivo_ingreso','integer');
 		$this->var->add_def_cols('id_almacen','integer');
+		$this->var->add_def_cols('tipo_costeo','varchar');
+		
 		
 		//Ejecuta la función de consulta
 		$res = $this->var->exec_query();
@@ -261,6 +263,7 @@ class cls_DBIngresoProy
 		$this->var->add_param("NULL");
 		$this->var->add_param("NULL");
 		$this->var->add_param("NULL");
+		$this->var->add_param("NULL"); // tipo_costeo
 		
 		//echo "query: ".$this->var->get_query();
 		//exit;
@@ -409,6 +412,7 @@ class cls_DBIngresoProy
 		$this->var->add_param("NULL");
 		$this->var->add_param("NULL");
 		$this->var->add_param("NULL");
+		$this->var->add_param("NULL"); //tipo_costeo
 		
 		//echo "query: ".$this->var->get_query();
 		//exit;

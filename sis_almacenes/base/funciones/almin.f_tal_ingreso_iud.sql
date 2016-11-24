@@ -49,7 +49,8 @@ CREATE OR REPLACE FUNCTION almin.f_tal_ingreso_iud (
   al_id_moneda_nacionaliz integer,
   al_dui varchar,
   al_monto_tot_factura numeric,
-  al_id_cotizacion integer
+  al_id_cotizacion integer,
+  al_tipo_costeo varchar
 )
 RETURNS varchar AS
 $body$
@@ -167,7 +168,7 @@ DECLARE
     g_codigo_motivo_ingreso          varchar;
     g_cursor                      CURSOR(ID integer) FOR
                                   SELECT
-                                  INGDET.id_ingreso_detalle,INGDET.id_item, INGDET.cantidad, ITEM.peso_kg
+                                     INGDET.id_ingreso_detalle,INGDET.id_item, INGDET.cantidad, ITEM.peso_kg, ITEM.costo_estimado,ITEM.codigo
                                   FROM almin.tal_ingreso_detalle INGDET
                                   INNER JOIN almin.tal_item ITEM
                                   ON ITEM.id_item = INGDET.id_item
@@ -181,6 +182,10 @@ DECLARE
     v_desc_item					  varchar;
     g_id_parametro_almacen_logico	integer;
     v_finalizacion_tmp				date;
+    g_costeo_obligatorio			varchar;
+    v_registros_ingreso				record;
+    g_costo_estimado_neto			numeric;
+    g_aux_cotos_det					numeric;
 
 BEGIN
 
@@ -374,7 +379,8 @@ BEGIN
     /*
       Autor:    RAC
       fecha:    07/12/2016
-      Desc:		recalcular  la gestion al editar ingresos
+      Desc:	    - recalcular  la gestion al editar ingresos
+                - agrega al_tipo_costeo en la edicion 
     
     */
     ELSIF pm_codigo_procedimiento = 'AL_OINSOL_UPD' THEN
@@ -481,36 +487,37 @@ BEGIN
              END IF;     
 
             UPDATE almin.tal_ingreso SET
-            descripcion                 = al_descripcion,
-            costo_total                 = al_costo_total,
-            id_proveedor                = al_id_proveedor,
-            id_contratista              = al_id_contratista,
-            id_empleado                 = al_id_empleado,
-            id_almacen_logico           = al_id_almacen_logico,
-            id_firma_autorizada         = g_id_firma_autorizada,
-            id_institucion              = al_id_institucion,
-            id_motivo_ingreso_cuenta    = al_id_motivo_ingreso_cuenta,
-            contabilizar                = g_contabilizar,
-               orden_compra                = al_orden_compra,
-               observaciones               = al_observaciones,
-            num_factura                    = al_num_factura,
-            fecha_factura                = al_fecha_factura,
-            responsable                    = al_responsable,
-            fecha_finalizado_cancelado  = al_fecha_finalizado_cancelado,
-            importacion                    = al_importacion,
-            flete                        = al_flete,
-            seguro                        = al_seguro,
-            gastos_alm                    = al_gastos_alm,
-            gastos_aduana                = al_gastos_aduana,
-            iva                            = al_iva,
-            rep_form                    = al_rep_form,
-            peso_neto                    = al_peso_neto,
-            dui                            = al_dui,
-            monto_tot_factura            = al_monto_tot_factura,
-            id_moneda_import            = al_id_moneda_import,
-            id_moneda_nacionaliz        = g_id_moneda_nacionaliz,
-            id_parametro_almacen =  g_id_parametro_almacen,
-            id_parametro_almacen_logico = g_id_parametro_almacen_logico
+              descripcion                 = al_descripcion,
+              costo_total                 = al_costo_total,
+              id_proveedor                = al_id_proveedor,
+              id_contratista              = al_id_contratista,
+              id_empleado                 = al_id_empleado,
+              id_almacen_logico           = al_id_almacen_logico,
+              id_firma_autorizada         = g_id_firma_autorizada,
+              id_institucion              = al_id_institucion,
+              id_motivo_ingreso_cuenta    = al_id_motivo_ingreso_cuenta,
+              contabilizar                = g_contabilizar,
+              orden_compra                = al_orden_compra,
+              observaciones               = al_observaciones,
+              num_factura                    = al_num_factura,
+              fecha_factura                = al_fecha_factura,
+              responsable                    = al_responsable,
+              fecha_finalizado_cancelado  = al_fecha_finalizado_cancelado,
+              importacion                    = al_importacion,
+              flete                        = al_flete,
+              seguro                        = al_seguro,
+              gastos_alm                    = al_gastos_alm,
+              gastos_aduana                = al_gastos_aduana,
+              iva                            = al_iva,
+              rep_form                    = al_rep_form,
+              peso_neto                    = al_peso_neto,
+              dui                            = al_dui,
+              monto_tot_factura            = al_monto_tot_factura,
+              id_moneda_import            = al_id_moneda_import,
+              id_moneda_nacionaliz        = g_id_moneda_nacionaliz,
+              id_parametro_almacen =  g_id_parametro_almacen,
+              id_parametro_almacen_logico = g_id_parametro_almacen_logico,
+              tipo_costeo	=	COALESCE(al_tipo_costeo,'peso')
             WHERE id_ingreso = al_id_ingreso;
 
             -- DESCRIPCIÓN DE ÉXITO PARA GUARDAR EN EL LOG
@@ -1664,9 +1671,10 @@ BEGIN
      codigo: 	AL_INFIPR_FIN
      fecha: 	30/11/2016
      autor: 	RAC
-     desc:		- no permite los ignresos no valorados
-     			- calculo de ingreso segun promedio ponderado
-                - TODO   realizar ingreso en la gestion 
+     desc:		-  no permite los ignresos no valorados
+     			-  calculo de ingreso segun promedio ponderado
+                -  realizar ingreso en la gestion abierta
+                -  permitr fianlizar ingresos en funcion si la lalve del almacen logico lo permite
      **************************************/
 
     ELSIF pm_codigo_procedimiento = 'AL_INFIPR_FIN' THEN --INFIPR: INgreso FInalización PRoyectos
@@ -1708,17 +1716,34 @@ BEGIN
 
             END IF;
 
-            --SE VERIFICA SI EL ALMACÉN ESTÁ BLOQUEADO O CERRADO
+            -- OBTIENE LA GESTIÓN VIGENTE RAC
+            
             SELECT
-            	id_almacen_logico,
-                id_parametro_almacen,
-                 id_almacen_logico
+            	i.id_almacen_logico,
+                i.id_parametro_almacen,
+                i.id_parametro_almacen_logico,
+                al.costeo_obligatorio
             INTO
             	g_id_almacen_logico,
                 g_id_parametro_almacen  ,
-                g_id_almacen_logico         
+                g_id_parametro_almacen_logico,
+                g_costeo_obligatorio         
             FROM almin.tal_ingreso i
+            inner join almin.tal_almacen_logico al on al.id_almacen_logico = i.id_almacen_logico
             WHERE id_ingreso = al_id_ingreso;
+            --SE VERIFICA SI EL ALMACÉN ESTÁ BLOQUEADO O CERRADO
+            IF exists(SELECT 1
+                      FROM almin.tal_parametro_almacen_logico l
+                      WHERE  l.id_parametro_almacen_logico = g_id_parametro_almacen_logico 
+                             and estado = 'cerrado') THEN                             
+                      raise exception 'No puede finalizar esta gestion esta cerrada';       
+        	END IF;
+                            
+                  
+                  
+             IF g_id_parametro_almacen_logico is null THEN
+                raise exception 'no se encontro gestión para el almacen lógico';
+             END IF;
             
              --  validar que la fecha de inalizacion este dentro de la gestion 
             select 
@@ -1850,16 +1875,21 @@ BEGIN
                         EXIT WHEN NOT FOUND;
                         
                         --  28/11/2016 verificar que cada item tenga el costeo definido antes de finalizar
-                        --  VERIFICAR que se tenga los costos ants de finalizar
-                        select  
-                           (i.codigo||'-'|| i.nombre)::varchar
-                        into
-                        	v_desc_item
-                        from almin.tal_item i
-                        where i.id_item = g_registros.id_item;
-                        -- no peuden ingresar item con costo cero ..??
-                        IF g_registros.costo_unitario is null or g_registros.costo_unitario = 0 THEN
-                             raise exception 'El costo unitario no puede ser cero para el item %, %',  g_registros.id_item, v_desc_item;  
+                        --  VERIFICAR que se tenga los costos antes de finalizar
+                        -- si la llave de costeo esta activada
+                        
+                        IF g_costeo_obligatorio = 'si' THEN
+                            select  
+                               (i.codigo||'-'|| i.nombre)::varchar
+                            into
+                                v_desc_item
+                            from almin.tal_item i
+                            where i.id_item = g_registros.id_item;
+                            -- no peuden ingresar item con costo cero ..??
+                            IF g_registros.costo_unitario is null or g_registros.costo_unitario = 0 THEN
+                                 raise exception 'El costo unitario no puede ser cero para el item %, %',  g_registros.id_item, v_desc_item;  
+                            END IF;
+                        
                         END IF;
 
                         IF EXISTS(SELECT 1
@@ -1942,7 +1972,8 @@ BEGIN
     /*
     Autor:		RAC
     Fecha:		03/12/2016
-    Desc:		Se agrega el parametro id_parametro_almacen_logico para permitir lso cierres y aperturas de gestion de manera individual
+    Desc:		- Se agrega el parametro id_parametro_almacen_logico para permitir lso cierres y aperturas de gestion de manera individual
+    			- agrega tipo costeo
     
     */
 
@@ -2107,31 +2138,31 @@ BEGIN
 
             -- INSERTA LA ORDEN DE INGRESO
             INSERT INTO almin.tal_ingreso(
-            descripcion,
-            costo_total              ,contabilizar           ,estado_ingreso              ,estado_registro,
-            fecha_borrador           ,id_responsable_almacen,
-            id_proveedor             ,id_contratista         ,id_empleado                 ,id_almacen_logico,    
-            id_firma_autorizada      ,id_institucion         ,id_motivo_ingreso_cuenta    ,fecha_pendiente,
-            fecha_aprobado_rechazado ,fecha_ing_fisico       ,fecha_ing_valorado          ,fecha_finalizado_cancelado,
-            orden_compra             ,observaciones          ,id_usuario                  ,id_parametro_almacen,
-            num_factura              ,fecha_factura          ,responsable                 ,id_jefe_almacen,
-            importacion              ,flete                  ,seguro                      ,gastos_alm,
-            gastos_aduana            ,iva                    ,rep_form                    ,peso_neto,
-            id_moneda_import         ,id_moneda_nacionaliz   ,dui                         ,monto_tot_factura,
-            circuito,				  id_parametro_almacen_logico
+                descripcion,
+                costo_total              ,contabilizar           ,estado_ingreso              ,estado_registro,
+                fecha_borrador           ,id_responsable_almacen,
+                id_proveedor             ,id_contratista         ,id_empleado                 ,id_almacen_logico,    
+                id_firma_autorizada      ,id_institucion         ,id_motivo_ingreso_cuenta    ,fecha_pendiente,
+                fecha_aprobado_rechazado ,fecha_ing_fisico       ,fecha_ing_valorado          ,fecha_finalizado_cancelado,
+                orden_compra             ,observaciones          ,id_usuario                  ,id_parametro_almacen,
+                num_factura              ,fecha_factura          ,responsable                 ,id_jefe_almacen,
+                importacion              ,flete                  ,seguro                      ,gastos_alm,
+                gastos_aduana            ,iva                    ,rep_form                    ,peso_neto,
+                id_moneda_import         ,id_moneda_nacionaliz   ,dui                         ,monto_tot_factura,
+                circuito,				  id_parametro_almacen_logico							,tipo_costeo
             ) VALUES (
-            al_descripcion,
-            al_costo_total           ,g_contabilizar         ,'Borrador'                  ,'activo',
-            now()                    ,g_id_responsable_almacen,
-            al_id_proveedor          ,al_id_contratista      ,al_id_empleado              ,al_id_almacen_logico,
-            g_id_firma_autorizada    ,al_id_institucion      ,al_id_motivo_ingreso_cuenta ,NULL,
-            NULL                     ,NULL                   ,NULL                        ,al_fecha_finalizado_cancelado,
-            al_orden_compra          ,al_observaciones       ,pm_id_usuario               ,g_id_parametro_almacen,
-            al_num_factura           ,al_fecha_factura       ,al_responsable              ,g_id_jefe_almacen,
-            al_importacion           ,al_flete               ,al_seguro                   ,al_gastos_alm,
-            al_gastos_aduana         ,al_iva                 ,al_rep_form                 ,al_peso_neto,
-            al_id_moneda_import      ,g_id_moneda_principal  ,al_dui                      ,al_monto_tot_factura,
-            'Simplificado',			  g_id_parametro_almacen_logico
+                al_descripcion,
+                al_costo_total           ,g_contabilizar         ,'Borrador'                  ,'activo',
+                now()                    ,g_id_responsable_almacen,
+                al_id_proveedor          ,al_id_contratista      ,al_id_empleado              ,al_id_almacen_logico,
+                g_id_firma_autorizada    ,al_id_institucion      ,al_id_motivo_ingreso_cuenta ,NULL,
+                NULL                     ,NULL                   ,NULL                        ,al_fecha_finalizado_cancelado,
+                al_orden_compra          ,al_observaciones       ,pm_id_usuario               ,g_id_parametro_almacen,
+                al_num_factura           ,al_fecha_factura       ,al_responsable              ,g_id_jefe_almacen,
+                al_importacion           ,al_flete               ,al_seguro                   ,al_gastos_alm,
+                al_gastos_aduana         ,al_iva                 ,al_rep_form                 ,al_peso_neto,
+                al_id_moneda_import      ,g_id_moneda_principal  ,al_dui                      ,al_monto_tot_factura,
+                'Simplificado',			  g_id_parametro_almacen_logico							,COALESCE(al_tipo_costeo,'peso')
             );
 
             -- DESCRIPCIÓN DE ÉXITO PARA GUARDAR EN EL LOG
@@ -2139,7 +2170,14 @@ BEGIN
             g_respuesta := 't'||g_separador||g_descripcion_log_error;
 
         END;
-
+  /*
+   Autor:	RAC
+   Fecha	15/12/2016
+   Descripcion	- Aumentar  el criterio de costo estimado para  prorratear el costo de importaion
+   				- Costeo por peso y coste estiamdo en ingresos  normales
+                - Ingresos por devolucion copiar el costo de ingreso de las ultimas salidas
+   
+  */
     ELSEIF pm_codigo_procedimiento = 'AL_VALORA_INS' THEN --VALoracion de Ingresos
         --Para la Valoracion de los items del Ingreso
         BEGIN
@@ -2164,31 +2202,41 @@ BEGIN
 
             END IF;
 
-            /*IF NOT EXISTS(SELECT 1 FROM almin.tal_ingreso_detalle
-                          WHERE id_ingreso = al_id_ingreso
-                          AND (costo_unitario = 0
-                          OR costo_unitario IS NULL)) THEN
-
-                g_descripcion_log_error := 'La valoracion ya fue realizada con anterioridad';
-                g_nivel_error := '4';
-                g_respuesta := param.f_pm_mensaje_error(g_descripcion_log_error, g_nombre_funcion, g_nivel_error, pm_codigo_procedimiento);
-                RETURN 'f'||g_separador||g_respuesta;
-
-            END IF;*/
-
+            --obtiene datos del ingreso
+            
+            
+            select 
+             	i.id_ingreso,
+             	i.tipo_costeo,
+             	pal.estado,
+                i.id_almacen_logico
+            into
+             	v_registros_ingreso
+            from almin.tal_ingreso i
+            inner join almin.tal_parametro_almacen_logico pal on pal.id_parametro_almacen_logico = i.id_parametro_almacen_logico
+            where i.id_ingreso = al_id_ingreso;  
+            
             --OBTIENE EL CODIGO DEL MOTIVO DE INGRESO PARA DETERMINAR EL TIPO DE VALORACION
             SELECT
-            MOTING.codigo
-            INTO g_codigo_motivo_ingreso
+              MOTING.codigo
+              
+            INTO 
+              g_codigo_motivo_ingreso
             FROM almin.tal_ingreso INGRES
-            INNER JOIN almin.tal_motivo_ingreso_cuenta MOINCU
-            ON MOINCU.id_motivo_ingreso_cuenta = INGRES.id_motivo_ingreso_cuenta
-            INNER JOIN almin.tal_motivo_ingreso MOTING
-            ON MOTING.id_motivo_ingreso = MOINCU.id_motivo_ingreso
-            AND MOTING.codigo = 'IMP'
+            INNER JOIN almin.tal_motivo_ingreso_cuenta MOINCU   ON MOINCU.id_motivo_ingreso_cuenta = INGRES.id_motivo_ingreso_cuenta
+            INNER JOIN almin.tal_motivo_ingreso MOTING  ON MOTING.id_motivo_ingreso = MOINCU.id_motivo_ingreso
             WHERE INGRES.id_ingreso = al_id_ingreso;
-
+            
+            --validar que la gestion no este cerrada
+            IF v_registros_ingreso.estado ='cerrado' then
+               raise exception 'La gestion ya se encuentra cerrada no puede cambiar los valores del costeo por obvias razones,  aun que insista';
+            end if;
+            
+            
             IF g_codigo_motivo_ingreso = 'IMP' THEN
+            
+            
+            
             
                 --VALORACION POR IMPORTACION
                 --OBTIENE EL TOTAL DE IMPORTACION Y EL TOTAL DE NACIONALIZACION
@@ -2206,20 +2254,35 @@ BEGIN
                 
                 --OBTIENE EL PESO SUMANDO LOS PESOS DE LOS ITEMS (RCM: 23/03/2009)
                 SELECT 
-                COALESCE(SUM(COALESCE(ITEM.peso_kg,0) * COALESCE(INGDET.cantidad,0)),0)
-                INTO g_peso_neto
+                   COALESCE(SUM(COALESCE(ITEM.peso_kg,0) * COALESCE(INGDET.cantidad,0)),0),
+                   COALESCE(SUM(COALESCE(ITEM.costo_estimado,0) * COALESCE(INGDET.cantidad,0)),0)
+                INTO 
+                    g_peso_neto,
+                    g_costo_estimado_neto
                 FROM almin.tal_ingreso INGRES
                 INNER JOIN almin.tal_ingreso_detalle INGDET
                 ON INGDET.id_ingreso = INGRES.id_ingreso
                 INNER JOIN almin.tal_item ITEM
                 ON ITEM.id_item = INGDET.id_item
                 WHERE INGRES.id_ingreso =  al_id_ingreso;
+                
+                IF v_registros_ingreso.tipo_costeo = 'peso' THEN
 
-                IF g_peso_neto IS NULL OR g_peso_neto = 0 THEN
-                    g_descripcion_log_error := 'Valoracion no realizada: El Peso Neto es cero o no fue registrado';
-                    g_nivel_error := '4';
-                    g_respuesta := param.f_pm_mensaje_error(g_descripcion_log_error, g_nombre_funcion, g_nivel_error, pm_codigo_procedimiento);
-                    RETURN 'f'||g_separador||g_respuesta;
+                    IF g_peso_neto IS NULL OR g_peso_neto = 0 THEN
+                        g_descripcion_log_error := 'Valoracion no realizada: El Peso Neto es cero o no fue registrado';
+                        g_nivel_error := '4';
+                        g_respuesta := param.f_pm_mensaje_error(g_descripcion_log_error, g_nombre_funcion, g_nivel_error, pm_codigo_procedimiento);
+                        RETURN 'f'||g_separador||g_respuesta;
+                    END IF;
+                ELSE
+                
+                   IF g_costo_estimado_neto IS NULL OR g_costo_estimado_neto = 0 THEN
+                        g_descripcion_log_error := 'Valoracion no realizada: El Costo Estimadto Neto es cero o no fue registrado';
+                        g_nivel_error := '4';
+                        g_respuesta := param.f_pm_mensaje_error(g_descripcion_log_error, g_nombre_funcion, g_nivel_error, pm_codigo_procedimiento);
+                        RETURN 'f'||g_separador||g_respuesta;
+                    END IF;
+                
                 END IF;
 
                 raise notice 'tot_import: %', g_tot_import;
@@ -2244,9 +2307,13 @@ BEGIN
                 raise notice 'tot_valoracion: %', g_tot_valoracion;
 
                 --OBTIENE EL FACTOR DE VALORACION (FD)
-                g_FD = g_tot_valoracion / g_peso_neto;
-
-                    raise notice 'FD: %', g_FD;
+                IF v_registros_ingreso.tipo_costeo = 'peso' THEN
+                	g_FD = g_tot_valoracion / g_peso_neto;
+                ELSE
+	                g_FD = g_tot_valoracion / g_costo_estimado_neto;	
+                END IF;
+ 				
+                raise notice 'FD: %', g_FD;
 
                 IF g_FD IS NULL AND g_FD > 0 THEN
                     g_descripcion_log_error := 'Valoracion no realizada: El Factor de Valoracion es cero o nulo';
@@ -2264,54 +2331,140 @@ BEGIN
 
                     IF NOT g_registro.cantidad IS NULL AND g_registro.cantidad > 0 THEN
                         --CALCULA EL PRECIO UNITARIO DEL ITEM
-                        --g_precio_item = COALESCE((g_FD * g_registro.peso_kg) / g_registro.cantidad,0);
-                        g_precio_item = COALESCE((g_FD * g_registro.peso_kg * g_registro.cantidad) / g_registro.cantidad,0);
-                        g_costo_total_item = g_precio_item * g_registro.cantidad;
-                         
-                        RAISE NOTICE '&&&&&&TOTAL ITEM = %',g_costo_total_item;
+                        IF v_registros_ingreso.tipo_costeo = 'peso' THEN
+                          g_precio_item = COALESCE((g_FD * g_registro.peso_kg * g_registro.cantidad) / g_registro.cantidad,0);
+                          
+                        ELSE
+                           g_precio_item = COALESCE((g_FD * g_registro.costo_estimado * g_registro.cantidad) / g_registro.cantidad,0);	
+                        END IF;
+                        
+                        IF g_precio_item is null or g_precio_item = 0 then
+                          raise exception 'El costo estimado del item (%) dio cero, revise su  peso y  costo estimado en clasificación',g_registro.codigo;
+                        end if;
+                        
+                       
 
                         --ACTUALZA EL PRECIO UNITARIO EN LA BD
                         UPDATE almin.tal_ingreso_detalle SET
-                        costo_unitario = g_precio_item,
+                           costo_unitario = g_precio_item,
                            costo = g_precio_item * g_registro.cantidad
                         WHERE id_ingreso_detalle = g_registro.id_ingreso_detalle;  
                         
-                        raise notice 'item: %   -> costo_unit % = (FD % * peso %) / cantidad %   PRECIO TOTAL % = precio_item % * cantidad %',g_registro.id_item,g_precio_item,g_FD,g_registro.peso_kg,g_registro.cantidad,g_precio_item*g_registro.cantidad,g_precio_item,g_registro.cantidad;
-
                     END IF;
 
                 END LOOP;
                 CLOSE g_cursor;
 
-            ELSEIF g_codigo_motivo_ingreso <> 'IMP' AND  NOT g_codigo_motivo_ingreso IS NULL THEN
+            
+            --------------------------------------------------------------
+            -- Valoracion de ingresos por devolucion
+            -- obtiene los costos de los items a aprtir de las salidas
+            ------------------------------------------------------------------
+            ELSEIF g_codigo_motivo_ingreso = 'DEV' THEN
+            
+                
+                
+                --RECORRE EL DETALLE DEL INGRESO Y VALORA CADA ITEM
+                OPEN g_cursor(al_id_ingreso);
+
+                LOOP
+                    FETCH g_cursor INTO g_registro;
+                    EXIT WHEN NOT FOUND;
+
+                    IF NOT g_registro.cantidad IS NULL AND g_registro.cantidad > 0 THEN
+                        
+                         -- obtener el ulitmo costo de laultima salida del mismo matearial
+                        g_aux_cotos_det = NULL;
+                         
+                         select 
+                            COALESCE(sad.costo_unitario,0),
+                            s.correlativo_sal
+                         into
+                            g_aux_cotos_det,
+                            g_correlativo_ing
+                         from almin.tal_salida_detalle sad
+                         inner join almin.tal_salida s on s.id_salida = sad.id_salida
+                         where sad.id_item = g_registro.id_item
+                         		AND s.id_almacen_logico = v_registros_ingreso
+                          ORDER BY sad.id_salida_detalle DESC
+                          LIMIT 1 OFFSET 0;
+                        
+                        IF g_aux_cotos_det = 0 THEN
+                            raise exception 'La salida % del item % no fue valorada, primero  costee los ingresos y salidas previos', g_correlativo_ing, g_registro.codigo;
+                        END IF;
+                        
+                         IF g_aux_cotos_det is null THEN
+                            raise exception 'No existe una ultima salida para el material %, no puede ingresar por devolucion',  g_registro.codigo;
+                        END IF;
+                       
+
+                        --ACTUALZA EL PRECIO UNITARIO EN LA BD
+                        UPDATE almin.tal_ingreso_detalle SET
+                           costo_unitario = g_precio_item,
+                           costo = g_precio_item * g_registro.cantidad
+                        WHERE id_ingreso_detalle = g_registro.id_ingreso_detalle;  
+                        
+                    END IF;
+
+                END LOOP;
+                CLOSE g_cursor;
+            
+            
+            ELSE
+                
                 --VALORACION GENERAL
                 --OBTIENE EL TOTAL DE LA FACTURA
+                
                 SELECT
-                INGRES.monto_tot_factura
-                INTO g_tot_factura
+                	INGRES.monto_tot_factura
+                INTO 	
+                	g_tot_factura
                 FROM almin.tal_ingreso INGRES
                 WHERE INGRES.id_ingreso = al_id_ingreso;
 
                  --OBTIENE LA CANTIDAD TOTAL DE LOS ITEMS A INGRESAR
                 SELECT
-                SUM(INGDET.cantidad)
-                INTO g_tot_cantidad
+                	SUM(INGDET.cantidad),
+             		SUM(INGDET.costo_unitario)
+                INTO 
+                	g_tot_cantidad,
+                    g_aux_cotos_det
                 FROM almin.tal_ingreso_detalle INGDET
                 WHERE INGDET.id_ingreso = al_id_ingreso;
-
-                IF g_peso_neto IS NULL OR g_peso_neto = 0 THEN
-                    g_descripcion_log_error := 'Valoracion no realizada: El Peso Neto es cero o no fue registrado';
-                    g_nivel_error := '4';
-                    g_respuesta := param.f_pm_mensaje_error(g_descripcion_log_error, g_nombre_funcion, g_nivel_error, pm_codigo_procedimiento);
-                    RETURN 'f'||g_separador||g_respuesta;
+                
+                -- solo permite el costeo cuando no lo  tiene
+                IF g_aux_cotos_det = 0 THEN
+                   raise exception 'Este metodo de costeo solo puede realizarce cuando no registro costos unitarios';
                 END IF;
-
-                raise notice 'tot_import: %', g_tot_import;
-                raise notice 'tot_nacionaliz: %', g_tot_nacionaliz;
-                raise notice 'peso neto: %', g_peso_neto;
-                raise notice 'fecha factura: %', g_fecha_factura;
-
-                g_precio_item = g_tot_factura / g_tot_cantidad;
+               
+              -- obtiene el criterio de prorrateo
+              -- OBTIENE EL PESO SUMANDO LOS PESOS DE LOS ITEMS (RCM: 23/03/2009)
+                SELECT 
+                   COALESCE(SUM(COALESCE(ITEM.peso_kg,0) * COALESCE(INGDET.cantidad,0)),0),
+                   COALESCE(SUM(COALESCE(ITEM.costo_estimado,0) * COALESCE(INGDET.cantidad,0)),0)
+                INTO 
+                    g_peso_neto,
+                    g_costo_estimado_neto
+                FROM almin.tal_ingreso INGRES
+                INNER JOIN almin.tal_ingreso_detalle INGDET
+                ON INGDET.id_ingreso = INGRES.id_ingreso
+                INNER JOIN almin.tal_item ITEM
+                ON ITEM.id_item = INGDET.id_item
+                WHERE INGRES.id_ingreso =  al_id_ingreso;
+                
+                IF v_registros_ingreso.tipo_costeo = 'peso' THEN
+                    IF g_peso_neto IS NULL OR g_peso_neto = 0 THEN
+                        raise exception 'Valoracion no realizada: El Peso Neto es cero o no fue registrado';                        
+                    END IF;
+                    g_FD = g_tot_factura / g_peso_neto;
+                ELSE                
+                    IF g_costo_estimado_neto IS NULL OR g_costo_estimado_neto = 0 THEN
+                        raise exception  'Valoracion no realizada: El Costo Estimado Neto es cero o no fue registrado';                    
+                    END IF;
+                     g_FD = g_tot_factura / g_costo_estimado_neto;                
+                END IF;
+                
+                
 
                 --RECORRE EL DETALLE DEL INGRESO Y VALORA CADA ITEM
                 OPEN g_cursor(al_id_ingreso);
@@ -2319,6 +2472,16 @@ BEGIN
                 LOOP
                     FETCH g_cursor INTO g_registro;
                     EXIT WHEN NOT FOUND;
+                    
+                    IF v_registros_ingreso.tipo_costeo = 'peso' THEN
+                    	g_precio_item = COALESCE((g_FD * g_registro.peso_kg * g_registro.cantidad) / g_registro.cantidad,0);                          
+                    ELSE
+                    	g_precio_item = COALESCE((g_FD * g_registro.costo_estimado * g_registro.cantidad) / g_registro.cantidad,0);	
+                    END IF;
+                    
+                    IF g_precio_item is null or g_precio_item = 0 then
+                          raise exception 'El costo estimado del item (%) dio cero, revise su  peso y  costo estimado en clasificación',g_registro.codigo;
+                     end if;
 
                     IF NOT g_registro.cantidad IS NULL AND g_registro.cantidad > 0 THEN
                         --ACTUALIZA EL PRECIO UNITARIO EN LA BD
@@ -2352,6 +2515,8 @@ BEGIN
                 RETURN 'f'||g_separador||g_respuesta;
 
             END IF;
+            
+            
 
             --ANULA LOS INGRESOS
             UPDATE almin.tal_ingreso SET

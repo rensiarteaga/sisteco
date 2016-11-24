@@ -303,15 +303,16 @@ BEGIN
         RETURN 'f'||g_separador||g_respuesta||g_separador||g_reg_evento;
     END IF;
    */ -- FIN RAC 
+   
+   
+   
       
      /*
        Autor: RAC
        Fecha: 5/12/2016
-       DESC:  al isnertar epdido se define el parametro almacen logico para permitir que los almacenes trabajen en gestiones independientes
+       DESC:  al isnertar pedido se define el parametro almacen logico para permitir que los almacenes trabajen en gestiones independientes
      
      */ 
-      
-      
       
       --*** EJECUCIÓN DEL PROCEDIMIENTO ESPECÍFICO
     IF pm_codigo_procedimiento = 'AL_PEDIDO_INS' THEN
@@ -2034,6 +2035,8 @@ BEGIN
      desc:		- no permite los saiadas sin existencias
      			- calculo de salida segun promedio ponderado
                 - realizar salida  en la gestion abierta
+                - finaliza solo si la gestion esta abierta
+                - cuando es transferencia verifica que el nuevo ingreso sea de la misma gestion 
      **************************************/
 
     ELSIF pm_codigo_procedimiento = 'AL_SAPROY_FIN' THEN --Finalizar Salida Proyectos
@@ -2072,6 +2075,14 @@ BEGIN
                g_id_parametro_almacen_logico
             FROM almin.tal_salida s
             WHERE id_salida = al_id_salida;
+            
+            --SE VERIFICA SI EL ALMACÉN ESTÁ BLOQUEADO O CERRADO
+            IF exists(SELECT 1
+                      FROM almin.tal_parametro_almacen_logico l
+                      WHERE  l.id_parametro_almacen_logico = g_id_parametro_almacen_logico 
+                             and estado = 'cerrado') THEN                             
+                      raise exception 'No puede finalizar esta gestion esta cerrada';       
+        	END IF;
             
              --  validar que la fecha de inalizacion este dentro de la gestion 
             select 
@@ -2305,7 +2316,6 @@ BEGIN
                                      
                                      -- OBTIENE LA GESTIÓN VIGENTE
                                     
-                                    
                                     SELECT 
                                         pl.id_parametro_almacen,
                                         pl.id_parametro_almacen_logico
@@ -2318,6 +2328,10 @@ BEGIN
                                     
                                     IF  g_id_parametro_almacen is null THEN
                                        raise exception 'no se encontro parametros gestion para abierto para el almacesn ';
+                                    END IF;
+                                    
+                                    IF    g_id_parametro_almacen_salida != g_id_parametro_almacen THEN
+                                       raise exception 'La gestion de ambos almacenes debe ser la misma para transferencias';
                                     END IF;
 
                                      IF (g_id_firma_autorizada>0) THEN  -- es posible registrar el ingreso
@@ -2347,7 +2361,7 @@ BEGIN
                                                  id_firma_autorizada       ,id_institucion             ,id_motivo_ingreso_cuenta,
                                                  fecha_ing_fisico          ,fecha_ing_valorado         ,fecha_finalizado_cancelado,
                                                  orden_compra              ,observaciones              ,id_usuario                             ,id_parametro_almacen,
-                                                 circuito
+                                                 circuito,					id_parametro_almacen_logico
                                                  ) VALUES ( g_id_ingreso,
                                                  g_registro.descripcion,
                                                  g_costo_total             ,g_contabilizar             ,'Aprobado'                             ,'activo',
@@ -2422,6 +2436,7 @@ BEGIN
      desc:		- no permite salida sin existencias
      			- calculo de salida segun promedio ponderado
                 - realizar la salida  en la gestion abierta
+                - verifica que la gestion este abierta
      **************************************/
     ELSIF pm_codigo_procedimiento = 'AL_SAPRUC_FIN' THEN --Finalizar Salida Proyectos Unidades Constructivas
         BEGIN
@@ -2440,6 +2455,14 @@ BEGIN
                g_id_parametro_almacen_logico
             FROM almin.tal_salida  s
             WHERE id_salida = al_id_salida;
+            
+            --SE VERIFICA SI EL ALMACÉN ESTÁ BLOQUEADO O CERRADO
+            IF exists(SELECT 1
+                      FROM almin.tal_parametro_almacen_logico l
+                      WHERE  l.id_parametro_almacen_logico = g_id_parametro_almacen_logico 
+                             and estado = 'cerrado') THEN                             
+                      raise exception 'No puede finalizar esta gestion esta cerrada';      
+        	END IF;
         
         
               --  validar que la fecha de inalizacion este dentro de la gestion 

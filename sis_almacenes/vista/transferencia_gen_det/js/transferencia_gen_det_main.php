@@ -736,6 +736,9 @@ function pagina_transferencia_det_det(idContenedor,direccion,paramConfig,maestro
 
 		CM_ocultarGrupo('Oculto');
 		ClaseMadre_btnNew();
+		cmb_Item.modificado = true;
+		
+		
 	}
 
 
@@ -743,6 +746,7 @@ function pagina_transferencia_det_det(idContenedor,direccion,paramConfig,maestro
 
 		CM_ocultarGrupo('Oculto');
 		ClaseMadre_btnEdit();
+		cmb_Item.modificado = true;
 	}
 	//para que los hijos puedan ajustarse al tamaño
 	this.getLayout=function(){

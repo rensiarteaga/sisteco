@@ -81,37 +81,41 @@ BEGIN
       -- TODO verificar que no queden prestamos pendientes
       
       -- verificar que no existan ingresos sin valoracion (tolos lso detalle denbe tener un costo)
+      -- y  que no existan ingresos sin finalizat
       v_numeros = '';
       
-      FOR v_registros_ingreso in (select 
+      FOR v_registros_ingreso in (select DISTINCT
                                           ing.correlativo_ing,
-                                          ing.fecha_finalizado_cancelado
+                                          ing.fecha_finalizado_cancelado,
+                                          ing.estado
                                     from almin.tal_ingreso ing
                                     inner join almin.tal_ingreso_detalle id on id.id_ingreso = ing.id_ingreso
                                     where ing.id_parametro_almacen_logico = g_id_parametro_almacen_logico
-                                           and  id.costo_unitario = 0 or  id.costo_unitario is null) LOOP
-      
-                v_numeros =  v_numeros||'( I-'||v_registros_ingreso.correlativo_ing::varchar||', '||v_registros_ingreso.fecha_finalizado_cancelado::varchar||')';
+                                           and  (id.costo_unitario = 0 or  id.costo_unitario is null  or ing.estado != 'Finalizado' ) ) LOOP
+               v_numeros =  v_numeros||'( I-'||v_registros_ingreso.correlativo_ing::varchar||', '||v_registros_ingreso.fecha_finalizado_cancelado::varchar||')';
                 
       
       END LOOP;
       
+      
+      
       if v_numeros != ''  THEN   
-         raise exception 'Existen ingesos  sin costos unitarios:  %', v_numeros;
+         raise exception 'Existen ingesos  sin costos unitarios o son finalizar :  %', v_numeros;
       end if;
       
       
-      -- verificar que todas las salidas esten valoradas
+      -- verificar que todas las salidas esten valoradas y no finalizadas
       v_numeros = '';
       
       FOR v_registros_salida in (
        								select 
+                                          DISTINCT
                                           sal.correlativo_sal,
                                           sal.fecha_finalizado_cancelado
                                     from almin.tal_salida sal
                                     inner join almin.tal_salida_detalle sd on sd.id_salida  = sal.id_salida
                                     where sal.id_parametro_almacen_logico = g_id_parametro_almacen_logico
-                                           and  sd.costo_unitario = 0 or  sd.costo_unitario is null) LOOP
+                                           and  (sd.costo_unitario = 0 or  sd.costo_unitario is null or  sal.estado != 'Finalizado')) LOOP
       
                 v_numeros =  v_numeros||'( S-'||v_registros_salida.correlativo_sal::varchar||', '||v_registros_salida.fecha_finalizado_cancelado::varchar||')';
                 
@@ -119,7 +123,7 @@ BEGIN
       END LOOP;
       
       if  v_numeros != ''  THEN   
-         raise exception 'Existen salidas sin costos unitarios: %', v_numeros;
+         raise exception 'Existen salidas sin costos unitarios o sin finalizar: %', v_numeros;
       end if;
       
       

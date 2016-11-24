@@ -97,15 +97,6 @@ class PDF extends FPDF
 		$fecha=date("d-m-Y");
 		//hora
 		$hora=date("H:i:s");
-		//$this->Cell(75,10,'Usuario: '.$_SESSION["ss_nombre_usuario"] ,0,0,'L');
-		//$this->Cell(40,10,'Página '.$this->PageNo().' de {nb}',0,0,'C');
-		//$this->Cell(47,10,'',0,0,'C');
-		//$this->Cell(35,10,'Fecha: '.$fecha ,0,0,'L');
-		//$this->ln(3);
-		//$this->Cell(75,10,'',0,0,'L');
-		//$this->Cell(40,10,'',0,0,'C');
-		//$this->Cell(47,10,'',0,0,'C');
-		//$this->Cell(35,10,'Hora: '.$hora ,0,0,'L');
 	}
 
 

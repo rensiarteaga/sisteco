@@ -183,7 +183,9 @@ if($_SESSION['autentificado']=='SI')
 			$xml->add_nodo('gestion',$f["gestion"]);
 			$xml->add_nodo('id_motivo_ingreso',$f["id_motivo_ingreso"]);
 			$xml->add_nodo('id_almacen',$f["id_almacen"]);
+			$xml->add_nodo('tipo_costeo',$f["tipo_costeo"]);
 			$xml->fin_rama();
+			
 		}
 		$xml->mostrar_xml();
 	}
