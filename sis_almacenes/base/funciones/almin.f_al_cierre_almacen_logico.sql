@@ -54,6 +54,7 @@ DECLARE
    v_date_fin							date;
    g_contabilizar						varchar;
    v_id_empleado						integer;
+   v_costeo_pendiente					varchar;
 
 BEGIN
       
@@ -63,13 +64,15 @@ BEGIN
           pl.id_parametro_almacen_logico,
           pa.gestion,
           ale.id_fina_regi_prog_proy_acti,
-          ale.id_almacen
+          ale.id_almacen,
+          pl.costeo_pendiente
       into
           g_id_parametro_almacen,
           g_id_parametro_almacen_logico,
           g_gestion_act,
           g_id_fina_regi_prog_proy_acti,
-          v_id_almacen
+          v_id_almacen,
+          v_costeo_pendiente
                     
       from almin.tal_parametro_almacen_logico pl
            inner join almin.tal_almacen_logico al on al.id_almacen_logico = pl.id_almacen_logico
@@ -77,6 +80,11 @@ BEGIN
            inner join almin.tal_parametro_almacen pa on pa.id_parametro_almacen = pl.id_parametro_almacen
       where pl.estado = 'abierto'
             and pl.id_almacen_logico = al_id_almacen_logico;
+            
+            
+       IF v_costeo_pendiente = 'si' THEN
+           raise exception 'El almacen tiene costeos pendientes, realize las revalorización correspondiente';
+       END IF;    
       
       -- TODO verificar que no queden prestamos pendientes
       
@@ -156,7 +164,7 @@ BEGIN
       where ra.id_almacen = v_id_almacen and
        		ra.cargo = 'Jefe de Almacen';
       IF g_id_responsable_almacen is null THEN
-         raise exception 'Nos e encontre un Feje de Almacen';
+         raise exception 'No se encontro un jefe de Almacen';
       END IF;
   
       
