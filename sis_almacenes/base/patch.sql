@@ -282,11 +282,11 @@ COMMENT ON COLUMN almin.tal_salida.sw_faltante_tuc
 IS 'si la salida se realiza con faltantes autorizados esta sw cambia al valor si';
 
  
-/***********************************I-SCP-RAC-ALMIN-2-29/12/2016****************************************/ 
+/***********************************F-SCP-RAC-ALMIN-2-29/12/2016****************************************/ 
  
 
 /***********************************I-SCP-RAC-ALMIN-2-03/01/2017****************************************/ 
- 
+
   CREATE TABLE almin.tal_componente_tmp (
   nombre VARCHAR,
   cantidad INTEGER DEFAULT 0 NOT NULL,
