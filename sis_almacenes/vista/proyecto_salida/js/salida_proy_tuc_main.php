@@ -1088,7 +1088,7 @@ function pagina_salida_proy_tuc(idContenedor,direccion,paramConfig)
 	//////////////////////////////////////////////////////////////
 	//Inicia Layout
 	var config={titulo_maestro:'Pedido',grid_maestro:'grid-'+idContenedor};
-	layout_salida=new DocsLayoutMaestro(idContenedor);
+	var layout_salida=new DocsLayoutMaestro(idContenedor);
 	layout_salida.init(config);
 	////////////////////////
 	// INICIAMOS HERENCIA //
@@ -1473,6 +1473,21 @@ function pagina_salida_proy_tuc(idContenedor,direccion,paramConfig)
 		Cm_btnActualizar()
 
 	}
+	
+	
+	function btn_pedido_tuc_int(){
+		var sm=getSelectionModel();var filas=ds.getModifiedRecords();var cont=filas.length;var NumSelect=sm.getCount();
+		if(NumSelect!=0){
+			var SelectionsRecord=sm.getSelected();
+			var data='m_id_salida='+SelectionsRecord.data.id_salida;
+			data=data+'&m_correlativo_sal='+SelectionsRecord.data.correlativo_sal;
+			var ParamVentana={Ventana:{width:'90%',height:'80%'}}
+			layout_salida.loadWindows(direccion+'../../../vista/pedido_tuc_int/pedido_tuc_int_det.php?'+data,'Materiales',ParamVentana);
+			layout_salida.getVentana().on('resize',function(){layout_salida.getLayout().layout()})
+		}
+		else{Ext.MessageBox.alert('Estado','Antes debe seleccionar un item.')
+		}
+	}
 
 	function btn_pedido_almacen(){
 		/*datax = "hidden_id_salida=" + Cm_getComponente('id_salida').getValue();
@@ -1542,14 +1557,13 @@ function pagina_salida_proy_tuc(idContenedor,direccion,paramConfig)
 		CM_ocultarComponente(componentes[5]);//empleado
 		CM_ocultarComponente(componentes[7])//institución
 	}
-
+	
+	
+	
 	//para que los hijos puedan ajustarse al tamaño
 	this.getLayout=function(){
-		return layout_orden_ingreso_sol.getLayout()
+		return layout_salida.getLayout()
 	};
-
-	//para que los hijos puedan ajustarse al tamaño
-	this.getLayout=function(){return layout_salida.getLayout()};
 	//para el manejo de hijos
 	this.getPagina=function(idContenedorHijo){
 		var tam_elementos=elementos.length;
@@ -1569,7 +1583,8 @@ function pagina_salida_proy_tuc(idContenedor,direccion,paramConfig)
 	this.InitFunciones(paramFunciones);
 	//para agregar botones
 	this.AdicionarBoton('../../../lib/imagenes/detalle.png','Detalle del Pedido',btn_salida_detalle,true,'salida_detalle','');
-	this.AdicionarBoton('../../../lib/imagenes/lightning.png','Verificar Existencias Tipo de Unidad Constructiva',btn_ver,true,'vr','');
+	this.AdicionarBoton('../../../lib/imagenes/lightning.png','Verificar Existencias Tipo de Unidad Constructiva',btn_ver,true,'vr','');	
+	this.AdicionarBoton('../../../lib/imagenes/book_open.png','Materiales',btn_pedido_tuc_int,true,'pedido_tuc_int','');
 	this.AdicionarBoton('../../../lib/imagenes/logo_pdf2.bmp','Imprimir Lista de Materiales',btn_listado_material,true,'listado','');
 	this.AdicionarBoton('../../../lib/imagenes/logo_pdf2.bmp','Imprimir Pedido Cabecera',btn_pedido_cab,true,'ped_cab','');
 	this.AdicionarBoton('../../../lib/imagenes/logo_pdf2.bmp','Imprimir Material a Entregar',btn_pedido_almacen,true,'rep_ped','');

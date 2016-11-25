@@ -2538,6 +2538,19 @@ class cls_CustomDBAlmacenes
 		
 		return $res;
 	}
+	
+	function PedidoMaterialesUCDetEntregados($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad)
+	{
+		$this->salida = "";
+		$dbSalida = new cls_DBSalida($this->decodificar);
+		$res = $dbSalida ->PedidoMaterialesUCDetEntregados($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad);
+		$this->salida = $dbSalida ->salida;
+		$this->query = $dbSalida ->query;
+		/*echo "QUERY: ".$this->query;
+		exit;*/
+		
+		return $res;
+	}
 	//ARV 13/02/2009
 	function PedidoMaterialesSimplificado($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad)
 	{

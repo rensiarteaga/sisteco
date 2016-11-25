@@ -1500,11 +1500,89 @@ class cls_DBSalida
 		//Obtiene la cadena con que se llamó a la función de postgres
 		$this->query = $this->var->query;
 
+		//cho "query: ".$this->query;
+		//exit;
+
+		return $res;
+	}
+
+   /**
+	 * Nombre de la función:	PedidoMaterialesUCDetDetalle
+	 * Propósito:				Despliega formulario del detalle de pedido de materiales UC. Solo muestra los que se incluyeron en formulario de lisada los entregados efectivamente
+	 * Autor:				    RAC
+	 * Fecha de creación:		30/12/2016
+	 */
+	function PedidoMaterialesUCDetEntregados($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad)
+	{
+		$this->salida = "";
+		$this->nombre_funcion = 'f_tal_salida_sel';
+		$this->codigo_procedimiento = "'AL_PMUCDRENT_SEL'";
+
+		$func = new cls_funciones();//Instancia de las funciones generales
+
+		//Instancia la clase middle para la ejecución de la función de la BD
+		$this->var = new cls_middle($this->nombre_funcion,$this->codigo_procedimiento);
+
+		//Carga los parámetros del filtro
+		$this->var->cant = $cant;
+		$this->var->puntero = $puntero;
+		$this->var->sortcol = "'$sortcol'";
+		$this->var->sortdir = "'$sortdir'";
+		$this->var->criterio_filtro = "'$criterio_filtro'";
+
+		//Carga los parámetros específicos de la estructura programática
+		$this->var->add_param($func->iif($id_financiador == '',"'%'","'$id_financiador'"));//id_financiador
+		$this->var->add_param($func->iif($id_regional == '',"'%'","'$id_regional'"));//id_regional
+		$this->var->add_param($func->iif($id_programa == '',"'%'","'$id_programa'"));//id_programa
+		$this->var->add_param($func->iif($id_proyecto == '',"'%'","'$id_proyecto'"));//id_proyecto
+		$this->var->add_param($func->iif($id_actividad == '',"'%'","'$id_actividad'"));//id_actividad
+ 
+		//Carga la definición de columnas con sus tipos de datos
+		$this->var->add_def_cols('nombre','varchar');
+		$this->var->add_def_cols('cant_unit_uc','numeric');
+		$this->var->add_def_cols('peso_kg','numeric');
+		$this->var->add_def_cols('unidad_medida','varchar');
+		$this->var->add_def_cols('calidad','varchar');
+		$this->var->add_def_cols('descripcion','varchar');
+		$this->var->add_def_cols('peso_total','numeric');
+		$this->var->add_def_cols('cantidad_total','numeric');
+		$this->var->add_def_cols('cant_demasia','numeric');
+		$this->var->add_def_cols('cantidad_total_dem','numeric');
+		
+		$this->var->add_def_cols('desc_almacen','varchar');
+		$this->var->add_def_cols('desc_uc','varchar');
+		$this->var->add_def_cols('cantidad_uc','numeric');
+		$this->var->add_def_cols('codigo','varchar');
+		$this->var->add_def_cols('desc_uc_padre','varchar');
+		$this->var->add_def_cols('solicitante','varchar');
+		$this->var->add_def_cols('supergrupo','varchar');
+		$this->var->add_def_cols('id_supergrupo','integer');
+		$this->var->add_def_cols('demasia','varchar');
+		
+		
+		
+
+		//Ejecuta la función de consulta
+		$res = $this->var->exec_query();
+
+		//Obtiene el array de salida de la función y retorna el resultado de la ejecución
+		$this->salida = $this->var->salida;
+        /*
+		print ("<pre>");
+		print_r($this->salida);
+		print ("</pre>");
+		exit;*/
+
+		//Obtiene la cadena con que se llamó a la función de postgres
+		$this->query = $this->var->query;
+
 		//echo "query: ".$this->query;
 		//exit;
 
 		return $res;
 	}
+
+
 	/**
 	 * Nombre de la función:	PedidoMaterialesSimplificado
 	 * Propósito:				Despliega formulario de pedido de materiales 

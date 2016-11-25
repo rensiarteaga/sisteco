@@ -188,20 +188,19 @@ BEGIN
         
             select 
              	s.id_salida,
-             	s.tipo_costeo,
              	pal.estado,
                 s.id_almacen_logico,
                 s.id_parametro_almacen_logico,
                 s.id_parametro_almacen,
                 s.fecha_finalizado_cancelado,
                 al.costeo_obligatorio,
-                s.estado_ingreso                
+                s.estado_salida              
             into
              	v_registros
             from almin.tal_salida s
             inner join almin.tal_almacen_logico al on al.id_almacen_logico = s.id_almacen_logico
             inner join almin.tal_parametro_almacen_logico pal on pal.id_parametro_almacen_logico = s.id_parametro_almacen_logico
-            where i.id_salida = al_id_salida; 
+            where s.id_salida = al_id_salida; 
            
            
            
@@ -263,7 +262,7 @@ BEGIN
                     
     
             
-            IF g_codigo_mot_ing = 'TRM' THEN              
+            IF g_codigo_mot_sal = 'TRM' THEN              
                raise exception 'No puede insertar registro en transferencias';
             END IF;
 
@@ -301,19 +300,18 @@ BEGIN
         
            select 
              	s.id_salida,
-             	s.tipo_costeo,
              	pal.estado,
                 s.id_almacen_logico,
                 s.id_parametro_almacen_logico,
                 s.fecha_finalizado_cancelado,
                 al.costeo_obligatorio,
-                s.estado_ingreso                
+                s.estado_salida              
             into
              	v_registros
             from almin.tal_salida s
             inner join almin.tal_almacen_logico al on al.id_almacen_logico = s.id_almacen_logico
             inner join almin.tal_parametro_almacen_logico pal on pal.id_parametro_almacen_logico = s.id_parametro_almacen_logico
-            where i.id_salida = al_id_salida; 
+            where s.id_salida = al_id_salida; 
             
             
             --VERIFICA EXISTENCIA DEL REGISTRO
@@ -525,6 +523,7 @@ BEGIN
 		AUTOR:		RAC
         FECHA		19/12/2016
         DESCR		-  bloquear eliminacion en transferencias
+        			-  bug no existe columnas 
     
     */ 
     
@@ -544,7 +543,7 @@ BEGIN
             END IF;
             
             select 
-             	i.tipo_costeo,
+             
              	pal.estado,
                 i.id_almacen_logico,
                 i.id_parametro_almacen_logico,

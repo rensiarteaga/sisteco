@@ -64,7 +64,7 @@ pm_proc_almacenado                          varchar  // para colocar el nombre d
 DECLARE
 
     --PARÁMETROS FIJOS
-
+      v_registros			    record;
     g_id_subsistema            integer; -- ID SUBSISTEMA
     g_id_lugar                 integer; -- ID LUGAR
     g_numero_error             varchar; -- ALMACENA EL NÚMERO DE ERROR
@@ -88,6 +88,7 @@ DECLARE
     g_cod_duplicado            varchar;
     g_id_orden_salida_uc_detalle  integer;  
     g_sw              varchar;
+ 
     
     --Cursor lista el contendi del kardex_logico contejado con almin.tal_pedido_tuc_tmp
     g_cursor_tmp        CURSOR (p_id_parametro_almacen bigint,p_id_salida integer,p_id_almacen_logico integer) FOR 
@@ -301,6 +302,16 @@ BEGIN
      g_descripcion_log_error := 'Registro exitosode de items para en tabla temporal de pedido_tuc para el tuc='||al_id_tipo_unidad_constructiva;
      g_respuesta := 't'||g_separador||g_descripcion_log_error||g_separador||'true';
      END;
+     
+       /*
+      Autor:	Rensi Arteaga Copari
+      Fecha:	29/12/2016
+      Desc:	 	- esta funcion corre cuando cuando tuc son agregadas al pedido
+      			-  Si el item ya existen solo modifica las cantidades
+      			
+      
+     
+     */
      ELSEIF pm_codigo_procedimiento = 'AL_OSUCDE_TUC_INT_INS' THEN
 
         BEGIN  
@@ -326,18 +337,38 @@ BEGIN
                  g_cantidad_solicitada:=g_registros.cantidad * al_cantidad;
                  g_cantidad_demasia:=ROUND(g_registros.porc_demasia * g_cantidad_solicitada);
                 
-               -- SELECT NEXTVAL('almin.tal_pedido_tuc_int_id_pedido_tuc_int_seq') INTO g_id_pedido_tuc_int; 
---                                almin.tal_tipo_unidad_constructiva_id_tipo_unidad_constructiva_seq
+             
+ 				v_registros = NULL;
+                
+                select
+                 *
+                into
+                  v_registros
+                from almin.tal_pedido_tuc_int pti
+                where pti.id_item = g_registros.id_item and pti.id_salida = al_id_salida;
+                
+                
+                IF  v_registros.id_pedido_tuc_int is null  THEN
+             
+                    
+                      INSERT INTO almin.tal_pedido_tuc_int(
+                        id_salida            ,id_orden_salida_uc_detalle    ,id_tipo_unidad_constructiva,
+                        id_item       		 ,cantidad_solicitada			,fecha_reg,
+                        demasia
+                        ) VALUES (
+                        al_id_salida         ,al_id_orden_salida_uc_detalle ,al_id_tipo_unidad_constructiva,
+                        g_registros.id_item  ,g_cantidad_solicitada			,now(),
+                        g_cantidad_demasia
+                        );
+                ELSE
+                    update almin.tal_pedido_tuc_int set
+                        cantidad_solicitada = v_registros.cantidad_solicitada + g_cantidad_solicitada,
+                        demasia = v_registros.demasia  + g_cantidad_demasia
+                     where id_pedido_tuc_int = v_registros.id_pedido_tuc_int;
+                
+                END IF;
                    
-                INSERT INTO almin.tal_pedido_tuc_int(
-                id_salida            ,id_orden_salida_uc_detalle    ,id_tipo_unidad_constructiva,
-                id_item       		 ,cantidad_solicitada			,fecha_reg,
-                demasia
-                ) VALUES (
-                al_id_salida         ,al_id_orden_salida_uc_detalle ,al_id_tipo_unidad_constructiva,
-                g_registros.id_item  ,g_cantidad_solicitada			,now(),
-                g_cantidad_demasia
-                );
+              
               
         
             END LOOP;
@@ -370,6 +401,16 @@ BEGIN
      g_respuesta := 't'||g_separador||g_descripcion_log_error;
      END; 
      
+     /*
+      Autor:	Rensi Arteaga Copari
+      Fecha:	29/12/2016
+      Desc:	 	- esta funcion corre cuando item se agregar directamente al pedido
+      			-  Si el item ya existen solo modifica las cantidades
+      			
+      
+     
+     */
+     
      ELSEIF pm_codigo_procedimiento = 'AL_OSUCDE_ITEM_INT_INS' THEN
 
         BEGIN  
@@ -377,16 +418,36 @@ BEGIN
                 
               --  SELECT NEXTVAL('almin.tal_pedido_tuc_int_id_pedido_tuc_int_seq') INTO g_id_pedido_tuc_int; 
 --                                almin.tal_tipo_unidad_constructiva_id_tipo_unidad_constructiva_seq
-                   
-                INSERT INTO almin.tal_pedido_tuc_int(
-                id_salida     ,id_orden_salida_uc_detalle,
-                id_tipo_unidad_constructiva    ,id_item       ,cantidad_solicitada,
-                fecha_reg
-                ) VALUES (
-                al_id_salida  ,al_id_orden_salida_uc_detalle,
-                al_id_tipo_unidad_constructiva  ,al_id_item         ,al_cantidad,
-                now()
-                );
+
+                --
+                select
+                 *
+                into
+                  v_registros
+                from almin.tal_pedido_tuc_int pti
+                where pti.id_item = al_id_item and pti.id_salida = al_id_salida;
+                
+           
+                
+                
+                IF  v_registros.id_pedido_tuc_int is null  THEN
+                
+                    
+                    INSERT INTO almin.tal_pedido_tuc_int(
+                        id_salida     ,id_orden_salida_uc_detalle,
+                        id_tipo_unidad_constructiva    ,id_item       ,cantidad_solicitada,
+                        fecha_reg
+                        ) VALUES (
+                        al_id_salida  ,al_id_orden_salida_uc_detalle,
+                        al_id_tipo_unidad_constructiva  ,al_id_item         ,al_cantidad,
+                        now()
+                    );
+                ELSE
+                    update almin.tal_pedido_tuc_int set
+                        cantidad_solicitada = v_registros.cantidad_solicitada + al_cantidad
+                     where id_pedido_tuc_int = v_registros.id_pedido_tuc_int;
+                
+                END IF;
               
         
             
@@ -480,6 +541,13 @@ BEGIN
          g_respuesta := 't'||g_separador||g_descripcion_log_error||g_separador||g_sw;     
         
         END;
+    /*
+    Autor:  	Rensi Arteaga Copari
+    Fecha:		05/12/2016
+    Desc:		- 05/12/2016  recuepra gestion vigente por almacen logico
+    			-  
+    */    
+        
     ELSEIF pm_codigo_procedimiento = 'AL_VERIF_EXI_INT' THEN
 
         BEGIN 

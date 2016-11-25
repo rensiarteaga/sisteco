@@ -118,7 +118,8 @@ function pagina_salida_proy_tuc_fin(idContenedor,direccion,paramConfig)
 		'solicitante_ci',
 		'num_contrato',
 		'nombre_superv',
-		'gestion'
+		'gestion',
+		'sw_faltante_tuc'
 		]),remoteSort:true
 	});
 	//carga datos XML
@@ -208,6 +209,19 @@ function pagina_salida_proy_tuc_fin(idContenedor,direccion,paramConfig)
 			grid_indice:8,
 			width_grid:220,
 			width:'100%',
+			renderer: function(value, p, record){
+				if(record.data.sw_faltante_tuc == 'si'  ){
+					return String.format('<font color="red">{0}</font>', value)
+				}
+				else{
+					if(record.data.sw_faltante_tuc == 'entre'  ){
+						return String.format('<font color="green">{0}</font>', value)
+					}
+					else{
+					    return String.format('{0}', value)
+					  }
+				}
+			}
 			//grid_indice:3
 		},
 		tipo:'TextArea',
@@ -1051,7 +1065,20 @@ function pagina_salida_proy_tuc_fin(idContenedor,direccion,paramConfig)
 			//grid_indice:-4,
 			width_grid:80,
 			width:'40',
-			grid_indice:3
+			grid_indice:3,
+			renderer: function(value, p, record){
+				if(record.data.sw_faltante_tuc == 'si'  ){
+					return String.format('<font color="red">{0}</font>', value)
+				}
+				else{
+					if(record.data.sw_faltante_tuc == 'entre'  ){
+						return String.format('<font color="green">{0}</font>', value)
+					}
+					else{
+					    return String.format('{0}', value)
+					  }
+				}
+			}
 		},
 		tipo:'TextArea',
 		filtro_0:true,
@@ -1462,6 +1489,29 @@ function pagina_salida_proy_tuc_fin(idContenedor,direccion,paramConfig)
 			Ext.MessageBox.alert('Estado', 'Debe seleccionar una salida.')
 		}
 	}
+	
+	function btn_pedido_almacen_entregado(){
+		/*datax = "hidden_id_salida=" + Cm_getComponente('id_salida').getValue();
+		window.open(direccion+'../../../control/_reportes/pedidos/ActionReportePedidos.php?'+datax)*/
+		var idSalida = Cm_getComponente('id_salida').getValue();
+		//alert("id_salida: "+idSalida);
+
+		/*var n = getSm().getSelectedNode();
+		if(n){*/
+		if(idSalida!=''){
+			var data='maestro_id_salida='+idSalida;
+			//var data='maestro_id_salida='+n.attributes.id_salida;
+			/*data=data+'&maestro_id_tipo_unidad_constructiva='+n.attributes.id;
+			data=data+'&maestro_codigo='+n.attributes.codigo;
+			data=data+'&maestro_tipo='+n.attributes.tipo;
+			data=data+'&maestro_terminado='+n.attributes.terminado;
+			data=data+'&maestro_nombre='+n.attributes.nombre;*/
+			window.open(direccion+'../../../control/_reportes/pedido_materiales/ActionPedidoMaterialesEntregados.php?'+data)
+		}
+		else{
+			Ext.MessageBox.alert('Estado', 'Debe seleccionar una salida.')
+		}
+	}
 
 	//Imprime el Pedido de material, sólo la cabecera
 	function btn_pedido_cab(){
@@ -1496,6 +1546,20 @@ function pagina_salida_proy_tuc_fin(idContenedor,direccion,paramConfig)
 		CM_ocultarComponente(componentes[5]);//empleado
 		CM_ocultarComponente(componentes[7])//institución
 	}
+	
+	function btn_pedido_tuc_int(){
+		var sm=getSelectionModel();var filas=ds.getModifiedRecords();var cont=filas.length;var NumSelect=sm.getCount();
+		if(NumSelect!=0){
+			var SelectionsRecord=sm.getSelected();
+			var data='m_id_salida='+SelectionsRecord.data.id_salida;
+			data=data+'&m_correlativo_sal='+SelectionsRecord.data.correlativo_sal;
+			var ParamVentana={Ventana:{width:'90%',height:'80%'}}
+			layout_salida.loadWindows(direccion+'../../../vista/pedido_tuc_int/fin_pedido_tuc_int_det.php?'+data,'Materiales',ParamVentana);
+			layout_salida.getVentana().on('resize',function(){layout_salida.getLayout().layout()})
+		}
+		else{Ext.MessageBox.alert('Estado','Antes debe seleccionar un item.')
+		}
+	}
 
 	//para que los hijos puedan ajustarse al tamaño
 	this.getLayout=function(){
@@ -1523,8 +1587,11 @@ function pagina_salida_proy_tuc_fin(idContenedor,direccion,paramConfig)
 	this.InitFunciones(paramFunciones);
 	//para agregar botones
 	this.AdicionarBoton('../../../lib/imagenes/detalle.png','Detalle del Pedido',btn_salida_detalle,true,'salida_detalle','');
+	this.AdicionarBoton('../../../lib/imagenes/book_open.png','Materiales',btn_pedido_tuc_int,true,'pedido_tuc_int','');
+
 	this.AdicionarBoton('../../../lib/imagenes/logo_pdf2.bmp','Imprimir Pedido Cabecera',btn_pedido_cab,true,'ped_cab','');
-	this.AdicionarBoton('../../../lib/imagenes/logo_pdf2.bmp','Imprimir Material Entregado',btn_pedido_almacen,true,'rep_ped','');
+	this.AdicionarBoton('../../../lib/imagenes/logo_pdf2.bmp','Imprimir Material Por UC',btn_pedido_almacen,true,'rep_ped','');
+	this.AdicionarBoton('../../../lib/imagenes/logo_pdf2.bmp','Imprimir Material Entregado',btn_pedido_almacen_entregado,true,'rep_ped_entregado','');
 
 	this.iniciaFormulario();
 	iniciarEventosFormularios();

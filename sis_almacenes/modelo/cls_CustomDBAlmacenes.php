@@ -76,6 +76,7 @@ class cls_CustomDBAlmacenes
 		include_once("cls_DBMaterialEntregado.php");
 		include_once("cls_DBValoracion.php");
 		include_once("cls_DBParametroAlmacenLogico.php");
+		include_once("cls_DBPedidoTucInt.php");
 	}
 
 
@@ -3629,9 +3630,53 @@ class cls_CustomDBAlmacenes
 		return $res;
 	}
 	
-	
-	
 	/// --------------------- FIN tal_parametro_almacen_logico --------------------- ///
+	
+	/// --------------------- tal_pedido_tuc_int --------------------- ///
+	
+	function ListarPedidoTucInt($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad)
+	{
+		$this->salida = "";
+		$db = new cls_DBPedidoTucInt($this->decodificar);
+		$res = $db ->ListarPedidoTucInt($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad);
+		$this->salida = $db->salida;
+		$this->query = $db->query;
+		return $res;
+	}
+	
+	function ContarPedidoTucInt($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad)
+	{
+		$this->salida = "";
+		$db = new cls_DBPedidoTucInt($this->decodificar);
+		$res = $db ->ContarPedidoTucInt($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad);
+		$this->salida = $db->salida;
+		$this->query = $db->query;
+		return $res;
+	}
+	function ActionAutorizaPedido($id_pedido_tuc_int)
+	{
+		
+	    $this->salida = "";
+		$db = new cls_DBPedidoTucInt($this->decodificar);
+		$res = $db ->ActionAutorizaPedido($id_pedido_tuc_int);
+		$this->salida = $db->salida;
+		$this->query = $db->query;
+		return $res;
+	}
+	
+	function GenerarSalidaPendiente($id_salida)
+	{
+		
+	    $this->salida = "";
+		$db = new cls_DBPedidoTucInt($this->decodificar);
+		$res = $db ->GenerarSalidaPendiente($id_salida);
+		$this->salida = $db->salida;
+		$this->query = $db->query;
+		return $res;
+	}
+	
+	
+	/// --------------------- FIN tal_pedido_tuc_int --------------------- ///
 	
 	
 }?>

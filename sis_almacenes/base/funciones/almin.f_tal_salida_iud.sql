@@ -136,6 +136,7 @@ DECLARE
     g_id_responsable_almacen      integer;
     g_id_almacen_logico_destino   integer;
     g_id_parametro_almacen        integer;
+    v_sw_faltante				  boolean;
     g_cursor_pedido_tuc           CURSOR (ID integer) FOR
                                   SELECT
                                   SUM(PEDINT.cantidad_solicitada) as cantidad_total_solicitada,
@@ -153,17 +154,20 @@ DECLARE
                                   
     g_cursor_pedido_tuc_pr        CURSOR (ID integer) FOR
                                   SELECT
-                                  SUM(PEDINT.cantidad_solicitada) as cantidad_total_solicitada,
-                                  SUM(PEDINT.demasia) as cant_demasia,
-                                  PEDINT.id_item,
-                                  PEDINT.id_salida,
-                                  SALIDA.id_almacen_logico
+                                      SUM(PEDINT.cantidad_solicitada) as cantidad_total_solicitada,
+                                      SUM(PEDINT.demasia) as cant_demasia,
+                                      SUM(PEDINT.nuevo) as cant_nuevo,
+                                      PEDINT.id_item,
+                                      PEDINT.id_salida,
+                                      SALIDA.id_almacen_logico,
+                                      pedint.sw_autorizado
+                                      
                                   FROM almin.tal_pedido_tuc_int PEDINT
                                   INNER JOIN almin.tal_salida SALIDA
                                   ON SALIDA.id_salida = PEDINT.id_salida
                                   WHERE PEDINT.id_salida = ID
                                   GROUP BY PEDINT.id_item,PEDINT.id_salida,
-                                  SALIDA.id_almacen_logico;
+                                  SALIDA.id_almacen_logico,pedint.sw_autorizado;
 
     g_reg_pedido_tuc              record; --Variable para recorrer el cursor de pedido_tuc
     g_cursor_pedido_tuc_int       CURSOR (p_id_salida INTEGER,p_id_item INTEGER) FOR
@@ -195,6 +199,8 @@ DECLARE
     g_id_parametro_almacen_logico_salida	integer;
     v_finalizacion_tmp						date;
     g_gestion								integer;
+    v_registros				record;
+    v_sw_tiene_salida_detalle				boolean;
 
 BEGIN
 
@@ -2037,6 +2043,7 @@ BEGIN
                 - realizar salida  en la gestion abierta
                 - finaliza solo si la gestion esta abierta
                 - cuando es transferencia verifica que el nuevo ingreso sea de la misma gestion 
+                -nopermite finalizar sin items 
      **************************************/
 
     ELSIF pm_codigo_procedimiento = 'AL_SAPROY_FIN' THEN --Finalizar Salida Proyectos
@@ -2168,6 +2175,8 @@ BEGIN
                 FROM almin.tal_salida
                 WHERE id_salida = al_id_salida;
                 
+                v_sw_tiene_salida_detalle = false;
+                
              
 
                 OPEN g_cursor_sal_det(al_id_salida);
@@ -2189,6 +2198,11 @@ BEGIN
                     
                     IF g_id_kardex_logico is null THEN
                       raise exception 'no se encontro kardex logico para el item %',g_registros.id_item;  
+                    END IF;
+                    
+                    --por lonmenos tiene que tener un item con  cantidad mayor a cero 
+                    IF coalesce(g_registros.cant_entregada,0) > 0 THEN
+                       v_sw_tiene_salida_detalle = true;
                     END IF;
                     
                     If ROUND(coalesce(g_registros.cant_entregada,0),2) > g_cant THEN
@@ -2247,7 +2261,9 @@ BEGIN
            
                 CLOSE g_cursor_sal_det;
                 
-              
+            IF not v_sw_tiene_salida_detalle THEN
+            	raise exception 'la salida no tiene ningun item con cantidad mayora cero';
+            END IF;  
                 
            ------------------------------------------------
            --  VERIFICA SI LA SALIDA ES POR TRANSFERENCIA
@@ -2416,6 +2432,23 @@ BEGIN
             	WHERE almin.tal_salida.id_salida= al_id_salida;
         
         	END IF;
+            
+            --si la salida viene de un ingreso incompleto ..
+            FOR v_registros in (select
+            						*
+                                from almin.tal_pedido_tuc_int pti
+                                where pti.id_salida_complementaria = al_id_salida) LOOP
+                                
+                                
+                if v_registros.sw_entregado = 'no'  then
+                    update almin.tal_pedido_tuc_int set
+                       sw_entregado = 'si'
+                     where id_pedido_tuc_int = v_registros.id_pedido_tuc_int;
+                end if; 
+            
+            END LOOP;
+           
+            
 
        		-- DESCRIPCIÓN DE ÉXITO PARA GUARDAR EN EL LOG
         	g_descripcion_log_error := 'finalizacion realizada satisfactoriamente';
@@ -2430,6 +2463,9 @@ BEGIN
      			- calculo de salida segun promedio ponderado
                 - realizar la salida  en la gestion abierta
                 - verifica que la gestion este abierta
+                - validar que las existencias sean suficientes para realizar la salida
+                - permitir salidas incompletas que esten autorizadas en pedido tuc int
+                - actulizar el material entregado en pedido tuc int 
      **************************************/
     ELSIF pm_codigo_procedimiento = 'AL_SAPRUC_FIN' THEN --Finalizar Salida Proyectos Unidades Constructivas
         BEGIN
@@ -2506,17 +2542,18 @@ BEGIN
                 RETURN 'f'||g_separador||g_respuesta;
             END IF;
             
+            
              --VERIFICA QUE YA SE HAYA HECHO LA VERIFICACION DE LA UNIDAD CONSTRUCTIVA
             IF EXISTS(SELECT 1 FROM almin.tal_pedido_tuc_int
                       WHERE id_salida = al_id_salida
-                      AND cantidad_solicitada + demasia > nuevo + usado ) THEN
-                g_descripcion_log_error := 'Finalización no realizada: La salida no puede ser finalizada porque hay materiales faltantes.\n Vea el Reporte de Faltantes.';
+                      AND cantidad_solicitada + demasia > nuevo + usado
+                      AND sw_autorizado =  'no' ) THEN
+                g_descripcion_log_error := 'Finalización no realizada: La salida no puede ser finalizada porque hay materiales faltantes no autorizados.\n Vea el Reporte de Faltantes y autoriza la salida si es necesario.';
                 g_nivel_error := '4';
                 g_respuesta := param.f_pm_mensaje_error(g_descripcion_log_error, g_nombre_funcion, g_nivel_error, pm_codigo_procedimiento);
                 RETURN 'f'||g_separador||g_respuesta;
             END IF;
-
-         	
+            
             
             --VERIFICA SI VIENE O NO DE UN PROCESO DE BAJA      
             IF NOT EXISTS (SELECT DISTINCT 1 FROM almin.tal_salida
@@ -2562,21 +2599,34 @@ BEGIN
                 SELECT fecha_borrador INTO g_fecha_borrador
                 FROM almin.tal_salida
                 WHERE id_salida = al_id_salida;
-                              
+                
+                ------------------------------------------------------------
+                ---- Inserta el detalle de salida a partir del pedido tuc int 
+                ------------------------------------------------------------------------
+                v_sw_faltante = false;
                 OPEN g_cursor_pedido_tuc_pr(al_id_salida);
                 LOOP
                     FETCH g_cursor_pedido_tuc_pr INTO g_datos;
                     EXIT WHEN NOT FOUND;
+                    
+                    
+                    -- solo se incluyen en la salida los items con existencias
+                    
+                    IF g_datos.sw_autorizado  = 'no' THEN
+                    
                                 
-                    INSERT INTO almin.tal_salida_detalle(
-                    cant_solicitada                       ,cant_entregada                    ,cant_consolidada,
-                    fecha_solicitada                      ,id_item                           ,id_salida,
-                    estado_item                           ,cant_demasia
-                    ) VALUES (
-                    g_datos.cantidad_total_solicitada     ,g_datos.cantidad_total_solicitada ,g_datos.cantidad_total_solicitada,
-                    g_fecha_borrador                      ,g_datos.id_item                   ,g_datos.id_salida,
-                    'Nuevo'                               ,g_datos.cant_demasia
-                    );
+                          INSERT INTO almin.tal_salida_detalle(
+                          cant_solicitada                       ,cant_entregada                    ,cant_consolidada,
+                          fecha_solicitada                      ,id_item                           ,id_salida,
+                          estado_item                           ,cant_demasia
+                          ) VALUES (
+                          g_datos.cantidad_total_solicitada     ,g_datos.cantidad_total_solicitada ,g_datos.cantidad_total_solicitada,
+                          g_fecha_borrador                      ,g_datos.id_item                   ,g_datos.id_salida,
+                          'Nuevo'                               ,g_datos.cant_demasia
+                          );
+                    ELSE
+                       v_sw_faltante = true;   
+                    END IF;
                                 
                 END LOOP;
                 CLOSE g_cursor_pedido_tuc_pr;
@@ -2638,6 +2688,12 @@ BEGIN
 
 				END LOOP;
                 CLOSE g_cursor_sal_det;
+                
+                IF v_sw_faltante THEN                     
+                      UPDATE almin.tal_salida  SET
+                        sw_faltante_tuc  = 'si'
+                      WHERE id_salida= al_id_salida;
+                END IF;
                             
                 --ACTUALIZAR EL CORRELATIVO
                 g_resp_act_correl := almin.f_al_actualizar_correlativo('SALIDA',to_char(COALESCE(g_fecha_borrador,now()),'mm'),g_id_almacen_logico);
@@ -2704,6 +2760,7 @@ BEGIN
     ---*** SE DEVUELVE LA RESPUESTA
     RETURN g_respuesta||g_separador||g_reg_evento;
 
+    
 
 EXCEPTION
 

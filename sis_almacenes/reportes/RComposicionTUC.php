@@ -38,8 +38,8 @@ class RComposicionTUC extends  ReportePDF {
 		
 		//Titulos de columnas superiores
 		$this->Cell(10,3.5,'Nº','LTB',0,'C');
-		$this->Cell(40,3.5,'UC','LTB',0,'C');
-		$this->Cell(80,3.5,'Desc Item','LTB',0,'C');
+		//$this->Cell(40,3.5,'UC','LTB',0,'C');
+		$this->Cell(80 + 40,3.5,'Desc Item','LTB',0,'C');
 		$this->Cell(25,3.5,'Cant Soli.','LTB',0,'C');
 		$this->Cell(25,3.5,'Cant Disp.','LTB',0,'C');
 		$this->Cell(25,3.5,'Cant Faltante','LTBR',0,'C');
@@ -85,9 +85,9 @@ class RComposicionTUC extends  ReportePDF {
 			
 			//configuracion de la tabla
 			$this->SetFont('','',9);
-			$conf_par_tablewidths=array(10,40,80,25,25,25);
-			$conf_par_tablealigns=array('C','L','L','R','R','R');
-			$conf_par_tablenumbers=array(0,0,0,1,1,1);
+			$conf_par_tablewidths=array(10,40+ 80,25,25,25);
+			$conf_par_tablealigns=array('C','L','R','R','R');
+			$conf_par_tablenumbers=array(0,0,1,1,1);
 			 $conf_tableborders=array();
 			$conf_tabletextcolor=array();
 			$this->tablewidths=$conf_par_tablewidths;
@@ -109,7 +109,7 @@ class RComposicionTUC extends  ReportePDF {
 						
 						$RowArray = array(
 				            			's0' => $count,
-										's1' => $val['desc_uc'],
+										//'s1' => $val['desc_uc'],
 				                        's2' => '('.$val['item'].') '.$val['desc_item'],
 				                        's3' => $val['cantidad_solicitada'],
 				                        's4' => $val['cant_disp'],

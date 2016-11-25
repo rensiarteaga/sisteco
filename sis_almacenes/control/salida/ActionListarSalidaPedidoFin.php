@@ -169,6 +169,10 @@ if($_SESSION['autentificado']=='SI')
 			$xml->add_nodo('num_contrato',$f["num_contrato"]);
 			$xml->add_nodo('nombre_superv',$f["nombre_superv"]);
 			$xml->add_nodo('gestion',$f["gestion"]);
+			$xml->add_nodo('sw_faltante_tuc',$f["sw_faltante_tuc"]);
+			
+			
+			
 			$xml->fin_rama();
 		}
 		$xml->mostrar_xml();

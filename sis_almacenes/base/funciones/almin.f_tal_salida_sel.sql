@@ -161,6 +161,7 @@ BEGIN
         RAISE EXCEPTION '%',g_descripcion_log_error;
     END IF;  
  
+    --raise exception 'llega';
 
     ---***SELECCIÓN DE OPERACIÓN A REALIZAR
     IF pm_codigo_procedimiento  = 'AL_SALIDA_SEL' THEN
@@ -1544,6 +1545,80 @@ FROM almin.tal_orden_salida_uc_detalle OSUCDE
             -- DESCRIPCIÓN DE ÉXITO PARA GUARDAR EN EL LOG
             g_descripcion_log_error := 'Consulta ejecutada';
         END;   
+     /*
+     Autor:		Rensi Arteaga Copari
+     Desc		Lista los materiales entregados para reporte de salidas de uc entregadas
+     Fecha		30/12/2016
+     
+     */   
+        
+     ELSIF pm_codigo_procedimiento  = 'AL_PMUCDRENT_SEL' THEN -- PMUCDR: Pedido Materiales UC Detalle Reporte
+        --Detalle de pedido de materiales  de Unidades COnstructivas
+        BEGIN
+            g_consulta := 'SELECT
+                                i.nombre,
+                                1::NUMERIC as cant_unit_uc,
+                                i.peso_kg, 
+                                umb.abreviatura as unidad_medida,
+                                i.calidad,
+                                i.descripcion,
+                                sd.cant_consolidada * i.peso_kg as peso_total,  
+                                sd.cant_consolidada as cantidad_total,
+                                sd.cant_demasia as cant_demasia,  
+                                sd.cant_entregada   as  cant_total_dem,
+                                
+                                 ALMACE.nombre as desc_almacen,
+                                 '' ''::varchar as desc_uc,
+                                 1::NUMERIC as cantidad_uc,
+                                 i.codigo, 
+                                 '' ''::varchar as desc_uc_padre,
+                                 
+                                 CASE COALESCE(sal.id_institucion,0)
+                                  WHEN 0 THEN CASE COALESCE(sal.id_contratista,0)
+                                  WHEN 0 THEN (SELECT COALESCE(apellido_paterno,'' '')||'' ''||COALESCE(apellido_materno,'' '')||'' ''||COALESCE(nombre,'' '') FROM sss.tsg_persona WHERE id_persona = EMPLEA.id_persona)
+                                   ELSE (SELECT COALESCE(nombre,'' '') FROM param.tpm_institucion WHERE id_institucion = CONTRA.id_institucion)
+                                                                      END
+                                                          ELSE INSTIT.nombre
+                                                      END as solicitante,
+                                 
+                                 
+                                
+                                 sg.nombre, 
+                                 i.id_supergrupo,
+                                 sg.demasia
+                                
+
+                              FROM almin.tal_salida_detalle sd
+                              inner join almin.tal_item i on i.id_item = sd.id_item
+                              INNER JOIN param.tpm_unidad_medida_base umb on umb.id_unidad_medida_base = i.id_unidad_medida_base
+                              INNER JOIN almin.tal_supergrupo sg  ON sg.id_supergrupo = i.id_supergrupo
+                              inner join almin.tal_salida sal ON  sal.id_salida = sd.id_salida
+                              INNER JOIN almin.tal_almacen_logico ALMLOG ON ALMLOG.id_almacen_logico = sal.id_almacen_logico
+                              INNER JOIN almin.tal_almacen_ep ALMAEP ON ALMAEP.id_almacen_ep = ALMLOG.id_almacen_ep
+                              INNER JOIN almin.tal_almacen ALMACE ON ALMACE.id_almacen = ALMAEP.id_almacen
+
+
+                              LEFT JOIN kard.tkp_empleado EMPLEA  ON EMPLEA.id_empleado = sal.id_empleado
+                              LEFT JOIN param.tpm_institucion INSTIT	ON INSTIT.id_institucion = sal.id_institucion
+                              LEFT JOIN param.tpm_contratista CONTRA	ON CONTRA.id_contratista = sal.id_contratista
+						WHERE ';
+                        
+            g_consulta := g_consulta || pm_criterio_filtro;
+
+            -- SE AUMENTA EL ORDEN Y LOS PARÁMETROS DE LA CANTIDAD DE REGISTROS A DESPLEGAR
+            g_consulta := g_consulta || ' ORDER BY ' || pm_sortcol;
+            g_consulta := g_consulta || ' LIMIT ' || pm_cant || ' OFFSET ' || pm_puntero;
+            
+            raise notice '--> %',g_consulta;
+
+            FOR g_registros in EXECUTE(g_consulta) LOOP
+                RETURN NEXT g_registros;
+            END LOOP;
+
+            -- DESCRIPCIÓN DE ÉXITO PARA GUARDAR EN EL LOG
+            g_descripcion_log_error := 'Consulta ejecutada';
+        END;      
+        
       
     ELSIF pm_codigo_procedimiento  = 'AL_PMSIMD_SEL' THEN -- PMSIMD: Pedido Materiales Simplificado detalle Reporte
         --Para reporte de Pedido de Materiales   Simplificado detalle
@@ -1816,7 +1891,8 @@ FROM almin.tal_orden_salida_uc_detalle OSUCDE
                            SALIDA.id_supervisor					   ,SALIDA.receptor_ci					  ,SALIDA.solicitante,
                            SALIDA.solicitante_ci				   ,SALIDA.num_contrato,
                            COALESCE(PERSON3.apellido_paterno,'''') || '' '' || COALESCE(PERSON3.apellido_materno,'''') || '' '' || COALESCE(PERSON3.nombre,'''') as nombre_superv,
-                           PARALM.gestion
+                           PARALM.gestion,
+                           SALIDA.sw_faltante_tuc
                            FROM almin.tal_salida SALIDA
                            LEFT JOIN almin.tal_responsable_almacen RESALM
                            ON RESALM.id_responsable_almacen=SALIDA.id_responsable_almacen
@@ -1989,7 +2065,7 @@ FROM almin.tal_orden_salida_uc_detalle OSUCDE
                                    TIPOUC.descripcion as desc_uc,
                                    ITEM.nombre as item,
                                    ITEM.descripcion as desc_item,
-                                   PEDINT.cantidad_solicitada,
+                                   (PEDINT.cantidad_solicitada + PEDINT.demasia) as cantidad_solicitada,
                                    PEDINT.nuevo + PEDINT.usado as cant_disp,
                                    PEDINT.cantidad_solicitada - PEDINT.nuevo - PEDINT.usado as cant_faltante,
                                    ALMACE.nombre,

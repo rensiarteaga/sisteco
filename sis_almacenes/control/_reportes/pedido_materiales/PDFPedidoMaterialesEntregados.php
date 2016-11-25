@@ -54,7 +54,7 @@ class PDF extends FPDF
 			$this->SetFont('Arial','B',12);
 			$this->SetY(9);
 			$this->Cell(46,5,'',0,0,'C');
-			$this->Cell(106,13,' LISTA DE MATERIALES ENTREGADOS',0,0,'C');
+			$this->Cell(106,13,' VALE DE SALIDA DE MATERIALES',0,0,'C');
 			$this->Ln(7);
 			$this->Cell(46,5,'',0,0,'C');
 			$this->Cell(106,10,$this->datos[0]['desc_almacen'],0,0,'C');
@@ -108,15 +108,6 @@ class PDF extends FPDF
 		$fecha=date("d-m-Y");
 		//hora
 		$hora=date("H:i:s");
-		//$this->Cell(75,10,'Usuario: '.$_SESSION["ss_nombre_usuario"] ,0,0,'L');
-		//$this->Cell(40,10,'Página '.$this->PageNo().' de {nb}',0,0,'C');
-		//$this->Cell(47,10,'',0,0,'C');
-		//$this->Cell(35,10,'Fecha: '.$fecha ,0,0,'L');
-		//$this->ln(3);
-		//$this->Cell(75,10,'',0,0,'L');
-		//$this->Cell(40,10,'',0,0,'C');
-		//$this->Cell(47,10,'',0,0,'C');
-		//$this->Cell(35,10,'Hora: '.$hora ,0,0,'L');
 	}
 
 	function LoadData()
@@ -145,21 +136,17 @@ class PDF extends FPDF
 		$cant=100000;
 		$puntero=0;
 		$fill=true;
-		$sortcol='ITEM.id_supergrupo,COMPON.orden,ITEM.nombre asc';
+		$sortcol='i.id_supergrupo, i.nombre asc';
 		$sortdir='asc';
-		$criterio_filtro=' OSUCDE.id_salida = '.$_SESSION["rep_mat_id_salida"].' AND OSUCDE.id_tipo_unidad_constructiva = '.$row[6];
+		$criterio_filtro=' sd.id_salida = '.$_SESSION["rep_mat_id_salida"].' ';
 
 		$Det=new cls_CustomDBAlmacenes();
-		$Det->PedidoMaterialesUCDet($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad);
+		$Det->PedidoMaterialesUCDetEntregados($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad);
 		$detalle=$Det->salida;
 
-		$this->detalle=$resp;
-
-		/*echo "<pre>";
-		print_r($detalle);
-		echo "</pre>";*/
-
-		return $resp;
+		//echo $this->detalle;
+		//exit;
+		return $detalle;
 	}
 
 
@@ -283,134 +270,115 @@ class PDF extends FPDF
 		$wdet=array(6,25,15,15,10,10,58,13,10,10,20);
 
 		$fecha=date("d-m-Y");
+		
+		$detalle = $this->LoadDetalle();
 
 		// Se imprime el detalle de cada UC solicitada
-		foreach($data as $row)
+		if($prim_hoja!=1)
 		{
-			//Obtiene el detalle
-			$cont=1;
-			$cant=100000;
-			$puntero=0;
-			$fill=true;
-			$sortcol='ITEM.id_supergrupo,COMPON.orden,ITEM.nombre asc';
-			$sortdir='asc';
-			$criterio_filtro=' OSUCDE.id_salida = '.$_SESSION["rep_mat_id_salida"].' AND OSUCDE.id_tipo_unidad_constructiva = '.$row[6];
+				$this->imp_cols=0;
+			$this->AddPage();
+		}
+		// datos de la cabecera
+		$this->Datos_Cab($data[0], $detalle[0]);
 
-			$Det=new cls_CustomDBAlmacenes();
-			$Det->PedidoMaterialesUCDet($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad);
-			$detalle=$Det->salida;
+		if(count($detalle)>1)
+		{
 
-			/*echo "<pre>";
-			print_r($detalle);
-			echo "</pre>";
-			exit;*/
+			//$this->Ln(2);
+			$this->Cell(120,10,$detalle[0]['supergrupo'] ,0,1,'L');
+		}
+		//Imprime los rótulos del detalle
+		$this->SetFont('Arial','B',6);
 
+		for($i=0;$i<count($header_det);$i++)
+		$this->Cell($wdet[$i],5,$header_det[$i],1,0,'C',1);
+		$this->Ln();
 
-			if($prim_hoja!=1)
-			{
+		$this->SetFont('Arial','',6);
+		$id_supergrupo=0;
+		$peso=0;
+
+		foreach($detalle as $row1)
+		{
+			if($cont==1){
+				$id_supergrupo=$row1['id_supergrupo'];
+
+			}
+			if($id_supergrupo!=$row1['id_supergrupo']&&$cont>1){
+				//Imprime el total del peso
+				$this->SetFont('Arial','B',6);
+				$this->Cell(139,5,'',0,0,'R');
+				$this->Cell(13,4,number_format($peso,5,$this->sep_decim,$this->sep_mil),'',0,'R');
+				$this->Cell(13,4,' Kg.','',1,'L');
+				$peso=0;
+
+				//Para separar por páginas los materiales por supergrupo
 				$this->imp_cols=0;
 				$this->AddPage();
+
+				$id_supergrupo=$row1['id_supergrupo'];
+				$cont=1;
+
+				//datos de la cabecera
+				$this->Datos_Cab($row,$row1);
+
+				$this->Cell(120,10,$row1['supergrupo'] ,0,1,'L');
+				//Imprime los encabezados
+				$this->SetFont('Arial','B',6);
+				for($i=0;$i<count($header_det);$i++)
+				$this->Cell($wdet[$i],5,$header_det[$i],1,0,'C',1);
+				$this->Ln();
 			}
-			// datos de la cabecera
-			$this->Datos_Cab($row,$detalle[0]);
-
-			if(count($detalle)>1)
-			{
-
-				//$this->Ln(2);
-				$this->Cell(120,10,$detalle[0]['supergrupo'] ,0,1,'L');
-			}
-			//Imprime los rótulos del detalle
-			$this->SetFont('Arial','B',6);
-
-			for($i=0;$i<count($header_det);$i++)
-			$this->Cell($wdet[$i],5,$header_det[$i],1,0,'C',1);
-			$this->Ln();
 
 			$this->SetFont('Arial','',6);
-			$id_supergrupo=0;
-			$peso=0;
 
-			foreach($detalle as $row1)
-			{
-				if($cont==1){
-					$id_supergrupo=$row1['id_supergrupo'];
+			//Forma el array para mandar al multitabla
+			$fila=array();
+			$fila[0]=$cont;
+			$fila[1]=$row1['nombre'];
+			$fila[2]=round($row1['cant_unit_uc']*100)/100;
+			$fila[3]=round($row1['peso_kg'],5);
+			$fila[4]=$row1['unidad_medida'];
+			$fila[5]=$row1['calidad'];
+			$fila[6]=$row1['descripcion'];
+			//$fila[7]=round($row1['peso_total']*100)/100;
+			$fila[7]=round($row1['peso_total'],5);
+			$fila[8]=round($row1['cantidad_total'],2);
+			$fila[9]=round($row1['cant_demasia'],2);
+			$fila[10]=round($row1['cantidad_total_dem'],2);
 
-				}
-				if($id_supergrupo!=$row1['id_supergrupo']&&$cont>1){
-					//Imprime el total del peso
-					$this->SetFont('Arial','B',6);
-					$this->Cell(139,5,'',0,0,'R');
-					$this->Cell(13,4,number_format($peso,5,$this->sep_decim,$this->sep_mil),'',0,'R');
-					$this->Cell(13,4,' Kg.','',1,'L');
-					$peso=0;
-
-					//Para separar por páginas los materiales por supergrupo
-					$this->imp_cols=0;
-					$this->AddPage();
-
-					$id_supergrupo=$row1['id_supergrupo'];
-					$cont=1;
-
-					//datos de la cabecera
-					$this->Datos_Cab($row,$row1);
-
-					$this->Cell(120,10,$row1['supergrupo'] ,0,1,'L');
-					//Imprime los encabezados
-					$this->SetFont('Arial','B',6);
-					for($i=0;$i<count($header_det);$i++)
-					$this->Cell($wdet[$i],5,$header_det[$i],1,0,'C',1);
-					$this->Ln();
-				}
-
-				$this->SetFont('Arial','',6);
-
-				//Forma el array para mandar al multitabla
-				$fila=array();
-				$fila[0]=$cont;
-				$fila[1]=$row1['nombre'];
-				$fila[2]=round($row1['cant_unit_uc']*100)/100;
-				$fila[3]=round($row1['peso_kg'],5);
-				$fila[4]=$row1['unidad_medida'];
-				$fila[5]=$row1['calidad'];
-				$fila[6]=$row1['descripcion'];
-				//$fila[7]=round($row1['peso_total']*100)/100;
-				$fila[7]=round($row1['peso_total'],5);
-				$fila[8]=round($row1['cantidad_total'],2);
-				$fila[9]=round($row1['cant_demasia'],2);
-				$fila[10]=round($row1['cantidad_total_dem'],2);
-
-				/*echo"<pre>";
-				print_r($fila);
-				echo"</pre>";*/
+			/*echo"<pre>";
+			print_r($fila);
+			echo"</pre>";*/
 
 
-				//$wdet=array(6,23,15,15,10,10,58,13,10,10,20);
-				$this->SetFont('Arial','',6);
-				$this->SetWidths(array(6,25,15,15,10,10,58,13,10,10,20));
-				$this->SetVisibles(array(1,1,1,1,1,1,1,1,1,1,1));
-				$this->SetAligns(array('C','L','R','R','C','C','L','R','R','R','R'));
-				$this->SetFonts(array('Arial','Arial','Arial','Arial','Arial','Arial','Arial','Arial','Arial','Arial','Arial'));
-				$this->SetFontsSizes(array(6,6,6,6,6,6,6,6,6,6,6));
-				$this->SetFontsStyles(array('','','','','','','','','','',''));
-				$this->SetSpaces(array(4,4,4,4,4,4,4,4,4,4,4));
-				$this->SetDecimales(array(0,0,0,3,0,0,0,3,2,2,2));
+			//$wdet=array(6,23,15,15,10,10,58,13,10,10,20);
+			$this->SetFont('Arial','',6);
+			$this->SetWidths(array(6,25,15,15,10,10,58,13,10,10,20));
+			$this->SetVisibles(array(1,1,1,1,1,1,1,1,1,1,1));
+			$this->SetAligns(array('C','L','R','R','C','C','L','R','R','R','R'));
+			$this->SetFonts(array('Arial','Arial','Arial','Arial','Arial','Arial','Arial','Arial','Arial','Arial','Arial'));
+			$this->SetFontsSizes(array(6,6,6,6,6,6,6,6,6,6,6));
+			$this->SetFontsStyles(array('','','','','','','','','','',''));
+			$this->SetSpaces(array(4,4,4,4,4,4,4,4,4,4,4));
+			$this->SetDecimales(array(0,0,0,3,0,0,0,3,2,2,2));
 
-				$this->MultiTabla($fila,2,3,4,6);
-				$peso+=$row1['peso_total'];
-				$cont++;
+			$this->MultiTabla($fila,2,3,4,6);
+			$peso+=$row1['peso_total'];
+			$cont++;
 
-			}
-			//Imprime el total del último grupo
-			//Imprime el total del peso
-			$this->SetFont('Arial','B',6);
-			$this->Cell(139,5,'',0,0,'R');
-			$this->Cell(13,4,number_format($peso,3,$this->sep_decim,$this->sep_mil),'',0,'R');
-			$this->Cell(13,4,' Kg.','',1,'L');
-
-			//Define que no es la primera página
-			$prim_hoja=0;
 		}
+		//Imprime el total del último grupo
+		//Imprime el total del peso
+		$this->SetFont('Arial','B',6);
+		$this->Cell(139,5,'',0,0,'R');
+		$this->Cell(13,4,number_format($peso,3,$this->sep_decim,$this->sep_mil),'',0,'R');
+		$this->Cell(13,4,' Kg.','',1,'L');
+
+		//Define que no es la primera página
+		$prim_hoja=0;
+		
 
 	}
 

@@ -694,6 +694,7 @@ class cls_DBSalidaPedido
 		$this->var->add_def_cols('num_contrato','varchar');
 		$this->var->add_def_cols('nombre_superv','text');
 		$this->var->add_def_cols('gestion','varchar');
+		$this->var->add_def_cols('sw_faltante_tuc','varchar');
 	
 		//Ejecuta la función de consulta
 		$res = $this->var->exec_query();

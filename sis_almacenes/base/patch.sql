@@ -231,6 +231,77 @@ CREATE INDEX tal_kardex_logico_aux_fk_tal_kardex_logico__id_item ON almin.tal_ka
   
   
  /***********************************F-SCP-RAC-ALMIN-1-20/12/2016****************************************/ 
+ 
+ 
+ 
+/***********************************I-SCP-RAC-ALMIN-1-29/12/2016****************************************/ 
+ 
+ 
+ --------------- SQL ---------------
+
+ALTER TABLE almin.tal_pedido_tuc_int
+  ADD COLUMN sw_autorizado VARCHAR(10) DEFAULT 'no' NOT NULL;
+
+COMMENT ON COLUMN almin.tal_pedido_tuc_int.sw_autorizado
+IS 'cuanto las existencias no alcazan para realizar la entrega este sw permite entregar lo que hay';
+
+--------------- SQL ---------------
+
+ALTER TABLE almin.tal_pedido_tuc_int
+  ADD COLUMN sw_entregado VARCHAR(10) DEFAULT 'no' NOT NULL;
+
+COMMENT ON COLUMN almin.tal_pedido_tuc_int.sw_entregado
+IS 'cuando el material a sido entegado sin existencias, este sw marca en si cuando se entreg el faltante en otra salida';
+
+
+--------------- SQL ---------------
+
+ALTER TABLE almin.tal_pedido_tuc_int
+  ADD COLUMN id_salida_complementaria INTEGER;
+
+COMMENT ON COLUMN almin.tal_pedido_tuc_int.id_salida_complementaria
+IS 'identifica con que salida se entrego el faltante';
+
+
+
+/***********************************F-SCP-RAC-ALMIN-1-29/12/2016****************************************/ 
+ 
 
 
   
+ 
+/***********************************I-SCP-RAC-ALMIN-2-29/12/2016****************************************/ 
+ 
+  
+  --------------- SQL ---------------
+
+ALTER TABLE almin.tal_salida
+  ADD COLUMN sw_faltante_tuc VARCHAR(5) DEFAULT 'no' NOT NULL;
+
+COMMENT ON COLUMN almin.tal_salida.sw_faltante_tuc
+IS 'si la salida se realiza con faltantes autorizados esta sw cambia al valor si';
+
+ 
+/***********************************I-SCP-RAC-ALMIN-2-29/12/2016****************************************/ 
+ 
+
+/***********************************I-SCP-RAC-ALMIN-2-03/01/2017****************************************/ 
+ 
+  CREATE TABLE almin.tal_componente_tmp (
+  nombre VARCHAR,
+  cantidad INTEGER DEFAULT 0 NOT NULL,
+  codigo_uc VARCHAR,
+  migrado VARCHAR(20) DEFAULT 'no' NOT NULL
+) WITHOUT OIDS;
+
+ALTER TABLE almin.tal_componente_tmp
+  ALTER COLUMN nombre SET STATISTICS 0;
+
+ALTER TABLE almin.tal_componente_tmp
+  ALTER COLUMN migrado SET STATISTICS 0;
+
+  
+ /***********************************F-SCP-RAC-ALMIN-2-03/01/2017****************************************/ 
+ 
+ 
+ 
