@@ -103,6 +103,7 @@ DECLARE
     v_registros					  record;
     g_aux_cotos_det				  numeric;
     g_correlativo_ing			  integer;
+    v_id_item					  integer;
 
 BEGIN
 
@@ -217,7 +218,7 @@ BEGIN
             g_respuesta := 't'||g_separador||g_descripcion_log_error;
 
         END;
-
+    
   --procedimiento de modificacion
 
    ELSIF pm_codigo_procedimiento = 'AL_OISDET_UPD' THEN
@@ -317,7 +318,7 @@ BEGIN
             from almin.tal_ingreso i
             inner join almin.tal_almacen_logico al on al.id_almacen_logico = i.id_almacen_logico
             inner join almin.tal_parametro_almacen_logico pal on pal.id_parametro_almacen_logico = i.id_parametro_almacen_logico
-            inner join almin.tal_ingreso_detalle idt on id.id_ingreso = i.id_ingreso
+            inner join almin.tal_ingreso_detalle idt on idt.id_ingreso = i.id_ingreso
             where idt.id_ingreso_detalle = al_id_ingreso_detalle;
             
             SELECT
@@ -475,6 +476,137 @@ BEGIN
             g_respuesta := 't'||g_separador||g_descripcion_log_error;
 
         END;
+     
+     /*
+     *
+     *   Autor:		Rensi Arteaga Copari
+     *   Desc:		Registro de ingresos desde archivo
+     *   Fecha:		23/12/2016
+     
+     *
+     */
+
+      --*** EJECUCIÓN DEL PROCEDIMIENTO ESPECÍFICO
+    ELSEIF pm_codigo_procedimiento = 'AL_IMPDET_INS' THEN
+
+        BEGIN
+        
+        
+            select 
+             	i.id_ingreso,
+             	i.tipo_costeo,
+             	pal.estado,
+                i.id_almacen_logico,
+                i.id_parametro_almacen_logico,
+                i.fecha_finalizado_cancelado,
+                al.costeo_obligatorio,
+                i.estado_ingreso
+            into
+             	v_registros
+            from almin.tal_ingreso i
+            inner join almin.tal_almacen_logico al on al.id_almacen_logico = i.id_almacen_logico
+            inner join almin.tal_parametro_almacen_logico pal on pal.id_parametro_almacen_logico = i.id_parametro_almacen_logico
+            where i.id_ingreso = al_id_ingreso; 
+
+            
+            IF v_registros is null  THEN
+        	    raise exception 'Inserción no realizada: Ingreso inexistente';
+               
+        	END IF;
+            
+            IF v_registros.estado_ingreso != 'Borrador' THEN
+               raise exception 'Solo puede agregar Items en ingresos con el estado Borrador';
+            END IF;
+        	
+        	
+            
+            --recupera el id del item
+            
+            select
+              i.id_item
+             into
+               v_id_item
+            from almin.tal_item i
+            where upper(i.codigo) = al_estado_item; -- aprovechamos la variable estado para usar como codigo al_codigo_item;
+            
+            
+            IF EXISTS(SELECT 1 FROM almin.tal_ingreso_detalle
+            		  WHERE id_item=v_id_item
+                      AND estado_item='Nuevo'
+                      AND id_ingreso=al_id_ingreso) THEN
+        	   raise exception 'Inserción no realizada: El item ya fue registrado';
+             
+        	END IF;
+            
+            SELECT
+            MOTING.codigo
+            INTO g_codigo_mot_ing
+            FROM almin.tal_ingreso INGRES
+            INNER JOIN almin.tal_motivo_ingreso_cuenta MOINCU
+            ON MOINCU.id_motivo_ingreso_cuenta = INGRES.id_motivo_ingreso_cuenta
+            INNER JOIN almin.tal_motivo_ingreso MOTING
+            ON MOTING.id_motivo_ingreso = MOINCU.id_motivo_ingreso
+            WHERE INGRES.id_ingreso = al_id_ingreso;
+
+            raise notice 'Codigo importacion: %',g_codigo_mot_ing;  
+            
+            
+             IF g_codigo_mot_ing = 'DEV' THEN
+            
+             			 select 
+                            COALESCE(sad.costo_unitario,0),
+                            s.correlativo_sal
+                         into
+                            g_aux_cotos_det,
+                            g_correlativo_ing
+                         from almin.tal_salida_detalle sad
+                         inner join almin.tal_salida s on s.id_salida = sad.id_salida
+                         where sad.id_item = v_id_item
+                         		AND s.id_almacen_logico = v_registros.id_almacen_logico
+                                AND s.estado_salida = 'Finalizado'
+                         ORDER BY sad.id_salida_detalle DESC
+                         LIMIT 1 OFFSET 0;
+                        
+                        
+                        
+            			IF g_aux_cotos_det is null THEN
+                            raise exception 'No existe una ultima salida finalizada para este  material, no puede ingresar por devolucion';
+                        END IF;
+            
+            ELSEIF g_codigo_mot_ing = 'TAA' THEN              
+               raise exception 'No puede insertar registro en transferencias';
+            END IF;
+            
+            
+            
+
+            INSERT INTO almin.tal_ingreso_detalle(
+              cantidad                 ,costo            ,precio_venta     ,costo_unitario,
+              precio_venta_unitario    ,fecha_reg        ,id_ingreso,
+              id_item					 ,estado_item      ,id_adjudicacion
+		    ) VALUES (
+              al_cantidad              ,al_costo         ,al_precio_venta  ,al_costo_unitario,
+              al_precio_venta_unitario ,now()            ,al_id_ingreso,
+              v_id_item				 ,'Nuevo'   	,al_id_adjudicacion
+            );
+
+            -- OBTIENE EL TOTAL DEL COSTO UNITARIO POR INGRESO
+            SELECT SUM(costo)
+            INTO g_costo_total
+            FROM almin.tal_ingreso_detalle
+            WHERE id_ingreso = al_id_ingreso;
+
+            -- ACTUALIZA EL COSTO TOTAL DEL INGRESO
+            UPDATE almin.tal_ingreso SET
+            costo_total = g_costo_total
+            WHERE id_ingreso = al_id_ingreso;
+
+            -- DESCRIPCIÓN DE ÉXITO PARA GUARDAR EN EL LOG
+            g_descripcion_log_error := 'Registro exitoso en almin.tal_ingreso_detalle';
+            g_respuesta := 't'||g_separador||g_descripcion_log_error;
+
+        END;   
+        
         
      /*
 		AUTOR:		RAC

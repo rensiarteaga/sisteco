@@ -129,7 +129,7 @@ class cls_middle
 	 *
 	 * @return unknown
 	 */
-	function exec_non_query()
+	function exec_non_query($conectar = TRUE)
 	{
 		//Array que contendrá el resultado del query
 		$salida_temp = array();
@@ -148,10 +148,13 @@ class cls_middle
 			$this->query .=')';
 		}
 
+        
 		//Se abre la conexión a la base de datos
 		$this->cnx = new cls_conexion();
 		$this->cnx->conectar_pg();
-
+	
+        
+		
 		// RAC:Incluimos la cadena de la noxeción en vez de la MAC
 		//$consulta= "'".addcslashes($this->query)."'";
 
@@ -174,9 +177,10 @@ class cls_middle
 			$this->salida[2] = "ORIGEN = $this->nombre_archivo";
 			$this->salida[3] = "PROC = verificarSesion";
 			$this->salida[4] = "NIVEL = 2";
-
+			
+			
 			$this->cnx->desconectar_pg();
-
+			
 			return false;
 
 		}
@@ -293,15 +297,72 @@ class cls_middle
 					array_push ($salida_temp, $row_ses);
 				}
 
-				/*echo "<pre>";
-				print_r($salida_temp);
-				echo "</pre>";
-				exit;
-				*/
+				//echo "<pre>";
+				//print_r($salida_temp);
+				//echo "</pre>";
+				//exit;
+				
 				//Libera la memoria
 				pg_free_result($res_ses);
 
 				if($salida_temp[0][0]=='t'){
+
+					return true;
+				}
+				else{
+					return false;
+				}
+
+
+			}
+			else {
+				return false;
+
+			}
+
+
+		}
+
+		return $estado;
+	}
+	
+	/**
+	 * Nombre función:	verificarSesionPDO
+	 * Propósito:		Verifica la sesion del usuario logueado para detectar fraudes o robo de sesión
+	 * Autor:			Rensi Arteaga Copari
+	 * Fecha creación:	10-05-2010
+	 *
+	 * @return unknown
+	 */
+	function verificarSesionPDO(){
+		$salida_temp = array();
+		$estado =true;
+		
+	
+
+		if($this->nombre_funcion !='sss.f_tsg_sesion_iud'){
+
+
+			$consulta = "SELECT sss.f_tsg_sesion_sel(".$_SESSION["ss_id_usuario"].",'".$_SERVER['REMOTE_ADDR']."','". session_id()."')";
+			
+			
+			$stmt = $this->cnx->prepare($consulta);          
+	        $stmt->execute();
+	        $result = $stmt->fetch(PDO::FETCH_ASSOC); 
+			//print_r($consulta);
+			//exit;
+
+			if($result){
+
+
+				/*
+				echo "<pre>";
+				print_r($consulta);
+				echo "</pre>";
+				exit;
+				*/
+				
+				if($result['f_tsg_sesion_sel']=='t'){
 
 					return true;
 				}
@@ -1224,6 +1285,106 @@ class cls_middle
 			$this->query.=" WHERE ".$this->filtro_funcion;
 		}
 	}
+	
+	
+	
+	function reset(){
+		$this->query = "";
+		$this->parametros = array();
+		$this->def_cols = array();
+		
+	}
+	
+	
+	/**
+	 * Nombre función:	exec_non_query_pdo
+	 * Propósito:		Ejecuta las funciones de la base de datos que no sean querys (insert, update, delete),
+	 * 					a partir del nombre de la función y de los parámetos necesarios de la función con conexion existen PDO
+	 * Autor:			Rodrigo Chumacero Moscoso, Rensi Arteaga Copari
+	 * Fecha creación:	22-05-2007
+	 *
+	 * @return unknown
+	 */
+	function exec_non_query_pdo($cnx)
+	{
+		//Array que contendrá el resultado del query
+		$salida_temp = array();
+
+		//Forma la llamada a la función
+
+		$this->query = "SELECT $this->nombre_funcion ($this->id_usuario,$this->ip_origen,$this->mac_maquina,$this->codigo_procedimiento,$this->proc_almacenado";
+
+		//Concantena los parámetros específicos; sino existieran añade un paréntesis
+		if(sizeof($this->parametros)>0)
+		{
+			$this->query .= ','.implode(",", $this->parametros).')';
+		}
+		else
+		{
+			$this->query .=')';
+		}
+
+        
+		//Se abre la conexión a la base de datos
+		$this->cnx = $cnx;
+	
+        $consulta=str_replace("'","''",$this->query);
+		$this->query=str_replace("'00:19:d1:09:22:7e'","'$consulta'",$this->query);
+		
+
+	}
+	
+	function analizarRespuesta($respuesta){
+		
+			
+			
+				$resp_funcion = explode($this->sep, $respuesta);
+				
+				//var_dump($resp_funcion);
+
+
+				if(sizeof($resp_funcion)>0)
+				{
+					if($resp_funcion[0]==t)
+					{
+						//No existe error lógico
+						$this->salida = $resp_funcion;						
+						return true;
+					}
+					elseif ($resp_funcion[0]==f)
+					{
+						//Existe error lógico
+						$this->salida = $resp_funcion;
+						return false;
+					}
+					else
+					{
+						//Si $resp_funcion no tiene ningún elemento, quiere decir que no hubo respuesta de la base de datos
+						$this->salida[0] = "f";
+						$this->salida[1] = "MENSAJE ERROR = No se obtuvo respuesta de la base de datos";
+						$this->salida[2] = "ORIGEN = $this->nombre_archivo";
+						$this->salida[3] = "PROC = exec_non_query";
+						$this->salida[4] = "NIVEL = 2";
+						return false;
+					}
+				}
+				else
+				{
+
+					//Si $resp_funcion no tiene ningún elemento, quiere decir que no hubo respuesta de la base de datos
+					$this->salida[0] = "f";
+					$this->salida[1] = "MENSAJE ERROR = No se obtuvo respuesta de la base de datos";
+					$this->salida[2] = "ORIGEN = $this->nombre_archivo";
+					$this->salida[3] = "PROC = exec_non_query";
+					$this->salida[4] = "NIVEL = 2";
+
+					return false;
+
+				}
+
+			
+	}
+	
 	
 }
 ?>

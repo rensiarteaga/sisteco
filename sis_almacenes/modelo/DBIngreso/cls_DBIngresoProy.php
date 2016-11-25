@@ -503,6 +503,132 @@ class cls_DBIngresoProy
 		return $res;
 	}
 
+/************************************************************
+ * 
+ *   Autor 		Rensi Arteaga Copari
+ *   Fecha		22/12/2016	
+ *   Desc		subida de archivo de ingreso detalle con PDO
+ * 
+ ***************************************************************/
+
+    //function ImportarDetalleIngreso($id_ingreso, $txt_foto_persona, $nombre_foto, $numero, $extension, $id_empleado, $vista_per)
+	function ImportarDetalleIngreso($id_ingreso, $ingreso_detalle, $nombre_archivo,  $extension)
+	{
+				
+		//Abre conexion con PDO
+		$this->salida = "";
+		$this->nombre_funcion = 'f_tal_ingreso_detalle_iud';
+		$this->codigo_procedimiento = "'AL_IMPDET_INS'";
+
+		//Instancia la clase midlle para la ejecución de la función de la BD
+		$cone = new cls_conexion();        
+        $link = $cone->conectarpdo();
+        $copiado = false;  
+		$temporal = true;         
+        try {
+            	
+            $link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);     
+            $link->beginTransaction();	
+			
+			//Instancia la clase midlle para la ejecución de la función de la BD
+			$this->var = new cls_middle($this->nombre_funcion,$this->codigo_procedimiento,$this->decodificar);
+			
+			//echo 'Extension:... '.$extension;
+			//echo 'nombre_archivo:... '.$nombre_archivo;
+			//echo 'ingreso_detalle:... '.$ingreso_detalle;
+			$chk_ext = explode(".",$nombre_archivo);
+	         
+	         if(strtolower(end($chk_ext)) == "csv")
+	         {
+	             //si es correcto, entonces damos permisos de lectura para subir
+	             $filename = $ingreso_detalle;
+	             $handle = fopen($filename, "r");
+	        
+	             while (($data = fgetcsv($handle, 1000, "|")) !== FALSE)
+	             {
+		               //Insertamos los datos con los valores...
+		              
+		                $codigo_item=$data[1];
+		                $costo_unitario=$data[5];
+		                $cantidad=$data[4];
+		                $costo = $cantidad*$costo_unitario;
+	                
+	               		
+						$this->var->reset();
+						
+					   						
+						$this->var->add_param("NULL");
+						$this->var->add_param($cantidad);
+						$this->var->add_param($costo);
+						$this->var->add_param("NULL");
+						$this->var->add_param($costo_unitario);
+						$this->var->add_param("NULL");
+						$this->var->add_param("NULL");
+						$this->var->add_param($id_ingreso);
+						$this->var->add_param("NULL");
+						$this->var->add_param("'$codigo_item'");
+						$this->var->add_param("NULL");
+										
+						//Ejecuta la función
+			            $res = $this->var->exec_non_query_pdo($link);
+						//Obtiene la cadena con que se llamó a la función de postgres
+						$this->query = $this->var->query;					
+						
+						//echo '<br>consulta '. $this->query ;
+						
+						$stmt = $link->prepare($this->query);          
+				        $stmt->execute();
+				        $res = $stmt->fetch(PDO::FETCH_ASSOC); 
+						
+						$temporal = $this->var->analizarRespuesta($res['f_tal_ingreso_detalle_iud']);
+						
+						//Obtiene el array de salida de la función y retorna el resultado de la ejecución
+						$this->salida = $this->var->salida;
+				
+						
+	             }
+	             //cerramos la lectura del archivo "abrir archivo" con un "cerrar archivo"
+	             fclose($handle);
+	             
+	             
+	         }
+	         else
+	         {
+	            //si aparece esto es posible que el archivo no tenga el formato adecuado, inclusive cuando es cvs, revisarlo para             //ver si esta separado por " , "
+	             throw new Exception("Archivo invalido", 3); 
+	         }
+			
+			
+			
+		    //si todo va bien confirmamos y regresamos el resultado
+            $link->commit();
+           return $temporal;
+				
+            
+        } 
+        catch (Exception $e) {          
+                $link->rollBack();
+				
+				$this->salida = "";
+				$this->salida[0] = "f";
+				$this->salida[1] = $e->getMessage();
+				$this->salida[2] = "ORIGEN = $this->nombre_archivo";
+				$this->salida[3] = "PROC = DBIngresoProy.php";
+				$this->salida[4] = "NIVEL = 3";
+				
+				//echo "entra ".$this->salida[1] ;
+				
+				return false;
+           
+                
+                
+        } 	
+			
+		
+	}
+
+
+
 
 
 	/**
@@ -512,6 +638,8 @@ class cls_DBIngresoProy
 	 * Fecha de creación:		2007-10-18 20:48:41
 	 */
 	function ValidarOrdenIngresoSol($operacion_sql,$tipo_orden_ingreso,$id_ingreso,$descripcion,$costo_total,$id_proveedor,$id_contratista,$id_empleado,$id_almacen_logico,$id_institucion,$id_motivo_ingreso_cuenta,$orden_compra,$observaciones)
+
+
 	{
 		//orden_tipo_ingreso: (Compra Local, Importacion, etc.)
 
@@ -751,4 +879,9 @@ class cls_DBIngresoProy
 			return false;
 		}
 	}
+	
+	
+
+	
+	
 }?>

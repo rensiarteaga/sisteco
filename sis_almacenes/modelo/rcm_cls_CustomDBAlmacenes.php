@@ -266,6 +266,20 @@ class cls_CustomDBAlmacenes
 		$this->query = $dbIngreso ->query;
 		return $res;
 	}
+	
+	function ImportarDetalleIngreso($id_ingreso, $ingreso_detalle, $nombre_archivo,  $extension)
+	{
+		$this->salida = "";
+		$dbIngreso = new cls_DBIngresoProy($this->decodificar);
+		$res = $dbIngreso ->ImportarDetalleIngreso($id_ingreso, $ingreso_detalle, $nombre_archivo,  $extension);
+		$this->salida = $dbIngreso ->salida;
+		$this->query = $dbIngreso ->query;
+		return $res;
+	}
+	
+	
+	
+	
 
 	/// --------------------- fin orden_ingreso_sol --------------------- ///
 

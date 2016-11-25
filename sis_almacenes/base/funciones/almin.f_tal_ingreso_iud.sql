@@ -2028,7 +2028,7 @@ BEGIN
                                  id_almacen_logico       ,id_parametro_almacen
                              ) VALUES(
                                  g_registros.estado_item ,10                     ,g_registros.cantidad ,COALESCE(g_registros.costo_unitario,0),
-                                 g_registros.costo          ,0                   ,g_registros.id_item,
+                                 COALESCE(g_registros.costo,0)          ,0                   ,g_registros.id_item,
                                  g_id_almacen_logico     ,g_id_parametro_almacen
                              );
             

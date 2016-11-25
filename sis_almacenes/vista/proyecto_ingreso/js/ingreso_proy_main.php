@@ -1513,6 +1513,34 @@ function pagina_ingreso_proy(idContenedor,direccion,paramConfig)
 			Ext.MessageBox.alert('Estado', 'Antes debe seleccionar un item.');
 		}
 	}
+	
+	function btnSubirArchivo()
+	{
+		var sm=getSelectionModel();
+		var filas=ds.getModifiedRecords();
+		var cont=filas.length;
+		var NumSelect=sm.getCount();
+		var data = '';
+		if(NumSelect==1){
+			
+			var SelectionsRecord=sm.getSelected();
+			data='id_ingreso='+SelectionsRecord.data.id_ingreso+'&accion=upload';
+			var ParamVentana=
+			{
+				Ventana:
+				{
+					width:400,
+					height:200
+				}
+			}
+			layout_orden_ingreso_sol.loadWindows(direccion+'../../../../sis_almacenes/vista/proyecto_ingreso/ingreso-upload.php?'+data,'SubirIngresos',ParamVentana);
+		}
+		else
+		{
+			Ext.MessageBox.alert('Estado','Antes debe seleccionar un item');
+		}
+	}
+
 
 	//función para la Valoración de los Ingresos
 	function btn_val_ing(){
@@ -1999,7 +2027,8 @@ function pagina_ingreso_proy(idContenedor,direccion,paramConfig)
 	});
 
 	//para agregar botones
-	this.AdicionarBoton('../../../lib/imagenes/detalle.png','Detalle Ingreso',btn_ingreso_proy_det,true,'ingreso_proy_det','');
+	this.AdicionarBoton('../../../lib/imagenes/detalle.png','Detalle Ingreso',btn_ingreso_proy_det,true,'ingreso_proy_det','');	
+	this.AdicionarBoton('../../../lib/imagenes/document_upload.png','Importar Detalle',btnSubirArchivo,true,'Subir Foto','importar_detalle_ingreso');
 	this.AdicionarBoton('../../../lib/imagenes/logo_pdf2.bmp','Imprimir Nota de Ingreso',btn_nota_ingreso,true,'rep_ing','');
 	this.AdicionarBoton('../../../lib/imagenes/script_gear.png','Valoración del Ingreso',btn_val_ing,true,'val_ing','');
 	this.AdicionarBoton('../../../lib/imagenes/book_next.png','Finalizar Ingreso',btn_fin_ord_ing,true,'term_solicitud','');

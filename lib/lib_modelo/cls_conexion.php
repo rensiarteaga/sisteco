@@ -265,6 +265,46 @@ class cls_conexion
 		return $this->usr;
 
 	}
+	
+	
+	/**
+	 * Nombre función:	conectarpdo
+	 * Propósito:	    conexión de PDO	
+	 * Autor:			Rensi Arteaga Copari
+	 * Fecha creación:	22/12/2016
+	 *
+	 * @return unknown
+	 */
+	
+	
+	function conectarpdo($externo='', $segu= ''){
+		if ($externo != '') {
+			$ext = "_" . $externo;
+		}
+		else {
+			$ext = "";
+		}
+		
+		try {      
+    		
+    		
+    		$cadena="pgsql:host=". $this->host.";port=5432;dbname=".$this->dbname.";user=".$this->usr.";password=".$this->pwd;			
+			
+    		if($conexion = new PDO($cadena))
+    		{
+    			return $conexion;
+    		}
+    		else{
+    				
+    			return 0;
+    		}
+		
+	  } 
+	  catch (Exception $e){
+            //TODO manejo de errores
+            throw new Exception('Error al conectar a la base de datos los datos por PDO'.$cadena);
+      }
+	}
 
 }
 ?>
