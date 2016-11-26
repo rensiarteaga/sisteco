@@ -1809,7 +1809,14 @@ function MultiTabla($data,$nro_decimales=0,$borde=0,$stg=5,$tl=10,$fn=0)
     if($this->visible[$i]==1){
     	
     	// echo "muestra algo".$this->widths[$i];
-        $this->SetFont('Arial','',$tl);
+    	$letra=isset($this->font[$i]) ? $this->font[$i]:'Arial';
+		$estilo=isset($this->font_style[$i]) ? $this->font_style[$i]:'';
+		$tam_letra=isset($this->font_size[$i])? $this->font_size[$i]:10;
+		 
+        //$this->SetFont('Arial','',$tl);
+		$this->setFont($letra,$estilo,$tam_letra);
+		
+		
         $nb=max($nb,$this->NbLines($this->widths[$i],$data[$i]));
       
      }
@@ -1825,7 +1832,8 @@ function MultiTabla($data,$nro_decimales=0,$borde=0,$stg=5,$tl=10,$fn=0)
     if($this->visible[$i]==1){
     	$w=$this->widths[$i];
         $a=isset($this->aligns[$i]) ? $this->aligns[$i] : 'L';
-        $f=$this->fill[$i];
+        //$f=$this->fill[$i];
+        $f=$this->fill;
         $letra=isset($this->font[$i]) ? $this->font[$i]:'Arial';
         $tam_letra=isset($this->font_size[$i])? $this->font_size[$i]:10;
         $estilo=isset($this->font_style[$i]) ? $this->font_style[$i]:'';

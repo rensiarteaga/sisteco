@@ -161,7 +161,7 @@ class PDF extends FPDF
 		//Cabecera
 		$w=array(40,115,30);
 		//$wi=array(35,60,60,30);
-		$wi=array(7,23,15,10,105,10,15);
+		$wi=array(7,28,15,10,100,10,15);
 		$rama=array();
 		$rama_nombre=array();
 		$fecha=date("d-m-Y");
@@ -264,12 +264,12 @@ class PDF extends FPDF
 			//rac  16/01/2016
 			
 			$this->SetFont('Arial','',8);
-			$this->SetWidths(array(7,23,15,10,105,10,15));
+			$this->SetWidths(array(7,28,15,10,100,10,15));
 			$this->SetVisibles(array(1,1,1,1,1,1,1));
 			$this->SetAligns(array('C','L','R','C','L','L','R','R'));
 			$this->SetFonts(array('Arial','Arial','Arial','Arial','Arial','Arial','Arial'),'Arial');
 			$this->SetFontsStyles(array('','','','','','',''));
-			$this->SetFontsSizes(array(5,4,6,6,6,6,6));
+			$this->SetFontsSizes(array(5,5,6,6,6,6,6));
 			$this->SetSpaces(array(3.5,3.5,3.5,3.5,3.5,3.5,3.5));
 			$this->SetDecimales(array(0,0,0,0,0,0,0));
 			//RAC FIN
@@ -286,11 +286,12 @@ class PDF extends FPDF
 				$this->Cell($wi[5],4,round($row['cant_demasia']*100)/100,'LTRB',0,'R',$fill);
 				$this->Cell($wi[6],4,round($row['cant_tot']*100)/100,'LTRB',0,'R',$fill);*/
 				
-				$this->imprimirLinea($row,$cont);
+				$this->imprimirLinea($row,$cont,$fill);
 				
 				$cont++;
 				//$this->Ln();
 				$fill=!$fill;
+				$this->fill =  $fill;
 			}
 		}
 
