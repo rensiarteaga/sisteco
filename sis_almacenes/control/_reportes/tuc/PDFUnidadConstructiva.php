@@ -78,14 +78,14 @@ class PDF extends FPDF
 	if ($tipo==raiz){
 		$sortcol='TIPOUC.codigo';
 		$Custom->ListarTipoUnidadConstructivaRaiz($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$hidden_ep_id_financiador,$hidden_ep_id_regional,$hidden_ep_id_programa,$hidden_ep_id_proyecto,$hidden_ep_id_actividad,$node);
-		$sortcol='ITEM.id_supergrupo,COMP.orden,ITEM.codigo';
+		$sortcol='COMP.id_componente';
 		$CustomItem->ListarTipoUnidadConstructivaItem($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$hidden_ep_id_financiador,$hidden_ep_id_regional,$hidden_ep_id_programa,$hidden_ep_id_proyecto,$hidden_ep_id_actividad,$node);
 
 	}
 	else{
-		$sortcol='TIPOUC.codigo';
+		$sortcol='COMTUC.id_composicion_tuc';
 		$Custom->ListarTipoUnidadConstructivaRama($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$hidden_ep_id_financiador,$hidden_ep_id_regional,$hidden_ep_id_programa,$hidden_ep_id_proyecto,$hidden_ep_id_actividad,$node);
-		$sortcol='ITEM.id_supergrupo,COMP.orden,ITEM.codigo';
+		$sortcol='COMP.id_componente';
 		$CustomItem->ListarTipoUnidadConstructivaItem($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$hidden_ep_id_financiador,$hidden_ep_id_regional,$hidden_ep_id_programa,$hidden_ep_id_proyecto,$hidden_ep_id_actividad,$node);
 	}
 	$nodes_rama=$Custom->salida;
