@@ -265,7 +265,8 @@ class cls_CustomDBAlmacenes
 		$this->query = $dbTipoTransferencia ->query;
 		return $res;
 	}
-
+	
+	
 	/// --------------------- fin tal_tipo_transferencia --------------------- ///
 
 
@@ -2719,21 +2720,21 @@ class cls_CustomDBAlmacenes
 		return $res;
 	}
 
-	function InsertarTransfBorrador($id_transferencia,$prestamo,$motivo,$descripcion,$observaciones,$id_empleado,$id_almacen_logico,$id_almacen_logico_destino,$id_motivo_ingreso_cuenta,$id_tipo_material,$id_motivo_salida_cuenta)
+	function InsertarTransfBorrador($id_transferencia,$prestamo,$motivo,$descripcion,$observaciones,$id_empleado,$id_almacen_logico,$id_almacen_logico_destino,$id_motivo_ingreso_cuenta,$id_tipo_material,$id_motivo_salida_cuenta,$tipo_transferencia,$importe_abierto)
 	{
 		$this->salida = "";
 		$dbTransferencia = new cls_DBTransferencia($this->decodificar);
-		$res = $dbTransferencia ->InsertarTransfBorrador($id_transferencia,$prestamo,$motivo,$descripcion,$observaciones,$id_empleado,$id_almacen_logico,$id_almacen_logico_destino,$id_motivo_ingreso_cuenta,$id_tipo_material,$id_motivo_salida_cuenta);
+		$res = $dbTransferencia ->InsertarTransfBorrador($id_transferencia,$prestamo,$motivo,$descripcion,$observaciones,$id_empleado,$id_almacen_logico,$id_almacen_logico_destino,$id_motivo_ingreso_cuenta,$id_tipo_material,$id_motivo_salida_cuenta,$tipo_transferencia,$importe_abierto);
 		$this->salida = $dbTransferencia ->salida;
 		$this->query = $dbTransferencia ->query;
 		return $res;
 	}
 
-	function ModificarTransfBorrador($id_transferencia,$prestamo,$motivo,$descripcion,$observaciones,$id_empleado,$id_almacen_logico,$id_almacen_logico_destino,$id_motivo_ingreso_cuenta,$id_tipo_material,$id_motivo_salida_cuenta)
+	function ModificarTransfBorrador($id_transferencia,$prestamo,$motivo,$descripcion,$observaciones,$id_empleado,$id_almacen_logico,$id_almacen_logico_destino,$id_motivo_ingreso_cuenta,$id_tipo_material,$id_motivo_salida_cuenta,$tipo_transferencia,$importe_abierto)
 	{
 		$this->salida = "";
 		$dbTransferencia = new cls_DBTransferencia($this->decodificar);
-		$res = $dbTransferencia ->ModificarTransfBorrador($id_transferencia,$prestamo,$motivo,$descripcion,$observaciones,$id_empleado,$id_almacen_logico,$id_almacen_logico_destino,$id_motivo_ingreso_cuenta,$id_tipo_material,$id_motivo_salida_cuenta);
+		$res = $dbTransferencia ->ModificarTransfBorrador($id_transferencia,$prestamo,$motivo,$descripcion,$observaciones,$id_empleado,$id_almacen_logico,$id_almacen_logico_destino,$id_motivo_ingreso_cuenta,$id_tipo_material,$id_motivo_salida_cuenta,$tipo_transferencia,$importe_abierto);
 		$this->salida = $dbTransferencia ->salida;
 		$this->query = $dbTransferencia ->query;
 		return $res;
@@ -2798,6 +2799,17 @@ class cls_CustomDBAlmacenes
 		$this->query = $dbTransferencia ->query;
 		return $res;
 	}
+	
+	function GenerarTransferenciaDevolucion($id_tipo_transferencia)
+	{
+		$this->salida = "";
+		$db = new cls_DBTransferencia($this->decodificar);
+		$res = $db -> GenerarTransferenciaDevolucion($id_tipo_transferencia);
+		$this->salida = $db ->salida;
+		$this->query = $db ->query;
+		return $res;
+	}
+	
 
 
 	/// --------------------- fin tal_transferencia --------------------- ///

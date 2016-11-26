@@ -119,11 +119,15 @@ function pagina_transferencia_seg(idContenedor,direccion,paramConfig)
 		'desc_tipo_material',
 		'id_motivo_salida_cuenta',
 		'desc_motivo_salida_cuenta',
-
 		'desc_motivo_ingreso',
 		'desc_motivo_salida',
 		'correlativo_ing',
-		'correlativo_sal'
+		'correlativo_sal',
+		{name: 'id_transferencia_dev',type:'int'},
+		//'id_transferencia_dev',		
+		'tipo_transferencia',
+		'importe_abierto'
+		
 
 		]),remoteSort:true
 	});
@@ -144,7 +148,7 @@ function pagina_transferencia_seg(idContenedor,direccion,paramConfig)
 	// hidden id_transferencia
 	//en la posición 0 siempre esta la llave primaria
 
-	vectorAtributos[0] = {
+	vectorAtributos=[{
 		validacion:{
 			//fieldLabel: 'Id',
 			labelSeparator:'',
@@ -158,9 +162,118 @@ function pagina_transferencia_seg(idContenedor,direccion,paramConfig)
 		filtro_0:false,
 		id_grupo:3,
 		save_as:'hidden_id_transferencia'
-	};
-
-	vectorAtributos[1]= {
+	},
+	{
+		validacion: {
+			name:'tipo_transferencia',
+			fieldLabel:'Tipo Transferencia',
+			allowBlank:false,
+			typeAhead: true,
+			loadMask: true,
+			triggerAction: 'all',			
+			valueField:'ID',
+			displayField:'valor',
+			lazyRender:true,
+			width:100,
+			forceSelection:true,
+			grid_visible:true,
+			grid_indice:1,
+			width_grid:100, // ancho de columna en el gris
+			renderer: function(value, p, record){
+				
+			    	if(record.data.tipo_transferencia == 'prestamo'){
+			    	    if(record.data.estado_transferencia == 'Finalizado' && record.data.id_transferencia_dev > 0 ){
+			    	    	return String.format('<font color = "green"><b>{0}</b></font>', value) 
+			    	    }
+			    	    else{
+			    	       return String.format('<font color = "red"><b>{0}</b></font>', value) 	
+			    	    }
+				       
+				       
+				    }	
+				
+				    return String.format('<font color = "bralck"><b>{0}</b></font>', value)   
+				
+			}
+		},
+		form:false,
+		tipo:'Field',
+		filtro_0:true,
+		filtro_1:true,
+		filterColValue:'TRANSF.tipo_transferencia'
+	},
+	{
+		validacion: {
+			name: 'importe_abierto',
+			fieldLabel: 'Importes Abiertos',
+			allowBlank: false,
+			typeAhead: true,
+			valueField: 'ID',
+			displayField: 'valor',
+			lazyRender: true,
+			width: 100,
+			forceSelection: true,
+			disabled: true,
+			grid_visible: true,
+			grid_indice: 1,
+			renderer: function(value, p, record){
+				console.log('.....',record.data.id_transferencia_dev)
+			    	if(record.data.tipo_transferencia == 'prestamo'){
+			    	    if(record.data.estado_transferencia == 'Finalizado' && record.data.id_transferencia_dev  > 0){
+			    	    	return String.format('<font color = "green"><b>{0}</b></font>', value) 
+			    	    }
+			    	    else{
+			    	       return String.format('<font color = "red"><b>{0}</b></font>', value) 	
+			    	    }
+				       
+				       
+				    }	
+				
+				    return String.format('<font color = "bralck"><b>{0}</b></font>', value)   
+				
+			},
+			width_grid: 100 // ancho de columna en el gris
+		},
+		form:false,
+		tipo:'Field',
+		filtro_0:true,
+		filtro_1:true,
+		filterColValue:'TRANSF.importe_abierto'
+	},
+	{
+		validacion:{
+			name:'estado_transferencia',
+			fieldLabel:'Estado',
+			grid_visible:true,
+			grid_editable:false,
+			grid_indice:1,	
+			renderer: function(value, p, record){
+				console.log('.....',record.data.id_transferencia_dev)
+			    	if(record.data.tipo_transferencia == 'prestamo'){
+			    	    if(record.data.estado_transferencia == 'Finalizado' && record.data.id_transferencia_dev  > 0){
+			    	    	return String.format('<font color = "green"><b>{0}</b></font>', value) 
+			    	    }
+			    	    else{
+			    	       return String.format('<font color = "red"><b>{0}</b></font>', value) 	
+			    	    }
+				       
+				       
+				    }	
+				
+				    return String.format('<font color = "bralck"><b>{0}</b></font>', value)   
+				
+			},		
+			width_grid:100
+		},
+		form:false,
+		tipo:'Field',
+		filtro_0:true,
+		filterColValue:'estado_transferencia',
+		save_as:'txt_estado_transferencia',
+		id_grupo:1
+	},
+	
+	{
 		validacion:{
 			name:'desc_almacen_orig',
 			fieldLabel:'Almacen Físico Origen',
@@ -175,9 +288,8 @@ function pagina_transferencia_seg(idContenedor,direccion,paramConfig)
 		filterColValue:'ALMACE.nombre',
 		save_as:'txt_desc_almacen_orig',
 		id_grupo:0
-	};
-
-	vectorAtributos[2]= {
+	},
+	{
 		validacion:{
 			name:'desc_almacen_dest',
 			fieldLabel:'Almacen Físico Destino',
@@ -192,9 +304,7 @@ function pagina_transferencia_seg(idContenedor,direccion,paramConfig)
 		filterColValue:'ALMACE1.nombre',
 		save_as:'txt_desc_almacen_dest',
 		id_grupo:1
-	};
-
-	vectorAtributos[3] = {
+	},{
 		validacion: {
 			name:'desc_almacen_logico_orig',
 			fieldLabel:'Almacén Lógico Origen',
@@ -210,10 +320,7 @@ function pagina_transferencia_seg(idContenedor,direccion,paramConfig)
 		defecto: '',
 		save_as:'txt_desc_almacen_logico_orig',
 		id_grupo:0
-	};
-
-
-	vectorAtributos[4]= {
+	},{
 		validacion: {
 			name:'desc_almacen_logico_dest',
 			fieldLabel:'Almacén Lógico Destino',
@@ -228,11 +335,7 @@ function pagina_transferencia_seg(idContenedor,direccion,paramConfig)
 		filterColValue:'ALMLOG1.nombre',
 		save_as:'txt_desc_almacen_logico_dest',
 		id_grupo:1
-	};
-
-
-	// txt prestamo
-	vectorAtributos[5]= {
+	},{
 		validacion: {
 			name:'prestamo',
 			fieldLabel:'Préstamo',
@@ -247,10 +350,7 @@ function pagina_transferencia_seg(idContenedor,direccion,paramConfig)
 		filterColValue:'TRANSF.prestamo',
 		save_as:'txt_prestamo',
 		id_grupo:2
-	};
-
-	// txt motivo
-	vectorAtributos[6]= {
+	},{
 		validacion:{
 			name:'motivo',
 			fieldLabel:'Motivo',
@@ -265,10 +365,7 @@ function pagina_transferencia_seg(idContenedor,direccion,paramConfig)
 		filterColValue:'TRANSF.motivo',
 		save_as:'txt_motivo',
 		id_grupo:2
-	};
-
-	// txt descripcion
-	vectorAtributos[7]= {
+	},{
 		validacion:{
 			name:'descripcion',
 			fieldLabel:'Descripcion',
@@ -283,10 +380,8 @@ function pagina_transferencia_seg(idContenedor,direccion,paramConfig)
 		filterColValue:'TRANSF.descripcion',
 		save_as:'txt_descripcion',
 		id_grupo:2
-	};
-
-	// txt observaciones
-	vectorAtributos[8]= {
+	},
+	{
 		validacion:{
 			name:'observaciones',
 			fieldLabel:'Observaciones',
@@ -301,10 +396,8 @@ function pagina_transferencia_seg(idContenedor,direccion,paramConfig)
 		filterColValue:'TRANSF.observaciones',
 		save_as:'txt_observaciones',
 		id_grupo:2
-	};
-
-	// txt id_empleado
-	vectorAtributos[9]= {
+	},
+	{
 		validacion: {
 			name:'desc_empleado',
 			fieldLabel:'Empleado',
@@ -319,9 +412,8 @@ function pagina_transferencia_seg(idContenedor,direccion,paramConfig)
 		filterColValue:'PERSON1.nombre#PERSON1.apellido_paterno#PERSON1.apellido_materno',
 		save_as:'txt_desc_empleado',
 		id_grupo:4
-	};
-
-	vectorAtributos[10]= {
+	},
+	{
 		validacion:{
 			name:'nombre_almacen',
 			fieldLabel:'nombre_almacen',
@@ -333,9 +425,8 @@ function pagina_transferencia_seg(idContenedor,direccion,paramConfig)
 		tipo: 'Field',
 		save_as:'txt_nombre_almacen',
 		id_grupo:3
-	};
-
-	vectorAtributos[11]= {
+	},
+	{
 		validacion:{
 			name:'desc_almacen_logico_orig',
 			fieldLabel:'Nombre Almacen Logico',
@@ -347,9 +438,8 @@ function pagina_transferencia_seg(idContenedor,direccion,paramConfig)
 		tipo: 'Field',
 		save_as:'txt_nombre_almacen_logico',
 		id_grupo:3
-	};
-
-	vectorAtributos[12]= {
+	},
+	{
 		validacion:{
 			name: 'nombre_financiador',
 			fieldLabel: 'Financiador Origen',
@@ -361,9 +451,8 @@ function pagina_transferencia_seg(idContenedor,direccion,paramConfig)
 		tipo: 'Field',
 		save_as:'txt_nombre_financiador',
 		id_grupo:0
-	};
-
-	vectorAtributos[13]= {
+	},
+	{
 		validacion:{
 			name: 'nombre_regional',
 			fieldLabel: 'Regional Origen',
@@ -375,9 +464,8 @@ function pagina_transferencia_seg(idContenedor,direccion,paramConfig)
 		tipo: 'Field',
 		save_as:'txt_nombre_regional',
 		id_grupo:0
-	};
-
-	vectorAtributos[14]= {
+	},
+	{
 		validacion:{
 			name: 'nombre_programa',
 			fieldLabel: 'Programa Origen',
@@ -389,9 +477,8 @@ function pagina_transferencia_seg(idContenedor,direccion,paramConfig)
 		tipo: 'Field',
 		save_as:'txt_nombre_programa',
 		id_grupo:0
-	};
-
-	vectorAtributos[15]= {
+	},
+	{
 		validacion:{
 			name: 'nombre_proyecto',
 			fieldLabel: 'Proyecto Origen',
@@ -403,9 +490,8 @@ function pagina_transferencia_seg(idContenedor,direccion,paramConfig)
 		tipo: 'Field',
 		save_as:'txt_id_nombre_proyecto',
 		id_grupo:0
-	};
-
-	vectorAtributos[16]= {
+	},
+	{
 		validacion:{
 			name: 'nombre_actividad',
 			fieldLabel: 'Actividad Origen',
@@ -417,9 +503,8 @@ function pagina_transferencia_seg(idContenedor,direccion,paramConfig)
 		tipo: 'Field',
 		save_as:'txt_nombre_actividad',
 		id_grupo:0
-	};
-
-	vectorAtributos[17]= {
+	},
+	{
 		validacion:{
 			name: 'nombre_financiador_dest',
 			fieldLabel: 'Financiador Destino',
@@ -431,9 +516,7 @@ function pagina_transferencia_seg(idContenedor,direccion,paramConfig)
 		tipo: 'Field',
 		save_as:'txt_nombre_financiador_dest',
 		id_grupo:0
-	};
-
-	vectorAtributos[18]= {
+	},{
 		validacion:{
 			name: 'nombre_regional_dest',
 			fieldLabel: 'Regional Destino',
@@ -445,9 +528,7 @@ function pagina_transferencia_seg(idContenedor,direccion,paramConfig)
 		tipo: 'Field',
 		save_as:'txt_nombre_regional_dest',
 		id_grupo:0
-	};
-
-	vectorAtributos[19]= {
+	},{
 		validacion:{
 			name: 'nombre_programa_dest',
 			fieldLabel: 'Programa Destino',
@@ -459,9 +540,8 @@ function pagina_transferencia_seg(idContenedor,direccion,paramConfig)
 		tipo: 'Field',
 		save_as:'txt_nombre_programa_dest',
 		id_grupo:0
-	};
-
-	vectorAtributos[20]= {
+	},
+	{
 		validacion:{
 			name: 'nombre_proyecto_dest',
 			fieldLabel: 'Proyecto Destino',
@@ -473,9 +553,8 @@ function pagina_transferencia_seg(idContenedor,direccion,paramConfig)
 		tipo: 'Field',
 		save_as:'txt_id_nombre_proyecto_dest',
 		id_grupo:0
-	};
-
-	vectorAtributos[21]= {
+	},
+	{
 		validacion:{
 			name: 'nombre_actividad_dest',
 			fieldLabel: 'Actividad Destino',
@@ -487,9 +566,8 @@ function pagina_transferencia_seg(idContenedor,direccion,paramConfig)
 		tipo: 'Field',
 		save_as:'txt_nombre_actividad_dest',
 		id_grupo:0
-	};
-
-	vectorAtributos[22]= {
+	},
+	{
 		validacion:{
 			name: 'desc_motivo_ingreso',
 			fieldLabel: 'Motivo ingreso',
@@ -501,9 +579,8 @@ function pagina_transferencia_seg(idContenedor,direccion,paramConfig)
 		tipo: 'Field',
 		save_as:'txt_desc_motivo_ingreso',
 		id_grupo:0
-	};
-
-	vectorAtributos[23]= {
+	},
+	{
 		validacion:{
 			name: 'desc_motivo_ingreso_cuenta',
 			fieldLabel: 'Cuenta ingreso',
@@ -515,9 +592,8 @@ function pagina_transferencia_seg(idContenedor,direccion,paramConfig)
 		tipo: 'Field',
 		save_as:'txt_desc_motivo_ingreso_cuenta',
 		id_grupo:0
-	};
-
-	vectorAtributos[24]= {
+	},
+	{
 		validacion:{
 			name: 'desc_motivo_salida',
 			fieldLabel: 'Motivo salida',
@@ -529,9 +605,8 @@ function pagina_transferencia_seg(idContenedor,direccion,paramConfig)
 		tipo: 'Field',
 		save_as:'txt_desc_motivo_salida',
 		id_grupo:0
-	};
-
-	vectorAtributos[25]= {
+	},
+	{
 		validacion:{
 			name: 'desc_motivo_salida_cuenta',
 			fieldLabel: 'Cuenta salida',
@@ -543,9 +618,8 @@ function pagina_transferencia_seg(idContenedor,direccion,paramConfig)
 		tipo: 'Field',
 		save_as:'txt_desc_motivo_salida_cuenta',
 		id_grupo:0
-	};
-
-	vectorAtributos[26]= {
+	},
+	{
 		validacion:{
 			name: 'desc_tipo_material',
 			fieldLabel: 'Tipo material',
@@ -559,9 +633,8 @@ function pagina_transferencia_seg(idContenedor,direccion,paramConfig)
 		filterColValue:'TIPMAT.nombre',
 		save_as:'txt_desc_tipo_material',
 		id_grupo:0
-	};
-
-	vectorAtributos[27]= {
+	},
+	{
 		validacion:{
 			name: 'fecha_borrador',
 			fieldLabel: 'Fecha borrador',
@@ -574,9 +647,8 @@ function pagina_transferencia_seg(idContenedor,direccion,paramConfig)
 		tipo: 'Field',
 		save_as:'txt_fecha_borrador',
 		id_grupo:0
-	};
-
-	vectorAtributos[28]= {
+	},
+	{
 		validacion:{
 			name: 'estado_transferencia',
 			fieldLabel: 'Estado Transferencia',
@@ -589,9 +661,8 @@ function pagina_transferencia_seg(idContenedor,direccion,paramConfig)
 		tipo: 'Field',
 		save_as:'txt_estado_transferencia',
 		id_grupo:0
-	};
-
-	vectorAtributos[29]= {
+	},
+	{
 		validacion:{
 			name: 'fecha_pendiente_sal',
 			fieldLabel: 'Fecha pendiente salida',
@@ -604,9 +675,8 @@ function pagina_transferencia_seg(idContenedor,direccion,paramConfig)
 		tipo: 'Field',
 		save_as:'txt_fecha_pendiente_sal',
 		id_grupo:0
-	};
-
-	vectorAtributos[30]= {
+	},
+	{
 		validacion:{
 			name: 'fecha_pendiente_ing',
 			fieldLabel: 'Fecha pendiente ingreso',
@@ -619,9 +689,8 @@ function pagina_transferencia_seg(idContenedor,direccion,paramConfig)
 		tipo: 'Field',
 		save_as:'txt_fecha_pendiente_ing',
 		id_grupo:0
-	};
-
-	vectorAtributos[31]= {
+	},
+	{
 		validacion:{
 			name: 'fecha_finalizado_anulado',
 			fieldLabel: 'Fecha finalizado/anulado',
@@ -634,9 +703,8 @@ function pagina_transferencia_seg(idContenedor,direccion,paramConfig)
 		tipo: 'Field',
 		save_as:'txt_fecha_finalizado_anulado',
 		id_grupo:0
-	};
-
-	vectorAtributos[32]= {
+	},
+	{
 		validacion:{
 			name: 'desc_firma_autorizada',
 			fieldLabel: 'Firma autorizada',
@@ -648,9 +716,8 @@ function pagina_transferencia_seg(idContenedor,direccion,paramConfig)
 		tipo: 'Field',
 		save_as:'txt_desc_firma_autorizada',
 		id_grupo:0
-	};
-
-	vectorAtributos[33]= {
+	},
+	{
 		validacion:{
 			name: 'fecha_pendiente',
 			fieldLabel: 'Fecha pendiente aprobación',
@@ -663,9 +730,8 @@ function pagina_transferencia_seg(idContenedor,direccion,paramConfig)
 		tipo: 'Field',
 		save_as:'txt_fecha_pendiente',
 		id_grupo:0
-	};
-
-	vectorAtributos[34]= {
+	},
+	{
 		validacion:{
 			name: 'fecha_rechazado',
 			fieldLabel: 'Fecha rechazado',
@@ -678,9 +744,8 @@ function pagina_transferencia_seg(idContenedor,direccion,paramConfig)
 		tipo: 'Field',
 		save_as:'txt_fecha_rechazado',
 		id_grupo:0
-	};
-	
-	vectorAtributos[35]= {
+	},
+	{
 		validacion:{
 			name: 'correlativo_sal',
 			fieldLabel: 'Salida',
@@ -692,9 +757,8 @@ function pagina_transferencia_seg(idContenedor,direccion,paramConfig)
 		tipo: 'Field',
 		save_as:'txt_correlativo_sal',
 		id_grupo:0
-	};
-	
-	vectorAtributos[36]= {
+	},
+	{
 		validacion:{
 			name: 'correlativo_ing',
 			fieldLabel: 'Ingreso',
@@ -706,7 +770,7 @@ function pagina_transferencia_seg(idContenedor,direccion,paramConfig)
 		tipo: 'Field',
 		save_as:'txt_correlativo_ing',
 		id_grupo:0
-	};
+	}];
 
 	//////////////////////////////////////////////////////////////
 	// ----------            FUNCIONES RENDER    ---------------//
@@ -797,6 +861,56 @@ function pagina_transferencia_seg(idContenedor,direccion,paramConfig)
 			Ext.MessageBox.alert('Estado', 'Antes debe seleccionar un item.');
 		}
 	}
+	
+	
+	function btn_gen_devolucion(){
+		var sm=getSelectionModel();
+		var filas=ds.getModifiedRecords();
+		var cont=filas.length;
+		var NumSelect=sm.getCount();
+		if(NumSelect!=0){
+			
+				var SelectionsRecord=sm.getSelected();
+				var data=SelectionsRecord.data.id_transferencia;
+				
+				console.log(SelectionsRecord.data.id_transferencia_dev,SelectionsRecord.data.tipo_transferencia,1, SelectionsRecord.data.id_transferencia_dev, 1,SelectionsRecord.data.estado_transferencia);
+				console.log(SelectionsRecord.data.tipo_transferencia != 'prestamo' && SelectionsRecord.data.id_transferencia_dev == 0 && SelectionsRecord.data.estado_transferencia == 'Finalizado');
+				
+				if(SelectionsRecord.data.tipo_transferencia == 'prestamo' && SelectionsRecord.data.id_transferencia_dev == 0 && SelectionsRecord.data.estado_transferencia == 'Finalizado'){
+					if(confirm("¿Está seguro de iniciar la devolución?")){
+							Ext.MessageBox.show({
+								title: 'Ejecutando proceso',
+								msg:"<div><img src='../../../lib/ext-yui/resources/images/default/grid/loading.gif'/> Registrando devolución</div>",
+								width:350,
+								height:200,
+								closable:false
+							});
+							
+							Ext.Ajax.request({
+								url:direccion+"../../../control/transferencia/ActionGenerarDevolucion.php?hidden_id_transferencia="+data,
+								method:'GET',
+								success:terminado,
+								failure:ClaseMadre_conexionFailure,
+								timeout:9999999//TIEMPO DE ESPERA PARA DAR FALLO
+							})
+                    }
+				}
+				else{
+					alert('Solo puede generar devoluciones en transferencia de tipo prestamo finalizadas que no tenga devoluciones');
+				}
+				
+			
+		}
+		else{
+			Ext.MessageBox.alert('Estado', 'Antes debe seleccionar un item.')
+		}
+	}
+	
+	function terminado(resp){
+		Ext.MessageBox.hide();
+		Ext.MessageBox.alert('Estado', '<br>Se genero una transferencia de devolución en borrador.<br>');
+		ClaseMadre_btnActualizar()
+	}
 
 
 	function InitPaginaTransferencia()
@@ -839,7 +953,9 @@ function pagina_transferencia_seg(idContenedor,direccion,paramConfig)
 	//InitBarraMenu(array DE PARÁMETROS PARA LAS FUNCIONES DE LA CLASE MADRE);
 	this.InitFunciones(paramFunciones);
 	//para agregar botones
-	this.AdicionarBoton('../../../lib/imagenes/detalle.png','Detalle de la Transferencia',btn_transferencia_detalle,true,'transferencia_detalle','');
+	this.AdicionarBoton('../../../lib/imagenes/detalle.png','Detalle de la Transferencia',btn_transferencia_detalle,true,'transferencia_detalle','');	
+	this.AdicionarBoton('../../../lib/imagenes/proc.png','Generar Devolución',btn_gen_devolucion,true,'ter_gen_dev','');
+	
 	this.iniciaFormulario();
 	InitPaginaTransferencia();
 	layout_transferencia.getLayout().addListener('layout',this.onResize);//aregla la forma en que se ve el grid dentro del layout

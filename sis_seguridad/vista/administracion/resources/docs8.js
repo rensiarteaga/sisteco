@@ -11,7 +11,24 @@ var cp = new Ext.state.CookieProvider({
    });
 Ext.state.Manager.setProvider(cp);
 
-
+Ext.override(Ext.form.Field, 
+	{	afterRender : Ext.form.Field.prototype.afterRender.createSequence(function()
+		{
+			var qt = this.qtip;
+		    if (qt)
+		    {	Ext.QuickTips.register({
+		        target:  this,
+		        title: '',
+		        text: qt,
+		        enabled: true,
+		        showDelay: 5,
+		        dismissDelay:20000,
+		        draggable:true
+		    	});
+		    }
+		})
+	});
+	
 var _CP=function(){
 	var estilo_vista,layoutContenedorPrincipal;
 	var elementos=new Array();
@@ -660,6 +677,8 @@ var _CP=function(){
 				//var mensaje="<p>HTTP status: " + resp.status +" <br/> Status: " + resp.statusText +"<br/> No se encontro el Action requerido</p>";
 
 				 mensaje="<p> No se encontro el Action requerido</p>";
+				 
+				 /*
 
 				Ext.Msg.show({
 
@@ -669,7 +688,7 @@ var _CP=function(){
 					maxWidth :800,
 					buttons: Ext.Msg.OK
 					//width: 300,
-				});
+				});*/
 				sw=true;
 				//-- registro de errores --//
 				parametros_mensaje = {
@@ -677,6 +696,8 @@ var _CP=function(){
 					mensaje:mensaje,
 					nivel:'3'
 				};
+				
+				//alert(mensaje)
 			}
 
 			if(!sw&&resp.responseXML&& resp.responseXML.documentElement){
@@ -709,7 +730,7 @@ var _CP=function(){
 					ContenedorPrincipal.loadLogin();
 				}
 				else{
-					Ext.Msg.show({
+					/*Ext.Msg.show({
 						title: 'ALERTA',
 						msg: "<pre><font face='Arial'> "+mensaje+"</font></pre>" ,
 						//msg: mensaje ,
@@ -719,7 +740,11 @@ var _CP=function(){
 						minHeight:600,
 						buttons: Ext.Msg.OK
 						//width: 300,
-					});
+					});*/
+					
+					 mensaje="<pre><font face='Arial'> "+mensaje+"</font></pre>";
+					
+					//alert(mensaje)
 				}
 				sw=true;
 			}
@@ -730,14 +755,14 @@ var _CP=function(){
 					//var mensaje = "<p>HTTP status: " + resp.status +"<br/> Status: " + resp.statusText +"<br/> Tiempo de espera agotado</p>";
 					 mensaje = "<p>Tiempo de espera agotado</p>";
 
-					Ext.Msg.show({
+					/*Ext.Msg.show({
 						title: 'ALERTA',
 						msg: mensaje,
 						minWidth:300,
 						maxWidth :800,
 						buttons: Ext.Msg.OK
 						//width: 300,
-					});
+					});*/
 					sw = true;
 
 				}
@@ -745,29 +770,42 @@ var _CP=function(){
 					//var mensaje = "HTTP status: " + resp.status +"<br/> Status: " + resp.statusText +"<br/> Fallo en su conexión de Internet";
 					 mensaje = "<p> Fallo en su conexión de Internet</p>";
 
-					Ext.Msg.show({
+					/*Ext.Msg.show({
 						title: 'ALERTA',
 						msg: mensaje,
 						minWidth:300,
 						maxWidth :800,
 						buttons: Ext.Msg.OK
 						//width: 300,
-					});
+					});*/
 					sw=true;
 
 				}
 				if(!sw){
 					mensaje = "respuesta indefinida, error en la transmision <br> respuesta obtenida:<br>"+ resp.responseText;
-					Ext.Msg.show({
+					/*Ext.Msg.show({
 						title: 'ALERTA',
 						msg: mensaje,
 						minWidth:300,
 						maxWidth :800,
 						buttons: Ext.Msg.OK
 						//width: 300,
-					});
+					});*/
 				}
+				
+				
+				//alert(mensaje)
 			}
+			
+			Ext.Msg.show({
+						title: 'ALERTA',
+						msg: "<p>"+mensaje+"</p>",
+						minWidth:'90%',
+						//maxWidth :800,
+						buttons: Ext.Msg.OK
+						//width: 300,
+					});
+					
 		},
 		
 

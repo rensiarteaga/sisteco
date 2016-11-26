@@ -36,14 +36,14 @@ BEGIN
                         g_correl
                      from almin.tal_transferencia t
                      inner join almin.tal_salida s on s.id_salida = t.id_salida
-                     where t.id_ingreso = v_registros_ingreso.id_ingreso;
+                     where t.id_ingreso = al_id_ingreso;
                      
                      IF g_id_transferencia is null THEN
                      	raise exception 'no se encontro la transferencia para el ingreso id: %',al_id_ingreso;
                      END IF;
          
                                                    
-                      --RECORRE EL DETALLE DEL INGRESO Y VALORA CADA ITEM
+                      --RECORRE EL DETALLE DEL INGRESO Y VALORAR CADA ITEM
                       OPEN g_cursor(al_id_ingreso);
 
                       LOOP

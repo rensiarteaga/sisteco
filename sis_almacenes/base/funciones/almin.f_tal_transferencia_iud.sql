@@ -28,7 +28,9 @@ CREATE OR REPLACE FUNCTION almin.f_tal_transferencia_iud (
   al_id_tipo_material integer,
   al_id_motivo_salida_cuenta integer,
   al_id_ingreso_prestamo integer,
-  al_id_salida_prestamo integer
+  al_id_salida_prestamo integer,
+  al_tipo_transferencia varchar,
+  al_importe_abierto varchar
 )
 RETURNS varchar AS
 $body$
@@ -131,6 +133,10 @@ DECLARE
     g_id_ingreso				  integer;
     g_id_parametro_almacen        integer;
     g_id_parametro_almacen_logico		integer;
+    v_nombre_al_destino					varchar;
+    v_registros							record;
+    v_registros_det						record;
+    v_id_transferencia_dev				integer;
 
 BEGIN
 
@@ -197,6 +203,15 @@ BEGIN
     --raise exception 'llega..';
 
     --*** EJECUCIÓN DEL PROCEDIMIENTO ESPECÍFICO
+    /*
+    Autor:   		RAC
+    Fecha:	 		09/01/2017
+    Descripcion:	registro de nuevos campos, tipo_transferencia, importe_abierto
+    
+    */
+    
+    --raise exception 'llega';  
+    
     IF pm_codigo_procedimiento = 'AL_TRABOR_INS' THEN  --TRABOR: Transferencia Borrador
 
         BEGIN
@@ -240,13 +255,15 @@ BEGIN
 		    observaciones               ,fecha_pendiente_sal           ,fecha_pendiente_ing     ,fecha_finalizado_anulado,
 		    id_empleado                 ,id_firma_autorizada_transf    ,id_almacen_logico       ,id_almacen_logico_destino,
 		    id_motivo_ingreso_cuenta    ,fecha_borrador                ,fecha_pendiente         ,fecha_rechazado,
-		    id_ingreso                  ,id_salida                     ,id_tipo_material        ,id_motivo_salida_cuenta
+		    id_ingreso                  ,id_salida                     ,id_tipo_material        ,id_motivo_salida_cuenta,
+            tipo_transferencia			,importe_abierto
 		    ) VALUES (
-		    al_prestamo                 ,'Borrador'                    ,al_motivo               ,al_descripcion,
+		    'no'                 ,'Borrador'                    ,al_motivo               ,al_descripcion,
 		    al_observaciones            ,NULL                          ,NULL                    ,NULL,
 		    al_id_empleado              ,g_id_firma_autorizada_transf  ,al_id_almacen_logico    ,al_id_almacen_logico_destino,
 		    al_id_motivo_ingreso_cuenta ,now()                         ,NULL                    ,NULL,
-		    NULL                        ,NULL                          ,al_id_tipo_material     ,al_id_motivo_salida_cuenta
+		    NULL                        ,NULL                          ,al_id_tipo_material     ,al_id_motivo_salida_cuenta,
+            al_tipo_transferencia		,al_importe_abierto
             );
             
             -- DESCRIPCIÓN DE ÉXITO PARA GUARDAR EN EL LOG
@@ -256,6 +273,13 @@ BEGIN
         END;
 
   --procedimiento de modificacion
+  
+  /*
+   AUTOR:  		RAC
+   Fecha:		10/01/2017
+   Desc			- bloquear la edición de transferencias del tipo devolucion
+  
+  */
 
    ELSIF pm_codigo_procedimiento = 'AL_TRABOR_UPD' THEN --TRABOR: Transferencia Borrador
 
@@ -291,21 +315,34 @@ BEGIN
             FROM
             almin.tal_firma_autorizada_transf
             WHERE id_motivo_ingreso_cuenta = al_id_motivo_ingreso_cuenta
-            AND id_motivo_salida_cuenta = al_id_motivo_salida_cuenta and estado_registro='activo'
-           ;
+            AND id_motivo_salida_cuenta = al_id_motivo_salida_cuenta and estado_registro='activo';
+            
+            
+            select
+              t.id_transferencia,
+              t.tipo_transferencia
+             into
+              v_registros
+            from almin.tal_transferencia t
+            where id_transferencia = al_id_transferencia;
+            
+            IF v_registros.tipo_transferencia = 'devolucion' THEN
+                raise exception 'No puede editar transferencias del tipo devolucion';
+            END IF;
 
-            UPDATE almin.tal_transferencia SET
-		    prestamo                   = al_prestamo,
-		    motivo                     = al_motivo,
-		    descripcion                = al_descripcion,
-		    observaciones              = al_observaciones,
-		    id_empleado                = al_id_empleado,
-		    id_firma_autorizada_transf = g_id_firma_autorizada_transf,
-		    id_almacen_logico          = al_id_almacen_logico,
-		    id_almacen_logico_destino  = al_id_almacen_logico_destino,
-		    id_motivo_ingreso_cuenta   = al_id_motivo_ingreso_cuenta,
-		    id_tipo_material           = al_id_tipo_material,
-		    id_motivo_salida_cuenta    = al_id_motivo_salida_cuenta
+            UPDATE almin.tal_transferencia SET		   
+                motivo                     = al_motivo,
+                descripcion                = al_descripcion,
+                observaciones              = al_observaciones,
+                id_empleado                = al_id_empleado,
+                id_firma_autorizada_transf = g_id_firma_autorizada_transf,
+                id_almacen_logico          = al_id_almacen_logico,
+                id_almacen_logico_destino  = al_id_almacen_logico_destino,
+                id_motivo_ingreso_cuenta   = al_id_motivo_ingreso_cuenta,
+                id_tipo_material           = al_id_tipo_material,
+                id_motivo_salida_cuenta    = al_id_motivo_salida_cuenta,
+                tipo_transferencia 		   = al_tipo_transferencia	,
+                importe_abierto 		   = al_importe_abierto
 			WHERE id_transferencia = al_id_transferencia;
 
             -- DESCRIPCIÓN DE ÉXITO PARA GUARDAR EN EL LOG
@@ -441,14 +478,18 @@ BEGIN
 
         END;
         
-        
+    /*
+    Autor:			RAC
+    Fecha:			10/01/2016
+    Descripcion		-  Al eliminar transferencias del tipo de volucion resetear en el pretamos el ID
+    */    
         
     ELSIF pm_codigo_procedimiento = 'AL_TRABOR_DEL' THEN --TRABOR: Transferencia Borrador
 
         BEGIN
             --VERIFICACIÓN DE EXISTENCIA DEL REGISTRO
             IF NOT EXISTS(SELECT 1 FROM almin.tal_transferencia
-                          WHERE almin.tal_transferencia.id_transferencia=al_id_transferencia) THEN
+                          WHERE almin.tal_transferencia.id_transferencia = al_id_transferencia) THEN
 
                 g_nivel_error := '4';
                 g_descripcion_log_error := 'Eliminación no realizada: registro en almin.tal_transferencia inexistente';
@@ -468,6 +509,24 @@ BEGIN
                 RETURN 'f'||g_separador||g_respuesta;
 
             END IF;
+            
+            --si un devolucion este update reseteal en el pretamo para que puedan crear otra devolucion
+           
+             select
+               t.id_transferencia,
+               t.tipo_transferencia
+              into
+               v_registros
+            from almin.tal_transferencia t
+            where t.id_transferencia = al_id_transferencia;
+            
+            IF v_registros.tipo_transferencia = 'devolucion'  THEN
+                 update almin.tal_transferencia  set
+                     id_transferencia_dev = NULL
+                 where id_transferencia_dev = al_id_transferencia;
+            END IF;
+            
+            
 
             -- BORRADO DE REGISTRO
             IF EXISTS(SELECT 1 from almin.tal_transferencia_det WHERE id_transferencia=al_id_transferencia) THEN
@@ -559,6 +618,7 @@ BEGIN
      Fecha: 			14/12/2016
      Descripcion: 		- 	Aprueba transferencia, transcribe salida inical en almacen de origen
       					-  Considerar la gestion abierta segun parametro almacen logico
+                        -  mejora la descripcion de  la salida
      */   
         
     ELSIF pm_codigo_procedimiento = 'AL_TRAPEN_APR' THEN  --TRAPEN: Transferencia Pendiente aprobación
@@ -590,10 +650,22 @@ BEGIN
 
 			--OBTIENE LOS DATOS DE LA TRANSFERENCIA
 			SELECT
-			*
-			INTO g_registro
-			FROM almin.tal_transferencia
+			  *
+			INTO 
+               g_registro
+			FROM almin.tal_transferencia t 
 			WHERE id_transferencia = al_id_transferencia;
+            
+            SELECT
+			  al.nombre 
+			INTO 
+               v_nombre_al_destino
+			FROM almin.tal_almacen_logico al 
+			WHERE al.id_almacen_logico = g_registro.id_almacen_logico_destino;
+            
+          
+            
+            --v_nombre_al_destino = g_registro.nombre_al_destino;
 			
 			--VERIFICA SI SE CONTABILIZA O NO (SI ES PRÉSTAMO DE HECHO NO SE CONTABILIZA)
 			IF g_registro.prestamo = 'si' THEN
@@ -746,7 +818,7 @@ BEGIN
                                                  id_usuario                     ,emergencia                 ,correlativo_vale        ,id_parametro_almacen,
                                                  id_parametro_almacen_logico
                                           ) VALUES (
-                                                 g_id_salida                    ,g_registro.motivo          ,g_contabilizar,
+                                                 g_id_salida                    ,g_registro.motivo||' (Tranferencia tipo '|| g_registro.tipo_transferencia ||',  al almacen '||v_nombre_al_destino||' Nro '  ,g_contabilizar,
                                                  'Aprobado'                     ,'activo'                   ,NULL                    ,g_id_usuario_firma,
                                                  g_registro.id_almacen_logico   ,g_registro.id_empleado     ,g_id_firma_autorizada   ,NULL,
                                                  g_registro.id_tipo_material    ,NULL                       ,NULL                    ,now(),
@@ -794,10 +866,17 @@ BEGIN
 
         END;
         
+     /*
+     Autor:			RAC
+     Fecha			10/01/2016
+     DESC			-  al rechar si una devolucion resetea el ID en el prestamo
+     
+     */   
+        
     ELSIF pm_codigo_procedimiento = 'AL_TRAPEN_REC' THEN --TRAPEN: Transferencia Pendiente
     -- Rechazar transferencia
         BEGIN
-            --VERIFICA EXISTENCIA DEL REGISTRO
+            --VERIFICA EXISTENCIA DEL REGISTRO  
             IF NOT EXISTS(SELECT 1 FROM almin.tal_transferencia
                           WHERE id_transferencia=al_id_transferencia) THEN
 
@@ -818,6 +897,20 @@ BEGIN
                 g_respuesta := param.f_pm_mensaje_error(g_descripcion_log_error, g_nombre_funcion, g_nivel_error, pm_codigo_procedimiento);
                 RETURN 'f'||g_separador||g_respuesta;
 
+            END IF;
+            
+            select
+               t.id_transferencia,
+               t.tipo_transferencia
+              into
+               v_registros
+            from almin.tal_transferencia t
+            where t.id_transferencia = al_id_transferencia;
+            
+            IF v_registros.tipo_transferencia = 'devolucion'  THEN
+                 update almin.tal_transferencia  set
+                     id_transferencia_dev = NULL
+                 where id_transferencia_dev = al_id_transferencia;
             END IF;
 
             UPDATE almin.tal_transferencia SET
@@ -1259,7 +1352,174 @@ BEGIN
             g_respuesta := 't'||g_separador||g_descripcion_log_error;
 
         END;
+    /*
+    Autor:   		RAC
+    Fecha:	 		09/01/2017
+    Descripcion:	- paara prestamso pendiente genera una devolucion invirtiendo los almacenes origen y destino
+    
+    */
+    ELSEIF pm_codigo_procedimiento = 'AL_VOLCARTRAN_INS' THEN  --TRABOR: Transferencia Borrador
 
+        BEGIN
+           
+           --recupera datos de la transferencias original
+           select 
+              tr.id_transferencia_dev, 
+              tr.tipo_transferencia,
+              tr.importe_abierto,
+              tr.estado_transferencia,
+              tr.observaciones,
+              tr.id_empleado,
+              tr.id_almacen_logico,
+              tr.id_almacen_logico_destino,
+              tr.id_motivo_ingreso_cuenta,
+              tr.id_motivo_salida_cuenta,
+              id_firma_autorizada_transf,
+              tr.descripcion,
+              tr.id_tipo_material
+           into
+             v_registros
+           from almin.tal_transferencia tr 
+           where tr.id_transferencia = al_id_transferencia;
+           
+           IF v_registros.tipo_transferencia !='prestamo' THEN
+              raise exception 'solo puede hacer devoluciones en transferencias del tipo prestamo';
+           END IF;
+           
+           --validaciones
+           IF v_registros.estado_transferencia != 'Finalizado' THEN
+              raise exception 'Solo puede devolver  transferencias finalizadas';
+           END IF;
+           
+           IF v_registros.id_transferencia_dev is not null THEN
+              raise exception 'esta transferencia ya tiene una devolucion : ID %', v_registros.id_transferencia_dev ;
+           END IF;
+           
+           SELECT NEXTVAL('almin.tal_transferencia_id_transferencia_seq') INTO v_id_transferencia_dev;
+     
+           
+           INSERT INTO almin.tal_transferencia(
+              prestamo                    ,estado_transferencia          ,motivo                  ,descripcion,
+              observaciones               ,fecha_pendiente_sal           ,fecha_pendiente_ing     ,fecha_finalizado_anulado,
+              id_empleado                 ,id_firma_autorizada_transf    ,id_almacen_logico       ,id_almacen_logico_destino,
+              id_motivo_ingreso_cuenta    ,fecha_borrador                ,fecha_pendiente         ,fecha_rechazado,
+              id_ingreso                  ,id_salida                     ,id_tipo_material        ,id_motivo_salida_cuenta,
+              tipo_transferencia			,importe_abierto			 ,id_transferencia
+		    ) VALUES (
+              'no'                				 ,'Borrador'                    			  ,'devolucion del prestamo id:'||al_id_transferencia::varchar               ,v_registros.descripcion,
+              v_registros.observaciones            ,NULL                          			  ,NULL                    													,NULL,
+              v_registros.id_empleado              ,v_registros.id_firma_autorizada_transf  	  ,v_registros.id_almacen_logico_destino    								,v_registros.id_almacen_logico,
+              v_registros.id_motivo_ingreso_cuenta ,now()                        				 ,NULL                   										 			,NULL,
+              NULL                        		 ,NULL                         				 ,v_registros.id_tipo_material     											,v_registros.id_motivo_salida_cuenta,
+              'devolucion'						 ,v_registros.importe_abierto				,v_id_transferencia_dev
+            );
+            
+            --insertar el detalle de transferencia
+            
+            FOR v_registros_det in (
+                                      select 
+                                        td.id_item,
+                                        td.id_transferencia_det,
+                                        td.cantidad,
+                                        td.costo,
+                                        td.costo_unitario,
+                                        td.estado_item,
+                                        td.precio_unitario
+                                      from almin.tal_transferencia_det td 
+                                      where td.id_transferencia = al_id_transferencia) LOOP
+                               
+                               
+                               INSERT INTO 
+                                            almin.tal_transferencia_det
+                                          (
+                                          
+                                            cantidad,
+                                            estado_item,
+                                            costo,
+                                            costo_unitario,
+                                            precio_unitario,
+                                            fecha_reg,
+                                            id_item,
+                                            id_transferencia
+                                          )
+                                          VALUES (
+                                           
+                                            v_registros_det.cantidad,
+                                            v_registros_det.estado_item,
+                                            v_registros_det.costo,
+                                            v_registros_det.costo_unitario,
+                                            v_registros_det.precio_unitario,
+                                            now(),
+                                            v_registros_det.id_item,
+                                            v_id_transferencia_dev
+                                          );       
+                                      
+            END LOOP;
+            
+            --actulizar transferencia original
+            update almin.tal_transferencia set
+              id_transferencia_dev = v_id_transferencia_dev
+            where id_transferencia = al_id_transferencia;
+            
+            -- DESCRIPCIÓN DE ÉXITO PARA GUARDAR EN EL LOG
+            g_descripcion_log_error := 'Registro exitoso de la transferencia';
+            g_respuesta := 't'||g_separador||g_descripcion_log_error;
+
+        END;
+        
+   /*
+    Autor:   		RAC
+    Fecha:	 		09/01/2017
+    Descripcion:	convierte una transferencai de prestamos en definitiva
+    
+    */
+    ELSEIF pm_codigo_procedimiento = 'AL_VOLCARTRAN_INS' THEN  --TRABOR: Transferencia Borrador
+
+        BEGIN
+           
+           --recupera datos de la transferencias original
+           select 
+              tr.id_transferencia_dev, 
+              tr.tipo_transferencia,
+              tr.importe_abierto,
+              tr.estado_transferencia,
+              tr.observaciones,
+              tr.id_empleado,
+              tr.id_almacen_logico,
+              tr.id_almacen_logico_destino,
+              tr.id_motivo_ingreso_cuenta,
+              tr.id_motivo_salida_cuenta,
+              id_firma_autorizada_transf
+           into
+             v_registros
+           from almin.tal_transferencia tr 
+           where tr.id_transferencia = al_id_transferencia;
+           
+            IF v_registros.tipo_transferencia !='prestamo' THEN
+              raise exception 'no es un prestamos';
+           END IF;
+           
+           --validaciones
+           IF v_registros.estado_transferencia != 'Finalizado' THEN
+              raise exception 'Solo puede transformar  transferencias finalizadas';
+           END IF;
+           
+           IF v_registros.id_transferencia_dev is not null THEN
+              raise exception 'esta transferencia ya tiene una devolucion : ID %', v_registros.id_transferencia_dev ;
+           END IF;
+           
+           
+            
+            --actulizar transferencia original
+            update almin.tal_transferencia set
+              tipo_transferencia = 'definitiva'
+            where id_transferencia = al_id_transferencia;
+            
+            -- DESCRIPCIÓN DE ÉXITO PARA GUARDAR EN EL LOG
+            g_descripcion_log_error := 'Registro exitoso de la transferencia';
+            g_respuesta := 't'||g_separador||g_descripcion_log_error;
+
+        END;     
 
     ELSE
         --PROCEDIMIENTO INEXISTENTE

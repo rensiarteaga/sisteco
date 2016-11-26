@@ -160,6 +160,11 @@ if($_SESSION['autentificado']=='SI')
 			$xml->add_nodo('correlativo_sal',$f["correlativo_sal"]);
 			$xml->add_nodo('id_ingreso_prestamo',$f["id_ingreso_prestamo"]);
 			$xml->add_nodo('id_salida_prestamo',$f["id_salida_prestamo"]);
+			
+			
+			$xml->add_nodo('id_transferencia_dev',$f["id_transferencia_dev"]);
+			$xml->add_nodo('tipo_transferencia',$f["tipo_transferencia"]);
+			$xml->add_nodo('importe_abierto',$f["importe_abierto"]);
 			$xml->fin_rama();
 		}
 		$xml->mostrar_xml();

@@ -161,6 +161,9 @@ if($_SESSION['autentificado']=='SI')
 			$xml->add_nodo('id_motivo_salida',$f["id_motivo_salida"]);			
 			$xml->add_nodo('id_motivo_ingreso',$f["id_motivo_ingreso"]);
 			
+			$xml->add_nodo('tipo_transferencia',$f["tipo_transferencia"]);
+			$xml->add_nodo('importe_abierto',$f["importe_abierto"]);
+			
 			
 			
 			

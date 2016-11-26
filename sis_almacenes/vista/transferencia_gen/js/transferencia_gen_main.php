@@ -129,7 +129,7 @@ function pagina_transferencia(idContenedor,direccion,paramConfig)
 
 		'desc_motivo_ingreso',
 		'desc_motivo_salida',
-		'id_almacen','id_almacen_destino','id_motivo_salida','id_motivo_ingreso'
+		'id_almacen','id_almacen_destino','id_motivo_salida','id_motivo_ingreso','id_transferencia_dev','tipo_transferencia','importe_abierto'
 		]),remoteSort:true
 	});
 
@@ -254,8 +254,29 @@ function pagina_transferencia(idContenedor,direccion,paramConfig)
 
 	// hidden id_transferencia
 	//en la posición 0 siempre esta la llave primaria
+	filterCols_almacen_origen=new Array();
+	filterValues_almacen_origen=new Array();
+	filterCols_almacen_destino=new Array();
+	filterValues_almacen_destino=new Array();
+	filterCols_almacen_logico_origen=new Array();
+	filterValues_almacen_logico_origen=new Array();
+	filterCols_almacen_logico_origen[0]='ALMACE.id_almacen';
+	filterValues_almacen_logico_origen[0]='-';
+	filterCols_almacen_logico_destino=new Array();
+	filterValues_almacen_logico_destino=new Array();
+	filterCols_almacen_logico_destino[0]='ALMACE.id_almacen';
+	filterValues_almacen_logico_destino[0]='-';
+	filterCols_motivo_ingreso_cuenta=new Array();
+	filterValues_motivo_ingreso_cuenta=new Array();
+	filterCols_motivo_ingreso_cuenta[0]='MOTING.id_motivo_ingreso';
+	filterValues_motivo_ingreso_cuenta[0]='-';
+	filterCols_motivo_salida_cuenta=new Array();
+	filterValues_motivo_salida_cuenta=new Array();
+	filterCols_motivo_salida_cuenta[0]='MOTSAL.id_motivo_salida';
+	filterValues_motivo_salida_cuenta[0]='-';
 
-	vectorAtributos[0] = {
+
+	vectorAtributos = [{
 		validacion:{
 			//fieldLabel: 'Id',
 			labelSeparator:'',
@@ -267,9 +288,8 @@ function pagina_transferencia(idContenedor,direccion,paramConfig)
 		tipo: 'Field',
 		filtro_0:false,
 		save_as:'hidden_id_transferencia'
-	};
-
-	vectorAtributos[1]= {
+	},
+    {
 		validacion:{
 			fieldLabel: 'EP Origen',
 			allowBlank: false,
@@ -292,9 +312,8 @@ function pagina_transferencia(idContenedor,direccion,paramConfig)
 		tipo: 'epField',
 		save_as:'txt_id_ep_origen',
 		id_grupo:0
-	};
-
-	vectorAtributos[2]= {
+	},
+	{
 		validacion:{
 			fieldLabel: 'EP Destino',
 			allowBlank: false,
@@ -332,12 +351,8 @@ function pagina_transferencia(idContenedor,direccion,paramConfig)
 		tipo: 'epField',
 		save_as:'txt_id_ep_destino',
 		id_grupo:1
-	};
-
-	filterCols_almacen_origen=new Array();
-	filterValues_almacen_origen=new Array();
-
-	vectorAtributos[3]= {
+	},
+	{
 		validacion:{
 			name:'id_almacen',     //indica la columna del store principal ds del que proviane el id
 			fieldLabel:'Almacen Físico Origen',
@@ -379,12 +394,7 @@ function pagina_transferencia(idContenedor,direccion,paramConfig)
 		defecto:'',
 		save_as:'txt_id_almacen',
 		id_grupo:0
-	};
-
-	filterCols_almacen_destino=new Array();
-	filterValues_almacen_destino=new Array();
-
-	vectorAtributos[4]= {
+	},{
 		validacion:{
 			fieldLabel:'Almacen Físico Destino',
 			allowBlank:true,
@@ -424,14 +434,8 @@ function pagina_transferencia(idContenedor,direccion,paramConfig)
 		defecto:'',
 		save_as:'txt_id_almacen_destino',
 		id_grupo:1
-	};
-
-	filterCols_almacen_logico_origen=new Array();
-	filterValues_almacen_logico_origen=new Array();
-	filterCols_almacen_logico_origen[0]='ALMACE.id_almacen';
-	filterValues_almacen_logico_origen[0]='-';
-
-	vectorAtributos[5] = {
+	},
+	{
 		validacion: {
 			name:'id_almacen_logico',
 			fieldLabel:'Almacén Lógico Origen',
@@ -473,14 +477,8 @@ function pagina_transferencia(idContenedor,direccion,paramConfig)
 		defecto: '',
 		save_as:'txt_id_almacen_logico',
 		id_grupo:0
-	};
-
-	filterCols_almacen_logico_destino=new Array();
-	filterValues_almacen_logico_destino=new Array();
-	filterCols_almacen_logico_destino[0]='ALMACE.id_almacen';
-	filterValues_almacen_logico_destino[0]='-';
-
-	vectorAtributos[6]= {
+	},
+	{
 		validacion: {
 			name:'id_almacen_logico_destino',
 			fieldLabel:'Almacén Lógico Destino',
@@ -521,10 +519,7 @@ function pagina_transferencia(idContenedor,direccion,paramConfig)
 		defecto: '',
 		save_as:'txt_id_almacen_logico_destino',
 		id_grupo:1
-	};
-
-	// txt id_tipo_material
-	vectorAtributos[7]={
+	},{
 		validacion: {
 			name:'id_tipo_material',
 			fieldLabel:'Tipo Material',
@@ -563,41 +558,63 @@ function pagina_transferencia(idContenedor,direccion,paramConfig)
 		defecto: '',
 		save_as:'txt_id_tipo_material',
 		id_grupo:2
-	};
-
-
-	// txt prestamo
-	vectorAtributos[8]= {
+	},{
 		validacion: {
-			name:'prestamo',
-			fieldLabel:'Préstamo',
+			name:'tipo_transferencia',
+			fieldLabel:'Tipo Transferencia',
+			qtip:'Cuando la transferencia es de tipo prestamo,  existirá una transferencia adicional para la devolución',
 			allowBlank:false,
 			typeAhead: true,
 			loadMask: true,
 			triggerAction: 'all',
 			//store: new Ext.data.SimpleStore({fields: ['ID','valor'],data : Ext.transferencia_gen_combo.prestamo}),
-			store: new Ext.data.SimpleStore({fields: ['ID','valor'],data : [['si','Si'],['no','No']]}),
+			store: new Ext.data.SimpleStore({fields: ['ID','valor'],data : [['definitiva','definitiva'],['prestamo','prestamo']]}),
 			valueField:'ID',
 			displayField:'valor',
 			lazyRender:true,
 			width:100,
 			forceSelection:true,
 			grid_visible:true,
-			grid_editable:true,
 			grid_indice:6,
-			width_grid:60 // ancho de columna en el gris
+			width_grid:100 // ancho de columna en el gris
+		},
+		tipo:'ComboBox',
+		filtro_0:true,
+		filtro_1:true,
+		filterColValue:'TRANSF.prestamo',
+		defecto:'definitiva',
+		save_as:'txt_tipo_transferencia',
+		id_grupo:2
+	},
+	{
+		validacion: {
+			name: 'importe_abierto',
+			fieldLabel: 'Importes Abiertos',
+			qtip: 'Cuanto el importe es abierto (=SI), los costos del ingreso tienen que definirce manualmente  cuando se tengan los valor de compra para devolver las piezas',
+			allowBlank: false,
+			typeAhead: true,
+			loadMask: true,
+			triggerAction: 'all',
+			store: new Ext.data.SimpleStore({fields: ['ID','valor'],data : [['no','no'],['si','si']]}),
+			valueField: 'ID',
+			displayField: 'valor',
+			lazyRender: true,
+			width: 100,
+			forceSelection: true,
+			disabled: true,
+			grid_visible: true,
+			grid_indice: 6,
+			width_grid: 100 // ancho de columna en el gris
 		},
 		tipo:'ComboBox',
 		filtro_0:true,
 		filtro_1:true,
 		filterColValue:'TRANSF.prestamo',
 		defecto:'no',
-		save_as:'txt_prestamo',
+		save_as:'txt_importe_abierto',
 		id_grupo:2
-	};
-
-	// txt motivo
-	vectorAtributos[9]= {
+	},
+	{
 		validacion:{
 			name:'motivo',
 			fieldLabel:'Motivo',
@@ -618,10 +635,7 @@ function pagina_transferencia(idContenedor,direccion,paramConfig)
 		filterColValue:'TRANSF.motivo',
 		save_as:'txt_motivo',
 		id_grupo:2
-	};
-
-	// txt descripcion
-	vectorAtributos[10]= {
+	},{
 		validacion:{
 			name:'descripcion',
 			fieldLabel:'Descripcion',
@@ -642,10 +656,7 @@ function pagina_transferencia(idContenedor,direccion,paramConfig)
 		filterColValue:'TRANSF.descripcion',
 		save_as:'txt_descripcion',
 		id_grupo:2
-	};
-
-	// txt observaciones
-	vectorAtributos[11]= {
+	},{
 		validacion:{
 			name:'observaciones',
 			fieldLabel:'Observaciones',
@@ -666,10 +677,7 @@ function pagina_transferencia(idContenedor,direccion,paramConfig)
 		filterColValue:'TRANSF.observaciones',
 		save_as:'txt_observaciones',
 		id_grupo:2
-	};
-
-	// txt id_motivo_ingreso
-	vectorAtributos[12]= {
+	},{
 		validacion: {
 			fieldLabel:'Motivo ingreso',
 			allowBlank:true,
@@ -709,15 +717,7 @@ function pagina_transferencia(idContenedor,direccion,paramConfig)
 		defecto: '',
 		save_as:'txt_id_motivo_ingreso',
 		id_grupo:1
-	};
-
-	filterCols_motivo_ingreso_cuenta=new Array();
-	filterValues_motivo_ingreso_cuenta=new Array();
-	filterCols_motivo_ingreso_cuenta[0]='MOTING.id_motivo_ingreso';
-	filterValues_motivo_ingreso_cuenta[0]='-';
-
-	// txt id_motivo_ingreso_cuenta
-	vectorAtributos[13]={
+	},{
 		validacion: {
 			name:'id_motivo_ingreso_cuenta',
 			fieldLabel:'Cuenta Ingreso',
@@ -760,9 +760,7 @@ function pagina_transferencia(idContenedor,direccion,paramConfig)
 		defecto: '',
 		save_as:'txt_id_motivo_ingreso_cuenta',
 		id_grupo:1
-	};
-
-	vectorAtributos[14]= {
+	},{
 		validacion: {
 			fieldLabel:'Motivo salida',
 			allowBlank:true,
@@ -802,16 +800,7 @@ function pagina_transferencia(idContenedor,direccion,paramConfig)
 		defecto: '',
 		save_as:'txt_id_motivo_salida',
 		id_grupo:0
-	};
-
-
-	filterCols_motivo_salida_cuenta=new Array();
-	filterValues_motivo_salida_cuenta=new Array();
-	filterCols_motivo_salida_cuenta[0]='MOTSAL.id_motivo_salida';
-	filterValues_motivo_salida_cuenta[0]='-';
-
-	// txt id_motivo_salida_cuenta
-	vectorAtributos[15]={
+	},{
 		validacion:{
 			fieldLabel:'Cuenta Salida',
 			allowBlank:false,
@@ -853,10 +842,7 @@ function pagina_transferencia(idContenedor,direccion,paramConfig)
 		defecto: '',
 		save_as:'txt_id_motivo_salida_cuenta',
 		id_grupo:0
-	};
-
-	// txt id_empleado
-	vectorAtributos[16]= {
+	},{
 		validacion: {
 			name:'id_empleado',
 			fieldLabel:'Responsable Transferencia',
@@ -896,7 +882,7 @@ function pagina_transferencia(idContenedor,direccion,paramConfig)
 		defecto: '',
 		save_as:'txt_id_empleado',
 		id_grupo:2
-	};
+	}];
 
 
 	//////////////////////////////////////////////////////////////
@@ -994,6 +980,11 @@ function pagina_transferencia(idContenedor,direccion,paramConfig)
 		combo_motivo_salida = ClaseMadre_getComponente('id_motivo_salida');
 		combo_motivo_salida_cuenta = ClaseMadre_getComponente('id_motivo_salida_cuenta');
 		combo_empleado = ClaseMadre_getComponente('id_empleado');
+		combo_tipo_transferencia = ClaseMadre_getComponente('tipo_transferencia');
+		cmp_importe_abierto =  ClaseMadre_getComponente('importe_abierto');
+		
+		
+		
 
 		var onMotivoIngresoSelect = function(e) {
 			var id = combo_motivo_ingreso.getValue();
@@ -1098,6 +1089,16 @@ function pagina_transferencia(idContenedor,direccion,paramConfig)
 		cmb_ep_origen.on('change',onEpOrigenSelect);
 		combo_motivo_salida.on('select',onMotivoSalidaSelect);
 		combo_motivo_salida.on('change',onMotivoSalidaSelect);
+		
+		combo_tipo_transferencia.on('select',function(cmp, rec,ind){
+			  console.log('rec....',rec)
+			  if(combo_tipo_transferencia.getValue()!= 'definitiva'){
+			  	  cmp_importe_abierto.enable();
+			  }
+			  else{
+			  	cmp_importe_abierto.disable();
+			  }
+		},this)
 
 	}
 

@@ -304,4 +304,36 @@ ALTER TABLE almin.tal_componente_tmp
  /***********************************F-SCP-RAC-ALMIN-2-03/01/2017****************************************/ 
  
  
+ /***********************************I-SCP-RAC-ALMIN-2-06/01/2017****************************************/ 
+ 
+ 
+ --------------- SQL ---------------
+
+ALTER TABLE almin.tal_transferencia
+  ADD COLUMN tipo_transferencia VARCHAR(50) DEFAULT 'definitiva' NOT NULL;
+
+COMMENT ON COLUMN almin.tal_transferencia.tipo_transferencia
+IS 'definitiva, prestamos, devolucion,  identifica las caractersticas del prestamo';
+
+
+--------------- SQL ---------------
+
+ALTER TABLE almin.tal_transferencia
+  ADD COLUMN id_transferencia_dev INTEGER;
+
+COMMENT ON COLUMN almin.tal_transferencia.id_transferencia_dev
+IS 'identifica la transferencia para la devolucion';
+
+
+--------------- SQL ---------------
+
+ALTER TABLE almin.tal_transferencia
+  ADD COLUMN importe_abierto VARCHAR(5) DEFAULT 'no' NOT NULL;
+
+COMMENT ON COLUMN almin.tal_transferencia.importe_abierto
+IS 'si o no, solo para prestamos es factible dejar el importe abierto (si). signifca que los costos de ingreso no se copian de la salida y tiene que ser introducidos manualmente cuadno tenga el dato oficial  (tiene cierta utilidad para no distorcionar los valores del almacen)';
+
+
+/***********************************F-SCP-RAC-ALMIN-2-06/01/2017****************************************/ 
+ 
  

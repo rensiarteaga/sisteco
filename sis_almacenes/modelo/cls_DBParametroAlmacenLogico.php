@@ -68,6 +68,7 @@ class cls_DBParametroAlmacenLogico
 		//Obtiene la cadena con que se llamó a la función de postgres
 		$this->query = $this->var->query;
 		
+		
 		//echo "sql:". $this->query;
 	
 		return $res;

@@ -96,6 +96,9 @@ if($_SESSION["autentificado"]=="SI")
 			$txt_id_motivo_ingreso_cuenta= $_GET["txt_id_motivo_ingreso_cuenta_$j"];
 			$txt_id_tipo_material= $_GET["txt_id_tipo_material_$j"];
 			$txt_id_motivo_salida_cuenta= $_GET["txt_id_motivo_salida_cuenta_$j"];
+			
+			$txt_tipo_transferencia= $_GET["txt_tipo_transferencia_$j"];
+			$txt_importe_abierto= $_GET["txt_importe_abierto_$j"];
 		}
 		else
 		{
@@ -110,6 +113,8 @@ if($_SESSION["autentificado"]=="SI")
 			$txt_id_motivo_ingreso_cuenta= $_POST["txt_id_motivo_ingreso_cuenta_$j"];
 			$txt_id_tipo_material= $_POST["txt_id_tipo_material_$j"];
 			$txt_id_motivo_salida_cuenta= $_POST["txt_id_motivo_salida_cuenta_$j"];
+			$txt_tipo_transferencia= $_POST["txt_tipo_transferencia_$j"];
+			$txt_importe_abierto= $_POST["txt_importe_abierto_$j"];
 		}
 
 		if ($hidden_id_transferencia == "undefined" || $hidden_id_transferencia == "")
@@ -132,7 +137,7 @@ if($_SESSION["autentificado"]=="SI")
 			}
 
 			//Validación satisfactoria, se ejecuta la inserción en la tabla tal_transferencia
-			$res = $Custom -> InsertarTransfBorrador($hidden_id_transferencia, $txt_prestamo,$txt_motivo,$txt_descripcion,$txt_observaciones,$txt_id_empleado,$txt_id_almacen_logico,$txt_id_almacen_logico_destino,$txt_id_motivo_ingreso_cuenta,$txt_id_tipo_material,$txt_id_motivo_salida_cuenta);
+			$res = $Custom -> InsertarTransfBorrador($hidden_id_transferencia, $txt_prestamo,$txt_motivo,$txt_descripcion,$txt_observaciones,$txt_id_empleado,$txt_id_almacen_logico,$txt_id_almacen_logico_destino,$txt_id_motivo_ingreso_cuenta,$txt_id_tipo_material,$txt_id_motivo_salida_cuenta,$txt_tipo_transferencia,$txt_importe_abierto);
 
 			if(!$res)
 			{
@@ -165,7 +170,7 @@ if($_SESSION["autentificado"]=="SI")
 				exit;
 			}
 
-			$res = $Custom->ModificarTransfBorrador($hidden_id_transferencia, $txt_prestamo,$txt_motivo,$txt_descripcion,$txt_observaciones,$txt_id_empleado,$txt_id_almacen_logico,$txt_id_almacen_logico_destino,$txt_id_motivo_ingreso_cuenta,$txt_id_tipo_material,$txt_id_motivo_salida_cuenta);
+			$res = $Custom->ModificarTransfBorrador($hidden_id_transferencia, $txt_prestamo,$txt_motivo,$txt_descripcion,$txt_observaciones,$txt_id_empleado,$txt_id_almacen_logico,$txt_id_almacen_logico_destino,$txt_id_motivo_ingreso_cuenta,$txt_id_tipo_material,$txt_id_motivo_salida_cuenta,$txt_tipo_transferencia,$txt_importe_abierto);
 
 			if(!$res)
 			{

@@ -189,6 +189,7 @@ DECLARE
     v_registros_salida				record;
     v_registros_aux					record;
     v_msg_ret 						varchar[];
+    g_id_salida						integer;
 
 BEGIN
 
@@ -1768,6 +1769,7 @@ BEGIN
      			-  calculo de ingreso segun promedio ponderado
                 -  realizar ingreso en la gestion abierta
                 -  permitr fianlizar ingresos en funcion si la lalve del almacen logico lo permite
+                -  actulizar correlativo en ingresos por transferencia
      **************************************/
 
     ELSIF pm_codigo_procedimiento = 'AL_INFIPR_FIN' THEN --INFIPR: INgreso FInalización PRoyectos
@@ -1873,20 +1875,17 @@ BEGIN
             END IF;
             
             --VERIFICA SI VIENE DE UNA TRANSFERENCIA
-            SELECT id_transferencia
-            INTO g_id_transferencia
-            FROM almin.tal_transferencia
+            SELECT 
+            	t.id_transferencia,
+                t.id_salida
+            INTO 
+                g_id_transferencia,
+                g_id_salida
+            FROM almin.tal_transferencia t
             WHERE id_ingreso = al_id_ingreso
             OR id_ingreso_prestamo = al_id_ingreso;
 
-            IF g_id_transferencia IS NOT NULL THEN
-                    --  ACTUALIZA EL ESTADO DE LA TRANSFERENCIA COMO FINALIZADO
-                    UPDATE almin.tal_transferencia SET
-                    estado_transferencia     = 'Finalizado',
-                    fecha_finalizado_anulado = v_finalizacion_tmp
-                    WHERE id_transferencia = g_id_transferencia;
-                
-            END IF;
+            
 
 
             -- SI NO ENCUENTRA EL USUARIO UTILIZA EL PARÁMETRO DE USUARIO
@@ -2052,6 +2051,20 @@ BEGIN
                    g_nivel_error := '4';
                    g_respuesta := param.f_pm_mensaje_error(g_descripcion_log_error, g_nombre_funcion, g_nivel_error, pm_codigo_procedimiento);
                    RETURN 'f'||g_separador||g_respuesta;
+            END IF;
+            
+            IF g_id_transferencia IS NOT NULL THEN
+                    --  ACTUALIZA EL ESTADO DE LA TRANSFERENCIA COMO FINALIZADO
+                    UPDATE almin.tal_transferencia SET
+                    estado_transferencia     = 'Finalizado',
+                    fecha_finalizado_anulado = v_finalizacion_tmp
+                    WHERE id_transferencia = g_id_transferencia;
+                    
+                    --actulizar descripcion en salida original
+                    update almin.tal_salida  set
+                       descripcion =  descripcion ||g_correl|| ' )'
+                    where id_salida = g_id_salida;
+                
             END IF;
 
             --***CONTABILIZACIÓN DEL INGRESO SI ES EL CASO
@@ -2367,11 +2380,11 @@ BEGIN
                     g_peso_neto,
                     g_costo_estimado_neto
                 FROM almin.tal_ingreso INGRES
-                INNER JOIN almin.tal_ingreso_detalle INGDET
-                ON INGDET.id_ingreso = INGRES.id_ingreso
-                INNER JOIN almin.tal_item ITEM
-                ON ITEM.id_item = INGDET.id_item
+                INNER JOIN almin.tal_ingreso_detalle INGDET  ON INGDET.id_ingreso = INGRES.id_ingreso
+                INNER JOIN almin.tal_item ITEM  ON ITEM.id_item = INGDET.id_item
                 WHERE INGRES.id_ingreso =  al_id_ingreso;
+                
+               
                 
                 IF v_registros_ingreso.tipo_costeo = 'peso' THEN
 
@@ -2477,7 +2490,7 @@ BEGIN
             -- obtiene los costos de los items en la transferencia de salida
             ------------------------------------------------------------------
             ELSEIF g_codigo_motivo_ingreso = 'TAA' THEN
-            
+          
                   v_msg_ret =  almin.f_al_valorar_transferencia(al_id_ingreso, v_registros_ingreso.id_almacen_logico, 'si');                              
         
             --------------------------------------------------------------
@@ -2520,11 +2533,11 @@ BEGIN
                     g_peso_neto,
                     g_costo_estimado_neto
                 FROM almin.tal_ingreso INGRES
-                INNER JOIN almin.tal_ingreso_detalle INGDET
-                ON INGDET.id_ingreso = INGRES.id_ingreso
-                INNER JOIN almin.tal_item ITEM
-                ON ITEM.id_item = INGDET.id_item
+                INNER JOIN almin.tal_ingreso_detalle INGDET ON INGDET.id_ingreso = INGRES.id_ingreso
+                INNER JOIN almin.tal_item ITEM  ON ITEM.id_item = INGDET.id_item
                 WHERE INGRES.id_ingreso =  al_id_ingreso;
+                
+               
                 
                 IF v_registros_ingreso.tipo_costeo = 'peso' THEN
                     IF g_peso_neto IS NULL OR g_peso_neto = 0 THEN

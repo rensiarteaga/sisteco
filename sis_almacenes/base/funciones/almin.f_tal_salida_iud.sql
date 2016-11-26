@@ -137,6 +137,7 @@ DECLARE
     g_id_almacen_logico_destino   integer;
     g_id_parametro_almacen        integer;
     v_sw_faltante				  boolean;
+    v_tipo_trans				  varchar;
     g_cursor_pedido_tuc           CURSOR (ID integer) FOR
                                   SELECT
                                   SUM(PEDINT.cantidad_solicitada) as cantidad_total_solicitada,
@@ -201,6 +202,8 @@ DECLARE
     g_gestion								integer;
     v_registros				record;
     v_sw_tiene_salida_detalle				boolean;
+    g_correlativo_sal		varchar;
+	g_nombre_al				varchar;
 
 BEGIN
 
@@ -2043,7 +2046,9 @@ BEGIN
                 - realizar salida  en la gestion abierta
                 - finaliza solo si la gestion esta abierta
                 - cuando es transferencia verifica que el nuevo ingreso sea de la misma gestion 
-                -nopermite finalizar sin items 
+                - no permite finalizar sin items 
+                - control de division por cero en salidas sin existencias
+                - mejorar descripcion de ingreso por transferencia 
      **************************************/
 
     ELSIF pm_codigo_procedimiento = 'AL_SAPROY_FIN' THEN --Finalizar Salida Proyectos
@@ -2073,14 +2078,19 @@ BEGIN
 
         	--SE OBTIENE EL ALMACEN LOGICO
             SELECT 
-               id_almacen_logico,
+               s.id_almacen_logico,
                s.id_parametro_almacen,
-               s.id_parametro_almacen_logico
+               s.id_parametro_almacen_logico,
+               s.correlativo_sal,
+               al.nombre
             INTO 
                g_id_almacen_logico,
                g_id_parametro_almacen,
-               g_id_parametro_almacen_logico
+               g_id_parametro_almacen_logico,
+               g_correlativo_sal,
+               g_nombre_al
             FROM almin.tal_salida s
+            inner join almin.tal_almacen_logico al on s.id_almacen_logico = al.id_almacen_logico
             WHERE id_salida = al_id_salida;
             
             --SE VERIFICA SI EL ALMACÉN ESTÁ BLOQUEADO O CERRADO
@@ -2138,11 +2148,13 @@ BEGIN
                  SELECT 
                     t.id_transferencia,
                     t.fecha_borrador,
-                    t.id_motivo_ingreso_cuenta
+                    t.id_motivo_ingreso_cuenta,
+                    t.tipo_transferencia
                  INTO 
                     g_id_transferencia,
                     g_fecha_trans,
-                    g_id_motivo_ingreso_cuenta
+                    g_id_motivo_ingreso_cuenta,
+                    v_tipo_trans
                  FROM almin.tal_transferencia t
                  WHERE id_salida = al_id_salida;
                  
@@ -2380,7 +2392,7 @@ BEGIN
                                                  orden_compra              ,observaciones              ,id_usuario                             ,id_parametro_almacen,
                                                  circuito,					id_parametro_almacen_logico
                                                  ) VALUES ( g_id_ingreso,
-                                                 g_registro.descripcion,
+                                                 g_registro.descripcion ||' (Ingreso por transferencia del tipo '||v_tipo_trans||' , desde la salida Nro '||g_correl||' en el almacen  '||g_nombre_al ||')',
                                                  g_costo_total             ,g_contabilizar             ,'Aprobado'                             ,'activo',
                                                  now()                     ,now()                      ,v_finalizacion_tmp                     ,g_id_responsable_almacen,
                                                  NULL                      ,NULL                       ,g_registro.id_empleado                 ,g_registro.id_almacen_logico_destino,
@@ -2406,6 +2418,8 @@ BEGIN
                                                    		id_ingreso           = g_id_ingreso,
                                                    		fecha_pendiente_ing  = now()
                                                     WHERE id_transferencia = g_id_transferencia;
+                                                    
+                                                 
                                                 
                                                    g_descripcion_log_error := 'Modificación exitosa en almin.tal_salida';
                                                    g_respuesta := 't'||g_separador||g_descripcion_log_error;
@@ -2466,6 +2480,7 @@ BEGIN
                 - validar que las existencias sean suficientes para realizar la salida
                 - permitir salidas incompletas que esten autorizadas en pedido tuc int
                 - actulizar el material entregado en pedido tuc int 
+                - correcion divicion por cero en salidas sin costos
      **************************************/
     ELSIF pm_codigo_procedimiento = 'AL_SAPRUC_FIN' THEN --Finalizar Salida Proyectos Unidades Constructivas
         BEGIN
@@ -2672,9 +2687,15 @@ BEGIN
                     AND id_salida=al_id_salida
                     AND estado_item=g_registros.estado_item;
                     
+                    
                     g_cant_tot := g_cant - ROUND(coalesce(v_total_cant_solicitada,0),2); 
                     g_nuevo_costo_tot = g_costo_total_kardex - (g_costo_unit * v_total_cant_solicitada);
-                    g_nuevo_costo_unit =   ROUND(coalesce(g_nuevo_costo_tot / g_cant_tot,0),2);  
+                    
+                    if g_cant_tot != 0 then
+                    	g_nuevo_costo_unit =   ROUND(coalesce(g_nuevo_costo_tot / g_cant_tot,0),2); 
+                    else
+                         g_nuevo_costo_unit = 0;
+                    end if;
                     
                     UPDATE almin.tal_kardex_logico SET
                         cantidad = ROUND(g_cant_tot,2),

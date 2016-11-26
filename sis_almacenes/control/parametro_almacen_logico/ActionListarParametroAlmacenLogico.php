@@ -71,7 +71,7 @@ if($_SESSION['autentificado']=='SI')
 	
 	$criterio_filtro = $cond -> obtener_criterio_filtro();
 	//Obtiene el criterio de orden de columnas
-	$crit_sort = new cls_criterio_sort($sortcol,$sortdir,'ParametroAlmacenLogico');
+	$crit_sort = new cls_criterio_sort($sortcol,$sortdir,'ParametroAlmacenLogico2');
 	$sortcol = $crit_sort->get_criterio_sort();
 	
 

@@ -171,11 +171,11 @@ BEGIN
      IF pm_codigo_procedimiento  = 'AL_REKAFI_SEL' THEN
         BEGIN
                  
-                 CREATE TEMP TABLE tt_tal_ingresos (fecha    date,codigo    varchar,descripcion varchar(200),cantidad_ing numeric,cantidad_sal numeric,costo_unitario numeric,costo_debe numeric,costo_haber numeric,tipo_ing_sal varchar,fecha_finalizado_exacta timestamp) ON COMMIT DROP;
+                 CREATE TEMP TABLE tt_tal_ingresos (fecha    date,codigo    varchar,descripcion varchar(1000),cantidad_ing numeric,cantidad_sal numeric,costo_unitario numeric,costo_debe numeric,costo_haber numeric,tipo_ing_sal varchar,fecha_finalizado_exacta timestamp) ON COMMIT DROP;
     			 
-                 CREATE TEMP TABLE tt_tal_salidas ( fecha    date,codigo    varchar,descripcion varchar(200),cantidad_ing numeric,cantidad_sal numeric,costo_unitario numeric,costo_debe numeric,costo_haber numeric,tipo_ing_sal varchar,fecha_finalizado_exacta timestamp) ON COMMIT DROP;
+                 CREATE TEMP TABLE tt_tal_salidas ( fecha    date,codigo    varchar,descripcion varchar(1000),cantidad_ing numeric,cantidad_sal numeric,costo_unitario numeric,costo_debe numeric,costo_haber numeric,tipo_ing_sal varchar,fecha_finalizado_exacta timestamp) ON COMMIT DROP;
                 
-                 CREATE TEMP TABLE tt_tal_kard_item (fecha date,codigo varchar,descripcion varchar(200),cantidad_ing numeric(18,2), cantidad_sal numeric(18,2),saldo numeric(18,2),costo_unitario numeric(18,6), costo_debe numeric(18,6),costo_haber numeric(18,6), saldo_costo numeric(18,6),fecha_finalizado_exacta timestamp) ON COMMIT DROP;
+                 CREATE TEMP TABLE tt_tal_kard_item (fecha date,codigo varchar,descripcion varchar(1000),cantidad_ing numeric(18,2), cantidad_sal numeric(18,2),saldo numeric(18,2),costo_unitario numeric(18,6), costo_debe numeric(18,6),costo_haber numeric(18,6), saldo_costo numeric(18,6),fecha_finalizado_exacta timestamp) ON COMMIT DROP;
                 
                  INSERT INTO  tt_tal_ingresos 
                     SELECT 
@@ -255,7 +255,7 @@ BEGIN
                
                FOR v_kard_fisico IN (( SELECT  TTING.fecha,
                								  TTING.codigo,
-                                              COALESCE(TTING.descripcion,'''') as descripcion,
+                                              COALESCE(TTING.descripcion,'') as descripcion,
                                               COALESCE(TTING.cantidad_ing,0) as cantidad_ing,
                                               COALESCE(TTING.cantidad_sal,0) as cantidad_sal,
                                               COALESCE(TTING.costo_unitario,0) as costo_unitario,
@@ -267,7 +267,7 @@ BEGIN
                                       UNION
                                      
                                      ( SELECT TTSAL.fecha,TTSAL.codigo,
-                                              COALESCE(TTSAL.descripcion,'''') as descripcion,
+                                              COALESCE(TTSAL.descripcion,'') as descripcion,
                                               COALESCE(TTSAL.cantidad_ing,0) as cantidad_ing,
                                               COALESCE(TTSAL.cantidad_sal,0) as cantidad_sal,
                                               COALESCE(TTSAL.costo_unitario,0) as costo_unitario,

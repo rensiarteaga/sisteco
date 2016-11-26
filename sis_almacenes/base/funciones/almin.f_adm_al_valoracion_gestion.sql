@@ -128,6 +128,16 @@ BEGIN
                      -- 3.2) iniciar variable de  salida modificada en false  (v_aux_sal_modificada)
                      
                            v_aux_sal_modificada = false;
+                     --  3.2.b)  recupera id de transferencia      
+                           IF v_reg_salida.codigo_motivo_salida = 'TRM' THEN  
+                                  
+                                       select 
+                                          t.id_transferencia
+                                         into
+                                           g_id_transferencia
+                                       from almin.tal_transferencia t
+                                       where t.id_salida = v_reg_salida.id_salida;
+                            END IF;         
                      ------------------------------------------------
                      -- 3.3)  FOR listar los item de la salida 
                      -------------------------------------------------
@@ -182,13 +192,24 @@ BEGIN
                                   --  revalorizar la transferencia detalle
                                   -----------------------------------------------
                                   
-                                  IF v_reg_salida.codigo_motivo_salida = 'TRM' THEN                                     
+                                  IF v_reg_salida.codigo_motivo_salida = 'TRM' THEN  
+                                  
+                                       select 
+                                          t.id_transferencia
+                                         into
+                                           g_id_transferencia
+                                       from almin.tal_transferencia t
+                                       where t.id_salida = v_reg_salida.id_salida;
+                                                                     
                                        UPDATE  almin.tal_transferencia_det set
                                          costo_unitario = g_costo_unit,
                                          costo = g_costo_unit*cantidad
                                        WHERE id_transferencia = g_id_transferencia 
                                               and id_item = v_reg_salida_det.id_item
-                                              and estado_item = v_reg_salida_det.estado_item;    
+                                              and estado_item = v_reg_salida_det.estado_item;
+                                              
+                                       -- raise exception 'entre ... %,  % --% --% ',g_costo_unit,v_reg_salida_det.estado_item, v_reg_salida_det.id_item,g_id_transferencia;       
+                                                  
                                   
                                   END IF;                                               
                                  
@@ -253,11 +274,18 @@ BEGIN
                                  INNER JOIN almin.tal_motivo_ingreso_cuenta mic ON mic.id_motivo_ingreso_cuenta = i.id_motivo_ingreso_cuenta
                                  INNER JOIN almin.tal_motivo_ingreso mi ON mi.id_motivo_ingreso = mic.id_motivo_ingreso
                                 where 	 i.id_parametro_almacen_logico = al_id_parametro_almacen_logico AND i.estado_ingreso = 'Finalizado'
-                                        and  i.fecha_finalizado_exacta >v_reg_salida.fecha_finalizado_exacta
+                                        and  
+                                            case  when v_reg_salida.fecha_finalizado_exacta is not null   then
+                                                      i.fecha_finalizado_exacta >v_reg_salida.fecha_finalizado_exacta
+                                                   else
+                                                      0=0
+                                                   end
                                 order by  i.fecha_finalizado_exacta asc
                            
                               )LOOP
                      
+         
+           
                       raise notice '----> id_ingreso %', v_reg_ingreso.id_ingreso;     
                      v_msg_ret =  almin.f_al_valorar_ingresos(v_reg_ingreso.id_ingreso, v_reg_ingreso.id_almacen_logico, v_reg_ingreso.id_parametro_almacen, v_reg_ingreso.correlativo_ing, v_reg_ingreso.codigo_motivo_ingreso);
                      if v_msg_ret[1] = 'fallo' then
@@ -266,7 +294,7 @@ BEGIN
                                        
           END LOOP;                      
       
-        -- raise exception '----llega----';
+         --raise exception '----llega 2----';
      ------------------------------------------------------------------------------------------------------------------------------------------------------
      -- 6)  si llega al final logro revalorar todas las salidas e ingresos ->  modificamos el parametro_lamcen_logico para que permita cerrar la gestion
      ------------------------------------------------------------------------------------------------------------------------------------------------------
