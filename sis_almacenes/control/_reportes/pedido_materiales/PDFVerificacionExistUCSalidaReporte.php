@@ -15,13 +15,14 @@ class PDF extends FPDF
 
 	var $ff=array();
 
-	function Header()  
+	function Header()
 	{
 		global $title;
 		$this->SetLeftMargin(15);
 		$funciones = new funciones();
 		//Logo
-		$this->Image('../../../../lib/images/logoTDE.png',140,2);
+		$this->Image('../../../../lib/images/logoTDE.jpg',140,2,0,0);
+		//$this->Image('../../../../lib/images/logoTDE.png',0,0,0,0,'PNG');
 		//Arial bold 15
 		$this->SetFont('Arial','B',12);
 		//Movernos a la derecha
@@ -52,8 +53,89 @@ class PDF extends FPDF
 		$this->Cell(100,10,'',0,0,'C');
 		$this->Cell(100,10,'Hora: '.$hora ,0,0,'L');
 	}
+	
+	
+	function loadDetalle()
+	{
+			
+			
+		//Parámetros del filtro
+		$cant = 15;
+		$puntero = 0;	
+		$sortcol = 'OSUCDE.id_tipo_unidad_constructiva,OSUCDE.descripcion,OSUCDE.id_unidad_constructiva,OSUCDE.id_item';
+		$sortdir = 'asc';
+		
+			
+		$Custom=new cls_CustomDBAlmacenes();
+		//Verifica si se manda la cantidad de filtros
+		if($CantFiltros=='') $CantFiltros = 0;
+	
+		//Se obtiene el criterio del filtro con formato sql para mandar a la BD
+		$cond = new cls_criterio_filtro($decodificar);
+		$cond->add_criterio_extra("OSUCDE.id_salida",$_SESSION['rep_mat_id_salida']);
+	
+		
+		$criterio_filtro = $cond -> obtener_criterio_filtro();
+		//Obtiene el conjunto de datos de la consulta
+		$res = $Custom->ListarOrdenSalidaUCDetalle($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$hidden_ep_id_financiador,$hidden_ep_id_regional,$hidden_ep_id_programa,$hidden_ep_id_proyecto,$hidden_ep_id_actividad);
 
-	function LoadData($id_salida)
+
+		if($res)
+		{
+			foreach ($Custom->salida as $f)
+			{
+				
+				//Forma la cadena de la cantidad solicitada
+				$cantidad=" [".utf8_encode($f["cantidad"]."]");
+
+				if($f['id_item'] != "")
+				{
+					//Configura el nodo tipo item
+					$tmp['leaf'] = true;
+					$tmp['text'] = utf8_encode($f["codigo"]).' - '.utf8_encode($f["nombre"]) . "<b>$cantidad</b>";
+					$tmp['icon'] = "../../../lib/imagenes/item.png";
+					$tmp['tipo'] = "item";
+					$tmp['id'] = utf8_encode($f["id_item"]);
+					$tmp['id_item'] = utf8_encode($f["id_item"]);
+				}
+				else
+				{	//Configura el nodo tipo tipo unidad constructiva
+					$tmp['leaf'] = false;
+					$tmp['text'] = utf8_encode($f["codigo"]).' - '.utf8_encode($f["nombre"]) . "<b>$cantidad</b>";
+					$tmp['icon'] = "../../../lib/imagenes/tucr.png";
+					$tmp['tipo'] = "raiz";
+					$tmp['id'] = utf8_encode($f["id_tipo_unidad_constructiva"]);
+					$tmp['id_tipo_unidad_constructiva'] = utf8_encode($f["id_tipo_unidad_constructiva"]);
+					
+				}
+
+				$tmp['repeticion'] = utf8_encode($f["repeticion"])=='si' ? 'true':'false';
+				$tmp['id_reg'] = utf8_encode($f["id_orden_salida_uc_detalle"]);
+				$tmp['cls']	= 'folder';
+				$tmp['allowDelete']	= true;
+				$tmp['allowEdit']	= true;
+				$tmp['allowDrag']	= false;
+				$tmp['codigo'] = utf8_encode($f["codigo"]);
+				$tmp['nombre'] = utf8_encode($f["nombre"]);
+				$tmp['descripcion'] = utf8_encode($f["descripcion"]);
+				$tmp['observaciones'] = utf8_encode($f["observaciones"]);
+				$tmp['cantidad'] = utf8_encode($f["cantidad"]);
+				$tmp['qtip'] = "Nombre: ".$tmp['nombre']." <br \/>Descripcion: ".$tmp["descripcion"];
+				$tmp['qtipTitle']="Codigo: ".$tmp["codigo"];
+				
+				
+
+				$nodes[] = $tmp;
+			}
+
+
+
+		}
+
+		return $nodes;
+	}
+
+	function LoadData()
 	{
 		//Recorre todo el árbol
 		$cant=50;
@@ -72,9 +154,16 @@ class PDF extends FPDF
 			$Custom=new cls_CustomDBAlmacenes();
 			$CustomItem=new cls_CustomDBAlmacenes();
 			$sortcol='TIPOUC.codigo';
+			
+		
 
 			if($tuc['tipo']=='raiz')
 			{
+					
+				/*print ("<pre>");
+		print_r ($tuc);
+		print ("</pre>");
+		exit;*/
 				//Obtiene las UC directas que tiene la raíz
 				$Custom->ListarTipoUnidadConstructivaRaiz($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$hidden_ep_id_financiador,$hidden_ep_id_regional,$hidden_ep_id_programa,$hidden_ep_id_proyecto,$hidden_ep_id_actividad,$tuc['id_tipo_unidad_constructiva']);
 				//Obtiene los items de la UC si es que tiene
@@ -222,14 +311,27 @@ class PDF extends FPDF
 			if($tuc['tipo']=='raiz')
 			{
 				$CustomItem=new cls_CustomDBAlmacenes();
-				$CustomItem->ListarExistenciaItemUC(15,0,$sort,$dir,$filtro,$hidden_ep_id_financiador,$hidden_ep_id_regional,$hidden_ep_id_programa,$hidden_ep_id_proyecto,$hidden_ep_id_actividad,$tuc['id_tipo_unidad_constructiva']);
+				$CustomItem->ListarExistenciaItemUC(15,0,$sort,$dir,$filtro,$hidden_ep_id_financiador,$hidden_ep_id_regional,$hidden_ep_id_programa,$hidden_ep_id_proyecto,$hidden_ep_id_actividad,$tuc['id_tipo_unidad_constructiva'],$_SESSION['rep_mat_id_almacen_logico']);
 			}
 			else
 			{
 				$CustomItem=new cls_CustomDBAlmacenes();
-				$CustomItem->ListarExistenciaItemUCRama(15,0,$sort,$dir,$filtro,$hidden_ep_id_financiador,$hidden_ep_id_regional,$hidden_ep_id_programa,$hidden_ep_id_proyecto,$hidden_ep_id_actividad,$tuc['id_tipo_unidad_constructiva']);
+				$CustomItem->ListarExistenciaItemUCRama(15,0,$sort,$dir,$filtro,$hidden_ep_id_financiador,$hidden_ep_id_regional,$hidden_ep_id_programa,$hidden_ep_id_proyecto,$hidden_ep_id_actividad,$tuc['id_tipo_unidad_constructiva'],$_SESSION['rep_mat_id_almacen_logico']);
 			}
-
+		/*
+		print("<pre>  ");
+		print_r($_SESSION['rep_mat_id_almacen_logico']);
+		print_r($tuc['tipo']);
+		
+		
+		print("</pre>");
+		
+		
+		print("<pre>");
+		print_r($CustomItem->salida);
+		print("</pre>");
+		exit;
+*/
 
 			foreach ($CustomItem->salida as $item)
 			{
@@ -561,17 +663,27 @@ class PDF extends FPDF
 $pdf=new PDF('P','mm','Letter');
 $pdf->AliasNbPages();
 $pdf->ff=array();
+
+$pdf->ff = $pdf->loadDetalle();
+
 /*$pdf->ff[0]['id_tipo_unidad_constructiva']=14;
 $pdf->ff[0]['cantidad']=310;
 $pdf->ff[0]['tipo']='raiz';
 $pdf->ff[1]['id_tipo_unidad_constructiva']=60;
 $pdf->ff[1]['cantidad']=100;
 $pdf->ff[1]['tipo']='raiz';*/
-$pdf->ff=$_SESSION[verif_exist_uc];
 
-/*print ("<pre>");
+
+//$pdf->ff=$_SESSION[verif_exist_uc];
+/*
+print ("<pre>");
 print_r ($pdf->ff);
-print ("</pre>");*/
+print ("</pre>");
+
+exit;*/
+
+
+
 
 
 
@@ -583,7 +695,7 @@ $header_item=array('Código','Material','Descripción','Cantidad');
 $tipo=$tipo;
 if(count($pdf->ff)>0)
 {
-	$pdf->LoadData($id_salida);
+	$pdf->LoadData();
 	$pdf->ObtenerIngresos($node);
 	$pdf->RepartirExistencias();
 	$pdf->CalcularExistenciasUC();

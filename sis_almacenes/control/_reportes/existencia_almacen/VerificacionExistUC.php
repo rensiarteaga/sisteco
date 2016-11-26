@@ -16,7 +16,7 @@ if($_SESSION['autentificado']=="SI")
 	print ("</pre>");
 	exit;*/
 
-	$id_composicion_tuc=$maestro_id_composicion_tuc;
+	$id_salida=$maestro_id_salida;
 	$node=$maestro_id_tipo_unidad_constructiva;
 	$tipo=$maestro_tipo;
 	$nombre=$maestro_nombre;
@@ -27,9 +27,9 @@ if($_SESSION['autentificado']=="SI")
 	$nombre_padre=$maestro_nombre_padre;
 	$_SESSION['dtipo']=$maestro_tipo;
 	$_SESSION['nombre_padre']=$maestro_nombre_padre;
-	//echo($id_composicion_tuc);
-	//exit();
-	header("location:PDFVerificacionExistUC.php?node=$node&terminado=$terminado&tipo=$tipo&nombre=$nombre&nombre_padre=$nombre_padre");
+	
+	
+	header("location:PDFVerificacionExistUC.php?id_salida=$id_salida");
 }
 
 else

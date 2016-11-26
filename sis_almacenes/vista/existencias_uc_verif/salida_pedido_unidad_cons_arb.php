@@ -15,7 +15,6 @@ session_start();
 <title>sis_almacenes tipo_unidad_constructiva</title>
    
 <link rel="stylesheet" type="text/css" href="../../../lib/css/dependency.css" />
-<script type='text/javascript' src='../../../sis_almacenes/vista/existencias_uc_verif/js/salida_pedido_unidad_cons_arb.js'></script>
 <script type='text/javascript' src='../../../sis_almacenes/vista/existencias_uc_verif/js/salida_pedido_unidad_cons_arb_main.php?idContenedorPadre=<?php echo "$idContenedorPadre";?>&idContenedor=<?php echo "$idContenedor";?>'></script>	
 
 </head>

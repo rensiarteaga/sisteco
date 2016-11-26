@@ -824,6 +824,147 @@ class cls_DBSalidaPedido
 		return $res;
 	}
 
+function ListarSalidaReporte($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad)
+	{
+		$this->salida = "";
+		$this->nombre_funcion = 'f_tal_salida_reporte_sel';
+		$this->codigo_procedimiento = "'AL_PEDIDOREP_SEL'";
+
+		$func = new cls_funciones();//Instancia de las funciones generales
+
+		//Instancia la clase middle para la ejecución de la función de la BD
+		$this->var = new cls_middle($this->nombre_funcion,$this->codigo_procedimiento);
+
+		//Carga los parámetros del filtro
+		$this->var->cant = $cant;
+		$this->var->puntero = $puntero;
+		$this->var->sortcol = "'$sortcol'";
+		$this->var->sortdir = "'$sortdir'";
+		$this->var->criterio_filtro = "'$criterio_filtro'";
+
+		//Carga los parámetros específicos de la estructura programática
+		$this->var->add_param($func->iif($id_financiador == '',"'%'","'$id_financiador'"));//id_financiador
+		$this->var->add_param($func->iif($id_regional == '',"'%'","'$id_regional'"));//id_regional
+		$this->var->add_param($func->iif($id_programa == '',"'%'","'$id_programa'"));//id_programa
+		$this->var->add_param($func->iif($id_proyecto == '',"'%'","'$id_proyecto'"));//id_proyecto
+		$this->var->add_param($func->iif($id_actividad == '',"'%'","'$id_actividad'"));//id_actividad
+
+		//Carga la definición de columnas con sus tipos de datos
+		  
+		  $this->var->add_def_cols('id_salida','INTEGER');
+		  $this->var->add_def_cols('correlativo_sal','VARCHAR');
+		  $this->var->add_def_cols('correlativo_vale','VARCHAR');
+		  $this->var->add_def_cols('descripcion','VARCHAR');
+		  $this->var->add_def_cols('contabilizar','VARCHAR');
+		  $this->var->add_def_cols('contabilizado','VARCHAR');
+		  $this->var->add_def_cols('estado_salida','VARCHAR');
+		  $this->var->add_def_cols('estado_registro','VARCHAR');
+		  $this->var->add_def_cols('motivo_cancelacion','VARCHAR');
+		  $this->var->add_def_cols('id_responsable_almacen','INTEGER');
+		  $this->var->add_def_cols('id_almacen_logico','INTEGER');
+		  $this->var->add_def_cols('desc_almacen_logico','VARCHAR');
+		  $this->var->add_def_cols('id_empleado','INTEGER');
+		  $this->var->add_def_cols('desc_almacen','VARCHAR');
+		  $this->var->add_def_cols('nombre_financiador','VARCHAR');
+		  $this->var->add_def_cols('nombre_regional','VARCHAR');
+		  $this->var->add_def_cols('nombre_programa','VARCHAR');
+		  $this->var->add_def_cols('nombre_proyecto','VARCHAR');
+		  $this->var->add_def_cols('nombre_actividad','VARCHAR');
+		  $this->var->add_def_cols('id_financiador','INTEGER');
+		  $this->var->add_def_cols('id_regional','INTEGER');
+		  $this->var->add_def_cols('id_programa','INTEGER');
+		  $this->var->add_def_cols('id_proyecto','INTEGER');
+		  $this->var->add_def_cols('id_actividad','INTEGER');
+		  $this->var->add_def_cols('codigo_financiador','VARCHAR');
+		  $this->var->add_def_cols('codigo_regional','VARCHAR');
+		  $this->var->add_def_cols('codigo_programa','VARCHAR');
+		  $this->var->add_def_cols('codigo_proyecto','VARCHAR');
+		  $this->var->add_def_cols('codigo_actividad','VARCHAR');
+		  $this->var->add_def_cols('emergencia','VARCHAR');
+		  $this->var->add_def_cols('observaciones','VARCHAR');
+		  $this->var->add_def_cols('tipo_pedido','VARCHAR');
+		  $this->var->add_def_cols('receptor','VARCHAR');
+		  $this->var->add_def_cols('id_tramo_subactividad','INTEGER');
+		  $this->var->add_def_cols('id_tramo_unidad_constructiva','INTEGER');
+		  $this->var->add_def_cols('fecha_borrador','DATE');
+		  $this->var->add_def_cols('id_supervisor','INTEGER');
+		  $this->var->add_def_cols('receptor_ci','VARCHAR');
+		  $this->var->add_def_cols('solicitante','VARCHAR');
+		  $this->var->add_def_cols('solicitante_ci','VARCHAR');
+		  $this->var->add_def_cols('num_contrato','VARCHAR');
+		  $this->var->add_def_cols('id_almacen','INTEGER');
+		
+		$res = $this->var->exec_query();
+
+		//Obtiene el array de salida de la función y retorna el resultado de la ejecución
+		$this->salida = $this->var->salida;
+
+		//Obtiene la cadena con que se llamó a la función de postgres
+		$this->query = $this->var->query;
+		
+		//echo "query: ".$this->query;
+		//exit;
+	
+
+		return $res;
+	}
+
+	/**
+	 * Nombre de la función:	ContarSalida
+	 * Propósito:				Contar los registros de tal_salida
+	 * Autor:				    (autogenerado)
+	 * Fecha de creación:		2007-10-25 15:07:58
+	 */
+	function ContarSalidaReporte($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad)
+	{
+		$this->salida = "";
+		$this->nombre_funcion = 'f_tal_salida_reporte_sel';
+		$this->codigo_procedimiento = "'AL_PEDIDOREP_COUNT'";
+
+		$func = new cls_funciones();//Instancia de las funciones generales
+
+		//Instancia la clase middle para la ejecución de la función de la BD
+		$this->var = new cls_middle($this->nombre_funcion,$this->codigo_procedimiento);
+
+		//Carga los parámetros del filtro
+		$this->var->cant = $cant;
+		$this->var->puntero = $puntero;
+		$this->var->sortcol = "'$sortcol'";
+		$this->var->sortdir = "'$sortdir'";
+		$this->var->criterio_filtro = "'$criterio_filtro'";
+
+		
+		//Carga los parámetros específicos de la estructura programática
+		$this->var->add_param($func->iif($id_financiador == '',"'%'","'$id_financiador'"));//id_financiador
+		$this->var->add_param($func->iif($id_regional == '',"'%'","'$id_regional'"));//id_regional
+		$this->var->add_param($func->iif($id_programa == '',"'%'","'$id_programa'"));//id_programa
+		$this->var->add_param($func->iif($id_proyecto == '',"'%'","'$id_proyecto'"));//id_proyecto
+		$this->var->add_param($func->iif($id_actividad == '',"'%'","'$id_actividad'"));//id_actividad
+
+
+		//Carga la definición de columnas con sus tipos de datos
+		$this->var->add_def_cols('total','bigint');
+
+		//Ejecuta la función de consulta
+		$res = $this->var->exec_query();
+
+		//Obtiene el array de salida de la función
+		$this->salida = $this->var->salida;
+
+		//Si la ejecución fue satisfactoria modifica la salida para que solo devuelva el total de la consulta
+		if($res)
+		{
+			$this->salida = $this->var->salida[0][0];
+		}
+
+		//Obtiene la cadena con que se llamó a la función de postgres
+		$this->query = $this->var->query;
+	 
+
+		//Retorna el resultado de la ejecución
+		return $res;
+	}
+
 	/**
 	 * Nombre de la función:	ValidarSalida
 	 * Propósito:				Permite ejecutar la validación del lado del servidor de la tabla tal_salida
@@ -1065,6 +1206,180 @@ class cls_DBSalidaPedido
 			//Validación exitosa
 			return true;
 		}
+		else
+		{
+			return false;
+		}
+	}
+
+
+/**
+	 * Nombre de la función:	InsertarSalidaReporte
+	 * Propósito:				Permite ejecutar la función de inserción de la tabla tal_salida
+	 * Autor:				    (autogenerado)
+	 * Fecha de creación:		2007-10-25 15:07:58
+	 */
+	function InsertarSalidaReporte($id_salida,$descripcion,$id_almacen_logico)
+	{
+		$this->salida = "";
+		$this->nombre_funcion = 'f_tal_salida_reporte_iud';
+		$this->codigo_procedimiento = "'AL_PEDIDOREP_INS'";
+
+		//Instancia la clase midlle para la ejecución de la función de la BD
+		$this->var = new cls_middle($this->nombre_funcion,$this->codigo_procedimiento,$this->decodificar);
+		$this->var->add_param("NULL");
+		$this->var->add_param("'$descripcion'");
+		$this->var->add_param($id_almacen_logico);
+		
+		//Ejecuta la función
+		$res = $this->var->exec_non_query();
+
+		//Obtiene el array de salida de la función y retorna el resultado de la ejecución
+		$this->salida = $this->var->salida;
+
+		//Obtiene la cadena con que se llamó a la función de postgres
+		$this->query = $this->var->query;
+
+		return $res;
+	}
+
+	/**
+	 * Nombre de la función:	ModificarSalidaPedido
+	 * Propósito:				Permite ejecutar la función de modificación de la tabla tal_salida
+	 * Autor:				    (autogenerado)
+	 * Fecha de creación:		2007-10-25 15:07:58
+	 */
+	function ModificarSalidaReporte($id_salida,$descripcion,$id_almacen_logico)
+	{
+		$this->salida = "";
+		$this->nombre_funcion = 'f_tal_salida_reporte_iud';
+		$this->codigo_procedimiento = "'AL_PEDIDOREP_UPD'";
+		
+		//Instancia la clase midlle para la ejecución de la función de la BD
+		$this->var = new cls_middle($this->nombre_funcion,$this->codigo_procedimiento,$this->decodificar);
+		$this->var->add_param($id_salida);
+		$this->var->add_param("'$descripcion'");
+		$this->var->add_param($id_almacen_logico);
+		
+		//Ejecuta la función
+		$res = $this->var->exec_non_query();
+
+		//Obtiene el array de salida de la función y retorna el resultado de la ejecución
+		$this->salida = $this->var->salida;
+
+		//Obtiene la cadena con que se llamó a la función de postgres
+		$this->query = $this->var->query;
+
+		return $res;
+	}
+
+	/**
+	 * Nombre de la función:	EliminarSalidaReporte
+	 * Propósito:				Permite ejecutar la función de eliminación de la tabla tal_salida
+	 * Autor:				    (autogenerado)
+	 * Fecha de creación:		2007-10-25 15:07:58
+	 */
+	function EliminarSalidaReporte($id_salida)
+	{
+		$this->salida = "";
+		$this->nombre_funcion = 'f_tal_salida_reporte_iud';
+		$this->codigo_procedimiento = "'AL_SALIDAREP_DEL'";
+
+		//Instancia la clase midlle para la ejecución de la función de la BD
+		$this->var = new cls_middle($this->nombre_funcion,$this->codigo_procedimiento,$this->decodificar);
+		$this->var->add_param($id_salida);
+		$this->var->add_param("NULL");
+		$this->var->add_param("NULL");
+
+		//Ejecuta la función
+		$res = $this->var->exec_non_query();
+
+		//Obtiene el array de salida de la función y retorna el resultado de la ejecución
+		$this->salida = $this->var->salida;
+
+		//Obtiene la cadena con que se llamó a la función de postgres
+		$this->query = $this->var->query;
+
+		return $res;
+	}
+
+
+
+/**
+	 * Nombre de la función:	ValidarSalidaReporte
+	 * Propósito:				Permite ejecutar la validación del lado del servidor de la tabla tal_salida
+	 * Autor:				    (autogenerado)
+	 * Fecha de creación:		2007-10-25 15:07:58
+	 */
+	function ValidarSalidaReporte($operacion_sql,$id_salida,$descripcion,$id_almacen_logico)
+	{
+		$this->salida = "";
+		$valid = new cls_validacion_serv();
+
+		//Clase para validar el tipo de dato
+		$tipo_dato = new cls_define_tipo_dato();
+
+		//Ejecuta la validación por el tipo de operación
+		if($operacion_sql=='insert' || $operacion_sql=='update')
+		{
+			if($operacion_sql == 'update')
+			{
+				//Validar id_salida - tipo int4
+				$tipo_dato->_reiniciar_valor();
+				$tipo_dato->set_MaxLength(10);
+				$tipo_dato->set_Columna("id_salida");
+
+				if(!$valid->verifica_dato($tipo_dato->TipoDatoInteger(), "id_salida", $id_salida))
+				{
+					$this->salida = $valid->salida;
+					return false;
+				}
+			}
+
+			
+
+			//Validar descripcion - tipo varchar
+			$tipo_dato->_reiniciar_valor();
+			$tipo_dato->set_Columna("descripcion");
+			$tipo_dato->set_MaxLength(200);
+			if(!$valid->verifica_dato($tipo_dato->TipoDatoText(), "descripcion", $descripcion))
+			{
+				$this->salida = $valid->salida;
+				return false;
+			}
+
+			
+			//Validar id_almacen_logico - tipo int4
+			$tipo_dato->_reiniciar_valor();
+			$tipo_dato->set_Columna("id_almacen_logico");
+			$tipo_dato->set_MaxLength(10);
+			if(!$valid->verifica_dato($tipo_dato->TipoDatoInteger(), "id_almacen_logico", $id_almacen_logico))
+			{
+				$this->salida = $valid->salida;
+				return false;
+			}
+
+			
+
+			//Validación exitosa
+			return true;
+		}
+		elseif ($operacion_sql=='delete')
+		{
+			//Validar id_salida - tipo int4
+			$tipo_dato->_reiniciar_valor();
+			$tipo_dato->set_Columna("id_salida");
+
+			if(!$valid->verifica_dato($tipo_dato->TipoDatoInteger(), "id_salida", $id_salida))
+			{
+				$this->salida = $valid->salida;
+				return false;
+			}
+
+			//Validación exitosa
+			return true;
+		}
+		
 		else
 		{
 			return false;

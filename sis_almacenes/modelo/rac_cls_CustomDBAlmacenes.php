@@ -2416,6 +2416,68 @@ class cls_CustomDBAlmacenes
 		$this->query = $dbSalidaPed ->query;
 		return $res;
 	}
+	
+	function ListarSalidaReporte($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad)
+	{
+		$this->salida = "";
+		$dbSalidaPed = new cls_DBSalidaPedido($this->decodificar);
+		$res = $dbSalidaPed ->ListarSalidaReporte($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad);
+		$this->salida = $dbSalidaPed ->salida;
+		$this->query = $dbSalidaPed ->query;
+		return $res;
+	}
+
+	function ContarSalidaReporte($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad)
+	{
+		$this->salida = "";
+		$dbSalidaPed = new cls_DBSalidaPedido($this->decodificar);
+		$res = $dbSalidaPed ->ContarSalidaReporte($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad);
+		$this->salida = $dbSalidaPed ->salida;
+		$this->query = $dbSalidaPed ->query;
+		return $res;
+	}
+	
+	function InsertarSalidaReporte($hidden_id_salida, $txt_descripcion,$txt_id_almacen_logico)
+	{
+		$this->salida = "";
+		$dbSalidaPed = new cls_DBSalidaPedido($this->decodificar);
+		$res = $dbSalidaPed ->InsertarSalidaReporte($hidden_id_salida, $txt_descripcion,$txt_id_almacen_logico);
+		$this->salida = $dbSalidaPed ->salida;
+		$this->query = $dbSalidaPed ->query;
+		return $res;
+	}
+
+	function ModificarSalidaReporte($hidden_id_salida, $txt_descripcion,$txt_id_almacen_logico)
+	{
+		$this->salida = "";
+		$dbSalidaPed = new cls_DBSalidaPedido($this->decodificar);
+		$res = $dbSalidaPed ->ModificarSalidaReporte($hidden_id_salida, $txt_descripcion,$txt_id_almacen_logico);
+		$this->salida = $dbSalidaPed ->salida;
+		$this->query = $dbSalidaPed ->query;
+		return $res;
+	}
+
+	function EliminarSalidaReporte($id_salida)
+	{
+		$this->salida = "";
+		$dbSalidaPed = new cls_DBSalidaPedido($this->decodificar);
+		$res = $dbSalidaPed -> EliminarSalidaReporte($id_salida);
+		$this->salida = $dbSalidaPed ->salida;
+		$this->query = $dbSalidaPed ->query;
+		return $res;
+	}
+	function ValidarSalidaReporte($operacion_sql,$hidden_id_salida, $txt_descripcion,$txt_id_almacen_logico)
+	{
+		$this->salida = "";
+		$dbSalidaPed = new cls_DBSalidaPedido($this->decodificar);
+		$res = $dbSalidaPed ->ValidarSalidaReporte($operacion_sql,$hidden_id_salida, $txt_descripcion,$txt_id_almacen_logico);
+		$this->salida = $dbSalidaPed ->salida;
+		$this->query = $dbSalidaPed ->query;
+		return $res;
+	}
+	
+	
+	
 
 	/// --------------------- fin salida pedido --------------------- ///
 

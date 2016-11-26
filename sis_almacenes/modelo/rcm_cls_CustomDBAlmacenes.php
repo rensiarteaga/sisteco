@@ -1371,22 +1371,22 @@ class cls_CustomDBAlmacenes
 	}
 
 	//RCM: 17/07/2008
-	function ListarExistenciaItemUC($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad,$id_tipo_unidad_constructiva)
+	function ListarExistenciaItemUC($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad,$id_tipo_unidad_constructiva ,$id_almacen_logico)
 	{
 		$this->salida = "";
 		$dbTuc = new cls_DBTipoUnidadConstructiva($this->decodificar);
-		$res = $dbTuc ->ListarExistenciaItemUC($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad,$id_tipo_unidad_constructiva);
+		$res = $dbTuc ->ListarExistenciaItemUC($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad,$id_tipo_unidad_constructiva, $id_almacen_logico);
 		$this->salida = $dbTuc ->salida;
 		$this->query = $dbTuc ->query;
 		return $res;
 	}
 	
 	//RCM: 14/08/2008
-	function ListarExistenciaItemUCRama($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad,$id_tipo_unidad_constructiva)
+	function ListarExistenciaItemUCRama($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad,$id_tipo_unidad_constructiva, $id_almacen_logico)
 	{
 		$this->salida = "";
 		$dbTuc = new cls_DBTipoUnidadConstructiva($this->decodificar);
-		$res = $dbTuc ->ListarExistenciaItemUCRama($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad,$id_tipo_unidad_constructiva);
+		$res = $dbTuc ->ListarExistenciaItemUCRama($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad,$id_tipo_unidad_constructiva,$id_almacen_logico);
 		$this->salida = $dbTuc ->salida;
 		$this->query = $dbTuc ->query;
 		return $res;
@@ -1433,6 +1433,16 @@ class cls_CustomDBAlmacenes
 		$res = $dbSal ->DiarioSalidaAlmacen($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad);
 		$this->salida = $dbSal ->salida;
 		$this->query = $dbSal ->query;
+		return $res;
+	}
+	
+	function PedidoMaterialesUC($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad)
+	{
+		$this->salida = "";
+		$dbSalida = new cls_DBSalida($this->decodificar);
+		$res = $dbSalida ->PedidoMaterialesUC($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad);
+		$this->salida = $dbSalida ->salida;
+		$this->query = $dbSalida ->query;
 		return $res;
 	}
 	

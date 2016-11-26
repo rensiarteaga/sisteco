@@ -165,6 +165,7 @@ class cls_DBTipoUnidadConstructiva
 		$this->var->add_param($func->iif($id_proyecto == '',"'%'","'$id_proyecto'"));//id_proyecto
 		$this->var->add_param($func->iif($id_actividad == '',"'%'","'$id_actividad'"));//id_actividad
 		$this->var->add_param("NULL");//raiz
+		$this->var->add_param("NULL");//raiz
 
 		//Carga la definición de columnas con sus tipos de datos
 		$this->var->add_def_cols('id_tipo_unidad_constructiva','int4');
@@ -265,6 +266,7 @@ class cls_DBTipoUnidadConstructiva
 		$this->var->add_param($func->iif($id_proyecto == '',"'%'","'$id_proyecto'"));//id_proyecto
 		$this->var->add_param($func->iif($id_actividad == '',"'%'","'$id_actividad'"));//id_actividad
 		$this->var->add_param("$raiz");//id_actividad
+		$this->var->add_param("NULL");//raiz
 
 		//Carga la definición de columnas con sus tipos de datos
 		$this->var->add_def_cols('id_tipo_unidad_constructiva','int4');
@@ -324,6 +326,7 @@ class cls_DBTipoUnidadConstructiva
 		$this->var->add_param($func->iif($id_proyecto == '',"'%'","'$id_proyecto'"));//id_proyecto
 		$this->var->add_param($func->iif($id_actividad == '',"'%'","'$id_actividad'"));//id_actividad
 		$this->var->add_param("$raiz");//raiz
+		$this->var->add_param("NULL");//raiz
 
 		
 		//Carga la definición de columnas con sus tipos de datos
@@ -383,6 +386,7 @@ class cls_DBTipoUnidadConstructiva
 		$this->var->add_param($func->iif($id_proyecto == '',"'%'","'$id_proyecto'"));//id_proyecto
 		$this->var->add_param($func->iif($id_actividad == '',"'%'","'$id_actividad'"));//id_actividad
 		$this->var->add_param("$raiz");//id_actividad
+		$this->var->add_param("NULL");//raiz
 
 		//Carga la definición de columnas con sus tipos de datos
 		

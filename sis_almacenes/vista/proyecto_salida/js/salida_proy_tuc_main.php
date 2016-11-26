@@ -1502,13 +1502,7 @@ function pagina_salida_proy_tuc(idContenedor,direccion,paramConfig)
 		/*var n = getSm().getSelectedNode();
 		if(n){*/
 		if(idSalida!=''){
-			var data='maestro_id_salida='+idSalida;
-			//var data='maestro_id_salida='+n.attributes.id_salida;
-			/*data=data+'&maestro_id_tipo_unidad_constructiva='+n.attributes.id;
-			data=data+'&maestro_codigo='+n.attributes.codigo;
-			data=data+'&maestro_tipo='+n.attributes.tipo;
-			data=data+'&maestro_terminado='+n.attributes.terminado;
-			data=data+'&maestro_nombre='+n.attributes.nombre;*/
+			var data='maestro_id_salida='+idSalida;			
 			window.open(direccion+'../../../control/_reportes/pedido_materiales/ActionPedidoMateriales.php?'+data)
 		}
 		else{

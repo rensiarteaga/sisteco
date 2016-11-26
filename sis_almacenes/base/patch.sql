@@ -335,5 +335,40 @@ IS 'si o no, solo para prestamos es factible dejar el importe abierto (si). sign
 
 
 /***********************************F-SCP-RAC-ALMIN-2-06/01/2017****************************************/ 
+
+
+
+/***********************************I-SCP-RAC-ALMIN-2-11/01/2017****************************************/ 
+
+--------------- SQL ---------------
+
+ALTER TABLE almin.tal_salida
+  ADD COLUMN tipo_reg VARCHAR(30) DEFAULT 'movimiento' NOT NULL;
+
+COMMENT ON COLUMN almin.tal_salida.tipo_reg
+IS 'movimiento, o reporte, el tipo reporte aprovecha al estructura para generar los reportes de estructuras';
+
+
+--------------- SQL ---------------
+
+ALTER TABLE almin.tal_salida
+  ALTER COLUMN id_firma_autorizada DROP NOT NULL;
+  
+  
+ --------------- SQL ---------------
+
+ALTER TABLE almin.tal_salida
+  ALTER COLUMN id_motivo_salida_cuenta DROP NOT NULL;
+  
+  --------------- SQL ---------------
+
+ALTER TABLE almin.tal_salida
+  ALTER COLUMN id_tipo_material DROP NOT NULL;
+
+
+/***********************************F-SCP-RAC-ALMIN-2-11/01/2017****************************************/ 
+
+
+
  
  

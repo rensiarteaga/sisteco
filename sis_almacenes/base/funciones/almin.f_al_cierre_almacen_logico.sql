@@ -124,8 +124,8 @@ BEGIN
                                           sal.estado_salida
                                     from almin.tal_salida sal
                                     inner join almin.tal_salida_detalle sd on sd.id_salida  = sal.id_salida
-                                    where sal.id_parametro_almacen_logico = g_id_parametro_almacen_logico
-                                           and  (sd.costo_unitario = 0 or  sd.costo_unitario is null or  sal.estado_salida != 'Finalizado')) LOOP
+                                    where sal.id_parametro_almacen_logico = g_id_parametro_almacen_logico and sal.tipo_reg = 'movimiento'
+                                           and  (sd.costo_unitario = 0 or  sd.costo_unitario is null or  sal.estado_salida != 'Finalizado' )) LOOP
       
                 v_numeros =  v_numeros||'( S-'||v_registros_salida.correlativo_sal::varchar||', '||v_registros_salida.fecha_finalizado_cancelado::varchar||')';
                 

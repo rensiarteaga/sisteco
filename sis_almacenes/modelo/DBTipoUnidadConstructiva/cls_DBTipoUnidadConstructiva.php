@@ -164,6 +164,7 @@ class cls_DBTipoUnidadConstructiva
 		$this->var->add_param($func->iif($id_proyecto == '',"'%'","'$id_proyecto'"));//id_proyecto
 		$this->var->add_param($func->iif($id_actividad == '',"'%'","'$id_actividad'"));//id_actividad
 		$this->var->add_param("NULL");//raiz
+		$this->var->add_param("NULL");//raiz
 
 		//Carga la definición de columnas con sus tipos de datos
 		$this->var->add_def_cols('id_tipo_unidad_constructiva','int4');
@@ -221,6 +222,7 @@ class cls_DBTipoUnidadConstructiva
 		$this->var->add_param($func->iif($id_proyecto == '',"'%'","'$id_proyecto'"));//id_proyecto
 		$this->var->add_param($func->iif($id_actividad == '',"'%'","'$id_actividad'"));//id_actividad
 		$this->var->add_param("$agrupador");//raiz
+		$this->var->add_param("NULL");//raiz
 
 		//Carga la definición de columnas con sus tipos de datos
 		$this->var->add_def_cols('id_tipo_unidad_constructiva','int4');
@@ -330,6 +332,7 @@ class cls_DBTipoUnidadConstructiva
 		$this->var->add_param($func->iif($id_proyecto == '',"'%'","'$id_proyecto'"));//id_proyecto
 		$this->var->add_param($func->iif($id_actividad == '',"'%'","'$id_actividad'"));//id_actividad
 		$this->var->add_param("$raiz");//id_actividad
+		$this->var->add_param("NULL");//raiz
 
 		//Carga la definición de columnas con sus tipos de datos
 		$this->var->add_def_cols('id_tipo_unidad_constructiva','int4');
@@ -390,6 +393,7 @@ class cls_DBTipoUnidadConstructiva
 		$this->var->add_param($func->iif($id_proyecto == '',"'%'","'$id_proyecto'"));//id_proyecto
 		$this->var->add_param($func->iif($id_actividad == '',"'%'","'$id_actividad'"));//id_actividad
 		$this->var->add_param("$raiz");//raiz
+		$this->var->add_param("NULL");//raiz
 
 
 		//Carga la definición de columnas con sus tipos de datos
@@ -446,6 +450,7 @@ class cls_DBTipoUnidadConstructiva
 		$this->var->add_param($func->iif($id_proyecto == '',"'%'","'$id_proyecto'"));//id_proyecto
 		$this->var->add_param($func->iif($id_actividad == '',"'%'","'$id_actividad'"));//id_actividad
 		$this->var->add_param("$raiz");//id_actividad
+		$this->var->add_param("NULL");//raiz
 
 		//Carga la definición de columnas con sus tipos de datos
 
@@ -511,6 +516,7 @@ class cls_DBTipoUnidadConstructiva
 		$this->var->add_param($func->iif($id_proyecto == '',"'%'","'$id_proyecto'"));//id_proyecto
 		$this->var->add_param($func->iif($id_actividad == '',"'%'","'$id_actividad'"));//id_actividad
 		$this->var->add_param("NULL");//raiz
+		$this->var->add_param("NULL");//raiz
 
 		//Carga la definición de columnas con sus tipos de datos
 		$this->var->add_def_cols('id_tipo_unidad_constructiva','int4');
@@ -562,6 +568,7 @@ class cls_DBTipoUnidadConstructiva
 		$this->var->add_param($func->iif($id_programa == '',"'%'","'$id_programa'"));//id_programa
 		$this->var->add_param($func->iif($id_proyecto == '',"'%'","'$id_proyecto'"));//id_proyecto
 		$this->var->add_param($func->iif($id_actividad == '',"'%'","'$id_actividad'"));//id_actividad
+		$this->var->add_param("NULL");//raiz
 		$this->var->add_param("NULL");//raiz
 
 
@@ -1480,7 +1487,7 @@ class cls_DBTipoUnidadConstructiva
 	 * Autor:				    RCM
 	 * Fecha de creación:		17/07/2008
 	 */
-	function ListarExistenciaItemUC($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad,$id_tipo_unidad_constructiva)
+	function ListarExistenciaItemUC($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad,$id_tipo_unidad_constructiva,$id_almacen_logico)
 	{
 		$this->salida = "";
 		$this->nombre_funcion = 'f_tal_tuc_arb_sel';
@@ -1505,6 +1512,7 @@ class cls_DBTipoUnidadConstructiva
 		$this->var->add_param($func->iif($id_proyecto == '',"'%'","'$id_proyecto'"));//id_proyecto
 		$this->var->add_param($func->iif($id_actividad == '',"'%'","'$id_actividad'"));//id_actividad
 		$this->var->add_param("$id_tipo_unidad_constructiva");//raiz
+		$this->var->add_param("$id_almacen_logico");//raiz
 
 		//Carga la definición de columnas con sus tipos de datos
 		$this->var->add_def_cols('id_item','integer');
@@ -1529,7 +1537,7 @@ class cls_DBTipoUnidadConstructiva
 	 * Autor:				    RCM
 	 * Fecha de creación:		17/07/2008
 	 */
-	function ListarExistenciaItemUCRama($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad,$id_tipo_unidad_constructiva)
+	function ListarExistenciaItemUCRama($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad,$id_tipo_unidad_constructiva, $id_almacen_logico)
 	{
 		$this->salida = "";
 		$this->nombre_funcion = 'f_tal_tuc_arb_sel';
@@ -1554,6 +1562,9 @@ class cls_DBTipoUnidadConstructiva
 		$this->var->add_param($func->iif($id_proyecto == '',"'%'","'$id_proyecto'"));//id_proyecto
 		$this->var->add_param($func->iif($id_actividad == '',"'%'","'$id_actividad'"));//id_actividad
 		$this->var->add_param("$id_tipo_unidad_constructiva");//raiz
+		$this->var->add_param("$id_almacen_logico");//raiz
+		
+		
 
 		//Carga la definición de columnas con sus tipos de datos
 		$this->var->add_def_cols('id_item','integer');
@@ -1603,6 +1614,7 @@ class cls_DBTipoUnidadConstructiva
 		$this->var->add_param($func->iif($id_proyecto == '',"'%'","'$id_proyecto'"));//id_proyecto
 		$this->var->add_param($func->iif($id_actividad == '',"'%'","'$id_actividad'"));//id_actividad
 		$this->var->add_param("$id_tipo_unidad_constructiva");//raiz
+		$this->var->add_param("NULL");//raiz
 
 		//Carga la definición de columnas con sus tipos de datos
 		$this->var->add_def_cols('id_tipo_unidad_constructiva','integer');
@@ -1654,6 +1666,7 @@ class cls_DBTipoUnidadConstructiva
 		$this->var->add_param($func->iif($id_proyecto == '',"'%'","'$id_proyecto'"));//id_proyecto
 		$this->var->add_param($func->iif($id_actividad == '',"'%'","'$id_actividad'"));//id_actividad
 		$this->var->add_param("$id_tipo_unidad_constructiva");//raiz
+		$this->var->add_param("NULL");//raiz
 
 		//Carga la definición de columnas con sus tipos de datos
 		$this->var->add_def_cols('id_tipo_unidad_constructiva','integer');

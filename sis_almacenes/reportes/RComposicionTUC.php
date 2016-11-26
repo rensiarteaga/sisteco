@@ -64,13 +64,7 @@ class RComposicionTUC extends  ReportePDF {
 		
 		//escribe formula contabla
 		$this->SetFont('times', 'BI', 17);
-		$tactivo = number_format( $this->total_activo , 2 , '.' , ',' );
-		$tpasivo = number_format( $this->total_pasivo , 2 , '.' , ',' );
-		$tpatrimonio = number_format( $this->total_patrimonio , 2 , '.' , ',' );
-		$tingreso = number_format( $this->total_ingreso , 2 , '.' , ',' );
-		$tegreso = number_format( $this->total_egreso , 2 , '.' , ',' );
-		$resultado = $this->total_ingreso - $this->total_egreso;
-		$resultado = number_format( $resultado , 2 , '.' , ',' );
+		
 		$sw_dif = 0;
 		
 		
@@ -97,6 +91,8 @@ class RComposicionTUC extends  ReportePDF {
 	        $this->tabletextcolor=$conf_tabletextcolor;
 			
 			$count  = 1;
+			
+			
 						
 	        foreach ($this->datos_detalle as $val) {	       		
 			
@@ -110,7 +106,9 @@ class RComposicionTUC extends  ReportePDF {
 						$RowArray = array(
 				            			's0' => $count,
 										//'s1' => $val['desc_uc'],
-				                        's2' => '('.$val['item'].') '.$val['desc_item'],
+				                        's2' =>  utf8_encode('('.$val['item'].') '.$val['desc_item']),
+				                        
+				                        
 				                        's3' => $val['cantidad_solicitada'],
 				                        's4' => $val['cant_disp'],
 				                        's5' => $val['cant_faltante']);

@@ -398,7 +398,7 @@ BEGIN
                            ON PERSON3.id_persona = SUPERV.id_persona
                            INNER JOIN almin.tal_parametro_almacen PARALM
                            ON PARALM.id_parametro_almacen = SALIDA.id_parametro_almacen
-                           WHERE SALIDA.estado_salida = ''Borrador'' AND ';
+                           WHERE SALIDA.tipo_reg = ''movimineto'' AND SALIDA.estado_salida = ''Borrador'' AND ';
             g_consulta := g_consulta || pm_criterio_filtro;
           --  para que los usuarios  solo puedan ver los pedidos realizados por ellos
             IF NOT g_rol_adm  THEN
@@ -487,7 +487,7 @@ BEGIN
                            ON PERSON3.id_persona = SUPERV.id_persona
                            INNER JOIN almin.tal_parametro_almacen PARALM
                            ON PARALM.id_parametro_almacen = SALIDA.id_parametro_almacen
-                           WHERE SALIDA.estado_salida = ''Borrador'' AND '; 
+                           WHERE SALIDA.tipo_reg = ''movimineto'' AND SALIDA.estado_salida = ''Borrador'' AND '; 
              --  para que los usuarios  solo puedan ver los pedidos realizados por ellos
             IF NOT g_rol_adm  THEN
                 g_consulta := g_consulta || ' SALIDA.id_usuario=' || pm_id_susario ||'  AND ';
@@ -2061,10 +2061,11 @@ FROM almin.tal_orden_salida_uc_detalle OSUCDE
     ELSIF pm_codigo_procedimiento  = 'AL_FALPTUC_REP' THEN  --Reporte de faltante de materiales
         --Para reporte de Pedido de Materiales   de Unidades Constructivas
         BEGIN
+           
             g_consulta := 'Select  TIPOUC1.descripcion as desc_padre,
                                    TIPOUC.descripcion as desc_uc,
-                                   ITEM.nombre as item,
-                                   ITEM.descripcion as desc_item,
+                                   COALESCE(ITEM.nombre,''s/n'')::varchar as item,
+                                   COALESCE(ITEM.descripcion,''s/n'')::varchar as desc_item,
                                    (PEDINT.cantidad_solicitada + PEDINT.demasia) as cantidad_solicitada,
                                    PEDINT.nuevo + PEDINT.usado as cant_disp,
                                    PEDINT.cantidad_solicitada - PEDINT.nuevo - PEDINT.usado as cant_faltante,
