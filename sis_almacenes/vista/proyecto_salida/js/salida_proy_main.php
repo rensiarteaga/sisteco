@@ -566,6 +566,8 @@ function pagina_salida_proy(idContenedor,direccion,paramConfig)
 	filterValues_motivo_salida_cuenta=new Array();
 	filterCols_motivo_salida_cuenta[0]='MOTSAL.id_motivo_salida';
 	filterValues_motivo_salida_cuenta[0]='%';
+	filterCols_motivo_salida_cuenta[1]='FRPPA.id_fina_regi_prog_proy_acti';
+	filterValues_motivo_salida_cuenta[1]='%';
 
 	vectorAtributos[10]={
 		validacion:{
@@ -1192,9 +1194,13 @@ function pagina_salida_proy(idContenedor,direccion,paramConfig)
 		cmb_tramo_unidad_constructiva=Cm_getComponente('id_tramo_unidad_constructiva');
 
 		var onMotivoSalidaSelect=function(e){
-			var id = combo_motivo_salida.getValue();
+			var id = combo_motivo_salida.getValue(),
+			    ep=cmb_ep.getValue();
 			combo_motivo_salida_cuenta.filterValues[0] =  id;
+			combo_motivo_salida_cuenta.filterValues[1] =  ep['id_fina_regi_prog_proy_acti'];
 			combo_motivo_salida_cuenta.modificado = true;
+			
+			
 			combo_motivo_salida_cuenta.enable();
 			combo_motivo_salida_cuenta.setValue('');
 			combo_motivo_salida.modificado=true

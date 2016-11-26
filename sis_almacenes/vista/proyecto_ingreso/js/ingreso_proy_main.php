@@ -680,6 +680,8 @@ function pagina_ingreso_proy(idContenedor,direccion,paramConfig)
 	filterValues_motivo_ingreso_cuenta=new Array();
 	filterCols_motivo_ingreso_cuenta[0]='MOTING.id_motivo_ingreso';
 	filterValues_motivo_ingreso_cuenta[0]='x';
+	filterCols_motivo_ingreso_cuenta[1]='FRPPA.id_fina_regi_prog_proy_acti';
+	filterValues_motivo_ingreso_cuenta[1]='x';
 	vectorAtributos[14]={
 		validacion: {
 			name:'id_motivo_ingreso_cuenta',
@@ -1641,9 +1643,13 @@ function pagina_ingreso_proy(idContenedor,direccion,paramConfig)
 
 
 		var onMotivoIngresoSelect = function(e) {
-			var id = combo_motivo_ingreso.getValue()=='' ? 'x':combo_motivo_ingreso.getValue();
+			var id = combo_motivo_ingreso.getValue()=='' ? 'x':combo_motivo_ingreso.getValue(),
+			    ep=cmb_ep.getValue();
 			combo_motivo_ingreso_cuenta.filterValues[0] =  id;
+			combo_motivo_ingreso_cuenta.filterValues[1] =  ep['id_fina_regi_prog_proy_acti'];
 			combo_motivo_ingreso_cuenta.modificado = true;
+			
+			
 			combo_motivo_ingreso_cuenta.setValue('');
 			combo_motivo_ingreso.modificado=true;
 
