@@ -66,6 +66,9 @@ class PDF extends FPDF
 		$this->Cell(115,10,$_SESSION['nombre_pie'],'LRB',0,'C');
 		$this->Cell(35,10,'Página '.$this->PageNo().' de {nb}' ,'LRB',0,'L');
 	}
+	
+	
+	
 	function LoadData($node,$tipo)
 	{    $cant=15;
 	$puntero=0;
@@ -257,28 +260,64 @@ class PDF extends FPDF
 			
 			//Datos
 			$fill=0;
+			
+			//rac  16/01/2016
+			
+			$this->SetFont('Arial','',8);
+			$this->SetWidths(array(7,23,15,10,105,10,15));
+			$this->SetVisibles(array(1,1,1,1,1,1,1));
+			$this->SetAligns(array('C','L','R','C','L','L','R','R'));
+			$this->SetFonts(array('Arial','Arial','Arial','Arial','Arial','Arial','Arial'),'Arial');
+			$this->SetFontsStyles(array('','','','','','',''));
+			$this->SetFontsSizes(array(5,4,6,6,6,6,6));
+			$this->SetSpaces(array(3.5,3.5,3.5,3.5,3.5,3.5,3.5));
+			$this->SetDecimales(array(0,0,0,0,0,0,0));
+			//RAC FIN
+			
+			
 			foreach($data as $row)
 			{
-							
+				/*			
 				$this->Cell($wi[0],4,$cont,'LTRB',0,'C',$fill);
 				$this->Cell($wi[1],4,$row['nombre_item'],'LTRB',0,'L',$fill);
-				$this->Cell($wi[2],4,round($row['cantidad']*100)/100,'LTRB',0,'R',$fill);
-				//$this->Cell($wi[2],4,$row['cantidad'],'LTRB',0,'R',$fill);
+			    $this->Cell($wi[2],4,round($row['cantidad']*100)/100,'LTRB',0,'R',$fill);
 				$this->Cell($wi[3],4,$row['calidad'],'LTRB',0,'C',$fill);
-				//$this->Cell($wi[3],4,$row['unidad_medida'],'LTRB',0,'C',$fill);
 				$this->Cell($wi[4],4,$row['descripcion'],'LTRB',0,'L',$fill);
 				$this->Cell($wi[5],4,round($row['cant_demasia']*100)/100,'LTRB',0,'R',$fill);
-				//$this->Cell($wi[5],4,$row['cant_demasia'],'LTRB',0,'R',$fill);
-				$this->Cell($wi[6],4,round($row['cant_tot']*100)/100,'LTRB',0,'R',$fill);
-				//$this->Cell($wi[6],4,$row['cant_tot'],'LTRB',0,'R',$fill);
+				$this->Cell($wi[6],4,round($row['cant_tot']*100)/100,'LTRB',0,'R',$fill);*/
+				
+				$this->imprimirLinea($row,$cont);
 				
 				$cont++;
-				$this->Ln();
+				//$this->Ln();
 				$fill=!$fill;
 			}
 		}
 
 
+	}
+
+   function imprimirLinea($row,$cont,$fill){
+		$a_final = Array
+					(
+					    0=> $cont,
+					    'cont' => $cont,
+					    1 => $row['nombre_item'],
+					    'nombre_item' => $row['nombre_item'],
+					    2 => round($row['cantidad']*100)/100,
+					    'cantidad' => round($row['cantidad']*100)/100,
+					    3 => $row['calidad'],
+					    'calidad' => $row['calidad'],
+					    4 => $row['descripcion'],
+					    'descripcion' => $row['descripcion'],
+					    5 => round($row['cant_demasia']*100)/100,
+					    'cant_demasia' => round($row['cant_demasia']*100)/100,
+					    6 => round($row['cant_tot']*100)/100,
+					    'cant_tot' => round($row['cant_tot']*100)/100
+					);
+														
+			$this->MultiTabla($a_final, 2,3,3.5,6);
+			
 	}
 
 }

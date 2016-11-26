@@ -64,14 +64,7 @@ if($sort == '') $sortcol = 'ITEM.codigo';
 	}
 
 	$criterio_filtro = $cond->obtener_criterio_filtro();
-	/*echo "dfasdflsdf".$txt_id_item;
-	exit;*/
-	/*$criterio_filtro= $criterio_filtro ." AND SALIDA.estado_salida=''Finalizado'' AND PARALM.id_parametro_almacen=$txt_id_parametro_almacen and ALMEP.id_fina_regi_prog_proy_acti = $id_fina_regi_prog_proy_acti AND
-ALMLOG.id_almacen_logico=$txt_id_almacen_logico and ALMACE.id_almacen=$txt_id_almacen AND
-SALIDA.fecha_finalizado_cancelado >=''$txt_fecha_desde'' and SALIDA.fecha_finalizado_cancelado<=''$txt_fecha_hasta'' 
- AND TRAMO.id_tramo = $txt_id_tramo	GROUP BY ITEM.codigo,ITEM.nombre,ITEM.descripcion";*/
-	//echo "id_item:".$txt_id_item;
-	//exit;
+	
         $salida_det = array();
 		$salida_det = $Custom-> ReporteKardexItemDetalle($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$hidden_ep_id_financiador,$hidden_ep_id_regional,$hidden_ep_id_programa,$hidden_ep_id_proyecto,$hidden_ep_id_actividad,$txt_id_parametro_almacen,$id_fina_regi_prog_proy_acti,$txt_id_almacen_logico,$txt_id_almacen,$txt_id_item,$txt_fecha_desde,$txt_fecha_hasta);
 		$_SESSION['PDF_kardex_item_detalle']=$Custom->salida;
