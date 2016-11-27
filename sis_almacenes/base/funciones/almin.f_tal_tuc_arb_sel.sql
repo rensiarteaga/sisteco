@@ -337,10 +337,8 @@ BEGIN
                            TIPOUCC.nombre as nombre_padre,
                            ''no''::varchar as considerar_repeticion,
                            TIPOUC.estado
-                           FROM almin.tal_composicion_tuc COMTUC
-                           INNER JOIN almin.tal_tipo_unidad_constructiva TIPOUC
-                           ON TIPOUC.id_tipo_unidad_constructiva = COMTUC.id_tuc_hijo
-                           INNER JOIN almin.tal_tipo_unidad_constructiva TIPOUCC
+                           FROM almin.tal_composicion_tuc COMTUC INNER JOIN almin.tal_tipo_unidad_constructiva TIPOUC
+                           ON TIPOUC.id_tipo_unidad_constructiva = COMTUC.id_tuc_hijo INNER JOIN almin.tal_tipo_unidad_constructiva TIPOUCC
                            ON TIPOUCC.id_tipo_unidad_constructiva = COMTUC.id_tipo_unidad_constructiva
                            WHERE COMTUC.id_tipo_unidad_constructiva = '||COALESCE(al_raiz,'0')||' AND ';
             g_consulta := g_consulta || pm_criterio_filtro;
@@ -406,22 +404,23 @@ BEGIN
 						   END as cant_tot,
             			   (SELECT demasia_porc FROM almin.tal_parametro_almacen WHERE cierre = ''no'' ORDER BY gestion DESC LIMIT 1) as demasia_porc,
  ITEM.calidad,
-                   SUPGRU.nombre as nombre_super
+                   SUPGRU.nombre as nombre_super,
+                   COALESCE(ITEM.peso_kg,0)::numeric as  peso_kg
                    
        FROM almin.tal_componente COMP
-                           INNER JOIN almin.tal_item ITEM
-                           ON ITEM.id_item=COMP.id_item
-                           INNER JOIN almin.tal_supergrupo SUPGRU
-						   ON SUPGRU.id_supergrupo = ITEM.id_supergrupo
+                           INNER JOIN almin.tal_item ITEM ON ITEM.id_item=COMP.id_item
+                           INNER JOIN almin.tal_supergrupo SUPGRU ON SUPGRU.id_supergrupo = ITEM.id_supergrupo
 						   WHERE COMP.id_tipo_unidad_constructiva='||al_raiz||' AND ';
             g_consulta := g_consulta || pm_criterio_filtro;
 	-- SE AUMENTA EL ORDEN Y LOS PARÁMETROS DE LA CANTIDAD DE REGISTROS A DESPLEGAR
-            g_consulta := g_consulta || ' ORDER BY ' || pm_sortcol;
+            g_consulta := g_consulta || ' ORDER BY  ' || pm_sortcol;
 --            g_consulta := g_consulta || ' LIMIT ' || pm_cant || ' OFFSET ' || pm_puntero;
 		
             FOR g_registros in EXECUTE(g_consulta) LOOP
                 RETURN NEXT g_registros;
             END LOOP;
+            
+            
 
             -- DESCRIPCIÓN DE ÉXITO PARA GUARDAR EN EL LOG
             g_descripcion_log_error := 'Consulta ejecutada';

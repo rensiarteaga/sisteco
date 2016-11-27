@@ -480,6 +480,9 @@ class cls_DBItem
 		$this->var->add_def_cols('nombre_supg','varchar');
 		$this->var->add_def_cols('nombre_unid_base','varchar');
 		$this->var->add_def_cols('mat_bajo_responsabilidad','varchar');
+		$this->var->add_def_cols('descripcion_aux','varchar');
+		
+		
 
 		//Ejecuta la función de consulta
 		$res = $this->var->exec_query();
@@ -630,6 +633,7 @@ class cls_DBItem
 		$this->var->add_def_cols('total','numeric');
 		$this->var->add_def_cols('nuevo','numeric');
 		$this->var->add_def_cols('usado','numeric');
+		$this->var->add_def_cols('descripcion_aux','varchar');
 		
 		
 		//Ejecuta la función de consulta

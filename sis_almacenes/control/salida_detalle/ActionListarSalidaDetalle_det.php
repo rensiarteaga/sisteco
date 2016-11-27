@@ -120,6 +120,8 @@ if($_SESSION['autentificado']=='SI')
 			$xml->add_nodo('nombre_id3',$f["nombre_id3"]);
 			$xml->add_nodo('emergencia',$f["emergencia"]);
 			$xml->add_nodo('unidad_medida',$f["unidad_medida"]);
+			
+			
 			$xml->fin_rama();
 		}
 		$xml->mostrar_xml();

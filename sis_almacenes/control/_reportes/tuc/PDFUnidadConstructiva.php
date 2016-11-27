@@ -78,6 +78,10 @@ class PDF extends FPDF
 	$Custom=new cls_CustomDBAlmacenes();
 	$CustomItem=new cls_CustomDBAlmacenes();
 
+//echo 'tipo...'.   $tipo;
+//exit;
+
+
 	if ($tipo==raiz){
 		$sortcol='TIPOUC.codigo';
 		$Custom->ListarTipoUnidadConstructivaRaiz($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$hidden_ep_id_financiador,$hidden_ep_id_regional,$hidden_ep_id_programa,$hidden_ep_id_proyecto,$hidden_ep_id_actividad,$node);
@@ -95,6 +99,10 @@ class PDF extends FPDF
 	$nodes_item=$CustomItem->salida;
 	$rama=sizeof($nodes_rama);
 	$item=sizeof($nodes_item);
+	
+	
+	//echo 'tipo...'.   var_dump($nodes_item);
+    //exit;
 	
 	if($rama!=0 && $item!=0){
 		$nodes=array_merge($nodes_rama,$nodes_item);
@@ -274,7 +282,7 @@ class PDF extends FPDF
 			$this->SetDecimales(array(0,0,0,0,0,0,0));
 			//RAC FIN
 			
-			
+			 $total = 0;
 			foreach($data as $row)
 			{
 				/*			
@@ -286,19 +294,37 @@ class PDF extends FPDF
 				$this->Cell($wi[5],4,round($row['cant_demasia']*100)/100,'LTRB',0,'R',$fill);
 				$this->Cell($wi[6],4,round($row['cant_tot']*100)/100,'LTRB',0,'R',$fill);*/
 				
-				$this->imprimirLinea($row,$cont,$fill);
+				$total = $total + $this->imprimirLinea($row,$cont,$fill);
 				
 				$cont++;
 				//$this->Ln();
 				$fill=!$fill;
 				$this->fill =  $fill;
 			}
+			
+			if($total > 0){
+				$this->Ln();
+				$this->Ln();
+				$this->Cell($wi[4],4,'Peso Total: '.strval($total). ' Kg.'  ,'',0,'L',$fill);
+			}
+			
 		}
 
 
 	}
-
+  
+   
+  
+   
    function imprimirLinea($row,$cont,$fill){
+	   	
+   	   $peso_total = strval(round($row['cant_tot'] * $row['peso_kg']*100)/100);
+	   $descripcion =  $row['descripcion'];
+	   if($peso_total > 0){
+	   	 $descripcion =  $descripcion.' (Kg: '. $peso_total.')';
+	   }
+	  
+	   //$descripcion ='';
 		$a_final = Array
 					(
 					    0=> $cont,
@@ -309,8 +335,8 @@ class PDF extends FPDF
 					    'cantidad' => round($row['cantidad']*100)/100,
 					    3 => $row['calidad'],
 					    'calidad' => $row['calidad'],
-					    4 => $row['descripcion'],
-					    'descripcion' => $row['descripcion'],
+					    4 => $descripcion,
+					    'descripcion' => $descripcion,
 					    5 => round($row['cant_demasia']*100)/100,
 					    'cant_demasia' => round($row['cant_demasia']*100)/100,
 					    6 => round($row['cant_tot']*100)/100,
@@ -318,6 +344,7 @@ class PDF extends FPDF
 					);
 														
 			$this->MultiTabla($a_final, 2,3,3.5,6);
+			return $peso_total;
 			
 	}
 

@@ -289,8 +289,8 @@ class cls_DBTipoUnidadConstructiva
 		//Obtiene la cadena con que se llamó a la función de postgres
 		$this->query = $this->var->query;
 		
-		echo "query: ". $this->query;
-		exit;
+		//echo "query: ". $this->query;
+		//exit;
 		
 		return $res;
 	}
@@ -404,6 +404,9 @@ class cls_DBTipoUnidadConstructiva
 		$this->var->add_def_cols('nombre_item','varchar');
 		$this->var->add_def_cols('codigo_item','varchar');
 		$this->var->add_def_cols('id_tipo_unidad_constructiva','int4');
+		//$this->var->add_def_cols('peso_kg','numeric');
+		
+		
 		
 		
 		$res = $this->var->exec_query();
@@ -413,6 +416,11 @@ class cls_DBTipoUnidadConstructiva
 
 		//Obtiene la cadena con que se llamó a la función de postgres
 		$this->query = $this->var->query;
+		
+		echo "query: ". $this->query;
+		exit;
+		
+		
 		return $res;
 	}
 	

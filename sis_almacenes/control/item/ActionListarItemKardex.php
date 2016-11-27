@@ -110,6 +110,9 @@ if($_SESSION['autentificado']=="SI")
 			$xml->add_nodo('total',$f["total"]);
 			$xml->add_nodo('nuevo',$f["nuevo"]);
 			$xml->add_nodo('usado',$f["usado"]);
+			$xml->add_nodo('descripcion_aux',$f["descripcion_aux"]);
+			
+			
 			$xml->fin_rama();
 		}
 		$xml->mostrar_xml();

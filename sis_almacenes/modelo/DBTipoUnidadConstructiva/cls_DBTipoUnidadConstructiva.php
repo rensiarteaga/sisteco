@@ -472,6 +472,7 @@ class cls_DBTipoUnidadConstructiva
 		
 		$this->var->add_def_cols('calidad','varchar');
 		$this->var->add_def_cols('nombre_super','varchar');
+		$this->var->add_def_cols('peso_kg','numeric');
 
 		$res = $this->var->exec_query();
 

@@ -289,7 +289,8 @@ BEGIN
                            nombre_unid_base,
                            total,
                            Nuevo,
-                           Usado
+                           Usado,
+                           descripcion_aux
                            FROM almin.val_kardex_logico
                            WHERE ';
             g_consulta := g_consulta || pm_criterio_filtro;
@@ -316,7 +317,8 @@ BEGIN
                            id_id2              ,id_id1          ,id_subgrupo             ,id_grupo,
                            id_supergrupo       ,nombre          ,nombre_id3              ,nombre_id2,
                            nombre_id1          ,nombre_subg     ,nombre_grupo            ,nombre_supg,
-                           nombre_unid_base    ,mat_bajo_responsabilidad
+                           nombre_unid_base    ,mat_bajo_responsabilidad, 
+                           descripcion_aux
                            FROM almin.val_item
                            WHERE ';
             g_consulta := g_consulta || pm_criterio_filtro;

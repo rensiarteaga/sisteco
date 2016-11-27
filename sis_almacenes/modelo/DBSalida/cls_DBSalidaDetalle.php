@@ -81,7 +81,8 @@ class cls_DBSalidaDetalle
 		$this->var->add_def_cols('nombre_id3','varchar');
 		$this->var->add_def_cols('emergencia','varchar');
 		$this->var->add_def_cols('unidad_medida','varchar');
-
+		
+		
 
 		//Ejecuta la función de consulta
 		$res = $this->var->exec_query();

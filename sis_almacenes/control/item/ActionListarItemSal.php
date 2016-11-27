@@ -119,6 +119,8 @@ if($_SESSION['autentificado']=="SI")
 			$xml->add_nodo('nombre_supg', $f["nombre_supg"]);
 			$xml->add_nodo('nombre_unid_base', $f["nombre_unid_base"]);
 			$xml->add_nodo('mat_bajo_responsabilidad', $f["mat_bajo_responsabilidad"]);
+			$xml->add_nodo('descripcion_aux', $f["descripcion_aux"]);
+			
 			$xml->fin_rama();
 		}
 		$xml->mostrar_xml();
