@@ -81,6 +81,8 @@ if($_SESSION["autentificado"]=="SI")
 			$txt_descripcion= $_GET["txt_descripcion_$j"];
 			$txt_observaciones= $_GET["txt_observaciones_$j"];
 			$txt_fecha_reg= $_GET["txt_fecha_reg_$j"];
+			
+			$txt_id_prog_proy_acti= $_GET["txt_id_prog_proy_acti_$j"];
 
 		}
 		else
@@ -90,6 +92,7 @@ if($_SESSION["autentificado"]=="SI")
 			$txt_descripcion=$_POST["txt_descripcion_$j"];
 			$txt_observaciones=$_POST["txt_observaciones_$j"];
 			$txt_fecha_reg=$_POST["txt_fecha_reg_$j"];
+			$txt_id_prog_proy_acti= $_POST["txt_id_prog_proy_acti_$j"];
 
 		}
 
@@ -113,7 +116,7 @@ if($_SESSION["autentificado"]=="SI")
 			}
 
 			//Validación satisfactoria, se ejecuta la inserción en la tabla tal_tramo
-			$res = $Custom -> InsertarTramo($hidden_id_tramo, $txt_codigo, $txt_descripcion, $txt_observaciones, $txt_fecha_reg);
+			$res = $Custom -> InsertarTramo($hidden_id_tramo, $txt_codigo, $txt_descripcion, $txt_observaciones, $txt_fecha_reg,$txt_id_prog_proy_acti);
 
 			if(!$res)
 			{
@@ -146,7 +149,7 @@ if($_SESSION["autentificado"]=="SI")
 				exit;
 			}
 
-			$res = $Custom->ModificarTramo($hidden_id_tramo, $txt_codigo, $txt_descripcion, $txt_observaciones, $txt_fecha_reg);
+			$res = $Custom->ModificarTramo($hidden_id_tramo, $txt_codigo, $txt_descripcion, $txt_observaciones, $txt_fecha_reg,$txt_id_prog_proy_acti);
 
 			if(!$res)
 			{

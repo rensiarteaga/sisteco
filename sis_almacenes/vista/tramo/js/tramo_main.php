@@ -65,6 +65,8 @@ function pagina_tramo(idContenedor,direccion,paramConfig)
 		'codigo',
 		'descripcion',
 		'observaciones',
+		'id_prog_proy_acti',
+		'desc_programa_proyecto_actividad',
 		{name: 'fecha_reg',type:'date',dateFormat:'Y-m-d'}
 
 		]),remoteSort:true});
@@ -77,11 +79,23 @@ function pagina_tramo(idContenedor,direccion,paramConfig)
 				CantFiltros:paramConfig.CantFiltros
 			}
 		});
+		
+	ds_programa_proyecto_actividad = new Ext.data.Store({proxy: new Ext.data.HttpProxy({url: direccion+'../../../../sis_parametros/control/programa_proyecto_actividad/ActionListarProgramaProyectoActividad.php'}),
+			reader: new Ext.data.XmlReader({
+			record: 'ROWS',
+			id: 'id_prog_proy_acti',
+			totalRecords: 'TotalCount'
+		}, ['id_prog_proy_acti','id_programa','id_proyecto','id_actividad','desc_prog_proy_acti'])
+	});
+	
+	
 		//DATA STORE COMBOS
 
 		//FUNCIONES RENDER
 
-
+    function render_id_prog_proy_acti(value, p, record){return String.format('{0}', record.data['desc_programa_proyecto_actividad']);}
+	
+	
 
 
 		/////////////////////////
@@ -192,6 +206,45 @@ function pagina_tramo(idContenedor,direccion,paramConfig)
 			save_as:'txt_fecha_reg'
 		};
 		vectorAtributos[4] = param_fecha_reg;
+		
+		vectorAtributos[5]= {
+			validacion: {
+			name:'id_prog_proy_acti',
+			fieldLabel:'Relación Prog/Proy/Acti',
+			allowBlank:false,			
+			emptyText:'Prog/Proy/Acti...',
+			desc: 'desc_programa_proyecto_actividad', //indica la columna del store principal ds del que proviane la descripcion
+			store:ds_programa_proyecto_actividad,
+			valueField: 'id_prog_proy_acti',
+			displayField: 'desc_prog_proy_acti',
+			queryParam: 'filterValue_0',
+			filterCol:'PGPYAC.nombre_programa#PGPYAC.nombre_proyecto#PGPYAC.nombre_actividad',
+			typeAhead:true,
+			forceSelection:true,
+			mode:'remote',
+			queryDelay:250,
+			pageSize:100,
+			minListWidth:450,
+			grow:true,
+			width:'100%',
+			//grow:true,
+			resizable:true,
+			queryParam:'filterValue_0',
+			minChars:1, ///caracteres mínimos requeridos para iniciar la busqueda
+			triggerAction:'all',
+			editable:true,
+			renderer:render_id_prog_proy_acti,
+			grid_visible:true,
+			grid_editable:true,
+			width_grid:250 // ancho de columna en el gris
+		},
+		tipo:'ComboBox',
+		filtro_0:true,
+		filtro_1:true,
+		filterColValue:'PROGRA.nombre_programa#PROYEC.nombre_proyecto#ACTIVI.nombre_actividad',
+		defecto: '',
+		save_as:'txt_id_prog_proy_acti'
+	};
 
 		//////////////////////////////////////////////////////////////
 		// ----------            FUNCIONES RENDER    ---------------//
@@ -261,6 +314,8 @@ function pagina_tramo(idContenedor,direccion,paramConfig)
 					var data='m_id_tramo='+SelectionsRecord.data.id_tramo;
 					data=data+'&m_codigo='+SelectionsRecord.data.codigo;
 					data=data+'&m_descripcion='+SelectionsRecord.data.descripcion;
+					data=data+'&m_id_prog_proy_acti='+SelectionsRecord.data.id_prog_proy_acti;
+					data=data+'&m_desc_programa_proyecto_actividad='+SelectionsRecord.data.desc_programa_proyecto_actividad;
 
 					var ParamVentana={Ventana:{width:'90%',height:'70%'}}
 					layout_tramo.loadWindows(direccion+'../../../vista/tramo_unidad_constructiva/tramo_unidad_constructiva_det.php?'+data,'Relación Tramos Unidades Constructivas',ParamVentana);
@@ -280,6 +335,8 @@ function pagina_tramo(idContenedor,direccion,paramConfig)
 					var data='m_id_tramo='+SelectionsRecord.data.id_tramo;
 					data=data+'&m_codigo='+SelectionsRecord.data.codigo;
 					data=data+'&m_descripcion='+SelectionsRecord.data.descripcion;
+					data=data+'&m_id_prog_proy_acti='+SelectionsRecord.data.id_prog_proy_acti;
+					data=data+'&m_desc_programa_proyecto_actividad='+SelectionsRecord.data.desc_programa_proyecto_actividad;
 
 					var ParamVentana={Ventana:{width:'90%',height:'70%'}}
 					layout_tramo.loadWindows(direccion+'../../../vista/tramo_subactividad/tramo_subactividad_det.php?'+data,'Relación Tramos Subactividad',ParamVentana);

@@ -336,68 +336,39 @@ BEGIN
                                SALIDA.id_supervisor					   ,SALIDA.receptor_ci					  ,SALIDA.solicitante,
                                SALIDA.solicitante_ci				   ,SALIDA.num_contrato,
                                COALESCE(PERSON3.apellido_paterno,'''') || '' '' || COALESCE(PERSON3.apellido_materno,'''') || '' '' || COALESCE(PERSON3.nombre,'''') as nombre_superv,
-                               PARALM.gestion                          ,MOTSAL.id_motivo_salida               ,ALMACE.id_almacen
+                               PARALM.gestion                          ,MOTSAL.id_motivo_salida               ,ALMACE.id_almacen,
+                               UNICON.id_unidad_constructiva
                            FROM almin.tal_salida SALIDA
-                           LEFT JOIN almin.tal_responsable_almacen RESALM
-                           ON RESALM.id_responsable_almacen=SALIDA.id_responsable_almacen
-                           INNER JOIN almin.tal_almacen_logico ALMLOG
-                           ON ALMLOG.id_almacen_logico=SALIDA.id_almacen_logico
-                           LEFT JOIN kard.tkp_empleado EMPLEA
-                           ON EMPLEA.id_empleado=SALIDA.id_empleado
-                           LEFT JOIN sss.tsg_persona PERSON
-                           ON PERSON.id_persona=EMPLEA.id_persona
-                           LEFT JOIN almin.tal_firma_autorizada FIRAUT
-                           ON FIRAUT.id_firma_autorizada=SALIDA.id_firma_autorizada
-                           LEFT JOIN kard.tkp_empleado_tpm_frppa EFRPPA
-                           ON EFRPPA.id_empleado_frppa=FIRAUT.id_empleado_frppa
-                           LEFT JOIN kard.tkp_empleado EMPLEA2
-                           ON EMPLEA2.id_empleado=EFRPPA.id_empleado
-                           LEFT JOIN sss.tsg_persona PERSON2
-                           ON PERSON2.id_persona=EMPLEA2.id_persona
-                           LEFT JOIN param.tpm_contratista CONTRA
-                           ON CONTRA.id_contratista=SALIDA.id_contratista
-                           INNER JOIN almin.tal_tipo_material TIPMAT
-                           ON TIPMAT.id_tipo_material=SALIDA.id_tipo_material
-                           LEFT JOIN param.tpm_institucion INSTIT
-                           ON INSTIT.id_institucion=SALIDA.id_institucion
-                           LEFT JOIN param.tpm_subactividad SUBACT
-                           ON SUBACT.id_subactividad=SALIDA.id_subactividad
-                           INNER JOIN almin.tal_motivo_salida_cuenta MOSACU
-            			   ON MOSACU.id_motivo_salida_cuenta=SALIDA.id_motivo_salida_cuenta
-            			   INNER JOIN almin.tal_almacen_ep ALMAEP
-            			   ON ALMAEP.id_almacen_ep = ALMLOG.id_almacen_ep
-            			   INNER JOIN almin.tal_almacen ALMACE
-            			   ON ALMACE.id_almacen = ALMAEP.id_almacen
-            			   INNER JOIN almin.tal_motivo_salida MOTSAL
-            			   ON MOTSAL.id_motivo_salida = MOSACU.id_motivo_salida
-            			   INNER JOIN param.tpm_fina_regi_prog_proy_acti FRPPA
-                           ON FRPPA.id_fina_regi_prog_proy_acti = ALMAEP.id_fina_regi_prog_proy_acti
-                           INNER JOIN param.tpm_financiador FINANC
-                           ON FINANC.id_financiador = FRPPA.id_financiador
-                           INNER JOIN param.tpm_regional REGION
-                           ON REGION.id_regional = FRPPA.id_regional
-                           INNER JOIN param.tpm_programa_proyecto_actividad PGPYAC
-                           ON PGPYAC.id_prog_proy_acti = FRPPA.id_prog_proy_acti
-                           INNER JOIN param.tpm_programa PROGRA
-                           ON PROGRA.id_programa = PGPYAC.id_programa
-                           INNER JOIN param.tpm_proyecto PROYEC
-                           ON PROYEC.id_proyecto = PGPYAC.id_proyecto
-                           INNER JOIN param.tpm_actividad ACTIVI
-                           ON ACTIVI.id_actividad = PGPYAC.id_actividad
-                           LEFT JOIN almin.tal_tramo_subactividad TRASUB
-                           ON TRASUB.id_tramo_subactividad = SALIDA.id_tramo_subactividad
-                           LEFT JOIN almin.tal_tramo TRAMO
-                           ON TRAMO.id_tramo = TRASUB.id_tramo
-                           LEFT JOIN almin.tal_tramo_unidad_constructiva TRAUNI
-                           ON TRAUNI.id_tramo_unidad_constructiva = SALIDA.id_tramo_unidad_constructiva
-                           LEFT JOIN almin.tal_unidad_constructiva UNICON
-                           ON UNICON.id_unidad_constructiva = TRAUNI.id_unidad_constructiva
-                           LEFT JOIN almin.tal_supervisor SUPERV
-                           ON SUPERV.id_supervisor = SALIDA.id_supervisor
-                           LEFT JOIN sss.tsg_persona PERSON3
-                           ON PERSON3.id_persona = SUPERV.id_persona
-                           INNER JOIN almin.tal_parametro_almacen PARALM
-                           ON PARALM.id_parametro_almacen = SALIDA.id_parametro_almacen
+                           LEFT JOIN almin.tal_responsable_almacen RESALM ON RESALM.id_responsable_almacen=SALIDA.id_responsable_almacen
+                           INNER JOIN almin.tal_almacen_logico ALMLOG ON ALMLOG.id_almacen_logico=SALIDA.id_almacen_logico
+                           LEFT JOIN kard.tkp_empleado EMPLEA ON EMPLEA.id_empleado=SALIDA.id_empleado
+                           LEFT JOIN sss.tsg_persona PERSON ON PERSON.id_persona=EMPLEA.id_persona
+                           LEFT JOIN almin.tal_firma_autorizada FIRAUT ON FIRAUT.id_firma_autorizada=SALIDA.id_firma_autorizada
+                           LEFT JOIN kard.tkp_empleado_tpm_frppa EFRPPA ON EFRPPA.id_empleado_frppa=FIRAUT.id_empleado_frppa
+                           LEFT JOIN kard.tkp_empleado EMPLEA2 ON EMPLEA2.id_empleado=EFRPPA.id_empleado
+                           LEFT JOIN sss.tsg_persona PERSON2 ON PERSON2.id_persona=EMPLEA2.id_persona
+                           LEFT JOIN param.tpm_contratista CONTRA ON CONTRA.id_contratista=SALIDA.id_contratista
+                           INNER JOIN almin.tal_tipo_material TIPMAT ON TIPMAT.id_tipo_material=SALIDA.id_tipo_material
+                           LEFT JOIN param.tpm_institucion INSTIT ON INSTIT.id_institucion=SALIDA.id_institucion
+                           LEFT JOIN param.tpm_subactividad SUBACT ON SUBACT.id_subactividad=SALIDA.id_subactividad
+                           INNER JOIN almin.tal_motivo_salida_cuenta MOSACU  ON MOSACU.id_motivo_salida_cuenta=SALIDA.id_motivo_salida_cuenta
+            			   INNER JOIN almin.tal_almacen_ep ALMAEP  ON ALMAEP.id_almacen_ep = ALMLOG.id_almacen_ep
+            			   INNER JOIN almin.tal_almacen ALMACE ON ALMACE.id_almacen = ALMAEP.id_almacen
+            			   INNER JOIN almin.tal_motivo_salida MOTSAL ON MOTSAL.id_motivo_salida = MOSACU.id_motivo_salida
+            			   INNER JOIN param.tpm_fina_regi_prog_proy_acti FRPPA ON FRPPA.id_fina_regi_prog_proy_acti = ALMAEP.id_fina_regi_prog_proy_acti
+                           INNER JOIN param.tpm_financiador FINANC ON FINANC.id_financiador = FRPPA.id_financiador
+                           INNER JOIN param.tpm_regional REGION ON REGION.id_regional = FRPPA.id_regional
+                           INNER JOIN param.tpm_programa_proyecto_actividad PGPYAC ON PGPYAC.id_prog_proy_acti = FRPPA.id_prog_proy_acti
+                           INNER JOIN param.tpm_programa PROGRA ON PROGRA.id_programa = PGPYAC.id_programa
+                           INNER JOIN param.tpm_proyecto PROYEC ON PROYEC.id_proyecto = PGPYAC.id_proyecto
+                           INNER JOIN param.tpm_actividad ACTIVI ON ACTIVI.id_actividad = PGPYAC.id_actividad
+                           LEFT JOIN almin.tal_tramo_subactividad TRASUB ON TRASUB.id_tramo_subactividad = SALIDA.id_tramo_subactividad
+                           LEFT JOIN almin.tal_tramo TRAMO ON TRAMO.id_tramo = TRASUB.id_tramo
+                           LEFT JOIN almin.tal_tramo_unidad_constructiva TRAUNI ON TRAUNI.id_tramo_unidad_constructiva = SALIDA.id_tramo_unidad_constructiva
+                           LEFT JOIN almin.tal_unidad_constructiva UNICON ON UNICON.id_unidad_constructiva = TRAUNI.id_unidad_constructiva
+                           LEFT JOIN almin.tal_supervisor SUPERV ON SUPERV.id_supervisor = SALIDA.id_supervisor
+                           LEFT JOIN sss.tsg_persona PERSON3 ON PERSON3.id_persona = SUPERV.id_persona
+                           INNER JOIN almin.tal_parametro_almacen PARALM ON PARALM.id_parametro_almacen = SALIDA.id_parametro_almacen
                            WHERE SALIDA.tipo_reg = ''movimiento'' AND SALIDA.estado_salida = ''Borrador'' AND ';
             g_consulta := g_consulta || pm_criterio_filtro;
           --  para que los usuarios  solo puedan ver los pedidos realizados por ellos
@@ -1500,34 +1471,20 @@ FROM almin.tal_salida SALIDA
   SUPGRU.demasia
                       
 FROM almin.tal_orden_salida_uc_detalle OSUCDE
-						INNER JOIN almin.tal_salida SALIDA
-						ON SALIDA.id_salida = OSUCDE.id_salida
-						INNER JOIN almin.tal_almacen_logico ALMLOG
-						ON ALMLOG.id_almacen_logico = SALIDA.id_almacen_logico
-						INNER JOIN almin.tal_almacen_ep ALMAEP
-						ON ALMAEP.id_almacen_ep = ALMLOG.id_almacen_ep
-						INNER JOIN almin.tal_almacen ALMACE
-						ON ALMACE.id_almacen = ALMAEP.id_almacen
-						INNER JOIN almin.tal_componente COMPON
-						ON COMPON.id_tipo_unidad_constructiva = OSUCDE.id_tipo_unidad_constructiva
-						INNER JOIN almin.tal_tipo_unidad_constructiva TIPOUC
-						ON TIPOUC.id_tipo_unidad_constructiva = COMPON.id_tipo_unidad_constructiva
-						INNER JOIN almin.tal_item ITEM
-						ON ITEM.id_item = COMPON.id_item
-						LEFT JOIN almin.tal_composicion_tuc COMTUC
-						ON COMTUC.id_tuc_hijo = OSUCDE.id_tipo_unidad_constructiva
-						LEFT JOIN almin.tal_tipo_unidad_constructiva TIPOUC1
-						ON TIPOUC1.id_tipo_unidad_constructiva = COMTUC.id_tipo_unidad_constructiva
-                        LEFT JOIN param.tpm_contratista CONTRA
-						ON CONTRA.id_contratista = SALIDA.id_contratista
-						LEFT JOIN param.tpm_institucion INSTIT
-						ON INSTIT.id_institucion = SALIDA.id_institucion
-						LEFT JOIN kard.tkp_empleado EMPLEA
-						ON EMPLEA.id_empleado = SALIDA.id_empleado
-						INNER JOIN param.tpm_unidad_medida_base UNMEDB
-						ON UNMEDB.id_unidad_medida_base = ITEM.id_unidad_medida_base
-                        INNER JOIN almin.tal_supergrupo SUPGRU
-                        ON SUPGRU.id_supergrupo = ITEM.id_supergrupo
+						INNER JOIN almin.tal_salida SALIDA ON SALIDA.id_salida = OSUCDE.id_salida
+						INNER JOIN almin.tal_almacen_logico ALMLOG ON ALMLOG.id_almacen_logico = SALIDA.id_almacen_logico
+						INNER JOIN almin.tal_almacen_ep ALMAEP ON ALMAEP.id_almacen_ep = ALMLOG.id_almacen_ep
+						INNER JOIN almin.tal_almacen ALMACE ON ALMACE.id_almacen = ALMAEP.id_almacen
+						INNER JOIN almin.tal_componente COMPON ON COMPON.id_tipo_unidad_constructiva = OSUCDE.id_tipo_unidad_constructiva
+						INNER JOIN almin.tal_tipo_unidad_constructiva TIPOUC ON TIPOUC.id_tipo_unidad_constructiva = COMPON.id_tipo_unidad_constructiva
+						INNER JOIN almin.tal_item ITEM ON ITEM.id_item = COMPON.id_item
+						LEFT JOIN almin.tal_composicion_tuc COMTUC ON COMTUC.id_tuc_hijo = OSUCDE.id_tipo_unidad_constructiva
+						LEFT JOIN almin.tal_tipo_unidad_constructiva TIPOUC1 ON TIPOUC1.id_tipo_unidad_constructiva = COMTUC.id_tipo_unidad_constructiva
+                        LEFT JOIN param.tpm_contratista CONTRA ON CONTRA.id_contratista = SALIDA.id_contratista
+						LEFT JOIN param.tpm_institucion INSTIT ON INSTIT.id_institucion = SALIDA.id_institucion
+						LEFT JOIN kard.tkp_empleado EMPLEA ON EMPLEA.id_empleado = SALIDA.id_empleado
+						INNER JOIN param.tpm_unidad_medida_base UNMEDB ON UNMEDB.id_unidad_medida_base = ITEM.id_unidad_medida_base
+                        INNER JOIN almin.tal_supergrupo SUPGRU ON SUPGRU.id_supergrupo = ITEM.id_supergrupo
 						WHERE ';
                         
             g_consulta := g_consulta || pm_criterio_filtro;

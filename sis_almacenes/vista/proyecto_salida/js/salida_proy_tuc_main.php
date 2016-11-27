@@ -115,7 +115,8 @@ function pagina_salida_proy_tuc(idContenedor,direccion,paramConfig)
 		'nombre_superv',
 		'gestion',
 		'id_motivo_salida',
-		'id_almacen'
+		'id_almacen',
+		'id_unidad_constructiva'
 		]),remoteSort:true
 	});
 	//carga datos XML
@@ -779,7 +780,7 @@ function pagina_salida_proy_tuc(idContenedor,direccion,paramConfig)
 			allowBlank:true,
 			emptyText:'Unidad Constructiva...',
 			name: 'id_tramo_unidad_constructiva',
-			desc: 'desc_unidad_constructiva',
+			desc: 'desc_unidad_cons',
 			store:ds_tramo_unidad_constructiva,
 			valueField: 'id_tramo_unidad_constructiva',
 			displayField: 'desc_unidad_constructiva',
@@ -1162,6 +1163,7 @@ function pagina_salida_proy_tuc(idContenedor,direccion,paramConfig)
 	}
 	//Para manejo de eventos
 	function iniciarEventosFormularios(){
+		
 		combo_almacen = Cm_getComponente('id_almacen');
 		combo_almacen_logico = Cm_getComponente('id_almacen_logico');
 		combo_solicitante = Cm_getComponente('solicitante');
@@ -1171,6 +1173,7 @@ function pagina_salida_proy_tuc(idContenedor,direccion,paramConfig)
 		combo_motivo_salida = Cm_getComponente('id_motivo_salida');
 		combo_motivo_salida_cuenta = Cm_getComponente('id_motivo_salida_cuenta');
 		cmb_ep=Cm_getComponente('id_ep');
+		
 		cmb_subactividad=Cm_getComponente('id_subactividad');
 		cmb_tramo_subactividad=Cm_getComponente('id_tramo_subactividad');
 		cmb_tramo_unidad_constructiva=Cm_getComponente('id_tramo_unidad_constructiva');
@@ -1386,8 +1389,14 @@ function pagina_salida_proy_tuc(idContenedor,direccion,paramConfig)
 		combo_almacen_logico.modificado=true;
 		combo_motivo_salida.modificado=true;
 		combo_motivo_salida_cuenta.modificado=true;
-		combo_empleado.modificado=true
-
+		combo_empleado.modificado=true;
+		cmb_subactividad.modificado=true;
+		
+		cmb_subactividad.filterValues[0] = ep['id_programa'];
+		cmb_subactividad.filterValues[1] = ep['id_proyecto'];
+		cmb_subactividad.filterValues[2] = ep['id_actividad'];
+		
+		
 	};
 
 	//función para terminar la orden de ingreso

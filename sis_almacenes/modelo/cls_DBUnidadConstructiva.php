@@ -57,8 +57,8 @@ class cls_DBUnidadConstructiva
 		$this->var->add_def_cols('fecha_reg','date');
 		$this->var->add_def_cols('id_tipo_unidad_constructiva','int4');
 		$this->var->add_def_cols('desc_tipo_unidad_constructiva','varchar');
-		$this->var->add_def_cols('id_subactividad','int4');
-		$this->var->add_def_cols('desc_subactividad','varchar');
+		$this->var->add_def_cols('id_prog_proy_acti','int4');
+		$this->var->add_def_cols('desc_programa_proyecto_actividad','text');
 
 		//Ejecuta la función de consulta
 		$res = $this->var->exec_query();
@@ -131,7 +131,7 @@ class cls_DBUnidadConstructiva
 	 * Autor:				    (autogenerado)
 	 * Fecha de creación:		2008-03-31 11:16:33
 	 */
-	function InsertarUnidadConstructiva($id_unidad_constructiva,$codigo,$fecha_reg,$id_tipo_unidad_constructiva,$id_subactividad)
+	function InsertarUnidadConstructiva($id_unidad_constructiva,$codigo,$fecha_reg,$id_tipo_unidad_constructiva,$id_prog_proy_acti)
 	{
 		$this->salida = "";
 		$this->nombre_funcion = 'f_tal_unidad_constructiva_iud';
@@ -143,7 +143,7 @@ class cls_DBUnidadConstructiva
 		$this->var->add_param("'$codigo'");
 		$this->var->add_param("'$fecha_reg'");
 		$this->var->add_param($id_tipo_unidad_constructiva);
-		$this->var->add_param($id_subactividad);
+		$this->var->add_param($id_prog_proy_acti);
 
 		//Ejecuta la función
 		$res = $this->var->exec_non_query();
@@ -163,7 +163,7 @@ class cls_DBUnidadConstructiva
 	 * Autor:				    (autogenerado)
 	 * Fecha de creación:		2008-03-31 11:16:33
 	 */
-	function ModificarUnidadConstructiva($id_unidad_constructiva,$codigo,$fecha_reg,$id_tipo_unidad_constructiva,$id_subactividad)
+	function ModificarUnidadConstructiva($id_unidad_constructiva,$codigo,$fecha_reg,$id_tipo_unidad_constructiva,$id_prog_proy_acti)
 	{
 		$this->salida = "";
 		$this->nombre_funcion = 'f_tal_unidad_constructiva_iud';
@@ -175,7 +175,7 @@ class cls_DBUnidadConstructiva
 		$this->var->add_param("'$codigo'");
 		$this->var->add_param("'$fecha_reg'");
 		$this->var->add_param($id_tipo_unidad_constructiva);
-		$this->var->add_param($id_subactividad);
+		$this->var->add_param($id_prog_proy_acti);
 
 		//Ejecuta la función
 		$res = $this->var->exec_non_query();
@@ -227,7 +227,7 @@ class cls_DBUnidadConstructiva
 	 * Autor:				    (autogenerado)
 	 * Fecha de creación:		2008-03-31 11:16:33
 	 */
-	function ValidarUnidadConstructiva($operacion_sql,$id_unidad_constructiva,$codigo,$fecha_reg,$id_tipo_unidad_constructiva,$id_subactividad)
+	function ValidarUnidadConstructiva($operacion_sql,$id_unidad_constructiva,$codigo,$fecha_reg,$id_tipo_unidad_constructiva,$id_prog_proy_acti)
 	{
 		$this->salida = "";
 		$valid = new cls_validacion_serv();
@@ -283,14 +283,14 @@ class cls_DBUnidadConstructiva
 			}
 
 			//Validar id_subactividad - tipo int4
-			/*$tipo_dato->_reiniciar_valor();
-			$tipo_dato->set_Columna("id_subactividad");
+			$tipo_dato->_reiniciar_valor();
+			$tipo_dato->set_Columna("id_prog_proy_acti");
 			$tipo_dato->set_MaxLength(10);
-			if(!$valid->verifica_dato($tipo_dato->TipoDatoInteger(), "id_subactividad", $id_subactividad))
+			if(!$valid->verifica_dato($tipo_dato->TipoDatoInteger(), "id_prog_proy_acti", $id_prog_proy_acti))
 			{
 				$this->salida = $valid->salida;
 				return false;
-			}*/
+			}
 			//Validación exitosa
 			return true;
 		}

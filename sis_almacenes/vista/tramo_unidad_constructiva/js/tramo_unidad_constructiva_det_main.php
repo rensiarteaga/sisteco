@@ -29,7 +29,13 @@ var paginaTipoActivo;
 	
 var paramConfig={TamanoPagina:20,TiempoEspera:10000,CantFiltros:1,FiltroEstructura:false,FiltroAvanzado:fa};
 var maestro={
-	     	id_tramo:<?php echo $m_id_tramo;?>,codigo:'<?php echo $m_codigo;?>',descripcion:'<?php echo $m_descripcion;?>'};
+	     	id_tramo:<?php echo $m_id_tramo;?>,
+	     	codigo:'<?php echo $m_codigo;?>',
+	     	descripcion:'<?php echo $m_descripcion;?>',
+	     	desc_programa_proyecto_actividad:'<?php echo $m_desc_programa_proyecto_actividad;?>',
+	     	id_prog_proy_acti:<?php echo $m_id_prog_proy_acti?>
+	     	
+	     	};
 idContenedorPadre='<?php echo $idContenedorPadre;?>';
 var elemento={idContenedor:idContenedor,pagina:new pagina_tramo_unidad_constructiva_det(idContenedor,direccion,paramConfig,maestro,idContenedorPadre)};
 //ContenedorPrincipal.getPagina(idContenedorPadre).pagina.setPagina(elemento);
@@ -87,11 +93,20 @@ function pagina_tramo_unidad_constructiva_det(idContenedor,direccion,paramConfig
 
 //	var dsMaestro = new Ext.data.Store({proxy: new Ext.data.MemoryProxy(dataMaestro),reader: new Ext.data.ArrayReader({id:0},[{name:'atributo'},{name:'valor'}])});
 //	dsMaestro.load();
-	var cmMaestro = new Ext.grid.ColumnModel([{header:"Atributo",width:150,sortable:false,renderer:negrita,locked:false,dataIndex:'atributo'},{header:"Valor",width: 300,sortable:false,renderer:italic,locked:false,dataIndex:'valor'}]);
+	var cmMaestro = new Ext.grid.ColumnModel(
+						[{header:"Atributo",width:150,sortable:false,renderer:negrita,locked:false,dataIndex:'atributo'},
+						 {header:"Valor",width: 300,sortable:false,renderer:italic,locked:false,dataIndex:'valor'}]);
+						 
 	function negrita(value){return '<span style="color:red;font-size:10pt"><b>'+value+'</b></span>';}
 	function italic(value){return '<i>'+value+'</i>';}
 	var div_grid_detalle=Ext.DomHelper.append(idContenedor,{tag:'div',id:'grid_detalle-'+idContenedor});
-	var gridMaestro=new Ext.grid.Grid(div_grid_detalle,{ds:new Ext.data.SimpleStore({fields:['atributo','valor'],data:[['Id.Tramo',maestro.id_tramo],['Código',maestro.codigo],['Descripción',maestro.descripcion]]}),cm:cmMaestro});
+	var gridMaestro=new Ext.grid.Grid(div_grid_detalle,{ds:new Ext.data.SimpleStore({fields:['atributo','valor'],
+	                                                                                  data:[  ['Id.Tramo',maestro.id_tramo],
+	                                                                                          ['Código',maestro.codigo],
+	                                                                                          ['Descripción',maestro.descripcion],
+	                                                                                          ['Proyecto',maestro.desc_programa_proyecto_actividad]
+	                                                                                          
+	                                                                                          ]}),cm:cmMaestro});
 	gridMaestro.render();
 	//DATA STORE COMBOS
 
@@ -154,6 +169,14 @@ function pagina_tramo_unidad_constructiva_det(idContenedor,direccion,paramConfig
 	};
 	vectorAtributos[1] = param_fecha_reg;
 // txt id_unidad_constructiva
+
+    var filterCols_id_unidad_constructiva=new Array();
+	var filterValues_id_unidad_constructiva=new Array();
+	filterCols_id_unidad_constructiva[0]='UNICON.id_prog_proy_acti';
+	filterValues_id_unidad_constructiva[0]= maestro.id_prog_proy_acti;
+	
+	
+	
 	var param_id_unidad_constructiva= {
 			validacion: {
 			name:'id_unidad_constructiva',
@@ -166,6 +189,8 @@ function pagina_tramo_unidad_constructiva_det(idContenedor,direccion,paramConfig
 			displayField: 'codigo',
 			queryParam: 'filterValue_0',
 			filterCol:'UNICON.codigo#UNICON.direccion',
+			filterCols:filterCols_id_unidad_constructiva,
+			filterValues:filterValues_id_unidad_constructiva,
 			typeAhead:true,
 			forceSelection:true,
 			mode:'remote',
@@ -269,9 +294,18 @@ function pagina_tramo_unidad_constructiva_det(idContenedor,direccion,paramConfig
 
 	this.reload=function(params){
 		var datos=Ext.urlDecode(decodeURIComponent(params));
+		
+		var cmb_id_unidad_constructiva=ClaseMadre_getComponente('id_unidad_constructiva');
+		
+		
 		maestro.id_tramo=datos.m_id_tramo;
 		maestro.codigo=datos.m_codigo;
-		maestro.descripcion=datos.m_descripcion;
+		maestro.descripcion=datos.m_descripcion;		
+		maestro.id_prog_proy_acti =datos.m_id_prog_proy_acti;
+		maestro.desc_programa_proyecto_actividad=datos.m_desc_programa_proyecto_actividad;
+		
+		                                                                              
+	                                                                                          
 		ds.load({
 			params:{
 				start:0,
@@ -280,9 +314,16 @@ function pagina_tramo_unidad_constructiva_det(idContenedor,direccion,paramConfig
 				m_id_tramo:maestro.id_tramo
 			}
 		});
+		
+		
+		cmb_id_unidad_constructiva.modificado = true;
+		cmb_id_unidad_constructiva.filterValues[0] = maestro.id_prog_proy_acti;
+		
+		
 		gridMaestro.getDataSource().removeAll();
-		gridMaestro.getDataSource().loadData([['Id.Tramo',maestro.id_tramo],['Código',maestro.codigo],['Descripción',maestro.descripcion]]);
+		gridMaestro.getDataSource().loadData([['Id.Tramo',maestro.id_tramo],['Código',maestro.codigo],['Descripción',maestro.descripcion],['Proyecto',maestro.desc_programa_proyecto_actividad]]);
 		vectorAtributos[3].defecto=maestro.id_tramo;
+		
 		paramFunciones.btnEliminar.parametros='&m_id_tramo='+maestro.id_tramo;
 		paramFunciones.Save.parametros='&m_id_tramo='+maestro.id_tramo;
 		paramFunciones.ConfirmSave.parametros='&m_id_tramo='+maestro.id_tramo;

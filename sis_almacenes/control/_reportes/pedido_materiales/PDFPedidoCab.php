@@ -79,11 +79,11 @@ class PDF extends FPDF
 		$this->Cell(48,3,' ','LR',0,'C');
 		$this->Cell(48,3,'CI: '.$this->datos[0]['doc_jefe_almacen'],'LR',1,'C');
 		
-		$this->Cell(48,4,'Encargado de Almacén','LRB',0,'C');
+		$this->Cell(48,4,'Encargado de Registros Almacén','LRB',0,'C');
 		//$this->Cell(48,4,'Gestor de Almacenes','LRB',0,'C');
 		$this->Cell(48,4,'','LRB',0,'C');
 		$this->Cell(48,4,'','LRB',0,'C');
-		$this->Cell(48,4,'Jefe de Almacenes','LRB',0,'C');
+		$this->Cell(48,4,'Encargado  de Almacén','LRB',0,'C');
 		$this->ln(1);
 
 		//Número de página

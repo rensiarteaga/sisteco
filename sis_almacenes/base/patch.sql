@@ -386,5 +386,41 @@ IS 'nro de pedido de compra del material';
 
 
 
- 
+/***********************************I-SCP-RAC-ALMIN-2-24/01/2017****************************************/ 
+
+ALTER TABLE almin.tal_unidad_constructiva
+  ADD COLUMN id_prog_proy_acti INTEGER;
+  
+  --------------- SQL ---------------
+
+ALTER TABLE almin.tal_unidad_constructiva
+  ADD CONSTRAINT tal_unidad_constructiva__id_prog_proy_acti_fk FOREIGN KEY (id_prog_proy_acti)
+    REFERENCES param.tpm_programa_proyecto_actividad(id_prog_proy_acti)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+    NOT DEFERRABLE;
+    
+    --------------- SQL ---------------
+
+ALTER TABLE almin.tal_tramo
+  ADD COLUMN id_prog_proy_acti INTEGER;
+
+COMMENT ON COLUMN almin.tal_tramo.id_prog_proy_acti
+IS 'identifica a que poryecto pertene el tramo';
+
+
+
+
+--------------- SQL ---------------
+
+ALTER TABLE almin.tal_tramo
+  ADD CONSTRAINT tal_tramo_id_prog_proy_acti_fk FOREIGN KEY (id_prog_proy_acti)
+    REFERENCES param.tpm_programa_proyecto_actividad(id_prog_proy_acti)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+    NOT DEFERRABLE;
+  
+  
+/***********************************F-SCP-RAC-ALMIN-2-24/01/2017****************************************/ 
+  
  

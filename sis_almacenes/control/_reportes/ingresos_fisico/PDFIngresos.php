@@ -138,10 +138,10 @@ class PDF extends FPDF
 		$this->Ln(5);
 		
 
-		$this->Cell(64,6,'Encargado de Almacén','LRB',0,'C',$fill);
+		$this->Cell(64,6,'Encargado de Registros Almacén','LRB',0,'C',$fill);
 		//$this->Cell(64,6,'Jefe de Almacenes','LRB',0,'C',$fill);
 		$this->Cell(64,6,'','LRB',0,'C',$fill);
-		$this->Cell(64,6,'Jefe de Almacenes','LRB',0,'C',$fill);
+		$this->Cell(64,6,'Encargado  de Almacén','LRB',0,'C',$fill);
 		//$this->Cell(64,6,'Contratista','LRB',0,'C',$fill);
 		$this->Ln(6);
 

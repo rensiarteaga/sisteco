@@ -841,7 +841,7 @@ function pagina_salida_proy(idContenedor,direccion,paramConfig)
 			allowBlank:true,
 			emptyText:'Unidad Constructiva...',
 			name: 'id_tramo_unidad_constructiva',
-			desc: 'desc_unidad_constructiva',
+			desc: 'desc_unidad_cons',
 			store:ds_tramo_unidad_constructiva,
 			valueField: 'id_tramo_unidad_constructiva',
 			displayField: 'desc_unidad_constructiva',
@@ -1424,7 +1424,13 @@ function pagina_salida_proy(idContenedor,direccion,paramConfig)
 		combo_almacen_logico.modificado=true;
 		combo_motivo_salida.modificado=true;
 		combo_motivo_salida_cuenta.modificado=true;
-		combo_empleado.modificado=true
+		combo_empleado.modificado=true;
+		
+		cmb_subactividad.modificado=true;		
+		cmb_subactividad.filterValues[0] = ep['id_programa'];
+		cmb_subactividad.filterValues[1] = ep['id_proyecto'];
+		cmb_subactividad.filterValues[2] = ep['id_actividad'];
+		
 
 	};
 

@@ -119,6 +119,9 @@ class cls_DBSalidaPedido
 		$this->var->add_def_cols('gestion','varchar');
 		$this->var->add_def_cols('id_motivo_salida','integer');
 		$this->var->add_def_cols('id_almacen','integer');
+		$this->var->add_def_cols('id_unidad_constructiva','integer');
+		
+		
 	
 		//Ejecuta la función de consulta
 		$res = $this->var->exec_query();

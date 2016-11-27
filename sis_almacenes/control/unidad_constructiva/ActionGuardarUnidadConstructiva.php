@@ -80,7 +80,7 @@ if($_SESSION["autentificado"]=="SI")
 			$txt_codigo= $_GET["txt_codigo_$j"];
 			$txt_fecha_reg= $_GET["txt_fecha_reg_$j"];
 			$txt_id_tipo_unidad_constructiva= $_GET["txt_id_tipo_unidad_constructiva_$j"];
-			$txt_id_subactividad= $_GET["txt_id_subactividad_$j"];
+			$txt_id_prog_proy_acti= $_GET["txt_id_prog_proy_acti_$j"];
 
 		}
 		else
@@ -89,7 +89,7 @@ if($_SESSION["autentificado"]=="SI")
 			$txt_codigo=$_POST["txt_codigo_$j"];
 			$txt_fecha_reg=$_POST["txt_fecha_reg_$j"];
 			$txt_id_tipo_unidad_constructiva=$_POST["txt_id_tipo_unidad_constructiva_$j"];
-			$txt_id_subactividad=$_POST["txt_id_subactividad_$j"];
+			$txt_id_prog_proy_acti=$_POST["txt_id_prog_proy_acti_$j"];
 
 		}
 
@@ -98,7 +98,7 @@ if($_SESSION["autentificado"]=="SI")
 			////////////////////Inserción/////////////////////
 
 			//Validación de datos (del lado del servidor)
-			$res = $Custom->ValidarUnidadConstructiva("insert",$hidden_id_unidad_constructiva, $txt_codigo,$txt_fecha_reg,$txt_id_tipo_unidad_constructiva,$txt_id_subactividad);
+			$res = $Custom->ValidarUnidadConstructiva("insert",$hidden_id_unidad_constructiva, $txt_codigo,$txt_fecha_reg,$txt_id_tipo_unidad_constructiva,$txt_id_prog_proy_acti);
 
 			if(!$res)
 			{
@@ -113,7 +113,7 @@ if($_SESSION["autentificado"]=="SI")
 			}
 
 			//Validación satisfactoria, se ejecuta la inserción en la tabla tal_unidad_constructiva
-			$res = $Custom -> InsertarUnidadConstructiva($hidden_id_unidad_constructiva, $txt_codigo, $txt_fecha_reg, $txt_id_tipo_unidad_constructiva, $txt_id_subactividad);
+			$res = $Custom -> InsertarUnidadConstructiva($hidden_id_unidad_constructiva, $txt_codigo, $txt_fecha_reg, $txt_id_tipo_unidad_constructiva, $txt_id_prog_proy_acti);
 
 			if(!$res)
 			{
@@ -132,7 +132,7 @@ if($_SESSION["autentificado"]=="SI")
 		{	///////////////////////Modificación////////////////////
 			
 			//Validación de datos (del lado del servidor)
-			$res = $Custom->ValidarUnidadConstructiva("update",$hidden_id_unidad_constructiva, $txt_codigo, $txt_fecha_reg, $txt_id_tipo_unidad_constructiva, $txt_id_subactividad);
+			$res = $Custom->ValidarUnidadConstructiva("update",$hidden_id_unidad_constructiva, $txt_codigo, $txt_fecha_reg, $txt_id_tipo_unidad_constructiva, $txt_id_prog_proy_acti);
 
 			if(!$res)
 			{
@@ -146,7 +146,7 @@ if($_SESSION["autentificado"]=="SI")
 				exit;
 			}
 
-			$res = $Custom->ModificarUnidadConstructiva($hidden_id_unidad_constructiva, $txt_codigo, $txt_fecha_reg, $txt_id_tipo_unidad_constructiva, $txt_id_subactividad);
+			$res = $Custom->ModificarUnidadConstructiva($hidden_id_unidad_constructiva, $txt_codigo, $txt_fecha_reg, $txt_id_tipo_unidad_constructiva, $txt_id_prog_proy_acti);
 
 			if(!$res)
 			{

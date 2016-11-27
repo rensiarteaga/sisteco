@@ -31,7 +31,11 @@ var paginaTipoActivo;
 	
 var paramConfig={TamanoPagina:20,TiempoEspera:10000,CantFiltros:1,FiltroEstructura:false,FiltroAvanzado:fa};
 var maestro={
-	     	id_tramo:<?php echo $m_id_tramo;?>,codigo:'<?php echo $m_codigo;?>',descripcion:'<?php echo $m_descripcion;?>'};
+	     	id_tramo:<?php echo $m_id_tramo;?>,codigo:'<?php echo $m_codigo;?>',
+	     	descripcion:'<?php echo $m_descripcion;?>',
+	     	desc_programa_proyecto_actividad:'<?php echo $m_desc_programa_proyecto_actividad;?>',
+	     	id_prog_proy_acti:<?php echo $m_id_prog_proy_acti?>
+	     	};
 idContenedorPadre='<?php echo $idContenedorPadre;?>';
 var elemento={idContenedor:idContenedor,pagina:new pagina_tramo_subactividad_det(idContenedor,direccion,paramConfig,maestro,idContenedorPadre)};
 //ContenedorPrincipal.getPagina(idContenedorPadre).pagina.setPagina(elemento);
@@ -156,6 +160,13 @@ function pagina_tramo_subactividad_det(idContenedor,direccion,paramConfig,maestr
 	};
 	vectorAtributos[1] = param_fecha_reg;
 // txt id_subactividad
+
+    var filterCols_id_subactividad = new Array();
+	var filterValues_id_subactividad = new Array();
+	filterCols_id_subactividad[0]='SUBACT.id_prog_proy_acti';
+	filterValues_id_subactividad[0]= maestro.id_prog_proy_acti;
+
+
 	var param_id_subactividad= {
 			validacion: {
 			name:'id_subactividad',
@@ -168,6 +179,8 @@ function pagina_tramo_subactividad_det(idContenedor,direccion,paramConfig,maestr
 			displayField: 'descripcion',
 			queryParam: 'filterValue_0',
 			filterCol:'SUBACT.codigo#SUBACT.descripcion',
+			filterCols:filterCols_id_subactividad,
+			filterValues:filterValues_id_subactividad,
 			typeAhead:true,
 			forceSelection:true,
 			mode:'remote',
@@ -273,7 +286,13 @@ function pagina_tramo_subactividad_det(idContenedor,direccion,paramConfig,maestr
 		var datos=Ext.urlDecode(decodeURIComponent(params));
 		maestro.id_tramo=datos.m_id_tramo;
 		maestro.codigo=datos.m_codigo;
-		maestro.descripcion=datos.m_descripcion;
+		maestro.descripcion=datos.m_descripcion;		
+		maestro.id_prog_proy_acti =datos.m_id_prog_proy_acti;
+		maestro.desc_programa_proyecto_actividad=datos.m_desc_programa_proyecto_actividad;
+		
+		var cmb_id_subactividad=ClaseMadre_getComponente('id_subactividad');
+		
+		
 		ds.load({
 			params:{
 				start:0,
@@ -283,12 +302,15 @@ function pagina_tramo_subactividad_det(idContenedor,direccion,paramConfig,maestr
 			}
 		});
 		gridMaestro.getDataSource().removeAll();
-		gridMaestro.getDataSource().loadData([['Id.Tramo',maestro.id_tramo],['Código',maestro.codigo],['Descripción',maestro.descripcion]]);
+		gridMaestro.getDataSource().loadData([['Id.Tramo',maestro.id_tramo],['Código',maestro.codigo],['Descripción',maestro.descripcion], ['Proyecto',maestro.desc_programa_proyecto_actividad]]);
 		vectorAtributos[3].defecto=maestro.id_tramo;
 		paramFunciones.btnEliminar.parametros='&m_id_tramo='+maestro.id_tramo;
 		paramFunciones.Save.parametros='&m_id_tramo='+maestro.id_tramo;
 		paramFunciones.ConfirmSave.parametros='&m_id_tramo='+maestro.id_tramo;
 		this.InitFunciones(paramFunciones)
+		
+		cmb_id_subactividad.modificado = true;
+		cmb_id_subactividad.filterValues[0] = maestro.id_prog_proy_acti;
 	};
 	//-------------- DEFINICIÓN DE FUNCIONES PROPIAS --------------//
 

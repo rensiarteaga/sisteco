@@ -127,8 +127,8 @@ if($_SESSION['autentificado']=='SI')
 			$xml->add_nodo('desc_tipo_material',$f["desc_tipo_material"]);
 			$xml->add_nodo('id_institucion',$f["id_institucion"]);
 			$xml->add_nodo('desc_institucion',$f["desc_institucion"]);
-			$xml->add_nodo('id_subactividad',$f["id_subactividad"]);
-			$xml->add_nodo('desc_subactividad',$f["desc_subactividad"]);
+			$xml->add_nodo('id_subactividad',$f["id_subactividad"]); ////////////////////////////////
+			$xml->add_nodo('desc_subactividad',$f["desc_subactividad"]);////////////////////////////////////////
 			$xml->add_nodo('id_motivo_salida_cuenta',$f["id_motivo_salida_cuenta"]);
 			$xml->add_nodo('desc_motivo_salida_cuenta',$f["desc_motivo_salida_cuenta"]);
 			$xml->add_nodo('nro_cuenta',$f["nro_cuenta"]);
@@ -153,10 +153,10 @@ if($_SESSION['autentificado']=='SI')
 			$xml->add_nodo('observaciones',$f["observaciones"]);
 			$xml->add_nodo('tipo_pedido',$f["tipo_pedido"]);
 			$xml->add_nodo('receptor',$f["receptor"]);
-			$xml->add_nodo('id_tramo_subactividad',$f["id_tramo_subactividad"]);
-			$xml->add_nodo('id_tramo_unidad_constructiva',$f["id_tramo_unidad_constructiva"]);
-			$xml->add_nodo('desc_tramo',$f["desc_tramo"]);
-			$xml->add_nodo('desc_unidad_cons',$f["desc_unidad_cons"]);
+			$xml->add_nodo('id_tramo_subactividad',$f["id_tramo_subactividad"]);//////////////
+			$xml->add_nodo('id_tramo_unidad_constructiva',$f["id_tramo_unidad_constructiva"]);  //////
+			$xml->add_nodo('desc_tramo',$f["desc_tramo"]);///////
+			$xml->add_nodo('desc_unidad_cons',$f["desc_unidad_cons"]);//////
 			$xml->add_nodo('fecha_borrador',$f["fecha_borrador"]);
 			$xml->add_nodo('id_supervisor',$f["id_supervisor"]);
 			$xml->add_nodo('receptor_ci',$f["receptor_ci"]);
@@ -167,6 +167,8 @@ if($_SESSION['autentificado']=='SI')
 			$xml->add_nodo('gestion',$f["gestion"]);
 			$xml->add_nodo('id_motivo_salida',$f["id_motivo_salida"]);
 			$xml->add_nodo('id_almacen',$f["id_almacen"]);
+			$xml->add_nodo('id_unidad_constructiva',$f["id_unidad_constructiva"]);	
+			
 			$xml->fin_rama();
 		}
 		$xml->mostrar_xml();

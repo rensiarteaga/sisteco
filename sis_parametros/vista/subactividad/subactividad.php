@@ -14,7 +14,6 @@ session_start();
 <meta http-equiv='Content-Type' content='text/html; charset=iso-8859-15'>
 <title>sis_parametros subactividad</title>
    <script type='text/javascript' src='../../../sis_parametros/vista/subactividad/js/subactividad_combo.js'></script>
-   <script type='text/javascript' src='../../../sis_parametros/vista/subactividad/js/subactividad.js'></script>
    <script type='text/javascript' src='../../../sis_parametros/vista/subactividad/js/subactividad_main.php?idContenedor=<?php echo "$idContenedor";?>'></script>
 </head>
 <body>

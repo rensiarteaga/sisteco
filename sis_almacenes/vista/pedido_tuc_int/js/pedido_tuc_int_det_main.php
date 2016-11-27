@@ -336,10 +336,13 @@ function pagina_pedido_tuc_int_det(idContenedor,direccion,paramConfig,maestro,id
 	var Cm_conexionFailure=this.conexionFailure;
 	
 	//-------- DEFINICIÓN DE LA BARRA DE MENÚ
-	var paramMenu={actualizar:{crear:true,separador:false}};
+	var paramMenu={actualizar:{crear:true,separador:false},eliminar:{crear:true,separador:false}};
 	
 	//--------- DEFINICIÓN DE FUNCIONES
-	var paramFunciones={Formulario:{html_apply:'dlgInfo-'+idContenedor,height:340,width:480,minWidth:150,minHeight:200,closable:true,titulo:'Almacen Lógico'}};
+	var paramFunciones={
+		btnEliminar:{url:direccion+'../../../control/pedido_tuc_int/ActionEliminarPedidoTucInt.php',parametros:'&m_id_salida='+maestro.id_salida},
+		Formulario:{html_apply:'dlgInfo-'+idContenedor,height:340,width:480,minWidth:150,minHeight:200,closable:true,titulo:'Almacen Lógico'}
+		};
 	
 	//-------------- Sobrecarga de funciones --------------------//
 	this.reload=function(params){

@@ -58,8 +58,8 @@ function pagina_unidad_constructiva(idContenedor,direccion,paramConfig)
 		{name: 'fecha_reg',type:'date',dateFormat:'Y-m-d'},
 		'id_tipo_unidad_constructiva',
 		'desc_tipo_unidad_constructiva',
-		'desc_subactividad',
-		'id_subactividad'
+		'desc_programa_proyecto_actividad',
+		'id_prog_proy_acti'
 
 		]),remoteSort:true});
 
@@ -81,18 +81,18 @@ function pagina_unidad_constructiva(idContenedor,direccion,paramConfig)
 		}, ['id_tipo_unidad_constructiva','codigo','nombre','tipo','descripcion','observaciones','fecha_reg','estado'])
 	});
 
-    ds_subactividad = new Ext.data.Store({proxy: new Ext.data.HttpProxy({url: direccion+'../../../../sis_parametros/control/subactividad/ActionListarSubactividad.php'}),
+     ds_programa_proyecto_actividad = new Ext.data.Store({proxy: new Ext.data.HttpProxy({url: direccion+'../../../../sis_parametros/control/programa_proyecto_actividad/ActionListarProgramaProyectoActividad.php'}),
 			reader: new Ext.data.XmlReader({
 			record: 'ROWS',
-			id: 'id_subactividad',
+			id: 'id_prog_proy_acti',
 			totalRecords: 'TotalCount'
-		}, ['id_subactividad','codigo','direccion','descripcion','observaciones','fecha_reg','id_prog_proy_acti'])
+		}, ['id_prog_proy_acti','id_programa','id_proyecto','id_actividad','desc_prog_proy_acti'])
 	});
 
 	//FUNCIONES RENDER
 	
 			function render_id_tipo_unidad_constructiva(value, p, record){return String.format('{0}', record.data['desc_tipo_unidad_constructiva']);}
-			function render_id_subactividad(value, p, record){return String.format('{0}', record.data['desc_subactividad']);}
+			function render_id_prog_proy_acti(value, p, record){return String.format('{0}', record.data['desc_programa_proyecto_actividad']);}
 	
 	
 	
@@ -202,19 +202,19 @@ function pagina_unidad_constructiva(idContenedor,direccion,paramConfig)
 		save_as:'txt_id_tipo_unidad_constructiva'
 	};
 	vectorAtributos[3] = param_id_tipo_unidad_constructiva;
-// txt id_subactividad
-	/*var param_id_subactividad= {
+	
+	vectorAtributos[4]= {
 			validacion: {
-			name:'id_subactividad',
-			fieldLabel:'Id.Subactividad',
+			name:'id_prog_proy_acti',
+			fieldLabel:'Relación Prog/Proy/Acti',
 			allowBlank:false,			
-			emptyText:'Id.Subactividad...',
-			desc: 'desc_subactividad', //indica la columna del store principal ds del que proviane la descripcion
-			store:ds_subactividad,
-			valueField: 'id_subactividad',
-			displayField: 'codigo',
+			emptyText:'Prog/Proy/Acti...',
+			desc: 'desc_programa_proyecto_actividad', //indica la columna del store principal ds del que proviane la descripcion
+			store:ds_programa_proyecto_actividad,
+			valueField: 'id_prog_proy_acti',
+			displayField: 'desc_prog_proy_acti',
 			queryParam: 'filterValue_0',
-			filterCol:'SUBACT.codigo#SUBACT.descripcion',
+			filterCol:'PGPYAC.nombre_programa#PGPYAC.nombre_proyecto#PGPYAC.nombre_actividad',
 			typeAhead:true,
 			forceSelection:true,
 			mode:'remote',
@@ -222,26 +222,26 @@ function pagina_unidad_constructiva(idContenedor,direccion,paramConfig)
 			pageSize:100,
 			minListWidth:450,
 			grow:true,
-			//width:'100%',
+			width:'100%',
 			//grow:true,
 			resizable:true,
 			queryParam:'filterValue_0',
 			minChars:1, ///caracteres mínimos requeridos para iniciar la busqueda
 			triggerAction:'all',
 			editable:true,
-			renderer:render_id_subactividad,
+			renderer:render_id_prog_proy_acti,
 			grid_visible:true,
 			grid_editable:true,
-			width_grid:100 // ancho de columna en el gris
+			width_grid:250 // ancho de columna en el gris
 		},
 		tipo:'ComboBox',
 		filtro_0:true,
 		filtro_1:true,
-		filterColValue:'SUBACT.codigo',
+		filterColValue:'PROGRA.nombre_programa#PROYEC.nombre_proyecto#ACTIVI.nombre_actividad',
 		defecto: '',
-		save_as:'txt_id_subactividad'
+		save_as:'txt_id_prog_proy_acti'
 	};
-	vectorAtributos[4] = param_id_subactividad;*/
+
 
 	//////////////////////////////////////////////////////////////
 	// ----------            FUNCIONES RENDER    ---------------//

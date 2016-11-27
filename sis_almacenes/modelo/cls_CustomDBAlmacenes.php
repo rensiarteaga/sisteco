@@ -3100,21 +3100,21 @@ class cls_CustomDBAlmacenes
 		return $res;
 	}
 
-	function InsertarTramo($id_tramo,$codigo,$descripcion,$observaciones,$fecha_reg)
+	function InsertarTramo($id_tramo,$codigo,$descripcion,$observaciones,$fecha_reg,$id_prog_proy_acti)
 	{
 		$this->salida = "";
 		$dbTramo = new cls_DBTramo($this->decodificar);
-		$res = $dbTramo ->InsertarTramo($id_tramo,$codigo,$descripcion,$observaciones,$fecha_reg);
+		$res = $dbTramo ->InsertarTramo($id_tramo,$codigo,$descripcion,$observaciones,$fecha_reg,$id_prog_proy_acti);
 		$this->salida = $dbTramo ->salida;
 		$this->query = $dbTramo ->query;
 		return $res;
 	}
 
-	function ModificarTramo($id_tramo,$codigo,$descripcion,$observaciones,$fecha_reg)
+	function ModificarTramo($id_tramo,$codigo,$descripcion,$observaciones,$fecha_reg,$id_prog_proy_acti)
 	{
 		$this->salida = "";
 		$dbTramo = new cls_DBTramo($this->decodificar);
-		$res = $dbTramo ->ModificarTramo($id_tramo,$codigo,$descripcion,$observaciones,$fecha_reg);
+		$res = $dbTramo ->ModificarTramo($id_tramo,$codigo,$descripcion,$observaciones,$fecha_reg,$id_prog_proy_acti);
 		$this->salida = $dbTramo ->salida;
 		$this->query = $dbTramo ->query;
 		return $res;
@@ -3686,6 +3686,18 @@ class cls_CustomDBAlmacenes
 		$this->query = $db->query;
 		return $res;
 	}
+	
+	function EliminarPedidoTucInt($id_pedido_tuc_int)
+	{
+		
+	    $this->salida = "";
+		$db = new cls_DBPedidoTucInt($this->decodificar);
+		$res = $db ->EliminarPedidoTucInt($id_pedido_tuc_int);
+		$this->salida = $db->salida;
+		$this->query = $db->query;
+		return $res;
+	}
+	
 	
 	
 	/// --------------------- FIN tal_pedido_tuc_int --------------------- ///

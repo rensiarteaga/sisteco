@@ -93,8 +93,8 @@ if($_SESSION['autentificado']=='SI')
 			$xml->add_nodo('fecha_reg',$f["fecha_reg"]);
 			$xml->add_nodo('id_tipo_unidad_constructiva',$f["id_tipo_unidad_constructiva"]);
 			$xml->add_nodo('desc_tipo_unidad_constructiva',$f["desc_tipo_unidad_constructiva"]);
-			$xml->add_nodo('id_subactividad',$f["id_subactividad"]);
-			$xml->add_nodo('desc_subactividad',$f["desc_subactividad"]);
+			$xml->add_nodo('id_prog_proy_acti',$f["id_prog_proy_acti"]);
+			$xml->add_nodo('desc_programa_proyecto_actividad',$f["desc_programa_proyecto_actividad"]);
 
 			$xml->fin_rama();
 		}

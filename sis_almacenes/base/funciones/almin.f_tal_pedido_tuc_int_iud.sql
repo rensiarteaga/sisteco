@@ -239,9 +239,48 @@ BEGIN
             END IF;
 
             -- DESCRIPCIÓN DE ÉXITO PARA GUARDAR EN EL LOG
-            g_descripcion_log_error := 'Eliminación exitosa del registro en almin.tal_parametro_almacen';
+            g_descripcion_log_error := 'valoracion de gestion';
             g_respuesta := 't'||g_separador||g_descripcion_log_error;
         END;
+        
+   /*
+   Autor:	 Rensi Arteaga Copari
+   Desc:	 permite eliminar piezas que no se entregaran en ningun momento
+   Fecha:	 24/01/2017
+   */    
+        
+    ELSEIF pm_codigo_procedimiento = 'AL_PEDTUCINT_DEL' THEN
+
+    BEGIN  
+    
+       --validar que la salida este en borrador
+       
+       select
+          sal.id_salida,
+          sal.estado_salida,
+          pti.id_item
+        into
+          v_registros
+       from almin.tal_pedido_tuc_int pti
+       inner join almin.tal_salida sal on sal.id_salida = pti.id_salida
+       where pti.id_pedido_tuc_int = al_id_pedido_tuc_int;
+       
+       IF v_registros.estado_salida != 'Borrador' THEN
+          raise exception 'Solo puede eliminar piezas en epdidos en borrador';
+       END IF;
+       
+       delete from  almin.tal_pedido_tuc_int 
+       where id_pedido_tuc_int = al_id_pedido_tuc_int;
+       
+       -- DESCRIPCIÓN DE ÉXITO PARA GUARDAR EN EL LOG
+      g_descripcion_log_error := 'Eliminación exitosa del registro';
+      g_respuesta := 't'||g_separador||g_descripcion_log_error;
+     
+    
+    END;    
+
+     
+        
    /*
    Autor:	 Rensi Arteaga Copari
    Desc:	 genera una salida con todos los materiales pendientes que no se pudieron entregar

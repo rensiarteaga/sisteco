@@ -57,6 +57,8 @@ class cls_DBTramo
 		$this->var->add_def_cols('descripcion','varchar');
 		$this->var->add_def_cols('observaciones','varchar');
 		$this->var->add_def_cols('fecha_reg','date');
+		$this->var->add_def_cols('id_prog_proy_acti','int4');
+		$this->var->add_def_cols('desc_programa_proyecto_actividad','text');
 
 		//Ejecuta la función de consulta
 		$res = $this->var->exec_query();
@@ -129,7 +131,7 @@ class cls_DBTramo
 	 * Autor:				    (autogenerado)
 	 * Fecha de creación:		2008-03-31 11:12:27
 	 */
-	function InsertarTramo($id_tramo,$codigo,$descripcion,$observaciones,$fecha_reg)
+	function InsertarTramo($id_tramo,$codigo,$descripcion,$observaciones,$fecha_reg,$id_prog_proy_acti)
 	{
 		$this->salida = "";
 		$this->nombre_funcion = 'f_tal_tramo_iud';
@@ -142,7 +144,8 @@ class cls_DBTramo
 		$this->var->add_param("'$descripcion'");
 		$this->var->add_param("'$observaciones'");
 		$this->var->add_param("'$fecha_reg'");
-
+		$this->var->add_param($id_prog_proy_acti);
+	
 		//Ejecuta la función
 		$res = $this->var->exec_non_query();
 
@@ -161,7 +164,7 @@ class cls_DBTramo
 	 * Autor:				    (autogenerado)
 	 * Fecha de creación:		2008-03-31 11:12:27
 	 */
-	function ModificarTramo($id_tramo,$codigo,$descripcion,$observaciones,$fecha_reg)
+	function ModificarTramo($id_tramo,$codigo,$descripcion,$observaciones,$fecha_reg,$id_prog_proy_acti)
 	{
 		$this->salida = "";
 		$this->nombre_funcion = 'f_tal_tramo_iud';
@@ -174,6 +177,7 @@ class cls_DBTramo
 		$this->var->add_param("'$descripcion'");
 		$this->var->add_param("'$observaciones'");
 		$this->var->add_param("'$fecha_reg'");
+		$this->var->add_param($id_prog_proy_acti);
 
 		//Ejecuta la función
 		$res = $this->var->exec_non_query();
@@ -202,6 +206,7 @@ class cls_DBTramo
 		//Instancia la clase midlle para la ejecución de la función de la BD
 		$this->var = new cls_middle($this->nombre_funcion,$this->codigo_procedimiento,$this->decodificar);
 		$this->var->add_param($id_tramo);
+		$this->var->add_param("NULL");
 		$this->var->add_param("NULL");
 		$this->var->add_param("NULL");
 		$this->var->add_param("NULL");

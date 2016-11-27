@@ -93,6 +93,11 @@ if($_SESSION['autentificado']=='SI')
 			$xml->add_nodo('descripcion',$f["descripcion"]);
 			$xml->add_nodo('observaciones',$f["observaciones"]);
 			$xml->add_nodo('fecha_reg',$f["fecha_reg"]);
+			$xml->add_nodo('id_prog_proy_acti',$f["id_prog_proy_acti"]);
+			$xml->add_nodo('desc_programa_proyecto_actividad',$f["desc_programa_proyecto_actividad"]);
+			
+			
+			
 
 			$xml->fin_rama();
 		}

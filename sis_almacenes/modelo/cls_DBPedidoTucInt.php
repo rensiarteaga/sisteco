@@ -200,5 +200,38 @@ class cls_DBPedidoTucInt
 
 		return $res;
 	}
+	
+	
+	 /**
+	 * Nombre de la función:	GenerarSalidaPendiente
+	 * Propósito:				genera una salida simple con los item no entregados
+	 * Autor:				    RAC
+	 * Fecha de creación:		30/12/2016
+	 */
+	function EliminarPedidoTucInt($id_pedido_tuc_int)
+	{
+		$this->salida = "";
+		$this->nombre_funcion = 'f_tal_pedido_tuc_int_iud';
+		$this->codigo_procedimiento = "'AL_PEDTUCINT_DEL'";
+
+		//Instancia la clase midlle para la ejecución de la función de la BD
+		$this->var = new cls_middle($this->nombre_funcion,$this->codigo_procedimiento,$this->decodificar);	
+		
+		
+		$this->var->add_param($id_pedido_tuc_int);
+		$this->var->add_param("NULL");		
+		
+
+		//Ejecuta la función
+		$res = $this->var->exec_non_query();
+
+		//Obtiene el array de salida de la función y retorna el resultado de la ejecución
+		$this->salida = $this->var->salida;
+
+		//Obtiene la cadena con que se llamó a la función de postgres
+		$this->query = $this->var->query;
+
+		return $res;
+	}
 }
 ?>
