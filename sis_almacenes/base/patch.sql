@@ -370,5 +370,21 @@ ALTER TABLE almin.tal_salida
 
 
 
+/***********************************I-SCP-RAC-ALMIN-2-16/01/2017****************************************/ 
+
+--------------- SQL ---------------
+
+ALTER TABLE almin.tal_ingreso
+  ADD COLUMN nro_pedido_compra VARCHAR;
+
+COMMENT ON COLUMN almin.tal_ingreso.nro_pedido_compra
+IS 'nro de pedido de compra del material';
+
+
+/***********************************F-SCP-RAC-ALMIN-2-16/01/2017****************************************/ 
+
+
+
+
  
  

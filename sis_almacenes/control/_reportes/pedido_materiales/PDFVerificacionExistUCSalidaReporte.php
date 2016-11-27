@@ -155,15 +155,17 @@ class PDF extends FPDF
 			$CustomItem=new cls_CustomDBAlmacenes();
 			$sortcol='TIPOUC.codigo';
 			
+			/*print ("<pre>");
+		print_r ($tuc);
+		print ("</pre>");
+		exit;*/
+			
 		
 
 			if($tuc['tipo']=='raiz')
 			{
 					
-				/*print ("<pre>");
-		print_r ($tuc);
-		print ("</pre>");
-		exit;*/
+				
 				//Obtiene las UC directas que tiene la raíz
 				$Custom->ListarTipoUnidadConstructivaRaiz($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$hidden_ep_id_financiador,$hidden_ep_id_regional,$hidden_ep_id_programa,$hidden_ep_id_proyecto,$hidden_ep_id_actividad,$tuc['id_tipo_unidad_constructiva']);
 				//Obtiene los items de la UC si es que tiene
@@ -174,9 +176,16 @@ class PDF extends FPDF
 				$CustomUc->ListarTipoUCPadre($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$hidden_ep_id_financiador,$hidden_ep_id_regional,$hidden_ep_id_programa,$hidden_ep_id_proyecto,$hidden_ep_id_actividad,$tuc['id_tipo_unidad_constructiva']);
 				//Código del padre
 				$codigo_padre = $CustomUc->salida[0]['codigo'];
+				
+				/*print ("<pre>");
+				print_r ($CustomUc->salida);
+				print ("</pre>");
+				exit;*/
 
 				//Carga los datos en el array interno
 				foreach ($Custom->salida as $uc)
+				//foreach ($CustomUc->salida as $uc)
+				
 				{
 					//$aux=count($this->items);
 					//echo "aux: ".$aux."<br>";
@@ -252,6 +261,10 @@ class PDF extends FPDF
 			}
 			else
 			{
+				
+		
+		
+		
 				$Custom=new cls_CustomDBAlmacenes();
 				$CustomItem=new cls_CustomDBAlmacenes();
 				$sortcol='TIPOUC.codigo';

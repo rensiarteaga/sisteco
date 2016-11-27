@@ -109,7 +109,10 @@ if($_SESSION["autentificado"]=="SI")
 			$txt_id_moneda_nacionaliz= $_GET["txt_id_moneda_nacionaliz_$j"];
 			$txt_dui= $_GET["txt_dui_$j"];
 			$txt_monto_tot_factura= $_GET["txt_monto_tot_factura_$j"];
-			$txt_tipo_costeo = $_GET["txt_tipo_costeo_$j"];
+			$txt_tipo_costeo = $_GET["txt_tipo_costeo_$j"];			
+			$txt_nro_pedido_compra = $_GET["txt_nro_pedido_compra_$j"];
+			
+			
 			
 		}
 		else
@@ -142,7 +145,10 @@ if($_SESSION["autentificado"]=="SI")
 			$txt_dui= $_POST["txt_dui_$j"];
 			$txt_monto_tot_factura= $_POST["txt_monto_tot_factura_$j"];
 			$txt_tipo_costeo = $_POST["txt_tipo_costeo_$j"];
+			$txt_nro_pedido_compra = $_POST["txt_nro_pedido_compra_$j"];
 		}
+		
+		
 		
 		
 		if ($hidden_id_ingreso == "undefined" || $hidden_id_ingreso == "")
@@ -165,7 +171,7 @@ if($_SESSION["autentificado"]=="SI")
 			}
 
 			//Validación satisfactoria, se ejecuta la inserción en la tabla tal_ingreso
-			$res = $Custom -> InsertarOrdenIngresoProy($txt_descripcion,$txt_costo_total,$txt_id_proveedor,$txt_id_contratista,$txt_id_empleado,$txt_id_almacen_logico,$txt_id_institucion,$txt_id_motivo_ingreso_cuenta,$txt_orden_compra,$txt_observaciones,$txt_num_factura,$txt_fecha_factura,$txt_responsable,$txt_fecha_finalizado_cancelado,$txt_importacion,$txt_flete,$txt_seguro,$txt_gastos_alm,$txt_gastos_aduana,$txt_iva,$txt_rep_form,$txt_peso_neto,$txt_id_moneda_import,$txt_id_moneda_nacionaliz,$txt_dui,$txt_monto_tot_factura,$txt_tipo_costeo);
+			$res = $Custom -> InsertarOrdenIngresoProy($txt_descripcion,$txt_costo_total,$txt_id_proveedor,$txt_id_contratista,$txt_id_empleado,$txt_id_almacen_logico,$txt_id_institucion,$txt_id_motivo_ingreso_cuenta,$txt_orden_compra,$txt_observaciones,$txt_num_factura,$txt_fecha_factura,$txt_responsable,$txt_fecha_finalizado_cancelado,$txt_importacion,$txt_flete,$txt_seguro,$txt_gastos_alm,$txt_gastos_aduana,$txt_iva,$txt_rep_form,$txt_peso_neto,$txt_id_moneda_import,$txt_id_moneda_nacionaliz,$txt_dui,$txt_monto_tot_factura,$txt_tipo_costeo,$txt_nro_pedido_compra);
 
 			if(!$res)
 			{
@@ -198,7 +204,7 @@ if($_SESSION["autentificado"]=="SI")
 				exit;
 			}
 
-			$res = $Custom->ModificarIngresoProy($hidden_id_ingreso,$txt_descripcion,$txt_costo_total,$txt_id_proveedor,$txt_id_contratista,$txt_id_empleado,$txt_id_almacen_logico,$txt_id_institucion,$txt_id_motivo_ingreso_cuenta,$txt_orden_compra,$txt_observaciones,$txt_num_factura,$txt_fecha_factura,$txt_responsable,$txt_fecha_finalizado_cancelado,$txt_importacion,$txt_flete,$txt_seguro,$txt_gastos_alm,$txt_gastos_aduana,$txt_iva,$txt_rep_form,$txt_peso_neto,$txt_id_moneda_import,$txt_id_moneda_nacionaliz,$txt_dui,$txt_monto_tot_factura,$txt_tipo_costeo);
+			$res = $Custom->ModificarIngresoProy($hidden_id_ingreso,$txt_descripcion,$txt_costo_total,$txt_id_proveedor,$txt_id_contratista,$txt_id_empleado,$txt_id_almacen_logico,$txt_id_institucion,$txt_id_motivo_ingreso_cuenta,$txt_orden_compra,$txt_observaciones,$txt_num_factura,$txt_fecha_factura,$txt_responsable,$txt_fecha_finalizado_cancelado,$txt_importacion,$txt_flete,$txt_seguro,$txt_gastos_alm,$txt_gastos_aduana,$txt_iva,$txt_rep_form,$txt_peso_neto,$txt_id_moneda_import,$txt_id_moneda_nacionaliz,$txt_dui,$txt_monto_tot_factura,$txt_tipo_costeo,$txt_nro_pedido_compra);
 
 			if(!$res)
 			{

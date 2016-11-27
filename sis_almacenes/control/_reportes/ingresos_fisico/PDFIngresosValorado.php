@@ -224,13 +224,13 @@ class PDF extends FPDF
 		$this->Cell(38,10,'Almacén Lógico: ',0,0,'R');
 						
 		$this->SetFont('Arial','B',10);
-		$this->Cell(66,10,''.$data[0]['almacen_log'],0,0,'L');
+		$this->Cell(70,10,''.$data[0]['almacen_log'],0,0,'L');
 		$this->SetFont('Arial','',8);
 		
 		$this->Cell(53,4,'# Contrato/Ord. Compra: ',0,0,'R');
 		
 		$this->SetFont('Arial','B',8);
-		$this->Cell(13,4,''.$data[0]['orden_compra'],'BTLR',0,'C');
+		$this->Cell(30,4,''.$data[0]['orden_compra'],'BTLR',0,'C');
 		$this->SetFont('Arial','',10);
 		
 		$this->Ln(4);
@@ -238,7 +238,17 @@ class PDF extends FPDF
 		$this->Cell(38,10,'Motivo Ingreso: ',0,0,'R');
 						
 		$this->SetFont('Arial','B',10);
-		$this->Cell(132,10,''.$data[0]['motivo_ing'],0,0,'L');
+		$this->Cell(70,10,''.$data[0]['motivo_ing'],0,0,'L');
+		
+		
+		$this->SetFont('Arial','I',8);
+		$this->Cell(53,4,'# Pedido de  Compra: ',0,0,'R');
+		
+		$this->SetFont('Arial','B',8);
+		$this->Cell(30,4,''.$data[0]['nro_pedido_compra'],'BTLR',0,'C');
+		
+		
+		
 		$this->SetFont('Arial','',10);
 		$this->Ln(8);
 		

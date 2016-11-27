@@ -131,7 +131,8 @@ function pagina_ingreso_proy(idContenedor,direccion,paramConfig)
 		'gestion',
 		'id_motivo_ingreso',
 		'id_almacen',
-		'tipo_costeo'
+		'tipo_costeo',
+		'nro_pedido_compra'
 		]),remoteSort:true
 	});
 
@@ -372,6 +373,8 @@ function pagina_ingreso_proy(idContenedor,direccion,paramConfig)
 		save_as:'txt_orden_compra',
 		id_grupo:4
 	};
+	
+	
 
 	vectorAtributos[6]= {
 		validacion:{
@@ -1359,6 +1362,29 @@ function pagina_ingreso_proy(idContenedor,direccion,paramConfig)
 		defecto:'peso',
 		save_as:'txt_tipo_costeo',
 		id_grupo:0
+	};
+	
+	vectorAtributos[41]= {
+		validacion:{
+			name:'nro_pedido_compra',
+			fieldLabel:'Nº Pedido Compra',
+			allowBlank:true,
+			maxLength:20,
+			minLength:0,
+			selectOnFocus:true,
+			vtype:'texto',
+			grid_visible:true,
+			grid_editable:false,
+			grid_indice:8,
+			width_grid:130
+		},
+		tipo: 'TextField',
+		filtro_0:true,
+		filtro_1:true,
+		filtro_2:true,
+		filterColValue:'INGRES.nro_pedido_compra',
+		save_as:'txt_nro_pedido_compra',
+		id_grupo:4
 	};
 
 	//////////////////////////////////////////////////////////////

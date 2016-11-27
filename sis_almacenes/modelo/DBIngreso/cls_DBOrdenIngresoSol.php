@@ -245,6 +245,9 @@ class cls_DBOrdenIngresoSol
 		$this->var->add_param("NULL");
 		$this->var->add_param("NULL");
 		$this->var->add_param("NULL");
+		$this->var->add_param("NULL"); //tipo_costeo
+		
+		$this->var->add_param("NULL"); //nro_predido_compra
 
 		//Ejecuta la función
 		$res = $this->var->exec_non_query();
@@ -320,6 +323,10 @@ class cls_DBOrdenIngresoSol
 		$this->var->add_param("NULL");
 		$this->var->add_param("NULL");
 		$this->var->add_param("NULL");
+		
+		$this->var->add_param("NULL"); //tipo_costeo
+		
+		$this->var->add_param("NULL"); //nro_predido_compra
 
 		//Ejecuta la función
 		$res = $this->var->exec_non_query();
@@ -392,6 +399,8 @@ class cls_DBOrdenIngresoSol
 		$this->var->add_param("NULL");
 		$this->var->add_param("NULL");
 		$this->var->add_param("NULL");
+		
+		$this->var->add_param("NULL"); //nro_predido_compra
 
 
 		//Ejecuta la función
@@ -464,6 +473,9 @@ class cls_DBOrdenIngresoSol
 		$this->var->add_param("NULL");
 		$this->var->add_param("NULL");
 		$this->var->add_param("NULL");
+		
+		$this->var->add_param("NULL"); //tipo_costeo		
+		$this->var->add_param("NULL"); //nro_predido_compra
 
 		//Ejecuta la función
 		$res = $this->var->exec_non_query();
@@ -483,7 +495,7 @@ class cls_DBOrdenIngresoSol
 	 * Autor:				    (autogenerado)
 	 * Fecha de creación:		2007-10-18 18:11:11
 	 */
-	function InsertarOrdenIngresoProy($descripcion,$costo_total,$id_proveedor,$id_contratista,$id_empleado,$id_almacen_logico,$id_institucion,$id_motivo_ingreso_cuenta,$orden_compra,$observaciones,$num_factura,$fecha_factura,$responsable,$fecha_finalizado_cancelado,$importacion,$flete,$seguro,$gastos_alm,$gastos_aduana,$iva,$rep_form,$peso_neto,$id_moneda_import,$id_moneda_nacionaliz,$dui,$monto_tot_factura,$tipo_costeo)
+	function InsertarOrdenIngresoProy($descripcion,$costo_total,$id_proveedor,$id_contratista,$id_empleado,$id_almacen_logico,$id_institucion,$id_motivo_ingreso_cuenta,$orden_compra,$observaciones,$num_factura,$fecha_factura,$responsable,$fecha_finalizado_cancelado,$importacion,$flete,$seguro,$gastos_alm,$gastos_aduana,$iva,$rep_form,$peso_neto,$id_moneda_import,$id_moneda_nacionaliz,$dui,$monto_tot_factura,$tipo_costeo,$nro_pedido_compra)
 	{
 		$this->salida = "";
 		$this->nombre_funcion = 'f_tal_ingreso_iud';
@@ -537,6 +549,9 @@ class cls_DBOrdenIngresoSol
 		$this->var->add_param("NULL");
 		
 		$this->var->add_param("'$tipo_costeo'");
+		$this->var->add_param("'$nro_pedido_compra'");
+		
+		
 
 		//Ejecuta la función
 		$res = $this->var->exec_non_query();
@@ -559,7 +574,7 @@ class cls_DBOrdenIngresoSol
 	 * Autor:				    RCM San Borja
 	 * Fecha de creación:		13/06/2008
 	 */
-	function ModificarIngresoProy($id_ingreso,$descripcion,$costo_total,$id_proveedor,$id_contratista,$id_empleado,$id_almacen_logico,$id_institucion,$id_motivo_ingreso_cuenta,$orden_compra,$observaciones,$num_factura,$fecha_factura,$responsable,$fecha_finalizado_cancelado,$importacion,$flete,$seguro,$gastos_alm,$gastos_aduana,$iva,$rep_form,$peso_neto,$id_moneda_import,$id_moneda_nacionaliz,$dui,$monto_tot_factura,$tipo_costeo)
+	function ModificarIngresoProy($id_ingreso,$descripcion,$costo_total,$id_proveedor,$id_contratista,$id_empleado,$id_almacen_logico,$id_institucion,$id_motivo_ingreso_cuenta,$orden_compra,$observaciones,$num_factura,$fecha_factura,$responsable,$fecha_finalizado_cancelado,$importacion,$flete,$seguro,$gastos_alm,$gastos_aduana,$iva,$rep_form,$peso_neto,$id_moneda_import,$id_moneda_nacionaliz,$dui,$monto_tot_factura,$tipo_costeo, $nro_pedido_compra)
 	{
 		$this->salida = "";
 		$this->nombre_funcion = 'f_tal_ingreso_iud';
@@ -613,6 +628,10 @@ class cls_DBOrdenIngresoSol
 		$this->var->add_param("NULL");
 		
 		$this->var->add_param("'$tipo_costeo'");
+		$this->var->add_param("'$nro_pedido_compra'");
+		
+		
+		
 		
 		
 
@@ -624,6 +643,9 @@ class cls_DBOrdenIngresoSol
 
 		//Obtiene la cadena con que se llamó a la función de postgres
 		$this->query = $this->var->query;
+		
+		//echo $this->query;
+		//exit; 
 
 		return $res;
 	}

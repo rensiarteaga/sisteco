@@ -306,37 +306,37 @@ BEGIN
     ELSIF pm_codigo_procedimiento  = 'AL_PEDIDO_SEL' THEN
         BEGIN
             g_consulta := 'SELECT
-                           SALIDA.id_salida       ,SALIDA.correlativo_sal             ,SALIDA.correlativo_vale,
-                           SALIDA.descripcion     ,SALIDA.contabilizar                ,SALIDA.contabilizado,SALIDA.estado_salida,
-                           SALIDA.estado_registro ,SALIDA.motivo_cancelacion          ,SALIDA.id_responsable_almacen,
-                           RESALM.cargo as desc_responsable_almacen                   ,SALIDA.id_almacen_logico,
-                           ALMLOG.nombre as desc_almacen_logico                       ,SALIDA.id_empleado,
-                           (COALESCE(PERSON.nombre,'' '')||'' ''||COALESCE(PERSON.apellido_paterno,'' '')||'' ''|| COALESCE(PERSON.apellido_materno,'' '')) as desc_empleado,
-                           SALIDA.id_firma_autorizada,
-                           (COALESCE(PERSON2.nombre,'' '')||'' ''||COALESCE(PERSON2.apellido_paterno,'' '')||'' ''|| COALESCE(PERSON2.apellido_materno,'' '')) as desc_firma_autorizada,
-                           SALIDA.id_contratista,
+                               SALIDA.id_salida       ,SALIDA.correlativo_sal             ,SALIDA.correlativo_vale,
+                               SALIDA.descripcion     ,SALIDA.contabilizar                ,SALIDA.contabilizado,SALIDA.estado_salida,
+                               SALIDA.estado_registro ,SALIDA.motivo_cancelacion          ,SALIDA.id_responsable_almacen,
+                               RESALM.cargo as desc_responsable_almacen                   ,SALIDA.id_almacen_logico,
+                               ALMLOG.nombre as desc_almacen_logico                       ,SALIDA.id_empleado,
+                               (COALESCE(PERSON.nombre,'' '')||'' ''||COALESCE(PERSON.apellido_paterno,'' '')||'' ''|| COALESCE(PERSON.apellido_materno,'' '')) as desc_empleado,
+                               SALIDA.id_firma_autorizada,
+                               (COALESCE(PERSON2.nombre,'' '')||'' ''||COALESCE(PERSON2.apellido_paterno,'' '')||'' ''|| COALESCE(PERSON2.apellido_materno,'' '')) as desc_firma_autorizada,
+                               SALIDA.id_contratista,
 
 
-                           (SELECT nombre FROM param.tpm_institucion where id_institucion = CONTRA.id_institucion) as desc_contratista,
-                           SALIDA.id_tipo_material,
-                           TIPMAT.nombre as desc_tipo_material                         ,SALIDA.id_institucion,
-                           INSTIT.nombre as desc_institucion                           ,SALIDA.id_subactividad,SUBACT.descripcion as desc_subactividad,
-                           SALIDA.id_motivo_salida_cuenta                              ,MOSACU.descripcion as desc_motivo_salida_cuenta,
-                           (SELECT CUENTA.nro_cuenta FROM sci.tct_cuenta CUENTA WHERE CUENTA.id_cuenta = MOSACU.id_cuenta) as nro_cuenta,
-                           MOTSAL.nombre as desc_motivo_salida                        ,ALMACE.nombre as desc_almacen,
-                           FINANC.nombre_financiador,
-                           REGION.nombre_regional                  ,PROGRA.nombre_programa                ,PROYEC.nombre_proyecto,
-                           ACTIVI.nombre_actividad                 ,FINANC.id_financiador                 ,REGION.id_regional,
-                           PROGRA.id_programa                      ,PROYEC.id_proyecto                    ,ACTIVI.id_actividad,
-                           FINANC.codigo_financiador               ,REGION.codigo_regional                ,PROGRA.codigo_programa,
-                           PROYEC.codigo_proyecto                  ,ACTIVI.codigo_actividad               ,SALIDA.emergencia,
-                           SALIDA.observaciones                    ,SALIDA.tipo_pedido                    ,SALIDA.receptor,
-                           SALIDA.id_tramo_subactividad            ,SALIDA.id_tramo_unidad_constructiva   ,TRAMO.descripcion as desc_tramo,
-                           UNICON.codigo as desc_unidad_cons	   ,SALIDA.fecha_borrador,
-                           SALIDA.id_supervisor					   ,SALIDA.receptor_ci					  ,SALIDA.solicitante,
-                           SALIDA.solicitante_ci				   ,SALIDA.num_contrato,
-                           COALESCE(PERSON3.apellido_paterno,'''') || '' '' || COALESCE(PERSON3.apellido_materno,'''') || '' '' || COALESCE(PERSON3.nombre,'''') as nombre_superv,
-                           PARALM.gestion                          ,MOTSAL.id_motivo_salida               ,ALMACE.id_almacen
+                               (SELECT nombre FROM param.tpm_institucion where id_institucion = CONTRA.id_institucion) as desc_contratista,
+                               SALIDA.id_tipo_material,
+                               TIPMAT.nombre as desc_tipo_material                         ,SALIDA.id_institucion,
+                               INSTIT.nombre as desc_institucion                           ,SALIDA.id_subactividad,SUBACT.descripcion as desc_subactividad,
+                               SALIDA.id_motivo_salida_cuenta                              ,MOSACU.descripcion as desc_motivo_salida_cuenta,
+                               (SELECT CUENTA.nro_cuenta FROM sci.tct_cuenta CUENTA WHERE CUENTA.id_cuenta = MOSACU.id_cuenta) as nro_cuenta,
+                               MOTSAL.nombre as desc_motivo_salida                        ,ALMACE.nombre as desc_almacen,
+                               FINANC.nombre_financiador,
+                               REGION.nombre_regional                  ,PROGRA.nombre_programa                ,PROYEC.nombre_proyecto,
+                               ACTIVI.nombre_actividad                 ,FINANC.id_financiador                 ,REGION.id_regional,
+                               PROGRA.id_programa                      ,PROYEC.id_proyecto                    ,ACTIVI.id_actividad,
+                               FINANC.codigo_financiador               ,REGION.codigo_regional                ,PROGRA.codigo_programa,
+                               PROYEC.codigo_proyecto                  ,ACTIVI.codigo_actividad               ,SALIDA.emergencia,
+                               SALIDA.observaciones                    ,SALIDA.tipo_pedido                    ,SALIDA.receptor,
+                               SALIDA.id_tramo_subactividad            ,SALIDA.id_tramo_unidad_constructiva   ,TRAMO.descripcion as desc_tramo,
+                               UNICON.codigo as desc_unidad_cons	   ,SALIDA.fecha_borrador,
+                               SALIDA.id_supervisor					   ,SALIDA.receptor_ci					  ,SALIDA.solicitante,
+                               SALIDA.solicitante_ci				   ,SALIDA.num_contrato,
+                               COALESCE(PERSON3.apellido_paterno,'''') || '' '' || COALESCE(PERSON3.apellido_materno,'''') || '' '' || COALESCE(PERSON3.nombre,'''') as nombre_superv,
+                               PARALM.gestion                          ,MOTSAL.id_motivo_salida               ,ALMACE.id_almacen
                            FROM almin.tal_salida SALIDA
                            LEFT JOIN almin.tal_responsable_almacen RESALM
                            ON RESALM.id_responsable_almacen=SALIDA.id_responsable_almacen
@@ -398,7 +398,7 @@ BEGIN
                            ON PERSON3.id_persona = SUPERV.id_persona
                            INNER JOIN almin.tal_parametro_almacen PARALM
                            ON PARALM.id_parametro_almacen = SALIDA.id_parametro_almacen
-                           WHERE SALIDA.tipo_reg = ''movimineto'' AND SALIDA.estado_salida = ''Borrador'' AND ';
+                           WHERE SALIDA.tipo_reg = ''movimiento'' AND SALIDA.estado_salida = ''Borrador'' AND ';
             g_consulta := g_consulta || pm_criterio_filtro;
           --  para que los usuarios  solo puedan ver los pedidos realizados por ellos
             IF NOT g_rol_adm  THEN
@@ -487,7 +487,7 @@ BEGIN
                            ON PERSON3.id_persona = SUPERV.id_persona
                            INNER JOIN almin.tal_parametro_almacen PARALM
                            ON PARALM.id_parametro_almacen = SALIDA.id_parametro_almacen
-                           WHERE SALIDA.tipo_reg = ''movimineto'' AND SALIDA.estado_salida = ''Borrador'' AND '; 
+                           WHERE  SALIDA.tipo_reg = ''movimiento'' AND  SALIDA.estado_salida = ''Borrador'' AND '; 
              --  para que los usuarios  solo puedan ver los pedidos realizados por ellos
             IF NOT g_rol_adm  THEN
                 g_consulta := g_consulta || ' SALIDA.id_usuario=' || pm_id_susario ||'  AND ';
@@ -2126,7 +2126,7 @@ FROM almin.tal_orden_salida_uc_detalle OSUCDE
             -- DESCRIPCIÓN DE ÉXITO PARA GUARDAR EN EL LOG
             g_descripcion_log_error := 'Consulta ejecutada';
         END;    
-
+ 
 
  ELSE
         --Procedimiento inexistente

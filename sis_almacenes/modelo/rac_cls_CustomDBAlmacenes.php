@@ -2587,6 +2587,16 @@ class cls_CustomDBAlmacenes
 		return $res;
 	}
 	
+	function ConsolidadoTUC($id_salida)
+	{
+		$this->salida = "";
+		$dbSalida = new cls_DBSalida($this->decodificar);
+		$res = $dbSalida ->ConsolidadoTUC($id_salida);
+		$this->salida = $dbSalida ->salida;
+		$this->query = $dbSalida ->query;
+		return $res;
+	}
+	
 	
 	function PedidoMaterialesUCDet($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad)
 	{

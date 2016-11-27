@@ -579,13 +579,41 @@ function pagina_salida_reporte_tuc(idContenedor,direccion,paramConfig)
 	
 		
 		var SelectionsRecord=sm.getSelected();
-		var data='maestro_id_salida='+SelectionsRecord.data.id_salida+'&maestro_id_almacen_logico='+SelectionsRecord.data.id_almacen_logico;
+		//var data='maestro_id_salida='+SelectionsRecord.data.id_salida+'&maestro_id_almacen_logico='+SelectionsRecord.data.id_almacen_logico;
+		
+		var data='hidden_id_salida='+SelectionsRecord.data.id_salida;
 		
 		console.log('data....', data)
 		if(SelectionsRecord.data){
 			
-			//window.open(direccion+'../../../control/_reportes/existencia_almacen/VerificacionExistUC.php?'+data)
-			window.open(direccion+'../../../control/_reportes/pedido_materiales/ActionReporteMateriales.php?'+data)
+			
+			
+			window.open(direccion+'../../../control/_reportes/pedido_materiales/ActionReporteConsolidadoTUC.php?'+data)
+		}
+		else{
+			Ext.MessageBox.alert('Estado', 'Debe seleccionar una salida.')
+		}
+	}
+	
+	
+	
+	function btn_verificar_resumen(){
+		
+		var sm=getSelectionModel();
+	
+	
+		
+		var SelectionsRecord=sm.getSelected();
+		//var data='maestro_id_salida='+SelectionsRecord.data.id_salida+'&maestro_id_almacen_logico='+SelectionsRecord.data.id_almacen_logico;
+		
+		var data='hidden_id_salida='+SelectionsRecord.data.id_salida;
+		
+		console.log('data....', data)
+		if(SelectionsRecord.data){
+			
+			
+			
+			window.open(direccion+'../../../control/_reportes/pedido_materiales/ActionReporteConsolidadoResTUC.php?'+data)
 		}
 		else{
 			Ext.MessageBox.alert('Estado', 'Debe seleccionar una salida.')
@@ -642,6 +670,7 @@ function pagina_salida_reporte_tuc(idContenedor,direccion,paramConfig)
 	this.AdicionarBoton('../../../lib/imagenes/book_open.png','Materiales',btn_pedido_tuc_int,true,'pedido_tuc_int','');
 	this.AdicionarBoton('../../../lib/imagenes/logo_pdf2.bmp','Imprimir Lista de Materiales',btn_listado_material,true,'listado','');	
 	this.AdicionarBoton('../../../lib/imagenes/logo_pdf2.bmp','Verificar  Unidades Constructivas',btn_verificar,true,'verexist','',false);
+	this.AdicionarBoton('../../../lib/imagenes/logo_pdf2.bmp','Verificar  Resumen Unidades Constructivas',btn_verificar_resumen,true,'verexistres','',false);
 	
 
 	this.iniciaFormulario();

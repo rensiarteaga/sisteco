@@ -145,7 +145,7 @@ BEGIN
         --DEVUELVE MENSAJE DE ERROR
         RAISE EXCEPTION '%',g_descripcion_log_error;
     END IF;
-   -- raise exception '%', pm_codigo_procedimiento; --INGRES.tipo_costeo
+    --raise exception '%', pm_codigo_procedimiento; --INGRES.tipo_costeo
     ---***SELECCIÓN DE OPERACIÓN A REALIZAR
     IF pm_codigo_procedimiento  = 'AL_OINSOL_SEL' THEN
     --Selección de las ordenes de ingreso en borrador
@@ -962,7 +962,8 @@ BEGIN
                                 (SELECT nombre FROM param.tpm_moneda WHERE id_moneda = INGRES.id_moneda_nacionaliz) as desc_moneda_nacionaliz,
                                 INGRES.dui							  ,INGRES.monto_tot_factura				 ,MOTING.codigo as codigo_mot_ing,
                                 PARALM.gestion                          ,MOTING.id_motivo_ingreso              ,ALMACE.id_almacen,
-                                INGRES.tipo_costeo
+                                INGRES.tipo_costeo,
+                                INGRES.nro_pedido_compra
 						  FROM almin.tal_ingreso INGRES
 	                      LEFT JOIN almin.tal_responsable_almacen RESALM
             			  ON RESALM.id_responsable_almacen=INGRES.id_responsable_almacen
@@ -1134,7 +1135,8 @@ ELSIF pm_codigo_procedimiento  = 'AL_INGREP_SEL' THEN
 
                            to_char(INGRES.fecha_reg,''dd/mm/YYYY'') as fecha_reg,
                           INGRES.observaciones,
-                          INGRES.orden_compra
+                          INGRES.orden_compra,
+                          INGRES.nro_pedido_compra
 FROM almin.tal_ingreso INGRES
 							INNER JOIN almin.tal_almacen_logico ALMLOG ON ALMLOG.id_almacen_logico = INGRES.id_almacen_logico
 							INNER JOIN almin.tal_almacen_ep ALMAEP ON ALMAEP.id_almacen_ep = ALMLOG.id_almacen_ep

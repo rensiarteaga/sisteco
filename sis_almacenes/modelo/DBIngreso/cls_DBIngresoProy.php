@@ -135,6 +135,8 @@ class cls_DBIngresoProy
 		$this->var->add_def_cols('id_almacen','integer');
 		$this->var->add_def_cols('tipo_costeo','varchar');
 		
+		$this->var->add_def_cols('nro_pedido_compra','varchar');
+		
 		
 		//Ejecuta la función de consulta
 		$res = $this->var->exec_query();
@@ -263,7 +265,9 @@ class cls_DBIngresoProy
 		$this->var->add_param("NULL");
 		$this->var->add_param("NULL");
 		$this->var->add_param("NULL");
-		$this->var->add_param("NULL"); // tipo_costeo
+		
+        $this->var->add_param("NULL"); //tipo_costeo		
+		$this->var->add_param("NULL"); //nro_predido_compr
 		
 		//echo "query: ".$this->var->get_query();
 		//exit;
@@ -317,24 +321,21 @@ class cls_DBIngresoProy
 		$this->var->add_def_cols('nombre_almacen','varchar');//0
 		$this->var->add_def_cols('correlativo_ing','text');//1
 		$this->var->add_def_cols('almacen_log','varchar');
-		$this->var->add_def_cols('motivo_ing','varchar');
-		
+		$this->var->add_def_cols('motivo_ing','varchar');		
 		$this->var->add_def_cols('num_factura','varchar');//2
 		$this->var->add_def_cols('fecha_factura','text');//3
 		$this->var->add_def_cols('fecha_finalizado_cancelado','text');//4
 		$this->var->add_def_cols('origen','varchar');//5
 		$this->var->add_def_cols('descripcion','varchar');//6
-		$this->var->add_def_cols('responsable','varchar');//7
-		
+		$this->var->add_def_cols('responsable','varchar');//7		
 		$this->var->add_def_cols('almacenero','text');//8
 		$this->var->add_def_cols('doc_almacenero','varchar');
 		$this->var->add_def_cols('jefe_almacen','text');//9
-		$this->var->add_def_cols('doc_jefe_almacen','varchar');
-		
+		$this->var->add_def_cols('doc_jefe_almacen','varchar');		
 		$this->var->add_def_cols('fecha_reg','text');//10
-		$this->var->add_def_cols('observaciones','varchar');//11
-		
-	    $this->var->add_def_cols('orden_compra','varchar');//
+		$this->var->add_def_cols('observaciones','varchar');//11		
+	    $this->var->add_def_cols('orden_compra','varchar');	    
+	    $this->var->add_def_cols('nro_pedido_compra','varchar');
 	    
 		/*$this->var->add_def_cols('contratista','varchar');//3
 		$this->var->add_def_cols('empleado','varchar');//3f
@@ -412,7 +413,9 @@ class cls_DBIngresoProy
 		$this->var->add_param("NULL");
 		$this->var->add_param("NULL");
 		$this->var->add_param("NULL");
-		$this->var->add_param("NULL"); //tipo_costeo
+		
+        $this->var->add_param("NULL"); //tipo_costeo		
+		$this->var->add_param("NULL"); //nro_predido_compr 
 		
 		//echo "query: ".$this->var->get_query();
 		//exit;
@@ -487,6 +490,7 @@ class cls_DBIngresoProy
 		$this->var->add_param("$monto_tot_factura");
 		$this->var->add_param("NULL");
 		$this->var->add_param("'$tipo_costeo'"); //rac 15 12 2016
+		$this->var->add_param("NULL"); //nro_predido_compr
 		
 		//echo "query: ".$this->var->get_query();
 		//exit;

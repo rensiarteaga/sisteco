@@ -184,11 +184,11 @@ class cls_CustomDBAlmacenes
 		return $res;
 	}
 
-	function InsertarOrdenIngresoProy($descripcion,$costo_total,$id_proveedor,$id_contratista,$id_empleado,$id_almacen_logico,$id_institucion,$id_motivo_ingreso_cuenta,$orden_compra,$observaciones,$num_factura,$fecha_factura,$responsable,$fecha_finalizado_cancelado,$importacion,$flete,$seguro,$gastos_alm,$gastos_aduana,$iva,$rep_form,$peso_neto,$id_moneda_import,$id_moneda_nacionaliz,$dui,$monto_tot_factura,$txt_tipo_costeo)
+	function InsertarOrdenIngresoProy($descripcion,$costo_total,$id_proveedor,$id_contratista,$id_empleado,$id_almacen_logico,$id_institucion,$id_motivo_ingreso_cuenta,$orden_compra,$observaciones,$num_factura,$fecha_factura,$responsable,$fecha_finalizado_cancelado,$importacion,$flete,$seguro,$gastos_alm,$gastos_aduana,$iva,$rep_form,$peso_neto,$id_moneda_import,$id_moneda_nacionaliz,$dui,$monto_tot_factura,$txt_tipo_costeo,$nro_pedido_compra)
 	{
 		$this->salida = "";
 		$dbIngreso = new cls_DBOrdenIngresoSol($this->decodificar);
-		$res = $dbIngreso ->InsertarOrdenIngresoProy($descripcion,$costo_total,$id_proveedor,$id_contratista,$id_empleado,$id_almacen_logico,$id_institucion,$id_motivo_ingreso_cuenta,$orden_compra,$observaciones,$num_factura,$fecha_factura,$responsable,$fecha_finalizado_cancelado,$importacion,$flete,$seguro,$gastos_alm,$gastos_aduana,$iva,$rep_form,$peso_neto,$id_moneda_import,$id_moneda_nacionaliz,$dui,$monto_tot_factura,$txt_tipo_costeo);
+		$res = $dbIngreso ->InsertarOrdenIngresoProy($descripcion,$costo_total,$id_proveedor,$id_contratista,$id_empleado,$id_almacen_logico,$id_institucion,$id_motivo_ingreso_cuenta,$orden_compra,$observaciones,$num_factura,$fecha_factura,$responsable,$fecha_finalizado_cancelado,$importacion,$flete,$seguro,$gastos_alm,$gastos_aduana,$iva,$rep_form,$peso_neto,$id_moneda_import,$id_moneda_nacionaliz,$dui,$monto_tot_factura,$txt_tipo_costeo,$nro_pedido_compra);
 		$this->salida = $dbIngreso ->salida;
 		$this->query = $dbIngreso ->query;
 		return $res;
@@ -204,11 +204,11 @@ class cls_CustomDBAlmacenes
 		return $res;
 	}
 
-	function ModificarIngresoProy($id_ingreso,$descripcion,$costo_total,$id_proveedor,$id_contratista,$id_empleado,$id_almacen_logico,$id_institucion,$id_motivo_ingreso_cuenta,$orden_compra,$observaciones,$num_factura,$fecha_factura,$responsable,$fecha_finalizado_cancelado,$importacion,$flete,$seguro,$gastos_alm,$gastos_aduana,$iva,$rep_form,$peso_neto,$id_moneda_import,$id_moneda_nacionaliz,$dui,$monto_tot_factura,$txt_tipo_costeo)
+	function ModificarIngresoProy($id_ingreso,$descripcion,$costo_total,$id_proveedor,$id_contratista,$id_empleado,$id_almacen_logico,$id_institucion,$id_motivo_ingreso_cuenta,$orden_compra,$observaciones,$num_factura,$fecha_factura,$responsable,$fecha_finalizado_cancelado,$importacion,$flete,$seguro,$gastos_alm,$gastos_aduana,$iva,$rep_form,$peso_neto,$id_moneda_import,$id_moneda_nacionaliz,$dui,$monto_tot_factura,$txt_tipo_costeo,$nro_pedido_compra)
 	{
 		$this->salida = "";
 		$dbIngreso = new cls_DBOrdenIngresoSol($this->decodificar);
-		$res = $dbIngreso ->ModificarIngresoProy($id_ingreso,$descripcion,$costo_total,$id_proveedor,$id_contratista,$id_empleado,$id_almacen_logico,$id_institucion,$id_motivo_ingreso_cuenta,$orden_compra,$observaciones,$num_factura,$fecha_factura,$responsable,$fecha_finalizado_cancelado,$importacion,$flete,$seguro,$gastos_alm,$gastos_aduana,$iva,$rep_form,$peso_neto,$id_moneda_import,$id_moneda_nacionaliz,$dui,$monto_tot_factura,$txt_tipo_costeo);
+		$res = $dbIngreso ->ModificarIngresoProy($id_ingreso,$descripcion,$costo_total,$id_proveedor,$id_contratista,$id_empleado,$id_almacen_logico,$id_institucion,$id_motivo_ingreso_cuenta,$orden_compra,$observaciones,$num_factura,$fecha_factura,$responsable,$fecha_finalizado_cancelado,$importacion,$flete,$seguro,$gastos_alm,$gastos_aduana,$iva,$rep_form,$peso_neto,$id_moneda_import,$id_moneda_nacionaliz,$dui,$monto_tot_factura,$txt_tipo_costeo,$nro_pedido_compra);
 		$this->salida = $dbIngreso ->salida;
 		$this->query = $dbIngreso ->query;
 		return $res;

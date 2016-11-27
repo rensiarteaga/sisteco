@@ -1429,6 +1429,70 @@ class cls_DBSalida
 		exit;*/
 		return $res;
 	}
+
+/**
+	 * Nombre de la función:	ComposicionTUC
+	 * Propósito:				PAra el listado de faltantes en TUC 
+	 * Autor:				    RAC
+	 * Fecha de creación:		12/12/2016
+	 */
+	function ConsolidadoTUC($id_salida)
+	{
+		$this->salida = "";
+		$this->nombre_funcion = 'f_al_rep_existencias_tuc';
+		$this->codigo_procedimiento = "'AL_REPCON_REP'";
+		
+
+		$func = new cls_funciones();//Instancia de las funciones generales
+
+		//Instancia la clase middle para la ejecución de la función de la BD
+		$this->var = new cls_middle($this->nombre_funcion,$this->codigo_procedimiento);
+
+		//Carga los parámetros del filtro
+		$this->var->cant = 0;
+		$this->var->puntero = 0;
+		$this->var->sortcol = "'id'";
+		$this->var->sortdir = "'asc'";
+		$this->var->criterio_filtro = "'0=0'";
+
+		//Carga los parámetros específicos de la estructura programática
+		$this->var->add_param("'$id_salida'");//id_financiador
+		
+		$this->var->add_def_cols('id','integer');
+        $this->var->add_def_cols('id_salida','integer');
+        $this->var->add_def_cols('id_item','integer');
+        $this->var->add_def_cols('id_tuc','integer');
+        $this->var->add_def_cols('id_tuc_padre','integer');
+        $this->var->add_def_cols('nombre_item','varchar');
+        $this->var->add_def_cols('codigo_item','varchar');
+        $this->var->add_def_cols('codigo_tuc','varchar');
+        $this->var->add_def_cols('nombre_tuc','varchar');                                    
+        $this->var->add_def_cols('codigo_tuc_padre','varchar');
+        $this->var->add_def_cols('nombre_tuc_padre','varchar');
+        $this->var->add_def_cols('cantidad_solicitada','numeric');
+        $this->var->add_def_cols('candidad_disponible','numeric');
+        $this->var->add_def_cols('cantidad_minima','numeric');
+        $this->var->add_def_cols('unidades_posibles','numeric');
+
+		
+		//Ejecuta la función de consulta
+		$res = $this->var->exec_query();
+
+		//Obtiene el array de salida de la función y retorna el resultado de la ejecución
+		$this->salida = $this->var->salida;
+
+		//Obtiene la cadena con que se llamó a la función de postgres
+		$this->query = $this->var->query;
+
+		//echo "query: ".$this->query;
+		//exit;
+		/*print ("<pre>");
+		print_r($this->salida);
+		print ("</pre>");
+		exit;*/
+		return $res;
+	}
+	
 	
 	
 

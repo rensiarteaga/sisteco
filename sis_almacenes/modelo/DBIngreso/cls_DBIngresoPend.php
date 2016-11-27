@@ -228,6 +228,9 @@ class cls_DBIngresoPend
 		$this->var->add_param("NULL");
 		$this->var->add_param("NULL");
 		$this->var->add_param("NULL");
+		
+		$this->var->add_param("NULL"); //tipo_costeo		
+		$this->var->add_param("NULL"); //nro_predido_compr
 
 		//Ejecuta la función
 		$res = $this->var->exec_non_query();
@@ -299,6 +302,9 @@ class cls_DBIngresoPend
 		$this->var->add_param("NULL");
 		$this->var->add_param("NULL");
 		$this->var->add_param("NULL");
+		
+		$this->var->add_param("NULL"); //tipo_costeo		
+		$this->var->add_param("NULL"); //nro_predido_compr
 
 		//Ejecuta la función
 		$res = $this->var->exec_non_query();

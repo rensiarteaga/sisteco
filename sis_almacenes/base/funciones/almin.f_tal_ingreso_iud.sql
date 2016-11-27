@@ -50,7 +50,8 @@ CREATE OR REPLACE FUNCTION almin.f_tal_ingreso_iud (
   al_dui varchar,
   al_monto_tot_factura numeric,
   al_id_cotizacion integer,
-  al_tipo_costeo varchar
+  al_tipo_costeo varchar,
+  al_nro_pedido_compra varchar
 )
 RETURNS varchar AS
 $body$
@@ -286,7 +287,7 @@ BEGIN
     ON ESTPRO.id_fina_regi_prog_proy_acti = ALMAEP.id_fina_regi_prog_proy_acti
     WHERE ALMLOG.id_almacen_logico = al_id_almacen_logico;
 
-
+    --raise exception 'llega';
 
     --*** EJECUCIÓN DEL PROCEDIMIENTO ESPECÍFICO
     IF pm_codigo_procedimiento = 'AL_OINSOL_INS' THEN
@@ -488,8 +489,9 @@ BEGIN
                   
              IF g_id_parametro_almacen_logico is null THEN
                 raise exception 'no se encontro gestión para el almacen lógico';
-             END IF;     
-
+             END IF;  
+             
+          
             UPDATE almin.tal_ingreso SET
               descripcion                 = al_descripcion,
               costo_total                 = al_costo_total,
@@ -521,7 +523,8 @@ BEGIN
               id_moneda_nacionaliz        = g_id_moneda_nacionaliz,
               id_parametro_almacen =  g_id_parametro_almacen,
               id_parametro_almacen_logico = g_id_parametro_almacen_logico,
-              tipo_costeo	=	COALESCE(al_tipo_costeo,'peso')
+              tipo_costeo	=	COALESCE(al_tipo_costeo,'peso'),
+              nro_pedido_compra =	al_nro_pedido_compra
             WHERE id_ingreso = al_id_ingreso;
 
             -- DESCRIPCIÓN DE ÉXITO PARA GUARDAR EN EL LOG
@@ -2080,6 +2083,7 @@ BEGIN
     Fecha:		03/12/2016
     Desc:		- Se agrega el parametro id_parametro_almacen_logico para permitir lso cierres y aperturas de gestion de manera individual
     			- agrega tipo costeo
+                - agregar nro de pedido de compra, 
     
     */
 
@@ -2237,7 +2241,7 @@ BEGIN
                 END IF;
 
            
-
+--raise exception 'al_nro_pedido_compra = %',al_nro_pedido_compra;
 
             --OBTIENE LA MONEDA PRINCIPAL (CAMBIAR CON FUNCION)
             g_id_moneda_principal = 1;
@@ -2255,7 +2259,8 @@ BEGIN
                 importacion              ,flete                  ,seguro                      ,gastos_alm,
                 gastos_aduana            ,iva                    ,rep_form                    ,peso_neto,
                 id_moneda_import         ,id_moneda_nacionaliz   ,dui                         ,monto_tot_factura,
-                circuito,				  id_parametro_almacen_logico							,tipo_costeo
+                circuito,				  id_parametro_almacen_logico						  ,tipo_costeo,
+                nro_pedido_compra
             ) VALUES (
                 al_descripcion,
                 al_costo_total           ,g_contabilizar         ,'Borrador'                  ,'activo',
@@ -2268,7 +2273,8 @@ BEGIN
                 al_importacion           ,al_flete               ,al_seguro                   ,al_gastos_alm,
                 al_gastos_aduana         ,al_iva                 ,al_rep_form                 ,al_peso_neto,
                 al_id_moneda_import      ,g_id_moneda_principal  ,al_dui                      ,al_monto_tot_factura,
-                'Simplificado',			  g_id_parametro_almacen_logico							,COALESCE(al_tipo_costeo,'peso')
+                'Simplificado',			  g_id_parametro_almacen_logico							,COALESCE(al_tipo_costeo,'peso'),
+                al_nro_pedido_compra
             );
 
             -- DESCRIPCIÓN DE ÉXITO PARA GUARDAR EN EL LOG
