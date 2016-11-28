@@ -220,7 +220,7 @@ class PDF extends FPDF
 		$this->Cell(25,5,'Nro. Contrato:',0,0,'R');
 
 		$this->SetFont('Arial','B',9);
-		$this->Cell(13,4,''.$padre[14],0,0,'C');
+		$this->Cell(13,5,''.$padre[14],0,0,'C');
 		$this->SetFont('Arial','',9);
 		
 		$this->Ln(4);
