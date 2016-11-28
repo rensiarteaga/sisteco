@@ -5,7 +5,6 @@
  * Autor:			Rodrigo Chumacero Moscoso
  * Fecha creación:	25-05-2007
  */
-
 class cls_manejo_xml
 {
 	var $xml;//Variable que contendrá el xml
@@ -16,7 +15,6 @@ class cls_manejo_xml
 	var $encoding_header; //Codificación que se utilizará para el Header de despliegue del xml
 	var $version_xml = '1.0' ;//Versión del xml
 	var $terminado = false;//Vriable que indica si se colocó ya su fin de nodo raíz
-
 	//Variable que contiene el código del header del html
 	var $codigo_header;
 
@@ -77,6 +75,9 @@ class cls_manejo_xml
 
 	public function mostrar_xml()
 	{
+		
+		//echo 'llega';
+		
 		if(!$this->terminado)
 		{
 			$this->xml .= "</$this->etiqueta_arbol>\n";
@@ -100,6 +101,7 @@ class cls_manejo_xml
 		{
 			header("Content-Type:text/xml; charset=$this->encoding_header");
 		}
+
 
 		//Despliega el xml
 		echo $this->xml;

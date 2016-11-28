@@ -18,10 +18,8 @@ Autor:					Generado Automaticamente
 */
 session_start();
 include_once('../LibModeloSeguridad.php');
-
 $Custom = new cls_CustomDBSeguridad();
 $nombre_archivo = 'ActionListarSubsistema .php';
-
 if (!isset($_SESSION['autentificado']))
 {
 	$_SESSION['autentificado']='NO';
@@ -76,6 +74,8 @@ if($_SESSION['autentificado']=='SI')
 
 	if($res) $total_registros= $Custom->salida;
 
+
+    
 	//Obtiene el conjunto de datos de la consulta
 	$res = $Custom->ListarSubsistema($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$hidden_ep_id_financiador,$hidden_ep_id_regional,$hidden_ep_id_programa,$hidden_ep_id_proyecto,$hidden_ep_id_actividad);
 	
@@ -110,7 +110,11 @@ if($_SESSION['autentificado']=='SI')
 
 			$xml->fin_rama();
 		}
+		
+		
 		$xml->mostrar_xml();
+		
+		 
 	}
 	else
 	{
