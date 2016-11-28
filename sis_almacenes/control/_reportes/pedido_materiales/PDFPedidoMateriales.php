@@ -195,9 +195,9 @@ class PDF extends FPDF
 		$this->Cell(55,5,''.$padre[1],0,0,'L');
 		$this->SetFont('Arial','',9);
 		
-		$this->Cell(25,5,'Imputación:',0,0,'R');
+		$this->Cell(20,5,'Imputación:',0,0,'R');
 		$this->SetFont('Arial','B',9);
-		$this->Cell(13,4,''.$padre[23],0,0,'C');
+		$this->Cell(13,6,''.$padre[23],0,0,'C');
 		$this->SetFont('Arial','',9);
 		
 		$this->Ln(4);
@@ -217,17 +217,15 @@ class PDF extends FPDF
 		$this->Cell(55,5,''.$padre[22],0,0,'L');
 		$this->SetFont('Arial','',9);
 		
-		$this->Cell(25,5,'Nro. Contrato:',0,0,'R');
+		$this->Cell(20,5,'Nro. Contrato:',0,0,'R');
 
 		$this->SetFont('Arial','B',9);
-		$this->Cell(13,5,''.$padre[14],0,0,'C');
+		$this->Cell(13,6,''.$padre[14],0,0,'C');
 		$this->SetFont('Arial','',9);
 		
 		$this->Ln(4);
 
 		$this->Cell(46,5,'Unidad Constructiva:',0,0,'R');
-
-
 		$this->SetFont('Arial','B',9);
 		$this->Cell(55,5,''.$hijo['desc_uc_padre'],0,0,'L');
 		$this->SetFont('Arial','',9);
@@ -242,14 +240,11 @@ class PDF extends FPDF
 
 		$this->Ln(4);
 		$this->Cell(46,5,'Componente:',0,0,'R');
-
 		$this->SetFont('Arial','B',9);
 		$this->Cell(55,5,''.$hijo['desc_uc'],0,0,'L');
 		$this->SetFont('Arial','',9);
-
 		$this->Cell(38,5,'',0,0,'R');
 		$this->Cell(33,5,'Estructura Nro.:',0,0,'R');
-
 		$this->SetFillColor(224,235,255);
 		$this->Cell(20,4,''.$padre['uc'],'LTRB',1,'C',$fill);
 		$this->SetFillColor(255,255,255);
