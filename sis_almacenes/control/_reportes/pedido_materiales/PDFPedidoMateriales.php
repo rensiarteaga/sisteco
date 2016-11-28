@@ -177,35 +177,27 @@ class PDF extends FPDF
 	{
 		$this->imp_cols=0;
 		$fill=true;
-		$this->SetFont('Arial','',10);
-
-		$this->Cell(46,5,'',0,0,'L');
-
-
-		$this->Cell(25,5,'Solicitante:',0,0,'R');
-
+		$this->SetFont('Arial','',9);      
+		$this->Cell(46,5,'Solicitante:',0,0,'R');
 		$this->SetFont('Arial','B',9);
-		$this->Cell(81,4,''.$padre[7],'LTRB',0,'C');
+		$this->Cell(81,4,''.$padre[7],0,0,'L');
 		$this->SetFont('Arial','',9);
 		$this->Ln(4);
 		
 		$this->Cell(46,5,'Almacén Lógico:',0,0,'R');
-
 		$this->SetFont('Arial','B',9);
 		$this->Cell(55,5,''.$padre[21],0,0,'L');// falta la consulta
 		$this->SetFont('Arial','',9);
 		$this->Ln(4);
 
 		$this->Cell(46,5,'Receptor Autorizado:',0,0,'R');
-
 		$this->SetFont('Arial','B',9);
 		$this->Cell(55,5,''.$padre[1],0,0,'L');
 		$this->SetFont('Arial','',9);
 		
 		$this->Cell(25,5,'Imputación:',0,0,'R');
-
 		$this->SetFont('Arial','B',9);
-		$this->Cell(13,4,''.$padre[23],'LTBR',0,'C');
+		$this->Cell(13,4,''.$padre[23],0,0,'C');
 		$this->SetFont('Arial','',9);
 		
 		$this->Ln(4);
@@ -228,7 +220,7 @@ class PDF extends FPDF
 		$this->Cell(25,5,'Nro. Contrato:',0,0,'R');
 
 		$this->SetFont('Arial','B',9);
-		$this->Cell(13,4,''.$padre[14],'LTBR',0,'C');
+		$this->Cell(13,4,''.$padre[14],0,0,'C');
 		$this->SetFont('Arial','',9);
 		
 		$this->Ln(4);
