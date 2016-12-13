@@ -276,7 +276,7 @@ BEGIN
                                               TTSAL.tipo_ing_sal,
                                               TTSAL.fecha_finalizado_exacta
                                          FROM tt_tal_salidas TTSAL)
-                                      order by fecha,fecha_finalizado_exacta) LOOP
+                                      order by fecha,fecha,fecha_finalizado_exacta) LOOP
                             
                       g_costo_unitario:=v_kard_fisico.costo_unitario;    
                             
@@ -306,8 +306,19 @@ BEGIN
               raise notice 'ingresos: %   salidas: %  saldo: %',v_kard_fisico.cantidad_ing,v_kard_fisico.cantidad_sal,g_saldo;
               raise notice 'costo_unit: %   debe: %   haber: %   costo:%',g_costo_unitario,v_kard_fisico.costo_debe,g_haber,g_saldo_costo;
              
-               EXECUTE(' INSERT INTO tt_tal_kard_item VALUES('''||v_kard_fisico.fecha||''','''||v_kard_fisico.codigo||''','''||v_kard_fisico.descripcion||''','||v_kard_fisico.cantidad_ing||','||v_kard_fisico.cantidad_sal||',
-                                         '||g_saldo||','||g_costo_unitario||','||v_kard_fisico.costo_debe||','||g_haber||','||g_saldo_costo||');');
+               INSERT 
+               INTO tt_tal_kard_item 
+               VALUES(
+                     v_kard_fisico.fecha,
+                     v_kard_fisico.codigo,
+                     v_kard_fisico.descripcion,
+                     v_kard_fisico.cantidad_ing,
+                     v_kard_fisico.cantidad_sal,
+                     g_saldo,
+                     g_costo_unitario,
+                     v_kard_fisico.costo_debe,
+                     g_haber,
+                     g_saldo_costo);
 
                 --raise notice 'codigo: %   saldo antes: %',v_kard_fisico.codigo,g_saldo_antes;
                 END LOOP;

@@ -28,6 +28,7 @@ $_SESSION["CONTRASENA"]=md5($_SESSION["_SEMILLA"].md5(trim($contrasenia)));
 
 $_SESSION["BASE_DATOS"]="dbendesis"; 
 $_SESSION["logo"]="../images/logo_reporte.jpg";
+$_SESSION['_DIR_LOGO']="../images/logo_reporte_corp.jpg";
 
 //RAC:  CREDENCIALES EXCLUSIVAS PARA VERIFICAR EL LOGUEO
 $_SESSION["CON_USUARIO"]=$_SESSION["BASE_DATOS"].'_conexion';

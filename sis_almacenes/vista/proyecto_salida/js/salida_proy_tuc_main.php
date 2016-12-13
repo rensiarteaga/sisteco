@@ -1466,7 +1466,7 @@ function pagina_salida_proy_tuc(idContenedor,direccion,paramConfig)
 			//RCM: 08/06/2008 yucumo
 			datax = "hidden_id_salida=" + Cm_getComponente('id_salida').getValue();
 			//datax = 'maestro_id_salida='+idSalida;
-			window.open(direccion+'../../../control/_reportes/pedido_materiales/ActionReporteFaltanteMaterialesUC.php?'+datax)
+			window.open(direccion+'../../../control/_reportes/pedido_materiales/ActionReporteFaltantesTUC.php?'+datax)
 
 
 		}

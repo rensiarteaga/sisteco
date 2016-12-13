@@ -12,7 +12,6 @@ session_start();
 <head>
 <meta http-equiv='Content-Type' content='text/html; charset=iso-8859-15'>
 <title>sis_almacenes almacen_ep</title>
-   <script type='text/javascript' src='../../../sis_almacenes/vista/almacen_ep/js/almacen_ep.js'></script>
    <script type='text/javascript' src='../../../sis_almacenes/vista/almacen_ep/js/almacen_ep_main.php?idContenedor=<?php echo "$idContenedor";?>'></script>
 </head>
 <body>

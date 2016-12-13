@@ -18,6 +18,7 @@ include_once(dirname(__FILE__)."../../../lib/lib_control/cls_validacion_serv.php
 include_once(dirname(__FILE__)."../../../lib/lib_control/cls_criterio_filtro.php");
 include_once(dirname(__FILE__)."../../../lib/lib_control/cls_criterio_sort.php");
 include_once(dirname(__FILE__)."../../modelo/cls_CustomDBAlmacenes.php");
+
 //include_once(dirname(__FILE__)."../../modelo/rcm_cls_CustomDBAlmacenes.php");
 //include_once(dirname(__FILE__)."../../modelo/erh_cls_CustomDBAlmacenes.php");
 include_once(dirname(__FILE__)."../../../sis_adquisiciones/modelo/cls_CustomDBAdquisiciones.php");

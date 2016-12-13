@@ -75,6 +75,7 @@ class cls_CustomDBAlmacenes
 		include_once("cls_DBKardexItem.php");
 		include_once("cls_DBMaterialEntregado.php");
 		include_once("cls_DBValoracion.php");
+		include_once("cls_DBParametroAlmacenLogico.php");
 	}
 
 
@@ -3584,5 +3585,41 @@ class cls_CustomDBAlmacenes
 		$this->query = $db ->query;
 		return $res;
 	}
-}
-?>
+	
+	
+	/// --------------------- tal_parametro_almacen_logico --------------------- ///
+
+	function ListarParametroAlmacenLogico($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad)
+	{
+		$this->salida = "";
+		$dbKardexLogico = new cls_DBParametroAlmacenLogico($this->decodificar);
+		$res = $dbKardexLogico ->ListarParametroAlmacenLogico($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad);
+		$this->salida = $dbKardexLogico ->salida;
+		$this->query = $dbKardexLogico ->query;
+		return $res;
+	}
+
+	function ContarParametroAlmacenLogico($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad)
+	{
+		$this->salida = "";
+		$dbKardexLogico = new cls_DBParametroAlmacenLogico($this->decodificar);
+		$res = $dbKardexLogico ->ContarParametroAlmacenLogico($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$id_financiador,$id_regional,$id_programa,$id_proyecto,$id_actividad);
+		$this->salida = $dbKardexLogico ->salida;
+		$this->query = $dbKardexLogico ->query;
+		return $res;
+	}
+	
+	function CerrarGestionLogica($id_parametro_almacen_logico)
+	{
+		$this->salida = "";
+		$db = new cls_DBParametroAlmacenLogico($this->decodificar);
+		$res = $db -> CerrarGestionLogica($id_parametro_almacen_logico);
+		$this->salida = $db ->salida;
+		$this->query = $db ->query;
+		return $res;
+	}
+	
+	/// --------------------- FIN tal_parametro_almacen_logico --------------------- ///
+	
+	
+}?>

@@ -391,7 +391,7 @@ function pagina_valoracion_saldos(idContenedor,direccion,paramConfig)
 		cmbAlmacen = ClaseMadre_getComponente('id_almacen');
 		cmbAlmacenLogico = ClaseMadre_getComponente('id_almacen_logico');
 		cmbGestion=ClaseMadre_getComponente('id_parametro_almacen');
-		dteFechaDesde=ClaseMadre_getComponente('fecha');
+		var dteFechaDesde=ClaseMadre_getComponente('fecha');
 		txt_id_financiador=ClaseMadre_getComponente('id_financiador');
 		txt_id_regional=ClaseMadre_getComponente('id_regional');
 		txt_id_programa=ClaseMadre_getComponente('id_programa');
@@ -446,11 +446,11 @@ function pagina_valoracion_saldos(idContenedor,direccion,paramConfig)
 		var onGestionSelect = function(e) {
 			var id = cmbGestion.getValue();
 			if(cmbGestion.store.getById(id)!=undefined){
-				intGestion=cmbGestion.store.getById(id).data.gestion;
+				var intGestion=cmbGestion.store.getById(id).data.gestion;
 			
 				//Define límites de la fecha
-				dte_fecha_ini_valid = '01/01/'+intGestion+' 00:00:00';
-				dte_fecha_fin_valid = '12/31/'+intGestion+' 00:00:00';
+				var dte_fecha_ini_valid = '01/01/'+intGestion+' 00:00:00';
+				var dte_fecha_fin_valid = '12/31/'+intGestion+' 00:00:00';
 				
 				//Instancia un objeto fecha con los datos obtenidos para que el DateFIeld los acepte sin problema
 				dte_fecha_ini_valid=new Date(dte_fecha_ini_valid);

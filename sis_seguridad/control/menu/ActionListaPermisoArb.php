@@ -30,7 +30,7 @@ if (!isset($_SESSION['autentificado']))
 }
 if($_SESSION['autentificado']=="SI"){
 
-	if($node=='id'){
+	if($_POST['node']=='id'){
 		//Obtiene la lista de permisos para el id_usuario, si existe caso contrario la funcion devolvera un error
 		//echo "Variables: ".$_SESSION["ss_id_usuario"]."      rol: ".$_SESSION["ss_id_rol"]."    ip: ".$_SESSION["ss_ip"]."   mac: ".$_SESSION["ss_mac"]; exit;
 		$resp = $CustomSeguridad->ListaPermisoArb($_SESSION["ss_id_usuario"],$_SESSION["ss_id_rol"],$_SESSION["ss_ip"],$_SESSION["ss_mac"],'1','%');

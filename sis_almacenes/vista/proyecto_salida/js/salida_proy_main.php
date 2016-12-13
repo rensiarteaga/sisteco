@@ -1405,6 +1405,7 @@ function pagina_salida_proy(idContenedor,direccion,paramConfig)
 	};
 
 	this.EnableSelect=function(selModel,row,selected){
+		
 		Cm_EnableSelect(selModel,row,selected)
 		var ep=cmb_ep.getValue();
 		data_ep='id_financiador='+ep['id_financiador']+'&id_regional='+ep['id_regional']+'&id_programa='+ep['id_programa']+'&id_proyecto='+ep['id_proyecto']+'&id_actividad='+ep['id_actividad'];
