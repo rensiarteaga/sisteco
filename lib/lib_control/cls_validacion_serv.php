@@ -745,5 +745,4 @@ class cls_validacion_serv
 		//Validación exitosa
 		return true;
 	}
-}
-?>
+}?>

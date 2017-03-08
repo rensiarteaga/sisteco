@@ -60,9 +60,7 @@ class cls_manejo_arbol
 
 	public function cadena_html()
 	{
-		return $this->html .= "
-		      												    		                       
-							   <a id=\"help-forums\" href=\"../../vista/preferencia/preferencia.php\" target=\"_parent\">Preferencias</a>
+		return $this->html .= "<a id=\"help-forums\" href=\"../../vista/preferencia/preferencia.php\" target=\"_parent\">Preferencias</a>
 		                       \n
 		                       <a id=\"help-forums1\" href=\"../../\" target=\"_parent\"target=\"_parent\">Eventos</a>\n
 		                       <!--<a id=\"help-forums2\" href=\"../../\" target=\"_parent\"target=\"_parent\">Tareas Pendientes</a>\n-->
@@ -82,8 +80,6 @@ class cls_manejo_arbol
 								}});
 								});
 		                       </script>";
-
-
 	}
 }
 ?>
