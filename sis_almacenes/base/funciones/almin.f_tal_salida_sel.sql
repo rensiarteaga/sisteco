@@ -109,6 +109,8 @@ BEGIN
     ---*** VERIFICACIÓN ROL ADMINISTRADOR
     IF EXISTS(SELECT 1 FROM sss.tsg_usuario_rol usrol WHERE usrol.id_usuario = pm_id_usuario AND usrol.id_rol=1) THEN
         g_rol_adm := true;
+    ELSE
+        g_rol_adm := false;
     END IF;
     
     ---*** OBTENCIÓN DEL ID DEL SUBSISTEMA
@@ -161,7 +163,7 @@ BEGIN
         RAISE EXCEPTION '%',g_descripcion_log_error;
     END IF;  
  
-    --raise exception 'llega';
+   -- raise exception 'llega';
 
     ---***SELECCIÓN DE OPERACIÓN A REALIZAR
     IF pm_codigo_procedimiento  = 'AL_SALIDA_SEL' THEN
@@ -371,9 +373,17 @@ BEGIN
                            INNER JOIN almin.tal_parametro_almacen PARALM ON PARALM.id_parametro_almacen = SALIDA.id_parametro_almacen
                            WHERE SALIDA.tipo_reg = ''movimiento'' AND SALIDA.estado_salida = ''Borrador'' AND ';
             g_consulta := g_consulta || pm_criterio_filtro;
-          --  para que los usuarios  solo puedan ver los pedidos realizados por ellos
-            IF NOT g_rol_adm  THEN
-                g_consulta := g_consulta || ' SALIDA.id_usuario=' || pm_id_susario ||'  AND ';
+         
+            -- VERIFICA SI TIENE ROL ADMINISTRADOR
+            IF NOT g_rol_adm THEN
+		 	    --SE AUMENTA LAS RESTRICCIONES DE LA ESTRUCTURA PROGRAMÁTICA
+            	g_consulta := g_consulta ||' AND ALMAEP.id_fina_regi_prog_proy_acti IN '|| '';
+            	g_consulta := g_consulta ||' '|| '(SELECT DISTINCT
+                                                      ASIGFRPPA.id_fina_regi_prog_proy_acti
+                                                   FROM sss.tsg_usuario_asignacion USRAS
+                                                   INNER JOIN sss.tsg_asignacion_estructura_tpm_frppa ASIGFRPPA  ON ASIGFRPPA.id_asignacion_estructura = USRAS.id_asignacion_estructura';
+            	g_consulta := g_consulta ||' WHERE USRAS.id_usuario = ' || pm_id_usuario ||')'; --CIERRA EL PARÉNTESIS DE LA SUBCONSULTA DE ESTRUCTURAS RELACIONADAS AL USUARIO
+           
             END IF;
             
             
@@ -460,11 +470,21 @@ BEGIN
                            ON PARALM.id_parametro_almacen = SALIDA.id_parametro_almacen
                            WHERE  SALIDA.tipo_reg = ''movimiento'' AND  SALIDA.estado_salida = ''Borrador'' AND '; 
              --  para que los usuarios  solo puedan ver los pedidos realizados por ellos
-            IF NOT g_rol_adm  THEN
-                g_consulta := g_consulta || ' SALIDA.id_usuario=' || pm_id_susario ||'  AND ';
-            END IF;
+           
 
             g_consulta := g_consulta || pm_criterio_filtro;
+            
+            -- VERIFICA SI TIENE ROL ADMINISTRADOR
+            IF NOT g_rol_adm THEN
+		 	    --SE AUMENTA LAS RESTRICCIONES DE LA ESTRUCTURA PROGRAMÁTICA
+            	g_consulta := g_consulta ||' AND ALMAEP.id_fina_regi_prog_proy_acti IN '|| '';
+            	g_consulta := g_consulta ||' '|| '(SELECT DISTINCT
+                                                      ASIGFRPPA.id_fina_regi_prog_proy_acti
+                                                   FROM sss.tsg_usuario_asignacion USRAS
+                                                   INNER JOIN sss.tsg_asignacion_estructura_tpm_frppa ASIGFRPPA  ON ASIGFRPPA.id_asignacion_estructura = USRAS.id_asignacion_estructura';
+            	g_consulta := g_consulta ||' WHERE USRAS.id_usuario = ' || pm_id_usuario ||')'; --CIERRA EL PARÉNTESIS DE LA SUBCONSULTA DE ESTRUCTURAS RELACIONADAS AL USUARIO
+           
+            END IF;
 
             FOR g_registros in EXECUTE(g_consulta) LOOP
                 RETURN NEXT g_registros;
@@ -1036,74 +1056,53 @@ BEGIN
                            COALESCE(PERSON3.apellido_paterno,'''') || '' '' || COALESCE(PERSON3.apellido_materno,'''') || '' '' || COALESCE(PERSON3.nombre,'''') as nombre_superv
 
                            FROM almin.tal_salida SALIDA
-                           LEFT JOIN almin.tal_responsable_almacen RESALM
-                           ON RESALM.id_responsable_almacen=SALIDA.id_responsable_almacen
-                           INNER JOIN almin.tal_almacen_logico ALMLOG
-                           ON ALMLOG.id_almacen_logico=SALIDA.id_almacen_logico
-                           LEFT JOIN kard.tkp_empleado EMPLEA
-                           ON EMPLEA.id_empleado=SALIDA.id_empleado
-                           LEFT JOIN sss.tsg_persona PERSON
-                           ON PERSON.id_persona=EMPLEA.id_persona
-                           LEFT JOIN almin.tal_firma_autorizada FIRAUT
-                           ON FIRAUT.id_firma_autorizada=SALIDA.id_firma_autorizada
-                           LEFT JOIN kard.tkp_empleado_tpm_frppa EFRPPA
-                           ON EFRPPA.id_empleado_frppa=FIRAUT.id_empleado_frppa
-                           LEFT JOIN kard.tkp_empleado EMPLEA2
-                           ON EMPLEA2.id_empleado=EFRPPA.id_empleado
+                           LEFT JOIN almin.tal_responsable_almacen RESALM ON RESALM.id_responsable_almacen=SALIDA.id_responsable_almacen
+                           INNER JOIN almin.tal_almacen_logico ALMLOG ON ALMLOG.id_almacen_logico=SALIDA.id_almacen_logico
+                           LEFT JOIN kard.tkp_empleado EMPLEA ON EMPLEA.id_empleado=SALIDA.id_empleado
+                           LEFT JOIN sss.tsg_persona PERSON ON PERSON.id_persona=EMPLEA.id_persona
+                           LEFT JOIN almin.tal_firma_autorizada FIRAUT ON FIRAUT.id_firma_autorizada=SALIDA.id_firma_autorizada
+                           LEFT JOIN kard.tkp_empleado_tpm_frppa EFRPPA ON EFRPPA.id_empleado_frppa=FIRAUT.id_empleado_frppa
+                           LEFT JOIN kard.tkp_empleado EMPLEA2 ON EMPLEA2.id_empleado=EFRPPA.id_empleado
                            
-                           LEFT JOIN sss.tsg_persona PERSON2
-                           ON PERSON2.id_persona=EMPLEA2.id_persona
+                           LEFT JOIN sss.tsg_persona PERSON2 ON PERSON2.id_persona=EMPLEA2.id_persona
                            
-                           LEFT JOIN almin.tal_supervisor SUPERV
-                           ON SUPERV.id_supervisor = SALIDA.id_supervisor
-                           LEFT JOIN sss.tsg_persona PERSON3
-                           ON PERSON3.id_persona = SUPERV.id_persona
+                           LEFT JOIN almin.tal_supervisor SUPERV ON SUPERV.id_supervisor = SALIDA.id_supervisor
+                           LEFT JOIN sss.tsg_persona PERSON3 ON PERSON3.id_persona = SUPERV.id_persona
                            
-                           LEFT JOIN param.tpm_contratista CONTRA
-                           ON CONTRA.id_contratista=SALIDA.id_contratista
-                           INNER JOIN almin.tal_tipo_material TIPMAT
-                           ON TIPMAT.id_tipo_material=SALIDA.id_tipo_material
-                           LEFT JOIN param.tpm_institucion INSTIT
-                           ON INSTIT.id_institucion=SALIDA.id_institucion
-                           LEFT JOIN param.tpm_subactividad SUBACT
-                           ON SUBACT.id_subactividad=SALIDA.id_subactividad
-                           INNER JOIN almin.tal_motivo_salida_cuenta MOSACU
-            			   ON MOSACU.id_motivo_salida_cuenta=SALIDA.id_motivo_salida_cuenta
-            			   INNER JOIN almin.tal_almacen_ep ALMAEP
-            			   ON ALMAEP.id_almacen_ep = ALMLOG.id_almacen_ep
-            			   INNER JOIN almin.tal_almacen ALMACE
-            			   ON ALMACE.id_almacen = ALMAEP.id_almacen
-            			   INNER JOIN almin.tal_motivo_salida MOTSAL
-            			   ON MOTSAL.id_motivo_salida = MOSACU.id_motivo_salida
-            			   INNER JOIN param.tpm_fina_regi_prog_proy_acti FRPPA
-                           ON FRPPA.id_fina_regi_prog_proy_acti = ALMAEP.id_fina_regi_prog_proy_acti
-                           INNER JOIN param.tpm_financiador FINANC
-                           ON FINANC.id_financiador = FRPPA.id_financiador
-                           INNER JOIN param.tpm_regional REGION
-                           ON REGION.id_regional = FRPPA.id_regional
-                           INNER JOIN param.tpm_programa_proyecto_actividad PGPYAC
-                           ON PGPYAC.id_prog_proy_acti = FRPPA.id_prog_proy_acti
-                           INNER JOIN param.tpm_programa PROGRA
-                           ON PROGRA.id_programa = PGPYAC.id_programa
-                           INNER JOIN param.tpm_proyecto PROYEC
-                           ON PROYEC.id_proyecto = PGPYAC.id_proyecto
-                           INNER JOIN param.tpm_actividad ACTIVI
-                           ON ACTIVI.id_actividad = PGPYAC.id_actividad
-                           LEFT JOIN almin.tal_tramo_subactividad TRASUB
-                           ON TRASUB.id_tramo_subactividad = SALIDA.id_tramo_subactividad
-                           LEFT JOIN almin.tal_tramo TRAMO
-                           ON TRAMO.id_tramo = TRASUB.id_tramo
-                           LEFT JOIN almin.tal_tramo_unidad_constructiva TRAUNI
-                           ON TRAUNI.id_tramo_unidad_constructiva = SALIDA.id_tramo_unidad_constructiva
-                           LEFT JOIN almin.tal_unidad_constructiva UNICON
-                           ON UNICON.id_unidad_constructiva = TRAUNI.id_unidad_constructiva
-                           INNER JOIN almin.tal_parametro_almacen PARALM
-                           ON PARALM.id_parametro_almacen = SALIDA.id_parametro_almacen
+                           LEFT JOIN param.tpm_contratista CONTRA ON CONTRA.id_contratista=SALIDA.id_contratista
+                           INNER JOIN almin.tal_tipo_material TIPMAT ON TIPMAT.id_tipo_material=SALIDA.id_tipo_material
+                           LEFT JOIN param.tpm_institucion INSTIT ON INSTIT.id_institucion=SALIDA.id_institucion
+                           LEFT JOIN param.tpm_subactividad SUBACT ON SUBACT.id_subactividad=SALIDA.id_subactividad
+                           INNER JOIN almin.tal_motivo_salida_cuenta MOSACU ON MOSACU.id_motivo_salida_cuenta=SALIDA.id_motivo_salida_cuenta
+            			   INNER JOIN almin.tal_almacen_ep ALMAEP ON ALMAEP.id_almacen_ep = ALMLOG.id_almacen_ep
+            			   INNER JOIN almin.tal_almacen ALMACE ON ALMACE.id_almacen = ALMAEP.id_almacen
+            			   INNER JOIN almin.tal_motivo_salida MOTSAL ON MOTSAL.id_motivo_salida = MOSACU.id_motivo_salida
+            			   INNER JOIN param.tpm_fina_regi_prog_proy_acti FRPPA ON FRPPA.id_fina_regi_prog_proy_acti = ALMAEP.id_fina_regi_prog_proy_acti
+                           INNER JOIN param.tpm_financiador FINANC ON FINANC.id_financiador = FRPPA.id_financiador
+                           INNER JOIN param.tpm_regional REGION ON REGION.id_regional = FRPPA.id_regional
+                           INNER JOIN param.tpm_programa_proyecto_actividad PGPYAC ON PGPYAC.id_prog_proy_acti = FRPPA.id_prog_proy_acti
+                           INNER JOIN param.tpm_programa PROGRA ON PROGRA.id_programa = PGPYAC.id_programa
+                           INNER JOIN param.tpm_proyecto PROYEC ON PROYEC.id_proyecto = PGPYAC.id_proyecto
+                           INNER JOIN param.tpm_actividad ACTIVI ON ACTIVI.id_actividad = PGPYAC.id_actividad
+                           LEFT JOIN almin.tal_tramo_subactividad TRASUB ON TRASUB.id_tramo_subactividad = SALIDA.id_tramo_subactividad
+                           LEFT JOIN almin.tal_tramo TRAMO ON TRAMO.id_tramo = TRASUB.id_tramo
+                           LEFT JOIN almin.tal_tramo_unidad_constructiva TRAUNI ON TRAUNI.id_tramo_unidad_constructiva = SALIDA.id_tramo_unidad_constructiva
+                           LEFT JOIN almin.tal_unidad_constructiva UNICON ON UNICON.id_unidad_constructiva = TRAUNI.id_unidad_constructiva
+                           INNER JOIN almin.tal_parametro_almacen PARALM ON PARALM.id_parametro_almacen = SALIDA.id_parametro_almacen
                            WHERE SALIDA.estado_salida not like ''Finalizado'' AND ';
             g_consulta := g_consulta || pm_criterio_filtro;
-          --  para que los usuarios  solo puedan ver los pedidos realizados por ellos
-            IF NOT g_rol_adm  THEN
-                g_consulta := g_consulta || ' SALIDA.id_usuario=' || pm_id_susario ||'  AND ';
+          
+            
+             -- VERIFICA SI TIENE ROL ADMINISTRADOR
+            IF NOT g_rol_adm THEN
+		 	    --SE AUMENTA LAS RESTRICCIONES DE LA ESTRUCTURA PROGRAMÁTICA
+            	g_consulta := g_consulta ||' AND ALMAEP.id_fina_regi_prog_proy_acti IN '|| '';
+            	g_consulta := g_consulta ||' '|| '(SELECT DISTINCT
+                                                      ASIGFRPPA.id_fina_regi_prog_proy_acti
+                                                   FROM sss.tsg_usuario_asignacion USRAS
+                                                   INNER JOIN sss.tsg_asignacion_estructura_tpm_frppa ASIGFRPPA  ON ASIGFRPPA.id_asignacion_estructura = USRAS.id_asignacion_estructura';
+            	g_consulta := g_consulta ||' WHERE USRAS.id_usuario = ' || pm_id_usuario ||')'; --CIERRA EL PARÉNTESIS DE LA SUBCONSULTA DE ESTRUCTURAS RELACIONADAS AL USUARIO
+           
             END IF;
 
 
@@ -1187,11 +1186,21 @@ BEGIN
                            ON PARALM.id_parametro_almacen = SALIDA.id_parametro_almacen
                            WHERE SALIDA.estado_salida not like ''Finalizado'' AND ';
              --  para que los usuarios  solo puedan ver los pedidos realizados por ellos
-            IF NOT g_rol_adm  THEN
-                g_consulta := g_consulta || ' SALIDA.id_usuario=' || pm_id_susario ||'  AND ';
-            END IF;
+           
 
             g_consulta := g_consulta || pm_criterio_filtro;
+            
+             -- VERIFICA SI TIENE ROL ADMINISTRADOR
+            IF NOT g_rol_adm THEN
+		 	    --SE AUMENTA LAS RESTRICCIONES DE LA ESTRUCTURA PROGRAMÁTICA
+            	g_consulta := g_consulta ||' AND ALMAEP.id_fina_regi_prog_proy_acti IN '|| '';
+            	g_consulta := g_consulta ||' '|| '(SELECT DISTINCT
+                                                      ASIGFRPPA.id_fina_regi_prog_proy_acti
+                                                   FROM sss.tsg_usuario_asignacion USRAS
+                                                   INNER JOIN sss.tsg_asignacion_estructura_tpm_frppa ASIGFRPPA  ON ASIGFRPPA.id_asignacion_estructura = USRAS.id_asignacion_estructura';
+            	g_consulta := g_consulta ||' WHERE USRAS.id_usuario = ' || pm_id_usuario ||')'; --CIERRA EL PARÉNTESIS DE LA SUBCONSULTA DE ESTRUCTURAS RELACIONADAS AL USUARIO
+           
+            END IF;
 
             FOR g_registros in EXECUTE(g_consulta) LOOP
                 RETURN NEXT g_registros;
@@ -1915,10 +1924,19 @@ FROM almin.tal_orden_salida_uc_detalle OSUCDE
                            ON INSTIT1.id_institucion=CONTRA.id_institucion
                            WHERE SALIDA.estado_salida = ''Finalizado'' AND ';
             g_consulta := g_consulta || pm_criterio_filtro;
-          --  para que los usuarios  solo puedan ver los pedidos realizados por ellos
-            IF NOT g_rol_adm  THEN
-                g_consulta := g_consulta || ' SALIDA.id_usuario=' || pm_id_usuario ||'  AND ';
+            
+            -- VERIFICA SI TIENE ROL ADMINISTRADOR
+            IF NOT g_rol_adm THEN
+		 	    --SE AUMENTA LAS RESTRICCIONES DE LA ESTRUCTURA PROGRAMÁTICA
+            	g_consulta := g_consulta ||' AND ALMAEP.id_fina_regi_prog_proy_acti IN '|| '';
+            	g_consulta := g_consulta ||' '|| '(SELECT DISTINCT
+                                                      ASIGFRPPA.id_fina_regi_prog_proy_acti
+                                                   FROM sss.tsg_usuario_asignacion USRAS
+                                                   INNER JOIN sss.tsg_asignacion_estructura_tpm_frppa ASIGFRPPA  ON ASIGFRPPA.id_asignacion_estructura = USRAS.id_asignacion_estructura';
+            	g_consulta := g_consulta ||' WHERE USRAS.id_usuario = ' || pm_id_usuario ||')'; --CIERRA EL PARÉNTESIS DE LA SUBCONSULTA DE ESTRUCTURAS RELACIONADAS AL USUARIO
+           
             END IF;
+          
             
             -- SE AUMENTA EL ORDEN Y LOS PARÁMETROS DE LA CANTIDAD DE REGISTROS A DESPLEGAR
             g_consulta := g_consulta || ' ORDER BY ' || pm_sortcol;
@@ -2002,8 +2020,16 @@ FROM almin.tal_orden_salida_uc_detalle OSUCDE
                            WHERE SALIDA.estado_salida = ''Finalizado'' AND ';
             g_consulta := g_consulta || pm_criterio_filtro;
           --  para que los usuarios  solo puedan ver los pedidos realizados por ellos
-            IF NOT g_rol_adm  THEN
-                g_consulta := g_consulta || ' SALIDA.id_usuario=' || pm_id_usuario ||'  AND ';
+            -- VERIFICA SI TIENE ROL ADMINISTRADOR
+            IF NOT g_rol_adm THEN
+		 	    --SE AUMENTA LAS RESTRICCIONES DE LA ESTRUCTURA PROGRAMÁTICA
+            	g_consulta := g_consulta ||' AND ALMAEP.id_fina_regi_prog_proy_acti IN '|| '';
+            	g_consulta := g_consulta ||' '|| '(SELECT DISTINCT
+                                                      ASIGFRPPA.id_fina_regi_prog_proy_acti
+                                                   FROM sss.tsg_usuario_asignacion USRAS
+                                                   INNER JOIN sss.tsg_asignacion_estructura_tpm_frppa ASIGFRPPA  ON ASIGFRPPA.id_asignacion_estructura = USRAS.id_asignacion_estructura';
+            	g_consulta := g_consulta ||' WHERE USRAS.id_usuario = ' || pm_id_usuario ||')'; --CIERRA EL PARÉNTESIS DE LA SUBCONSULTA DE ESTRUCTURAS RELACIONADAS AL USUARIO
+           
             END IF;
 
             FOR g_registros in EXECUTE(g_consulta) LOOP
