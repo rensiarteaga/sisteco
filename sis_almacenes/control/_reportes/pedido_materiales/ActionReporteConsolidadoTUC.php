@@ -37,11 +37,14 @@ if($_SESSION['autentificado']=="SI")
 	 						'titulo'=> 'Compisición Unidad Constructiva',
 	 						'nombre_archivo'=> $nombreArchivo,
 	 						'tipoReporte' => 'pdf',
-	 						'codSistema'  => 'ALMIN'
+	 						'codSistema'  => 'ALMIN',
+	 						'desc_almacen' => $desc_almacen,
+	 						'desc_almacen_logico' => $desc_almacen_logico
+	 						
 						);	
     
 	$reporte = new RConsolidadoTUC($parametros);
-	$reporte->datosHeader($resp);
+	$reporte->datosHeader($resp,$parametros );
 	$reporte->generarReporte();
 	$reporte->output();
 	

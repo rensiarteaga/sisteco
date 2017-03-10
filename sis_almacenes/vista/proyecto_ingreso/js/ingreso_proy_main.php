@@ -470,7 +470,7 @@ function pagina_ingreso_proy(idContenedor,direccion,paramConfig)
 			valueField: 'id_proveedor',
 			displayField: 'nombre_proveedor',
 			queryParam: 'filterValue_0',
-			filterCol:'PROVEE.codigo#PROVEE.observaciones',
+			filterCol:'PROVEE.codigo#PROVEE.observaciones#PROVEE.desc_proveedor',
 			tpl: resultTplProveedor,
 			typeAhead:true,
 			forceSelection:true,

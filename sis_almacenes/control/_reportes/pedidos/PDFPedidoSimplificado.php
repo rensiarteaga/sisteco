@@ -175,21 +175,21 @@ class PDF extends FPDF
             
 			//$this->Cell(10,5,'',0,0,'L');
 						
-			$this->Cell(68,5,'Solicitante: ',0,0,'R');
+			$this->Cell(33,5,'Solicitante: ',0,0,'R');
 						    
 			$this->SetFont('Arial','B',10);
-			$this->Cell(120,5,''.$data[0]['solicitante'],'LTRB',0,'C');
+			$this->Cell(140,5,''.$data[0]['solicitante'],'LTRB',0,'L');
 			$this->SetFont('Arial','',10);
 			$this->Ln(6);
 			
-			$this->Cell(48,5,'Almacén Lógico:',0,0,'R');
+			$this->Cell(33,5,'Almacén Lógico:',0,0,'R');
 			
 			$this->SetFont('Arial','B',10);
 			$this->Cell(96,5,''.$data[0]['almacen_log'],0,0,'L');
 			$this->SetFont('Arial','',10);
 			$this->Ln(4);
 			
-			$this->Cell(48,5,'Receptor autorizado:',0,0,'R');
+			$this->Cell(33,5,'Receptor autorizado:',0,0,'R');
 			
 			$this->SetFont('Arial','B',10);
 			$this->Cell(96,5,''.$data[0]['receptor'],0,0,'L');
@@ -197,19 +197,19 @@ class PDF extends FPDF
 			
 			$this->Cell(26,5,'Imputación: ',0,0,'R');
 			$this->SetFillColor(224,235,255);
-			$this->Cell(20,5,''.$data[0]['codigo_proyecto'],'LRTB',0,'C',$fill);
+			$this->Cell(30,5,''.$data[0]['codigo_proyecto'],'LRTB',0,'C',$fill);
 			$this->SetFillColor(255,255,255);
 			
 			$this->Ln(4);
 			
-			$this->Cell(48,5,'Destino del Material:',0,0,'R');
+			$this->Cell(33,5,'Destino del Material:',0,0,'R');
 			
 			$this->SetFont('Arial','B',10);
 			$this->Cell(96,5,''.$data[0]['tramo'],0,0,'L');
 			$this->SetFont('Arial','',10);
 			$this->Ln(4);
 			
-			$this->Cell(48,5,'Motivo de Salida:',0,0,'R');
+			$this->Cell(33,5,'Motivo de Salida:',0,0,'R');
 			
 			$this->SetFont('Arial','B',10);
 			$this->Cell(96,5,''.$data[0]['motivo_sal'],0,0,'L');
@@ -218,7 +218,7 @@ class PDF extends FPDF
 			$this->Cell(26,5,'Nro Contrato.:',0,0,'R');
             
 			$this->SetFillColor(224,235,255);
-			$this->Cell(20,5,''.$data[0]['num_contrato'],'LTRB',1,'C',$fill);
+			$this->Cell(30,5,''.$data[0]['num_contrato'],'LTRB',1,'C',$fill);
 			$this->SetFillColor(255,255,255);
 			$this->Ln(4);
 			

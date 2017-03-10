@@ -19,22 +19,37 @@ class RConsolidadoTUC extends  ReportePDF {
 	var $total_egreso;
 	var $tipo_balance;
 	var $incluir_cierre;
+	var $desc_almacen;
+	var $desc_almacen_logico;
 	
-	function datosHeader ( $detalle) {
+	function datosHeader ( $detalle, $parametros) {
 		$this->ancho_hoja = $this->getPageWidth()-PDF_MARGIN_LEFT-PDF_MARGIN_RIGHT-10;
 		$this->datos_detalle = $detalle;		
 		$this->SetMargins(5,30);
+		$this->desc_almacen  = $parametros["desc_almacen"];
+		$this->desc_almacen_logico  = $parametros["desc_almacen_logico"];
 	}
 	
 	function Header() {
 		//cabecera del reporte
 		$this->Image(dirname(__FILE__).'/../../lib'.$_SESSION['_DIR_LOGO'], $this->ancho_hoja, 5, 30, 10);
-		$this->ln(7);
+		$this->ln(3);
 		$this->SetFont('','BU',12);
 		$this->Cell(0,5,"DISPONIBILIDADES DE UNIDAD CONSTRUCTIVA",0,1,'C');	
 		
-		$this->Ln(7);
+		$this->Ln(4);
 		$this->SetFont('','B',10);
+		
+		$this->Cell(30, 3.5, utf8_encode('Almacén Físico:'), '',0,'L'); 
+		$this->Cell(60, 3.5, utf8_encode($this->desc_almacen), '',0,'L');
+		
+		$this->Ln();
+		$this->Cell(30, 3.5, utf8_encode('Almacén Lógico:'), '',0,'L'); 
+		$this->Cell(60, 3.5, utf8_encode($this->desc_almacen_logico), '',0,'L');
+		$this->Ln();
+		$this->SetFont('','B',10);
+		
+		
 		
 		//Titulos de columnas superiores
 		$this->Cell(10,3.5,'Nº','LTB',0,'C');
