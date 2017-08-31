@@ -1473,6 +1473,7 @@ class cls_DBSalida
         $this->var->add_def_cols('candidad_disponible','numeric');
         $this->var->add_def_cols('cantidad_minima','numeric');
         $this->var->add_def_cols('unidades_posibles','numeric');
+		$this->var->add_def_cols('descripcion_item','varchar');
 
 		
 		//Ejecuta la función de consulta

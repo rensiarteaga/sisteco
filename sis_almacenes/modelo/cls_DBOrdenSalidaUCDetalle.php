@@ -980,6 +980,11 @@ class cls_DBOrdenSalidaUCDetalle
 		else
 		$repeticion='no';
 		$this->var->add_param($repeticion);//id_item*/
+		
+		
+		echo "query:".$this->query;
+		exit;
+		
 
 		//Ejecuta la función
 		$res = $this->var->exec_non_query();
@@ -989,7 +994,8 @@ class cls_DBOrdenSalidaUCDetalle
 
 		//Obtiene la cadena con que se llamó a la función de postgres
 		$this->query = $this->var->query;
-
+		
+		
 		return $res;
 	}
 

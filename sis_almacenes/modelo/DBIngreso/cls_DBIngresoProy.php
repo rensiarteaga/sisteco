@@ -269,9 +269,9 @@ class cls_DBIngresoProy
         $this->var->add_param("NULL"); //tipo_costeo		
 		$this->var->add_param("NULL"); //nro_predido_compr
 		
-		//echo "query: ".$this->var->get_query();
-		//exit;
-
+		//echo 'LLEGA aca';
+		
+	
 		//Ejecuta la función
 		$res = $this->var->exec_non_query();
 
@@ -281,6 +281,10 @@ class cls_DBIngresoProy
 		//Obtiene la cadena con que se llamó a la función de postgres
 		$this->query = $this->var->query;
 		
+		//echo "query: ".$this->var->get_query();
+		//exit; 
+
+
 		
 
 		return $res;

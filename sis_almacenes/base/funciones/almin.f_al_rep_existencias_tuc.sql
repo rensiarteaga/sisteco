@@ -39,7 +39,8 @@ BEGIN
                                     cantidad_solicitada numeric,
                                     candidad_disponible numeric,
                                     cantidad_minima		numeric,
-                                    unidades_posibles		numeric
+                                    unidades_posibles		numeric,
+                                    descripcion_item		varchar
                              
                                     
                                  ) ON COMMIT DROP;
@@ -98,7 +99,8 @@ BEGIN
                                     cantidad_solicitada ,
                                     candidad_disponible ,
                                     cantidad_minima		,
-                                    unidades_posibles
+                                    unidades_posibles, 
+                                    descripcion_item
                                from existencias_tuc
                                order by id desc) LOOP
                 RETURN NEXT v_registros;

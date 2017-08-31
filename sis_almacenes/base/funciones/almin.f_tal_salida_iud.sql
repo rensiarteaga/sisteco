@@ -2049,6 +2049,9 @@ BEGIN
                 - no permite finalizar sin items 
                 - control de division por cero en salidas sin existencias
                 - mejorar descripcion de ingreso por transferencia 
+               
+              18/08/2017
+                -  Cambiar el correlativo con la fecha de salida 
      **************************************/
 
     ELSIF pm_codigo_procedimiento = 'AL_SAPROY_FIN' THEN --Finalizar Salida Proyectos
@@ -2082,13 +2085,15 @@ BEGIN
                s.id_parametro_almacen,
                s.id_parametro_almacen_logico,
                s.correlativo_sal,
-               al.nombre
+               al.nombre,
+               s.fecha_borrador
             INTO 
                g_id_almacen_logico,
                g_id_parametro_almacen,
                g_id_parametro_almacen_logico,
                g_correlativo_sal,
-               g_nombre_al
+               g_nombre_al,
+               v_finalizacion_tmp
             FROM almin.tal_salida s
             inner join almin.tal_almacen_logico al on s.id_almacen_logico = al.id_almacen_logico
             WHERE id_salida = al_id_salida;
@@ -2108,7 +2113,30 @@ BEGIN
                g_gestion
             from almin.tal_parametro_almacen pa 
             where pa.id_parametro_almacen =  g_id_parametro_almacen;
-                    
+            
+            
+             IF 
+               exists(select  1
+                      from almin.tal_ingreso i
+                      where i.fecha_finalizado_cancelado > v_finalizacion_tmp::date
+                            and i.id_almacen_logico = g_id_almacen_logico
+                           and  i.id_parametro_almacen = g_id_parametro_almacen
+                           and  i.id_parametro_almacen_logico = g_id_parametro_almacen_logico
+                           and  i.estado_ingreso = 'Finalizado')
+                           
+              OR
+              exists(select  1
+                      from almin.tal_salida s
+                      where s.fecha_finalizado_cancelado > v_finalizacion_tmp
+                            and s.id_almacen_logico = g_id_almacen_logico
+                           and  s.id_parametro_almacen = g_id_parametro_almacen
+                           and  s.id_parametro_almacen_logico = g_id_parametro_almacen_logico
+                           and  s.estado_salida = 'Finalizado')     THEN
+                  
+                  raise exception 'Exiten salidas o ingresos en fechas posteriores  al  %',v_finalizacion_tmp;
+             END IF;  
+            
+            /*        
             v_finalizacion_tmp = now();
             IF v_finalizacion_tmp < ('01/01/'||g_gestion::varchar)::date   THEN
                v_finalizacion_tmp = ('01/01/'||g_gestion::varchar)::date;
@@ -2116,10 +2144,10 @@ BEGIN
             
              IF  v_finalizacion_tmp > ('12/31/'||g_gestion::varchar)::date THEN
                v_finalizacion_tmp =  ('12/31/'||g_gestion::varchar)::date;
-            END IF;
+            END IF;*/
                   
             -- Obtiene el correlativo de la SALIDA
-            g_correl = almin.f_al_obtener_correlativo('SALIDA',to_char(COALESCE(al_fecha_borrador,now()),'mm'),g_id_almacen_logico);
+            g_correl = almin.f_al_obtener_correlativo('SALIDA',to_char(COALESCE(v_finalizacion_tmp,now()),'mm'),g_id_almacen_logico);
             IF g_correl = -1 THEN
                 g_nivel_error := '3';
                 g_descripcion_log_error := 'Salida no registrada: No se pudo obtener el correlativo';
@@ -2492,11 +2520,13 @@ BEGIN
             SELECT 
                id_almacen_logico,
                s.id_parametro_almacen,
-               s.id_parametro_almacen_logico
+               s.id_parametro_almacen_logico,
+               s.fecha_finalizado_cancelado
             INTO 
                g_id_almacen_logico,
                g_id_parametro_almacen,
-               g_id_parametro_almacen_logico
+               g_id_parametro_almacen_logico,
+               v_finalizacion_tmp
             FROM almin.tal_salida  s
             WHERE id_salida = al_id_salida;
             
@@ -2516,15 +2546,39 @@ BEGIN
                g_gestion
             from almin.tal_parametro_almacen pa 
             where pa.id_parametro_almacen =  g_id_parametro_almacen;
+            
+            
+            
+             IF 
+               exists(select  1
+                      from almin.tal_ingreso i
+                      where i.fecha_finalizado_cancelado > v_finalizacion_tmp::date
+                            and i.id_almacen_logico = g_id_almacen_logico
+                           and  i.id_parametro_almacen = g_id_parametro_almacen
+                           and  i.id_parametro_almacen_logico = g_id_parametro_almacen_logico
+                           and  i.estado_ingreso = 'Finalizado')
+                           
+              OR
+              exists(select  1
+                      from almin.tal_salida s
+                      where s.fecha_finalizado_cancelado > v_finalizacion_tmp
+                            and s.id_almacen_logico = g_id_almacen_logico
+                           and  s.id_parametro_almacen = g_id_parametro_almacen
+                           and  s.id_parametro_almacen_logico = g_id_parametro_almacen_logico
+                           and  s.estado_salida = 'Finalizado')     THEN
+                  raise exception 'Exiten salidas o ingresos en fechas posteriores  al  %',v_finalizacion_tmp;
+             END IF;  
                     
-             v_finalizacion_tmp = now();
+           
+           /*
+            v_finalizacion_tmp = now();
             IF v_finalizacion_tmp < ('01/01/'||g_gestion::varchar)::date   THEN
                v_finalizacion_tmp = ('01/01/'||g_gestion::varchar)::date;
             END IF;
             
              IF  v_finalizacion_tmp > ('12/31/'||g_gestion::varchar)::date THEN
                v_finalizacion_tmp =  ('12/31/'||g_gestion::varchar)::date;
-            END IF;
+            END IF;*/
        
         
                 

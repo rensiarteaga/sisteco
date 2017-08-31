@@ -1773,6 +1773,9 @@ BEGIN
                 -  realizar ingreso en la gestion abierta
                 -  permitr fianlizar ingresos en funcion si la lalve del almacen logico lo permite
                 -  actulizar correlativo en ingresos por transferencia
+               
+                    18/08/2017
+               -  El correlativo se calcula con la fecha de ingreso     
      **************************************/
 
     ELSIF pm_codigo_procedimiento = 'AL_INFIPR_FIN' THEN --INFIPR: INgreso FInalización PRoyectos
@@ -1780,6 +1783,10 @@ BEGIN
         BEGIN
             g_bandera:=0;
             --VERIFICA EXISTENCIA DEL REGISTRO
+            
+           
+            
+            
             IF NOT EXISTS( SELECT 1 FROM almin.tal_ingreso
                            WHERE id_ingreso=al_id_ingreso) THEN
 
@@ -1820,12 +1827,14 @@ BEGIN
             	i.id_almacen_logico,
                 i.id_parametro_almacen,
                 i.id_parametro_almacen_logico,
-                al.costeo_obligatorio
+                al.costeo_obligatorio,
+                i.fecha_finalizado_cancelado
             INTO
             	g_id_almacen_logico,
                 g_id_parametro_almacen  ,
                 g_id_parametro_almacen_logico,
-                g_costeo_obligatorio         
+                g_costeo_obligatorio,
+                v_finalizacion_tmp         
             FROM almin.tal_ingreso i
             inner join almin.tal_almacen_logico al on al.id_almacen_logico = i.id_almacen_logico
             WHERE id_ingreso = al_id_ingreso;
@@ -1850,15 +1859,49 @@ BEGIN
                g_gestion
             from almin.tal_parametro_almacen pa 
             where pa.id_parametro_almacen =  g_id_parametro_almacen;
-                    
+            
+            
+            IF 
+               exists(select  1
+                      from almin.tal_ingreso i
+                      where i.fecha_finalizado_cancelado > v_finalizacion_tmp::date
+                            and i.id_almacen_logico = g_id_almacen_logico
+                           and  i.id_parametro_almacen = g_id_parametro_almacen
+                           and  i.id_parametro_almacen_logico = g_id_parametro_almacen_logico
+                           and  i.estado_ingreso = 'Finalizado')
+                           
+              OR
+              exists(select  1
+                      from almin.tal_salida s
+                      where s.fecha_finalizado_cancelado > v_finalizacion_tmp
+                            and s.id_almacen_logico = g_id_almacen_logico
+                           and  s.id_parametro_almacen = g_id_parametro_almacen
+                           and  s.id_parametro_almacen_logico = g_id_parametro_almacen_logico
+                           and  s.estado_salida = 'Finalizado')     THEN
+                           
+                 
+              
+                raise exception 'Exiten salidas o ingresos en fechas posteriores  al  %',v_finalizacion_tmp;
+              
+                        
+            END IF;         
+                 
+                 
+                
+           
+             /*       
              v_finalizacion_tmp = now();
+             
+             
+             
+             
             IF v_finalizacion_tmp < ('01/01/'||g_gestion::varchar)::date   THEN
                v_finalizacion_tmp = ('01/01/'||g_gestion::varchar)::date;
             END IF;
             
              IF  v_finalizacion_tmp > ('12/31/'||g_gestion::varchar)::date THEN
                v_finalizacion_tmp =  ('12/31/'||g_gestion::varchar)::date;
-            END IF;
+            END IF;*/
             
              
 
@@ -1919,7 +1962,7 @@ BEGIN
                 IF (g_id_tarea_pendiente>0 OR g_sw = 1) THEN
 
                        -- Obtiene el correlativo del Ingreso
-                    g_correl = almin.f_al_obtener_correlativo('INGRES',to_char(COALESCE(al_fecha_reg,now()),'mm'),g_id_almacen_logico);
+                    g_correl = almin.f_al_obtener_correlativo('INGRES',to_char(COALESCE(v_finalizacion_tmp,now()),'mm'),g_id_almacen_logico);
                     IF g_correl = -1 THEN
                         g_nivel_error := '3';
                         g_descripcion_log_error := 'Ingreso no registrado: No se pudo obtener el correlativo';
@@ -2069,6 +2112,9 @@ BEGIN
                     where id_salida = g_id_salida;
                 
             END IF;
+            
+            
+         
 
             --***CONTABILIZACIÓN DEL INGRESO SI ES EL CASO
             

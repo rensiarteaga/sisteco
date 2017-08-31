@@ -1041,36 +1041,12 @@ function pagina_ingreso_proy(idContenedor,direccion,paramConfig)
 		id_grupo:5
 	};
 
-	vectorAtributos[28]= {
-		validacion:{
-			name:'flete',
-			fieldLabel:'Flete',
-			allowBlank:true,
-			maxLength:50,
-			minLength:0,
-			selectOnFocus:true,
-			allowDecimals:true,
-			decimalPrecision :2,
-			allowNegative: false,
-			minValue:0,
-			vtype:'texto',
-			grid_visible:true,
-			grid_editable:false,
-			grid_indice:21,
-			width_grid:100,
-			align:'right',
-			renderer: 'usMoney'
-		},
-		tipo: 'NumberField',
-		filtro_0:false,
-		save_as:'txt_flete',
-		id_grupo:5
-	};
+	
 
 	vectorAtributos[29]= {
 		validacion:{
 			name:'seguro',
-			fieldLabel:'Seguro',
+			fieldLabel:'Otros impuestos',
 			allowBlank:true,
 			maxLength:50,
 			minLength:0,
@@ -1090,10 +1066,10 @@ function pagina_ingreso_proy(idContenedor,direccion,paramConfig)
 		tipo: 'NumberField',
 		filtro_0:false,
 		save_as:'txt_seguro',
-		id_grupo:5
+		id_grupo:6
 	};
 
-	vectorAtributos[30]= {
+	vectorAtributos[28]= {
 		validacion:{
 			name:'dui',
 			fieldLabel:'DUI',
@@ -1112,6 +1088,31 @@ function pagina_ingreso_proy(idContenedor,direccion,paramConfig)
 		filtro_0:true,
 		filterColValue:'INGRES.dui',
 		save_as:'txt_dui',
+		id_grupo:6
+	};
+	vectorAtributos[30]= {
+		validacion:{
+			name:'flete',
+			fieldLabel:'Comisiones',
+			allowBlank:true,
+			maxLength:50,
+			minLength:0,
+			selectOnFocus:true,
+			allowDecimals:true,
+			decimalPrecision :2,
+			allowNegative: false,
+			minValue:0,
+			vtype:'texto',
+			grid_visible:true,
+			grid_editable:false,
+			grid_indice:21,
+			width_grid:100,
+			align:'right',
+			renderer: 'usMoney'
+		},
+		tipo: 'NumberField',
+		filtro_0:false,
+		save_as:'txt_flete',
 		id_grupo:6
 	};
 
@@ -1196,7 +1197,7 @@ function pagina_ingreso_proy(idContenedor,direccion,paramConfig)
 	vectorAtributos[34]= {
 		validacion:{
 			name:'rep_form',
-			fieldLabel:'Reposición Formulario',
+			fieldLabel:'SIDUNEA',
 			allowBlank:true,
 			maxLength:50,
 			minLength:0,
@@ -1864,10 +1865,7 @@ function pagina_ingreso_proy(idContenedor,direccion,paramConfig)
 
 		var onActTotalImportacion = function (e){
 			var vimport=isNaN(parseFloat(txt_importacion.getValue())) ? 0: parseFloat(txt_importacion.getValue());
-			var vflete=isNaN(parseFloat(txt_flete.getValue())) ? 0 : parseFloat(txt_flete.getValue());
-			var vseguro=isNaN(parseFloat(txt_seguro.getValue())) ? 0 : parseFloat(txt_seguro.getValue());
-
-			txt_tot_import.setValue(vimport + vflete + vseguro);
+			txt_tot_import.setValue(vimport );
 		};
 
 		var onActTotalNacionaliz = function (e){
@@ -1875,8 +1873,10 @@ function pagina_ingreso_proy(idContenedor,direccion,paramConfig)
 			var vgastos_aduana=isNaN(parseFloat(txt_gastos_aduana.getValue())) ? 0 : parseFloat(txt_gastos_aduana.getValue());
 			var viva=isNaN(parseFloat(txt_iva.getValue())) ? 0 : parseFloat(txt_iva.getValue());
 			var vrep_form=isNaN(parseFloat(txt_rep_form.getValue())) ? 0 : parseFloat(txt_rep_form.getValue());
+			var vflete=isNaN(parseFloat(txt_flete.getValue())) ? 0 : parseFloat(txt_flete.getValue());
+			var vseguro=isNaN(parseFloat(txt_seguro.getValue())) ? 0 : parseFloat(txt_seguro.getValue());
 
-			txt_tot_nacionaliz.setValue(vgastos_alm+vgastos_aduana+viva+vrep_form);
+			txt_tot_nacionaliz.setValue(vgastos_alm+vgastos_aduana+viva+vrep_form+ vflete + vseguro);
 		};
 
 

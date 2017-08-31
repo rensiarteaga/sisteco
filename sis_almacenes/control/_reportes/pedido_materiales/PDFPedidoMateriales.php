@@ -145,7 +145,7 @@ class PDF extends FPDF
 		$cant=100000;
 		$puntero=0;
 		$fill=true;
-		$sortcol='COMPONid_componente asc';
+		$sortcol='COMPON.id_componente asc';
 		$sortdir='asc';
 		$criterio_filtro=' OSUCDE.id_salida = '.$_SESSION["rep_mat_id_salida"].' AND OSUCDE.id_tipo_unidad_constructiva = '.$row[6];
 
@@ -278,7 +278,7 @@ class PDF extends FPDF
 			$cant=100000;
 			$puntero=0;
 			$fill=true;
-			$sortcol='ITEM.id_supergrupo,COMPON.orden,ITEM.nombre asc';
+			$sortcol='ITEM.id_supergrupo,ITEM.id_item,COMPON.orden,ITEM.nombre asc';
 			$sortdir='asc';
 			$criterio_filtro=' OSUCDE.id_salida = '.$_SESSION["rep_mat_id_salida"].' AND OSUCDE.id_tipo_unidad_constructiva = '.$row[6];
 

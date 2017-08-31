@@ -123,8 +123,8 @@ class RConsolidadoTUC extends  ReportePDF {
 						if($val['codigo_item'] != ''){
 							$RowArray = array(
 				            			's0' => $count,
-										's1' => $val['codigo_tuc_padre'],
-				                        's2' =>  utf8_encode('('.$val['codigo_item'].') '.$val['nombre_item']),			                        
+										's1' => utf8_encode('('.$val['codigo_tuc_padre'].') '.$val['nombre_tuc_padre']),
+				                        's2' =>  utf8_encode('('.$val['nombre_item'].') '.$val['descripcion_item']),			                        
 				                        
 				                        's3' => $val['cantidad_solicitada'],
 				                        's4' => $val['candidad_disponible']);

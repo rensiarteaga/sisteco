@@ -128,7 +128,9 @@ BEGIN
       select 
           i.nombre,
           i.codigo,
-          i.id_item
+          i.id_item,
+          i.descripcion,
+          i.descripcion_aux
         into 
           v_registros_item
       from almin.tal_item i
@@ -182,7 +184,8 @@ BEGIN
                                     cantidad_minima,
                                     unidades_posibles,
                                     codigo_tuc_padre,
-                                    nombre_tuc_padre
+                                    nombre_tuc_padre,
+                                    descripcion_item
                                     
                                  ) 
                                  values
@@ -196,7 +199,8 @@ BEGIN
                                     al_cantidad_minima,
                                     v_unidades_posibles,
                                     al_codigo_tuc_padre,
-                                    al_nombre_tuc_padre
+                                    al_nombre_tuc_padre,
+                                    v_registros_item.descripcion
                                  );
               
    END IF;

@@ -1196,8 +1196,14 @@ class cls_CustomDBAlmacenes
 
 	function insertarItemIntPedido($id_orden_salida_uc_detalle,$id_item,$id_salida,$cantidad,$repeticion,$id_almacen_logico)
 	{
+		
+	
 		$this->salida = "";
 		$dbOrdSalUCDet = new cls_DBOrdenSalidaUCDetalle($this->decodificar);
+		
+		
+		
+		
 		$res = $dbOrdSalUCDet ->insertarItemIntPedido($id_orden_salida_uc_detalle,$id_item,$id_salida,$cantidad,$repeticion,$id_almacen_logico);
 		$this->salida = $dbOrdSalUCDet ->salida;
 		$this->query = $dbOrdSalUCDet ->query;

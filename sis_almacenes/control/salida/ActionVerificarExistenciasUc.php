@@ -21,6 +21,7 @@ Autor:					Rensi Arteraga Copari
 session_start();
 include_once("../rcm_LibModeloAlmacenes.php");
 
+
 $Custom_tuc = new cls_CustomDBAlmacenes();
 $nombre_archivo = "ActionGuardarPedidoDetalleUcArb.php";
 
@@ -52,6 +53,8 @@ if($_SESSION["autentificado"]=="SI")
 
 	//Verifica si se hará o no la decodificación(sólo pregunta en caso del GET)
 	//valores permitidos de $cod -> 'si', 'no'
+	
+	
 
 	switch ($cod){
 		case 'si':
@@ -77,10 +80,15 @@ if($_SESSION["autentificado"]=="SI")
 	$nodo = json_decode($decodificado,true);
 
 	//$res = $Custom ->insertarTucTpmPedido($nodo["id_reg"],$descripcion,$observaciones,$nodo['id'],$id_salida,$id_unidad_constructiva,$nodo['cantidad'],$repeticion,$id_almacen_logico);
-
+	
+	
 
 	//Vacia la tabla intermedia
 	$resp = $Custom_tuc -> EliminarOrdenSalidaUCDetalleInt($id_salida);
+
+
+
+	
 
 	if($resp){
 		$mensaje='true';
@@ -88,16 +96,30 @@ if($_SESSION["autentificado"]=="SI")
 		//Lista todos los elementos del pedido, TUC y/o items en base al id de la salida
 		$res = $Custom_tuc->ListarOrdenSalidaUCDetalle($cant,$puntero,$sortcol,$sortdir,"OSUCDE.id_salida=$id_salida",$hidden_ep_id_financiador,$hidden_ep_id_regional,$hidden_ep_id_programa,$hidden_ep_id_proyecto,$hidden_ep_id_actividad);
 		
+		
+		
+		
 		$llave=false;
 		if($res){
 			foreach ($Custom_tuc->salida as $f){
 				$llave=true;
 				//Forma la cadena de la cantidad solicitada
 				$cantidad=" [".utf8_encode($f["cantidad"]."]");
+				
+				
+                 // echo 'llega aca...'.$id_salida;
+	
 
 				if($f['id_item'] != ""){
 					//Si es Item, inserta el item con su cantidad en la tabla temporal tal_pedido_tuc_int
+					
+						
+		 
 					$resp4 = $Custom_tuc -> insertarItemIntPedido($f["id_orden_salida_uc_detalle"],$f["id_item"],$id_salida,$f["cantidad"],$f["repeticion"],$id_almacen_logico);
+					
+					   
+					   
+					   
 					if(!$resp4){
 
 						$resp4 = new cls_manejo_mensajes(true, "406");
@@ -113,6 +135,9 @@ if($_SESSION["autentificado"]=="SI")
 				}
 				else{
 					//Llama a la función recursiva para obtener todas sus ramas y llegar a los items
+					
+					
+					 
 					$var = insertaMaterialesArb ($f["id_tipo_unidad_constructiva"],$f["id_orden_salida_uc_detalle"],$f["cantidad"],$id_salida,$id_almacen_logico,$f["repeticion"]);
 					if($mensaje!='false'){
 						$mensaje=$var;
@@ -121,6 +146,8 @@ if($_SESSION["autentificado"]=="SI")
 				}
 			}
 		}
+
+
 
 		//VERIFICA LAS EXISTENCIA de los elemntos insertados el la tabla intermedia
 		//para la generacion de reportes de faltantes y de materiales necesarios
@@ -224,21 +251,31 @@ function insertaMaterialesArb ($id_tuc,$id_reg,$cantidad,$id_salida,$id_almacen_
 	else $sortdir = $dir;
 
 	$criterio_filtro='0=0';
+	
+	
 
 	//Obtiene las ramas del TUC (no items, solo las ramas si es que tuviera)
 	$resp = $Custom->ListarOrdenSalidaUCDetalleRamas($cant,$puntero,$sortcol,$sortdir,$criterio_filtro,$hidden_ep_id_financiador,$hidden_ep_id_regional,$hidden_ep_id_programa,$hidden_ep_id_proyecto,$hidden_ep_id_actividad,$id_tuc,$id_reg);
 	$mensaje='true';
-
+	
+	
 	if($resp){
 		foreach ($Custom->salida as $f){
 			//Llamada recursiva
 			$mensaje=insertaMaterialesArb ($f["id_tipo_unidad_constructiva"],$id_reg,$cantidad * $f["cantidad"],$id_salida,$id_almacen_logico,$repeticion);
 		}
+		
+		
+		
 
 		//Obtiene todos los componentes (items) del TUC y los inserta en la tabla temporal (tal_pedido_tuc_int)
 		$resp2 = $Custom ->insertarTucIntPedido($id_reg,$id_tuc,$id_salida,$cantidad,$repeticion,$id_almacen_logico);
+		
+		
 
 		if(!$resp2){
+			
+			
 
 			$resp3 = $Custom -> EliminarOrdenSalidaUCDetalleInt($id_salida);
 			$resp2 = new cls_manejo_mensajes(true,'406');
@@ -247,8 +284,17 @@ function insertaMaterialesArb ($id_tuc,$id_reg,$cantidad,$id_salida,$id_almacen_
 			$resp->proc = $Custom->salida[3];
 			$resp2->nivel = $Custom->salida[4];
 			$resp2->query = $Custom->query;
-			echo $resp->get_mensaje();
-			exit;
+			
+			
+			
+			// echo 'ppppppp aca...'.$id_salida;
+			
+			//echo $resp->get_mensaje();
+			//
+			
+			 
+			 
+			//exit;
 		}else
 		{
 			if($mensaje=='false'){
@@ -261,10 +307,16 @@ function insertaMaterialesArb ($id_tuc,$id_reg,$cantidad,$id_salida,$id_almacen_
 
 
 		}
+		
+		
 
 	}
 	else{
+		
+		
 		$resp3 = $Custom -> EliminarOrdenSalidaUCDetalleInt($id_salida);
+		
+		
 		$resp = new cls_manejo_mensajes(true,'406');
 		$resp->mensaje_error = $Custom->salida[1];
 		$resp->origen = $Custom->salida[2];

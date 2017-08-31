@@ -1584,7 +1584,7 @@ function pagina_salida_proy_tuc(idContenedor,direccion,paramConfig)
 		var sm=getSelectionModel();		
 		var SelectionsRecord=sm.getSelected();
 		//var data='maestro_id_salida='+SelectionsRecord.data.id_salida+'&maestro_id_almacen_logico='+SelectionsRecord.data.id_almacen_logico;		
-		var data='hidden_id_salida='+SelectionsRecord.data.id_salida+'&desc_almacen='+SelectionsRecord.data.desc_almacen+'&desc_almacen_logico='+SelectionsRecord.data.desc_almacen_logico;	;		
+		var data='hidden_id_salida='+SelectionsRecord.data.id_salida+'&desc_almacen='+SelectionsRecord.data.desc_almacen+'&desc_almacen_logico='+SelectionsRecord.data.desc_almacen_logico;		
 		console.log('data....', data)
 		if(SelectionsRecord.data){
 			window.open(direccion+'../../../control/_reportes/pedido_materiales/ActionReporteConsolidadoResTUC.php?'+data)
